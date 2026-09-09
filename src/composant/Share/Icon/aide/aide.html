@@ -1,0 +1,790 @@
+<!-- ============================================================
+
+     ❓ HELP TOGGLE — JARDISCAN
+
+     PREMIUM EMERALD GLASS
+
+     Responsive :
+     • Mobile       → Popup à droite
+     • Tablette     → Popup à droite
+     • Laptop       → Popup sous le bouton
+     • Desktop      → Popup sous le bouton
+
+     • Ouverture → DROITE ➜ GAUCHE
+     • Light / Dark
+     • Français / English
+     • Glassmorphism
+     • 44 × 44
+     • Aide contextuelle
+
+============================================================= -->
+
+<div
+  class="
+    help-wrapper
+    relative
+    flex
+    items-center
+    justify-center
+  "
+  (click)="$event.stopPropagation()"
+>
+
+  <!-- ==========================================================
+       ❓ HELP BUTTON
+  =========================================================== -->
+
+  <button
+    type="button"
+
+    [attr.aria-label]="
+      currentLanguage === 'fr'
+        ? 'Aide'
+        : 'Help'
+    "
+
+    [attr.aria-expanded]="isOpen"
+
+    aria-haspopup="menu"
+
+    [title]="
+      currentLanguage === 'fr'
+        ? 'Aide'
+        : 'Help'
+    "
+
+    class="
+      help-button
+      group
+      relative
+      flex
+      h-10
+      w-10
+      shrink-0
+      items-center
+      justify-center
+      overflow-hidden
+      rounded-full
+      backdrop-blur-2xl
+      backdrop-saturate-200
+      cursor-pointer
+      select-none
+      transition-transform
+      duration-200
+      hover:scale-[1.04]
+      active:scale-95
+      focus:outline-none
+      focus-visible:ring-2
+      focus-visible:ring-emerald-500/30
+      sm:h-11
+      sm:w-11
+    "
+
+    [ngStyle]="{
+      'color': themeService.TextPrincipal
+    }"
+
+    (click)="togglePopup($event)"
+  >
+
+    <!-- ========================================================
+         ❓ HELP ICON
+    ========================================================= -->
+
+    <i
+      aria-hidden="true"
+
+      [ngStyle]="{
+        'color': themeService.TextPrincipal
+      }"
+
+      class="
+        fa-regular
+        fa-circle-question
+        relative
+        z-10
+        text-[15px]
+        transition-transform
+        duration-300
+        group-hover:scale-110
+        group-hover:rotate-6
+        sm:text-[20px]
+      "
+    ></i>
+
+  </button>
+
+
+  <!-- ==========================================================
+     ❓ HELP POPUP — JARDISCAN
+     
+     PREMIUM EMERALD GLASS
+
+     Responsive :
+     • Mobile       → Popup à droite
+     • Tablette     → Popup à droite
+     • Laptop       → Popup sous le bouton
+     • Desktop      → Popup sous le bouton
+
+     Animation :
+     • DROITE ➜ GAUCHE
+     • Light / Dark
+     • Glassmorphism
+     • UI identique au Language Popup
+=========================================================== -->
+
+<div
+*ngIf="isOpen"
+role="menu"
+[attr.aria-label]="
+  currentLanguage === 'fr'
+    ? 'Aide JardiScan'
+    : 'JardiScan Help'
+"
+class="
+  help-popup
+  fixed
+  z-[99999]
+
+  w-max
+  min-w-[285px]
+  max-w-[calc(100vw-24px)]
+
+  flex
+  flex-col
+
+  rounded-2xl
+  p-1.5
+  overflow-hidden
+
+  backdrop-blur-3xl
+  backdrop-saturate-200
+
+  shadow-xl
+
+  origin-top-right
+
+  animate-[helpPopupRightToLeft_160ms_ease-out]
+"
+[ngStyle]="{
+  'top.px': popupTop,
+  'left.px': popupLeft,
+  'transform': popupTransform,
+
+  'background': themeService.Background1,
+  'border': '1px solid ' + themeService.Border1,
+  'box-shadow': themeService.BoxShadow
+}"
+(click)="$event.stopPropagation()"
+>
+
+<!-- ========================================================
+     🏷️ POPUP HEADER
+========================================================= -->
+
+<div
+  class="
+    flex
+    items-center
+    gap-3
+
+    rounded-xl
+
+    px-3
+    py-2
+
+    select-none
+  "
+>
+
+  <!-- ======================================================
+       ❓ ICON
+  ======================================================= -->
+
+  <span
+    class="
+      flex
+      h-8
+      w-8
+      shrink-0
+
+      items-center
+      justify-center
+
+      rounded-xl
+
+      bg-emerald-500/10
+      text-emerald-500
+
+      text-[14px]
+    "
+  >
+    <i
+      aria-hidden="true"
+      class="fa-regular fa-circle-question"
+    ></i>
+  </span>
+
+
+  <!-- ======================================================
+       🏷️ TITLE + DESCRIPTION
+  ======================================================= -->
+
+  <div class="min-w-0 flex-1">
+
+    <p
+      class="
+        text-[13px]
+        font-bold
+        tracking-[-0.01em]
+      "
+      [ngStyle]="{
+        'color': themeService.isDarkMode
+          ? '#F0FDF4'
+          : '#17251B'
+      }"
+    >
+      {{
+        currentLanguage === 'fr'
+          ? 'Aide'
+          : 'Help'
+      }}
+    </p>
+
+    <p
+      class="
+        mt-0.5
+        text-[11px]
+        leading-tight
+      "
+      [ngStyle]="{
+        'color': themeService.isDarkMode
+          ? 'rgba(240,253,244,0.55)'
+          : 'rgba(23,37,27,0.55)'
+      }"
+    >
+      {{
+        currentLanguage === 'fr'
+          ? 'Comment utiliser JardiScan ?'
+          : 'How to use JardiScan?'
+      }}
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================
+     📚 SEPARATOR
+========================================================= -->
+
+<div
+  class="
+    mx-2
+    my-1.5
+    h-px
+
+    bg-black/[0.06]
+    dark:bg-white/[0.06]
+  "
+></div>
+
+
+<!-- ========================================================
+     📷 SCANNER UNE PLANTE
+========================================================= -->
+
+<button
+  type="button"
+  routerLink="/scannerplante"
+  role="menuitem"
+
+  class="
+    help-option
+    group
+
+    flex
+    w-full
+    items-center
+
+    gap-2.5
+
+    rounded-xl
+
+    px-3
+    py-2
+
+    text-left
+
+    cursor-pointer
+    select-none
+
+    transition-transform
+    duration-150
+
+    hover:scale-[1.015]
+    active:scale-[0.98]
+  "
+
+  [ngStyle]="{
+    'background':
+      'transparent',
+
+    'color':
+      themeService.isDarkMode
+        ? '#F0FDF4'
+        : '#17251B'
+  }"
+
+  (click)="openHelp('scanner', $event)"
+>
+
+  <!-- ICON -->
+
+  <span
+    class="
+      flex
+      h-7
+      w-7
+      shrink-0
+
+      items-center
+      justify-center
+
+      rounded-lg
+
+      bg-black/[0.04]
+      dark:bg-white/[0.06]
+
+      text-emerald-500
+
+      text-[13px]
+    "
+  >
+    <i
+      aria-hidden="true"
+      class="fa-solid fa-camera text-[11px]"
+    ></i>
+  </span>
+
+
+  <!-- TEXT -->
+
+  <span
+    class="
+      min-w-0
+      flex-1
+
+      text-[12px]
+      font-semibold
+      tracking-[-0.01em]
+    "
+  >
+    {{
+      currentLanguage === 'fr'
+        ? 'Scanner une plante'
+        : 'Scan a plant'
+    }}
+  </span>
+
+
+  <!-- ARROW -->
+
+  <i
+    aria-hidden="true"
+    class="
+      fa-solid
+      fa-chevron-right
+
+      text-[9px]
+
+      opacity-35
+
+      transition-transform
+      duration-150
+
+      group-hover:translate-x-0.5
+    "
+  ></i>
+
+</button>
+
+
+<!-- ========================================================
+     🌱 MES PLANTES
+========================================================= -->
+
+<button
+  type="button"
+  routerLink="/myplants"
+  role="menuitem"
+
+  class="
+    help-option
+    group
+
+    flex
+    w-full
+    items-center
+
+    gap-2.5
+
+    rounded-xl
+
+    px-3
+    py-2
+
+    text-left
+
+    cursor-pointer
+    select-none
+
+    transition-transform
+    duration-150
+
+    hover:scale-[1.015]
+    active:scale-[0.98]
+  "
+
+  [ngStyle]="{
+    'background':
+      'transparent',
+
+    'color':
+      themeService.isDarkMode
+        ? '#F0FDF4'
+        : '#17251B'
+  }"
+
+  (click)="openHelp('plants', $event)"
+>
+
+  <!-- ICON -->
+
+  <span
+    class="
+      flex
+      h-7
+      w-7
+      shrink-0
+
+      items-center
+      justify-center
+
+      rounded-lg
+
+      bg-black/[0.04]
+      dark:bg-white/[0.06]
+
+      text-emerald-500
+
+      text-[13px]
+    "
+  >
+    <i
+      aria-hidden="true"
+      class="fa-solid fa-leaf text-[11px]"
+    ></i>
+  </span>
+
+
+  <!-- TEXT -->
+
+  <span
+    class="
+      min-w-0
+      flex-1
+
+      text-[12px]
+      font-semibold
+      tracking-[-0.01em]
+    "
+  >
+    {{
+      currentLanguage === 'fr'
+        ? 'Mes plantes'
+        : 'My plants'
+    }}
+  </span>
+
+
+  <!-- ARROW -->
+
+  <i
+    aria-hidden="true"
+    class="
+      fa-solid
+      fa-chevron-right
+
+      text-[9px]
+
+      opacity-35
+
+      transition-transform
+      duration-150
+
+      group-hover:translate-x-0.5
+    "
+  ></i>
+
+</button>
+
+
+<!-- ========================================================
+     ⚙️ PARAMÈTRES
+========================================================= -->
+
+<button
+  type="button"
+  routerLink="/parametres"
+  role="menuitem"
+
+  class="
+    help-option
+    group
+
+    flex
+    w-full
+    items-center
+
+    gap-2.5
+
+    rounded-xl
+
+    px-3
+    py-2
+
+    text-left
+
+    cursor-pointer
+    select-none
+
+    transition-transform
+    duration-150
+
+    hover:scale-[1.015]
+    active:scale-[0.98]
+  "
+
+  [ngStyle]="{
+    'background':
+      'transparent',
+
+    'color':
+      themeService.isDarkMode
+        ? '#F0FDF4'
+        : '#17251B'
+  }"
+
+  (click)="openHelp('settings', $event)"
+>
+
+  <!-- ICON -->
+
+  <span
+    class="
+      flex
+      h-7
+      w-7
+      shrink-0
+
+      items-center
+      justify-center
+
+      rounded-lg
+
+      bg-black/[0.04]
+      dark:bg-white/[0.06]
+
+      text-emerald-500
+
+      text-[13px]
+    "
+  >
+    <i
+      aria-hidden="true"
+      class="fa-solid fa-gear text-[11px]"
+    ></i>
+  </span>
+
+
+  <!-- TEXT -->
+
+  <span
+    class="
+      min-w-0
+      flex-1
+
+      text-[12px]
+      font-semibold
+      tracking-[-0.01em]
+    "
+  >
+    {{
+      currentLanguage === 'fr'
+        ? 'Paramètres'
+        : 'Settings'
+    }}
+  </span>
+
+
+  <!-- ARROW -->
+
+  <i
+    aria-hidden="true"
+    class="
+      fa-solid
+      fa-chevron-right
+
+      text-[9px]
+
+      opacity-35
+
+      transition-transform
+      duration-150
+
+      group-hover:translate-x-0.5
+    "
+  ></i>
+
+</button>
+
+
+<!-- ========================================================
+     📚 SEPARATOR
+========================================================= -->
+
+<div
+  class="
+    mx-2
+    my-1.5
+    h-px
+
+    bg-black/[0.06]
+    dark:bg-white/[0.06]
+  "
+></div>
+
+
+<!-- ========================================================
+     📖 CENTRE D'AIDE
+========================================================= -->
+
+<button
+  type="button"
+  role="menuitem"
+
+  class="
+    help-center
+    group
+
+    flex
+    w-full
+    items-center
+
+    gap-2.5
+
+    rounded-xl
+
+    px-3
+    py-2
+
+    text-left
+
+    cursor-pointer
+    select-none
+
+    transition-transform
+    duration-150
+
+    hover:scale-[1.015]
+    active:scale-[0.98]
+  "
+
+  [ngStyle]="{
+    'background':
+      'transparent',
+
+    'color':
+      themeService.isDarkMode
+        ? '#6EE7B7'
+        : '#059669'
+  }"
+
+  (click)="openHelpCenter($event)"
+>
+
+  <!-- ICON -->
+
+  <span
+    class="
+      flex
+      h-7
+      w-7
+      shrink-0
+
+      items-center
+      justify-center
+
+      rounded-lg
+
+      bg-emerald-500/[0.08]
+
+      text-emerald-500
+
+      text-[11px]
+    "
+  >
+    <i
+      aria-hidden="true"
+      class="fa-solid fa-book"
+    ></i>
+  </span>
+
+
+  <!-- TEXT -->
+
+  <span
+    class="
+      min-w-0
+      flex-1
+
+      text-[11px]
+      font-semibold
+      tracking-[-0.01em]
+    "
+  >
+    {{
+      currentLanguage === 'fr'
+        ? "Centre d'aide complet"
+        : 'Full Help Center'
+    }}
+  </span>
+
+
+  <!-- EXTERNAL ARROW -->
+
+  <i
+    aria-hidden="true"
+    class="
+      fa-solid
+      fa-arrow-up-right-from-square
+
+      text-[9px]
+
+      opacity-60
+
+      transition-transform
+      duration-150
+
+      group-hover:translate-x-0.5
+      group-hover:-translate-y-0.5
+    "
+  ></i>
+
+</button>
+
+</div>
+
+</div>

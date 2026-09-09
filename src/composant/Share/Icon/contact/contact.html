@@ -1,0 +1,651 @@
+<!-- ============================================================
+
+     ✉️ CONTACT TOGGLE — JARDISCAN
+
+     PREMIUM EMERALD GLASS
+
+     Responsive :
+     • Mobile       → Popup à droite
+     • Tablette     → Popup à droite
+     • Laptop       → Popup sous le bouton
+     • Desktop      → Popup sous le bouton
+
+     • Ouverture → DROITE ➜ GAUCHE
+     • Light / Dark
+     • Français / English
+     • Glassmorphism
+     • 44 × 44
+     • Une seule popup ouverte à la fois
+
+============================================================= -->
+
+<div
+  class="
+    contact-wrapper
+    relative
+    flex
+    items-center
+    justify-center
+  "
+  (click)="$event.stopPropagation()"
+>
+
+  <!-- ==========================================================
+       ✉️ CONTACT BUTTON
+  =========================================================== -->
+
+  <button
+    type="button"
+
+    [attr.aria-label]="
+      currentLanguage === 'fr'
+        ? 'Contacter JardiScan'
+        : 'Contact JardiScan'
+    "
+
+    [attr.aria-expanded]="isOpen"
+
+    aria-haspopup="menu"
+
+    [title]="
+      currentLanguage === 'fr'
+        ? 'Contacter JardiScan'
+        : 'Contact JardiScan'
+    "
+
+    class="
+      contact-button
+      group
+      relative
+      flex
+      h-10
+      w-10
+      shrink-0
+      items-center
+      justify-center
+      overflow-hidden
+      rounded-full
+      backdrop-blur-2xl
+      backdrop-saturate-200
+      cursor-pointer
+      select-none
+      transition-transform
+      duration-200
+      hover:scale-[1.04]
+      active:scale-95
+      focus:outline-none
+      focus-visible:ring-2
+      focus-visible:ring-emerald-500/30
+      sm:h-11
+      sm:w-11
+    "
+
+    [ngStyle]="{
+      'color': themeService.TextPrincipal
+    }"
+
+    (click)="togglePopup($event)"
+  >
+
+    <!-- ========================================================
+         ✉️ CONTACT ICON
+    ========================================================= -->
+
+    <i
+      aria-hidden="true"
+
+      [ngStyle]="{
+        'color': themeService.TextPrincipal
+      }"
+
+      class="
+        fa-regular
+        fa-envelope
+        relative
+        z-10
+        text-[15px]
+        transition-transform
+        duration-300
+        group-hover:scale-110
+        group-hover:-rotate-6
+        sm:text-[20px]
+      "
+    ></i>
+
+  </button>
+
+
+  <!-- ==========================================================
+       ✉️ CONTACT POPUP
+
+       • right-0
+       • left-auto
+       • origin-top-right
+       • Animation droite → gauche
+  =========================================================== -->
+
+  <div
+    *ngIf="isOpen"
+
+    role="menu"
+
+    [attr.aria-label]="
+      currentLanguage === 'fr'
+        ? 'Contacter JardiScan'
+        : 'Contact JardiScan'
+    "
+
+    class="
+      contact-popup
+      absolute
+      z-[100]
+
+      top-full
+      right-0
+      left-auto
+
+      mt-2
+      lg:mt-3
+
+      w-[285px]
+      max-w-[calc(100vw-24px)]
+
+      overflow-hidden
+      rounded-2xl
+      border
+      p-1.5
+
+
+
+      backdrop-blur-3xl
+      backdrop-saturate-200
+
+      origin-top-right
+
+      animate-[contactPopupRightToLeft_160ms_ease-out]
+    "
+
+    [ngStyle]="{
+      'background': themeService.Background1,
+      'border': '1px solid ' + themeService.Border1,
+      'box-shadow': themeService.BoxShadow
+    }"
+
+    (click)="$event.stopPropagation()"
+  >
+
+    <!-- ========================================================
+         🏷️ POPUP HEADER
+    ========================================================= -->
+
+    <div
+      class="
+        flex
+        items-center
+        gap-3
+        px-3
+        pb-2.5
+        pt-2
+      "
+    >
+
+      <!-- ICON -->
+
+      <span
+        class="
+          flex
+          h-8
+          w-8
+          shrink-0
+          items-center
+          justify-center
+          rounded-xl
+          bg-emerald-500/10
+          text-emerald-500
+        "
+      >
+
+        <i
+          aria-hidden="true"
+          class="fa-regular fa-envelope text-[14px]"
+        ></i>
+
+      </span>
+
+
+      <!-- TITLE -->
+
+      <div class="min-w-0 flex-1">
+
+        <p
+          class="
+            text-[13px]
+            font-bold
+            tracking-[-0.01em]
+          "
+
+          [ngStyle]="{
+            'color': themeService.isDarkMode
+              ? '#F0FDF4'
+              : '#17251B'
+          }"
+        >
+          {{
+            currentLanguage === 'fr'
+              ? 'Contact'
+              : 'Contact'
+          }}
+        </p>
+
+
+        <p
+          class="
+            mt-0.5
+            text-[11px]
+            leading-tight
+          "
+
+          [ngStyle]="{
+            'color': themeService.isDarkMode
+              ? 'rgba(240,253,244,0.55)'
+              : 'rgba(23,37,27,0.55)'
+          }"
+        >
+          {{
+            currentLanguage === 'fr'
+              ? 'Comment pouvons-nous vous aider ?'
+              : 'How can we help you?'
+          }}
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         ✉️ NOUS CONTACTER
+    ========================================================= -->
+
+    <button
+      type="button"
+      role="menuitem"
+
+      class="
+        contact-option
+        group
+        flex
+        w-full
+        items-center
+        gap-3
+        rounded-xl
+        px-3
+        py-2.5
+        text-left
+        cursor-pointer
+        select-none
+        transition-transform
+        duration-150
+        hover:scale-[1.015]
+        active:scale-[0.98]
+      "
+
+      [ngStyle]="{
+        'background': themeService.isDarkMode
+          ? 'rgba(52,211,153,0.12)'
+          : 'rgba(16,185,129,0.09)',
+
+        'color': themeService.isDarkMode
+          ? '#F0FDF4'
+          : '#17251B'
+      }"
+
+      (click)="openContact($event)"
+    >
+
+      <span
+        class="
+          flex
+          h-8
+          w-8
+          shrink-0
+          items-center
+          justify-center
+          rounded-lg
+          bg-emerald-500/10
+          text-emerald-500
+        "
+      >
+
+        <i
+          aria-hidden="true"
+          class="fa-solid fa-paper-plane text-[12px]"
+        ></i>
+
+      </span>
+
+
+      <span class="min-w-0 flex-1">
+
+        <span
+          class="
+            block
+            text-[12px]
+            font-semibold
+          "
+        >
+          {{
+            currentLanguage === 'fr'
+              ? 'Nous contacter'
+              : 'Contact us'
+          }}
+        </span>
+
+
+        <span
+          class="
+            mt-0.5
+            block
+            text-[10px]
+            opacity-55
+          "
+        >
+          {{
+            currentLanguage === 'fr'
+              ? 'Envoyez-nous votre message'
+              : 'Send us your message'
+          }}
+        </span>
+
+      </span>
+
+
+      <i
+        aria-hidden="true"
+        class="
+          fa-solid
+          fa-chevron-right
+          text-[9px]
+          opacity-50
+        "
+      ></i>
+
+    </button>
+
+
+    <!-- ========================================================
+         📚 SEPARATOR
+    ========================================================= -->
+
+    <div
+      class="
+        mx-2
+        my-1.5
+        h-px
+        bg-black/[0.06]
+        dark:bg-white/[0.06]
+      "
+    ></div>
+
+
+    <!-- ========================================================
+         🐛 SIGNALER UN PROBLÈME
+    ========================================================= -->
+
+    <button
+      type="button"
+      role="menuitem"
+
+      class="
+        contact-option
+        group
+        flex
+        w-full
+        items-center
+        gap-3
+        rounded-xl
+        px-3
+        py-2
+        text-left
+        cursor-pointer
+        select-none
+        transition-transform
+        duration-150
+        hover:scale-[1.015]
+        active:scale-[0.98]
+      "
+
+      [ngStyle]="{
+        'color': themeService.isDarkMode
+          ? '#F0FDF4'
+          : '#17251B'
+      }"
+
+      (click)="openContactType('problem', $event)"
+    >
+
+      <span
+        class="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-lg
+          bg-emerald-500/[0.08]
+          text-emerald-500
+        "
+      >
+
+        <i
+          aria-hidden="true"
+          class="fa-solid fa-bug text-[11px]"
+        ></i>
+
+      </span>
+
+
+      <span
+        class="
+          min-w-0
+          flex-1
+          text-[12px]
+          font-semibold
+        "
+      >
+        {{
+          currentLanguage === 'fr'
+            ? 'Signaler un problème'
+            : 'Report a problem'
+        }}
+      </span>
+
+
+      <i
+        aria-hidden="true"
+        class="
+          fa-solid
+          fa-chevron-right
+          text-[9px]
+          opacity-35
+        "
+      ></i>
+
+    </button>
+
+
+    <!-- ========================================================
+         💡 SUGGESTION
+    ========================================================= -->
+
+    <button
+      type="button"
+      role="menuitem"
+
+      class="
+        contact-option
+        group
+        flex
+        w-full
+        items-center
+        gap-3
+        rounded-xl
+        px-3
+        py-2
+        text-left
+        cursor-pointer
+        select-none
+        transition-transform
+        duration-150
+        hover:scale-[1.015]
+        active:scale-[0.98]
+      "
+
+      [ngStyle]="{
+        'color': themeService.isDarkMode
+          ? '#F0FDF4'
+          : '#17251B'
+      }"
+
+      (click)="openContactType('suggestion', $event)"
+    >
+
+      <span
+        class="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-lg
+          bg-emerald-500/[0.08]
+          text-emerald-500
+        "
+      >
+
+        <i
+          aria-hidden="true"
+          class="fa-solid fa-lightbulb text-[11px]"
+        ></i>
+
+      </span>
+
+
+      <span
+        class="
+          min-w-0
+          flex-1
+          text-[12px]
+          font-semibold
+        "
+      >
+        {{
+          currentLanguage === 'fr'
+            ? 'Faire une suggestion'
+            : 'Make a suggestion'
+        }}
+      </span>
+
+
+      <i
+        aria-hidden="true"
+        class="
+          fa-solid
+          fa-chevron-right
+          text-[9px]
+          opacity-35
+        "
+      ></i>
+
+    </button>
+
+
+    <!-- ========================================================
+         📖 CENTRE DE CONTACT
+    ========================================================= -->
+
+    <div
+      class="
+        mx-2
+        my-1.5
+        h-px
+        bg-black/[0.06]
+        dark:bg-white/[0.06]
+      "
+    ></div>
+
+
+    <button
+      type="button"
+      role="menuitem"
+
+      class="
+        contact-center
+        group
+        flex
+        w-full
+        items-center
+        gap-2.5
+        rounded-xl
+        px-3
+        py-2
+        text-left
+        cursor-pointer
+        select-none
+        transition-transform
+        duration-150
+        hover:scale-[1.015]
+        active:scale-[0.98]
+      "
+
+      [ngStyle]="{
+        'color': themeService.isDarkMode
+          ? '#6EE7B7'
+          : '#059669'
+      }"
+
+      (click)="openContactCenter($event)"
+    >
+
+      <i
+        aria-hidden="true"
+        class="
+          fa-solid
+          fa-envelope-open-text
+          text-[11px]
+        "
+      ></i>
+
+
+      <span
+        class="
+          flex-1
+          text-[11px]
+          font-semibold
+        "
+      >
+        {{
+          currentLanguage === 'fr'
+            ? 'Centre de contact'
+            : 'Contact Center'
+        }}
+      </span>
+
+
+      <i
+        aria-hidden="true"
+        class="
+          fa-solid
+          fa-arrow-up-right-from-square
+          text-[9px]
+          opacity-60
+        "
+      ></i>
+
+    </button>
+
+  </div>
+
+</div>

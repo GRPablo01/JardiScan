@@ -1,0 +1,592 @@
+<!-- ============================================================
+     🚀 ACTIONS MOBILE / TABLETTE
+
+     • Mobile       → Actions essentielles
+     • Tablette     → Actions essentielles
+     • LG+          → Masqué
+     • Boutons      → 44 × 44 px
+     • Glassmorphism
+     • Light / Dark
+     • Menu secondaire fiable
+     • Menu affiché sous le bouton +
+============================================================= -->
+
+<div
+  class="
+    relative
+    z-[100]
+    flex
+    w-11
+    shrink-0
+    flex-col
+    items-center
+    justify-center
+    gap-2
+    sm:gap-2.5
+    lg:hidden
+  "
+>
+
+  <!-- ========================================================
+       🌗 THÈME
+  ========================================================= -->
+
+  <div
+    class="
+      relative
+      z-10
+      flex
+      h-11
+      w-11
+      shrink-0
+      items-center
+      justify-center
+      overflow-visible
+    "
+  >
+    <app-theme></app-theme>
+  </div>
+
+
+  <!-- ========================================================
+       🌍 LANGUE
+  ========================================================= -->
+
+  <div
+    class="
+      relative
+      z-10
+      flex
+      h-11
+      w-11
+      shrink-0
+      items-center
+      justify-center
+      overflow-visible
+    "
+  >
+    <app-language></app-language>
+  </div>
+
+
+  <!-- ========================================================
+       ⋯ MENU PRINCIPAL
+  ========================================================= -->
+
+  <div
+    class="
+      relative
+      z-[200]
+      flex
+      h-11
+      w-11
+      shrink-0
+      items-center
+      justify-center
+    "
+  >
+
+    <!-- ======================================================
+         ➕ BOUTON PLUS
+    ======================================================= -->
+
+    <button
+      type="button"
+
+      [attr.aria-expanded]="showMoreActions"
+
+      aria-controls="mobile-secondary-actions"
+
+      [attr.aria-label]="
+        showMoreActions
+          ? 'Fermer les actions'
+          : 'Afficher plus d’actions'
+      "
+
+      [attr.title]="
+        showMoreActions
+          ? 'Fermer'
+          : 'Plus d’actions'
+      "
+
+      (click)="toggleMoreActions()"
+
+      class="
+        group
+        relative
+        z-[210]
+
+        flex
+        h-11
+        w-11
+        shrink-0
+
+        items-center
+        justify-center
+
+        overflow-hidden
+
+        rounded-full
+        border
+        p-0
+
+        cursor-pointer
+        select-none
+
+        shadow-[0_6px_20px_rgba(0,0,0,0.07),inset_0_1px_0_rgba(255,255,255,0.55)]
+
+        backdrop-blur-2xl
+        backdrop-saturate-200
+
+        transition-transform
+        duration-200
+
+        hover:scale-[1.04]
+        active:scale-95
+
+        focus:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-emerald-500/30
+      "
+
+      [ngStyle]="{
+        'background': themeService.isDarkMode
+          ? 'rgba(27,40,32,0.82)'
+          : 'rgba(255,255,255,0.28)',
+
+        'border-color': themeService.isDarkMode
+          ? 'rgba(110,231,183,0.22)'
+          : 'rgba(255,255,255,0.45)',
+
+        'color': themeService.isDarkMode
+          ? '#6EE7B7'
+          : '#10B981'
+      }"
+    >
+
+      <!-- ====================================================
+           ICON PLUS
+      ===================================================== -->
+
+      <svg
+        class="
+          relative
+          z-10
+          h-[18px]
+          w-[18px]
+          shrink-0
+
+          transition-transform
+          duration-200
+        "
+
+        [class.rotate-45]="showMoreActions"
+
+        viewBox="0 0 24 24"
+
+        fill="none"
+
+        stroke="currentColor"
+
+        stroke-width="1.8"
+
+        stroke-linecap="round"
+      >
+
+        <path d="M12 5v14"></path>
+
+        <path d="M5 12h14"></path>
+
+      </svg>
+
+
+      <!-- ====================================================
+           ✨ TOP GLASS HIGHLIGHT
+      ===================================================== -->
+
+      <span
+        aria-hidden="true"
+
+        class="
+          pointer-events-none
+          absolute
+          inset-x-3
+          top-0
+          z-20
+          h-px
+          rounded-full
+        "
+
+        [ngStyle]="{
+          'background': themeService.isDarkMode
+            ? 'rgba(110,231,183,0.28)'
+            : 'rgba(255,255,255,0.75)'
+        }"
+      ></span>
+
+
+      <!-- ====================================================
+           ✨ INNER GLOW
+      ===================================================== -->
+
+      <span
+        aria-hidden="true"
+
+        class="
+          pointer-events-none
+          absolute
+          inset-0
+          z-0
+          rounded-full
+          bg-emerald-400/[0.05]
+          opacity-0
+          transition-opacity
+          duration-200
+          group-hover:opacity-100
+        "
+      ></span>
+
+    </button>
+
+
+    <!-- ========================================================
+         📂 MENU ACTIONS SECONDAIRES
+
+         IMPORTANT :
+         • z-[999]
+         • position sous le bouton
+         • ne dépend plus de right-full
+         • largeur suffisante
+         • reste au-dessus du header
+    ========================================================= -->
+
+    <div
+      *ngIf="showMoreActions"
+
+      id="mobile-secondary-actions"
+
+      class="
+        absolute
+        right-0
+        top-full
+        z-[999]
+
+        mt-2
+
+        flex
+        flex-col
+        items-center
+        gap-2
+
+        rounded-2xl
+        border
+
+        p-2
+
+        shadow-[0_14px_40px_rgba(0,0,0,0.16)]
+
+        backdrop-blur-2xl
+        backdrop-saturate-200
+      "
+
+      [ngStyle]="{
+        'background': themeService.isDarkMode
+          ? 'rgba(27,40,32,0.96)'
+          : 'rgba(255,255,255,0.92)',
+
+        'border-color': themeService.isDarkMode
+          ? 'rgba(110,231,183,0.20)'
+          : 'rgba(255,255,255,0.65)'
+      }"
+    >
+
+      <!-- ======================================================
+           🌱 PLANTES
+      ======================================================= -->
+
+      <button
+        type="button"
+
+        aria-label="Voir les plantes"
+
+        title="Plantes"
+
+        (click)="onPlantsClick()"
+
+        class="
+          group
+          relative
+
+          flex
+          h-11
+          w-11
+          shrink-0
+
+          items-center
+          justify-center
+
+          overflow-hidden
+
+          rounded-full
+          border
+          p-0
+
+          cursor-pointer
+          select-none
+
+          shadow-[0_6px_20px_rgba(0,0,0,0.07),inset_0_1px_0_rgba(255,255,255,0.55)]
+
+          backdrop-blur-2xl
+          backdrop-saturate-200
+
+          transition-transform
+          duration-200
+
+          hover:scale-[1.05]
+          active:scale-95
+
+          focus:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-emerald-500/30
+        "
+
+        [ngStyle]="{
+          'background': themeService.isDarkMode
+            ? 'rgba(27,40,32,0.80)'
+            : 'rgba(255,255,255,0.30)',
+
+          'border-color': themeService.isDarkMode
+            ? 'rgba(110,231,183,0.20)'
+            : 'rgba(255,255,255,0.50)',
+
+          'color': themeService.isDarkMode
+            ? '#6EE7B7'
+            : '#10B981'
+        }"
+      >
+
+        <svg
+          class="
+            relative
+            z-10
+            h-[17px]
+            w-[17px]
+            shrink-0
+            transition-transform
+            duration-200
+            group-hover:scale-110
+          "
+
+          viewBox="0 0 24 24"
+
+          fill="none"
+
+          stroke="currentColor"
+
+          stroke-width="1.7"
+        >
+
+          <path d="M12 21V10"></path>
+
+          <path
+            d="M12 10C12 6.5 14.5 3 18 3c0 3.5-2.5 7-6 7Z"
+          ></path>
+
+          <path
+            d="M12 14C12 10.5 9.5 7 6 7c0 3.5 2.5 7 6 7Z"
+          ></path>
+
+        </svg>
+
+
+        <span
+          aria-hidden="true"
+
+          class="
+            pointer-events-none
+            absolute
+            inset-x-3
+            top-0
+            z-20
+            h-px
+            rounded-full
+          "
+
+          [ngStyle]="{
+            'background': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.28)'
+              : 'rgba(255,255,255,0.75)'
+          }"
+        ></span>
+
+      </button>
+
+
+      <!-- ======================================================
+           📖 CONSEILS
+      ======================================================= -->
+
+      <button
+        type="button"
+
+        aria-label="Voir les conseils"
+
+        title="Conseils"
+
+        (click)="onAdviceClick()"
+
+        class="
+          group
+          relative
+
+          flex
+          h-11
+          w-11
+          shrink-0
+
+          items-center
+          justify-center
+
+          overflow-hidden
+
+          rounded-full
+          border
+          p-0
+
+          cursor-pointer
+          select-none
+
+          shadow-[0_6px_20px_rgba(0,0,0,0.07),inset_0_1px_0_rgba(255,255,255,0.55)]
+
+          backdrop-blur-2xl
+          backdrop-saturate-200
+
+          transition-transform
+          duration-200
+
+          hover:scale-[1.05]
+          active:scale-95
+
+          focus:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-emerald-500/30
+        "
+
+        [ngStyle]="{
+          'background': themeService.isDarkMode
+            ? 'rgba(27,40,32,0.80)'
+            : 'rgba(255,255,255,0.30)',
+
+          'border-color': themeService.isDarkMode
+            ? 'rgba(110,231,183,0.20)'
+            : 'rgba(255,255,255,0.50)',
+
+          'color': themeService.isDarkMode
+            ? '#6EE7B7'
+            : '#10B981'
+        }"
+      >
+
+        <svg
+          class="
+            relative
+            z-10
+            h-[17px]
+            w-[17px]
+            shrink-0
+            transition-transform
+            duration-200
+            group-hover:scale-110
+          "
+
+          viewBox="0 0 24 24"
+
+          fill="none"
+
+          stroke="currentColor"
+
+          stroke-width="1.7"
+        >
+
+          <path
+            d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Z"
+          ></path>
+
+          <path
+            d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"
+          ></path>
+
+          <path d="M9 7h6"></path>
+
+          <path d="M9 10h5"></path>
+
+        </svg>
+
+
+        <span
+          aria-hidden="true"
+
+          class="
+            pointer-events-none
+            absolute
+            inset-x-3
+            top-0
+            z-20
+            h-px
+            rounded-full
+          "
+
+          [ngStyle]="{
+            'background': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.28)'
+              : 'rgba(255,255,255,0.75)'
+          }"
+        ></span>
+
+      </button>
+
+
+      <!-- ======================================================
+           ❓ AIDE
+      ======================================================= -->
+
+      <div
+        class="
+          flex
+          h-11
+          w-11
+          shrink-0
+          items-center
+          justify-center
+          overflow-visible
+        "
+        (click)="closeMoreActions()"
+      >
+        <app-aide></app-aide>
+      </div>
+
+
+      <!-- ======================================================
+           📩 CONTACT
+      ======================================================= -->
+
+      <div
+        class="
+          flex
+          h-11
+          w-11
+          shrink-0
+          items-center
+          justify-center
+          overflow-visible
+        "
+        (click)="closeMoreActions()"
+      >
+        <app-contact></app-contact>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

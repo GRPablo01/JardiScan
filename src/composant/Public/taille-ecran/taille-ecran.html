@@ -1,0 +1,375 @@
+<!-- ============================================================
+     🌿 JARDISCAN — DEBUG TAILLE ÉCRAN
+
+     • Affichage taille viewport
+     • Détection mobile / tablette / laptop / desktop
+     • Orientation
+     • Breakpoint Tailwind
+     • Mise à jour automatique au resize
+     ============================================================ -->
+
+     <div
+     class="
+       fixed
+       right-3
+       top-20
+       z-[9999]
+   
+       w-[250px]
+   
+       rounded-2xl
+       border
+   
+       bg-black/80
+       p-4
+   
+       font-sans
+       text-white
+   
+       shadow-2xl
+       backdrop-blur-xl
+   
+       select-none
+     "
+   >
+   
+     <!-- ==========================================================
+          TITRE
+          ========================================================== -->
+   
+     <div
+       class="
+         mb-3
+         flex
+         items-center
+         justify-between
+         gap-3
+       "
+     >
+   
+       <div
+         class="
+           text-xs
+           font-black
+           uppercase
+           tracking-[0.15em]
+           text-white
+         "
+       >
+         🐛 Debug écran
+       </div>
+   
+       <div
+         class="
+           rounded-full
+           bg-white/10
+           px-2
+           py-1
+           text-[9px]
+           font-bold
+           uppercase
+         "
+       >
+         LIVE
+       </div>
+   
+     </div>
+   
+   
+     <!-- ==========================================================
+          TYPE D'ÉCRAN
+          ========================================================== -->
+   
+     <div
+       class="
+         mb-3
+         rounded-xl
+         border
+         border-white/10
+         bg-white/5
+         p-3
+       "
+     >
+   
+       <div
+         class="
+           mb-1
+           text-[10px]
+           font-semibold
+           uppercase
+           tracking-wider
+           text-white/50
+         "
+       >
+         Type d'écran
+       </div>
+   
+       <div
+         class="
+           flex
+           items-center
+           gap-2
+           text-lg
+           font-black
+         "
+       >
+   
+         <span>
+           {{ emojiEcran }}
+         </span>
+   
+         <span>
+           {{ typeEcran }}
+         </span>
+   
+       </div>
+   
+       <div
+         class="
+           mt-1
+           text-[10px]
+           text-white/50
+         "
+       >
+         Plage : {{ plageEcran }}
+       </div>
+   
+     </div>
+   
+   
+     <!-- ==========================================================
+          DIMENSIONS
+          ========================================================== -->
+   
+     <div
+       class="
+         grid
+         grid-cols-2
+         gap-2
+       "
+     >
+   
+       <div
+         class="
+           rounded-xl
+           border
+           border-white/10
+           bg-white/5
+           p-3
+         "
+       >
+   
+         <div
+           class="
+             text-[9px]
+             font-bold
+             uppercase
+             tracking-wider
+             text-white/40
+           "
+         >
+           Largeur
+         </div>
+   
+         <div
+           class="
+             mt-1
+             text-xl
+             font-black
+           "
+         >
+           {{ largeur }}
+           <span class="text-xs text-white/40">
+             px
+           </span>
+         </div>
+   
+       </div>
+   
+   
+       <div
+         class="
+           rounded-xl
+           border
+           border-white/10
+           bg-white/5
+           p-3
+         "
+       >
+   
+         <div
+           class="
+             text-[9px]
+             font-bold
+             uppercase
+             tracking-wider
+             text-white/40
+           "
+         >
+           Hauteur
+         </div>
+   
+         <div
+           class="
+             mt-1
+             text-xl
+             font-black
+           "
+         >
+           {{ hauteur }}
+           <span class="text-xs text-white/40">
+             px
+           </span>
+         </div>
+   
+       </div>
+   
+     </div>
+   
+   
+     <!-- ==========================================================
+          ORIENTATION
+          ========================================================== -->
+   
+     <div
+       class="
+         mt-2
+         rounded-xl
+         border
+         border-white/10
+         bg-white/5
+         px-3
+         py-2
+       "
+     >
+   
+       <div
+         class="
+           flex
+           items-center
+           justify-between
+         "
+       >
+   
+         <span
+           class="
+             text-[10px]
+             font-bold
+             uppercase
+             tracking-wider
+             text-white/40
+           "
+         >
+           Orientation
+         </span>
+   
+         <span
+           class="
+             text-xs
+             font-black
+           "
+         >
+           {{ orientation === 'Portrait' ? '📱' : '🖥️' }}
+           {{ orientation }}
+         </span>
+   
+       </div>
+   
+     </div>
+   
+   
+     <!-- ==========================================================
+          TAILWIND BREAKPOINT
+          ========================================================== -->
+   
+     <div
+       class="
+         mt-2
+         rounded-xl
+         border
+         border-white/10
+         bg-white/5
+         px-3
+         py-2
+       "
+     >
+   
+       <div
+         class="
+           flex
+           items-center
+           justify-between
+         "
+       >
+   
+         <span
+           class="
+             text-[10px]
+             font-bold
+             uppercase
+             tracking-wider
+             text-white/40
+           "
+         >
+           Tailwind
+         </span>
+   
+         <span
+           class="
+             rounded-lg
+             bg-white/10
+             px-2
+             py-1
+             font-mono
+             text-xs
+             font-black
+           "
+         >
+           {{ breakpointTailwind }}
+         </span>
+   
+       </div>
+   
+     </div>
+   
+   
+     <!-- ==========================================================
+          RÉSUMÉ
+          ========================================================== -->
+   
+     <div
+       class="
+         mt-3
+         border-t
+         border-white/10
+         pt-3
+         text-[9px]
+         leading-relaxed
+         text-white/40
+       "
+     >
+   
+       <div>
+         Viewport :
+         <strong class="text-white/70">
+           {{ largeur }} × {{ hauteur }}
+         </strong>
+       </div>
+   
+       <div>
+         Responsive :
+         <strong class="text-white/70">
+           {{ typeEcran }}
+         </strong>
+       </div>
+   
+       <div>
+         Breakpoint :
+         <strong class="text-white/70">
+           {{ breakpointTailwind }}
+         </strong>
+       </div>
+   
+     </div>
+   
+   </div>

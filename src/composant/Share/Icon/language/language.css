@@ -1,0 +1,216 @@
+
+/* ============================================================
+   🌐 LANGUAGE — JARDISCAN
+   PREMIUM GLASS
+   FIXED POPUP / ABOVE EVERYTHING
+============================================================ */
+
+
+/* ============================================================
+   📦 WRAPPER
+============================================================ */
+
+.language-wrapper {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  /*
+   * Aucun overflow ici.
+   */
+  overflow: visible;
+
+  /*
+   * Ne crée pas inutilement un stacking context.
+   */
+  isolation: auto;
+}
+
+
+/* ============================================================
+   🌐 BUTTON
+============================================================ */
+
+.language-button {
+  position: relative;
+
+  z-index: 1;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ============================================================
+   🌐 POPUP
+============================================================ */
+
+.language-popup {
+
+  /*
+   * IMPORTANT :
+   *
+   * La popup est position: fixed.
+   *
+   * Elle est donc attachée au viewport
+   * et non au header / parent.
+   */
+
+  position: fixed !important;
+
+  /*
+   * Niveau extrêmement élevé.
+   *
+   * Permet de passer au-dessus des headers,
+   * cards, menus, images, etc.
+   */
+
+  z-index: 2147483647 !important;
+
+  /*
+   * Ne doit jamais être coupée.
+   */
+
+  overflow: visible;
+
+  /*
+   * Dimensions stables.
+   */
+
+  min-width: 150px;
+
+  max-width: calc(100vw - 20px);
+
+  /*
+   * Empêche le texte de provoquer une largeur
+   * excessive.
+   */
+
+  box-sizing: border-box;
+
+  /*
+   * Laisse la popup respirer.
+   */
+
+  pointer-events: auto;
+
+  /*
+   * Optimisation du rendu glass.
+   */
+
+  will-change: transform, opacity;
+
+  /*
+   * Évite certains problèmes de rendu
+   * avec backdrop-filter.
+   */
+
+  transform-origin: center;
+}
+
+
+/* ============================================================
+   📱 MOBILE
+============================================================ */
+
+@media (max-width: 639px) {
+
+  .language-popup {
+
+    min-width: 148px;
+
+  }
+
+}
+
+
+/* ============================================================
+   📱 TABLETTE
+============================================================ */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+
+  .language-popup {
+
+    min-width: 155px;
+
+  }
+
+}
+
+
+/* ============================================================
+   💻 LAPTOP / DESKTOP
+============================================================ */
+
+@media (min-width: 1024px) {
+
+  .language-popup {
+
+    min-width: 160px;
+
+  }
+
+}
+
+
+/* ============================================================
+   ✨ ANIMATION
+============================================================ */
+
+@keyframes languagePopup {
+
+  from {
+
+    opacity: 0;
+
+    scale: 0.94;
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    scale: 1;
+
+  }
+
+}
+
+
+/* ============================================================
+   🖱️ OPTION
+============================================================ */
+
+.language-option {
+
+  min-height: 42px;
+
+  width: 100%;
+
+  -webkit-tap-highlight-color: transparent;
+
+  touch-action: manipulation;
+}
+
+
+/* ============================================================
+   ♿ ACCESSIBILITY
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .language-popup,
+  .language-option,
+  .language-button {
+
+    animation: none !important;
+
+    transition: none !important;
+
+  }
+
+}

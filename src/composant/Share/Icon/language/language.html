@@ -1,0 +1,364 @@
+<!-- ============================================================
+     🌐 LANGUAGE TOGGLE — JARDISCAN
+     PREMIUM EMERALD GLASS
+
+     Responsive :
+     • Mobile       → Popup à droite
+     • Tablette     → Popup à droite
+     • Laptop       → Popup sous le bouton
+     • Desktop      → Popup sous le bouton
+
+     Animation :
+     • DROITE ➜ GAUCHE
+     • Light / Dark
+     • Glassmorphism
+     • 44 × 44
+     • Instant language switch
+============================================================= -->
+
+<div
+  class="
+    language-wrapper
+    relative
+    inline-flex
+    shrink-0
+  "
+  (click)="$event.stopPropagation()"
+>
+
+  <!-- ==========================================================
+       🌐 LANGUAGE BUTTON
+  =========================================================== -->
+
+  <button
+    type="button"
+
+    [attr.aria-label]="translate('changeLanguage')"
+
+    [title]="
+      currentLanguage === 'fr'
+        ? 'Langue'
+        : 'Language'
+    "
+
+    [attr.aria-expanded]="isOpen"
+
+    aria-haspopup="menu"
+
+    class="
+      language-button
+      group
+      relative
+      flex
+      h-10
+      w-10
+      shrink-0
+      items-center
+      justify-center
+      overflow-hidden
+      rounded-full
+      backdrop-blur-2xl
+      backdrop-saturate-200
+      cursor-pointer
+      select-none
+      transition-transform
+      duration-200
+      hover:scale-[1.04]
+      active:scale-95
+      focus:outline-none
+      focus-visible:ring-2
+      focus-visible:ring-emerald-500/30
+      sm:h-11
+      sm:w-11
+    "
+
+    [ngStyle]="{
+      'color': themeService.TextPrincipal
+    }"
+
+    (click)="togglePopup($event)"
+  >
+
+    <!-- ========================================================
+         🌐 LANGUAGE ICON
+    ========================================================= -->
+
+    <i
+      aria-hidden="true"
+
+      class="
+        fa-solid
+        fa-language
+        relative
+        z-10
+        text-[16px]
+        transition-transform
+        duration-300
+        group-hover:scale-110
+        group-hover:-rotate-6
+        sm:text-[20px]
+      "
+
+      [ngStyle]="{
+        'color': themeService.TextPrincipal
+      }"
+    ></i>
+
+  </button>
+
+
+  <!-- ==========================================================
+       🌐 LANGUAGE POPUP
+  =========================================================== -->
+
+  <div
+    *ngIf="isOpen"
+
+    role="menu"
+
+    [attr.aria-label]="translate('chooseLanguage')"
+
+    class="
+      language-popup
+      fixed
+      z-[99999]
+      w-max
+      min-w-[180px]
+      flex
+      flex-col
+      rounded-2xl
+      p-1.5
+      overflow-hidden
+      backdrop-blur-3xl
+      backdrop-saturate-200
+      shadow-xl
+      origin-top-right
+      animate-[languagePopupRightToLeft_160ms_ease-out]
+    "
+
+    [ngStyle]="{
+      'top.px': popupTop,
+      'left.px': popupLeft,
+      'transform': popupTransform,
+      'background': themeService.Background1,
+      'border': '1px solid ' + themeService.Border1,
+      'box-shadow': themeService.BoxShadow
+    }"
+
+    (click)="$event.stopPropagation()"
+  >
+
+    <!-- ========================================================
+         🇫🇷 FRANÇAIS
+    ========================================================= -->
+
+    <button
+      type="button"
+
+      role="menuitem"
+
+      class="
+        language-option
+        group
+        flex
+        w-full
+        items-center
+        gap-2.5
+        rounded-xl
+        px-3
+        py-2
+        text-left
+        cursor-pointer
+        select-none
+        transition-transform
+        duration-150
+        hover:scale-[1.015]
+        active:scale-[0.98]
+      "
+
+      [ngStyle]="{
+        'background':
+          languageService.is('fr')
+            ? (
+                themeService.isDarkMode
+                  ? 'rgba(52,211,153,0.12)'
+                  : 'rgba(16,185,129,0.09)'
+              )
+            : 'transparent',
+
+        'color':
+          themeService.isDarkMode
+            ? '#F0FDF4'
+            : '#17251B'
+      }"
+
+      (click)="selectLanguage('fr', $event)"
+    >
+
+      <!-- ======================================================
+           🇫🇷 DRAPEAU
+      ======================================================= -->
+
+      <span
+        class="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-lg
+          bg-black/[0.04]
+          dark:bg-white/[0.06]
+          text-[17px]
+        "
+      >
+        🇫🇷
+      </span>
+
+
+      <!-- ======================================================
+           🏷️ NOM
+      ======================================================= -->
+
+      <span
+        class="
+          min-w-0
+          flex-1
+          text-[13px]
+          font-semibold
+          tracking-[-0.01em]
+        "
+      >
+        {{ translate('french') }}
+      </span>
+
+
+      <!-- ======================================================
+           ✅ LANGUE ACTIVE
+      ======================================================= -->
+
+      <i
+        *ngIf="languageService.is('fr')"
+
+        aria-hidden="true"
+
+        class="
+          fa-solid
+          fa-check
+          text-[11px]
+          text-emerald-500
+        "
+      ></i>
+
+    </button>
+
+
+    <!-- ========================================================
+         🇬🇧 ENGLISH
+    ========================================================= -->
+
+    <button
+      type="button"
+
+      role="menuitem"
+
+      class="
+        language-option
+        group
+        flex
+        w-full
+        items-center
+        gap-2.5
+        rounded-xl
+        px-3
+        py-2
+        text-left
+        cursor-pointer
+        select-none
+        transition-transform
+        duration-150
+        hover:scale-[1.015]
+        active:scale-[0.98]
+      "
+
+      [ngStyle]="{
+        'background':
+          languageService.is('en')
+            ? (
+                themeService.isDarkMode
+                  ? 'rgba(52,211,153,0.12)'
+                  : 'rgba(16,185,129,0.09)'
+              )
+            : 'transparent',
+
+        'color':
+          themeService.isDarkMode
+            ? '#F0FDF4'
+            : '#17251B'
+      }"
+
+      (click)="selectLanguage('en', $event)"
+    >
+
+      <!-- ======================================================
+           🇬🇧 DRAPEAU
+      ======================================================= -->
+
+      <span
+        class="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-lg
+          bg-black/[0.04]
+          dark:bg-white/[0.06]
+          text-[17px]
+        "
+      >
+        🇬🇧
+      </span>
+
+
+      <!-- ======================================================
+           🏷️ NOM
+      ======================================================= -->
+
+      <span
+        class="
+          min-w-0
+          flex-1
+          text-[13px]
+          font-semibold
+          tracking-[-0.01em]
+        "
+      >
+        {{ translate('english') }}
+      </span>
+
+
+      <!-- ======================================================
+           ✅ LANGUE ACTIVE
+      ======================================================= -->
+
+      <i
+        *ngIf="languageService.is('en')"
+
+        aria-hidden="true"
+
+        class="
+          fa-solid
+          fa-check
+          text-[11px]
+          text-emerald-500
+        "
+      ></i>
+
+    </button>
+
+  </div>
+
+</div>

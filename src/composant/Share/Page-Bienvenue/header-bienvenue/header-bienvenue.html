@@ -1,0 +1,373 @@
+<!-- ============================================================
+🌿 JARDISCAN — HEADER
+
+• Header sticky
+• Logo JardiScan
+• Navigation publique
+• Navigation desktop à partir de 1293px
+• Navigation mobile/tablette de 390px à 1292px
+• Bouton bienvenue conservé
+• ThemeService conservé
+• Angular 20 Standalone
+• Tailwind CSS
+• Responsive
+• Contenu légèrement décalé vers la droite
+============================================================ -->
+
+<header
+  class="
+    sticky
+    top-0
+    z-50
+    w-full
+    border-b
+    backdrop-blur-2xl
+  "
+  [ngStyle]="{
+    'background': themeService.GlassBackground,
+    'border-color': themeService.Border1,
+    'box-shadow': themeService.BoxShadowSmall
+  }"
+>
+
+  <!-- ==========================================================
+  🌿 CONTENEUR PRINCIPAL DU HEADER
+  =========================================================== -->
+
+  <div
+    class="
+      mx-auto
+
+      flex
+      min-h-[72px]
+      w-full
+
+      max-w-[1600px]
+
+      items-center
+      justify-between
+
+      gap-5
+
+      px-6
+      sm:px-8
+      lg:px-10
+      xl:px-12
+      2xl:px-14
+    "
+  >
+
+    <!-- ========================================================
+    🌿 LOGO JARDISCAN
+    ========================================================= -->
+
+    <a
+      routerLink="/welcome"
+
+      aria-label="JardiScan - Accueil de présentation"
+
+      class="
+        group
+
+        flex
+        shrink-0
+        items-center
+        gap-2.5
+
+        rounded-2xl
+
+        outline-none
+
+        transition-all
+        duration-300
+
+        focus-visible:ring-2
+        focus-visible:ring-offset-2
+      "
+
+      [ngStyle]="{
+        'color': themeService.TextPrincipal,
+        '--tw-ring-color': themeService.Primary
+      }"
+    >
+
+      <!-- ======================================================
+      🖼️ CONTENEUR DU LOGO
+      ======================================================= -->
+
+      <div
+        class="
+          relative
+
+          flex
+          h-10
+          w-10
+
+          shrink-0
+
+          items-center
+          justify-center
+
+          overflow-hidden
+
+          rounded-2xl
+
+          border
+
+          transition-all
+          duration-300
+
+          group-hover:scale-105
+          group-active:scale-95
+
+          sm:h-11
+          sm:w-11
+
+          lg:h-12
+          lg:w-12
+        "
+
+        [ngStyle]="{
+          'background': themeService.PrimarySoft,
+          'border-color': themeService.BorderPrimary
+        }"
+      >
+
+        <!-- ====================================================
+        🖼️ LOGO
+        ===================================================== -->
+
+        <img
+          src="assets/Logo.svg"
+          alt="Logo JardiScan"
+
+          class="
+            relative
+            z-10
+
+            h-full
+            w-full
+
+            object-contain
+
+            p-1
+          "
+        />
+
+        <!-- ====================================================
+        ✨ EFFET LUMINEUX AU SURVOL
+        ===================================================== -->
+
+        <span
+          aria-hidden="true"
+
+          class="
+            pointer-events-none
+
+            absolute
+            inset-0
+            z-20
+
+            -translate-x-full
+
+            skew-x-[-20deg]
+
+            bg-white/20
+
+            transition-transform
+            duration-500
+
+            group-hover:translate-x-[150%]
+          "
+        ></span>
+
+      </div>
+
+
+      <!-- ======================================================
+      🌿 NOM DE L'APPLICATION
+      ======================================================= -->
+
+      <div
+        class="
+          hidden
+          flex-col
+
+          leading-none
+
+          sm:flex
+        "
+      >
+
+        <p
+          class="
+            text-lg
+            font-black
+            tracking-tight
+
+            sm:text-xl
+          "
+
+          [ngStyle]="{
+            'color': themeService.TextPrincipal
+          }"
+        >
+          JardiScan
+        </p>
+
+        <span
+          class="
+            mt-1
+
+            text-[10px]
+
+            font-semibold
+            uppercase
+
+            tracking-[0.18em]
+          "
+
+          [ngStyle]="{
+            'color': themeService.TextTertiaire
+          }"
+        >
+          Jardin intelligent
+        </span>
+
+      </div>
+
+    </a>
+
+
+
+    <!-- ========================================================
+    🖥️ NAVIGATION PUBLIQUE DESKTOP / GRAND LAPTOP
+
+    • Masquée sous 1293px
+    • Visible à partir de 1293px
+    • Reste dans le header
+    • Décalée légèrement vers la droite
+    ========================================================= -->
+
+    <div
+      class="
+        hidden
+
+        min-w-0
+
+        flex-1
+
+        items-center
+        justify-end
+
+        min-[1293px]:flex
+
+        pl-6
+        xl:pl-10
+        2xl:pl-14
+
+        pr-2
+        xl:pr-4
+        2xl:pr-6
+      "
+    >
+
+      <app-nav-welcome></app-nav-welcome>
+
+    </div>
+
+
+
+    <!-- ========================================================
+    👤 BOUTON BIENVENUE / ACTION UTILISATEUR
+
+    • Conservé
+    • Légèrement espacé de la navigation
+    ========================================================= -->
+
+    <div
+      class="
+        shrink-0
+
+        ml-1
+        xl:ml-2
+        2xl:ml-3
+      "
+    >
+
+      <app-bouton-bienvenue></app-bouton-bienvenue>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+
+<!-- ============================================================
+
+🌿 JARDISCAN — LISTE ICON LAPTOP / DESKTOP
+
+• Visible à partir de 1280px
+• Visible jusqu'à l'infini
+• Masquée sous 1280px
+• Position fixe
+• À gauche de l'écran
+• Centrée verticalement
+• Ne casse pas le header
+• Ne modifie pas le composant app-liste-icon
+• Visible indépendamment du header
+• Angular 20 Standalone
+• Tailwind CSS
+
+============================================================ -->
+
+<!-- <div
+  class="
+    hidden
+    min-[1280px]:block
+    fixed
+    left-31
+    2xl:left-35
+    top-1/2
+    z-[100]
+    -translate-y-1/2
+    pointer-events-none
+  "
+>
+  <div class="pointer-events-auto">
+    <app-liste-icon></app-liste-icon>
+  </div>
+</div> -->
+
+
+
+
+<!-- ============================================================
+📱 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
+
+• Affichée de 390px à 1292px
+• Masquée sous 390px
+• Masquée à partir de 1293px
+• app-nav-welcome conservé
+============================================================ -->
+
+<div
+  class="
+    hidden
+
+    w-full
+
+    min-[390px]:block
+    min-[1293px]:hidden
+  "
+>
+
+  <app-nav-welcome></app-nav-welcome>
+
+</div>
+
+
+

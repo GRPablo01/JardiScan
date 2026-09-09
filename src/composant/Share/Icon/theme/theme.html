@@ -1,0 +1,144 @@
+<!-- ============================================================
+     🌗 THEME TOGGLE — JARDISCAN
+     PREMIUM EMERALD GLASS
+     Même UI / UX que le Welcome Header
+     Light / Dark — Responsive
+============================================================= -->
+
+<app-icon></app-icon>
+
+<button
+  type="button"
+
+  (click)="toggleTheme()"
+
+  (mouseenter)="hoverTheme = true"
+  (mouseleave)="hoverTheme = false"
+  (focus)="hoverTheme = true"
+  (blur)="hoverTheme = false"
+
+  [attr.aria-label]="
+    themeService.isDarkMode
+      ? 'Passer en mode clair'
+      : 'Passer en mode sombre'
+  "
+
+  [attr.aria-pressed]="themeService.isDarkMode"
+
+  [title]="
+    themeService.isDarkMode
+      ? 'Passer en mode clair'
+      : 'Passer en mode sombre'
+  "
+
+  class="
+    group
+    relative
+
+    flex
+    h-10
+    w-10
+
+    shrink-0
+    items-center
+    justify-center
+
+    overflow-hidden
+
+    rounded-full
+
+    backdrop-blur-2xl
+    backdrop-saturate-200
+
+    cursor-pointer
+    select-none
+
+    transition-transform
+    duration-200
+
+    hover:scale-[1.04]
+    active:scale-95
+
+    focus:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-emerald-500/30
+
+    sm:h-11
+    sm:w-11
+  "
+
+  [ngStyle]="{
+    'color':themeService.TextPrincipal
+  }"
+>
+
+  
+
+
+ 
+
+
+  <!-- ==========================================================
+       🌙 LIGHT MODE → MOON
+  =========================================================== -->
+
+  <i
+    *ngIf="!themeService.isDarkMode"
+
+    aria-hidden="true"
+    [ngStyle]="{
+    'color':themeService.TextPrincipal
+  }"
+    class="
+      fa-solid
+      fa-moon
+
+      relative
+      z-10
+
+      text-[15px]
+
+
+      transition-transform
+      duration-300
+
+      group-hover:rotate-12
+      group-hover:scale-110
+
+      sm:text-[20px]
+    "
+  ></i>
+
+
+  <!-- ==========================================================
+       ☀️ DARK MODE → SUN
+  =========================================================== -->
+
+  <i
+    *ngIf="themeService.isDarkMode"
+
+    aria-hidden="true"
+    [ngStyle]="{
+    'color':themeService.TextPrincipal
+  }"
+    class="
+      fa-solid
+      fa-sun
+
+      relative
+      z-10
+
+      text-[15px]
+
+
+      transition-transform
+      duration-300
+
+      group-hover:rotate-12
+      group-hover:scale-110
+
+      sm:text-[20px]
+    "
+  ></i>
+  
+</button>

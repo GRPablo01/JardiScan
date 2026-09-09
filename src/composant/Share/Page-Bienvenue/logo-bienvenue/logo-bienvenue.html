@@ -1,0 +1,172 @@
+
+<!-- ============================================================
+     🌿 LOGO BIENVENUE — JARDISCAN
+
+     • Logo à gauche
+     • Nom JardiScan
+     • Slogan
+     • Emerald / Lime
+     • Light / Dark
+     • Couleurs 100% opaques
+     • ThemeService
+     • Responsive
+     • Accessible
+     • Animation premium
+     • Background premium
+============================================================= -->
+
+<a
+  href="/"
+  aria-label="JardiScan - Accueil"
+  class="
+    group
+
+    relative
+
+    flex
+    items-center
+    gap-3
+
+    rounded-full
+
+    px-2
+    py-2
+
+    transition-all
+    duration-300
+    ease-out
+
+    hover:-translate-y-0.5
+  "
+  [ngStyle]="{
+    'background': themeService.Background2,
+    'border-color': themeService.Border2,
+    'box-shadow': themeService.BoxShadow
+  }"
+>
+
+  <!-- ==========================================================
+       🌿 LOGO
+  =========================================================== -->
+
+  <div
+    class="
+      relative
+      z-10
+
+      flex
+      h-12
+      w-12
+      shrink-0
+      items-center
+      justify-center
+
+      overflow-hidden
+
+      rounded-full
+      transition-all
+      duration-300
+
+      group-hover:scale-105
+    "
+    
+  >
+
+    <!-- Logo -->
+
+    <img
+      src="assets/Logo.svg"
+      alt="Logo JardiScan"
+      class="
+        relative
+        z-10
+
+        h-full
+        w-full
+
+        object-contain
+
+        p-1.5
+
+        transition-transform
+        duration-300
+
+        group-hover:scale-105
+      "
+    />
+
+  </div>
+
+
+  <!-- ==========================================================
+       🌿 IDENTITÉ JARDISCAN
+  =========================================================== -->
+
+  <div class="relative z-10 hidden min-w-0 sm:block">
+
+    <!-- ========================================================
+         NOM JARDISCAN
+    ========================================================= -->
+
+    <div
+      class="
+        flex
+        items-center
+
+        text-xl
+        font-bold
+        leading-none
+        tracking-tight
+
+        transition-all
+        duration-300
+      "
+      [ngStyle]="{
+        'color': themeService.TextPrincipal
+      }"
+    >
+
+      <span>
+        Jardi
+      </span>
+
+      <span
+        class="transition-colors duration-300"
+        [ngStyle]="{
+          'color': themeService.Primary
+        }"
+      >
+        Scan
+      </span>
+
+    </div>
+
+
+    <!-- ========================================================
+         SLOGAN
+    ========================================================= -->
+
+    <p
+      class="
+        mt-1
+
+        truncate
+
+        text-[11px]
+        font-medium
+        leading-tight
+        tracking-wide
+
+        transition-colors
+        duration-300
+      "
+      [ngStyle]="{
+        'color': themeService.TextSecondaire
+      }"
+    >
+      Votre jardin, simplement.
+    </p>
+
+  </div>
+
+</a>

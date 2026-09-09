@@ -1,0 +1,1869 @@
+
+
+
+<!-- ============================================================
+🌿 JARDISCAN — NAVIGATION PUBLIQUE DESKTOP / GRAND LAPTOP
+============================================================ -->
+
+<nav
+
+  class="
+    hidden
+
+    min-[1293px]:flex
+
+    items-center
+    justify-center
+
+    gap-0.5
+
+    rounded-2xl
+
+    border
+
+    px-1
+    py-1
+
+    backdrop-blur-2xl
+    backdrop-saturate-150
+  "
+
+  [ngStyle]="{
+
+    'background-color':
+      themeService.GlassBackground,
+
+    'border-color':
+      themeService.GlassBorder,
+
+    'box-shadow':
+      themeService.BoxShadowSmall,
+
+    'color':
+      themeService.TextPrincipal
+
+  }"
+
+  aria-label="Navigation publique JardiScan"
+
+>
+
+
+  <!-- ==========================================================
+  🌿 DÉCOUVRIR
+  ========================================================== -->
+
+  <a
+
+    routerLink="/welcome"
+
+    routerLinkActive="nav-active"
+
+    #discoverActive="routerLinkActive"
+
+    [routerLinkActiveOptions]="{ exact: true }"
+
+    [attr.aria-current]="
+      discoverActive.isActive ? 'page' : null
+    "
+
+    aria-label="Découvrir JardiScan"
+
+    title="Découvrir JardiScan"
+
+    class="
+      group
+      relative
+
+      flex
+      h-10
+
+      items-center
+      gap-1.5
+
+      overflow-hidden
+
+      rounded-xl
+
+      px-2.5
+
+      outline-none
+
+      transition-all
+      duration-200
+      ease-out
+
+      hover:-translate-y-0.5
+
+      focus-visible:ring-2
+      focus-visible:ring-offset-2
+    "
+
+    [ngStyle]="{
+
+      'color':
+        discoverActive.isActive
+
+          ? themeService.Primary
+
+          : themeService.TextSecondaire,
+
+      '--tw-ring-color':
+        themeService.Primary,
+
+      '--tw-ring-offset-color':
+        themeService.Background1
+
+    }"
+
+  >
+
+    <span
+
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+
+        rounded-xl
+
+        opacity-0
+
+        transition-all
+        duration-200
+
+        group-hover:opacity-100
+      "
+
+      [class.opacity-100]="
+        discoverActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.PrimarySoft
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+
+    <i
+
+      class="
+        fa-solid
+        fa-leaf
+
+        relative
+        z-10
+
+        text-[15px]
+
+        transition-transform
+        duration-200
+
+        group-hover:scale-110
+      "
+
+      [class.scale-110]="
+        discoverActive.isActive
+      "
+
+      aria-hidden="true"
+
+    ></i>
+
+
+    <span
+
+      class="
+        relative
+        z-10
+
+        whitespace-nowrap
+
+        text-[13px]
+        font-semibold
+      "
+
+    >
+
+      Découvrir
+
+    </span>
+
+
+    <span
+
+      class="
+        pointer-events-none
+
+        absolute
+        bottom-1
+        left-1/2
+
+        h-0.5
+        w-0
+
+        -translate-x-1/2
+
+        rounded-full
+
+        transition-all
+        duration-200
+      "
+
+      [class.w-6]="
+        discoverActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.Primary
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+  </a>
+
+
+  <!-- ==========================================================
+  ✨ FONCTIONNALITÉS
+  ========================================================== -->
+
+  <a
+
+    routerLink="/welcome/fonctionnalites"
+
+    routerLinkActive="nav-active"
+
+    #featuresActive="routerLinkActive"
+
+    [attr.aria-current]="
+      featuresActive.isActive ? 'page' : null
+    "
+
+    aria-label="Découvrir les fonctionnalités de JardiScan"
+
+    title="Fonctionnalités"
+
+    class="
+      group
+      relative
+
+      flex
+      h-10
+
+      items-center
+      gap-1.5
+
+      overflow-hidden
+
+      rounded-xl
+
+      px-2.5
+
+      outline-none
+
+      transition-all
+      duration-200
+      ease-out
+
+      hover:-translate-y-0.5
+
+      focus-visible:ring-2
+      focus-visible:ring-offset-2
+    "
+
+    [ngStyle]="{
+
+      'color':
+        featuresActive.isActive
+
+          ? themeService.Primary
+
+          : themeService.TextSecondaire,
+
+      '--tw-ring-color':
+        themeService.Primary,
+
+      '--tw-ring-offset-color':
+        themeService.Background1
+
+    }"
+
+  >
+
+    <span
+
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+
+        rounded-xl
+
+        opacity-0
+
+        transition-all
+        duration-200
+
+        group-hover:opacity-100
+      "
+
+      [class.opacity-100]="
+        featuresActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.PrimarySoft
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+
+    <i
+
+      class="
+        fa-solid
+        fa-wand-magic-sparkles
+
+        relative
+        z-10
+
+        text-[15px]
+
+        transition-transform
+        duration-200
+
+        group-hover:scale-110
+      "
+
+      [class.scale-110]="
+        featuresActive.isActive
+      "
+
+      aria-hidden="true"
+
+    ></i>
+
+
+    <span
+
+      class="
+        relative
+        z-10
+
+        whitespace-nowrap
+
+        text-[13px]
+        font-semibold
+      "
+
+    >
+
+      Fonctionnalités
+
+    </span>
+
+
+    <span
+
+      class="
+        pointer-events-none
+
+        absolute
+        bottom-1
+        left-1/2
+
+        h-0.5
+        w-0
+
+        -translate-x-1/2
+
+        rounded-full
+
+        transition-all
+        duration-200
+      "
+
+      [class.w-6]="
+        featuresActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.Primary
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+  </a>
+
+
+  <!-- ==========================================================
+  ▶️ COMMENT ÇA MARCHE
+  ========================================================== -->
+
+  <a
+
+    routerLink="/welcome/comment-ca-marche"
+
+    routerLinkActive="nav-active"
+
+    #howActive="routerLinkActive"
+
+    [attr.aria-current]="
+      howActive.isActive ? 'page' : null
+    "
+
+    aria-label="Découvrir comment fonctionne JardiScan"
+
+    title="Comment ça marche"
+
+    class="
+      group
+      relative
+
+      flex
+      h-10
+
+      items-center
+      gap-1.5
+
+      overflow-hidden
+
+      rounded-xl
+
+      px-2.5
+
+      outline-none
+
+      transition-all
+      duration-200
+      ease-out
+
+      hover:-translate-y-0.5
+
+      focus-visible:ring-2
+      focus-visible:ring-offset-2
+    "
+
+    [ngStyle]="{
+
+      'color':
+        howActive.isActive
+
+          ? themeService.Primary
+
+          : themeService.TextSecondaire,
+
+      '--tw-ring-color':
+        themeService.Primary,
+
+      '--tw-ring-offset-color':
+        themeService.Background1
+
+    }"
+
+  >
+
+    <span
+
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+
+        rounded-xl
+
+        opacity-0
+
+        transition-all
+        duration-200
+
+        group-hover:opacity-100
+      "
+
+      [class.opacity-100]="
+        howActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.PrimarySoft
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+
+    <i
+
+      class="
+        fa-solid
+        fa-circle-play
+
+        relative
+        z-10
+
+        text-[16px]
+
+        transition-transform
+        duration-200
+
+        group-hover:scale-110
+      "
+
+      [class.scale-110]="
+        howActive.isActive
+      "
+
+      aria-hidden="true"
+
+    ></i>
+
+
+    <span
+
+      class="
+        relative
+        z-10
+
+        whitespace-nowrap
+
+        text-[13px]
+        font-semibold
+      "
+
+    >
+
+      Comment ça marche
+
+    </span>
+
+
+    <span
+
+      class="
+        pointer-events-none
+
+        absolute
+        bottom-1
+        left-1/2
+
+        h-0.5
+        w-0
+
+        -translate-x-1/2
+
+        rounded-full
+
+        transition-all
+        duration-200
+      "
+
+      [class.w-6]="
+        howActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.Primary
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+  </a>
+
+
+  <!-- ==========================================================
+  👥 RÔLES
+  ========================================================== -->
+
+  <a
+
+    routerLink="/welcome/roles"
+
+    routerLinkActive="nav-active"
+
+    #rolesActive="routerLinkActive"
+
+    [attr.aria-current]="
+      rolesActive.isActive ? 'page' : null
+    "
+
+    aria-label="Découvrir les rôles disponibles dans JardiScan"
+
+    title="Les rôles"
+
+    class="
+      group
+      relative
+
+      flex
+      h-10
+
+      items-center
+      gap-1.5
+
+      overflow-hidden
+
+      rounded-xl
+
+      px-2.5
+
+      outline-none
+
+      transition-all
+      duration-200
+      ease-out
+
+      hover:-translate-y-0.5
+
+      focus-visible:ring-2
+      focus-visible:ring-offset-2
+    "
+
+    [ngStyle]="{
+
+      'color':
+        rolesActive.isActive
+
+          ? themeService.Primary
+
+          : themeService.TextSecondaire,
+
+      '--tw-ring-color':
+        themeService.Primary,
+
+      '--tw-ring-offset-color':
+        themeService.Background1
+
+    }"
+
+  >
+
+    <span
+
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+
+        rounded-xl
+
+        opacity-0
+
+        transition-all
+        duration-200
+
+        group-hover:opacity-100
+      "
+
+      [class.opacity-100]="
+        rolesActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.PrimarySoft
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+
+    <i
+
+      class="
+        fa-solid
+        fa-users
+
+        relative
+        z-10
+
+        text-[15px]
+
+        transition-transform
+        duration-200
+
+        group-hover:scale-110
+      "
+
+      [class.scale-110]="
+        rolesActive.isActive
+      "
+
+      aria-hidden="true"
+
+    ></i>
+
+
+    <span
+
+      class="
+        relative
+        z-10
+
+        whitespace-nowrap
+
+        text-[13px]
+        font-semibold
+      "
+
+    >
+
+      Les rôles
+
+    </span>
+
+
+    <span
+
+      class="
+        pointer-events-none
+
+        absolute
+        bottom-1
+        left-1/2
+
+        h-0.5
+        w-0
+
+        -translate-x-1/2
+
+        rounded-full
+
+        transition-all
+        duration-200
+      "
+
+      [class.w-6]="
+        rolesActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.Primary
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+  </a>
+
+
+  <!-- ==========================================================
+  ❓ AIDE & FAQ
+  ========================================================== -->
+
+  <a
+
+    routerLink="/welcome/faq"
+
+    routerLinkActive="nav-active"
+
+    #faqActive="routerLinkActive"
+
+    [attr.aria-current]="
+      faqActive.isActive ? 'page' : null
+    "
+
+    aria-label="Consulter l'aide et la FAQ de JardiScan"
+
+    title="Aide et FAQ"
+
+    class="
+      group
+      relative
+
+      flex
+      h-10
+
+      items-center
+      gap-1.5
+
+      overflow-hidden
+
+      rounded-xl
+
+      px-2.5
+
+      outline-none
+
+      transition-all
+      duration-200
+      ease-out
+
+      hover:-translate-y-0.5
+
+      focus-visible:ring-2
+      focus-visible:ring-offset-2
+    "
+
+    [ngStyle]="{
+
+      'color':
+        faqActive.isActive
+
+          ? themeService.Primary
+
+          : themeService.TextSecondaire,
+
+      '--tw-ring-color':
+        themeService.Primary,
+
+      '--tw-ring-offset-color':
+        themeService.Background1
+
+    }"
+
+  >
+
+    <span
+
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+
+        rounded-xl
+
+        opacity-0
+
+        transition-all
+        duration-200
+
+        group-hover:opacity-100
+      "
+
+      [class.opacity-100]="
+        faqActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.PrimarySoft
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+
+    <i
+
+      class="
+        fa-solid
+        fa-circle-question
+
+        relative
+        z-10
+
+        text-[16px]
+
+        transition-transform
+        duration-200
+
+        group-hover:scale-110
+      "
+
+      [class.scale-110]="
+        faqActive.isActive
+      "
+
+      aria-hidden="true"
+
+    ></i>
+
+
+    <span
+
+      class="
+        relative
+        z-10
+
+        whitespace-nowrap
+
+        text-[13px]
+        font-semibold
+      "
+
+    >
+
+      Aide & FAQ
+
+    </span>
+
+
+    <span
+
+      class="
+        pointer-events-none
+
+        absolute
+        bottom-1
+        left-1/2
+
+        h-0.5
+        w-0
+
+        -translate-x-1/2
+
+        rounded-full
+
+        transition-all
+        duration-200
+      "
+
+      [class.w-6]="
+        faqActive.isActive
+      "
+
+      [ngStyle]="{
+        'background-color':
+          themeService.Primary
+      }"
+
+      aria-hidden="true"
+
+    ></span>
+
+  </a>
+
+</nav>
+
+
+
+
+
+<!-- ============================================================
+    🌿 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
+============================================================ -->
+
+<div
+  class="
+    fixed
+    inset-x-0
+    bottom-0
+    z-[100]
+
+    hidden
+    min-[390px]:block
+    min-[1293px]:hidden
+
+    px-3
+    pb-[calc(0.65rem+env(safe-area-inset-bottom))]
+    pt-3
+
+    sm:px-5
+    sm:pb-[calc(0.8rem+env(safe-area-inset-bottom))]
+    sm:pt-4
+
+    md:px-8
+    md:pb-[calc(0.9rem+env(safe-area-inset-bottom))]
+    md:pt-5
+
+    pointer-events-none
+  "
+  [ngStyle]="{
+    background:
+      'linear-gradient(to top, ' +
+      themeService.Background1 +
+      ' 0%, transparent 100%)'
+  }"
+>
+
+  <!-- ==========================================================
+       🍎 DOCK macOS
+  =========================================================== -->
+
+  <nav
+    class="
+      pointer-events-auto
+
+      relative
+      mx-auto
+
+      flex
+      items-center
+      justify-center
+
+      gap-1.5
+
+      w-fit
+      max-w-[calc(100vw-24px)]
+
+      min-h-[68px]
+
+      rounded-[24px]
+
+      border
+
+      px-2
+      py-2
+
+      backdrop-blur-3xl
+      backdrop-saturate-200
+
+      shadow-2xl
+
+      sm:gap-2
+      sm:min-h-[72px]
+      sm:rounded-[26px]
+      sm:px-2.5
+      sm:py-2.5
+
+      md:gap-2.5
+      md:min-h-[76px]
+      md:rounded-[28px]
+      md:px-3
+      md:py-3
+    "
+    [ngStyle]="{
+      'background-color': themeService.Background2,
+      'background-image':
+        'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))',
+      'border-color': themeService.Border2,
+      'box-shadow':
+        '0 20px 50px rgba(0,0,0,0.28), 0 4px 14px rgba(0,0,0,0.18)',
+      'color': themeService.TextPrincipal
+    }"
+    aria-label="Navigation publique JardiScan"
+  >
+
+    <!-- ========================================================
+         🌿 DÉCOUVRIR
+    ========================================================= -->
+
+    <a
+      routerLink="/welcome"
+      routerLinkActive="is-active"
+      #discoverMobileActive="routerLinkActive"
+      [routerLinkActiveOptions]="{ exact: true }"
+
+      [attr.aria-current]="
+        discoverMobileActive.isActive ? 'page' : null
+      "
+
+      aria-label="Découvrir JardiScan"
+      title="Découvrir"
+
+      class="
+        group
+        relative
+
+        flex
+        items-center
+        justify-center
+
+        shrink-0
+        overflow-hidden
+
+        h-[52px]
+        w-[52px]
+
+        rounded-[19px]
+
+        border
+
+        outline-none
+
+        transition-all
+        duration-300
+        ease-out
+
+        hover:-translate-y-1
+        hover:scale-105
+
+        active:translate-y-0
+        active:scale-90
+
+        focus-visible:ring-2
+        focus-visible:ring-offset-2
+
+        sm:h-[56px]
+        sm:w-[56px]
+        sm:rounded-[20px]
+
+        md:h-[58px]
+        md:w-[58px]
+        md:rounded-[21px]
+      "
+
+      [class.w-[110px]]="discoverMobileActive.isActive"
+      [class.sm:w-[124px]]="discoverMobileActive.isActive"
+      [class.md:w-[132px]]="discoverMobileActive.isActive"
+
+      [class.rounded-[18px]]="discoverMobileActive.isActive"
+      [class.sm:rounded-[20px]]="discoverMobileActive.isActive"
+      [class.md:rounded-[21px]]="discoverMobileActive.isActive"
+
+      [class.border-transparent]="discoverMobileActive.isActive"
+
+      [ngStyle]="{
+        'background':
+          discoverMobileActive.isActive
+            ? 'linear-gradient(135deg, ' +
+              themeService.Primary +
+              ', ' +
+              themeService.PrimarySoft +
+              ')'
+            : 'rgba(255,255,255,0.045)',
+
+        'border-color':
+          discoverMobileActive.isActive
+            ? 'transparent'
+            : themeService.Border2,
+
+        'color':
+          discoverMobileActive.isActive
+            ? themeService.TextPrincipal
+            : themeService.TextSecondaire,
+
+        'box-shadow':
+          discoverMobileActive.isActive
+            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
+            : 'none',
+
+        '--tw-ring-color': themeService.Primary,
+        '--tw-ring-offset-color': themeService.Background1
+      }"
+    >
+
+      <!-- Glow macOS -->
+      <span
+        class="
+          pointer-events-none
+          absolute
+          inset-[-12px]
+
+          rounded-full
+          blur-2xl
+
+          opacity-0
+
+          transition-all
+          duration-500
+
+          group-hover:opacity-60
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft
+        }"
+        aria-hidden="true"
+      ></span>
+
+      <!-- Icône -->
+      <i
+        class="
+          fa-solid
+          fa-leaf
+
+          relative
+          z-10
+
+          shrink-0
+
+          text-[21px]
+
+          transition-transform
+          duration-300
+
+          group-hover:scale-110
+          group-active:scale-90
+
+          sm:text-[22px]
+          md:text-[23px]
+        "
+        aria-hidden="true"
+      ></i>
+
+      <!-- Label actif -->
+      <span
+        *ngIf="discoverMobileActive.isActive"
+        class="
+          relative
+          z-10
+
+          whitespace-nowrap
+
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.6px]
+
+          sm:text-[11px]
+          md:text-xs
+        "
+      >
+        Découvrir
+      </span>
+
+    </a>
+
+
+    <!-- ========================================================
+         ✨ FONCTIONNALITÉS
+    ========================================================= -->
+
+    <a
+      routerLink="/welcome/fonctionnalites"
+      routerLinkActive="is-active"
+      #featuresMobileActive="routerLinkActive"
+
+      [attr.aria-current]="
+        featuresMobileActive.isActive ? 'page' : null
+      "
+
+      aria-label="Fonctionnalités de JardiScan"
+      title="Fonctionnalités"
+
+      class="
+        group
+        relative
+
+        flex
+        items-center
+        justify-center
+
+        shrink-0
+        overflow-hidden
+
+        h-[52px]
+        w-[52px]
+
+        rounded-[18px]
+
+        border
+
+        outline-none
+
+        transition-all
+        duration-300
+        ease-out
+
+        hover:-translate-y-1
+        hover:scale-105
+
+        active:translate-y-0
+        active:scale-90
+
+        focus-visible:ring-2
+        focus-visible:ring-offset-2
+
+        sm:h-[56px]
+        sm:w-[56px]
+        sm:rounded-[20px]
+
+        md:h-[58px]
+        md:w-[58px]
+        md:rounded-[21px]
+      "
+
+      [class.w-[132px]]="featuresMobileActive.isActive"
+      [class.sm:w-[148px]]="featuresMobileActive.isActive"
+      [class.md:w-[158px]]="featuresMobileActive.isActive"
+
+      [class.border-transparent]="featuresMobileActive.isActive"
+
+      [ngStyle]="{
+        'background':
+          featuresMobileActive.isActive
+            ? 'linear-gradient(135deg, ' +
+              themeService.Primary +
+              ', ' +
+              themeService.PrimarySoft +
+              ')'
+            : 'rgba(255,255,255,0.045)',
+
+        'border-color':
+          featuresMobileActive.isActive
+            ? 'transparent'
+            : themeService.Border2,
+
+        'color':
+          featuresMobileActive.isActive
+            ? themeService.TextPrincipal
+            : themeService.TextSecondaire,
+
+        'box-shadow':
+          featuresMobileActive.isActive
+            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
+            : 'none',
+
+        '--tw-ring-color': themeService.Primary,
+        '--tw-ring-offset-color': themeService.Background1
+      }"
+    >
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          inset-[-12px]
+
+          rounded-full
+          blur-2xl
+
+          opacity-0
+
+          transition-all
+          duration-500
+
+          group-hover:opacity-60
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft
+        }"
+        aria-hidden="true"
+      ></span>
+
+      <i
+        class="
+          fa-solid
+          fa-wand-magic-sparkles
+
+          relative
+          z-10
+          shrink-0
+
+          text-[20px]
+
+          transition-transform
+          duration-300
+
+          group-hover:scale-110
+          group-active:scale-90
+
+          sm:text-[21px]
+          md:text-[22px]
+        "
+        aria-hidden="true"
+      ></i>
+
+      <span
+        *ngIf="featuresMobileActive.isActive"
+        class="
+          relative
+          z-10
+
+          whitespace-nowrap
+
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.6px]
+
+          sm:text-[11px]
+          md:text-xs
+        "
+      >
+        Fonctionnalités
+      </span>
+
+    </a>
+
+
+    <!-- ========================================================
+         ▶️ COMMENT ÇA MARCHE
+    ========================================================= -->
+
+    <a
+      routerLink="/welcome/comment-ca-marche"
+      routerLinkActive="is-active"
+      #howMobileActive="routerLinkActive"
+
+      [attr.aria-current]="
+        howMobileActive.isActive ? 'page' : null
+      "
+
+      aria-label="Comment fonctionne JardiScan"
+      title="Comment ça marche"
+
+      class="
+        group
+        relative
+
+        flex
+        items-center
+        justify-center
+
+        shrink-0
+        overflow-hidden
+
+        h-[52px]
+        w-[52px]
+
+        rounded-[18px]
+
+        border
+
+        outline-none
+
+        transition-all
+        duration-300
+        ease-out
+
+        hover:-translate-y-1
+        hover:scale-105
+
+        active:translate-y-0
+        active:scale-90
+
+        focus-visible:ring-2
+        focus-visible:ring-offset-2
+
+        sm:h-[56px]
+        sm:w-[56px]
+        sm:rounded-[20px]
+
+        md:h-[58px]
+        md:w-[58px]
+        md:rounded-[21px]
+      "
+
+      [class.w-[132px]]="howMobileActive.isActive"
+      [class.sm:w-[148px]]="howMobileActive.isActive"
+      [class.md:w-[158px]]="howMobileActive.isActive"
+
+      [class.border-transparent]="howMobileActive.isActive"
+
+      [ngStyle]="{
+        'background':
+          howMobileActive.isActive
+            ? 'linear-gradient(135deg, ' +
+              themeService.Primary +
+              ', ' +
+              themeService.PrimarySoft +
+              ')'
+            : 'rgba(255,255,255,0.045)',
+
+        'border-color':
+          howMobileActive.isActive
+            ? 'transparent'
+            : themeService.Border2,
+
+        'color':
+          howMobileActive.isActive
+            ? themeService.TextPrincipal
+            : themeService.TextSecondaire,
+
+        'box-shadow':
+          howMobileActive.isActive
+            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
+            : 'none',
+
+        '--tw-ring-color': themeService.Primary,
+        '--tw-ring-offset-color': themeService.Background1
+      }"
+    >
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          inset-[-12px]
+
+          rounded-full
+          blur-2xl
+
+          opacity-0
+
+          transition-all
+          duration-500
+
+          group-hover:opacity-60
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft
+        }"
+        aria-hidden="true"
+      ></span>
+
+      <i
+        class="
+          fa-solid
+          fa-circle-play
+
+          relative
+          z-10
+          shrink-0
+
+          text-[21px]
+
+          transition-transform
+          duration-300
+
+          group-hover:scale-110
+          group-active:scale-90
+
+          sm:text-[22px]
+          md:text-[23px]
+        "
+        aria-hidden="true"
+      ></i>
+
+      <span
+        *ngIf="howMobileActive.isActive"
+        class="
+          relative
+          z-10
+
+          whitespace-nowrap
+
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.6px]
+
+          sm:text-[11px]
+          md:text-xs
+        "
+      >
+        Comment ça marche
+      </span>
+
+    </a>
+
+
+    <!-- ========================================================
+         👥 RÔLES
+    ========================================================= -->
+
+    <a
+      routerLink="/welcome/roles"
+      routerLinkActive="is-active"
+      #rolesMobileActive="routerLinkActive"
+
+      [attr.aria-current]="
+        rolesMobileActive.isActive ? 'page' : null
+      "
+
+      aria-label="Les rôles disponibles dans JardiScan"
+      title="Les rôles"
+
+      class="
+        group
+        relative
+
+        flex
+        items-center
+        justify-center
+
+        shrink-0
+        overflow-hidden
+
+        h-[52px]
+        w-[52px]
+
+        rounded-[18px]
+
+        border
+
+        outline-none
+
+        transition-all
+        duration-300
+        ease-out
+
+        hover:-translate-y-1
+        hover:scale-105
+
+        active:translate-y-0
+        active:scale-90
+
+        focus-visible:ring-2
+        focus-visible:ring-offset-2
+
+        sm:h-[56px]
+        sm:w-[56px]
+        sm:rounded-[20px]
+
+        md:h-[58px]
+        md:w-[58px]
+        md:rounded-[21px]
+      "
+
+      [class.w-[105px]]="rolesMobileActive.isActive"
+      [class.sm:w-[116px]]="rolesMobileActive.isActive"
+      [class.md:w-[124px]]="rolesMobileActive.isActive"
+
+      [class.border-transparent]="rolesMobileActive.isActive"
+
+      [ngStyle]="{
+        'background':
+          rolesMobileActive.isActive
+            ? 'linear-gradient(135deg, ' +
+              themeService.Primary +
+              ', ' +
+              themeService.PrimarySoft +
+              ')'
+            : 'rgba(255,255,255,0.045)',
+
+        'border-color':
+          rolesMobileActive.isActive
+            ? 'transparent'
+            : themeService.Border2,
+
+        'color':
+          rolesMobileActive.isActive
+            ? themeService.TextPrincipal
+            : themeService.TextSecondaire,
+
+        'box-shadow':
+          rolesMobileActive.isActive
+            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
+            : 'none',
+
+        '--tw-ring-color': themeService.Primary,
+        '--tw-ring-offset-color': themeService.Background1
+      }"
+    >
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          inset-[-12px]
+
+          rounded-full
+          blur-2xl
+
+          opacity-0
+
+          transition-all
+          duration-500
+
+          group-hover:opacity-60
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft
+        }"
+        aria-hidden="true"
+      ></span>
+
+      <i
+        class="
+          fa-solid
+          fa-users
+
+          relative
+          z-10
+          shrink-0
+
+          text-[20px]
+
+          transition-transform
+          duration-300
+
+          group-hover:scale-110
+          group-active:scale-90
+
+          sm:text-[21px]
+          md:text-[22px]
+        "
+        aria-hidden="true"
+      ></i>
+
+      <span
+        *ngIf="rolesMobileActive.isActive"
+        class="
+          relative
+          z-10
+
+          whitespace-nowrap
+
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.6px]
+
+          sm:text-[11px]
+          md:text-xs
+        "
+      >
+        Les rôles
+      </span>
+
+    </a>
+
+
+    <!-- ========================================================
+         ❓ AIDE & FAQ
+    ========================================================= -->
+
+    <a
+      routerLink="/welcome/faq"
+      routerLinkActive="is-active"
+      #faqMobileActive="routerLinkActive"
+
+      [attr.aria-current]="
+        faqMobileActive.isActive ? 'page' : null
+      "
+
+      aria-label="Aide et FAQ de JardiScan"
+      title="Aide et FAQ"
+
+      class="
+        group
+        relative
+
+        flex
+        items-center
+        justify-center
+
+        shrink-0
+        overflow-hidden
+
+        h-[52px]
+        w-[52px]
+
+        rounded-[18px]
+
+        border
+
+        outline-none
+
+        transition-all
+        duration-300
+        ease-out
+
+        hover:-translate-y-1
+        hover:scale-105
+
+        active:translate-y-0
+        active:scale-90
+
+        focus-visible:ring-2
+        focus-visible:ring-offset-2
+
+        sm:h-[56px]
+        sm:w-[56px]
+        sm:rounded-[20px]
+
+        md:h-[58px]
+        md:w-[58px]
+        md:rounded-[21px]
+      "
+
+      [class.w-[105px]]="faqMobileActive.isActive"
+      [class.sm:w-[116px]]="faqMobileActive.isActive"
+      [class.md:w-[124px]]="faqMobileActive.isActive"
+
+      [class.border-transparent]="faqMobileActive.isActive"
+
+      [ngStyle]="{
+        'background':
+          faqMobileActive.isActive
+            ? 'linear-gradient(135deg, ' +
+              themeService.Primary +
+              ', ' +
+              themeService.PrimarySoft +
+              ')'
+            : 'rgba(255,255,255,0.045)',
+
+        'border-color':
+          faqMobileActive.isActive
+            ? 'transparent'
+            : themeService.Border2,
+
+        'color':
+          faqMobileActive.isActive
+            ? themeService.TextPrincipal
+            : themeService.TextSecondaire,
+
+        'box-shadow':
+          faqMobileActive.isActive
+            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
+            : 'none',
+
+        '--tw-ring-color': themeService.Primary,
+        '--tw-ring-offset-color': themeService.Background1
+      }"
+    >
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          inset-[-12px]
+
+          rounded-full
+          blur-2xl
+
+          opacity-0
+
+          transition-all
+          duration-500
+
+          group-hover:opacity-60
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft
+        }"
+        aria-hidden="true"
+      ></span>
+
+      <i
+        class="
+          fa-solid
+          fa-circle-question
+
+          relative
+          z-10
+          shrink-0
+
+          text-[21px]
+
+          transition-transform
+          duration-300
+
+          group-hover:scale-110
+          group-active:scale-90
+
+          sm:text-[22px]
+          md:text-[23px]
+        "
+        aria-hidden="true"
+      ></i>
+
+      <span
+        *ngIf="faqMobileActive.isActive"
+        class="
+          relative
+          z-10
+
+          whitespace-nowrap
+
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.6px]
+
+          sm:text-[11px]
+          md:text-xs
+        "
+      >
+        Aide & FAQ
+      </span>
+
+    </a>
+
+  </nav>
+
+</div>

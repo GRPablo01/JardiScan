@@ -1,0 +1,1264 @@
+<!-- ============================================================
+     🌿 JARDISCAN — AIDE / PARAMÈTRES
+
+     PREMIUM EMERALD GLASS UI / UX
+
+     • Light / Dark
+     • FR / EN
+     • Emerald / Lime Nature UI
+     • Premium Glassmorphism
+     • Responsive Mobile / Tablet / Laptop / Desktop
+     • Header premium
+     • Bouton retour
+     • Logo
+     • Sections d'aide
+     • Paramètres généraux
+     • Angular @if
+     • Aucun overflow horizontal
+     • Aucun appel à "nouveautes"
+============================================================ -->
+
+<section
+  class="relative min-h-screen overflow-x-hidden px-3 pb-16 pt-3 sm:px-5 sm:pb-20 sm:pt-4 lg:px-8 lg:pb-24 lg:pt-5"
+  [ngStyle]="{
+    background: themeService.isDarkMode
+      ? 'linear-gradient(180deg, rgba(27,36,28,0.35) 0%, rgba(27,36,28,0) 100%)'
+      : 'linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 100%)'
+  }"
+>
+
+  <!-- ==========================================================
+       🌫️ AMBIENT BACKGROUND
+  =========================================================== -->
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+  >
+    <div
+      class="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-emerald-400/[0.06] blur-[90px]"
+    ></div>
+
+    <div
+      class="absolute -right-32 top-20 h-72 w-72 rounded-full bg-lime-300/[0.05] blur-[90px]"
+    ></div>
+
+    @if (themeService.isDarkMode) {
+      <div
+        class="absolute left-1/2 top-1/3 h-96 w-96 -translate-x-1/2 rounded-full bg-emerald-400/[0.025] blur-[120px]"
+      ></div>
+    }
+
+    <div
+      class="absolute -bottom-40 left-1/3 h-96 w-96 rounded-full bg-emerald-300/[0.035] blur-[100px]"
+    ></div>
+  </div>
+
+
+  <!-- ==========================================================
+       🌿 TOP HEADER
+  =========================================================== -->
+
+  <header
+    class="relative z-50 w-full rounded-full border backdrop-blur-3xl backdrop-saturate-200"
+    [ngStyle]="{
+      background: themeService.isDarkMode
+        ? 'rgba(16,23,19,0.72)'
+        : 'rgba(255,255,255,0.18)',
+
+      'border-color': themeService.isDarkMode
+        ? 'rgba(110,231,183,0.16)'
+        : 'rgba(255,255,255,0.40)',
+
+      'box-shadow': themeService.isDarkMode
+        ? '0 12px 45px rgba(0,0,0,0.30), 0 2px 8px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.10)'
+        : '0 12px 45px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.65)'
+    }"
+  >
+
+    <!-- HEADER LIGHT EFFECTS -->
+
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 overflow-hidden rounded-full"
+    >
+      <div
+        class="absolute -left-16 -top-20 h-40 w-40 rounded-full bg-emerald-300/[0.08] blur-3xl"
+      ></div>
+
+      <div
+        class="absolute -right-20 -top-16 h-36 w-36 rounded-full bg-lime-300/[0.06] blur-3xl"
+      ></div>
+
+      @if (themeService.isDarkMode) {
+        <div
+          class="absolute left-1/3 -top-12 h-28 w-28 rounded-full bg-emerald-400/[0.05] blur-3xl"
+        ></div>
+      }
+    </div>
+
+
+    <!-- HEADER CONTENT -->
+
+    <div
+      class="relative z-10 flex min-h-[64px] w-full items-center justify-between gap-3 px-3 py-2 sm:min-h-[68px] sm:gap-4 sm:px-4 lg:min-h-[72px] lg:px-5 xl:px-6"
+    >
+
+      <!-- RETOUR -->
+
+      <button
+        type="button"
+        (click)="retour()"
+        [attr.aria-label]="
+          currentLanguage === 'fr'
+            ? 'Retour à la page précédente'
+            : 'Back to the previous page'
+        "
+        [attr.title]="
+          currentLanguage === 'fr'
+            ? 'Retour'
+            : 'Back'
+        "
+        class="group relative flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border px-3 backdrop-blur-2xl backdrop-saturate-200 transition-transform duration-200 hover:-translate-x-1 active:scale-95 sm:h-11 sm:px-4"
+        [ngStyle]="{
+          background: themeService.isDarkMode
+            ? 'rgba(27,40,32,0.72)'
+            : 'rgba(255,255,255,0.16)',
+
+          'border-color': themeService.isDarkMode
+            ? 'rgba(110,231,183,0.18)'
+            : 'rgba(255,255,255,0.35)',
+
+          color: themeService.isDarkMode
+            ? '#F5F8F5'
+            : '#17201B',
+
+          'box-shadow':
+            '0 6px 20px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.55)'
+        }"
+      >
+
+        <span
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-0 rounded-full bg-emerald-400/[0.07] opacity-0 blur-xl transition-opacity duration-200 group-hover:opacity-100"
+        ></span>
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="relative z-10 h-[16px] w-[16px] transition-transform duration-200 group-hover:-translate-x-0.5 sm:h-[17px] sm:w-[17px]"
+        >
+          <path d="M19 12H5"></path>
+          <path d="M12 19l-7-7 7-7"></path>
+        </svg>
+
+        <span
+          class="relative z-10 hidden text-[10px] font-semibold tracking-[0.02em] sm:block"
+        >
+          {{ currentLanguage === 'fr' ? 'Retour' : 'Back' }}
+        </span>
+
+      </button>
+
+
+      <!-- LOGO -->
+
+      <div class="relative flex min-w-0 shrink-0 items-center">
+        <!-- <app-logo></app-logo> -->
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ESPACE -->
+
+  <div class="h-5 sm:h-6 lg:h-8"></div>
+
+
+  <!-- ==========================================================
+       🌿 CONTENU PRINCIPAL
+  =========================================================== -->
+
+  <main class="mx-auto w-full max-w-5xl">
+
+
+    <!-- ========================================================
+         PAGE HEADER
+    ========================================================= -->
+
+    <header
+      class="relative mb-8 overflow-hidden rounded-[28px] border px-5 py-6 backdrop-blur-3xl backdrop-saturate-200 sm:mb-10 sm:rounded-[32px] sm:px-7 sm:py-8 lg:px-9 lg:py-9"
+      [ngStyle]="{
+        background: themeService.isDarkMode
+          ? 'rgba(16,23,19,0.68)'
+          : 'rgba(255,255,255,0.18)',
+
+        'border-color': themeService.isDarkMode
+          ? 'rgba(110,231,183,0.14)'
+          : 'rgba(255,255,255,0.42)',
+
+        'box-shadow': themeService.isDarkMode
+          ? '0 16px 50px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.08)'
+          : '0 16px 50px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.60)'
+      }"
+    >
+
+      <!-- GLOWS -->
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 overflow-hidden rounded-[28px] sm:rounded-[32px]"
+      >
+
+        <div
+          class="absolute -left-20 -top-24 h-48 w-48 rounded-full bg-emerald-300/[0.08] blur-3xl"
+        ></div>
+
+        <div
+          class="absolute -right-20 -top-20 h-44 w-44 rounded-full bg-lime-300/[0.06] blur-3xl"
+        ></div>
+
+        @if (themeService.isDarkMode) {
+          <div
+            class="absolute left-1/3 -top-10 h-32 w-32 rounded-full bg-emerald-400/[0.05] blur-3xl"
+          ></div>
+        }
+
+      </div>
+
+
+      <div class="relative z-10">
+
+        <!-- BADGE -->
+
+        <div
+          class="mb-5 inline-flex items-center gap-2 rounded-full border px-3.5 py-2 backdrop-blur-xl sm:px-4"
+          [ngStyle]="{
+            background: 'rgba(52,211,153,0.08)',
+
+            'border-color': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.16)'
+              : 'rgba(16,185,129,0.16)',
+
+            color: themeService.isDarkMode
+              ? '#6EE7B7'
+              : '#059669'
+          }"
+        >
+
+          <span class="text-[15px] leading-none sm:text-base">
+            ❔
+          </span>
+
+          <span
+            class="text-[11px] font-bold tracking-[0.04em] sm:text-xs"
+          >
+            {{ currentLanguage === 'fr' ? 'Aide & paramètres' : 'Help & settings' }}
+          </span>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1
+          class="max-w-3xl text-3xl font-black leading-[1.05] tracking-[-0.035em] sm:text-4xl lg:text-5xl"
+          [ngStyle]="{
+            color: themeService.isDarkMode
+              ? '#F5F8F5'
+              : '#17201B'
+          }"
+        >
+          {{
+            currentLanguage === 'fr'
+              ? 'Tout savoir sur JardiScan'
+              : 'Everything about JardiScan'
+          }}
+        </h1>
+
+
+        <!-- DESCRIPTION -->
+
+        <p
+          class="mt-4 max-w-2xl text-sm leading-6 sm:text-base sm:leading-7"
+          [ngStyle]="{
+            color: themeService.isDarkMode
+              ? '#A8B5AA'
+              : '#5F6B63'
+          }"
+        >
+          {{
+            currentLanguage === 'fr'
+              ? 'Retrouvez ici les informations essentielles pour utiliser JardiScan, personnaliser votre expérience et comprendre les principales fonctionnalités.'
+              : 'Find essential information here to use JardiScan, customize your experience and understand its main features.'
+          }}
+        </p>
+
+
+        <!-- SEPARATOR -->
+
+        <div
+          class="mt-6 h-px w-full bg-gradient-to-r from-emerald-500/40 via-emerald-500/10 to-transparent"
+        ></div>
+
+      </div>
+
+    </header>
+
+
+    <!-- ========================================================
+         SECTION — UTILISER JARDISCAN
+    ========================================================= -->
+
+    <section class="mb-5 sm:mb-6">
+
+      <!-- SECTION TITLE -->
+
+      <div class="mb-4 flex items-center gap-3 px-1">
+
+        <div
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-base backdrop-blur-xl"
+          [ngStyle]="{
+            background: 'rgba(52,211,153,0.08)',
+
+            'border-color': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.13)'
+              : 'rgba(16,185,129,0.13)'
+          }"
+        >
+          🌿
+        </div>
+
+        <div class="min-w-0">
+
+          <h2
+            class="text-base font-extrabold tracking-tight sm:text-lg"
+            [ngStyle]="{
+              color: themeService.isDarkMode
+                ? '#F5F8F5'
+                : '#17201B'
+            }"
+          >
+            {{
+              currentLanguage === 'fr'
+                ? 'Utiliser JardiScan'
+                : 'Using JardiScan'
+            }}
+          </h2>
+
+          <p
+            class="mt-0.5 text-xs"
+            [ngStyle]="{
+              color: themeService.isDarkMode
+                ? '#7F8C82'
+                : '#7A857D'
+            }"
+          >
+            {{
+              currentLanguage === 'fr'
+                ? 'Les étapes essentielles'
+                : 'The essential steps'
+            }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- HELP CARDS -->
+
+      <div class="flex flex-col gap-4">
+
+        <!-- CARD 01 -->
+
+        <article
+          class="group relative overflow-hidden rounded-[26px] border p-5 backdrop-blur-3xl backdrop-saturate-200 transition-transform duration-200 hover:-translate-y-[2px] sm:rounded-[30px] sm:p-6"
+          [ngStyle]="{
+            background: themeService.isDarkMode
+              ? 'rgba(27,40,32,0.58)'
+              : 'rgba(255,255,255,0.16)',
+
+            'border-color': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.12)'
+              : 'rgba(255,255,255,0.42)',
+
+            'box-shadow': themeService.isDarkMode
+              ? '0 10px 35px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)'
+              : '0 10px 35px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.55)'
+          }"
+        >
+
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-emerald-400/[0.07] blur-3xl transition-transform duration-500 group-hover:scale-125"
+          ></div>
+
+          <div
+            class="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-start"
+          >
+
+            <!-- ICON -->
+
+            <div
+              class="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border text-2xl backdrop-blur-xl sm:h-16 sm:w-16 sm:rounded-[20px]"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.09)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.14)'
+                  : 'rgba(16,185,129,0.14)'
+              }"
+            >
+              📷
+            </div>
+
+
+            <!-- TEXT -->
+
+            <div class="min-w-0 flex-1">
+
+              <span
+                class="inline-flex rounded-full border px-3 py-1 text-[10px] font-bold"
+                [ngStyle]="{
+                  background: 'rgba(52,211,153,0.08)',
+
+                  'border-color': themeService.isDarkMode
+                    ? 'rgba(110,231,183,0.10)'
+                    : 'rgba(16,185,129,0.10)',
+
+                  color: themeService.isDarkMode
+                    ? '#6EE7B7'
+                    : '#059669'
+                }"
+              >
+                01
+              </span>
+
+              <h3
+                class="mt-3 text-xl font-extrabold leading-tight tracking-[-0.02em] sm:text-2xl"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#F5F8F5'
+                    : '#17201B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Scanner une plante'
+                    : 'Scan a plant'
+                }}
+              </h3>
+
+              <p
+                class="mt-3 text-sm leading-6 sm:text-base sm:leading-7"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#A8B5AA'
+                    : '#5F6B63'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Prenez une photo claire de la plante que vous souhaitez identifier. JardiScan analyse son apparence pour vous proposer les résultats les plus pertinents.'
+                    : 'Take a clear photo of the plant you want to identify. JardiScan analyzes its appearance and provides the most relevant results.'
+                }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- CARD 02 -->
+
+        <article
+          class="group relative overflow-hidden rounded-[26px] border p-5 backdrop-blur-3xl backdrop-saturate-200 transition-transform duration-200 hover:-translate-y-[2px] sm:rounded-[30px] sm:p-6"
+          [ngStyle]="{
+            background: themeService.isDarkMode
+              ? 'rgba(27,40,32,0.58)'
+              : 'rgba(255,255,255,0.16)',
+
+            'border-color': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.12)'
+              : 'rgba(255,255,255,0.42)',
+
+            'box-shadow': themeService.isDarkMode
+              ? '0 10px 35px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)'
+              : '0 10px 35px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.55)'
+          }"
+        >
+
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-lime-300/[0.05] blur-3xl"
+          ></div>
+
+          <div
+            class="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-start"
+          >
+
+            <div
+              class="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border text-2xl backdrop-blur-xl sm:h-16 sm:w-16 sm:rounded-[20px]"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.09)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.14)'
+                  : 'rgba(16,185,129,0.14)'
+              }"
+            >
+              🔎
+            </div>
+
+            <div class="min-w-0 flex-1">
+
+              <span
+                class="inline-flex rounded-full border px-3 py-1 text-[10px] font-bold"
+                [ngStyle]="{
+                  background: 'rgba(52,211,153,0.08)',
+
+                  'border-color': themeService.isDarkMode
+                    ? 'rgba(110,231,183,0.10)'
+                    : 'rgba(16,185,129,0.10)',
+
+                  color: themeService.isDarkMode
+                    ? '#6EE7B7'
+                    : '#059669'
+                }"
+              >
+                02
+              </span>
+
+              <h3
+                class="mt-3 text-xl font-extrabold leading-tight tracking-[-0.02em] sm:text-2xl"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#F5F8F5'
+                    : '#17201B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Comprendre le résultat'
+                    : 'Understand the result'
+                }}
+              </h3>
+
+              <p
+                class="mt-3 text-sm leading-6 sm:text-base sm:leading-7"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#A8B5AA'
+                    : '#5F6B63'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Consultez les propositions obtenues après le scan et utilisez les informations affichées pour mieux connaître la plante identifiée.'
+                    : 'Review the suggestions obtained after the scan and use the displayed information to learn more about the identified plant.'
+                }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- CARD 03 -->
+
+        <article
+          class="group relative overflow-hidden rounded-[26px] border p-5 backdrop-blur-3xl backdrop-saturate-200 transition-transform duration-200 hover:-translate-y-[2px] sm:rounded-[30px] sm:p-6"
+          [ngStyle]="{
+            background: themeService.isDarkMode
+              ? 'rgba(27,40,32,0.58)'
+              : 'rgba(255,255,255,0.16)',
+
+            'border-color': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.12)'
+              : 'rgba(255,255,255,0.42)',
+
+            'box-shadow': themeService.isDarkMode
+              ? '0 10px 35px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)'
+              : '0 10px 35px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.55)'
+          }"
+        >
+
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -bottom-24 left-1/3 h-32 w-32 rounded-full bg-lime-300/[0.035] blur-3xl"
+          ></div>
+
+          <div
+            class="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-start"
+          >
+
+            <div
+              class="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border text-2xl backdrop-blur-xl sm:h-16 sm:w-16 sm:rounded-[20px]"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.09)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.14)'
+                  : 'rgba(16,185,129,0.14)'
+              }"
+            >
+              🌱
+            </div>
+
+            <div class="min-w-0 flex-1">
+
+              <span
+                class="inline-flex rounded-full border px-3 py-1 text-[10px] font-bold"
+                [ngStyle]="{
+                  background: 'rgba(52,211,153,0.08)',
+
+                  'border-color': themeService.isDarkMode
+                    ? 'rgba(110,231,183,0.10)'
+                    : 'rgba(16,185,129,0.10)',
+
+                  color: themeService.isDarkMode
+                    ? '#6EE7B7'
+                    : '#059669'
+                }"
+              >
+                03
+              </span>
+
+              <h3
+                class="mt-3 text-xl font-extrabold leading-tight tracking-[-0.02em] sm:text-2xl"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#F5F8F5'
+                    : '#17201B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Améliorer la qualité du scan'
+                    : 'Improve scan quality'
+                }}
+              </h3>
+
+              <p
+                class="mt-3 text-sm leading-6 sm:text-base sm:leading-7"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#A8B5AA'
+                    : '#5F6B63'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Pour obtenir de meilleurs résultats, privilégiez une plante bien visible, une bonne lumière et une image nette.'
+                    : 'For better results, make sure the plant is clearly visible, well lit and the image is sharp.'
+                }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         SECTION — PARAMÈTRES
+    ========================================================= -->
+
+    <section class="mb-5 sm:mb-6">
+
+      <!-- SECTION HEADER -->
+
+      <div class="mb-4 flex items-center gap-3 px-1">
+
+        <div
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-base backdrop-blur-xl"
+          [ngStyle]="{
+            background: 'rgba(52,211,153,0.08)',
+
+            'border-color': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.13)'
+              : 'rgba(16,185,129,0.13)'
+          }"
+        >
+          ⚙️
+        </div>
+
+        <div class="min-w-0">
+
+          <h2
+            class="text-base font-extrabold tracking-tight sm:text-lg"
+            [ngStyle]="{
+              color: themeService.isDarkMode
+                ? '#F5F8F5'
+                : '#17201B'
+            }"
+          >
+            {{
+              currentLanguage === 'fr'
+                ? 'Paramètres'
+                : 'Settings'
+            }}
+          </h2>
+
+          <p
+            class="mt-0.5 text-xs"
+            [ngStyle]="{
+              color: themeService.isDarkMode
+                ? '#7F8C82'
+                : '#7A857D'
+            }"
+          >
+            {{
+              currentLanguage === 'fr'
+                ? 'Personnalisez votre expérience'
+                : 'Customize your experience'
+            }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- SETTINGS INFO CARD -->
+
+      <article
+        class="relative overflow-hidden rounded-[26px] border p-5 backdrop-blur-3xl backdrop-saturate-200 sm:rounded-[30px] sm:p-6 lg:p-7"
+        [ngStyle]="{
+          background: themeService.isDarkMode
+            ? 'rgba(27,40,32,0.58)'
+            : 'rgba(255,255,255,0.16)',
+
+          'border-color': themeService.isDarkMode
+            ? 'rgba(110,231,183,0.12)'
+            : 'rgba(255,255,255,0.42)',
+
+          'box-shadow': themeService.isDarkMode
+            ? '0 10px 35px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)'
+            : '0 10px 35px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.55)'
+        }"
+      >
+
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute -right-24 -top-24 h-48 w-48 rounded-full bg-emerald-400/[0.06] blur-3xl"
+        ></div>
+
+
+        <div class="relative z-10 divide-y"
+          [ngStyle]="{
+            'border-color': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.08)'
+              : 'rgba(16,185,129,0.08)'
+          }"
+        >
+
+          <!-- LANGUAGE -->
+
+          <div class="flex items-center gap-4 py-4 first:pt-0 sm:py-5">
+
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[15px] border text-lg"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.08)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.12)'
+                  : 'rgba(16,185,129,0.12)'
+              }"
+            >
+              🌐
+            </div>
+
+            <div class="min-w-0 flex-1">
+
+              <h3
+                class="text-sm font-bold sm:text-base"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#F5F8F5'
+                    : '#17201B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Langue'
+                    : 'Language'
+                }}
+              </h3>
+
+              <p
+                class="mt-1 text-xs leading-5 sm:text-sm"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#8E9A91'
+                    : '#68736B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'JardiScan est disponible en français et en anglais.'
+                    : 'JardiScan is available in French and English.'
+                }}
+              </p>
+
+            </div>
+
+            <span
+              class="hidden shrink-0 rounded-full border px-3 py-1.5 text-[10px] font-bold sm:block"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.08)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.12)'
+                  : 'rgba(16,185,129,0.12)',
+
+                color: themeService.isDarkMode
+                  ? '#6EE7B7'
+                  : '#059669'
+              }"
+            >
+              {{ currentLanguage === 'fr' ? 'Actuelle' : 'Current' }}
+            </span>
+
+          </div>
+
+
+          <!-- THEME -->
+
+          <div class="flex items-center gap-4 py-4 sm:py-5">
+
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[15px] border text-lg"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.08)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.12)'
+                  : 'rgba(16,185,129,0.12)'
+              }"
+            >
+              {{ themeService.isDarkMode ? '🌙' : '☀️' }}
+            </div>
+
+            <div class="min-w-0 flex-1">
+
+              <h3
+                class="text-sm font-bold sm:text-base"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#F5F8F5'
+                    : '#17201B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Apparence'
+                    : 'Appearance'
+                }}
+              </h3>
+
+              <p
+                class="mt-1 text-xs leading-5 sm:text-sm"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#8E9A91'
+                    : '#68736B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Le thème actuel de JardiScan.'
+                    : 'The current JardiScan theme.'
+                }}
+              </p>
+
+            </div>
+
+            <span
+              class="shrink-0 rounded-full border px-3 py-1.5 text-[10px] font-bold"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.08)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.12)'
+                  : 'rgba(16,185,129,0.12)',
+
+                color: themeService.isDarkMode
+                  ? '#6EE7B7'
+                  : '#059669'
+              }"
+            >
+              {{
+                themeService.isDarkMode
+                  ? (currentLanguage === 'fr' ? 'Sombre' : 'Dark')
+                  : (currentLanguage === 'fr' ? 'Clair' : 'Light')
+              }}
+            </span>
+
+          </div>
+
+
+          <!-- PRIVACY -->
+
+          <div class="flex items-center gap-4 py-4 sm:py-5">
+
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[15px] border text-lg"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.08)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.12)'
+                  : 'rgba(16,185,129,0.12)'
+              }"
+            >
+              🔒
+            </div>
+
+            <div class="min-w-0 flex-1">
+
+              <h3
+                class="text-sm font-bold sm:text-base"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#F5F8F5'
+                    : '#17201B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Confidentialité'
+                    : 'Privacy'
+                }}
+              </h3>
+
+              <p
+                class="mt-1 text-xs leading-5 sm:text-sm"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#8E9A91'
+                    : '#68736B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Utilisez uniquement les autorisations nécessaires au fonctionnement de l’application.'
+                    : 'Only use the permissions required for the application to work.'
+                }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- VERSION -->
+
+          <div class="flex items-center gap-4 pb-0 pt-4 sm:pt-5">
+
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[15px] border text-lg"
+              [ngStyle]="{
+                background: 'rgba(52,211,153,0.08)',
+
+                'border-color': themeService.isDarkMode
+                  ? 'rgba(110,231,183,0.12)'
+                  : 'rgba(16,185,129,0.12)'
+              }"
+            >
+              ✨
+            </div>
+
+            <div class="min-w-0 flex-1">
+
+              <h3
+                class="text-sm font-bold sm:text-base"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#F5F8F5'
+                    : '#17201B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'À propos de JardiScan'
+                    : 'About JardiScan'
+                }}
+              </h3>
+
+              <p
+                class="mt-1 text-xs leading-5 sm:text-sm"
+                [ngStyle]="{
+                  color: themeService.isDarkMode
+                    ? '#8E9A91'
+                    : '#68736B'
+                }"
+              >
+                {{
+                  currentLanguage === 'fr'
+                    ? 'Une expérience pensée pour identifier et mieux comprendre les plantes.'
+                    : 'An experience designed to identify and better understand plants.'
+                }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- ========================================================
+         SECTION — CONSEILS
+    ========================================================= -->
+
+    <section class="mb-5 sm:mb-6">
+
+      <div class="mb-4 flex items-center gap-3 px-1">
+
+        <div
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border text-base backdrop-blur-xl"
+          [ngStyle]="{
+            background: 'rgba(52,211,153,0.08)',
+
+            'border-color': themeService.isDarkMode
+              ? 'rgba(110,231,183,0.13)'
+              : 'rgba(16,185,129,0.13)'
+          }"
+        >
+          💡
+        </div>
+
+        <div class="min-w-0">
+
+          <h2
+            class="text-base font-extrabold tracking-tight sm:text-lg"
+            [ngStyle]="{
+              color: themeService.isDarkMode
+                ? '#F5F8F5'
+                : '#17201B'
+            }"
+          >
+            {{
+              currentLanguage === 'fr'
+                ? 'Conseils'
+                : 'Tips'
+            }}
+          </h2>
+
+          <p
+            class="mt-0.5 text-xs"
+            [ngStyle]="{
+              color: themeService.isDarkMode
+                ? '#7F8C82'
+                : '#7A857D'
+            }"
+          >
+            {{
+              currentLanguage === 'fr'
+                ? 'Quelques bonnes pratiques'
+                : 'A few best practices'
+            }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- TIPS -->
+
+      <div
+        class="relative overflow-hidden rounded-[26px] border p-5 backdrop-blur-3xl sm:rounded-[30px] sm:p-6"
+        [ngStyle]="{
+          background: themeService.isDarkMode
+            ? 'rgba(27,40,32,0.58)'
+            : 'rgba(255,255,255,0.16)',
+
+          'border-color': themeService.isDarkMode
+            ? 'rgba(110,231,183,0.12)'
+            : 'rgba(255,255,255,0.42)',
+
+          'box-shadow': themeService.isDarkMode
+            ? '0 10px 35px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)'
+            : '0 10px 35px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.55)'
+        }"
+      >
+
+        <div
+          class="flex flex-col gap-4"
+        >
+
+          <!-- TIP 1 -->
+
+          <div
+            class="flex gap-3 rounded-2xl border p-4"
+            [ngStyle]="{
+              background: 'rgba(52,211,153,0.045)',
+
+              'border-color': themeService.isDarkMode
+                ? 'rgba(110,231,183,0.08)'
+                : 'rgba(16,185,129,0.08)'
+            }"
+          >
+
+            <span class="text-lg">
+              ☀️
+            </span>
+
+            <p
+              class="text-xs leading-5 sm:text-sm"
+              [ngStyle]="{
+                color: themeService.isDarkMode
+                  ? '#A8B5AA'
+                  : '#5F6B63'
+              }"
+            >
+              {{
+                currentLanguage === 'fr'
+                  ? 'Privilégiez une lumière naturelle ou uniforme lors de la prise de vue.'
+                  : 'Prefer natural or even lighting when taking a photo.'
+              }}
+            </p>
+
+          </div>
+
+
+          <!-- TIP 2 -->
+
+          <div
+            class="flex gap-3 rounded-2xl border p-4"
+            [ngStyle]="{
+              background: 'rgba(52,211,153,0.045)',
+
+              'border-color': themeService.isDarkMode
+                ? 'rgba(110,231,183,0.08)'
+                : 'rgba(16,185,129,0.08)'
+            }"
+          >
+
+            <span class="text-lg">
+              🌿
+            </span>
+
+            <p
+              class="text-xs leading-5 sm:text-sm"
+              [ngStyle]="{
+                color: themeService.isDarkMode
+                  ? '#A8B5AA'
+                  : '#5F6B63'
+              }"
+            >
+              {{
+                currentLanguage === 'fr'
+                  ? 'Cadrez principalement la plante et évitez autant que possible les éléments qui masquent ses détails.'
+                  : 'Frame the plant clearly and avoid elements that hide its details.'
+              }}
+            </p>
+
+          </div>
+
+
+          <!-- TIP 3 -->
+
+          <div
+            class="flex gap-3 rounded-2xl border p-4"
+            [ngStyle]="{
+              background: 'rgba(52,211,153,0.045)',
+
+              'border-color': themeService.isDarkMode
+                ? 'rgba(110,231,183,0.08)'
+                : 'rgba(16,185,129,0.08)'
+            }"
+          >
+
+            <span class="text-lg">
+              🔍
+            </span>
+
+            <p
+              class="text-xs leading-5 sm:text-sm"
+              [ngStyle]="{
+                color: themeService.isDarkMode
+                  ? '#A8B5AA'
+                  : '#5F6B63'
+              }"
+            >
+              {{
+                currentLanguage === 'fr'
+                  ? 'Si le résultat semble incertain, essayez avec une nouvelle photo prise sous un angle différent.'
+                  : 'If the result seems uncertain, try taking another photo from a different angle.'
+              }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         FOOTER INFO
+    ========================================================= -->
+
+    <div
+      class="relative mt-8 overflow-hidden rounded-[24px] border px-5 py-5 text-center backdrop-blur-3xl sm:mt-10 sm:px-7"
+      [ngStyle]="{
+        background: themeService.isDarkMode
+          ? 'rgba(16,23,19,0.45)'
+          : 'rgba(255,255,255,0.12)',
+
+        'border-color': themeService.isDarkMode
+          ? 'rgba(110,231,183,0.08)'
+          : 'rgba(255,255,255,0.30)'
+      }"
+    >
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute left-1/2 top-0 h-24 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-400/[0.05] blur-3xl"
+      ></div>
+
+      <p
+        class="relative text-xs leading-5 sm:text-sm"
+        [ngStyle]="{
+          color: themeService.isDarkMode
+            ? '#7F8C82'
+            : '#7A857D'
+        }"
+      >
+        {{
+          currentLanguage === 'fr'
+            ? 'JardiScan • Identifier • Comprendre • Découvrir'
+            : 'JardiScan • Identify • Understand • Discover'
+        }}
+      </p>
+
+    </div>
+
+  </main>
+
+</section>

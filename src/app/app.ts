@@ -1,0 +1,13 @@
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Icon } from '../composant/Public/icon/icon';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet,Icon],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
+})
+export class App {
+  protected readonly title = signal('JardiScan');
+}

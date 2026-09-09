@@ -1,0 +1,765 @@
+<!-- ============================================================
+     🌿 JARDISCAN — BIENVENUE / UI-UX PREMIUM RESPONSIVE
+
+     📱 MOBILE
+        → Introduction
+        → Cards empilées
+        → Illustration
+
+     📲 TABLETTE
+        → Introduction
+        → Cards en grille
+        → Illustration
+
+     💻 LAPTOP / DESKTOP
+        → Illustration à gauche
+        → Contenu à droite
+
+     ✨ UI / UX
+        → Hiérarchie visuelle renforcée
+        → Cards interactives
+        → Accent visuel au hover
+        → Meilleure lisibilité
+        → Image héro plus présente
+        → Responsive complet
+        → ThemeService conservé
+        → Multilingue conservé
+        → Motion-reduce supporté
+   ============================================================ -->
+<section
+    [ngStyle]="{
+     background: themeService.Background1
+   }"
+   class="
+     relative
+     isolate
+     w-full
+     overflow-hidden
+     px-5
+     py-8
+ 
+     sm:px-8
+     sm:py-10
+ 
+     md:px-10
+     md:py-12
+ 
+     lg:grid
+     lg:min-h-[680px]
+     lg:grid-cols-[1.05fr_0.95fr]
+     lg:items-center
+     lg:gap-12
+     lg:px-10
+     lg:py-14
+ 
+     xl:min-h-[720px]
+     xl:grid-cols-[1.1fr_0.9fr]
+     xl:gap-16
+     xl:px-14
+     xl:py-16
+ 
+     2xl:min-h-[780px]
+     2xl:gap-20
+     2xl:px-20
+     2xl:py-20
+   "
+ >
+ 
+   <!-- ==========================================================
+        📝 COLONNE CONTENU
+   =========================================================== -->
+ 
+   <div
+     class="
+       relative
+       z-10
+       order-1
+       flex
+       w-full
+       flex-col
+       justify-center
+ 
+       lg:order-2
+     "
+   >
+ 
+     <!-- ========================================================
+          🧠 TITRE PRINCIPAL
+     ========================================================= -->
+ 
+     <div class="max-w-2xl">
+ 
+       <h1
+         class="
+           text-center
+           text-3xl
+           font-bold
+           leading-[1.08]
+           tracking-tight
+ 
+           sm:text-4xl
+ 
+           md:text-5xl
+ 
+           lg:text-left
+           lg:text-[2.75rem]
+ 
+           xl:text-5xl
+ 
+           2xl:text-6xl
+         "
+         [ngStyle]="{
+           color: themeService.TextPrincipal
+         }"
+       >
+         {{
+           languageService.currentLanguage === 'fr'
+             ? 'Découvrez le monde fascinant des plantes'
+             : 'Discover the fascinating world of plants'
+         }}
+       </h1>
+ 
+ 
+       <!-- ======================================================
+            DESCRIPTION
+       ======================================================= -->
+ 
+       <p
+         class="
+           mx-auto
+           mt-5
+           max-w-xl
+           text-center
+           text-sm
+           leading-7
+ 
+           sm:text-base
+           sm:leading-7
+ 
+           md:text-lg
+           md:leading-8
+ 
+           lg:mx-0
+           lg:text-left
+         "
+         [ngStyle]="{
+           color: themeService.TextSecondaire
+         }"
+       >
+         {{
+           languageService.currentLanguage === 'fr'
+             ? 'Identifiez vos plantes, découvrez leurs caractéristiques et enrichissez votre collection grâce à JardiScan.'
+             : 'Identify your plants, discover their characteristics and grow your collection with JardiScan.'
+         }}
+       </p>
+ 
+     </div>
+ 
+ 
+     <!-- ========================================================
+          🃏 CARDS
+     ========================================================= -->
+ 
+     <div
+       class="
+         mt-8
+         grid
+         w-full
+         grid-cols-1
+         gap-3
+ 
+         sm:mt-10
+         sm:grid-cols-2
+         sm:gap-4
+ 
+         lg:mt-10
+         lg:grid-cols-1
+ 
+         xl:gap-4
+       "
+     >
+ 
+ 
+       <!-- ======================================================
+            🃏 CARD 1 — IDENTIFIER
+       ======================================================= -->
+ 
+       <article
+         class="
+           group
+           relative
+           overflow-hidden
+           rounded-2xl
+           border
+           p-4
+ 
+           transition-all
+           duration-300
+           ease-out
+ 
+           hover:-translate-y-1
+ 
+           motion-reduce:transition-none
+         "
+         [ngStyle]="{
+           background: themeService.Background3,
+           borderColor: themeService.Border3,
+           boxShadow: themeService.BoxShadow
+         }"
+       >
+ 
+         <!-- Accent vertical -->
+ 
+         <div
+           class="
+             absolute
+             left-0
+             top-0
+             h-full
+             w-1
+             origin-top
+             scale-y-0
+             transition-transform
+             duration-300
+             group-hover:scale-y-100
+           "
+           [ngStyle]="{
+             background: themeService.TextPrincipal
+           }"
+         ></div>
+ 
+ 
+         <div
+           class="
+             flex
+             items-start
+             gap-4
+           "
+         >
+ 
+           <!-- Icon -->
+ 
+           <div
+             class="
+               flex
+               h-12
+               w-12
+               shrink-0
+               items-center
+               justify-center
+               rounded-xl
+               text-xl
+ 
+               transition-transform
+               duration-300
+ 
+               group-hover:scale-105
+ 
+               motion-reduce:transition-none
+             "
+              [ngStyle]="{
+                background: themeService.Background4,
+                borderColor: themeService.Border4,
+                boxShadow: themeService.BoxShadow
+            }"
+           >
+             🌱
+           </div>
+ 
+ 
+           <!-- Texte -->
+ 
+           <div class="min-w-0 flex-1">
+ 
+             <h2
+               class="
+                 text-base
+                 font-bold
+                 leading-snug
+ 
+                 sm:text-lg
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               {{
+                 languageService.currentLanguage === 'fr'
+                   ? 'Identifiez une plante'
+                   : 'Identify a plant'
+               }}
+             </h2>
+ 
+             <p
+               class="
+                 mt-1.5
+                 text-sm
+                 leading-6
+               "
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               {{
+                 languageService.currentLanguage === 'fr'
+                   ? 'Prenez simplement une photo et découvrez rapidement son identité.'
+                   : 'Simply take a photo and quickly discover its identity.'
+               }}
+             </p>
+ 
+           </div>
+ 
+ 
+           <!-- Flèche -->
+ 
+           <div
+             class="
+               hidden
+               shrink-0
+               pt-1
+               text-lg
+               opacity-40
+               transition-all
+               duration-300
+ 
+               sm:block
+               group-hover:translate-x-1
+               group-hover:opacity-100
+             "
+             [ngStyle]="{
+               color: themeService.TextPrincipal
+             }"
+           >
+             →
+           </div>
+ 
+         </div>
+ 
+       </article>
+ 
+ 
+       <!-- ======================================================
+            🃏 CARD 2 — DÉCOUVRIR
+       ======================================================= -->
+ 
+       <article
+         class="
+           group
+           relative
+           overflow-hidden
+           rounded-2xl
+           border
+           p-4
+ 
+           transition-all
+           duration-300
+           ease-out
+ 
+           hover:-translate-y-1
+ 
+           motion-reduce:transition-none
+         "
+         [ngStyle]="{
+           background: themeService.Background3,
+           borderColor: themeService.Border3,
+           boxShadow: themeService.BoxShadow
+         }"
+       >
+ 
+         <div
+           class="
+             absolute
+             left-0
+             top-0
+             h-full
+             w-1
+             origin-top
+             scale-y-0
+             transition-transform
+             duration-300
+             group-hover:scale-y-100
+           "
+           [ngStyle]="{
+             background: themeService.TextPrincipal
+           }"
+         ></div>
+ 
+ 
+         <div
+           class="
+             flex
+             items-start
+             gap-4
+           "
+         >
+ 
+           <div
+             class="
+               flex
+               h-12
+               w-12
+               shrink-0
+               items-center
+               justify-center
+               rounded-xl
+               text-xl
+ 
+               transition-transform
+               duration-300
+ 
+               group-hover:scale-105
+ 
+               motion-reduce:transition-none
+             "
+              [ngStyle]="{
+           background: themeService.Background4,
+           borderColor: themeService.Border4,
+           boxShadow: themeService.BoxShadow
+         }"
+           >
+             📚
+           </div>
+ 
+ 
+           <div class="min-w-0 flex-1">
+ 
+             <h2
+               class="
+                 text-base
+                 font-bold
+                 leading-snug
+ 
+                 sm:text-lg
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               {{
+                 languageService.currentLanguage === 'fr'
+                   ? 'Découvrez vos plantes'
+                   : 'Discover your plants'
+               }}
+             </h2>
+ 
+             <p
+               class="
+                 mt-1.5
+                 text-sm
+                 leading-6
+               "
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               {{
+                 languageService.currentLanguage === 'fr'
+                   ? 'Retrouvez toutes les informations utiles sur les plantes découvertes.'
+                   : 'Find all useful information about the plants you discover.'
+               }}
+             </p>
+ 
+           </div>
+ 
+ 
+           <div
+             class="
+               hidden
+               shrink-0
+               pt-1
+               text-lg
+               opacity-40
+               transition-all
+               duration-300
+ 
+               sm:block
+               group-hover:translate-x-1
+               group-hover:opacity-100
+             "
+             [ngStyle]="{
+               color: themeService.TextPrincipal
+             }"
+           >
+             →
+           </div>
+ 
+         </div>
+ 
+       </article>
+ 
+ 
+       <!-- ======================================================
+            🃏 CARD 3 — COLLECTION
+       ======================================================= -->
+ 
+       <article
+         class="
+           group
+           relative
+           overflow-hidden
+           rounded-2xl
+           border
+           p-4
+ 
+           transition-all
+           duration-300
+           ease-out
+ 
+           hover:-translate-y-1
+ 
+           motion-reduce:transition-none
+         "
+         [ngStyle]="{
+           background: themeService.Background3,
+           borderColor: themeService.Border3,
+           boxShadow: themeService.BoxShadow
+         }"
+       >
+ 
+         <div
+           class="
+             absolute
+             left-0
+             top-0
+             h-full
+             w-1
+             origin-top
+             scale-y-0
+             transition-transform
+             duration-300
+             group-hover:scale-y-100
+           "
+           [ngStyle]="{
+             background: themeService.TextPrincipal
+           }"
+         ></div>
+ 
+ 
+         <div
+           class="
+             flex
+             items-start
+             gap-4
+           "
+         >
+ 
+           <div
+             class="
+               flex
+               h-12
+               w-12
+               shrink-0
+               items-center
+               justify-center
+               rounded-xl
+               text-xl
+ 
+               transition-transform
+               duration-300
+ 
+               group-hover:scale-105
+ 
+               motion-reduce:transition-none
+             "
+             [ngStyle]="{
+           background: themeService.Background4,
+           borderColor: themeService.Border4,
+           boxShadow: themeService.BoxShadow
+         }"
+           >
+             🔎
+           </div>
+ 
+ 
+           <div class="min-w-0 flex-1">
+ 
+             <h2
+               class="
+                 text-base
+                 font-bold
+                 leading-snug
+ 
+                 sm:text-lg
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               {{
+                 languageService.currentLanguage === 'fr'
+                   ? 'Explorez votre collection'
+                   : 'Explore your collection'
+               }}
+             </h2>
+ 
+             <p
+               class="
+                 mt-1.5
+                 text-sm
+                 leading-6
+               "
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               {{
+                 languageService.currentLanguage === 'fr'
+                   ? 'Consultez et retrouvez facilement toutes vos découvertes.'
+                   : 'Easily browse and find all your discoveries.'
+               }}
+             </p>
+ 
+           </div>
+ 
+ 
+           <div
+             class="
+               hidden
+               shrink-0
+               pt-1
+               text-lg
+               opacity-40
+               transition-all
+               duration-300
+ 
+               sm:block
+               group-hover:translate-x-1
+               group-hover:opacity-100
+             "
+             [ngStyle]="{
+               color: themeService.TextPrincipal
+             }"
+           >
+             →
+           </div>
+ 
+         </div>
+ 
+       </article>
+ 
+     </div>
+ 
+   </div>
+ 
+ 
+   <!-- ==========================================================
+        🖼️ COLONNE IMAGE
+   =========================================================== -->
+ 
+   <div
+     class="
+       relative
+       z-10
+       order-2
+       mt-10
+       flex
+       min-h-[280px]
+       w-full
+       items-center
+       justify-center
+ 
+       sm:mt-12
+       sm:min-h-[340px]
+ 
+       md:min-h-[400px]
+ 
+       lg:order-1
+       lg:mt-0
+       lg:min-h-0
+       lg:h-full
+     "
+   >
+ 
+     <!-- ========================================================
+          ✨ HALO VISUEL
+     ========================================================= -->
+ 
+     <div
+       aria-hidden="true"
+       class="
+         pointer-events-none
+         absolute
+         left-1/2
+         top-1/2
+         h-[65%]
+         w-[65%]
+         -translate-x-1/2
+         -translate-y-1/2
+         rounded-full
+         opacity-[0.045]
+         blur-3xl
+       "
+       [ngStyle]="{
+         background: themeService.TextPrincipal
+       }"
+     ></div>
+ 
+ 
+     <!-- ========================================================
+          🖼️ IMAGE
+     ========================================================= -->
+ 
+     <div
+       class="
+         group
+         relative
+         flex
+         h-full
+         w-full
+         items-center
+         justify-center
+       "
+     >
+ 
+       <img
+         src="assets/ImageFonctionnalité.jpg"
+         [alt]="
+           languageService.currentLanguage === 'fr'
+             ? 'Illustration de bienvenue de JardiScan'
+             : 'JardiScan welcome illustration'
+         "
+         class="
+           relative
+           z-10
+           block
+           h-auto
+           w-full
+           max-w-[560px]
+           object-contain
+           object-center
+ 
+           transform-gpu
+ 
+           transition-transform
+           duration-700
+           ease-[cubic-bezier(0.22,1,0.36,1)]
+ 
+           group-hover:scale-[1.025]
+ 
+           max-h-[34vh]
+ 
+           sm:max-w-[650px]
+           sm:max-h-[42vh]
+ 
+           md:max-w-[720px]
+           md:max-h-[48vh]
+ 
+           lg:max-w-[760px]
+           lg:max-h-[68vh]
+ 
+           xl:max-w-[880px]
+           xl:max-h-[74vh]
+ 
+           2xl:max-w-[1000px]
+           2xl:max-h-[78vh]
+ 
+           motion-reduce:transform-none
+           motion-reduce:transition-none
+         "
+       />
+ 
+     </div>
+ 
+   </div>
+ 
+</section>
