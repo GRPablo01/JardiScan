@@ -26,10 +26,10 @@ import { Language2 } from '../../Icon/language/language';
 import { Aide } from '../../Icon/aide/aide';
 import { Contact } from '../../Icon/contact/contact';
 import { ActionsMobileTablette } from '../../../Public/actions-mobile-tablette/actions-mobile-tablette';
-import { ListeIcon } from "../../Icon/liste-icon/liste-icon";
 import { NavWelcome } from '../nav-welcome/nav-welcome';
 import { BoutonBienvenue } from "../bouton-bienvenue/bouton-bienvenue";
 import { TailleEcran } from "../../../Public/taille-ecran/taille-ecran";
+import { ListeIcon } from '../../../Public/liste-icon/liste-icon';
 
 
 

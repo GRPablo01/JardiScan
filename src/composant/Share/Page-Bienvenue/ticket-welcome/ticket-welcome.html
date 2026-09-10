@@ -1,0 +1,1532 @@
+<!-- ============================================================
+     JARDISCAN — ASSISTANCE / TICKET PREMIUM
+     
+     • FR / EN avec LanguageService
+     • ThemeService conservé
+     • RouterLink conservé
+     • openTicketModal() conservé
+     • closeTicketModal() conservé
+     • ticketModalOpen conservé
+     • Font Awesome uniquement
+     • Aucun emoji
+     • UI / UX premium
+     • Responsive Desktop / Tablet / Mobile
+     • Modal responsive
+     • Timeline
+     • Animations
+     • Backdrop blur
+     ============================================================ -->
+
+
+<!-- ============================================================
+     SECTION ASSISTANCE
+     ============================================================ -->
+
+<section
+  id="aide"
+  class="relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24 xl:px-14"
+  [ngStyle]="{
+    background: themeService.Background1
+  }"
+>
+
+  
+
+  <!-- ==========================================================
+       CONTENU
+       ========================================================== -->
+
+  <div
+    class="relative z-10 mx-auto grid w-full max-w-[1650px] gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8 xl:gap-10"
+  >
+
+
+    <!-- ========================================================
+         CARTE PRINCIPALE
+         ======================================================== -->
+
+    <div
+      class="reveal reveal-delay-1 group relative overflow-hidden rounded-[2rem] border p-6 shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl sm:p-8 lg:p-10 xl:p-12"
+      [ngStyle]="{
+        background: themeService.Background2,
+        borderColor: themeService.Border2,
+        boxShadow: themeService.BoxShadow
+      }"
+    >
+
+      
+
+
+      <div class="relative z-10">
+
+
+        <!-- ======================================================
+             BADGE
+             ====================================================== -->
+
+        <div
+          class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] transition-all duration-300 hover:scale-105 sm:text-[11px]"
+          [ngStyle]="{
+            background: themeService.Background3,
+            borderColor: themeService.Border3,
+            color: themeService.TextPrincipal,
+            boxShadow: themeService.BoxShadow
+          }"
+        >
+
+          <span
+            class="flex h-6 w-6 items-center justify-center rounded-full"
+            [ngStyle]="{
+              background: themeService.Primary
+            }"
+          >
+            <i
+              class="fa-solid fa-headset text-[10px]"
+              [ngStyle]="{
+                color: '#FFFFFF'
+              }"
+            ></i>
+          </span>
+
+          <span>
+            {{ languageService.is('fr') ? 'Assistance' : 'Support' }}
+          </span>
+
+          <span
+            class="h-1.5 w-1.5 animate-pulse rounded-full"
+            [ngStyle]="{
+              background: themeService.Primary
+            }"
+          ></span>
+
+          <span>
+            {{ languageService.is('fr') ? 'Support' : 'Help center' }}
+          </span>
+
+        </div>
+
+
+        <!-- ======================================================
+             ICÔNE
+             ====================================================== -->
+
+        <div
+          class="mt-7 flex h-20 w-20 items-center justify-center rounded-[1.5rem] border text-3xl shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 sm:h-24 sm:w-24 sm:text-4xl"
+          [ngStyle]="{
+            background: themeService.Background3,
+            borderColor: themeService.Border3,
+            boxShadow: themeService.BoxShadow
+          }"
+        >
+
+          <i
+            class="fa-solid fa-headset"
+            [ngStyle]="{
+              color: themeService.Primary
+            }"
+          ></i>
+
+        </div>
+
+
+        <!-- ======================================================
+             TITRE
+             ====================================================== -->
+
+        <h2
+          class="mt-7 max-w-4xl text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl"
+          [ngStyle]="{
+            color: themeService.TextPrincipal
+          }"
+        >
+
+          {{ languageService.is('fr')
+            ? 'Une question ?'
+            : 'Have a question?' }}
+
+          <span
+            class="mt-3 block text-lg font-bold leading-tight sm:text-xl lg:text-2xl"
+            [ngStyle]="{
+              color: themeService.Primary
+            }"
+          >
+
+            {{ languageService.is('fr')
+              ? 'Notre équipe vous accompagne.'
+              : 'Our team is here to help you.' }}
+
+          </span>
+
+        </h2>
+
+
+        <!-- ======================================================
+             DESCRIPTION
+             ====================================================== -->
+
+        <p
+          class="mt-6 max-w-3xl text-sm leading-7 sm:text-base sm:leading-8"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+
+          {{ languageService.is('fr')
+            ? 'Certaines demandes nécessitent une prise en charge spécifique. Après connexion, vous pourrez utiliser le système de tickets pour contacter l’équipe concernée et suivre votre demande directement depuis JardiScan.'
+            : 'Some requests require specific assistance. After signing in, you can use the ticket system to contact the appropriate team and track your request directly from JardiScan.' }}
+
+        </p>
+
+
+        <!-- ======================================================
+             INFORMATIONS RAPIDES
+             ====================================================== -->
+
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
+
+
+          <!-- Accès -->
+
+          <div
+            class="group/info flex items-center gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            [ngStyle]="{
+              background: themeService.Background3,
+              borderColor: themeService.Border3,
+              boxShadow: themeService.BoxShadow
+            }"
+          >
+
+            <div
+              class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover/info:scale-110"
+              [ngStyle]="{
+                background: themeService.PrimarySoft
+              }"
+            >
+              <i
+                class="fa-solid fa-user-lock"
+                [ngStyle]="{
+                  color: themeService.Primary
+                }"
+              ></i>
+            </div>
+
+            <div class="min-w-0">
+
+              <p
+                class="text-[10px] font-black uppercase tracking-[0.16em]"
+                [ngStyle]="{
+                  color: themeService.TextMuted
+                }"
+              >
+                {{ languageService.is('fr') ? 'Accès' : 'Access' }}
+              </p>
+
+              <p
+                class="mt-1 text-sm font-bold"
+                [ngStyle]="{
+                  color: themeService.TextPrincipal
+                }"
+              >
+                {{ languageService.is('fr')
+                  ? 'Connexion requise'
+                  : 'Sign-in required' }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- Support -->
+
+          <div
+            class="group/info flex items-center gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            [ngStyle]="{
+              background: themeService.Background3,
+              borderColor: themeService.Border3,
+              boxShadow: themeService.BoxShadow
+            }"
+          >
+
+            <div
+              class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover/info:scale-110"
+              [ngStyle]="{
+                background: themeService.PrimarySoft
+              }"
+            >
+              <i
+                class="fa-solid fa-headset"
+                [ngStyle]="{
+                  color: themeService.Primary
+                }"
+              ></i>
+            </div>
+
+            <div class="min-w-0">
+
+              <p
+                class="text-[10px] font-black uppercase tracking-[0.16em]"
+                [ngStyle]="{
+                  color: themeService.TextMuted
+                }"
+              >
+                {{ languageService.is('fr') ? 'Support' : 'Support' }}
+              </p>
+
+              <p
+                class="mt-1 text-sm font-bold"
+                [ngStyle]="{
+                  color: themeService.TextPrincipal
+                }"
+              >
+                {{ languageService.is('fr')
+                  ? 'Équipe concernée'
+                  : 'Relevant team' }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================================
+             BOUTON
+             ====================================================== -->
+
+        <button
+          type="button"
+          class="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-4 text-sm font-black shadow-xl transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:gap-4 active:scale-[0.98] sm:w-auto"
+          [ngStyle]="{
+            background: themeService.Primary,
+            borderColor: themeService.BorderPrimary,
+            color: '#FFFFFF',
+            boxShadow: themeService.BoxShadow
+          }"
+          (click)="openTicketModal()"
+        >
+
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-lg bg-black/10"
+          >
+            <i class="fa-solid fa-ticket"></i>
+          </span>
+
+          <span>
+            {{ languageService.is('fr')
+              ? 'Voir un exemple de ticket'
+              : 'View a ticket example' }}
+          </span>
+
+          <i
+            class="fa-solid fa-arrow-right text-xs transition-transform duration-300 group-hover:translate-x-1"
+          ></i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================================
+         À RETENIR
+         ======================================================== -->
+
+    <div
+      class="reveal reveal-delay-2 relative overflow-hidden rounded-[2rem] border p-6 shadow-xl sm:p-8 lg:p-10"
+      [ngStyle]="{
+        background: themeService.Background2,
+        borderColor: themeService.Border2,
+        boxShadow: themeService.BoxShadow
+      }"
+    >
+
+     
+
+
+      <div class="relative z-10">
+
+
+        <!-- ======================================================
+             HEADER
+             ====================================================== -->
+
+        <div class="flex items-start gap-4">
+
+          <div
+            class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border text-lg shadow-sm"
+            [ngStyle]="{
+              background: themeService.Background3,
+              borderColor: themeService.Border3,
+              boxShadow: themeService.BoxShadow
+            }"
+          >
+
+            <i
+              class="fa-solid fa-list-check"
+              [ngStyle]="{
+                color: themeService.Primary
+              }"
+            ></i>
+
+          </div>
+
+
+          <div class="min-w-0">
+
+            <span
+              class="text-[10px] font-black uppercase tracking-[0.2em]"
+              [ngStyle]="{
+                color: themeService.Primary
+              }"
+            >
+              {{ languageService.is('fr')
+                ? 'À retenir'
+                : 'Good to know' }}
+            </span>
+
+            <h3
+              class="mt-1 text-xl font-black leading-tight sm:text-2xl"
+              [ngStyle]="{
+                color: themeService.TextPrincipal
+              }"
+            >
+              {{ languageService.is('fr')
+                ? 'Comment faire une demande ?'
+                : 'How do I submit a request?' }}
+            </h3>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================================
+             TIMELINE
+             ====================================================== -->
+
+        <div class="relative mt-8">
+
+          <!-- Ligne -->
+
+          <div
+            class="absolute bottom-10 left-[22px] top-6 hidden w-px sm:block"
+            [ngStyle]="{
+              background: themeService.BorderPrimary
+            }"
+          ></div>
+
+
+          <div class="space-y-4">
+
+
+            <!-- ==================================================
+                 ÉTAPE 01
+                 ================================================== -->
+
+            <div
+              class="group relative flex gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              [ngStyle]="{
+                background: themeService.Background3,
+                borderColor: themeService.Border3,
+                boxShadow: themeService.BoxShadow
+              }"
+            >
+
+              <div
+                class="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-sm transition-all duration-300 group-hover:scale-110"
+                [ngStyle]="{
+                  background: themeService.Background4,
+                  borderColor: themeService.Border4,
+                  color: themeService.Primary
+                }"
+              >
+                <i class="fa-solid fa-right-to-bracket"></i>
+              </div>
+
+
+              <div class="min-w-0">
+
+                <span
+                  class="text-[10px] font-black uppercase tracking-widest"
+                  [ngStyle]="{
+                    color: themeService.Primary
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Étape 01'
+                    : 'Step 01' }}
+                </span>
+
+                <h4
+                  class="mt-1 font-black"
+                  [ngStyle]="{
+                    color: themeService.TextPrincipal
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Connectez-vous'
+                    : 'Sign in' }}
+                </h4>
+
+                <p
+                  class="mt-1 text-sm leading-6"
+                  [ngStyle]="{
+                    color: themeService.TextSecondaire
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Les demandes liées à votre compte nécessitent une connexion à votre espace personnel.'
+                    : 'Requests linked to your account require you to sign in to your personal area.' }}
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 ÉTAPE 02
+                 ================================================== -->
+
+            <div
+              class="group relative flex gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              [ngStyle]="{
+                background: themeService.Background3,
+                borderColor: themeService.Border3,
+                boxShadow: themeService.BoxShadow
+              }"
+            >
+
+              <div
+                class="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-sm transition-all duration-300 group-hover:scale-110"
+                [ngStyle]="{
+                  background: themeService.Background4,
+                  borderColor: themeService.Border4,
+                  color: themeService.Primary
+                }"
+              >
+                <i class="fa-solid fa-pen-to-square"></i>
+              </div>
+
+
+              <div class="min-w-0">
+
+                <span
+                  class="text-[10px] font-black uppercase tracking-widest"
+                  [ngStyle]="{
+                    color: themeService.Primary
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Étape 02'
+                    : 'Step 02' }}
+                </span>
+
+                <h4
+                  class="mt-1 font-black"
+                  [ngStyle]="{
+                    color: themeService.TextPrincipal
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Expliquez votre demande'
+                    : 'Describe your request' }}
+                </h4>
+
+                <p
+                  class="mt-1 text-sm leading-6"
+                  [ngStyle]="{
+                    color: themeService.TextSecondaire
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Donnez un titre clair et une description suffisamment précise afin de faciliter le traitement.'
+                    : 'Provide a clear title and enough details to make your request easier to process.' }}
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 ÉTAPE 03
+                 ================================================== -->
+
+            <div
+              class="group relative flex gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              [ngStyle]="{
+                background: themeService.Background3,
+                borderColor: themeService.Border3,
+                boxShadow: themeService.BoxShadow
+              }"
+            >
+
+              <div
+                class="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-sm transition-all duration-300 group-hover:scale-110"
+                [ngStyle]="{
+                  background: themeService.Background4,
+                  borderColor: themeService.Border4,
+                  color: themeService.Primary
+                }"
+              >
+                <i class="fa-solid fa-paper-plane"></i>
+              </div>
+
+
+              <div class="min-w-0">
+
+                <span
+                  class="text-[10px] font-black uppercase tracking-widest"
+                  [ngStyle]="{
+                    color: themeService.Primary
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Étape 03'
+                    : 'Step 03' }}
+                </span>
+
+                <h4
+                  class="mt-1 font-black"
+                  [ngStyle]="{
+                    color: themeService.TextPrincipal
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Envoyez votre ticket'
+                    : 'Send your ticket' }}
+                </h4>
+
+                <p
+                  class="mt-1 text-sm leading-6"
+                  [ngStyle]="{
+                    color: themeService.TextSecondaire
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'L’équipe concernée recevra votre demande et pourra la traiter directement depuis JardiScan.'
+                    : 'The relevant team will receive your request and process it directly through JardiScan.' }}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================================
+             CONSEIL
+             ====================================================== -->
+
+        <div
+          class="mt-6 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:p-5"
+          [ngStyle]="{
+            background: themeService.Background4,
+            borderColor: themeService.BorderPrimary,
+            boxShadow: themeService.BoxShadow
+          }"
+        >
+
+          <div class="flex gap-3">
+
+            <div
+              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+              [ngStyle]="{
+                background: themeService.Background1
+              }"
+            >
+              <i
+                class="fa-solid fa-lightbulb"
+                [ngStyle]="{
+                  color: themeService.Primary
+                }"
+              ></i>
+            </div>
+
+
+            <div class="min-w-0">
+
+              <p
+                class="text-xs font-black uppercase tracking-wider"
+                [ngStyle]="{
+                  color: themeService.Primary
+                }"
+              >
+                {{ languageService.is('fr')
+                  ? 'Conseil'
+                  : 'Tip' }}
+              </p>
+
+              <p
+                class="mt-1 text-sm leading-6"
+                [ngStyle]="{
+                  color: themeService.TextSecondaire
+                }"
+              >
+                {{ languageService.is('fr')
+                  ? 'Une demande claire et précise permet à l’équipe de mieux comprendre votre besoin et de vous répondre plus efficacement.'
+                  : 'A clear and precise request helps the team understand your needs and provide a more effective response.' }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ============================================================
+     MODAL — EXEMPLE DE TICKET
+     ============================================================ -->
+
+@if (ticketModalOpen) {
+
+  <div
+    class="fixed inset-0 z-[100] flex min-h-screen items-center justify-center overflow-y-auto bg-black/70 p-3 backdrop-blur-md animate-fade-in sm:p-5 lg:p-8"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ticket-modal-title"
+    (click)="closeTicketModal()"
+    (keydown.escape)="closeTicketModal()"
+  >
+
+    <!-- ========================================================
+         MODAL
+         ======================================================== -->
+
+    <div
+      class="modal-enter relative my-auto flex max-h-[94vh] w-full max-w-3xl flex-col overflow-hidden rounded-[1.75rem] border shadow-2xl sm:rounded-[2rem]"
+      [ngStyle]="{
+        background: themeService.Background1,
+        borderColor: themeService.Border1,
+        boxShadow: themeService.BoxShadow
+      }"
+      (click)="$event.stopPropagation()"
+    >
+
+
+      <!-- ======================================================
+           HEADER
+           ====================================================== -->
+
+      <div
+        class="flex shrink-0 items-start justify-between gap-4 border-b p-5 sm:p-7"
+        [ngStyle]="{
+          borderColor: themeService.Border1
+        }"
+      >
+
+        <div class="flex min-w-0 items-start gap-3 sm:gap-4">
+
+          <div
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-xl shadow-sm sm:h-14 sm:w-14 sm:text-2xl"
+            [ngStyle]="{
+              background: themeService.PrimarySoft
+            }"
+          >
+            <i
+              class="fa-solid fa-ticket"
+              [ngStyle]="{
+                color: themeService.Primary
+              }"
+            ></i>
+          </div>
+
+
+          <div class="min-w-0">
+
+            <p
+              id="ticket-modal-title"
+              class="text-base font-black sm:text-xl"
+              [ngStyle]="{
+                color: themeService.TextPrincipal
+              }"
+            >
+              {{ languageService.is('fr')
+                ? 'Exemple de ticket'
+                : 'Ticket example' }}
+            </p>
+
+            <p
+              class="mt-1 text-xs leading-5 sm:text-sm"
+              [ngStyle]="{
+                color: themeService.TextMuted
+              }"
+            >
+              {{ languageService.is('fr')
+                ? 'Voici à quoi peut ressembler une demande.'
+                : 'Here is an example of what a request can look like.' }}
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- Fermeture -->
+
+        <button
+          type="button"
+          aria-label="Fermer"
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-xl transition-all duration-200 hover:scale-110 hover:bg-black/5 active:scale-95"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+          (click)="closeTicketModal()"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+
+      <!-- ======================================================
+           CONTENU
+           ====================================================== -->
+
+      <div class="overflow-y-auto">
+
+        <div class="space-y-5 p-4 sm:space-y-6 sm:p-7">
+
+
+          <!-- ==================================================
+               TICKET
+               ================================================== -->
+
+          <div
+            class="overflow-hidden rounded-3xl border"
+            [ngStyle]="{
+              background: themeService.Background2,
+              borderColor: themeService.Border2,
+              boxShadow: themeService.BoxShadow
+            }"
+          >
+
+
+            <!-- Ticket Header -->
+
+            <div
+              class="flex flex-col gap-4 border-b border-dashed p-5 sm:flex-row sm:items-center sm:justify-between"
+              [ngStyle]="{
+                borderColor: themeService.Border1
+              }"
+            >
+
+              <div class="min-w-0">
+
+                <p
+                  class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
+                  [ngStyle]="{
+                    color: themeService.TextMuted
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Sujet du ticket'
+                    : 'Ticket subject' }}
+                </p>
+
+                <h3
+                  class="mt-1 text-base font-black sm:text-lg"
+                  [ngStyle]="{
+                    color: themeService.TextPrincipal
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Demande de changement de rôle'
+                    : 'Role change request' }}
+                </h3>
+
+              </div>
+
+
+              <span
+                class="inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-3 py-1.5 text-xs font-black"
+                [ngStyle]="{
+                  background: themeService.Primary,
+                  color: '#FFFFFF',
+                  boxShadow: themeService.BoxShadow
+                }"
+              >
+                <i class="fa-solid fa-circle-info"></i>
+
+                {{ languageService.is('fr')
+                  ? 'Exemple'
+                  : 'Example' }}
+
+              </span>
+
+            </div>
+
+
+            <!-- ==================================================
+                 CHAMPS
+                 ================================================== -->
+
+            <div class="space-y-5 p-5">
+
+
+              <!-- Catégorie -->
+
+              <div>
+
+                <p
+                  class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
+                  [ngStyle]="{
+                    color: themeService.TextMuted
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Catégorie'
+                    : 'Category' }}
+                </p>
+
+
+                <div
+                  class="mt-2 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-all duration-300 hover:-translate-y-0.5"
+                  [ngStyle]="{
+                    background: themeService.Background1,
+                    borderColor: themeService.Border1,
+                    color: themeService.TextPrincipal
+                  }"
+                >
+
+                  <div
+                    class="flex h-8 w-8 items-center justify-center rounded-lg"
+                    [ngStyle]="{
+                      background: themeService.PrimarySoft
+                    }"
+                  >
+                    <i
+                      class="fa-solid fa-user-tag text-xs"
+                      [ngStyle]="{
+                        color: themeService.Primary
+                      }"
+                    ></i>
+                  </div>
+
+                  <span>
+                    {{ languageService.is('fr')
+                      ? 'Demande de rôle'
+                      : 'Role request' }}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <!-- Titre -->
+
+              <div>
+
+                <p
+                  class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
+                  [ngStyle]="{
+                    color: themeService.TextMuted
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Titre'
+                    : 'Title' }}
+                </p>
+
+
+                <div
+                  class="mt-2 rounded-xl border px-4 py-3 text-sm"
+                  [ngStyle]="{
+                    background: themeService.Background1,
+                    borderColor: themeService.Border1,
+                    color: themeService.TextPrincipal
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Je souhaite devenir contributeur'
+                    : 'I would like to become a contributor' }}
+                </div>
+
+              </div>
+
+
+              <!-- Description -->
+
+              <div>
+
+                <p
+                  class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
+                  [ngStyle]="{
+                    color: themeService.TextMuted
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Description'
+                    : 'Description' }}
+                </p>
+
+
+                <div
+                  class="mt-2 rounded-xl border p-4 text-sm leading-7"
+                  [ngStyle]="{
+                    background: themeService.Background1,
+                    borderColor: themeService.Border1,
+                    color: themeService.TextSecondaire
+                  }"
+                >
+
+                  {{ languageService.is('fr')
+                    ? 'Bonjour, je souhaiterais obtenir le rôle de contributeur afin de pouvoir participer à l’enrichissement des informations présentes sur JardiScan.'
+                    : 'Hello, I would like to obtain the contributor role so that I can help enrich the information available on JardiScan.' }}
+
+                  <br />
+                  <br />
+
+                  {{ languageService.is('fr')
+                    ? 'Je souhaite contribuer à la plateforme et proposer des informations utiles à la communauté.'
+                    : 'I would like to contribute to the platform and provide useful information to the community.' }}
+
+                </div>
+
+              </div>
+
+
+              <!-- Pièce jointe -->
+
+              <div>
+
+                <p
+                  class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
+                  [ngStyle]="{
+                    color: themeService.TextMuted
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Pièce jointe'
+                    : 'Attachment' }}
+                </p>
+
+
+                <div
+                  class="mt-2 flex items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 hover:-translate-y-0.5"
+                  [ngStyle]="{
+                    background: themeService.Background1,
+                    borderColor: themeService.Border1
+                  }"
+                >
+
+                  <div
+                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+                    [ngStyle]="{
+                      background: themeService.PrimarySoft
+                    }"
+                  >
+                    <i
+                      class="fa-solid fa-paperclip"
+                      [ngStyle]="{
+                        color: themeService.Primary
+                      }"
+                    ></i>
+                  </div>
+
+                  <span
+                    class="min-w-0 truncate text-sm"
+                    [ngStyle]="{
+                      color: themeService.TextSecondaire
+                    }"
+                  >
+                    exemple-image.png
+                  </span>
+
+                  <i
+                    class="fa-solid fa-image ml-auto text-xs"
+                    [ngStyle]="{
+                      color: themeService.TextMuted
+                    }"
+                  ></i>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 STATUTS
+                 ================================================== -->
+
+            <div
+              class="border-t p-5"
+              [ngStyle]="{
+                borderColor: themeService.Border1
+              }"
+            >
+
+              <div class="flex flex-wrap gap-2">
+
+
+                <!-- En attente -->
+
+                <span
+                  class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-black"
+                  [ngStyle]="{
+                    background: themeService.PrimarySoft,
+                    color: themeService.Primary
+                  }"
+                >
+                  <i class="fa-regular fa-clock"></i>
+
+                  {{ languageService.is('fr')
+                    ? 'En attente'
+                    : 'Pending' }}
+
+                </span>
+
+
+                <!-- Priorité -->
+
+                <span
+                  class="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold"
+                  [ngStyle]="{
+                    background: themeService.Background1,
+                    color: themeService.TextMuted
+                  }"
+                >
+                  <i class="fa-solid fa-flag"></i>
+
+                  {{ languageService.is('fr')
+                    ? 'Priorité normale'
+                    : 'Normal priority' }}
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ==================================================
+               CONSEILS
+               ================================================== -->
+
+          <div
+            class="rounded-2xl border p-5 sm:p-6"
+            [ngStyle]="{
+              background: themeService.PrimarySoft,
+              borderColor: themeService.BorderPrimary
+            }"
+          >
+
+            <div class="flex gap-3 sm:gap-4">
+
+              <div
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                [ngStyle]="{
+                  background: themeService.Background1
+                }"
+              >
+                <i
+                  class="fa-solid fa-lightbulb"
+                  [ngStyle]="{
+                    color: themeService.Primary
+                  }"
+                ></i>
+              </div>
+
+
+              <div class="min-w-0">
+
+                <h3
+                  class="font-black"
+                  [ngStyle]="{
+                    color: themeService.TextPrincipal
+                  }"
+                >
+                  {{ languageService.is('fr')
+                    ? 'Comment bien rédiger votre ticket ?'
+                    : 'How to write a good ticket?' }}
+                </h3>
+
+
+                <ul
+                  class="mt-4 space-y-3 text-sm leading-6"
+                  [ngStyle]="{
+                    color: themeService.TextSecondaire
+                  }"
+                >
+
+
+                  <!-- Conseil 1 -->
+
+                  <li class="flex gap-3">
+
+                    <span
+                      class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                      [ngStyle]="{
+                        background: themeService.Primary
+                      }"
+                    >
+                      <i
+                        class="fa-solid fa-check text-[9px]"
+                        [ngStyle]="{
+                          color: themeService.TextOnPrimary
+                        }"
+                      ></i>
+                    </span>
+
+                    <span>
+                      {{ languageService.is('fr')
+                        ? 'Donnez un titre clair et précis.'
+                        : 'Use a clear and precise title.' }}
+                    </span>
+
+                  </li>
+
+
+                  <!-- Conseil 2 -->
+
+                  <li class="flex gap-3">
+
+                    <span
+                      class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                      [ngStyle]="{
+                        background: themeService.Primary
+                      }"
+                    >
+                      <i
+                        class="fa-solid fa-check text-[9px]"
+                        [ngStyle]="{
+                          color: themeService.TextOnPrimary
+                        }"
+                      ></i>
+                    </span>
+
+                    <span>
+                      {{ languageService.is('fr')
+                        ? 'Expliquez votre demande avec suffisamment de détails.'
+                        : 'Explain your request with enough detail.' }}
+                    </span>
+
+                  </li>
+
+
+                  <!-- Conseil 3 -->
+
+                  <li class="flex gap-3">
+
+                    <span
+                      class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                      [ngStyle]="{
+                        background: themeService.Primary
+                      }"
+                    >
+                      <i
+                        class="fa-solid fa-check text-[9px]"
+                        [ngStyle]="{
+                          color: themeService.TextOnPrimary
+                        }"
+                      ></i>
+                    </span>
+
+                    <span>
+                      {{ languageService.is('fr')
+                        ? 'Indiquez pourquoi vous souhaitez effectuer cette demande.'
+                        : 'Explain why you want to make this request.' }}
+                    </span>
+
+                  </li>
+
+
+                  <!-- Conseil 4 -->
+
+                  <li class="flex gap-3">
+
+                    <span
+                      class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                      [ngStyle]="{
+                        background: themeService.Primary
+                      }"
+                    >
+                      <i
+                        class="fa-solid fa-check text-[9px]"
+                        [ngStyle]="{
+                          color: themeService.TextOnPrimary
+                        }"
+                      ></i>
+                    </span>
+
+                    <span>
+                      {{ languageService.is('fr')
+                        ? 'Ajoutez une pièce jointe uniquement si elle est réellement utile.'
+                        : 'Add an attachment only when it is genuinely useful.' }}
+                    </span>
+
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ==================================================
+               ACTIONS
+               ================================================== -->
+
+          <div
+            class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end"
+          >
+
+            <!-- Fermer -->
+
+            <button
+              type="button"
+              class="inline-flex items-center justify-center gap-2 rounded-xl border px-5 py-3 text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 hover:bg-black/5 active:scale-[0.98]"
+              [ngStyle]="{
+                borderColor: themeService.Border1,
+                color: themeService.TextSecondaire
+              }"
+              (click)="closeTicketModal()"
+            >
+
+              <i class="fa-solid fa-xmark"></i>
+
+              {{ languageService.is('fr')
+                ? 'Fermer'
+                : 'Close' }}
+
+            </button>
+
+
+            <!-- Connexion -->
+
+            <a
+              routerLink="/login"
+              class="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-center text-sm font-black shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:gap-3 active:scale-[0.98]"
+              [ngStyle]="{
+                background: themeService.Primary,
+                color: themeService.TextOnPrimary,
+                boxShadow: themeService.BoxShadowPrimary
+              }"
+              (click)="closeTicketModal()"
+            >
+
+              <i class="fa-solid fa-right-to-bracket"></i>
+
+              <span>
+                {{ languageService.is('fr')
+                  ? 'Se connecter pour faire une demande'
+                  : 'Sign in to submit a request' }}
+              </span>
+
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}
+
+
+<!-- ============================================================
+     ANIMATIONS
+     ============================================================ -->
+
+<style>
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.reveal {
+  opacity: 0;
+  animation:
+    reveal-up
+    0.7s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+
+.reveal-delay-1 {
+  animation-delay: 0.1s;
+}
+
+
+.reveal-delay-2 {
+  animation-delay: 0.25s;
+}
+
+
+@keyframes modal-pop {
+
+  from {
+    opacity: 0;
+    transform:
+      scale(0.92)
+      translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      scale(1)
+      translateY(0);
+  }
+
+}
+
+
+.modal-enter {
+  animation:
+    modal-pop
+    0.35s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+@keyframes fade-in {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+.animate-fade-in {
+  animation:
+    fade-in
+    0.25s
+    ease-out;
+}
+
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.06;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.11;
+    transform: scale(1.06);
+  }
+
+}
+
+
+.animate-pulse-slow {
+  animation:
+    pulse-slow
+    6s
+    ease-in-out
+    infinite;
+}
+
+
+/* ============================================================
+   SCROLLBAR MODAL
+   ============================================================ */
+
+.modal-enter::-webkit-scrollbar,
+.modal-enter *::-webkit-scrollbar {
+  width: 6px;
+}
+
+
+.modal-enter::-webkit-scrollbar-track,
+.modal-enter *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.modal-enter::-webkit-scrollbar-thumb,
+.modal-enter *::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+}
+
+
+/* ============================================================
+   ACCESSIBILITÉ
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal,
+  .modal-enter,
+  .animate-fade-in,
+  .animate-pulse-slow {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+  #aide {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+}
+
+
+@media (max-width: 380px) {
+
+  #aide {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+}
+</style>

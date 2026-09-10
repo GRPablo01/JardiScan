@@ -1,0 +1,4427 @@
+<!-- <!-- ============================================================
+     🌿 JARDISCAN — WELCOME / LANDING PAGE
+     
+     • Page publique avant connexion
+     • Angular 20 Standalone
+     • Tailwind CSS
+     • ThemeService conservé
+     • Responsive Mobile / Tablet / Desktop
+     • UI/UX premium
+     • Sections supplémentaires
+     • Images intégrées
+     • Modal ticket fonctionnelle
+     ============================================================ --
+
+     <div
+     class="min-h-screen overflow-x-hidden"
+     [ngStyle]="{
+       background: themeService.Background1,
+       color: themeService.TextPrincipal
+     }"
+   >
+   
+     <!-- ============================================================
+          HEADER
+          ============================================================ --
+   
+     <header
+       class="
+         sticky top-0 z-50
+         border-b backdrop-blur-2xl
+       "
+       [ngStyle]="{
+         background: themeService.GlassBackground,
+         borderColor: themeService.Border1
+       }"
+     >
+   
+       <div
+         class="
+           mx-auto flex min-h-[74px] w-full
+           items-center justify-between gap-4
+           px-4 sm:px-6 lg:px-10 xl:px-14
+         "
+       >
+   
+         <!-- LOGO --
+   
+         <a
+           href="#welcome"
+           aria-label="Retour à l'accueil JardiScan"
+           class="group flex shrink-0 items-center gap-3"
+         >
+   
+           <div
+             class="
+               relative flex h-11 w-11
+               items-center justify-center
+               overflow-hidden rounded-2xl
+               shadow-lg transition duration-300
+               group-hover:scale-105
+             "
+             [ngStyle]="{
+               background: themeService.Primary,
+               boxShadow: themeService.BoxShadowPrimary
+             }"
+           >
+             <span class="text-xl">🌿</span>
+   
+             <span
+               class="
+                 absolute inset-0
+                 -translate-x-full
+                 bg-white/20
+                 transition duration-500
+                 group-hover:translate-x-0
+               "
+             ></span>
+           </div>
+   
+           <div class="hidden sm:block">
+   
+             <p
+               class="text-lg font-black tracking-tight"
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               JardiScan
+             </p>
+   
+             <p
+               class="text-[11px] font-medium"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Explorez • Identifiez • Apprenez
+             </p>
+   
+           </div>
+   
+         </a>
+   
+   
+         <!-- NAVIGATION --
+   
+         <nav class="hidden items-center gap-1 lg:flex">
+   
+           <a
+             href="#welcome"
+             class="rounded-xl px-3 py-2.5 text-sm font-semibold transition hover:bg-white/5"
+             [ngStyle]="{
+               color: themeService.TextSecondaire
+             }"
+           >
+             Accueil
+           </a>
+   
+           <a
+             href="#univers"
+             class="rounded-xl px-3 py-2.5 text-sm font-semibold transition hover:bg-white/5"
+             [ngStyle]="{
+               color: themeService.TextSecondaire
+             }"
+           >
+             L'univers
+           </a>
+   
+           <a
+             href="#fonctionnalites"
+             class="rounded-xl px-3 py-2.5 text-sm font-semibold transition hover:bg-white/5"
+             [ngStyle]="{
+               color: themeService.TextSecondaire
+             }"
+           >
+             Fonctionnalités
+           </a>
+   
+           <a
+             href="#parcours"
+             class="rounded-xl px-3 py-2.5 text-sm font-semibold transition hover:bg-white/5"
+             [ngStyle]="{
+               color: themeService.TextSecondaire
+             }"
+           >
+             Parcours
+           </a>
+   
+           <a
+             href="#roles"
+             class="rounded-xl px-3 py-2.5 text-sm font-semibold transition hover:bg-white/5"
+             [ngStyle]="{
+               color: themeService.TextSecondaire
+             }"
+           >
+             Rôles
+           </a>
+   
+           <a
+             href="#faq"
+             class="rounded-xl px-3 py-2.5 text-sm font-semibold transition hover:bg-white/5"
+             [ngStyle]="{
+               color: themeService.TextSecondaire
+             }"
+           >
+             FAQ
+           </a>
+   
+         </nav>
+   
+   
+         <!-- ACTIONS --
+   
+         <div class="flex items-center gap-2">
+   
+           <a
+             routerLink="/login"
+             class="
+               hidden rounded-xl px-4 py-2.5
+               text-sm font-bold transition
+               hover:bg-white/5 sm:block
+             "
+             [ngStyle]="{
+               color: themeService.TextSecondaire
+             }"
+           >
+             Se connecter
+           </a>
+   
+           <a
+             routerLink="/register"
+             class="
+               group relative overflow-hidden
+               rounded-xl px-4 py-2.5
+               text-sm font-black
+               shadow-lg transition duration-300
+               hover:-translate-y-0.5
+             "
+             [ngStyle]="{
+               background: themeService.Primary,
+               color: themeService.TextOnPrimary,
+               boxShadow: themeService.BoxShadowPrimary
+             }"
+           >
+   
+             <span class="relative z-10">
+   
+               <span class="hidden sm:inline">
+                 Commencer l'aventure
+               </span>
+   
+               <span class="sm:hidden">
+                 Commencer
+               </span>
+   
+             </span>
+   
+             <span
+               class="
+                 absolute inset-0
+                 -translate-x-full
+                 bg-white/20
+                 transition duration-500
+                 group-hover:translate-x-0
+               "
+             ></span>
+   
+           </a>
+   
+         </div>
+   
+       </div>
+   
+     </header>
+   
+   
+     <!-- ============================================================
+          MAIN
+          ============================================================ --
+   
+     <main>
+   
+   
+       <!-- ============================================================
+            HERO
+            ============================================================ --
+   
+       <section
+         id="welcome"
+         class="
+           relative isolate overflow-hidden
+           px-4 py-14
+           sm:px-6 sm:py-20
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+         [ngStyle]="{
+           background: themeService.BackgroundHero
+         }"
+       >
+   
+         <!-- DECORATIONS --
+   
+         <div
+           class="
+             pointer-events-none absolute
+             -left-40 -top-40
+             h-96 w-96
+             rounded-full
+             opacity-20 blur-3xl
+           "
+           [ngStyle]="{
+             background: themeService.Primary
+           }"
+         ></div>
+   
+         <div
+           class="
+             pointer-events-none absolute
+             -bottom-40 -right-40
+             h-96 w-96
+             rounded-full
+             opacity-20 blur-3xl
+           "
+           [ngStyle]="{
+             background: themeService.Accent
+           }"
+         ></div>
+   
+   
+         <div
+           class="
+             relative mx-auto grid
+             w-full max-w-[1500px]
+             items-center gap-12
+             lg:grid-cols-[0.9fr_1.1fr]
+             xl:gap-20
+           "
+         >
+   
+           <!-- CONTENT --
+   
+           <div class="relative z-10">
+   
+             <div
+               class="
+                 mb-6 inline-flex
+                 items-center gap-2
+                 rounded-full border
+                 px-3 py-2
+                 text-xs font-bold
+                 shadow-sm backdrop-blur-md
+               "
+               [ngStyle]="{
+                 background: themeService.GlassBackground,
+                 borderColor: themeService.BorderPrimary,
+                 color: themeService.TextPrincipal
+               }"
+             >
+   
+               <span
+                 class="h-2 w-2 animate-pulse rounded-full"
+                 [ngStyle]="{
+                   background: themeService.Primary
+                 }"
+               ></span>
+   
+               Bienvenue dans votre aventure botanique
+   
+             </div>
+   
+   
+             <h1
+               class="
+                 max-w-4xl
+                 text-4xl font-black
+                 leading-[1.02] tracking-tight
+                 sm:text-5xl
+                 lg:text-6xl
+                 xl:text-7xl
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Découvrez le monde
+   
+               <span
+                 class="block"
+                 [ngStyle]="{
+                   color: themeService.Primary
+                 }"
+               >
+                 végétal autrement.
+               </span>
+             </h1>
+   
+   
+             <p
+               class="
+                 mt-6 max-w-2xl
+                 text-base leading-7
+                 sm:text-lg sm:leading-8
+               "
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               JardiScan vous accompagne pour découvrir,
+               identifier et comprendre les plantes qui vous
+               entourent grâce à une expérience moderne,
+               simple et accessible.
+             </p>
+   
+   
+             <!-- CTA --
+   
+             <div
+               class="
+                 mt-8 flex flex-col gap-3
+                 sm:flex-row sm:flex-wrap
+               "
+             >
+   
+               <a
+                 routerLink="/register"
+                 class="
+                   group inline-flex
+                   items-center justify-center
+                   gap-2 rounded-2xl
+                   px-6 py-4
+                   text-sm font-black
+                   shadow-xl transition
+                   hover:-translate-y-1
+                 "
+                 [ngStyle]="{
+                   background: themeService.Primary,
+                   color: themeService.TextOnPrimary,
+                   boxShadow: themeService.BoxShadowPrimary
+                 }"
+               >
+                 Créer mon compte
+   
+                 <span
+                   class="transition group-hover:translate-x-1"
+                 >
+                   →
+                 </span>
+   
+               </a>
+   
+   
+               <a
+                 routerLink="/login"
+                 class="
+                   inline-flex
+                   items-center justify-center
+                   rounded-2xl border
+                   px-6 py-4
+                   text-sm font-bold
+                   backdrop-blur-md
+                   transition hover:-translate-y-1
+                 "
+                 [ngStyle]="{
+                   background: themeService.GlassBackground,
+                   borderColor: themeService.Border1,
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 J'ai déjà un compte
+               </a>
+   
+             </div>
+   
+   
+             <!-- TRUST --
+   
+             <div
+               class="
+                 mt-8 flex flex-wrap
+                 items-center gap-x-6 gap-y-3
+                 text-xs font-semibold
+               "
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+   
+               <span>✓ Interface moderne</span>
+               <span>✓ Expérience accessible</span>
+               <span>✓ Découverte simplifiée</span>
+   
+             </div>
+   
+           </div>
+   
+   
+           <!-- HERO IMAGE --
+   
+           <div
+             class="
+               relative min-h-[420px]
+               sm:min-h-[520px]
+               lg:min-h-[620px]
+             "
+           >
+   
+             <div
+               class="
+                 absolute inset-0
+                 overflow-hidden
+                 rounded-[2rem]
+                 border shadow-2xl
+                 sm:rounded-[2.5rem]
+               "
+               [ngStyle]="{
+                 borderColor: themeService.Border1,
+                 boxShadow: themeService.BoxShadowLarge
+               }"
+             >
+   
+               <img
+                 [src]="themeService.ImageFondWelcome"
+                 alt="Nature et végétation"
+                 class="
+                   h-full w-full
+                   object-cover
+                   transition duration-700
+                   hover:scale-105
+                 "
+               />
+   
+               <div
+                 class="
+                   absolute inset-0
+                   bg-gradient-to-t
+                   from-black/80
+                   via-black/20
+                   to-transparent
+                 "
+               ></div>
+   
+   
+               <div
+                 class="
+                   absolute bottom-7
+                   left-6 right-6
+                   sm:bottom-10 sm:left-10
+                 "
+               >
+   
+                 <span
+                   class="
+                     text-xs font-bold
+                     uppercase tracking-[0.25em]
+                     text-white/60
+                   "
+                 >
+                   JardiScan
+                 </span>
+   
+                 <h2
+                   class="
+                     mt-3 max-w-xl
+                     text-3xl font-black
+                     leading-tight text-white
+                     sm:text-4xl
+                   "
+                 >
+                   Regardez la nature.
+                   Comprenez-la.
+                   Explorez-la.
+                 </h2>
+   
+               </div>
+   
+             </div>
+   
+   
+             <!-- FLOATING CARD --
+   
+             <div
+               class="
+                 absolute -left-3 top-8 z-20
+                 hidden w-60
+                 rounded-2xl border
+                 p-4 shadow-2xl
+                 backdrop-blur-xl
+                 sm:block lg:-left-8
+               "
+               [ngStyle]="{
+                 background: themeService.GlassBackground,
+                 borderColor: themeService.Border1,
+                 boxShadow: themeService.BoxShadowMedium
+               }"
+             >
+   
+               <div class="flex items-center gap-3">
+   
+                 <div
+                   class="
+                     flex h-12 w-12
+                     shrink-0 items-center
+                     justify-center
+                     rounded-xl text-xl
+                   "
+                   [ngStyle]="{
+                     background: themeService.PrimarySoft
+                   }"
+                 >
+                   🔎
+                 </div>
+   
+                 <div>
+   
+                   <p
+                     class="text-xs"
+                     [ngStyle]="{
+                       color: themeService.TextMuted
+                     }"
+                   >
+                     Exploration
+                   </p>
+   
+                   <p
+                     class="text-sm font-black"
+                     [ngStyle]="{
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Identifier une plante
+                   </p>
+   
+                 </div>
+   
+               </div>
+   
+             </div>
+   
+   
+             <!-- FLOATING CARD 2 --
+   
+             <div
+               class="
+                 absolute -bottom-5
+                 -right-3 z-20
+                 w-64
+                 rounded-2xl border
+                 p-4 shadow-2xl
+                 backdrop-blur-xl
+                 sm:-right-5 lg:-right-8
+               "
+               [ngStyle]="{
+                 background: themeService.GlassBackground,
+                 borderColor: themeService.Border1,
+                 boxShadow: themeService.BoxShadowLarge
+               }"
+             >
+   
+               <div class="flex items-start gap-3">
+   
+                 <div
+                   class="
+                     flex h-12 w-12
+                     shrink-0 items-center
+                     justify-center
+                     rounded-xl text-xl
+                   "
+                   [ngStyle]="{
+                     background: themeService.PrimarySoft
+                   }"
+                 >
+                   🌱
+                 </div>
+   
+                 <div>
+   
+                   <p
+                     class="text-xs"
+                     [ngStyle]="{
+                       color: themeService.TextMuted
+                     }"
+                   >
+                     Votre prochaine découverte
+                   </p>
+   
+                   <p
+                     class="mt-1 text-sm font-black"
+                     [ngStyle]="{
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Commencez votre exploration
+                   </p>
+   
+                   <div
+                     class="
+                       mt-3 h-1.5
+                       overflow-hidden rounded-full
+                     "
+                     [ngStyle]="{
+                       background: themeService.Border1
+                     }"
+                   >
+   
+                     <div
+                       class="
+                         h-full w-3/4
+                         rounded-full
+                       "
+                       [ngStyle]="{
+                         background: themeService.Primary
+                       }"
+                     ></div>
+   
+                   </div>
+   
+                 </div>
+   
+               </div>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            STATISTIQUES / PROMESSE
+            ============================================================ --
+   
+       <section
+         class="
+           px-4 py-10
+           sm:px-6
+           lg:px-10
+           xl:px-14
+         "
+       >
+   
+         <div
+           class="
+             mx-auto grid
+             w-full max-w-[1400px]
+             overflow-hidden
+             rounded-[2rem]
+             border
+             sm:grid-cols-2
+             lg:grid-cols-4
+           "
+           [ngStyle]="{
+             background: themeService.Card,
+             borderColor: themeService.Border1
+           }"
+         >
+   
+           <div
+             class="
+               border-b p-6
+               sm:border-r
+               lg:border-b-0
+             "
+             [ngStyle]="{
+               borderColor: themeService.Border1
+             }"
+           >
+   
+             <div class="text-3xl">🌿</div>
+   
+             <p
+               class="mt-4 text-2xl font-black"
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Découvrir
+             </p>
+   
+             <p
+               class="mt-2 text-sm leading-6"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Explorez le monde végétal autour de vous.
+             </p>
+   
+           </div>
+   
+   
+           <div
+             class="
+               border-b p-6
+               lg:border-b-0 lg:border-r
+             "
+             [ngStyle]="{
+               borderColor: themeService.Border1
+             }"
+           >
+   
+             <div class="text-3xl">🔎</div>
+   
+             <p
+               class="mt-4 text-2xl font-black"
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Identifier
+             </p>
+   
+             <p
+               class="mt-2 text-sm leading-6"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Apprenez à reconnaître vos découvertes.
+             </p>
+   
+           </div>
+   
+   
+           <div
+             class="
+               border-b p-6
+               sm:border-r
+               lg:border-b-0
+             "
+             [ngStyle]="{
+               borderColor: themeService.Border1
+             }"
+           >
+   
+             <div class="text-3xl">📚</div>
+   
+             <p
+               class="mt-4 text-2xl font-black"
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Apprendre
+             </p>
+   
+             <p
+               class="mt-2 text-sm leading-6"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Comprenez mieux les plantes rencontrées.
+             </p>
+   
+           </div>
+   
+   
+           <div class="p-6">
+   
+             <div class="text-3xl">✨</div>
+   
+             <p
+               class="mt-4 text-2xl font-black"
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Partager
+             </p>
+   
+             <p
+               class="mt-2 text-sm leading-6"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Participez progressivement à l'univers JardiScan.
+             </p>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            UNIVERS
+            ============================================================ --
+   
+       <section
+         id="univers"
+         class="
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+       >
+   
+         <div
+           class="
+             mx-auto grid
+             w-full max-w-[1400px]
+             gap-12
+             lg:grid-cols-2
+             lg:items-center
+           "
+         >
+   
+           <div>
+   
+             <span
+               class="
+                 text-sm font-black
+                 uppercase tracking-[0.2em]
+               "
+               [ngStyle]="{
+                 color: themeService.Primary
+               }"
+             >
+               🌱 L'univers JardiScan
+             </span>
+   
+             <h2
+               class="
+                 mt-4
+                 text-3xl font-black
+                 tracking-tight
+                 sm:text-4xl
+                 lg:text-5xl
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Une application pensée
+               pour observer autrement.
+             </h2>
+   
+             <p
+               class="
+                 mt-6
+                 text-base leading-8
+                 sm:text-lg
+               "
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               JardiScan rassemble plusieurs outils autour
+               d'une même idée : rendre la découverte des
+               plantes plus simple, intuitive et agréable.
+             </p>
+   
+             <p
+               class="mt-4 text-base leading-8"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Votre espace évolue ensuite selon votre compte,
+               votre rôle et les autorisations qui vous sont
+               attribuées.
+             </p>
+   
+   
+             <div class="mt-8 grid gap-3 sm:grid-cols-2">
+   
+               <div
+                 class="rounded-2xl border p-4"
+                 [ngStyle]="{
+                   background: themeService.Card,
+                   borderColor: themeService.Border1
+                 }"
+               >
+                 <span class="text-2xl">👀</span>
+   
+                 <p
+                   class="mt-3 font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Observer
+                 </p>
+   
+                 <p
+                   class="mt-1 text-sm"
+                   [ngStyle]="{
+                     color: themeService.TextMuted
+                   }"
+                 >
+                   Prenez le temps de regarder votre environnement.
+                 </p>
+   
+               </div>
+   
+   
+               <div
+                 class="rounded-2xl border p-4"
+                 [ngStyle]="{
+                   background: themeService.Card,
+                   borderColor: themeService.Border1
+                 }"
+               >
+                 <span class="text-2xl">🧠</span>
+   
+                 <p
+                   class="mt-3 font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Comprendre
+                 </p>
+   
+                 <p
+                   class="mt-1 text-sm"
+                   [ngStyle]="{
+                     color: themeService.TextMuted
+                   }"
+                 >
+                   Transformez chaque découverte en connaissance.
+                 </p>
+   
+               </div>
+   
+             </div>
+   
+           </div>
+   
+   
+           <!-- VISUAL --
+   
+           <div
+             class="
+               relative
+               min-h-[420px]
+               overflow-hidden
+               rounded-[2rem]
+               border
+             "
+             [ngStyle]="{
+               background: themeService.Card,
+               borderColor: themeService.Border1
+             }"
+           >
+   
+             <img
+               [src]="themeService.ImageFondWelcome"
+               alt="Découverte de la nature avec JardiScan"
+               class="
+                 absolute inset-0
+                 h-full w-full
+                 object-cover
+                 opacity-70
+               "
+             />
+   
+             <div
+               class="
+                 absolute inset-0
+                 bg-gradient-to-br
+                 from-black/10
+                 via-black/20
+                 to-black/80
+               "
+             ></div>
+   
+   
+             <div
+               class="
+                 absolute
+                 left-5 right-5
+                 top-5
+                 grid grid-cols-2
+                 gap-3
+                 sm:left-8 sm:right-8 sm:top-8
+               "
+             >
+   
+               <div
+                 class="
+                   rounded-2xl
+                   border
+                   p-4
+                   backdrop-blur-xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.GlassBackground,
+                   borderColor: themeService.GlassBorder
+                 }"
+               >
+   
+                 <p class="text-2xl">🌿</p>
+   
+                 <p
+                   class="mt-2 text-sm font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Nature
+                 </p>
+   
+               </div>
+   
+   
+               <div
+                 class="
+                   rounded-2xl
+                   border
+                   p-4
+                   backdrop-blur-xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.GlassBackground,
+                   borderColor: themeService.GlassBorder
+                 }"
+               >
+   
+                 <p class="text-2xl">🔬</p>
+   
+                 <p
+                   class="mt-2 text-sm font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Découverte
+                 </p>
+   
+               </div>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 absolute bottom-6
+                 left-6 right-6
+                 sm:bottom-8 sm:left-8 sm:right-8
+               "
+             >
+   
+               <p
+                 class="text-xs font-bold uppercase tracking-widest text-white/60"
+               >
+                 Explorer différemment
+               </p>
+   
+               <p
+                 class="
+                   mt-2
+                   text-2xl font-black
+                   text-white
+                   sm:text-3xl
+                 "
+               >
+                 Chaque plante peut devenir
+                 une nouvelle découverte.
+               </p>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            FONCTIONNALITÉS
+            ============================================================ --
+   
+       <section
+         id="fonctionnalites"
+         class="
+           relative overflow-hidden
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+         [ngStyle]="{
+           background: themeService.Background2
+         }"
+       >
+   
+         <div
+           class="
+             pointer-events-none absolute
+             -right-32 top-0
+             h-96 w-96
+             rounded-full
+             opacity-10 blur-3xl
+           "
+           [ngStyle]="{
+             background: themeService.Primary
+           }"
+         ></div>
+   
+   
+         <div class="relative mx-auto w-full max-w-[1400px]">
+   
+           <div class="max-w-3xl">
+   
+             <span
+               class="
+                 text-sm font-black
+                 uppercase tracking-[0.2em]
+               "
+               [ngStyle]="{
+                 color: themeService.Primary
+               }"
+             >
+               ✨ Fonctionnalités
+             </span>
+   
+             <h2
+               class="
+                 mt-4
+                 text-3xl font-black
+                 tracking-tight
+                 sm:text-4xl
+                 lg:text-5xl
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Tout un univers autour
+               des plantes.
+             </h2>
+   
+             <p
+               class="mt-5 text-base leading-8 sm:text-lg"
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               Découvrez les différents outils qui peuvent
+               enrichir votre expérience JardiScan.
+             </p>
+   
+           </div>
+   
+   
+           <div
+             class="
+               mt-12 grid gap-5
+               sm:grid-cols-2
+               lg:grid-cols-3
+             "
+           >
+   
+             <!-- CARD 1 --
+   
+             <article
+               class="
+                 group overflow-hidden
+                 rounded-3xl border
+                 transition duration-300
+                 hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="relative h-48 overflow-hidden">
+   
+                 <img
+                   [src]="themeService.ImageFondWelcome"
+                   alt="Scanner une plante"
+                   class="
+                     h-full w-full
+                     object-cover
+                     transition duration-500
+                     group-hover:scale-110
+                   "
+                 />
+   
+                 <div
+                   class="
+                     absolute inset-0
+                     bg-gradient-to-t
+                     from-black/70
+                     to-transparent
+                   "
+                 ></div>
+   
+                 <span
+                   class="
+                     absolute bottom-4 left-4
+                     flex h-12 w-12
+                     items-center justify-center
+                     rounded-xl
+                     text-xl
+                     backdrop-blur-md
+                   "
+                   [ngStyle]="{
+                     background: themeService.PrimarySoft
+                   }"
+                 >
+                   🔎
+                 </span>
+   
+               </div>
+   
+               <div class="p-6">
+   
+                 <h3
+                   class="text-xl font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Scanner une plante
+                 </h3>
+   
+                 <p
+                   class="mt-3 text-sm leading-7"
+                   [ngStyle]="{
+                     color: themeService.TextSecondaire
+                   }"
+                 >
+                   Utilisez votre appareil pour découvrir
+                   les plantes qui vous entourent.
+                 </p>
+   
+               </div>
+   
+             </article>
+   
+   
+             <!-- CARD 2 --
+   
+             <article
+               class="
+                 group overflow-hidden
+                 rounded-3xl border
+                 transition duration-300
+                 hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="relative h-48 overflow-hidden">
+   
+                 <img
+                   [src]="themeService.ImageFondWelcome"
+                   alt="Historique des découvertes"
+                   class="
+                     h-full w-full
+                     object-cover
+                     transition duration-500
+                     group-hover:scale-110
+                   "
+                 />
+   
+                 <div
+                   class="
+                     absolute inset-0
+                     bg-gradient-to-t
+                     from-black/70
+                     to-transparent
+                   "
+                 ></div>
+   
+                 <span
+                   class="
+                     absolute bottom-4 left-4
+                     flex h-12 w-12
+                     items-center justify-center
+                     rounded-xl text-xl
+                   "
+                   [ngStyle]="{
+                     background: themeService.PrimarySoft
+                   }"
+                 >
+                   📚
+                 </span>
+   
+               </div>
+   
+               <div class="p-6">
+   
+                 <h3
+                   class="text-xl font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Vos découvertes
+                 </h3>
+   
+                 <p
+                   class="mt-3 text-sm leading-7"
+                   [ngStyle]="{
+                     color: themeService.TextSecondaire
+                   }"
+                 >
+                   Retrouvez vos découvertes et gardez
+                   une trace de votre exploration.
+                 </p>
+   
+               </div>
+   
+             </article>
+   
+   
+             <!-- CARD 3 --
+   
+             <article
+               class="
+                 group overflow-hidden
+                 rounded-3xl border
+                 transition duration-300
+                 hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="relative h-48 overflow-hidden">
+   
+                 <img
+                   [src]="themeService.ImageFondWelcome"
+                   alt="QR Code"
+                   class="
+                     h-full w-full
+                     object-cover
+                     transition duration-500
+                     group-hover:scale-110
+                   "
+                 />
+   
+                 <div
+                   class="
+                     absolute inset-0
+                     bg-gradient-to-t
+                     from-black/70
+                     to-transparent
+                   "
+                 ></div>
+   
+                 <span
+                   class="
+                     absolute bottom-4 left-4
+                     flex h-12 w-12
+                     items-center justify-center
+                     rounded-xl text-xl
+                   "
+                   [ngStyle]="{
+                     background: themeService.PrimarySoft
+                   }"
+                 >
+                   📱
+                 </span>
+   
+               </div>
+   
+               <div class="p-6">
+   
+                 <h3
+                   class="text-xl font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Scanner un QR Code
+                 </h3>
+   
+                 <p
+                   class="mt-3 text-sm leading-7"
+                   [ngStyle]="{
+                     color: themeService.TextSecondaire
+                   }"
+                 >
+                   Accédez rapidement à certains contenus
+                   grâce au lecteur QR Code.
+                 </p>
+   
+               </div>
+   
+             </article>
+   
+   
+             <!-- CARD 4 --
+   
+             <article
+               class="
+                 rounded-3xl border p-6
+                 transition duration-300
+                 hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div
+                 class="
+                   flex h-14 w-14
+                   items-center justify-center
+                   rounded-2xl text-2xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.PrimarySoft
+                 }"
+               >
+                 🌱
+               </div>
+   
+               <h3
+                 class="mt-6 text-xl font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Comprendre les plantes
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Explorez des informations pour mieux
+                 comprendre le monde végétal.
+               </p>
+   
+             </article>
+   
+   
+             <!-- CARD 5 --
+   
+             <article
+               class="
+                 rounded-3xl border p-6
+                 transition duration-300
+                 hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div
+                 class="
+                   flex h-14 w-14
+                   items-center justify-center
+                   rounded-2xl text-2xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.PrimarySoft
+                 }"
+               >
+                 ♿
+               </div>
+   
+               <h3
+                 class="mt-6 text-xl font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Une expérience accessible
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Une interface pensée pour proposer
+                 une navigation claire et confortable.
+               </p>
+   
+             </article>
+   
+   
+             <!-- CARD 6 --
+   
+             <article
+               class="
+                 rounded-3xl border p-6
+                 transition duration-300
+                 hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div
+                 class="
+                   flex h-14 w-14
+                   items-center justify-center
+                   rounded-2xl text-2xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.PrimarySoft
+                 }"
+               >
+                 🎫
+               </div>
+   
+               <h3
+                 class="mt-6 text-xl font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Assistance par ticket
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Certaines demandes peuvent être adressées
+                 à l'équipe via un système de tickets.
+               </p>
+   
+               <button
+                 type="button"
+                 (click)="openTicketModal()"
+                 class="
+                   mt-6 text-xs font-black
+                   transition hover:opacity-70
+                 "
+                 [ngStyle]="{
+                   color: themeService.Primary
+                 }"
+               >
+                 Voir un exemple →
+               </button>
+   
+             </article>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            POURQUOI JARDISCAN
+            ============================================================ --
+   
+       <section
+         class="
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+       >
+   
+         <div
+           class="
+             mx-auto
+             w-full max-w-[1400px]
+           "
+         >
+   
+           <div class="max-w-3xl">
+   
+             <span
+               class="
+                 text-sm font-black
+                 uppercase tracking-[0.2em]
+               "
+               [ngStyle]="{
+                 color: themeService.Primary
+               }"
+             >
+               💚 Pourquoi JardiScan ?
+             </span>
+   
+             <h2
+               class="
+                 mt-4
+                 text-3xl font-black
+                 sm:text-4xl lg:text-5xl
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Plus qu'une application,
+               une expérience.
+             </h2>
+   
+           </div>
+   
+   
+           <div
+             class="
+               mt-12 grid gap-5
+               md:grid-cols-2
+               lg:grid-cols-4
+             "
+           >
+   
+             <div
+               class="
+                 rounded-3xl border p-6
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="text-3xl">⚡</div>
+   
+               <h3
+                 class="mt-6 text-lg font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Simple
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Une expérience pensée pour aller
+                 rapidement à l'essentiel.
+               </p>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 rounded-3xl border p-6
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="text-3xl">🎯</div>
+   
+               <h3
+                 class="mt-6 text-lg font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Intuitive
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Les informations sont organisées
+                 pour faciliter votre navigation.
+               </p>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 rounded-3xl border p-6
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="text-3xl">🌍</div>
+   
+               <h3
+                 class="mt-6 text-lg font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Évolutive
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Votre espace peut évoluer selon
+                 votre rôle et vos autorisations.
+               </p>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 rounded-3xl border p-6
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="text-3xl">💡</div>
+   
+               <h3
+                 class="mt-6 text-lg font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Accessible
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Une attention particulière portée
+                 à la lisibilité et au confort.
+               </p>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            PARCOURS
+            ============================================================ --
+   
+       <section
+         id="parcours"
+         class="
+           relative overflow-hidden
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+         [ngStyle]="{
+           background: themeService.Background2
+         }"
+       >
+   
+         <div class="mx-auto w-full max-w-[1400px]">
+   
+           <div class="mx-auto max-w-3xl text-center">
+   
+             <span
+               class="
+                 text-sm font-black
+                 uppercase tracking-[0.2em]
+               "
+               [ngStyle]="{
+                 color: themeService.Primary
+               }"
+             >
+               🚀 Votre parcours
+             </span>
+   
+             <h2
+               class="
+                 mt-4
+                 text-3xl font-black
+                 sm:text-4xl lg:text-5xl
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Commencer est simple.
+             </h2>
+   
+             <p
+               class="mt-5 text-base leading-8 sm:text-lg"
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               Quelques étapes suffisent pour commencer
+               votre aventure avec JardiScan.
+             </p>
+   
+           </div>
+   
+   
+           <div
+             class="
+               relative mt-14
+               grid gap-8
+               md:grid-cols-3
+             "
+           >
+   
+             <div
+               class="
+                 absolute left-[16%]
+                 right-[16%] top-12
+                 hidden h-px md:block
+               "
+               [ngStyle]="{
+                 background: themeService.BorderPrimary
+               }"
+             ></div>
+   
+   
+             <!-- STEP --
+   
+             <div class="relative text-center">
+   
+               <div
+                 class="
+                   relative mx-auto
+                   flex h-24 w-24
+                   items-center justify-center
+                   rounded-full border-4
+                   text-3xl shadow-xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.Card,
+                   borderColor: themeService.Primary
+                 }"
+               >
+                 👤
+               </div>
+   
+               <p
+                 class="
+                   mt-6 text-xs font-black
+                   uppercase tracking-widest
+                 "
+                 [ngStyle]="{
+                   color: themeService.Primary
+                 }"
+               >
+                 Étape 01
+               </p>
+   
+               <h3
+                 class="mt-2 text-xl font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Créez votre compte
+               </h3>
+   
+               <p
+                 class="mx-auto mt-3 max-w-sm text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Inscrivez-vous pour créer votre espace personnel.
+               </p>
+   
+             </div>
+   
+   
+             <div class="relative text-center">
+   
+               <div
+                 class="
+                   relative mx-auto
+                   flex h-24 w-24
+                   items-center justify-center
+                   rounded-full border-4
+                   text-3xl shadow-xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.Card,
+                   borderColor: themeService.Primary
+                 }"
+               >
+                 🌿
+               </div>
+   
+               <p
+                 class="
+                   mt-6 text-xs font-black
+                   uppercase tracking-widest
+                 "
+                 [ngStyle]="{
+                   color: themeService.Primary
+                 }"
+               >
+                 Étape 02
+               </p>
+   
+               <h3
+                 class="mt-2 text-xl font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Explorez
+               </h3>
+   
+               <p
+                 class="mx-auto mt-3 max-w-sm text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Découvrez les fonctionnalités disponibles
+                 dans votre espace.
+               </p>
+   
+             </div>
+   
+   
+             <div class="relative text-center">
+   
+               <div
+                 class="
+                   relative mx-auto
+                   flex h-24 w-24
+                   items-center justify-center
+                   rounded-full border-4
+                   text-3xl shadow-xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.Card,
+                   borderColor: themeService.Primary
+                 }"
+               >
+                 ⭐
+               </div>
+   
+               <p
+                 class="
+                   mt-6 text-xs font-black
+                   uppercase tracking-widest
+                 "
+                 [ngStyle]="{
+                   color: themeService.Primary
+                 }"
+               >
+                 Étape 03
+               </p>
+   
+               <h3
+                 class="mt-2 text-xl font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Construisez votre aventure
+               </h3>
+   
+               <p
+                 class="mx-auto mt-3 max-w-sm text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Apprenez, explorez et participez progressivement.
+               </p>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            GALERIE VISUELLE
+            ============================================================ --
+   
+       <section
+         class="
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+       >
+   
+         <div class="mx-auto w-full max-w-[1400px]">
+   
+           <div
+             class="
+               grid gap-5
+               md:grid-cols-2
+               lg:grid-cols-4
+             "
+           >
+   
+             <div
+               class="
+                 relative min-h-[360px]
+                 overflow-hidden
+                 rounded-[2rem]
+                 border
+                 md:row-span-2
+                 lg:min-h-[600px]
+               "
+               [ngStyle]="{
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <img
+                 [src]="themeService.ImageFondWelcome"
+                 alt="Nature"
+                 class="
+                   absolute inset-0
+                   h-full w-full
+                   object-cover
+                   transition duration-700
+                   hover:scale-105
+                 "
+               />
+   
+               <div
+                 class="
+                   absolute inset-0
+                   bg-gradient-to-t
+                   from-black/80
+                   to-transparent
+                 "
+               ></div>
+   
+               <div
+                 class="
+                   absolute bottom-6
+                   left-6 right-6
+                 "
+               >
+   
+                 <p
+                   class="
+                     text-xs font-bold
+                     uppercase tracking-widest
+                     text-white/60
+                   "
+                 >
+                   Observer
+                 </p>
+   
+                 <h3
+                   class="
+                     mt-2
+                     text-2xl font-black
+                     text-white
+                   "
+                 >
+                   La nature est votre terrain d'exploration.
+                 </h3>
+   
+               </div>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 relative min-h-[280px]
+                 overflow-hidden
+                 rounded-[2rem]
+                 border
+               "
+               [ngStyle]="{
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <img
+                 [src]="themeService.ImageFondWelcome"
+                 alt="Plante"
+                 class="
+                   h-full w-full
+                   object-cover
+                   transition duration-700
+                   hover:scale-105
+                 "
+               />
+   
+               <div
+                 class="
+                   absolute inset-0
+                   bg-gradient-to-t
+                   from-black/70
+                   to-transparent
+                 "
+               ></div>
+   
+               <p
+                 class="
+                   absolute bottom-5
+                   left-5
+                   text-lg font-black
+                   text-white
+                 "
+               >
+                 Identifier
+               </p>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 relative min-h-[280px]
+                 overflow-hidden
+                 rounded-[2rem]
+                 border
+               "
+               [ngStyle]="{
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <img
+                 [src]="themeService.ImageFondWelcome"
+                 alt="Exploration botanique"
+                 class="
+                   h-full w-full
+                   object-cover
+                   transition duration-700
+                   hover:scale-105
+                 "
+               />
+   
+               <div
+                 class="
+                   absolute inset-0
+                   bg-gradient-to-t
+                   from-black/70
+                   to-transparent
+                 "
+               ></div>
+   
+               <p
+                 class="
+                   absolute bottom-5
+                   left-5
+                   text-lg font-black
+                   text-white
+                 "
+               >
+                 Explorer
+               </p>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 relative min-h-[280px]
+                 overflow-hidden
+                 rounded-[2rem]
+                 border
+                 md:col-span-2
+               "
+               [ngStyle]="{
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <img
+                 [src]="themeService.ImageFondWelcome"
+                 alt="Découverte végétale"
+                 class="
+                   h-full w-full
+                   object-cover
+                   transition duration-700
+                   hover:scale-105
+                 "
+               />
+   
+               <div
+                 class="
+                   absolute inset-0
+                   bg-gradient-to-r
+                   from-black/70
+                   to-transparent
+                 "
+               ></div>
+   
+               <div
+                 class="
+                   absolute left-6
+                   top-1/2
+                   max-w-sm
+                   -translate-y-1/2
+                 "
+               >
+   
+                 <p
+                   class="
+                     text-xs font-bold
+                     uppercase tracking-widest
+                     text-white/60
+                   "
+                 >
+                   Apprendre
+                 </p>
+   
+                 <h3
+                   class="
+                     mt-2
+                     text-2xl font-black
+                     text-white
+                   "
+                 >
+                   Chaque découverte devient
+                   une occasion d'apprendre.
+                 </h3>
+   
+               </div>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            ROLES
+            ============================================================ --
+   
+       <section
+         id="roles"
+         class="
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+         [ngStyle]="{
+           background: themeService.Background2
+         }"
+       >
+   
+         <div class="mx-auto w-full max-w-[1400px]">
+   
+           <div
+             class="
+               grid gap-8
+               lg:grid-cols-[0.8fr_1.2fr]
+               lg:items-end
+             "
+           >
+   
+             <div>
+   
+               <span
+                 class="
+                   text-sm font-black
+                   uppercase tracking-[0.2em]
+                 "
+                 [ngStyle]="{
+                   color: themeService.Primary
+                 }"
+               >
+                 👥 Les rôles
+               </span>
+   
+               <h2
+                 class="
+                   mt-4
+                   text-3xl font-black
+                   sm:text-4xl lg:text-5xl
+                 "
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Un espace qui peut
+                 évoluer avec vous.
+               </h2>
+   
+             </div>
+   
+             <p
+               class="text-base leading-8"
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               JardiScan peut proposer plusieurs niveaux
+               d'accès. Le rôle associé à votre compte
+               détermine les fonctionnalités et outils
+               auxquels vous pouvez accéder.
+             </p>
+   
+           </div>
+   
+   
+           <div
+             class="
+               mt-12 grid gap-5
+               sm:grid-cols-2
+               lg:grid-cols-4
+             "
+           >
+   
+             <!-- ROLE --
+   
+             <article
+               class="
+                 rounded-3xl border p-6
+                 transition hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="text-3xl">🌱</div>
+   
+               <h3
+                 class="mt-5 text-lg font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Utilisateur
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Découvre et utilise les fonctionnalités
+                 proposées par l'application.
+               </p>
+   
+             </article>
+   
+   
+             <article
+               class="
+                 rounded-3xl border p-6
+                 transition hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="text-3xl">✍️</div>
+   
+               <h3
+                 class="mt-5 text-lg font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Contributeur
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Peut participer à l'enrichissement
+                 des contenus et informations.
+               </p>
+   
+             </article>
+   
+   
+             <article
+               class="
+                 rounded-3xl border p-6
+                 transition hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="text-3xl">🛡️</div>
+   
+               <h3
+                 class="mt-5 text-lg font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Modérateur
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Peut participer à la gestion et à
+                 la modération de la plateforme.
+               </p>
+   
+             </article>
+   
+   
+             <article
+               class="
+                 rounded-3xl border p-6
+                 transition hover:-translate-y-2
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div class="text-3xl">⚙️</div>
+   
+               <h3
+                 class="mt-5 text-lg font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Administrateur
+               </h3>
+   
+               <p
+                 class="mt-3 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Dispose des outils nécessaires à la
+                 gestion globale de la plateforme.
+               </p>
+   
+             </article>
+   
+           </div>
+   
+   
+           <!-- ROLE REQUEST --
+   
+           <div
+             class="
+               mt-8 flex flex-col gap-5
+               rounded-3xl border p-6
+               sm:flex-row
+               sm:items-center
+               sm:justify-between
+             "
+             [ngStyle]="{
+               background: themeService.GlassBackground,
+               borderColor: themeService.BorderPrimary
+             }"
+           >
+   
+             <div class="flex items-start gap-4">
+   
+               <div class="text-2xl">
+                 💡
+               </div>
+   
+               <div>
+   
+                 <h3
+                   class="font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Besoin d'un autre rôle ?
+                 </h3>
+   
+                 <p
+                   class="mt-1 text-sm leading-6"
+                   [ngStyle]="{
+                     color: themeService.TextSecondaire
+                   }"
+                 >
+                   Une demande de changement de rôle peut
+                   être effectuée via un ticket après connexion.
+                 </p>
+   
+               </div>
+   
+             </div>
+   
+   
+             <button
+               type="button"
+               (click)="openTicketModal()"
+               class="
+                 shrink-0 rounded-xl border
+                 px-4 py-3 text-sm font-black
+                 transition hover:-translate-y-0.5
+               "
+               [ngStyle]="{
+                 borderColor: themeService.BorderPrimary,
+                 color: themeService.Primary
+               }"
+             >
+               Voir comment faire →
+             </button>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            ACCESSIBILITÉ
+            ============================================================ --
+   
+       <section
+         class="
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+       >
+   
+         <div
+           class="
+             mx-auto grid
+             w-full max-w-[1400px]
+             gap-10
+             lg:grid-cols-[1fr_1fr]
+             lg:items-center
+           "
+         >
+   
+           <div>
+   
+             <span
+               class="
+                 text-sm font-black
+                 uppercase tracking-[0.2em]
+               "
+               [ngStyle]="{
+                 color: themeService.Primary
+               }"
+             >
+               ♿ Accessibilité
+             </span>
+   
+             <h2
+               class="
+                 mt-4
+                 text-3xl font-black
+                 sm:text-4xl lg:text-5xl
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Une interface pensée
+               pour être confortable.
+             </h2>
+   
+             <p
+               class="mt-5 text-base leading-8"
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               JardiScan accorde une attention particulière
+               à la lisibilité, à la hiérarchie visuelle et
+               à la simplicité de navigation.
+             </p>
+   
+           </div>
+   
+   
+           <div
+             class="
+               grid gap-4
+               sm:grid-cols-2
+             "
+           >
+   
+             <div
+               class="
+                 rounded-3xl border p-6
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <span class="text-3xl">Aa</span>
+   
+               <h3
+                 class="mt-5 font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Lisibilité
+               </h3>
+   
+               <p
+                 class="mt-2 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Une hiérarchie claire pour faciliter
+                 la lecture des informations.
+               </p>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 rounded-3xl border p-6
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <span class="text-3xl">🎨</span>
+   
+               <h3
+                 class="mt-5 font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Contraste
+               </h3>
+   
+               <p
+                 class="mt-2 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Des éléments visuels conçus pour
+                 rester facilement identifiables.
+               </p>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 rounded-3xl border p-6
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <span class="text-3xl">🧭</span>
+   
+               <h3
+                 class="mt-5 font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Navigation
+               </h3>
+   
+               <p
+                 class="mt-2 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Des parcours simples pour trouver
+                 rapidement les informations.
+               </p>
+   
+             </div>
+   
+   
+             <div
+               class="
+                 rounded-3xl border p-6
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <span class="text-3xl">💚</span>
+   
+               <h3
+                 class="mt-5 font-black"
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Confort
+               </h3>
+   
+               <p
+                 class="mt-2 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Une expérience visuelle agréable
+                 sur différents écrans.
+               </p>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            TICKET / ASSISTANCE
+            ============================================================ --
+   
+       <section
+         id="aide"
+         class="
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+         [ngStyle]="{
+           background: themeService.Background2
+         }"
+       >
+   
+         <div
+           class="
+             mx-auto grid
+             w-full max-w-[1400px]
+             gap-8
+             lg:grid-cols-[1.15fr_0.85fr]
+           "
+         >
+   
+           <div
+             class="
+               relative overflow-hidden
+               rounded-[2rem]
+               border p-7
+               sm:p-10
+             "
+             [ngStyle]="{
+               background: themeService.Card,
+               borderColor: themeService.Border1
+             }"
+           >
+   
+             <div
+               class="
+                 pointer-events-none
+                 absolute -right-20 -top-20
+                 h-56 w-56
+                 rounded-full
+                 opacity-10 blur-3xl
+               "
+               [ngStyle]="{
+                 background: themeService.Primary
+               }"
+             ></div>
+   
+             <div class="relative">
+   
+               <div class="text-4xl">
+                 🎫
+               </div>
+   
+               <h2
+                 class="
+                   mt-5
+                   text-3xl font-black
+                   sm:text-4xl
+                 "
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Une question ?
+               </h2>
+   
+               <p
+                 class="mt-4 max-w-2xl text-base leading-8"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Certaines demandes nécessitent une prise
+                 en charge spécifique. Après connexion,
+                 vous pourrez utiliser le système de tickets
+                 pour contacter l'équipe concernée.
+               </p>
+   
+               <button
+                 type="button"
+                 (click)="openTicketModal()"
+                 class="
+                   mt-7 inline-flex
+                   items-center gap-2
+                   rounded-2xl
+                   px-5 py-3.5
+                   text-sm font-black
+                   shadow-lg
+                   transition hover:-translate-y-1
+                 "
+                 [ngStyle]="{
+                   background: themeService.Primary,
+                   color: themeService.TextOnPrimary,
+                   boxShadow: themeService.BoxShadowPrimary
+                 }"
+               >
+                 Voir un exemple de ticket →
+               </button>
+   
+             </div>
+   
+           </div>
+   
+   
+           <div
+             class="
+               rounded-[2rem]
+               border p-7
+               sm:p-10
+             "
+             [ngStyle]="{
+               background: themeService.Card,
+               borderColor: themeService.Border1
+             }"
+           >
+   
+             <span
+               class="
+                 text-sm font-black
+                 uppercase tracking-widest
+               "
+               [ngStyle]="{
+                 color: themeService.Primary
+               }"
+             >
+               À retenir
+             </span>
+   
+             <div class="mt-7 space-y-6">
+   
+               <div class="flex gap-4">
+   
+                 <span
+                   class="text-xl font-black"
+                   [ngStyle]="{
+                     color: themeService.Primary
+                   }"
+                 >
+                   01
+                 </span>
+   
+                 <div>
+   
+                   <h3
+                     class="font-black"
+                     [ngStyle]="{
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Connectez-vous
+                   </h3>
+   
+                   <p
+                     class="mt-1 text-sm leading-6"
+                     [ngStyle]="{
+                       color: themeService.TextSecondaire
+                     }"
+                   >
+                     Les demandes liées à votre compte
+                     nécessitent une connexion.
+                   </p>
+   
+                 </div>
+   
+               </div>
+   
+   
+               <div class="flex gap-4">
+   
+                 <span
+                   class="text-xl font-black"
+                   [ngStyle]="{
+                     color: themeService.Primary
+                   }"
+                 >
+                   02
+                 </span>
+   
+                 <div>
+   
+                   <h3
+                     class="font-black"
+                     [ngStyle]="{
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Expliquez votre demande
+                   </h3>
+   
+                   <p
+                     class="mt-1 text-sm leading-6"
+                     [ngStyle]="{
+                       color: themeService.TextSecondaire
+                     }"
+                   >
+                     Donnez un titre et une description
+                     suffisamment précise.
+                   </p>
+   
+                 </div>
+   
+               </div>
+   
+   
+               <div class="flex gap-4">
+   
+                 <span
+                   class="text-xl font-black"
+                   [ngStyle]="{
+                     color: themeService.Primary
+                   }"
+                 >
+                   03
+                 </span>
+   
+                 <div>
+   
+                   <h3
+                     class="font-black"
+                     [ngStyle]="{
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Envoyez votre ticket
+                   </h3>
+   
+                   <p
+                     class="mt-1 text-sm leading-6"
+                     [ngStyle]="{
+                       color: themeService.TextSecondaire
+                     }"
+                   >
+                     L'équipe concernée pourra traiter
+                     votre demande.
+                   </p>
+   
+                 </div>
+   
+               </div>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            FAQ
+            ============================================================ --
+   
+       <section
+         id="faq"
+         class="
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+       >
+   
+         <div
+           class="
+             mx-auto
+             w-full max-w-[1000px]
+           "
+         >
+   
+           <div class="text-center">
+   
+             <span
+               class="
+                 text-sm font-black
+                 uppercase tracking-[0.2em]
+               "
+               [ngStyle]="{
+                 color: themeService.Primary
+               }"
+             >
+               ❓ FAQ
+             </span>
+   
+             <h2
+               class="
+                 mt-4
+                 text-3xl font-black
+                 sm:text-4xl lg:text-5xl
+               "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Les questions fréquentes.
+             </h2>
+   
+             <p
+               class="mx-auto mt-5 max-w-2xl text-base leading-8"
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               Quelques réponses pour comprendre
+               rapidement le fonctionnement de JardiScan.
+             </p>
+   
+           </div>
+   
+   
+           <div class="mt-12 space-y-4">
+   
+             <details
+               class="
+                 group rounded-2xl
+                 border p-5
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <summary
+                 class="
+                   flex cursor-pointer
+                   list-none items-center
+                   justify-between gap-4
+                   font-black
+                 "
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+   
+                 <span>
+                   Qu'est-ce que JardiScan ?
+                 </span>
+   
+                 <span
+                   class="
+                     text-xl transition
+                     group-open:rotate-45
+                   "
+                   [ngStyle]="{
+                     color: themeService.Primary
+                   }"
+                 >
+                   +
+                 </span>
+   
+               </summary>
+   
+               <p
+                 class="mt-4 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 JardiScan est une expérience numérique
+                 dédiée à la découverte, l'identification
+                 et la compréhension des plantes.
+               </p>
+   
+             </details>
+   
+   
+             <details
+               class="
+                 group rounded-2xl
+                 border p-5
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <summary
+                 class="
+                   flex cursor-pointer
+                   list-none items-center
+                   justify-between gap-4
+                   font-black
+                 "
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+   
+                 <span>
+                   Dois-je créer un compte ?
+                 </span>
+   
+                 <span
+                   class="
+                     text-xl transition
+                     group-open:rotate-45
+                   "
+                   [ngStyle]="{
+                     color: themeService.Primary
+                   }"
+                 >
+                   +
+                 </span>
+   
+               </summary>
+   
+               <p
+                 class="mt-4 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Pour accéder aux fonctionnalités de votre
+                 espace personnel, vous devez créer un compte
+                 puis vous connecter.
+               </p>
+   
+             </details>
+   
+   
+             <details
+               class="
+                 group rounded-2xl
+                 border p-5
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <summary
+                 class="
+                   flex cursor-pointer
+                   list-none items-center
+                   justify-between gap-4
+                   font-black
+                 "
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+   
+                 <span>
+                   Les rôles sont-ils identiques pour tout le monde ?
+                 </span>
+   
+                 <span
+                   class="
+                     text-xl transition
+                     group-open:rotate-45
+                   "
+                   [ngStyle]="{
+                     color: themeService.Primary
+                   }"
+                 >
+                   +
+                 </span>
+   
+               </summary>
+   
+               <p
+                 class="mt-4 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Non. Les droits disponibles peuvent dépendre
+                 du rôle associé à votre compte.
+               </p>
+   
+             </details>
+   
+   
+             <details
+               class="
+                 group rounded-2xl
+                 border p-5
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <summary
+                 class="
+                   flex cursor-pointer
+                   list-none items-center
+                   justify-between gap-4
+                   font-black
+                 "
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+   
+                 <span>
+                   Comment demander un changement de rôle ?
+                 </span>
+   
+                 <span
+                   class="
+                     text-xl transition
+                     group-open:rotate-45
+                   "
+                   [ngStyle]="{
+                     color: themeService.Primary
+                   }"
+                 >
+                   +
+                 </span>
+   
+               </summary>
+   
+               <p
+                 class="mt-4 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Après connexion, vous pouvez effectuer une
+                 demande via le système de tickets afin que
+                 l'équipe concernée puisse étudier votre demande.
+               </p>
+   
+             </details>
+   
+   
+             <details
+               class="
+                 group rounded-2xl
+                 border p-5
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <summary
+                 class="
+                   flex cursor-pointer
+                   list-none items-center
+                   justify-between gap-4
+                   font-black
+                 "
+                 [ngStyle]="{
+                   color: themeService.TextPrincipal
+                 }"
+               >
+   
+                 <span>
+                   JardiScan est-il accessible sur mobile ?
+                 </span>
+   
+                 <span
+                   class="
+                     text-xl transition
+                     group-open:rotate-45
+                   "
+                   [ngStyle]="{
+                     color: themeService.Primary
+                   }"
+                 >
+                   +
+                 </span>
+   
+               </summary>
+   
+               <p
+                 class="mt-4 text-sm leading-7"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Oui. Cette page est conçue pour s'adapter
+                 aux smartphones, tablettes, ordinateurs
+                 portables et écrans de bureau.
+               </p>
+   
+             </details>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+   
+       <!-- ============================================================
+            FINAL CTA
+            ============================================================ --
+   
+       <section
+         class="
+           px-4 py-20
+           sm:px-6
+           lg:px-10 lg:py-28
+           xl:px-14
+         "
+       >
+   
+         <div
+           class="
+             relative mx-auto
+             max-w-[1400px]
+             overflow-hidden
+             rounded-[2.5rem]
+             border
+             p-8 text-center
+             shadow-2xl
+             sm:p-12
+             lg:p-20
+           "
+           [ngStyle]="{
+             background: themeService.BackgroundHero,
+             borderColor: themeService.BorderPrimary,
+             boxShadow: themeService.BoxShadowLarge
+           }"
+         >
+   
+           <div
+             class="
+               pointer-events-none
+               absolute -left-24 -top-24
+               h-72 w-72
+               rounded-full
+               opacity-20 blur-3xl
+             "
+             [ngStyle]="{
+               background: themeService.Primary
+             }"
+           ></div>
+   
+           <div
+             class="
+               pointer-events-none
+               absolute -bottom-24 -right-24
+               h-72 w-72
+               rounded-full
+               opacity-10 blur-3xl
+             "
+             [ngStyle]="{
+               background: themeService.Accent
+             }"
+           ></div>
+   
+   
+           <div class="relative">
+   
+             <div class="text-5xl">
+               🌿
+             </div>
+   
+             <span
+               class="
+                 mt-6 inline-block
+                 text-xs font-black
+                 uppercase tracking-[0.25em]
+               "
+               [ngStyle]="{
+                 color: themeService.Primary
+               }"
+             >
+               Votre aventure commence ici
+             </span>
+   
+             <h2
+               class="
+                 mx-auto mt-4
+                 max-w-3xl
+                 text-3xl font-black
+                 tracking-tight
+                 sm:text-4xl lg:text-5xl
+             "
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Prêt à découvrir le monde
+               végétal autrement ?
+             </h2>
+   
+             <p
+               class="
+                 mx-auto mt-5
+                 max-w-2xl
+                 text-base leading-8
+               "
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               Créez votre compte et commencez progressivement
+               votre aventure avec JardiScan.
+             </p>
+   
+   
+             <div
+               class="
+                 mt-8 flex
+                 flex-col justify-center
+                 gap-3 sm:flex-row
+               "
+             >
+   
+               <a
+                 routerLink="/register"
+                 class="
+                   inline-flex
+                   items-center
+                   justify-center
+                   gap-2
+                   rounded-2xl
+                   px-7 py-4
+                   text-sm font-black
+                   shadow-xl
+                   transition
+                   hover:-translate-y-1
+                 "
+                 [ngStyle]="{
+                   background: themeService.Primary,
+                   color: themeService.TextOnPrimary,
+                   boxShadow: themeService.BoxShadowPrimary
+                 }"
+               >
+                 Créer mon compte →
+               </a>
+   
+               <a
+                 routerLink="/login"
+                 class="
+                   inline-flex
+                   items-center
+                   justify-center
+                   rounded-2xl
+                   border
+                   px-7 py-4
+                   text-sm font-black
+                   transition
+                   hover:-translate-y-1
+                 "
+                 [ngStyle]="{
+                   background: themeService.GlassBackground,
+                   borderColor: themeService.Border1,
+                   color: themeService.TextPrincipal
+                 }"
+               >
+                 Se connecter
+               </a>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </section>
+   
+     </main>
+   
+   
+     <!-- ============================================================
+          FOOTER
+          ============================================================ --
+   
+     <footer
+       class="
+         border-t
+         px-4 py-12
+         sm:px-6
+         lg:px-10
+         xl:px-14
+       "
+       [ngStyle]="{
+         background: themeService.BackgroundFooter,
+         borderColor: themeService.Border1
+       }"
+     >
+   
+       <div class="mx-auto w-full max-w-[1400px]">
+   
+         <div
+           class="
+             grid gap-10
+             sm:grid-cols-2
+             lg:grid-cols-4
+           "
+         >
+   
+           <!-- BRAND --
+   
+           <div class="lg:col-span-2">
+   
+             <div class="flex items-center gap-3">
+   
+               <div
+                 class="
+                   flex h-11 w-11
+                   items-center justify-center
+                   rounded-2xl text-xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.Primary
+                 }"
+               >
+                 🌿
+               </div>
+   
+               <div>
+   
+                 <p
+                   class="font-black"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   JardiScan
+                 </p>
+   
+                 <p
+                   class="text-xs"
+                   [ngStyle]="{
+                     color: themeService.TextMuted
+                   }"
+                 >
+                   Explorez le monde végétal.
+                 </p>
+   
+               </div>
+   
+             </div>
+   
+             <p
+               class="
+                 mt-5 max-w-md
+                 text-sm leading-7
+               "
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               Une expérience numérique dédiée à la découverte,
+               l'identification et la compréhension des plantes.
+             </p>
+   
+           </div>
+   
+   
+           <!-- DISCOVER --
+   
+           <div>
+   
+             <h3
+               class="text-sm font-black"
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Découvrir
+             </h3>
+   
+             <div class="mt-4 flex flex-col gap-3">
+   
+               <a
+                 href="#welcome"
+                 class="text-sm transition hover:opacity-70"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Accueil
+               </a>
+   
+               <a
+                 href="#univers"
+                 class="text-sm transition hover:opacity-70"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 L'univers
+               </a>
+   
+               <a
+                 href="#fonctionnalites"
+                 class="text-sm transition hover:opacity-70"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Fonctionnalités
+               </a>
+   
+               <a
+                 href="#parcours"
+                 class="text-sm transition hover:opacity-70"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Parcours
+               </a>
+   
+               <a
+                 href="#roles"
+                 class="text-sm transition hover:opacity-70"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Les rôles
+               </a>
+   
+               <a
+                 href="#faq"
+                 class="text-sm transition hover:opacity-70"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 FAQ
+               </a>
+   
+             </div>
+   
+           </div>
+   
+   
+           <!-- ACCESS --
+   
+           <div>
+   
+             <h3
+               class="text-sm font-black"
+               [ngStyle]="{
+                 color: themeService.TextPrincipal
+               }"
+             >
+               Accès
+             </h3>
+   
+             <div class="mt-4 flex flex-col gap-3">
+   
+               <a
+                 routerLink="/login"
+                 class="text-sm transition hover:opacity-70"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Se connecter
+               </a>
+   
+               <a
+                 routerLink="/register"
+                 class="text-sm transition hover:opacity-70"
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Créer un compte
+               </a>
+   
+               <button
+                 type="button"
+                 (click)="openTicketModal()"
+                 class="
+                   w-fit text-left
+                   text-sm transition
+                   hover:opacity-70
+                 "
+                 [ngStyle]="{
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Exemple de ticket
+               </button>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+   
+         <!-- FOOTER BOTTOM --
+  
+         <div
+           class="
+             mt-10 flex flex-col gap-4
+             border-t pt-6
+             sm:flex-row
+             sm:items-center
+             sm:justify-between
+           "
+           [ngStyle]="{
+             borderColor: themeService.Border1
+           }"
+         >
+   
+           <p
+             class="text-xs"
+             [ngStyle]="{
+               color: themeService.TextMuted
+             }"
+           >
+             © {{ currentYear }} JardiScan.
+             Tous droits réservés.
+           </p>
+   
+   
+           <div
+             class="
+               flex flex-wrap
+               gap-x-5 gap-y-2
+             "
+           >
+   
+             <a
+               routerLink="/privacy"
+               class="text-xs transition hover:opacity-70"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Confidentialité
+             </a>
+   
+             <a
+               routerLink="/legal"
+               class="text-xs transition hover:opacity-70"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Mentions légales
+             </a>
+   
+             <a
+               routerLink="/terms"
+               class="text-xs transition hover:opacity-70"
+               [ngStyle]="{
+                 color: themeService.TextMuted
+               }"
+             >
+               Conditions
+             </a>
+   
+           </div>
+   
+         </div>
+   
+       </div>
+   
+     </footer>
+   
+   
+     <!-- ============================================================
+          MODAL — EXEMPLE DE TICKET
+          ============================================================ --
+   
+     @if (ticketModalOpen) {
+   
+       <div
+         class="
+           fixed inset-0 z-[100]
+           flex items-center justify-center
+           overflow-y-auto
+           bg-black/70
+           p-4 backdrop-blur-md
+           sm:p-6
+         "
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="ticket-modal-title"
+         (click)="closeTicketModal()"
+       >
+   
+         <div
+           class="
+             relative my-auto
+             w-full max-w-2xl
+             overflow-hidden
+             rounded-[2rem]
+             border shadow-2xl
+           "
+           [ngStyle]="{
+             background: themeService.Background1,
+             borderColor: themeService.Border1,
+             boxShadow: themeService.BoxShadowLarge
+           }"
+           (click)="$event.stopPropagation()"
+         >
+   
+           <!-- HEADER --
+   
+           <div
+             class="
+               flex items-start
+               justify-between gap-4
+               border-b p-5
+               sm:p-7
+             "
+             [ngStyle]="{
+               borderColor: themeService.Border1
+             }"
+           >
+   
+             <div class="flex items-start gap-4">
+   
+               <div
+                 class="
+                   flex h-12 w-12
+                   shrink-0
+                   items-center justify-center
+                   rounded-2xl text-xl
+                 "
+                 [ngStyle]="{
+                   background: themeService.PrimarySoft
+                 }"
+               >
+                 🎫
+               </div>
+   
+               <div>
+   
+                 <p
+                   id="ticket-modal-title"
+                   class="text-lg font-black sm:text-xl"
+                   [ngStyle]="{
+                     color: themeService.TextPrincipal
+                   }"
+                 >
+                   Exemple de ticket
+                 </p>
+   
+                 <p
+                   class="mt-1 text-sm"
+                   [ngStyle]="{
+                     color: themeService.TextMuted
+                   }"
+                 >
+                   Voici à quoi peut ressembler une demande.
+                 </p>
+   
+               </div>
+   
+             </div>
+   
+   
+             <button
+               type="button"
+               aria-label="Fermer la fenêtre"
+               (click)="closeTicketModal()"
+               class="
+                 flex h-10 w-10
+                 shrink-0 items-center justify-center
+                 rounded-xl text-xl
+                 transition hover:bg-white/10
+               "
+               [ngStyle]="{
+                 color: themeService.TextSecondaire
+               }"
+             >
+               ×
+             </button>
+   
+           </div>
+   
+   
+           <!-- CONTENT --
+   
+           <div class="space-y-6 p-5 sm:p-7">
+   
+             <div
+               class="
+                 overflow-hidden
+                 rounded-3xl border
+               "
+               [ngStyle]="{
+                 background: themeService.Card,
+                 borderColor: themeService.Border1
+               }"
+             >
+   
+               <div
+                 class="
+                   flex flex-col gap-4
+                   border-b p-5
+                   sm:flex-row
+                   sm:items-center
+                   sm:justify-between
+                 "
+                 [ngStyle]="{
+                   borderColor: themeService.Border1
+                 }"
+               >
+   
+                 <div>
+   
+                   <p
+                     class="
+                       text-[11px]
+                       font-bold
+                       uppercase
+                       tracking-widest
+                     "
+                     [ngStyle]="{
+                       color: themeService.TextMuted
+                     }"
+                   >
+                     Sujet du ticket
+                   </p>
+   
+                   <h3
+                     class="
+                       mt-1
+                       text-base font-black
+                       sm:text-lg
+                     "
+                     [ngStyle]="{
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Demande de changement de rôle
+                   </h3>
+   
+                 </div>
+   
+                 <span
+                   class="
+                     w-fit
+                     rounded-full
+                     px-3 py-1.5
+                     text-xs font-black
+                   "
+                   [ngStyle]="{
+                     background: themeService.PrimarySoft,
+                     color: themeService.Primary
+                   }"
+                 >
+                   Exemple
+                 </span>
+   
+               </div>
+   
+   
+               <div class="space-y-5 p-5">
+   
+                 <div>
+   
+                   <p
+                     class="
+                       text-[11px]
+                       font-bold
+                       uppercase
+                       tracking-widest
+                     "
+                     [ngStyle]="{
+                       color: themeService.TextMuted
+                     }"
+                   >
+                     Catégorie
+                   </p>
+   
+                   <div
+                     class="
+                       mt-2
+                       rounded-xl
+                       border
+                       px-4 py-3
+                       text-sm
+                     "
+                     [ngStyle]="{
+                       background: themeService.Background1,
+                       borderColor: themeService.Border1,
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Demande de rôle
+                   </div>
+   
+                 </div>
+   
+   
+                 <div>
+   
+                   <p
+                     class="
+                       text-[11px]
+                       font-bold
+                       uppercase
+                       tracking-widest
+                     "
+                     [ngStyle]="{
+                       color: themeService.TextMuted
+                     }"
+                   >
+                     Titre
+                   </p>
+   
+                   <div
+                     class="
+                       mt-2
+                       rounded-xl
+                       border
+                       px-4 py-3
+                       text-sm
+                     "
+                     [ngStyle]="{
+                       background: themeService.Background1,
+                       borderColor: themeService.Border1,
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Je souhaite devenir contributeur
+                   </div>
+   
+                 </div>
+   
+   
+                 <div>
+   
+                   <p
+                     class="
+                       text-[11px]
+                       font-bold
+                       uppercase
+                       tracking-widest
+                     "
+                     [ngStyle]="{
+                       color: themeService.TextMuted
+                     }"
+                   >
+                     Description
+                   </p>
+   
+                   <div
+                     class="
+                       mt-2
+                       rounded-xl
+                       border
+                       p-4
+                       text-sm leading-7
+                     "
+                     [ngStyle]="{
+                       background: themeService.Background1,
+                       borderColor: themeService.Border1,
+                       color: themeService.TextSecondaire
+                     }"
+                   >
+                     Bonjour, je souhaiterais obtenir le rôle
+                     de contributeur afin de pouvoir participer
+                     à l'enrichissement des informations présentes
+                     sur JardiScan.
+   
+                     <br /><br />
+   
+                     Je souhaite contribuer à la plateforme
+                     et proposer des informations utiles
+                     à la communauté.
+                   </div>
+   
+                 </div>
+   
+   
+                 <div>
+   
+                   <p
+                     class="
+                       text-[11px]
+                       font-bold
+                       uppercase
+                       tracking-widest
+                     "
+                     [ngStyle]="{
+                       color: themeService.TextMuted
+                     }"
+                   >
+                     Pièce jointe
+                   </p>
+   
+                   <div
+                     class="
+                       mt-2
+                       flex items-center gap-3
+                       rounded-xl border
+                       px-4 py-3
+                     "
+                     [ngStyle]="{
+                       background: themeService.Background1,
+                       borderColor: themeService.Border1
+                     }"
+                   >
+   
+                     <span class="text-xl">
+                       📎
+                     </span>
+   
+                     <span
+                       class="text-sm"
+                       [ngStyle]="{
+                         color: themeService.TextSecondaire
+                       }"
+                     >
+                       exemple-image.png
+                     </span>
+   
+                   </div>
+   
+                 </div>
+   
+               </div>
+   
+   
+               <div
+                 class="border-t p-5"
+                 [ngStyle]="{
+                   borderColor: themeService.Border1
+                 }"
+               >
+   
+                 <div class="flex flex-wrap gap-2">
+   
+                   <span
+                     class="
+                       rounded-full
+                       px-3 py-1.5
+                       text-xs font-bold
+                     "
+                     [ngStyle]="{
+                       background: themeService.PrimarySoft,
+                       color: themeService.Primary
+                     }"
+                   >
+                     🕐 En attente
+                   </span>
+   
+                   <span
+                     class="
+                       rounded-full
+                       px-3 py-1.5
+                       text-xs font-bold
+                     "
+                     [ngStyle]="{
+                       background: themeService.Background1,
+                       color: themeService.TextMuted
+                     }"
+                   >
+                     Priorité normale
+                   </span>
+   
+                 </div>
+   
+               </div>
+   
+             </div>
+   
+   
+             <!-- EXPLANATION --
+   
+             <div
+               class="
+                 rounded-2xl
+                 border p-5
+               "
+               [ngStyle]="{
+                 background: themeService.PrimarySoft,
+                 borderColor: themeService.BorderPrimary
+               }"
+             >
+   
+               <div class="flex gap-3">
+   
+                 <span class="text-xl">
+                   💡
+                 </span>
+   
+                 <div>
+   
+                   <h3
+                     class="font-black"
+                     [ngStyle]="{
+                       color: themeService.TextPrincipal
+                     }"
+                   >
+                     Comment bien rédiger votre ticket ?
+                   </h3>
+   
+                   <ul
+                     class="
+                       mt-3 space-y-2
+                       text-sm leading-6
+                     "
+                     [ngStyle]="{
+                       color: themeService.TextSecondaire
+                     }"
+                   >
+   
+                     <li>
+                       ✓ Donnez un titre clair et précis.
+                     </li>
+   
+                     <li>
+                       ✓ Expliquez votre demande avec suffisamment de détails.
+                     </li>
+   
+                     <li>
+                       ✓ Indiquez pourquoi vous souhaitez effectuer cette demande.
+                     </li>
+   
+                     <li>
+                       ✓ Ajoutez une pièce jointe uniquement si elle est utile.
+                     </li>
+   
+                   </ul>
+   
+                 </div>
+   
+               </div>
+   
+             </div>
+   
+   
+             <!-- ACTIONS --
+   
+             <div
+               class="
+                 flex flex-col-reverse gap-3
+                 sm:flex-row
+                 sm:justify-end
+               "
+             >
+   
+               <button
+                 type="button"
+                 (click)="closeTicketModal()"
+                 class="
+                   rounded-xl border
+                   px-5 py-3
+                   text-sm font-bold
+                   transition
+                   hover:bg-white/5
+                 "
+                 [ngStyle]="{
+                   borderColor: themeService.Border1,
+                   color: themeService.TextSecondaire
+                 }"
+               >
+                 Fermer
+               </button>
+   
+               <a
+                 routerLink="/login"
+                 (click)="closeTicketModal()"
+                 class="
+                   rounded-xl
+                   px-5 py-3
+                   text-center
+                   text-sm font-black
+                   shadow-lg
+                   transition
+                   hover:-translate-y-0.5
+                 "
+                 [ngStyle]="{
+                   background: themeService.Primary,
+                   color: themeService.TextOnPrimary
+                 }"
+               >
+                 Se connecter pour faire une demande
+               </a>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+       </div>
+   
+     }
+   
+   </div> -->

@@ -1,0 +1,680 @@
+<!-- ============================================================
+     🐛 JARDISCAN — DEBUG RESPONSIVE COMPACT
+     Tailwind CSS
+     ============================================================ -->
+
+     <div
+     class="
+       fixed
+       top-3
+       right-3
+       z-[999999]
+       w-[250px]
+       rounded-[14px]
+       border
+       border-white/10
+       bg-slate-900/95
+       p-2.5
+       text-slate-50
+       shadow-[0_15px_40px_rgba(0,0,0,0.45)]
+       backdrop-blur-xl
+   
+       max-[639px]:top-2
+       max-[639px]:right-2
+       max-[639px]:left-2
+       max-[639px]:w-auto
+       max-[639px]:rounded-xl
+       max-[639px]:p-2
+     "
+   >
+   
+     <!-- ============================================================
+          HEADER
+          ============================================================ -->
+   
+     <div class="mb-2 flex items-center justify-between">
+   
+       <div class="flex items-center gap-1.5">
+   
+         <!-- Icône -->
+         <span
+           class="
+             flex
+             h-7
+             w-7
+             items-center
+             justify-center
+             rounded-lg
+             bg-rose-600/15
+             text-sm
+           "
+         >
+           🐛
+         </span>
+   
+         <!-- Titre -->
+         <div
+           class="
+             text-[11px]
+             font-extrabold
+             tracking-tight
+           "
+         >
+           Debug Responsive
+         </div>
+   
+       </div>
+   
+       <!-- LIVE -->
+       <div
+         class="
+           flex
+           items-center
+           gap-1
+           rounded-full
+           bg-green-500/10
+           px-1.5
+           py-1
+           text-[7px]
+           font-extrabold
+           uppercase
+           tracking-[0.5px]
+           text-green-400
+         "
+       >
+         <span
+           class="
+             h-1
+             w-1
+             rounded-full
+             bg-green-500
+             shadow-[0_0_5px_#22c55e]
+           "
+         ></span>
+   
+         LIVE
+       </div>
+   
+     </div>
+   
+   
+     <!-- ============================================================
+          TYPE D'ÉCRAN
+          ============================================================ -->
+   
+     <div
+       class="
+         mb-2
+         flex
+         items-center
+         gap-2
+         rounded-xl
+         border
+         border-white/[0.08]
+         bg-gradient-to-br
+         from-rose-600/[0.16]
+         to-blue-600/[0.12]
+         p-2.5
+         max-[639px]:p-2
+       "
+     >
+   
+       <!-- Emoji -->
+       <div class="text-[20px]">
+         {{ typeEcran.split(' ')[0] }}
+       </div>
+   
+       <!-- Informations -->
+       <div>
+   
+         <div
+           class="
+             text-sm
+             font-black
+             tracking-tight
+             max-[639px]:text-[13px]
+           "
+         >
+           {{ typeEcran.substring(typeEcran.indexOf(' ') + 1) }}
+         </div>
+   
+         <div
+           class="
+             mt-0.5
+             text-[8px]
+             text-slate-400
+           "
+         >
+           {{ breakpoint }}
+         </div>
+   
+       </div>
+   
+     </div>
+   
+   
+     <!-- ============================================================
+          INFORMATIONS
+          ============================================================ -->
+   
+     <div
+       class="
+         mb-2
+         grid
+         grid-cols-2
+         gap-1.5
+       "
+     >
+   
+       <!-- LARGEUR -->
+       <div
+         class="
+           rounded-lg
+           border
+           border-white/[0.06]
+           bg-white/[0.045]
+           p-2
+         "
+       >
+   
+         <div class="mb-1 text-[11px]">
+           ↔️
+         </div>
+   
+         <div
+           class="
+             text-[8px]
+             font-semibold
+             text-slate-400
+           "
+         >
+           Largeur
+         </div>
+   
+         <div
+           class="
+             mt-0.5
+             text-sm
+             font-black
+             tracking-tight
+           "
+         >
+           {{ largeur }}
+   
+           <span
+             class="
+               ml-0.5
+               text-[8px]
+               font-semibold
+               text-slate-500
+             "
+           >
+             px
+           </span>
+         </div>
+   
+       </div>
+   
+   
+       <!-- HAUTEUR -->
+       <div
+         class="
+           rounded-lg
+           border
+           border-white/[0.06]
+           bg-white/[0.045]
+           p-2
+         "
+       >
+   
+         <div class="mb-1 text-[11px]">
+           ↕️
+         </div>
+   
+         <div
+           class="
+             text-[8px]
+             font-semibold
+             text-slate-400
+           "
+         >
+           Hauteur
+         </div>
+   
+         <div
+           class="
+             mt-0.5
+             text-sm
+             font-black
+             tracking-tight
+           "
+         >
+           {{ hauteur }}
+   
+           <span
+             class="
+               ml-0.5
+               text-[8px]
+               font-semibold
+               text-slate-500
+             "
+           >
+             px
+           </span>
+         </div>
+   
+       </div>
+   
+   
+       <!-- RATIO -->
+       <div
+         class="
+           rounded-lg
+           border
+           border-white/[0.06]
+           bg-white/[0.045]
+           p-2
+         "
+       >
+   
+         <div class="mb-1 text-[11px]">
+           ▣
+         </div>
+   
+         <div
+           class="
+             text-[8px]
+             font-semibold
+             text-slate-400
+           "
+         >
+           Ratio
+         </div>
+   
+         <div
+           class="
+             mt-0.5
+             text-sm
+             font-black
+             tracking-tight
+           "
+         >
+           {{ ratio }}
+         </div>
+   
+       </div>
+   
+   
+       <!-- ORIENTATION -->
+       <div
+         class="
+           rounded-lg
+           border
+           border-white/[0.06]
+           bg-white/[0.045]
+           p-2
+         "
+       >
+   
+         <div class="mb-1 text-[11px]">
+           🔄
+         </div>
+   
+         <div
+           class="
+             text-[8px]
+             font-semibold
+             text-slate-400
+           "
+         >
+           Orientation
+         </div>
+   
+         <div
+           class="
+             mt-0.5
+             text-[11px]
+             font-black
+           "
+         >
+           {{ orientation }}
+         </div>
+   
+       </div>
+   
+     </div>
+   
+   
+     <!-- ============================================================
+          BREAKPOINTS
+          ============================================================ -->
+   
+     <div
+       class="
+         rounded-xl
+         bg-black/15
+         p-2
+       "
+     >
+   
+       <!-- Titre -->
+       <div
+         class="
+           mb-1
+           text-[7px]
+           font-extrabold
+           uppercase
+           tracking-[0.7px]
+           text-slate-500
+         "
+       >
+         Breakpoints
+       </div>
+   
+   
+       <!-- MOBILE -->
+       <div
+         class="
+           flex
+           min-h-[23px]
+           items-center
+           gap-1.5
+           rounded-md
+           px-1.5
+           py-0.5
+           text-[8px]
+           text-slate-500
+           [&.active]:bg-rose-600/15
+           [&.active]:text-rose-400
+         "
+         [class.active]="largeur < 640"
+       >
+   
+         <span class="text-[10px]">📱</span>
+   
+         <strong
+           class="
+             flex-1
+             text-[8px]
+             font-bold
+             text-slate-400
+             [.active_&]:text-slate-50
+           "
+         >
+           Mobile
+         </strong>
+   
+         <small
+           class="
+             text-[7px]
+             text-slate-600
+             [.active_&]:text-rose-400
+           "
+         >
+           &lt; 640px
+         </small>
+   
+       </div>
+   
+   
+       <!-- GRANDE TABLETTE -->
+       <div
+         class="
+           flex
+           min-h-[23px]
+           items-center
+           gap-1.5
+           rounded-md
+           px-1.5
+           py-0.5
+           text-[8px]
+           text-slate-500
+           [&.active]:bg-rose-600/15
+           [&.active]:text-rose-400
+         "
+         [class.active]="largeur >= 640 && largeur < 768"
+       >
+   
+         <span class="text-[10px]">📱</span>
+   
+         <strong
+           class="
+             flex-1
+             text-[8px]
+             font-bold
+             text-slate-400
+             [.active_&]:text-slate-50
+           "
+         >
+           Grande tablette
+         </strong>
+   
+         <small
+           class="
+             text-[7px]
+             text-slate-600
+             [.active_&]:text-rose-400
+           "
+         >
+           640 → 767px
+         </small>
+   
+       </div>
+   
+   
+       <!-- TABLETTE -->
+       <div
+         class="
+           flex
+           min-h-[23px]
+           items-center
+           gap-1.5
+           rounded-md
+           px-1.5
+           py-0.5
+           text-[8px]
+           text-slate-500
+           [&.active]:bg-rose-600/15
+           [&.active]:text-rose-400
+         "
+         [class.active]="largeur >= 768 && largeur < 1024"
+       >
+   
+         <span class="text-[10px]">📱</span>
+   
+         <strong
+           class="
+             flex-1
+             text-[8px]
+             font-bold
+             text-slate-400
+             [.active_&]:text-slate-50
+           "
+         >
+           Tablette
+         </strong>
+   
+         <small
+           class="
+             text-[7px]
+             text-slate-600
+             [.active_&]:text-rose-400
+           "
+         >
+           768 → 1023px
+         </small>
+   
+       </div>
+   
+   
+       <!-- PETIT LAPTOP -->
+       <div
+         class="
+           flex
+           min-h-[23px]
+           items-center
+           gap-1.5
+           rounded-md
+           px-1.5
+           py-0.5
+           text-[8px]
+           text-slate-500
+           [&.active]:bg-rose-600/15
+           [&.active]:text-rose-400
+         "
+         [class.active]="largeur >= 1024 && largeur < 1280"
+       >
+   
+         <span class="text-[10px]">💻</span>
+   
+         <strong
+           class="
+             flex-1
+             text-[8px]
+             font-bold
+             text-slate-400
+             [.active_&]:text-slate-50
+           "
+         >
+           Petit laptop
+         </strong>
+   
+         <small
+           class="
+             text-[7px]
+             text-slate-600
+             [.active_&]:text-rose-400
+           "
+         >
+           1024 → 1279px
+         </small>
+   
+       </div>
+   
+   
+       <!-- DESKTOP -->
+       <div
+         class="
+           flex
+           min-h-[23px]
+           items-center
+           gap-1.5
+           rounded-md
+           px-1.5
+           py-0.5
+           text-[8px]
+           text-slate-500
+           [&.active]:bg-rose-600/15
+           [&.active]:text-rose-400
+         "
+         [class.active]="largeur >= 1280 && largeur < 1536"
+       >
+   
+         <span class="text-[10px]">🖥️</span>
+   
+         <strong
+           class="
+             flex-1
+             text-[8px]
+             font-bold
+             text-slate-400
+             [.active_&]:text-slate-50
+           "
+         >
+           Desktop
+         </strong>
+   
+         <small
+           class="
+             text-[7px]
+             text-slate-600
+             [.active_&]:text-rose-400
+           "
+         >
+           1280 → 1535px
+         </small>
+   
+       </div>
+   
+   
+       <!-- GRAND ÉCRAN -->
+       <div
+         class="
+           flex
+           min-h-[23px]
+           items-center
+           gap-1.5
+           rounded-md
+           px-1.5
+           py-0.5
+           text-[8px]
+           text-slate-500
+           [&.active]:bg-rose-600/15
+           [&.active]:text-rose-400
+         "
+         [class.active]="largeur >= 1536"
+       >
+   
+         <span class="text-[10px]">🖥️</span>
+   
+         <strong
+           class="
+             flex-1
+             text-[8px]
+             font-bold
+             text-slate-400
+             [.active_&]:text-slate-50
+           "
+         >
+           Grand écran
+         </strong>
+   
+         <small
+           class="
+             text-[7px]
+             text-slate-600
+             [.active_&]:text-rose-400
+           "
+         >
+           ≥ 1536px
+         </small>
+   
+       </div>
+   
+     </div>
+   
+   
+     <!-- ============================================================
+          FOOTER
+          ============================================================ -->
+   
+     <div
+       class="
+         mt-1.5
+         flex
+         items-center
+         justify-between
+         border-t
+         border-white/5
+         pt-1.5
+         text-[7px]
+         text-slate-600
+       "
+     >
+   
+       <span>
+         Dernière mise à jour
+       </span>
+   
+       <strong
+         class="
+           font-bold
+           text-slate-500
+         "
+       >
+         {{ heure }}
+       </strong>
+   
+     </div>
+   
+   </div>

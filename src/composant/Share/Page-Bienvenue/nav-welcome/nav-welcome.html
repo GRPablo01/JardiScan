@@ -1,946 +1,637 @@
 
 
 
+
 <!-- ============================================================
+
 🌿 JARDISCAN — NAVIGATION PUBLIQUE DESKTOP / GRAND LAPTOP
+
+• Visible à partir de 1293px
+• 🌐 FR / EN via LanguageService
+• ThemeService conservé
+• RouterLinkActive conservé
+• Accessibilité conservée
+• Liens :
+  → Découvrir
+  → Nouveauté
+  → Conseil
+  → Paramètre
+  → Fonctionnalité
+
 ============================================================ -->
 
 <nav
-
   class="
     hidden
-
     min-[1293px]:flex
-
     items-center
     justify-center
-
     gap-0.5
-
     rounded-2xl
-
     border
-
     px-1
     py-1
-
     backdrop-blur-2xl
     backdrop-saturate-150
   "
-
   [ngStyle]="{
-
-    'background-color':
-      themeService.GlassBackground,
-
-    'border-color':
-      themeService.GlassBorder,
-
-    'box-shadow':
-      themeService.BoxShadowSmall,
-
-    'color':
-      themeService.TextPrincipal
-
+    'background-color': themeService.GlassBackground,
+    'border-color': themeService.GlassBorder,
+    'box-shadow': themeService.BoxShadowSmall,
+    'color': themeService.TextPrincipal
   }"
-
   aria-label="Navigation publique JardiScan"
-
 >
-
 
   <!-- ==========================================================
   🌿 DÉCOUVRIR
-  ========================================================== -->
+  =========================================================== -->
 
   <a
-
-    routerLink="/welcome"
-
+    routerLink="/decouvrir"
     routerLinkActive="nav-active"
-
     #discoverActive="routerLinkActive"
-
     [routerLinkActiveOptions]="{ exact: true }"
-
-    [attr.aria-current]="
-      discoverActive.isActive ? 'page' : null
+    [attr.aria-current]="discoverActive.isActive ? 'page' : null"
+    [attr.aria-label]="
+      languageService.currentLanguage === 'fr'
+        ? 'Découvrir JardiScan'
+        : 'Discover JardiScan'
     "
-
-    aria-label="Découvrir JardiScan"
-
-    title="Découvrir JardiScan"
-
+    [attr.title]="
+      languageService.currentLanguage === 'fr'
+        ? 'Découvrir JardiScan'
+        : 'Discover JardiScan'
+    "
     class="
       group
       relative
-
       flex
       h-10
-
       items-center
       gap-1.5
-
       overflow-hidden
-
       rounded-xl
-
       px-2.5
-
       outline-none
-
       transition-all
       duration-200
       ease-out
-
       hover:-translate-y-0.5
-
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
-
     [ngStyle]="{
-
       'color':
         discoverActive.isActive
-
           ? themeService.Primary
-
           : themeService.TextSecondaire,
-
-      '--tw-ring-color':
-        themeService.Primary,
-
-      '--tw-ring-offset-color':
-        themeService.Background1
-
+      '--tw-ring-color': themeService.Primary,
+      '--tw-ring-offset-color': themeService.Background1
     }"
-
   >
 
     <span
-
       class="
         pointer-events-none
         absolute
         inset-0
-
         rounded-xl
-
         opacity-0
-
         transition-all
         duration-200
-
         group-hover:opacity-100
       "
-
-      [class.opacity-100]="
-        discoverActive.isActive
-      "
-
+      [class.opacity-100]="discoverActive.isActive"
       [ngStyle]="{
-        'background-color':
-          themeService.PrimarySoft
+        'background-color': themeService.PrimarySoft
       }"
-
       aria-hidden="true"
-
     ></span>
 
-
     <i
-
       class="
         fa-solid
         fa-leaf
-
         relative
         z-10
-
         text-[15px]
-
         transition-transform
         duration-200
-
         group-hover:scale-110
       "
-
-      [class.scale-110]="
-        discoverActive.isActive
-      "
-
+      [class.scale-110]="discoverActive.isActive"
       aria-hidden="true"
-
     ></i>
 
-
     <span
-
       class="
         relative
         z-10
-
         whitespace-nowrap
-
         text-[13px]
         font-semibold
       "
-
     >
-
-      Découvrir
-
+      {{
+        languageService.currentLanguage === 'fr'
+          ? 'Découvrir'
+          : 'Discover'
+      }}
     </span>
 
-
     <span
-
       class="
         pointer-events-none
-
         absolute
         bottom-1
         left-1/2
-
         h-0.5
         w-0
-
         -translate-x-1/2
-
         rounded-full
-
         transition-all
         duration-200
       "
-
-      [class.w-6]="
-        discoverActive.isActive
-      "
-
+      [class.w-6]="discoverActive.isActive"
       [ngStyle]="{
-        'background-color':
-          themeService.Primary
+        'background-color': themeService.Primary
       }"
-
       aria-hidden="true"
-
     ></span>
 
   </a>
 
 
   <!-- ==========================================================
-  ✨ FONCTIONNALITÉS
-  ========================================================== -->
+  ✨ NOUVEAUTÉ
+  =========================================================== -->
 
   <a
-
-    routerLink="/welcome/fonctionnalites"
-
+    routerLink="/nouveaute"
     routerLinkActive="nav-active"
-
-    #featuresActive="routerLinkActive"
-
-    [attr.aria-current]="
-      featuresActive.isActive ? 'page' : null
+    #nouveauteActive="routerLinkActive"
+    [attr.aria-current]="nouveauteActive.isActive ? 'page' : null"
+    [attr.aria-label]="
+      languageService.currentLanguage === 'fr'
+        ? 'Découvrir les nouveautés de JardiScan'
+        : 'Discover JardiScan news'
     "
-
-    aria-label="Découvrir les fonctionnalités de JardiScan"
-
-    title="Fonctionnalités"
-
+    [attr.title]="
+      languageService.currentLanguage === 'fr'
+        ? 'Nouveauté'
+        : 'News'
+    "
     class="
       group
       relative
-
       flex
       h-10
-
       items-center
       gap-1.5
-
       overflow-hidden
-
       rounded-xl
-
       px-2.5
-
       outline-none
-
       transition-all
       duration-200
       ease-out
-
       hover:-translate-y-0.5
-
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
-
     [ngStyle]="{
-
       'color':
-        featuresActive.isActive
-
+        nouveauteActive.isActive
           ? themeService.Primary
-
           : themeService.TextSecondaire,
-
-      '--tw-ring-color':
-        themeService.Primary,
-
-      '--tw-ring-offset-color':
-        themeService.Background1
-
+      '--tw-ring-color': themeService.Primary,
+      '--tw-ring-offset-color': themeService.Background1
     }"
-
   >
 
     <span
-
       class="
         pointer-events-none
         absolute
         inset-0
-
         rounded-xl
-
         opacity-0
-
         transition-all
         duration-200
-
         group-hover:opacity-100
       "
-
-      [class.opacity-100]="
-        featuresActive.isActive
-      "
-
+      [class.opacity-100]="nouveauteActive.isActive"
       [ngStyle]="{
-        'background-color':
-          themeService.PrimarySoft
+        'background-color': themeService.PrimarySoft
       }"
-
       aria-hidden="true"
-
     ></span>
 
-
     <i
-
       class="
-        fa-solid
-        fa-wand-magic-sparkles
-
+        fa-solid fa-wand-magic-sparkles
         relative
         z-10
-
         text-[15px]
-
         transition-transform
         duration-200
-
         group-hover:scale-110
       "
-
-      [class.scale-110]="
-        featuresActive.isActive
-      "
-
+      [class.scale-110]="nouveauteActive.isActive"
       aria-hidden="true"
-
     ></i>
 
-
     <span
-
       class="
         relative
         z-10
-
         whitespace-nowrap
-
         text-[13px]
         font-semibold
       "
-
     >
-
-      Fonctionnalités
-
+      {{
+        languageService.currentLanguage === 'fr'
+          ? 'Nouveauté'
+          : 'News'
+      }}
     </span>
 
-
     <span
-
       class="
         pointer-events-none
-
         absolute
         bottom-1
         left-1/2
-
         h-0.5
         w-0
-
         -translate-x-1/2
-
         rounded-full
-
         transition-all
         duration-200
       "
-
-      [class.w-6]="
-        featuresActive.isActive
-      "
-
+      [class.w-6]="nouveauteActive.isActive"
       [ngStyle]="{
-        'background-color':
-          themeService.Primary
+        'background-color': themeService.Primary
       }"
-
       aria-hidden="true"
-
     ></span>
 
   </a>
 
 
   <!-- ==========================================================
-  ▶️ COMMENT ÇA MARCHE
-  ========================================================== -->
+  💡 CONSEIL
+  =========================================================== -->
 
   <a
-
-    routerLink="/welcome/comment-ca-marche"
-
+    routerLink="/conseil"
     routerLinkActive="nav-active"
-
-    #howActive="routerLinkActive"
-
-    [attr.aria-current]="
-      howActive.isActive ? 'page' : null
+    #conseilActive="routerLinkActive"
+    [attr.aria-current]="conseilActive.isActive ? 'page' : null"
+    [attr.aria-label]="
+      languageService.currentLanguage === 'fr'
+        ? 'Consulter les conseils JardiScan'
+        : 'View JardiScan tips'
     "
-
-    aria-label="Découvrir comment fonctionne JardiScan"
-
-    title="Comment ça marche"
-
+    [attr.title]="
+      languageService.currentLanguage === 'fr'
+        ? 'Conseil'
+        : 'Tips'
+    "
     class="
       group
       relative
-
       flex
       h-10
-
       items-center
       gap-1.5
-
       overflow-hidden
-
       rounded-xl
-
       px-2.5
-
       outline-none
-
       transition-all
       duration-200
       ease-out
-
       hover:-translate-y-0.5
-
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
-
     [ngStyle]="{
-
       'color':
-        howActive.isActive
-
+        conseilActive.isActive
           ? themeService.Primary
-
           : themeService.TextSecondaire,
-
-      '--tw-ring-color':
-        themeService.Primary,
-
-      '--tw-ring-offset-color':
-        themeService.Background1
-
+      '--tw-ring-color': themeService.Primary,
+      '--tw-ring-offset-color': themeService.Background1
     }"
-
   >
 
     <span
-
       class="
         pointer-events-none
         absolute
         inset-0
-
         rounded-xl
-
         opacity-0
-
         transition-all
         duration-200
-
         group-hover:opacity-100
       "
-
-      [class.opacity-100]="
-        howActive.isActive
-      "
-
+      [class.opacity-100]="conseilActive.isActive"
       [ngStyle]="{
-        'background-color':
-          themeService.PrimarySoft
+        'background-color': themeService.PrimarySoft
       }"
-
       aria-hidden="true"
-
     ></span>
-
 
     <i
-
       class="
         fa-solid
-        fa-circle-play
-
+        fa-lightbulb
         relative
         z-10
-
-        text-[16px]
-
-        transition-transform
-        duration-200
-
-        group-hover:scale-110
-      "
-
-      [class.scale-110]="
-        howActive.isActive
-      "
-
-      aria-hidden="true"
-
-    ></i>
-
-
-    <span
-
-      class="
-        relative
-        z-10
-
-        whitespace-nowrap
-
-        text-[13px]
-        font-semibold
-      "
-
-    >
-
-      Comment ça marche
-
-    </span>
-
-
-    <span
-
-      class="
-        pointer-events-none
-
-        absolute
-        bottom-1
-        left-1/2
-
-        h-0.5
-        w-0
-
-        -translate-x-1/2
-
-        rounded-full
-
-        transition-all
-        duration-200
-      "
-
-      [class.w-6]="
-        howActive.isActive
-      "
-
-      [ngStyle]="{
-        'background-color':
-          themeService.Primary
-      }"
-
-      aria-hidden="true"
-
-    ></span>
-
-  </a>
-
-
-  <!-- ==========================================================
-  👥 RÔLES
-  ========================================================== -->
-
-  <a
-
-    routerLink="/welcome/roles"
-
-    routerLinkActive="nav-active"
-
-    #rolesActive="routerLinkActive"
-
-    [attr.aria-current]="
-      rolesActive.isActive ? 'page' : null
-    "
-
-    aria-label="Découvrir les rôles disponibles dans JardiScan"
-
-    title="Les rôles"
-
-    class="
-      group
-      relative
-
-      flex
-      h-10
-
-      items-center
-      gap-1.5
-
-      overflow-hidden
-
-      rounded-xl
-
-      px-2.5
-
-      outline-none
-
-      transition-all
-      duration-200
-      ease-out
-
-      hover:-translate-y-0.5
-
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-    "
-
-    [ngStyle]="{
-
-      'color':
-        rolesActive.isActive
-
-          ? themeService.Primary
-
-          : themeService.TextSecondaire,
-
-      '--tw-ring-color':
-        themeService.Primary,
-
-      '--tw-ring-offset-color':
-        themeService.Background1
-
-    }"
-
-  >
-
-    <span
-
-      class="
-        pointer-events-none
-        absolute
-        inset-0
-
-        rounded-xl
-
-        opacity-0
-
-        transition-all
-        duration-200
-
-        group-hover:opacity-100
-      "
-
-      [class.opacity-100]="
-        rolesActive.isActive
-      "
-
-      [ngStyle]="{
-        'background-color':
-          themeService.PrimarySoft
-      }"
-
-      aria-hidden="true"
-
-    ></span>
-
-
-    <i
-
-      class="
-        fa-solid
-        fa-users
-
-        relative
-        z-10
-
         text-[15px]
-
         transition-transform
         duration-200
-
         group-hover:scale-110
       "
-
-      [class.scale-110]="
-        rolesActive.isActive
-      "
-
+      [class.scale-110]="conseilActive.isActive"
       aria-hidden="true"
-
     ></i>
 
-
     <span
-
       class="
         relative
         z-10
-
         whitespace-nowrap
-
         text-[13px]
         font-semibold
       "
-
     >
-
-      Les rôles
-
+      {{
+        languageService.currentLanguage === 'fr'
+          ? 'Conseil'
+          : 'Tips'
+      }}
     </span>
 
-
     <span
-
       class="
         pointer-events-none
-
         absolute
         bottom-1
         left-1/2
-
         h-0.5
         w-0
-
         -translate-x-1/2
-
         rounded-full
-
         transition-all
         duration-200
       "
-
-      [class.w-6]="
-        rolesActive.isActive
-      "
-
+      [class.w-6]="conseilActive.isActive"
       [ngStyle]="{
-        'background-color':
-          themeService.Primary
+        'background-color': themeService.Primary
       }"
-
       aria-hidden="true"
-
     ></span>
 
   </a>
 
 
   <!-- ==========================================================
-  ❓ AIDE & FAQ
-  ========================================================== -->
+  ⚙️ PARAMÈTRE
+  =========================================================== -->
 
   <a
-
-    routerLink="/welcome/faq"
-
+    routerLink="/parametre"
     routerLinkActive="nav-active"
-
-    #faqActive="routerLinkActive"
-
-    [attr.aria-current]="
-      faqActive.isActive ? 'page' : null
+    #parametreActive="routerLinkActive"
+    [attr.aria-current]="parametreActive.isActive ? 'page' : null"
+    [attr.aria-label]="
+      languageService.currentLanguage === 'fr'
+        ? 'Accéder aux paramètres de JardiScan'
+        : 'Access JardiScan settings'
     "
-
-    aria-label="Consulter l'aide et la FAQ de JardiScan"
-
-    title="Aide et FAQ"
-
+    [attr.title]="
+      languageService.currentLanguage === 'fr'
+        ? 'Paramètre'
+        : 'Settings'
+    "
     class="
       group
       relative
-
       flex
       h-10
-
       items-center
       gap-1.5
-
       overflow-hidden
-
       rounded-xl
-
       px-2.5
-
       outline-none
-
       transition-all
       duration-200
       ease-out
-
       hover:-translate-y-0.5
-
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
-
     [ngStyle]="{
-
       'color':
-        faqActive.isActive
-
+        parametreActive.isActive
           ? themeService.Primary
-
           : themeService.TextSecondaire,
-
-      '--tw-ring-color':
-        themeService.Primary,
-
-      '--tw-ring-offset-color':
-        themeService.Background1
-
+      '--tw-ring-color': themeService.Primary,
+      '--tw-ring-offset-color': themeService.Background1
     }"
-
   >
 
     <span
-
       class="
         pointer-events-none
         absolute
         inset-0
-
         rounded-xl
-
         opacity-0
-
         transition-all
         duration-200
-
         group-hover:opacity-100
       "
-
-      [class.opacity-100]="
-        faqActive.isActive
-      "
-
+      [class.opacity-100]="parametreActive.isActive"
       [ngStyle]="{
-        'background-color':
-          themeService.PrimarySoft
+        'background-color': themeService.PrimarySoft
       }"
-
       aria-hidden="true"
-
     ></span>
 
-
     <i
-
       class="
         fa-solid
-        fa-circle-question
-
+        fa-sliders
         relative
         z-10
-
-        text-[16px]
-
+        text-[15px]
         transition-transform
         duration-200
-
         group-hover:scale-110
       "
-
-      [class.scale-110]="
-        faqActive.isActive
-      "
-
+      [class.scale-110]="parametreActive.isActive"
       aria-hidden="true"
-
     ></i>
 
-
     <span
-
       class="
         relative
         z-10
-
         whitespace-nowrap
-
         text-[13px]
         font-semibold
       "
-
     >
-
-      Aide & FAQ
-
+      {{
+        languageService.currentLanguage === 'fr'
+          ? 'Paramètre'
+          : 'Settings'
+      }}
     </span>
 
-
     <span
-
       class="
         pointer-events-none
-
         absolute
         bottom-1
         left-1/2
-
         h-0.5
         w-0
-
         -translate-x-1/2
-
         rounded-full
-
         transition-all
         duration-200
       "
-
-      [class.w-6]="
-        faqActive.isActive
-      "
-
+      [class.w-6]="parametreActive.isActive"
       [ngStyle]="{
-        'background-color':
-          themeService.Primary
+        'background-color': themeService.Primary
       }"
-
       aria-hidden="true"
+    ></span>
 
+  </a>
+
+
+  <!-- ==========================================================
+  ✨ FONCTIONNALITÉ
+  =========================================================== -->
+
+  <a
+    routerLink="fonctionnalites"
+    routerLinkActive="nav-active"
+    #fonctionnaliteActive="routerLinkActive"
+    [attr.aria-current]="fonctionnaliteActive.isActive ? 'page' : null"
+    [attr.aria-label]="
+      languageService.currentLanguage === 'fr'
+        ? 'Découvrir les fonctionnalités de JardiScan'
+        : 'Discover JardiScan features'
+    "
+    [attr.title]="
+      languageService.currentLanguage === 'fr'
+        ? 'Fonctionnalité'
+        : 'Feature'
+    "
+    class="
+      group
+      relative
+      flex
+      h-10
+      items-center
+      gap-1.5
+      overflow-hidden
+      rounded-xl
+      px-2.5
+      outline-none
+      transition-all
+      duration-200
+      ease-out
+      hover:-translate-y-0.5
+      focus-visible:ring-2
+      focus-visible:ring-offset-2
+    "
+    [ngStyle]="{
+      'color':
+        fonctionnaliteActive.isActive
+          ? themeService.Primary
+          : themeService.TextSecondaire,
+      '--tw-ring-color': themeService.Primary,
+      '--tw-ring-offset-color': themeService.Background1
+    }"
+  >
+
+    <span
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+        rounded-xl
+        opacity-0
+        transition-all
+        duration-200
+        group-hover:opacity-100
+      "
+      [class.opacity-100]="fonctionnaliteActive.isActive"
+      [ngStyle]="{
+        'background-color': themeService.PrimarySoft
+      }"
+      aria-hidden="true"
+    ></span>
+
+    <i
+      class="
+        fa-solid fa-gears
+        relative
+        z-10
+        text-[15px]
+        transition-transform
+        duration-200
+        group-hover:scale-110
+      "
+      [class.scale-110]="fonctionnaliteActive.isActive"
+      aria-hidden="true"
+    ></i>
+
+    <span
+      class="
+        relative
+        z-10
+        whitespace-nowrap
+        text-[13px]
+        font-semibold
+      "
+    >
+      {{
+        languageService.currentLanguage === 'fr'
+          ? 'Fonctionnalité'
+          : 'Feature'
+      }}
+    </span>
+
+    <span
+      class="
+        pointer-events-none
+        absolute
+        bottom-1
+        left-1/2
+        h-0.5
+        w-0
+        -translate-x-1/2
+        rounded-full
+        transition-all
+        duration-200
+      "
+      [class.w-6]="fonctionnaliteActive.isActive"
+      [ngStyle]="{
+        'background-color': themeService.Primary
+      }"
+      aria-hidden="true"
     ></span>
 
   </a>
@@ -951,8 +642,22 @@
 
 
 
+
 <!-- ============================================================
-    🌿 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
+
+🌿 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
+
+• Visible de 390px à 1292px
+• Dock style macOS
+• Nom du lien dans une pop-up au hover
+• Pop-up au-dessus de l’icône
+• Nom toujours visible si actif
+• FR / EN via LanguageService
+• ThemeService conservé
+• RouterLinkActive conservé
+• Responsive
+• Safe-area iOS
+
 ============================================================ -->
 
 <div
@@ -961,23 +666,18 @@
     inset-x-0
     bottom-0
     z-[100]
-
     hidden
     min-[390px]:block
     min-[1293px]:hidden
-
     px-3
     pb-[calc(0.65rem+env(safe-area-inset-bottom))]
     pt-3
-
     sm:px-5
     sm:pb-[calc(0.8rem+env(safe-area-inset-bottom))]
     sm:pt-4
-
     md:px-8
     md:pb-[calc(0.9rem+env(safe-area-inset-bottom))]
     md:pt-5
-
     pointer-events-none
   "
   [ngStyle]="{
@@ -995,39 +695,27 @@
   <nav
     class="
       pointer-events-auto
-
       relative
       mx-auto
-
       flex
       items-center
       justify-center
-
       gap-1.5
-
       w-fit
       max-w-[calc(100vw-24px)]
-
       min-h-[68px]
-
       rounded-[24px]
-
       border
-
       px-2
       py-2
-
       backdrop-blur-3xl
       backdrop-saturate-200
-
       shadow-2xl
-
       sm:gap-2
       sm:min-h-[72px]
       sm:rounded-[26px]
       sm:px-2.5
       sm:py-2.5
-
       md:gap-2.5
       md:min-h-[76px]
       md:rounded-[28px]
@@ -1055,66 +743,48 @@
       routerLinkActive="is-active"
       #discoverMobileActive="routerLinkActive"
       [routerLinkActiveOptions]="{ exact: true }"
-
       [attr.aria-current]="
         discoverMobileActive.isActive ? 'page' : null
       "
-
-      aria-label="Découvrir JardiScan"
-      title="Découvrir"
-
+      [attr.aria-label]="
+        languageService.currentLanguage === 'fr'
+          ? 'Découvrir JardiScan'
+          : 'Discover JardiScan'
+      "
+      [attr.title]="
+        languageService.currentLanguage === 'fr'
+          ? 'Découvrir'
+          : 'Discover'
+      "
       class="
         group
         relative
-
         flex
         items-center
         justify-center
-
         shrink-0
-        overflow-hidden
-
         h-[52px]
         w-[52px]
-
         rounded-[19px]
-
         border
-
         outline-none
-
         transition-all
         duration-300
         ease-out
-
         hover:-translate-y-1
         hover:scale-105
-
         active:translate-y-0
-        active:scale-90
-
+        active:scale-95
         focus-visible:ring-2
         focus-visible:ring-offset-2
-
         sm:h-[56px]
         sm:w-[56px]
         sm:rounded-[20px]
-
         md:h-[58px]
         md:w-[58px]
         md:rounded-[21px]
       "
-
-      [class.w-[110px]]="discoverMobileActive.isActive"
-      [class.sm:w-[124px]]="discoverMobileActive.isActive"
-      [class.md:w-[132px]]="discoverMobileActive.isActive"
-
-      [class.rounded-[18px]]="discoverMobileActive.isActive"
-      [class.sm:rounded-[20px]]="discoverMobileActive.isActive"
-      [class.md:rounded-[21px]]="discoverMobileActive.isActive"
-
       [class.border-transparent]="discoverMobileActive.isActive"
-
       [ngStyle]="{
         'background':
           discoverMobileActive.isActive
@@ -1124,42 +794,110 @@
               themeService.PrimarySoft +
               ')'
             : 'rgba(255,255,255,0.045)',
-
         'border-color':
           discoverMobileActive.isActive
             ? 'transparent'
             : themeService.Border2,
-
         'color':
           discoverMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
-
         'box-shadow':
           discoverMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-
         '--tw-ring-color': themeService.Primary,
         '--tw-ring-offset-color': themeService.Background1
       }"
     >
 
-      <!-- Glow macOS -->
+      <!-- POP-UP -->
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          left-1/2
+          bottom-[calc(100%+12px)]
+          z-[200]
+          -translate-x-1/2
+          translate-y-2
+          scale-95
+          whitespace-nowrap
+          rounded-xl
+          border
+          px-3
+          py-2
+          text-[10px]
+          font-extrabold
+          uppercase
+          tracking-[0.7px]
+          opacity-0
+          shadow-2xl
+          backdrop-blur-2xl
+          transition-all
+          duration-200
+          ease-out
+          group-hover:translate-y-0
+          group-hover:scale-100
+          group-hover:opacity-100
+          sm:text-[11px]
+          sm:px-3.5
+          sm:py-2
+          md:text-xs
+          md:px-4
+          md:py-2.5
+        "
+        [class.translate-y-0]="discoverMobileActive.isActive"
+        [class.scale-100]="discoverMobileActive.isActive"
+        [class.opacity-100]="discoverMobileActive.isActive"
+        [ngStyle]="{
+          'background-color': themeService.Background2,
+          'border-color': themeService.Border2,
+          'color': themeService.TextPrincipal,
+          'box-shadow':
+            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
+        }"
+        aria-hidden="true"
+      >
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Découvrir'
+            : 'Discover'
+        }}
+
+        <span
+          class="
+            absolute
+            left-1/2
+            top-full
+            -translate-x-1/2
+            h-0
+            w-0
+            border-l-[6px]
+            border-r-[6px]
+            border-t-[6px]
+            border-l-transparent
+            border-r-transparent
+          "
+          [ngStyle]="{
+            'border-top-color': themeService.Background2
+          }"
+        ></span>
+      </span>
+
+      <!-- Glow -->
+
       <span
         class="
           pointer-events-none
           absolute
           inset-[-12px]
-
           rounded-full
           blur-2xl
-
           opacity-0
-
           transition-all
           duration-500
-
           group-hover:opacity-60
         "
         [ngStyle]="{
@@ -1169,162 +907,191 @@
       ></span>
 
       <!-- Icône -->
+
       <i
         class="
           fa-solid
           fa-leaf
-
           relative
           z-10
-
           shrink-0
-
           text-[21px]
-
           transition-transform
           duration-300
-
           group-hover:scale-110
           group-active:scale-90
-
           sm:text-[22px]
           md:text-[23px]
         "
         aria-hidden="true"
       ></i>
 
-      <!-- Label actif -->
-      <span
-        *ngIf="discoverMobileActive.isActive"
-        class="
-          relative
-          z-10
-
-          whitespace-nowrap
-
-          text-[10px]
-          font-bold
-          uppercase
-          tracking-[0.6px]
-
-          sm:text-[11px]
-          md:text-xs
-        "
-      >
-        Découvrir
-      </span>
-
     </a>
 
 
     <!-- ========================================================
-         ✨ FONCTIONNALITÉS
+         ✨ NOUVEAUTÉ
     ========================================================= -->
 
     <a
-      routerLink="/welcome/fonctionnalites"
+      routerLink="nouveaute"
       routerLinkActive="is-active"
-      #featuresMobileActive="routerLinkActive"
-
+      #nouveauteMobileActive="routerLinkActive"
       [attr.aria-current]="
-        featuresMobileActive.isActive ? 'page' : null
+        nouveauteMobileActive.isActive ? 'page' : null
       "
-
-      aria-label="Fonctionnalités de JardiScan"
-      title="Fonctionnalités"
-
+      [attr.aria-label]="
+        languageService.currentLanguage === 'fr'
+          ? 'Découvrir les nouveautés de JardiScan'
+          : 'Discover JardiScan news'
+      "
+      [attr.title]="
+        languageService.currentLanguage === 'fr'
+          ? 'Nouveauté'
+          : 'News'
+      "
       class="
         group
         relative
-
         flex
         items-center
         justify-center
-
         shrink-0
-        overflow-hidden
-
         h-[52px]
         w-[52px]
-
         rounded-[18px]
-
         border
-
         outline-none
-
         transition-all
         duration-300
         ease-out
-
         hover:-translate-y-1
         hover:scale-105
-
         active:translate-y-0
-        active:scale-90
-
+        active:scale-95
         focus-visible:ring-2
         focus-visible:ring-offset-2
-
         sm:h-[56px]
         sm:w-[56px]
         sm:rounded-[20px]
-
         md:h-[58px]
         md:w-[58px]
         md:rounded-[21px]
       "
-
-      [class.w-[132px]]="featuresMobileActive.isActive"
-      [class.sm:w-[148px]]="featuresMobileActive.isActive"
-      [class.md:w-[158px]]="featuresMobileActive.isActive"
-
-      [class.border-transparent]="featuresMobileActive.isActive"
-
+      [class.border-transparent]="nouveauteMobileActive.isActive"
       [ngStyle]="{
         'background':
-          featuresMobileActive.isActive
+          nouveauteMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
               themeService.Primary +
               ', ' +
               themeService.PrimarySoft +
               ')'
             : 'rgba(255,255,255,0.045)',
-
         'border-color':
-          featuresMobileActive.isActive
+          nouveauteMobileActive.isActive
             ? 'transparent'
             : themeService.Border2,
-
         'color':
-          featuresMobileActive.isActive
+          nouveauteMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
-
         'box-shadow':
-          featuresMobileActive.isActive
+          nouveauteMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-
         '--tw-ring-color': themeService.Primary,
         '--tw-ring-offset-color': themeService.Background1
       }"
     >
+
+      <!-- POP-UP -->
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          left-1/2
+          bottom-[calc(100%+12px)]
+          z-[200]
+          -translate-x-1/2
+          translate-y-2
+          scale-95
+          whitespace-nowrap
+          rounded-xl
+          border
+          px-3
+          py-2
+          text-[10px]
+          font-extrabold
+          uppercase
+          tracking-[0.7px]
+          opacity-0
+          shadow-2xl
+          backdrop-blur-2xl
+          transition-all
+          duration-200
+          ease-out
+          group-hover:translate-y-0
+          group-hover:scale-100
+          group-hover:opacity-100
+          sm:text-[11px]
+          sm:px-3.5
+          sm:py-2
+          md:text-xs
+          md:px-4
+          md:py-2.5
+        "
+        [class.translate-y-0]="nouveauteMobileActive.isActive"
+        [class.scale-100]="nouveauteMobileActive.isActive"
+        [class.opacity-100]="nouveauteMobileActive.isActive"
+        [ngStyle]="{
+          'background-color': themeService.Background2,
+          'border-color': themeService.Border2,
+          'color': themeService.TextPrincipal,
+          'box-shadow':
+            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
+        }"
+        aria-hidden="true"
+      >
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Nouveauté'
+            : 'News'
+        }}
+
+        <span
+          class="
+            absolute
+            left-1/2
+            top-full
+            -translate-x-1/2
+            h-0
+            w-0
+            border-l-[6px]
+            border-r-[6px]
+            border-t-[6px]
+            border-l-transparent
+            border-r-transparent
+          "
+          [ngStyle]="{
+            'border-top-color': themeService.Background2
+          }"
+        ></span>
+      </span>
+
+      <!-- Glow -->
 
       <span
         class="
           pointer-events-none
           absolute
           inset-[-12px]
-
           rounded-full
           blur-2xl
-
           opacity-0
-
           transition-all
           duration-500
-
           group-hover:opacity-60
         "
         [ngStyle]="{
@@ -1332,161 +1099,193 @@
         }"
         aria-hidden="true"
       ></span>
+
+      <!-- Icône -->
 
       <i
         class="
           fa-solid
           fa-wand-magic-sparkles
-
           relative
           z-10
           shrink-0
-
           text-[20px]
-
           transition-transform
           duration-300
-
           group-hover:scale-110
           group-active:scale-90
-
           sm:text-[21px]
           md:text-[22px]
         "
         aria-hidden="true"
       ></i>
 
-      <span
-        *ngIf="featuresMobileActive.isActive"
-        class="
-          relative
-          z-10
-
-          whitespace-nowrap
-
-          text-[10px]
-          font-bold
-          uppercase
-          tracking-[0.6px]
-
-          sm:text-[11px]
-          md:text-xs
-        "
-      >
-        Fonctionnalités
-      </span>
-
     </a>
 
 
     <!-- ========================================================
-         ▶️ COMMENT ÇA MARCHE
+         💡 CONSEIL
     ========================================================= -->
 
     <a
-      routerLink="/welcome/comment-ca-marche"
+      routerLink="/conseil"
       routerLinkActive="is-active"
-      #howMobileActive="routerLinkActive"
-
+      #conseilMobileActive="routerLinkActive"
       [attr.aria-current]="
-        howMobileActive.isActive ? 'page' : null
+        conseilMobileActive.isActive ? 'page' : null
       "
-
-      aria-label="Comment fonctionne JardiScan"
-      title="Comment ça marche"
-
+      [attr.aria-label]="
+        languageService.currentLanguage === 'fr'
+          ? 'Consulter les conseils JardiScan'
+          : 'View JardiScan tips'
+      "
+      [attr.title]="
+        languageService.currentLanguage === 'fr'
+          ? 'Conseil'
+          : 'Tips'
+      "
       class="
         group
         relative
-
         flex
         items-center
         justify-center
-
         shrink-0
-        overflow-hidden
-
         h-[52px]
         w-[52px]
-
         rounded-[18px]
-
         border
-
         outline-none
-
         transition-all
         duration-300
         ease-out
-
         hover:-translate-y-1
         hover:scale-105
-
         active:translate-y-0
-        active:scale-90
-
+        active:scale-95
         focus-visible:ring-2
         focus-visible:ring-offset-2
-
         sm:h-[56px]
         sm:w-[56px]
         sm:rounded-[20px]
-
         md:h-[58px]
         md:w-[58px]
         md:rounded-[21px]
       "
-
-      [class.w-[132px]]="howMobileActive.isActive"
-      [class.sm:w-[148px]]="howMobileActive.isActive"
-      [class.md:w-[158px]]="howMobileActive.isActive"
-
-      [class.border-transparent]="howMobileActive.isActive"
-
+      [class.border-transparent]="conseilMobileActive.isActive"
       [ngStyle]="{
         'background':
-          howMobileActive.isActive
+          conseilMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
               themeService.Primary +
               ', ' +
               themeService.PrimarySoft +
               ')'
             : 'rgba(255,255,255,0.045)',
-
         'border-color':
-          howMobileActive.isActive
+          conseilMobileActive.isActive
             ? 'transparent'
             : themeService.Border2,
-
         'color':
-          howMobileActive.isActive
+          conseilMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
-
         'box-shadow':
-          howMobileActive.isActive
+          conseilMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-
         '--tw-ring-color': themeService.Primary,
         '--tw-ring-offset-color': themeService.Background1
       }"
     >
+
+      <!-- POP-UP -->
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          left-1/2
+          bottom-[calc(100%+12px)]
+          z-[200]
+          -translate-x-1/2
+          translate-y-2
+          scale-95
+          whitespace-nowrap
+          rounded-xl
+          border
+          px-3
+          py-2
+          text-[10px]
+          font-extrabold
+          uppercase
+          tracking-[0.7px]
+          opacity-0
+          shadow-2xl
+          backdrop-blur-2xl
+          transition-all
+          duration-200
+          ease-out
+          group-hover:translate-y-0
+          group-hover:scale-100
+          group-hover:opacity-100
+          sm:text-[11px]
+          sm:px-3.5
+          sm:py-2
+          md:text-xs
+          md:px-4
+          md:py-2.5
+        "
+        [class.translate-y-0]="conseilMobileActive.isActive"
+        [class.scale-100]="conseilMobileActive.isActive"
+        [class.opacity-100]="conseilMobileActive.isActive"
+        [ngStyle]="{
+          'background-color': themeService.Background2,
+          'border-color': themeService.Border2,
+          'color': themeService.TextPrincipal,
+          'box-shadow':
+            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
+        }"
+        aria-hidden="true"
+      >
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Conseil'
+            : 'Tips'
+        }}
+
+        <span
+          class="
+            absolute
+            left-1/2
+            top-full
+            -translate-x-1/2
+            h-0
+            w-0
+            border-l-[6px]
+            border-r-[6px]
+            border-t-[6px]
+            border-l-transparent
+            border-r-transparent
+          "
+          [ngStyle]="{
+            'border-top-color': themeService.Background2
+          }"
+        ></span>
+      </span>
+
+      <!-- Glow -->
 
       <span
         class="
           pointer-events-none
           absolute
           inset-[-12px]
-
           rounded-full
           blur-2xl
-
           opacity-0
-
           transition-all
           duration-500
-
           group-hover:opacity-60
         "
         [ngStyle]="{
@@ -1495,160 +1294,192 @@
         aria-hidden="true"
       ></span>
 
+      <!-- Icône -->
+
       <i
         class="
           fa-solid
-          fa-circle-play
-
+          fa-lightbulb
           relative
           z-10
           shrink-0
-
           text-[21px]
-
           transition-transform
           duration-300
-
           group-hover:scale-110
           group-active:scale-90
-
           sm:text-[22px]
           md:text-[23px]
         "
         aria-hidden="true"
       ></i>
 
-      <span
-        *ngIf="howMobileActive.isActive"
-        class="
-          relative
-          z-10
-
-          whitespace-nowrap
-
-          text-[10px]
-          font-bold
-          uppercase
-          tracking-[0.6px]
-
-          sm:text-[11px]
-          md:text-xs
-        "
-      >
-        Comment ça marche
-      </span>
-
     </a>
 
 
     <!-- ========================================================
-         👥 RÔLES
+         ⚙️ PARAMÈTRE
     ========================================================= -->
 
     <a
-      routerLink="/welcome/roles"
+      routerLink="parametre"
       routerLinkActive="is-active"
-      #rolesMobileActive="routerLinkActive"
-
+      #parametreMobileActive="routerLinkActive"
       [attr.aria-current]="
-        rolesMobileActive.isActive ? 'page' : null
+        parametreMobileActive.isActive ? 'page' : null
       "
-
-      aria-label="Les rôles disponibles dans JardiScan"
-      title="Les rôles"
-
+      [attr.aria-label]="
+        languageService.currentLanguage === 'fr'
+          ? 'Accéder aux paramètres de JardiScan'
+          : 'Access JardiScan settings'
+      "
+      [attr.title]="
+        languageService.currentLanguage === 'fr'
+          ? 'Paramètre'
+          : 'Settings'
+      "
       class="
         group
         relative
-
         flex
         items-center
         justify-center
-
         shrink-0
-        overflow-hidden
-
         h-[52px]
         w-[52px]
-
         rounded-[18px]
-
         border
-
         outline-none
-
         transition-all
         duration-300
         ease-out
-
         hover:-translate-y-1
         hover:scale-105
-
         active:translate-y-0
-        active:scale-90
-
+        active:scale-95
         focus-visible:ring-2
         focus-visible:ring-offset-2
-
         sm:h-[56px]
         sm:w-[56px]
         sm:rounded-[20px]
-
         md:h-[58px]
         md:w-[58px]
         md:rounded-[21px]
       "
-
-      [class.w-[105px]]="rolesMobileActive.isActive"
-      [class.sm:w-[116px]]="rolesMobileActive.isActive"
-      [class.md:w-[124px]]="rolesMobileActive.isActive"
-
-      [class.border-transparent]="rolesMobileActive.isActive"
-
+      [class.border-transparent]="parametreMobileActive.isActive"
       [ngStyle]="{
         'background':
-          rolesMobileActive.isActive
+          parametreMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
               themeService.Primary +
               ', ' +
               themeService.PrimarySoft +
               ')'
             : 'rgba(255,255,255,0.045)',
-
         'border-color':
-          rolesMobileActive.isActive
+          parametreMobileActive.isActive
             ? 'transparent'
             : themeService.Border2,
-
         'color':
-          rolesMobileActive.isActive
+          parametreMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
-
         'box-shadow':
-          rolesMobileActive.isActive
+          parametreMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-
         '--tw-ring-color': themeService.Primary,
         '--tw-ring-offset-color': themeService.Background1
       }"
     >
+
+      <!-- POP-UP -->
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          left-1/2
+          bottom-[calc(100%+12px)]
+          z-[200]
+          -translate-x-1/2
+          translate-y-2
+          scale-95
+          whitespace-nowrap
+          rounded-xl
+          border
+          px-3
+          py-2
+          text-[10px]
+          font-extrabold
+          uppercase
+          tracking-[0.7px]
+          opacity-0
+          shadow-2xl
+          backdrop-blur-2xl
+          transition-all
+          duration-200
+          ease-out
+          group-hover:translate-y-0
+          group-hover:scale-100
+          group-hover:opacity-100
+          sm:text-[11px]
+          sm:px-3.5
+          sm:py-2
+          md:text-xs
+          md:px-4
+          md:py-2.5
+        "
+        [class.translate-y-0]="parametreMobileActive.isActive"
+        [class.scale-100]="parametreMobileActive.isActive"
+        [class.opacity-100]="parametreMobileActive.isActive"
+        [ngStyle]="{
+          'background-color': themeService.Background2,
+          'border-color': themeService.Border2,
+          'color': themeService.TextPrincipal,
+          'box-shadow':
+            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
+        }"
+        aria-hidden="true"
+      >
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Paramètre'
+            : 'Settings'
+        }}
+
+        <span
+          class="
+            absolute
+            left-1/2
+            top-full
+            -translate-x-1/2
+            h-0
+            w-0
+            border-l-[6px]
+            border-r-[6px]
+            border-t-[6px]
+            border-l-transparent
+            border-r-transparent
+          "
+          [ngStyle]="{
+            'border-top-color': themeService.Background2
+          }"
+        ></span>
+      </span>
+
+      <!-- Glow -->
 
       <span
         class="
           pointer-events-none
           absolute
           inset-[-12px]
-
           rounded-full
           blur-2xl
-
           opacity-0
-
           transition-all
           duration-500
-
           group-hover:opacity-60
         "
         [ngStyle]="{
@@ -1657,160 +1488,192 @@
         aria-hidden="true"
       ></span>
 
+      <!-- Icône -->
+
       <i
         class="
           fa-solid
-          fa-users
-
+          fa-sliders
           relative
           z-10
           shrink-0
-
           text-[20px]
-
           transition-transform
           duration-300
-
           group-hover:scale-110
           group-active:scale-90
-
           sm:text-[21px]
           md:text-[22px]
         "
         aria-hidden="true"
       ></i>
 
-      <span
-        *ngIf="rolesMobileActive.isActive"
-        class="
-          relative
-          z-10
-
-          whitespace-nowrap
-
-          text-[10px]
-          font-bold
-          uppercase
-          tracking-[0.6px]
-
-          sm:text-[11px]
-          md:text-xs
-        "
-      >
-        Les rôles
-      </span>
-
     </a>
 
 
     <!-- ========================================================
-         ❓ AIDE & FAQ
+         ✨ FONCTIONNALITÉ
     ========================================================= -->
 
     <a
-      routerLink="/welcome/faq"
+      routerLink="fonctionnalites"
       routerLinkActive="is-active"
-      #faqMobileActive="routerLinkActive"
-
+      #fonctionnaliteMobileActive="routerLinkActive"
       [attr.aria-current]="
-        faqMobileActive.isActive ? 'page' : null
+        fonctionnaliteMobileActive.isActive ? 'page' : null
       "
-
-      aria-label="Aide et FAQ de JardiScan"
-      title="Aide et FAQ"
-
+      [attr.aria-label]="
+        languageService.currentLanguage === 'fr'
+          ? 'Découvrir les fonctionnalités de JardiScan'
+          : 'Discover JardiScan features'
+      "
+      [attr.title]="
+        languageService.currentLanguage === 'fr'
+          ? 'Fonctionnalité'
+          : 'Feature'
+      "
       class="
         group
         relative
-
         flex
         items-center
         justify-center
-
         shrink-0
-        overflow-hidden
-
         h-[52px]
         w-[52px]
-
         rounded-[18px]
-
         border
-
         outline-none
-
         transition-all
         duration-300
         ease-out
-
         hover:-translate-y-1
         hover:scale-105
-
         active:translate-y-0
-        active:scale-90
-
+        active:scale-95
         focus-visible:ring-2
         focus-visible:ring-offset-2
-
         sm:h-[56px]
         sm:w-[56px]
         sm:rounded-[20px]
-
         md:h-[58px]
         md:w-[58px]
         md:rounded-[21px]
       "
-
-      [class.w-[105px]]="faqMobileActive.isActive"
-      [class.sm:w-[116px]]="faqMobileActive.isActive"
-      [class.md:w-[124px]]="faqMobileActive.isActive"
-
-      [class.border-transparent]="faqMobileActive.isActive"
-
+      [class.border-transparent]="fonctionnaliteMobileActive.isActive"
       [ngStyle]="{
         'background':
-          faqMobileActive.isActive
+          fonctionnaliteMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
               themeService.Primary +
               ', ' +
               themeService.PrimarySoft +
               ')'
             : 'rgba(255,255,255,0.045)',
-
         'border-color':
-          faqMobileActive.isActive
+          fonctionnaliteMobileActive.isActive
             ? 'transparent'
             : themeService.Border2,
-
         'color':
-          faqMobileActive.isActive
+          fonctionnaliteMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
-
         'box-shadow':
-          faqMobileActive.isActive
+          fonctionnaliteMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-
         '--tw-ring-color': themeService.Primary,
         '--tw-ring-offset-color': themeService.Background1
       }"
     >
+
+      <!-- POP-UP -->
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          left-1/2
+          bottom-[calc(100%+12px)]
+          z-[200]
+          -translate-x-1/2
+          translate-y-2
+          scale-95
+          whitespace-nowrap
+          rounded-xl
+          border
+          px-3
+          py-2
+          text-[10px]
+          font-extrabold
+          uppercase
+          tracking-[0.7px]
+          opacity-0
+          shadow-2xl
+          backdrop-blur-2xl
+          transition-all
+          duration-200
+          ease-out
+          group-hover:translate-y-0
+          group-hover:scale-100
+          group-hover:opacity-100
+          sm:text-[11px]
+          sm:px-3.5
+          sm:py-2
+          md:text-xs
+          md:px-4
+          md:py-2.5
+        "
+        [class.translate-y-0]="fonctionnaliteMobileActive.isActive"
+        [class.scale-100]="fonctionnaliteMobileActive.isActive"
+        [class.opacity-100]="fonctionnaliteMobileActive.isActive"
+        [ngStyle]="{
+          'background-color': themeService.Background2,
+          'border-color': themeService.Border2,
+          'color': themeService.TextPrincipal,
+          'box-shadow':
+            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
+        }"
+        aria-hidden="true"
+      >
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Fonctionnalité'
+            : 'Feature'
+        }}
+
+        <span
+          class="
+            absolute
+            left-1/2
+            top-full
+            -translate-x-1/2
+            h-0
+            w-0
+            border-l-[6px]
+            border-r-[6px]
+            border-t-[6px]
+            border-l-transparent
+            border-r-transparent
+          "
+          [ngStyle]="{
+            'border-top-color': themeService.Background2
+          }"
+        ></span>
+      </span>
+
+      <!-- Glow -->
 
       <span
         class="
           pointer-events-none
           absolute
           inset-[-12px]
-
           rounded-full
           blur-2xl
-
           opacity-0
-
           transition-all
           duration-500
-
           group-hover:opacity-60
         "
         [ngStyle]="{
@@ -1819,48 +1682,24 @@
         aria-hidden="true"
       ></span>
 
+      <!-- Icône -->
+
       <i
         class="
-          fa-solid
-          fa-circle-question
-
+          fa-solid fa-gears
           relative
           z-10
           shrink-0
-
-          text-[21px]
-
+          text-[20px]
           transition-transform
           duration-300
-
           group-hover:scale-110
           group-active:scale-90
-
-          sm:text-[22px]
-          md:text-[23px]
+          sm:text-[21px]
+          md:text-[22px]
         "
         aria-hidden="true"
       ></i>
-
-      <span
-        *ngIf="faqMobileActive.isActive"
-        class="
-          relative
-          z-10
-
-          whitespace-nowrap
-
-          text-[10px]
-          font-bold
-          uppercase
-          tracking-[0.6px]
-
-          sm:text-[11px]
-          md:text-xs
-        "
-      >
-        Aide & FAQ
-      </span>
 
     </a>
 

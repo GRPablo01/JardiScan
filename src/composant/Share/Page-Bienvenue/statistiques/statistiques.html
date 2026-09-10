@@ -1,0 +1,1003 @@
+<!-- ============================================================
+     🌿 JARDISCAN — COMMENT ÇA FONCTIONNE
+
+     Version FULL WIDTH
+
+     • FR / EN avec LanguageService
+     • ThemeService conservé
+     • Pleine largeur écran
+     • Aucun max-width global
+     • Responsive Desktop / Tablet / Mobile
+     • Font Awesome uniquement
+     • UI / UX premium
+     • Animations d'entrée
+     • Aucun changement de logique Angular
+============================================================ -->
+
+<section
+  class="
+    relative
+    w-full
+    overflow-hidden
+  "
+  [ngStyle]="{
+    'background-color': themeService.Background2,
+    'color': themeService.TextPrincipal
+  }"
+>
+
+  <!-- ============================================================
+       CONTENU FULL WIDTH
+  ============================================================= -->
+
+  <div
+    class="
+      relative
+      w-full
+      px-5
+      py-12
+      sm:px-8
+      sm:py-14
+      md:px-10
+      lg:px-12
+      lg:py-16
+      xl:px-16
+      2xl:px-20
+    "
+  >
+
+    <!-- ============================================================
+         EN-TÊTE
+    ============================================================= -->
+
+    <div class="w-full text-center">
+
+      <!-- Petit label -->
+
+      <div
+        class="
+          jhow-reveal
+          mx-auto
+          mb-5
+          inline-flex
+          items-center
+          gap-2.5
+          rounded-full
+          border
+          px-4
+          py-2
+          text-[11px]
+          sm:text-xs
+          font-bold
+          uppercase
+          tracking-[0.18em]
+          backdrop-blur-md
+        "
+        [ngStyle]="{
+          'background-color': themeService.Background1 + 'CC',
+          'border-color': themeService.Border2,
+          'color': themeService.Primary,
+          'animation-delay': '0.05s'
+        }"
+      >
+
+        <span
+          class="
+            flex
+            h-6
+            w-6
+            shrink-0
+            items-center
+            justify-center
+            rounded-full
+          "
+          [ngStyle]="{
+            'background-color': themeService.Primary + '18'
+          }"
+        >
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </span>
+
+        <span>
+          {{
+            languageService.is('fr')
+              ? 'Simple & rapide'
+              : 'Simple & fast'
+          }}
+        </span>
+
+      </div>
+
+
+      <!-- Titre -->
+
+      <h2
+        class="
+          jhow-reveal
+          text-3xl
+          font-black
+          tracking-tight
+          sm:text-4xl
+          md:text-5xl
+          lg:text-6xl
+          xl:text-7xl
+          leading-[1]
+        "
+        [ngStyle]="{
+          'color': themeService.TextPrincipal,
+          'animation-delay': '0.12s'
+        }"
+      >
+
+        {{
+          languageService.is('fr')
+            ? 'Comment fonctionne'
+            : 'How does'
+        }}
+
+        <span
+          [ngStyle]="{
+            'color': themeService.Primary
+          }"
+        >
+          JardiScan
+        </span>
+
+        ?
+
+      </h2>
+
+
+      <!-- Description -->
+
+      <p
+        class="
+          jhow-reveal
+          mx-auto
+          mt-5
+          max-w-3xl
+          text-sm
+          leading-7
+          sm:text-base
+          sm:leading-8
+          lg:text-lg
+          lg:leading-9
+        "
+        [ngStyle]="{
+          'color': themeService.TextPrincipal,
+          'opacity': '0.72',
+          'animation-delay': '0.2s'
+        }"
+      >
+
+        {{
+          languageService.is('fr')
+            ? 'En quelques secondes, identifiez votre plante, comprenez ses besoins et obtenez des conseils adaptés à votre jardin.'
+            : 'In just a few seconds, identify your plant, understand its needs, and get advice tailored to your garden.'
+        }}
+
+      </p>
+
+    </div>
+
+
+    <!-- ============================================================
+         ÉTAPES — PLEINE LARGEUR
+    ============================================================= -->
+
+    <div
+      class="
+        relative
+        mt-10
+        grid
+        w-full
+        grid-cols-1
+        gap-5
+        sm:mt-12
+        md:grid-cols-3
+        md:gap-6
+        lg:mt-16
+        lg:gap-8
+        xl:gap-10
+      "
+    >
+
+      <!-- ==========================================================
+           LIGNE ENTRE LES CARTES — DESKTOP
+      =========================================================== -->
+
+      <div
+        class="
+          pointer-events-none
+          absolute
+          left-[16%]
+          right-[16%]
+          top-[54px]
+          hidden
+          h-px
+          md:block
+        "
+        [ngStyle]="{
+          'background-color': themeService.Border1
+        }"
+      >
+
+        <span
+          class="
+            absolute
+            left-1/2
+            top-1/2
+            h-1
+            w-1
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+          "
+          [ngStyle]="{
+            'background-color': themeService.Primary
+          }"
+        ></span>
+
+      </div>
+
+
+      <!-- ==========================================================
+           ÉTAPE 1 — SCANNEZ
+      =========================================================== -->
+
+      <article
+        class="
+          jhow-card
+          group
+          relative
+          z-10
+          w-full
+          rounded-[1.75rem]
+          border
+          p-6
+          transition-all
+          duration-300
+          hover:-translate-y-1
+          lg:p-8
+          xl:p-9
+        "
+        [ngStyle]="{
+          'background-color': themeService.Background3,
+          'border-color': themeService.Border3,
+          'animation-delay': '0.25s'
+        }"
+      >
+
+        <!-- Numéro + icône -->
+
+        <div class="flex items-center justify-between">
+
+          <div
+            class="
+              flex
+              h-14
+              w-14
+              items-center
+              justify-center
+              rounded-2xl
+              text-xl
+              shadow-sm
+              transition-all
+              duration-300
+              group-hover:scale-105
+              group-hover:rotate-2
+              lg:h-16
+              lg:w-16
+              lg:text-2xl
+            "
+            [ngStyle]="{
+              'background-color': themeService.Primary,
+              'color': '#ffffff',
+              'box-shadow': '0 12px 30px ' + themeService.Primary + '30'
+            }"
+          >
+            <i class="fa-solid fa-camera"></i>
+          </div>
+
+          <span
+            class="
+              text-4xl
+              font-black
+              opacity-10
+              transition-transform
+              duration-300
+              group-hover:scale-110
+              lg:text-5xl
+            "
+          >
+            01
+          </span>
+
+        </div>
+
+
+        <!-- Contenu -->
+
+        <div class="mt-6 lg:mt-8">
+
+          <span
+            class="
+              text-[11px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              sm:text-xs
+            "
+            [ngStyle]="{
+              'color': themeService.Primary
+            }"
+          >
+            {{
+              languageService.is('fr')
+                ? 'Étape 01'
+                : 'Step 01'
+            }}
+          </span>
+
+          <h3
+            class="
+              mt-2
+              text-xl
+              font-extrabold
+              lg:text-2xl
+            "
+          >
+            {{
+              languageService.is('fr')
+                ? 'Scannez'
+                : 'Scan'
+            }}
+          </h3>
+
+          <p
+            class="
+              mt-3
+              text-sm
+              leading-6
+              lg:text-base
+              lg:leading-7
+            "
+            [ngStyle]="{
+              'color': themeService.TextPrincipal,
+              'opacity': '0.7'
+            }"
+          >
+            {{
+              languageService.is('fr')
+                ? 'Identifiez facilement votre plante ou votre espace grâce à JardiScan.'
+                : 'Easily identify your plant or growing space with JardiScan.'
+            }}
+          </p>
+
+        </div>
+
+
+        <!-- Séparateur -->
+
+        <div
+          class="my-5 h-px w-full"
+          [ngStyle]="{
+            'background-color': themeService.Border1
+          }"
+        ></div>
+
+
+        <!-- Indication -->
+
+        <div
+          class="
+            flex
+            items-center
+            gap-2
+            text-xs
+            font-semibold
+            lg:text-sm
+          "
+          [ngStyle]="{
+            'color': themeService.TextPrincipal,
+            'opacity': '0.6'
+          }"
+        >
+
+          <span
+            class="
+              flex
+              h-7
+              w-7
+              shrink-0
+              items-center
+              justify-center
+              rounded-lg
+            "
+            [ngStyle]="{
+              'background-color': themeService.Primary + '14',
+              'color': themeService.Primary
+            }"
+          >
+            <i class="fa-solid fa-qrcode"></i>
+          </span>
+
+          <span>
+            {{
+              languageService.is('fr')
+                ? 'Identification rapide'
+                : 'Quick identification'
+            }}
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- ==========================================================
+           ÉTAPE 2 — ANALYSEZ
+      =========================================================== -->
+
+      <article
+        class="
+          jhow-card
+          group
+          relative
+          z-10
+          w-full
+          rounded-[1.75rem]
+          border
+          p-6
+          transition-all
+          duration-300
+          hover:-translate-y-1
+          lg:p-8
+          xl:p-9
+        "
+        [ngStyle]="{
+          'background-color': themeService.Background3,
+          'border-color': themeService.Border3,
+          'animation-delay': '0.38s'
+        }"
+      >
+
+        <!-- Numéro + icône -->
+
+        <div class="flex items-center justify-between">
+
+          <div
+            class="
+              flex
+              h-14
+              w-14
+              items-center
+              justify-center
+              rounded-2xl
+              text-xl
+              shadow-sm
+              transition-all
+              duration-300
+              group-hover:scale-105
+              group-hover:rotate-2
+              lg:h-16
+              lg:w-16
+              lg:text-2xl
+            "
+            [ngStyle]="{
+              'background-color': themeService.Primary + '18',
+              'color': themeService.Primary
+            }"
+          >
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+          </div>
+
+          <span
+            class="
+              text-4xl
+              font-black
+              opacity-10
+              transition-transform
+              duration-300
+              group-hover:scale-110
+              lg:text-5xl
+            "
+          >
+            02
+          </span>
+
+        </div>
+
+
+        <!-- Contenu -->
+
+        <div class="mt-6 lg:mt-8">
+
+          <span
+            class="
+              text-[11px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              sm:text-xs
+            "
+            [ngStyle]="{
+              'color': themeService.Primary
+            }"
+          >
+            {{
+              languageService.is('fr')
+                ? 'Étape 02'
+                : 'Step 02'
+            }}
+          </span>
+
+          <h3
+            class="
+              mt-2
+              text-xl
+              font-extrabold
+              lg:text-2xl
+            "
+          >
+            {{
+              languageService.is('fr')
+                ? 'Analysez'
+                : 'Analyze'
+            }}
+          </h3>
+
+          <p
+            class="
+              mt-3
+              text-sm
+              leading-6
+              lg:text-base
+              lg:leading-7
+            "
+            [ngStyle]="{
+              'color': themeService.TextPrincipal,
+              'opacity': '0.7'
+            }"
+          >
+            {{
+              languageService.is('fr')
+                ? 'JardiScan vous fournit rapidement des informations utiles pour mieux comprendre votre jardin.'
+                : 'JardiScan quickly provides useful information to help you better understand your garden.'
+            }}
+          </p>
+
+        </div>
+
+
+        <!-- Séparateur -->
+
+        <div
+          class="my-5 h-px w-full"
+          [ngStyle]="{
+            'background-color': themeService.Border1
+          }"
+        ></div>
+
+
+        <!-- Indication -->
+
+        <div
+          class="
+            flex
+            items-center
+            gap-2
+            text-xs
+            font-semibold
+            lg:text-sm
+          "
+          [ngStyle]="{
+            'color': themeService.TextPrincipal,
+            'opacity': '0.6'
+          }"
+        >
+
+          <span
+            class="
+              flex
+              h-7
+              w-7
+              shrink-0
+              items-center
+              justify-center
+              rounded-lg
+            "
+            [ngStyle]="{
+              'background-color': themeService.Primary + '14',
+              'color': themeService.Primary
+            }"
+          >
+            <i class="fa-solid fa-chart-simple"></i>
+          </span>
+
+          <span>
+            {{
+              languageService.is('fr')
+                ? 'Informations utiles'
+                : 'Useful information'
+            }}
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- ==========================================================
+           ÉTAPE 3 — AGISSEZ
+      =========================================================== -->
+
+      <article
+        class="
+          jhow-card
+          group
+          relative
+          z-10
+          w-full
+          rounded-[1.75rem]
+          border
+          p-6
+          transition-all
+          duration-300
+          hover:-translate-y-1
+          lg:p-8
+          xl:p-9
+        "
+        [ngStyle]="{
+          'background-color': themeService.Background3,
+          'border-color': themeService.Border3,
+          'animation-delay': '0.51s'
+        }"
+      >
+
+        <!-- Numéro + icône -->
+
+        <div class="flex items-center justify-between">
+
+          <div
+            class="
+              flex
+              h-14
+              w-14
+              items-center
+              justify-center
+              rounded-2xl
+              text-xl
+              shadow-sm
+              transition-all
+              duration-300
+              group-hover:scale-105
+              group-hover:rotate-2
+              lg:h-16
+              lg:w-16
+              lg:text-2xl
+            "
+            [ngStyle]="{
+              'background-color': themeService.Primary + '18',
+              'color': themeService.Primary
+            }"
+          >
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+
+          <span
+            class="
+              text-4xl
+              font-black
+              opacity-10
+              transition-transform
+              duration-300
+              group-hover:scale-110
+              lg:text-5xl
+            "
+          >
+            03
+          </span>
+
+        </div>
+
+
+        <!-- Contenu -->
+
+        <div class="mt-6 lg:mt-8">
+
+          <span
+            class="
+              text-[11px]
+              font-bold
+              uppercase
+              tracking-[0.16em]
+              sm:text-xs
+            "
+            [ngStyle]="{
+              'color': themeService.Primary
+            }"
+          >
+            {{
+              languageService.is('fr')
+                ? 'Étape 03'
+                : 'Step 03'
+            }}
+          </span>
+
+          <h3
+            class="
+              mt-2
+              text-xl
+              font-extrabold
+              lg:text-2xl
+            "
+          >
+            {{
+              languageService.is('fr')
+                ? 'Agissez'
+                : 'Take action'
+            }}
+          </h3>
+
+          <p
+            class="
+              mt-3
+              text-sm
+              leading-6
+              lg:text-base
+              lg:leading-7
+            "
+            [ngStyle]="{
+              'color': themeService.TextPrincipal,
+              'opacity': '0.7'
+            }"
+          >
+            {{
+              languageService.is('fr')
+                ? 'Découvrez les conseils adaptés à votre plante et prenez soin de votre jardin au bon moment.'
+                : 'Discover advice tailored to your plant and take care of your garden at the right time.'
+            }}
+          </p>
+
+        </div>
+
+
+        <!-- Séparateur -->
+
+        <div
+          class="my-5 h-px w-full"
+          [ngStyle]="{
+            'background-color': themeService.Border1
+          }"
+        ></div>
+
+
+        <!-- Indication -->
+
+        <div
+          class="
+            flex
+            items-center
+            gap-2
+            text-xs
+            font-semibold
+            lg:text-sm
+          "
+          [ngStyle]="{
+            'color': themeService.TextPrincipal,
+            'opacity': '0.6'
+          }"
+        >
+
+          <span
+            class="
+              flex
+              h-7
+              w-7
+              shrink-0
+              items-center
+              justify-center
+              rounded-lg
+            "
+            [ngStyle]="{
+              'background-color': themeService.Primary + '14',
+              'color': themeService.Primary
+            }"
+          >
+            <i class="fa-solid fa-seedling"></i>
+          </span>
+
+          <span>
+            {{
+              languageService.is('fr')
+                ? 'Conseils personnalisés'
+                : 'Personalized advice'
+            }}
+          </span>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <!-- ============================================================
+         MINI PROMESSE
+    ============================================================= -->
+
+    <div
+      class="
+        jhow-reveal
+        mx-auto
+        mt-9
+        flex
+        w-full
+        items-center
+        justify-center
+        gap-3
+        text-center
+        text-xs
+        sm:mt-11
+        sm:text-sm
+      "
+      [ngStyle]="{
+        'color': themeService.TextPrincipal,
+        'opacity': '0.6',
+        'animation-delay': '0.65s'
+      }"
+    >
+
+      <span
+        class="
+          h-1.5
+          w-1.5
+          shrink-0
+          rounded-full
+        "
+        [ngStyle]="{
+          'background-color': themeService.Primary
+        }"
+      ></span>
+
+      <span>
+        {{
+          languageService.is('fr')
+            ? 'De l’identification aux conseils, tout est pensé pour simplifier votre jardinage.'
+            : 'From identification to advice, everything is designed to make gardening easier.'
+        }}
+      </span>
+
+      <span
+        class="
+          h-1.5
+          w-1.5
+          shrink-0
+          rounded-full
+        "
+        [ngStyle]="{
+          'background-color': themeService.Primary
+        }"
+      ></span>
+
+    </div>
+
+
+    <!-- ============================================================
+         INDICATEUR FINAL
+    ============================================================= -->
+
+    <div
+      class="
+        jhow-reveal
+        mx-auto
+        mt-7
+        flex
+        items-center
+        justify-center
+        gap-2
+        text-xs
+        font-semibold
+        sm:text-sm
+      "
+      [ngStyle]="{
+        'color': themeService.Primary,
+        'animation-delay': '0.72s'
+      }"
+    >
+
+      <i class="fa-solid fa-arrow-right"></i>
+
+      <span>
+        {{
+          languageService.is('fr')
+            ? 'Scanner. Analyser. Agir.'
+            : 'Scan. Analyze. Take action.'
+        }}
+      </span>
+
+      <i class="fa-solid fa-arrow-left"></i>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     🎬 ANIMATIONS
+============================================================ -->
+
+<style>
+
+  @keyframes jhowFadeUp {
+
+    0% {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  }
+
+
+  @keyframes jhowCardIn {
+
+    0% {
+      opacity: 0;
+      transform: translateY(28px) scale(0.98);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+  }
+
+
+  .jhow-reveal {
+    opacity: 0;
+    animation: jhowFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+
+  .jhow-card {
+    opacity: 0;
+    animation: jhowCardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+
+  .jhow-card:hover {
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.08);
+  }
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .jhow-reveal,
+    .jhow-card {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+  }
+
+
+  @media (max-width: 767px) {
+
+    .jhow-card {
+      animation-duration: 0.65s;
+    }
+
+  }
+
+</style>

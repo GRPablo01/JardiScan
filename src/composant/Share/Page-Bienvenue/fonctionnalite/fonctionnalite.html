@@ -1,765 +1,1071 @@
 <!-- ============================================================
-     🌿 JARDISCAN — BIENVENUE / UI-UX PREMIUM RESPONSIVE
+     🌿 JARDISCAN — PAGE FONCTIONNALITÉS
+     
+     UI / UX PREMIUM
+     
+     Desktop :
+     ├── 32% IMAGE
+     └── 68% CONTENU
+     
+     Grand desktop :
+     └── HAUTEUR FIXE 700px
+     
+     Mobile :
+     └── IMAGE puis CONTENU
+     
+     Image :
+     └── Entièrement visible — aucun recadrage
+     ============================================================ -->
 
-     📱 MOBILE
-        → Introduction
-        → Cards empilées
-        → Illustration
-
-     📲 TABLETTE
-        → Introduction
-        → Cards en grille
-        → Illustration
-
-     💻 LAPTOP / DESKTOP
-        → Illustration à gauche
-        → Contenu à droite
-
-     ✨ UI / UX
-        → Hiérarchie visuelle renforcée
-        → Cards interactives
-        → Accent visuel au hover
-        → Meilleure lisibilité
-        → Image héro plus présente
-        → Responsive complet
-        → ThemeService conservé
-        → Multilingue conservé
-        → Motion-reduce supporté
-   ============================================================ -->
 <section
+  class="relative w-full h-[700px] overflow-hidden"
+  [ngStyle]="{
+    'background-color': '#F97',
+    'color': themeService.TextPrincipal
+  }"
+>
+
+  <!-- ============================================================
+       ✨ DÉCORATIONS D'ARRIÈRE-PLAN
+       ============================================================ -->
+
+  <div
+    class="pointer-events-none absolute -left-32 -top-32 h-80 w-80 rounded-full blur-3xl opacity-20"
     [ngStyle]="{
-     background: themeService.Background1
-   }"
-   class="
-     relative
-     isolate
-     w-full
-     overflow-hidden
-     px-5
-     py-8
- 
-     sm:px-8
-     sm:py-10
- 
-     md:px-10
-     md:py-12
- 
-     lg:grid
-     lg:min-h-[680px]
-     lg:grid-cols-[1.05fr_0.95fr]
-     lg:items-center
-     lg:gap-12
-     lg:px-10
-     lg:py-14
- 
-     xl:min-h-[720px]
-     xl:grid-cols-[1.1fr_0.9fr]
-     xl:gap-16
-     xl:px-14
-     xl:py-16
- 
-     2xl:min-h-[780px]
-     2xl:gap-20
-     2xl:px-20
-     2xl:py-20
-   "
- >
- 
-   <!-- ==========================================================
-        📝 COLONNE CONTENU
-   =========================================================== -->
- 
-   <div
-     class="
-       relative
-       z-10
-       order-1
-       flex
-       w-full
-       flex-col
-       justify-center
- 
-       lg:order-2
-     "
-   >
- 
-     <!-- ========================================================
-          🧠 TITRE PRINCIPAL
-     ========================================================= -->
- 
-     <div class="max-w-2xl">
- 
-       <h1
-         class="
-           text-center
-           text-3xl
-           font-bold
-           leading-[1.08]
-           tracking-tight
- 
-           sm:text-4xl
- 
-           md:text-5xl
- 
-           lg:text-left
-           lg:text-[2.75rem]
- 
-           xl:text-5xl
- 
-           2xl:text-6xl
-         "
-         [ngStyle]="{
-           color: themeService.TextPrincipal
-         }"
-       >
-         {{
-           languageService.currentLanguage === 'fr'
-             ? 'Découvrez le monde fascinant des plantes'
-             : 'Discover the fascinating world of plants'
-         }}
-       </h1>
- 
- 
-       <!-- ======================================================
-            DESCRIPTION
-       ======================================================= -->
- 
-       <p
-         class="
-           mx-auto
-           mt-5
-           max-w-xl
-           text-center
-           text-sm
-           leading-7
- 
-           sm:text-base
-           sm:leading-7
- 
-           md:text-lg
-           md:leading-8
- 
-           lg:mx-0
-           lg:text-left
-         "
-         [ngStyle]="{
-           color: themeService.TextSecondaire
-         }"
-       >
-         {{
-           languageService.currentLanguage === 'fr'
-             ? 'Identifiez vos plantes, découvrez leurs caractéristiques et enrichissez votre collection grâce à JardiScan.'
-             : 'Identify your plants, discover their characteristics and grow your collection with JardiScan.'
-         }}
-       </p>
- 
-     </div>
- 
- 
-     <!-- ========================================================
-          🃏 CARDS
-     ========================================================= -->
- 
-     <div
-       class="
-         mt-8
-         grid
-         w-full
-         grid-cols-1
-         gap-3
- 
-         sm:mt-10
-         sm:grid-cols-2
-         sm:gap-4
- 
-         lg:mt-10
-         lg:grid-cols-1
- 
-         xl:gap-4
-       "
-     >
- 
- 
-       <!-- ======================================================
-            🃏 CARD 1 — IDENTIFIER
-       ======================================================= -->
- 
-       <article
-         class="
-           group
-           relative
-           overflow-hidden
-           rounded-2xl
-           border
-           p-4
- 
-           transition-all
-           duration-300
-           ease-out
- 
-           hover:-translate-y-1
- 
-           motion-reduce:transition-none
-         "
-         [ngStyle]="{
-           background: themeService.Background3,
-           borderColor: themeService.Border3,
-           boxShadow: themeService.BoxShadow
-         }"
-       >
- 
-         <!-- Accent vertical -->
- 
-         <div
-           class="
-             absolute
-             left-0
-             top-0
-             h-full
-             w-1
-             origin-top
-             scale-y-0
-             transition-transform
-             duration-300
-             group-hover:scale-y-100
-           "
-           [ngStyle]="{
-             background: themeService.TextPrincipal
-           }"
-         ></div>
- 
- 
-         <div
-           class="
-             flex
-             items-start
-             gap-4
-           "
-         >
- 
-           <!-- Icon -->
- 
-           <div
-             class="
-               flex
-               h-12
-               w-12
-               shrink-0
-               items-center
-               justify-center
-               rounded-xl
-               text-xl
- 
-               transition-transform
-               duration-300
- 
-               group-hover:scale-105
- 
-               motion-reduce:transition-none
-             "
-              [ngStyle]="{
-                background: themeService.Background4,
-                borderColor: themeService.Border4,
-                boxShadow: themeService.BoxShadow
+      'background-color': themeService.Primary
+    }"
+  ></div>
+
+  <div
+    class="pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full blur-3xl opacity-10"
+    [ngStyle]="{
+      'background-color': themeService.Primary
+    }"
+  ></div>
+
+  <!-- ============================================================
+       🌿 CONTENEUR PRINCIPAL
+       ============================================================ -->
+
+  <div
+    class="
+      relative
+      z-10
+      grid
+      h-full
+      w-full
+      grid-cols-1
+      lg:grid-cols-[32%_68%]
+    "
+  >
+
+    <!-- ==========================================================
+         🖼️ BLOC IMAGE — GAUCHE
+         ========================================================== -->
+
+    <div
+      class="
+        relative
+        flex
+        h-full
+        w-full
+        min-w-0
+        items-center
+        justify-center
+        overflow-hidden
+        px-6
+        py-8
+        sm:px-10
+        lg:justify-start
+        lg:px-4
+        lg:py-0
+      "
+    >
+
+      <!-- Halo derrière l'illustration -->
+
+      <div
+        class="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          h-56
+          w-56
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          blur-3xl
+          opacity-20
+          lg:left-24
+          lg:translate-x-0
+        "
+        [ngStyle]="{
+          'background-color': themeService.Primary
+        }"
+      ></div>
+
+      <!-- Conteneur illustration -->
+
+      <div
+        class="
+          relative
+          flex
+          h-full
+          w-full
+          items-center
+          justify-center
+          lg:justify-start
+        "
+      >
+
+        <img
+          src="assets/ImageFonctionnalite.svg"
+          alt="Fonctionnalités JardiScan"
+          class="
+            relative
+            z-10
+            block
+            h-[78%]
+            w-[82%]
+            max-h-full
+            max-w-full
+            object-contain
+            object-center
+            pointer-events-none
+            select-none
+            transition-transform
+            duration-500
+            sm:h-[76%]
+            sm:w-[78%]
+            lg:h-[70%]
+            lg:w-[88%]
+            lg:object-left
+            xl:h-[72%]
+            xl:w-[86%]
+            2xl:h-[74%]
+            2xl:w-[84%]
+          "
+        />
+
+      </div>
+
+    </div>
+
+
+    <!-- ==========================================================
+         📝 BLOC CONTENU — DROITE
+         ========================================================== -->
+
+    <div
+      class="
+        flex
+        h-full
+        w-full
+        min-w-0
+        flex-col
+        justify-center
+        px-5
+        py-8
+        sm:px-8
+        sm:py-8
+        lg:px-8
+        lg:py-8
+        xl:px-12
+        2xl:px-16
+      "
+    >
+
+      <div
+        class="
+          mx-auto
+          flex
+          w-full
+          max-w-5xl
+          flex-col
+          justify-center
+        "
+      >
+
+        <!-- ======================================================
+             ✨ INTRODUCTION
+             ====================================================== -->
+
+        <div class="w-full">
+
+          <!-- Badge -->
+
+          <div
+            class="
+              mb-3
+              inline-flex
+              items-center
+              gap-2
+              rounded-full
+              border
+              px-3.5
+              py-1.5
+              text-[10px]
+              font-bold
+              tracking-wide
+              shadow-sm
+            "
+            [ngStyle]="{
+              'background-color': themeService.Primary + '12',
+              'border-color': themeService.Primary + '25',
+              'color': themeService.Primary
             }"
-           >
-             🌱
-           </div>
- 
- 
-           <!-- Texte -->
- 
-           <div class="min-w-0 flex-1">
- 
-             <h2
-               class="
-                 text-base
-                 font-bold
-                 leading-snug
- 
-                 sm:text-lg
-               "
-               [ngStyle]="{
-                 color: themeService.TextPrincipal
-               }"
-             >
-               {{
-                 languageService.currentLanguage === 'fr'
-                   ? 'Identifiez une plante'
-                   : 'Identify a plant'
-               }}
-             </h2>
- 
-             <p
-               class="
-                 mt-1.5
-                 text-sm
-                 leading-6
-               "
-               [ngStyle]="{
-                 color: themeService.TextSecondaire
-               }"
-             >
-               {{
-                 languageService.currentLanguage === 'fr'
-                   ? 'Prenez simplement une photo et découvrez rapidement son identité.'
-                   : 'Simply take a photo and quickly discover its identity.'
-               }}
-             </p>
- 
-           </div>
- 
- 
-           <!-- Flèche -->
- 
-           <div
-             class="
-               hidden
-               shrink-0
-               pt-1
-               text-lg
-               opacity-40
-               transition-all
-               duration-300
- 
-               sm:block
-               group-hover:translate-x-1
-               group-hover:opacity-100
-             "
-             [ngStyle]="{
-               color: themeService.TextPrincipal
-             }"
-           >
-             →
-           </div>
- 
-         </div>
- 
-       </article>
- 
- 
-       <!-- ======================================================
-            🃏 CARD 2 — DÉCOUVRIR
-       ======================================================= -->
- 
-       <article
-         class="
-           group
-           relative
-           overflow-hidden
-           rounded-2xl
-           border
-           p-4
- 
-           transition-all
-           duration-300
-           ease-out
- 
-           hover:-translate-y-1
- 
-           motion-reduce:transition-none
-         "
-         [ngStyle]="{
-           background: themeService.Background3,
-           borderColor: themeService.Border3,
-           boxShadow: themeService.BoxShadow
-         }"
-       >
- 
-         <div
-           class="
-             absolute
-             left-0
-             top-0
-             h-full
-             w-1
-             origin-top
-             scale-y-0
-             transition-transform
-             duration-300
-             group-hover:scale-y-100
-           "
-           [ngStyle]="{
-             background: themeService.TextPrincipal
-           }"
-         ></div>
- 
- 
-         <div
-           class="
-             flex
-             items-start
-             gap-4
-           "
-         >
- 
-           <div
-             class="
-               flex
-               h-12
-               w-12
-               shrink-0
-               items-center
-               justify-center
-               rounded-xl
-               text-xl
- 
-               transition-transform
-               duration-300
- 
-               group-hover:scale-105
- 
-               motion-reduce:transition-none
-             "
+          >
+
+            <span
+              class="
+                flex
+                h-5
+                w-5
+                items-center
+                justify-center
+                rounded-full
+              "
               [ngStyle]="{
-           background: themeService.Background4,
-           borderColor: themeService.Border4,
-           boxShadow: themeService.BoxShadow
-         }"
-           >
-             📚
-           </div>
- 
- 
-           <div class="min-w-0 flex-1">
- 
-             <h2
-               class="
-                 text-base
-                 font-bold
-                 leading-snug
- 
-                 sm:text-lg
-               "
-               [ngStyle]="{
-                 color: themeService.TextPrincipal
-               }"
-             >
-               {{
-                 languageService.currentLanguage === 'fr'
-                   ? 'Découvrez vos plantes'
-                   : 'Discover your plants'
-               }}
-             </h2>
- 
-             <p
-               class="
-                 mt-1.5
-                 text-sm
-                 leading-6
-               "
-               [ngStyle]="{
-                 color: themeService.TextSecondaire
-               }"
-             >
-               {{
-                 languageService.currentLanguage === 'fr'
-                   ? 'Retrouvez toutes les informations utiles sur les plantes découvertes.'
-                   : 'Find all useful information about the plants you discover.'
-               }}
-             </p>
- 
-           </div>
- 
- 
-           <div
-             class="
-               hidden
-               shrink-0
-               pt-1
-               text-lg
-               opacity-40
-               transition-all
-               duration-300
- 
-               sm:block
-               group-hover:translate-x-1
-               group-hover:opacity-100
-             "
-             [ngStyle]="{
-               color: themeService.TextPrincipal
-             }"
-           >
-             →
-           </div>
- 
-         </div>
- 
-       </article>
- 
- 
-       <!-- ======================================================
-            🃏 CARD 3 — COLLECTION
-       ======================================================= -->
- 
-       <article
-         class="
-           group
-           relative
-           overflow-hidden
-           rounded-2xl
-           border
-           p-4
- 
-           transition-all
-           duration-300
-           ease-out
- 
-           hover:-translate-y-1
- 
-           motion-reduce:transition-none
-         "
-         [ngStyle]="{
-           background: themeService.Background3,
-           borderColor: themeService.Border3,
-           boxShadow: themeService.BoxShadow
-         }"
-       >
- 
-         <div
-           class="
-             absolute
-             left-0
-             top-0
-             h-full
-             w-1
-             origin-top
-             scale-y-0
-             transition-transform
-             duration-300
-             group-hover:scale-y-100
-           "
-           [ngStyle]="{
-             background: themeService.TextPrincipal
-           }"
-         ></div>
- 
- 
-         <div
-           class="
-             flex
-             items-start
-             gap-4
-           "
-         >
- 
-           <div
-             class="
-               flex
-               h-12
-               w-12
-               shrink-0
-               items-center
-               justify-center
-               rounded-xl
-               text-xl
- 
-               transition-transform
-               duration-300
- 
-               group-hover:scale-105
- 
-               motion-reduce:transition-none
-             "
-             [ngStyle]="{
-           background: themeService.Background4,
-           borderColor: themeService.Border4,
-           boxShadow: themeService.BoxShadow
-         }"
-           >
-             🔎
-           </div>
- 
- 
-           <div class="min-w-0 flex-1">
- 
-             <h2
-               class="
-                 text-base
-                 font-bold
-                 leading-snug
- 
-                 sm:text-lg
-               "
-               [ngStyle]="{
-                 color: themeService.TextPrincipal
-               }"
-             >
-               {{
-                 languageService.currentLanguage === 'fr'
-                   ? 'Explorez votre collection'
-                   : 'Explore your collection'
-               }}
-             </h2>
- 
-             <p
-               class="
-                 mt-1.5
-                 text-sm
-                 leading-6
-               "
-               [ngStyle]="{
-                 color: themeService.TextSecondaire
-               }"
-             >
-               {{
-                 languageService.currentLanguage === 'fr'
-                   ? 'Consultez et retrouvez facilement toutes vos découvertes.'
-                   : 'Easily browse and find all your discoveries.'
-               }}
-             </p>
- 
-           </div>
- 
- 
-           <div
-             class="
-               hidden
-               shrink-0
-               pt-1
-               text-lg
-               opacity-40
-               transition-all
-               duration-300
- 
-               sm:block
-               group-hover:translate-x-1
-               group-hover:opacity-100
-             "
-             [ngStyle]="{
-               color: themeService.TextPrincipal
-             }"
-           >
-             →
-           </div>
- 
-         </div>
- 
-       </article>
- 
-     </div>
- 
-   </div>
- 
- 
-   <!-- ==========================================================
-        🖼️ COLONNE IMAGE
-   =========================================================== -->
- 
-   <div
-     class="
-       relative
-       z-10
-       order-2
-       mt-10
-       flex
-       min-h-[280px]
-       w-full
-       items-center
-       justify-center
- 
-       sm:mt-12
-       sm:min-h-[340px]
- 
-       md:min-h-[400px]
- 
-       lg:order-1
-       lg:mt-0
-       lg:min-h-0
-       lg:h-full
-     "
-   >
- 
-     <!-- ========================================================
-          ✨ HALO VISUEL
-     ========================================================= -->
- 
-     <div
-       aria-hidden="true"
-       class="
-         pointer-events-none
-         absolute
-         left-1/2
-         top-1/2
-         h-[65%]
-         w-[65%]
-         -translate-x-1/2
-         -translate-y-1/2
-         rounded-full
-         opacity-[0.045]
-         blur-3xl
-       "
-       [ngStyle]="{
-         background: themeService.TextPrincipal
-       }"
-     ></div>
- 
- 
-     <!-- ========================================================
-          🖼️ IMAGE
-     ========================================================= -->
- 
-     <div
-       class="
-         group
-         relative
-         flex
-         h-full
-         w-full
-         items-center
-         justify-center
-       "
-     >
- 
-       <img
-         src="assets/ImageFonctionnalité.jpg"
-         [alt]="
-           languageService.currentLanguage === 'fr'
-             ? 'Illustration de bienvenue de JardiScan'
-             : 'JardiScan welcome illustration'
-         "
-         class="
-           relative
-           z-10
-           block
-           h-auto
-           w-full
-           max-w-[560px]
-           object-contain
-           object-center
- 
-           transform-gpu
- 
-           transition-transform
-           duration-700
-           ease-[cubic-bezier(0.22,1,0.36,1)]
- 
-           group-hover:scale-[1.025]
- 
-           max-h-[34vh]
- 
-           sm:max-w-[650px]
-           sm:max-h-[42vh]
- 
-           md:max-w-[720px]
-           md:max-h-[48vh]
- 
-           lg:max-w-[760px]
-           lg:max-h-[68vh]
- 
-           xl:max-w-[880px]
-           xl:max-h-[74vh]
- 
-           2xl:max-w-[1000px]
-           2xl:max-h-[78vh]
- 
-           motion-reduce:transform-none
-           motion-reduce:transition-none
-         "
-       />
- 
-     </div>
- 
-   </div>
- 
+                'background-color': themeService.Primary + '18'
+              }"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>
+            </span>
+
+            <span>
+              Une expérience pensée pour vous
+            </span>
+
+          </div>
+
+
+          <!-- Petit label -->
+
+          <div
+            class="
+              mb-1.5
+              text-[9px]
+              font-bold
+              uppercase
+              tracking-[0.2em]
+              opacity-60
+            "
+          >
+            JardiScan
+          </div>
+
+
+          <!-- Titre -->
+
+          <h2
+            class="
+              max-w-3xl
+              text-2xl
+              font-black
+              leading-[1.08]
+              tracking-[-0.025em]
+              sm:text-3xl
+              lg:text-3xl
+              xl:text-4xl
+              2xl:text-[2.7rem]
+            "
+          >
+
+            Tout ce dont vous avez besoin
+
+            <span
+              class="relative inline-block"
+              [ngStyle]="{
+                'color': themeService.Primary
+              }"
+            >
+              au même endroit
+            </span>
+
+          </h2>
+
+
+          <!-- Description -->
+
+          <p
+            class="
+              mt-3
+              max-w-2xl
+              text-xs
+              leading-5
+              opacity-80
+              sm:text-sm
+              sm:leading-6
+            "
+            [ngStyle]="{
+              'color': themeService.TextPrincipal
+            }"
+          >
+            JardiScan rassemble plusieurs outils intelligents pour
+            identifier, rechercher et découvrir les plantes plus
+            simplement, rapidement et intuitivement.
+          </p>
+
+        </div>
+
+
+        <!-- ======================================================
+             🌿 FONCTIONNALITÉS
+             ====================================================== -->
+
+        <div
+          class="
+            mt-5
+            grid
+            w-full
+            grid-cols-1
+            gap-3
+            sm:grid-cols-2
+            xl:gap-4
+          "
+        >
+
+          <!-- ====================================================
+               📷 SCANNER
+               ==================================================== -->
+
+          <article
+            class="
+              group
+              relative
+              overflow-hidden
+              rounded-2xl
+              border
+              p-4
+              shadow-sm
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:shadow-lg
+              xl:p-4.5
+            "
+            [ngStyle]="{
+              'background-color': themeService.Background2,
+              'border-color': themeService.Border2
+            }"
+          >
+
+            <!-- Accent -->
+
+            <div
+              class="
+                absolute
+                -right-8
+                -top-8
+                h-20
+                w-20
+                rounded-full
+                blur-2xl
+                opacity-0
+                transition-opacity
+                duration-300
+                group-hover:opacity-30
+              "
+              [ngStyle]="{
+                'background-color': themeService.Primary
+              }"
+            ></div>
+
+
+            <!-- Header -->
+
+            <div
+              class="
+                relative
+                z-10
+                flex
+                items-center
+                justify-between
+                gap-3
+              "
+            >
+
+              <div
+                class="
+                  flex
+                  h-10
+                  w-10
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  transition-transform
+                  duration-300
+                  group-hover:scale-105
+                "
+                [ngStyle]="{
+                  'background-color': themeService.Primary + '18'
+                }"
+              >
+                <i
+                  class="fa-solid fa-camera text-sm"
+                  [ngStyle]="{
+                    'color': themeService.Primary
+                  }"
+                ></i>
+              </div>
+
+              <span
+                class="
+                  rounded-full
+                  px-2.5
+                  py-1
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-wider
+                "
+                [ngStyle]="{
+                  'background-color': themeService.Primary + '12',
+                  'color': themeService.Primary
+                }"
+              >
+                Rapide
+              </span>
+
+            </div>
+
+
+            <!-- Contenu -->
+
+            <div class="relative z-10">
+
+              <h3
+                class="
+                  mt-3
+                  text-sm
+                  font-extrabold
+                  tracking-tight
+                  xl:text-base
+                "
+              >
+                Scanner une plante
+              </h3>
+
+              <p
+                class="
+                  mt-1.5
+                  text-[11px]
+                  leading-[1.45]
+                  opacity-75
+                  xl:text-xs
+                  xl:leading-5
+                "
+                [ngStyle]="{
+                  'color': themeService.TextPrincipal
+                }"
+              >
+                Utilisez votre appareil photo pour identifier
+                rapidement une plante et obtenir les informations
+                essentielles.
+              </p>
+
+              <div
+                class="
+                  mt-3
+                  flex
+                  items-center
+                  gap-2
+                  text-[10px]
+                  font-bold
+                  xl:text-[11px]
+                "
+                [ngStyle]="{
+                  'color': themeService.Primary
+                }"
+              >
+                <span>
+                  Identifier facilement
+                </span>
+
+                <span
+                  class="
+                    flex
+                    h-5
+                    w-5
+                    items-center
+                    justify-center
+                    rounded-full
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                  [ngStyle]="{
+                    'background-color': themeService.Primary + '12'
+                  }"
+                >
+                  <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                </span>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- ====================================================
+               🔎 RECHERCHE
+               ==================================================== -->
+
+          <article
+            class="
+              group
+              relative
+              overflow-hidden
+              rounded-2xl
+              border
+              p-4
+              shadow-sm
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:shadow-lg
+              xl:p-4.5
+            "
+            [ngStyle]="{
+              'background-color': themeService.Background2,
+              'border-color': themeService.Border2
+            }"
+          >
+
+            <div
+              class="
+                absolute
+                -right-8
+                -top-8
+                h-20
+                w-20
+                rounded-full
+                blur-2xl
+                opacity-0
+                transition-opacity
+                duration-300
+                group-hover:opacity-30
+              "
+              [ngStyle]="{
+                'background-color': themeService.Primary
+              }"
+            ></div>
+
+            <div
+              class="
+                relative
+                z-10
+                flex
+                items-center
+                justify-between
+                gap-3
+              "
+            >
+
+              <div
+                class="
+                  flex
+                  h-10
+                  w-10
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  transition-transform
+                  duration-300
+                  group-hover:scale-105
+                "
+                [ngStyle]="{
+                  'background-color': themeService.Primary + '18'
+                }"
+              >
+                <i
+                  class="fa-solid fa-magnifying-glass text-sm"
+                  [ngStyle]="{
+                    'color': themeService.Primary
+                  }"
+                ></i>
+              </div>
+
+              <span
+                class="
+                  rounded-full
+                  px-2.5
+                  py-1
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-wider
+                "
+                [ngStyle]="{
+                  'background-color': themeService.Primary + '12',
+                  'color': themeService.Primary
+                }"
+              >
+                Simple
+              </span>
+
+            </div>
+
+            <div class="relative z-10">
+
+              <h3
+                class="
+                  mt-3
+                  text-sm
+                  font-extrabold
+                  tracking-tight
+                  xl:text-base
+                "
+              >
+                Rechercher une plante
+              </h3>
+
+              <p
+                class="
+                  mt-1.5
+                  text-[11px]
+                  leading-[1.45]
+                  opacity-75
+                  xl:text-xs
+                  xl:leading-5
+                "
+                [ngStyle]="{
+                  'color': themeService.TextPrincipal
+                }"
+              >
+                Recherchez directement une plante grâce à son
+                nom et accédez rapidement à sa fiche.
+              </p>
+
+              <div
+                class="
+                  mt-3
+                  flex
+                  items-center
+                  gap-2
+                  text-[10px]
+                  font-bold
+                  xl:text-[11px]
+                "
+                [ngStyle]="{
+                  'color': themeService.Primary
+                }"
+              >
+                <span>
+                  Trouver rapidement
+                </span>
+
+                <span
+                  class="
+                    flex
+                    h-5
+                    w-5
+                    items-center
+                    justify-center
+                    rounded-full
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                  [ngStyle]="{
+                    'background-color': themeService.Primary + '12'
+                  }"
+                >
+                  <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                </span>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- ====================================================
+               📱 QR CODE
+               ==================================================== -->
+
+          <article
+            class="
+              group
+              relative
+              overflow-hidden
+              rounded-2xl
+              border
+              p-4
+              shadow-sm
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:shadow-lg
+              xl:p-4.5
+            "
+            [ngStyle]="{
+              'background-color': themeService.Background2,
+              'border-color': themeService.Border2
+            }"
+          >
+
+            <div
+              class="
+                absolute
+                -right-8
+                -top-8
+                h-20
+                w-20
+                rounded-full
+                blur-2xl
+                opacity-0
+                transition-opacity
+                duration-300
+                group-hover:opacity-30
+              "
+              [ngStyle]="{
+                'background-color': themeService.Primary
+              }"
+            ></div>
+
+            <div
+              class="
+                relative
+                z-10
+                flex
+                items-center
+                justify-between
+                gap-3
+              "
+            >
+
+              <div
+                class="
+                  flex
+                  h-10
+                  w-10
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  transition-transform
+                  duration-300
+                  group-hover:scale-105
+                "
+                [ngStyle]="{
+                  'background-color': themeService.Primary + '18'
+                }"
+              >
+                <i
+                  class="fa-solid fa-qrcode text-sm"
+                  [ngStyle]="{
+                    'color': themeService.Primary
+                  }"
+                ></i>
+              </div>
+
+              <span
+                class="
+                  rounded-full
+                  px-2.5
+                  py-1
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-wider
+                "
+                [ngStyle]="{
+                  'background-color': themeService.Primary + '12',
+                  'color': themeService.Primary
+                }"
+              >
+                Pratique
+              </span>
+
+            </div>
+
+            <div class="relative z-10">
+
+              <h3
+                class="
+                  mt-3
+                  text-sm
+                  font-extrabold
+                  tracking-tight
+                  xl:text-base
+                "
+              >
+                Scanner un QR Code
+              </h3>
+
+              <p
+                class="
+                  mt-1.5
+                  text-[11px]
+                  leading-[1.45]
+                  opacity-75
+                  xl:text-xs
+                  xl:leading-5
+                "
+                [ngStyle]="{
+                  'color': themeService.TextPrincipal
+                }"
+              >
+                Accédez instantanément aux informations associées
+                à une plante grâce à son QR Code.
+              </p>
+
+              <div
+                class="
+                  mt-3
+                  flex
+                  items-center
+                  gap-2
+                  text-[10px]
+                  font-bold
+                  xl:text-[11px]
+                "
+                [ngStyle]="{
+                  'color': themeService.Primary
+                }"
+              >
+                <span>
+                  Accès instantané
+                </span>
+
+                <span
+                  class="
+                    flex
+                    h-5
+                    w-5
+                    items-center
+                    justify-center
+                    rounded-full
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                  [ngStyle]="{
+                    'background-color': themeService.Primary + '12'
+                  }"
+                >
+                  <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                </span>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- ====================================================
+               🌱 FICHE PLANTE
+               ==================================================== -->
+
+          <article
+            class="
+              group
+              relative
+              overflow-hidden
+              rounded-2xl
+              border
+              p-4
+              shadow-sm
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:shadow-lg
+              xl:p-4.5
+            "
+            [ngStyle]="{
+              'background-color': themeService.Background2,
+              'border-color': themeService.Border2
+            }"
+          >
+
+            <div
+              class="
+                absolute
+                -right-8
+                -top-8
+                h-20
+                w-20
+                rounded-full
+                blur-2xl
+                opacity-0
+                transition-opacity
+                duration-300
+                group-hover:opacity-30
+              "
+              [ngStyle]="{
+                'background-color': themeService.Primary
+              }"
+            ></div>
+
+            <div
+              class="
+                relative
+                z-10
+                flex
+                items-center
+                justify-between
+                gap-3
+              "
+            >
+
+              <div
+                class="
+                  flex
+                  h-10
+                  w-10
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  transition-transform
+                  duration-300
+                  group-hover:scale-105
+                "
+                [ngStyle]="{
+                  'background-color': themeService.Primary + '18'
+                }"
+              >
+                <i
+                  class="fa-solid fa-leaf text-sm"
+                  [ngStyle]="{
+                    'color': themeService.Primary
+                  }"
+                ></i>
+              </div>
+
+              <span
+                class="
+                  rounded-full
+                  px-2.5
+                  py-1
+                  text-[9px]
+                  font-bold
+                  uppercase
+                  tracking-wider
+                "
+                [ngStyle]="{
+                  'background-color': themeService.Primary + '12',
+                  'color': themeService.Primary
+                }"
+              >
+                Détaillé
+              </span>
+
+            </div>
+
+            <div class="relative z-10">
+
+              <h3
+                class="
+                  mt-3
+                  text-sm
+                  font-extrabold
+                  tracking-tight
+                  xl:text-base
+                "
+              >
+                Fiches détaillées
+              </h3>
+
+              <p
+                class="
+                  mt-1.5
+                  text-[11px]
+                  leading-[1.45]
+                  opacity-75
+                  xl:text-xs
+                  xl:leading-5
+                "
+                [ngStyle]="{
+                  'color': themeService.TextPrincipal
+                }"
+              >
+                Retrouvez les informations importantes sur chaque
+                plante dans une interface claire et facile à consulter.
+              </p>
+
+              <div
+                class="
+                  mt-3
+                  flex
+                  items-center
+                  gap-2
+                  text-[10px]
+                  font-bold
+                  xl:text-[11px]
+                "
+                [ngStyle]="{
+                  'color': themeService.Primary
+                }"
+              >
+                <span>
+                  Découvrir les plantes
+                </span>
+
+                <span
+                  class="
+                    flex
+                    h-5
+                    w-5
+                    items-center
+                    justify-center
+                    rounded-full
+                    transition-transform
+                    duration-300
+                    group-hover:translate-x-1
+                  "
+                  [ngStyle]="{
+                    'background-color': themeService.Primary + '12'
+                  }"
+                >
+                  <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                </span>
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <!-- ======================================================
+             ✨ MICRO INDICATEUR UX
+             ====================================================== -->
+
+        <div
+          class="
+            mt-4
+            flex
+            items-center
+            gap-2
+            text-[9px]
+            font-medium
+            opacity-50
+          "
+        >
+
+          <span
+            class="h-1.5 w-1.5 rounded-full"
+            [ngStyle]="{
+              'background-color': themeService.Primary
+            }"
+          ></span>
+
+          <span>
+            Une interface pensée pour rester simple et intuitive
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>

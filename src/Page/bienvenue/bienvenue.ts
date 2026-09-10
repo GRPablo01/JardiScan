@@ -7,7 +7,12 @@ import { ThemeService } from '../../../Backend/Services/theme.service';
 import { HeaderBienvenue } from '../../composant/Share/Page-Bienvenue/header-bienvenue/header-bienvenue';
 import { Welcome } from '../../composant/Share/Page-Bienvenue/welcome/welcome';
 import { Fonctionnalite } from '../../composant/Share/Page-Bienvenue/fonctionnalite/fonctionnalite';
-import { Teste } from "../../composant/teste/teste";
+import { Statistiques } from '../../composant/Share/Page-Bienvenue/statistiques/statistiques';
+import { Pourquoi } from '../../composant/Share/Page-Bienvenue/pourquoi/pourquoi';
+import { Role } from '../../composant/Share/Page-Bienvenue/role/role';
+import { TicketWelcome } from '../../composant/Share/Page-Bienvenue/ticket-welcome/ticket-welcome';
+import { FooterBienvenue } from "../../composant/Share/Page-Bienvenue/footer-bienvenue/footer-bienvenue";
+
 
 
 
@@ -30,7 +35,11 @@ import { Teste } from "../../composant/teste/teste";
     Welcome,
     HeaderBienvenue,
     Fonctionnalite,
-    Teste
+    Statistiques,
+    Pourquoi,
+    Role,
+    TicketWelcome,
+    FooterBienvenue
 ],
   templateUrl: './bienvenue.html',
   styleUrls: ['./bienvenue.css'],
@@ -84,11 +93,11 @@ export class Bienvenue implements OnInit {
   private updateScrollbarColors(isDark: boolean): void {
     const root = document.documentElement;
     if (isDark) {
-      root.style.setProperty('--scroll-track', '#1B241C');
+      root.style.setProperty('--scroll-track', '#18181B');
       root.style.setProperty('--scroll-thumb', '#5FA58E');
       root.style.setProperty('--scroll-thumb-hover', '#5FA58E');
     } else {
-      root.style.setProperty('--scroll-track', '#F3F7F2');
+      root.style.setProperty('--scroll-track', '#F8FAFC');
       root.style.setProperty('--scroll-thumb', '#4F8061');
       root.style.setProperty('--scroll-thumb-hover', '#4F8061');
     }
