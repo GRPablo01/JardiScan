@@ -1,0 +1,334 @@
+<!-- ============================================================
+
+🌿 JARDISCAN — HEADER COMPLET FIXED
+
+• Header fixed
+• Reste visible pendant tout le scroll
+• Toute la largeur disponible
+• Marge permanente à gauche et à droite
+• Logo jamais collé à la bordure
+• app-liste-icon directement à côté du logo
+• Navigation desktop centrée exactement dans l'écran
+• app-bouton-bienvenue jamais collé à la bordure
+• Navigation mobile / tablette conservée
+• Bouton bienvenue conservé
+• ThemeService conservé
+• Angular 20 Standalone
+• Tailwind CSS
+• Responsive
+• Aucun composant supprimé
+• Aucun composant déplacé hors de sa logique actuelle
+
+============================================================ -->
+
+<header
+  class="
+    fixed
+    top-0
+    left-0
+    z-50
+    w-full
+    border-b
+    backdrop-blur-2xl
+  "
+  [ngStyle]="{
+    'background': themeService.GlassBackground,
+    'border-color': themeService.Border1,
+    'box-shadow': themeService.BoxShadowSmall
+  }"
+>
+
+  <!-- ==========================================================
+  🌿 CONTENEUR PRINCIPAL
+
+  • Toute la largeur
+  • Marge gauche permanente
+  • Marge droite permanente
+  • Logo à gauche
+  • Liste-icons juste à côté
+  • Navigation centrée
+  • Bouton bienvenue à droite
+  =========================================================== -->
+
+  <div
+    class="
+      relative
+      flex
+      min-h-[72px]
+      w-full
+      items-center
+      px-3
+      sm:px-4
+      md:px-5
+      lg:px-6
+      xl:px-8
+      2xl:px-10
+    "
+  >
+
+
+<!-- ========================================================
+🌿 ZONE GAUCHE
+
+• Toujours à gauche
+• Mais jamais collée à la bordure
+• Logo
+• Nom JardiScan
+• app-liste-icon juste à côté
+========================================================= -->
+
+<div
+  class="
+    flex
+    shrink-0
+    items-center
+    gap-2
+    sm:gap-3
+  "
+>
+
+  <!-- ======================================================
+  🌿 LOGO JARDISCAN
+  ======================================================= -->
+
+  <a
+    routerLink="/"
+    aria-label="JardiScan - Accueil de présentation"
+    class="
+      group
+      flex
+      shrink-0
+      items-center
+      gap-2.5
+      rounded-2xl
+      outline-none
+      transition-all
+      duration-300
+    "
+    [ngStyle]="{
+      'color': themeService.TextPrincipal,
+      '--tw-ring-color': themeService.Primary
+    }"
+  >
+
+    <!-- ==================================================
+    🖼️ CONTENEUR DU LOGO
+    =================================================== -->
+
+    <div
+      class="
+        relative
+        flex
+        h-10
+        w-10
+        shrink-0
+        items-center
+        justify-center
+        overflow-hidden
+        rounded-2xl
+        border
+        transition-all
+        duration-300
+        group-hover:scale-105
+        group-active:scale-95
+        sm:h-11
+        sm:w-11
+        lg:h-12
+        lg:w-12
+      "
+      [ngStyle]="{
+        'background': themeService.PrimarySoft,
+        'border-color': themeService.BorderPrimary
+      }"
+    >
+
+      <!-- =================================================
+      🖼️ LOGO
+      ================================================== -->
+
+      <img
+        src="assets/Logo.svg"
+        alt="Logo JardiScan"
+        class="
+          relative
+          z-10
+          h-full
+          w-full
+          object-contain
+          p-1
+        "
+      />
+
+      <!-- =================================================
+      ✨ EFFET LUMINEUX
+      ================================================== -->
+
+      <span
+        aria-hidden="true"
+        class="
+          pointer-events-none
+          absolute
+          inset-0
+          z-20
+          -translate-x-full
+          skew-x-[-20deg]
+          bg-white/20
+          transition-transform
+          duration-500
+          group-hover:translate-x-[150%]
+        "
+      ></span>
+
+    </div>
+
+    <!-- ==================================================
+    🌿 NOM DE L'APPLICATION
+    =================================================== -->
+
+    <div
+      class="
+        hidden
+        min-w-0
+        flex-col
+        leading-none
+        sm:flex
+      "
+    >
+
+      <p
+        class="
+          truncate
+          text-lg
+          font-black
+          tracking-tight
+          sm:text-xl
+        "
+        [ngStyle]="{
+          'color': themeService.TextPrincipal
+        }"
+      >
+        JardiScan
+      </p>
+
+      <span
+        class="
+          mt-1
+          truncate
+          text-[10px]
+          font-semibold
+          uppercase
+          tracking-[0.18em]
+        "
+        [ngStyle]="{
+          'color': themeService.TextTertiaire
+        }"
+      >
+        Jardin intelligent
+      </span>
+
+    </div>
+
+  </a>
+
+  <!-- ======================================================
+  🌿 LISTE DES ICÔNES
+
+  • Directement à côté du logo
+  • Reste dans le header
+  • Aucun changement du composant
+  ======================================================= -->
+
+  <div
+    class="
+      flex
+      shrink-0
+      items-center
+    "
+  >
+    <app-liste-icon></app-liste-icon>
+  </div>
+
+</div>
+
+<!-- ========================================================
+🖥️ NAVIGATION DESKTOP
+
+• À partir de 1293px
+• Centrée exactement à 50% de l'écran
+• Indépendante du logo
+• Indépendante du bouton bienvenue
+• Ne touche jamais directement les bords
+========================================================= -->
+
+<div
+  class="
+    absolute
+    left-1/2
+    top-1/2
+    hidden
+    -translate-x-1/2
+    -translate-y-1/2
+    min-[1293px]:block
+  "
+>
+
+  <!-- ====================================================
+  🌿 NAVIGATION PUBLIQUE
+  ===================================================== -->
+
+  <app-nav></app-nav>
+
+</div>
+
+<!-- ========================================================
+👤 BOUTON BIENVENUE
+
+• Toujours à droite
+• Marge intérieure du header
+• Jamais collé à la bordure
+• Indépendant de la navigation
+========================================================= -->
+
+<div
+  class="
+    ml-auto
+    flex
+    shrink-0
+    items-center
+  "
+>
+  <app-profil></app-profil>
+</div>
+
+
+  </div>
+
+</header>
+
+<!-- ============================================================
+
+📱 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
+
+• En dehors de la balise header
+• De 390px à 1292px
+• Masquée sous 390px
+• Masquée à partir de 1293px
+• app-nav-welcome conservé
+• app-liste-icon reste dans le header
+• Header désormais FIXED
+
+============================================================ -->
+
+<div
+  class="
+    hidden
+    w-full
+    min-[390px]:block
+    min-[1293px]:hidden
+    pt-[72px]
+  "
+>
+
+<app-nav></app-nav>
+
+</div>

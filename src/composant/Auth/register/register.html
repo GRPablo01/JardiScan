@@ -1,0 +1,1812 @@
+<section
+  class="relative min-h-screen w-full overflow-x-hidden"
+  [style.background-color]="themeService.Background1"
+>
+
+  <!-- ============================================================
+       IMAGE GAUCHE
+       DESKTOP UNIQUEMENT
+       ============================================================ -->
+
+  <div
+    class="pointer-events-none absolute inset-y-0 left-0 z-0 hidden h-screen w-1/2 overflow-visible lg:block"
+  >
+    <img
+      src="assets/ImageRegisterLoginGauche.svg"
+      alt=""
+      aria-hidden="true"
+      class="absolute left-[-22vw] top-1/2 h-[125vh] w-[78vw] max-w-none -translate-y-1/2 object-cover object-left"
+    />
+  </div>
+
+  <!-- ============================================================
+       IMAGE DROITE
+       DESKTOP UNIQUEMENT
+       ============================================================ -->
+
+  <div
+    class="pointer-events-none absolute inset-y-0 right-0 z-0 hidden h-screen w-1/2 overflow-visible lg:block"
+  >
+    <img
+      src="assets/mageRegisterLoginDroite.svg"
+      alt=""
+      aria-hidden="true"
+      class="absolute right-[-22vw] top-1/2 h-[125vh] w-[78vw] max-w-none -translate-y-1/2 object-cover object-right"
+    />
+  </div>
+
+ 
+  <!-- ============================================================
+       BOUTON RETOUR
+       ============================================================ -->
+
+  <a
+    routerLink="/"
+    class="group fixed left-3 top-3 z-30 flex h-11 items-center gap-2 rounded-2xl border px-3.5 text-sm font-semibold backdrop-blur-xl transition-all duration-200 hover:-translate-x-0.5 hover:opacity-85 active:scale-95 sm:left-5 sm:top-5 sm:h-12 sm:px-4"
+    [style.background-color]="themeService.GlassBackground"
+    [style.border-color]="themeService.GlassBorder"
+    [style.color]="themeService.TextPrincipal"
+    [style.box-shadow]="themeService.BoxShadowLarge"
+    [attr.aria-label]="languageService.is('fr') ? 'Retour' : 'Back'"
+  >
+    <!-- FLÈCHE -->
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:-translate-x-0.5 sm:h-5 sm:w-5"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19 12H5"
+      />
+
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m12 19-7-7 7-7"
+      />
+    </svg>
+
+    <span>
+      {{ languageService.is('fr') ? 'Retour' : 'Back' }}
+    </span>
+  </a>
+
+  <!-- ============================================================
+       CONTENU
+       MOBILE / TABLETTE :
+       FORMULAIRE UNIQUEMENT
+
+       DESKTOP :
+       FORMULAIRE + DÉCORATIONS
+       ============================================================ -->
+
+  <div
+    class="relative z-20 flex min-h-screen w-full items-center justify-center px-3 py-5 sm:px-5 sm:py-6 md:px-8 md:py-8 lg:px-8 lg:py-8"
+  >
+
+
+<!-- ==========================================================
+     CARTE REGISTER
+     UI/UX ALIGNÉE SUR LA CARTE LOGIN
+     ========================================================== -->
+
+<div
+  class="w-full max-w-[500px] overflow-hidden rounded-[1.75rem] border p-5 backdrop-blur-2xl sm:rounded-[2rem] sm:p-7 md:p-8 lg:p-9"
+  [style.background-color]="themeService.GlassBackground"
+  [style.border-color]="themeService.GlassBorder"
+  [style.box-shadow]="themeService.BoxShadowLarge"
+>
+  <!-- ========================================================
+       HEADER
+       ======================================================== -->
+
+  <header class="mb-6 text-center sm:mb-7">
+
+    <!-- LOGO -->
+    <div
+      class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[18px] border p-2.5 shadow-sm sm:mb-5 sm:h-16 sm:w-16 sm:rounded-[20px]"
+      [style.background-color]="themeService.PrimarySoft"
+      [style.border-color]="themeService.BorderPrimary"
+    >
+      <img
+        src="assets/Logo.svg"
+        alt="JardiScan"
+        class="h-full w-full object-contain"
+      />
+    </div>
+
+    <!-- TITRE -->
+    <h1
+      class="text-[1.75rem] font-bold leading-tight tracking-tight sm:text-3xl md:text-4xl"
+      [style.color]="themeService.TextPrincipal"
+    >
+      {{ t('createAccount') }}
+    </h1>
+
+    <p
+      class="mx-auto mt-2 max-w-md text-sm leading-5 sm:text-base sm:leading-6"
+      [style.color]="themeService.TextSecondaire"
+    >
+      {{ t('registerSubtitle') }}
+    </p>
+  </header>
+
+
+  <!-- ========================================================
+       MESSAGE SUCCÈS
+       ======================================================== -->
+
+  <div
+    *ngIf="successMessage"
+    class="mb-5 flex items-start gap-3 rounded-2xl border px-3.5 py-3 sm:px-4"
+    [style.background-color]="themeService.PrimarySoft"
+    [style.border-color]="themeService.BorderPrimary"
+  >
+    <div
+      class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+      [style.background-color]="themeService.Primary"
+      [style.color]="themeService.TextOnPrimary"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        class="h-3 w-3"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m5 12 4 4L19 6"
+        />
+      </svg>
+    </div>
+
+    <p
+      class="min-w-0 text-sm font-medium leading-5"
+      [style.color]="themeService.Primary"
+    >
+      {{ successMessage }}
+    </p>
+  </div>
+
+
+  <!-- ========================================================
+       MESSAGE ERREUR
+       ======================================================== -->
+
+  <div
+    *ngIf="errorMessage"
+    class="mb-5 flex items-start gap-3 rounded-2xl border px-3.5 py-3 sm:px-4"
+    [style.background-color]="themeService.ErrorSoft"
+    [style.border-color]="themeService.ErrorBorder"
+    role="alert"
+  >
+    <div
+      class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+      [style.background-color]="themeService.Error"
+      [style.color]="themeService.TextOnPrimary"
+    >
+      !
+    </div>
+
+    <p
+      class="min-w-0 text-sm font-medium leading-5"
+      [style.color]="themeService.Error"
+    >
+      {{ errorMessage }}
+    </p>
+  </div>
+
+
+  <!-- ========================================================
+       PROGRESSION — 5 ÉTAPES
+       ======================================================== -->
+
+  <div class="mb-6 sm:mb-7">
+
+    <div class="mb-3 flex items-center justify-between gap-3">
+
+      <span
+        class="shrink-0 text-[11px] font-semibold sm:text-xs"
+        [style.color]="themeService.Primary"
+      >
+        {{ t('step') }} {{ currentStep }} {{ t('of') }} 5
+      </span>
+
+      <span
+        class="min-w-0 truncate text-[11px] sm:text-xs"
+        [style.color]="themeService.TextSecondaire"
+      >
+        {{ getStepLabel() }}
+      </span>
+
+    </div>
+
+    <div class="flex gap-1.5">
+      <span
+        *ngFor="let step of [1, 2, 3, 4, 5]"
+        class="h-1.5 flex-1 rounded-full transition-all duration-300"
+        [style.background-color]="
+          step <= currentStep
+            ? themeService.Primary
+            : themeService.BorderSoft
+        "
+      ></span>
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       FORMULAIRE
+       ======================================================== -->
+
+  <form
+    class="space-y-5"
+    (ngSubmit)="submitCurrentStep()"
+    novalidate
+  >
+
+    <!-- ======================================================
+         ÉTAPE 1 — IDENTITÉ
+         ====================================================== -->
+
+    <div
+      *ngIf="currentStep === 1"
+      class="space-y-5"
+    >
+
+      <!-- INTRODUCTION -->
+
+      <div class="mb-1">
+
+        <h2
+          class="text-xl font-bold sm:text-[1.35rem]"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('yourIdentity') }}
+        </h2>
+
+        <p
+          class="mt-1 text-sm leading-5"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ t('identityDescription') }}
+        </p>
+
+      </div>
+
+
+      <!-- PSEUDO -->
+
+      <div>
+
+        <label
+          for="pseudo"
+          class="mb-2 block text-sm font-semibold"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('username') }}
+        </label>
+
+        <div class="relative">
+
+          <!-- ICÔNE -->
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-4"
+            [style.color]="themeService.TextSecondaire"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0"
+            />
+          </svg>
+
+          <!-- INPUT -->
+
+          <input
+            id="pseudo"
+            type="text"
+            name="pseudo"
+            autocomplete="username"
+            maxlength="30"
+            [placeholder]="t('usernamePlaceholder')"
+            [(ngModel)]="pseudo"
+            required
+            [disabled]="isLoading"
+            class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-4 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
+            [style.background-color]="themeService.Surface2"
+            [style.border-color]="
+              isFieldInvalid(pseudo)
+                ? themeService.ErrorBorder
+                : themeService.Border2
+            "
+            [style.color]="themeService.TextPrincipal"
+            [style.caret-color]="themeService.Primary"
+            [style.--tw-ring-color]="themeService.PrimarySoft"
+          />
+
+        </div>
+
+        <p
+          *ngIf="submitted && pseudo && pseudo.length < 2"
+          class="mt-1.5 px-1 text-xs leading-4"
+          [style.color]="themeService.Error"
+        >
+          {{ t('usernameMin') }}
+        </p>
+
+      </div>
+
+
+      <!-- NOM + PRÉNOM -->
+
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+        <!-- NOM -->
+
+        <div>
+
+          <label
+            for="nom"
+            class="mb-2 block text-sm font-semibold"
+            [style.color]="themeService.TextPrincipal"
+          >
+            {{ t('lastName') }}
+          </label>
+
+          <input
+            id="nom"
+            type="text"
+            name="nom"
+            autocomplete="family-name"
+            maxlength="50"
+            [placeholder]="t('lastNamePlaceholder')"
+            [(ngModel)]="nom"
+            required
+            [disabled]="isLoading"
+            class="min-h-[52px] w-full rounded-2xl border px-4 py-3.5 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60"
+            [style.background-color]="themeService.Surface2"
+            [style.border-color]="
+              isFieldInvalid(nom)
+                ? themeService.ErrorBorder
+                : themeService.Border2
+            "
+            [style.color]="themeService.TextPrincipal"
+            [style.caret-color]="themeService.Primary"
+            [style.--tw-ring-color]="themeService.PrimarySoft"
+          />
+
+        </div>
+
+
+        <!-- PRÉNOM -->
+
+        <div>
+
+          <label
+            for="prenom"
+            class="mb-2 block text-sm font-semibold"
+            [style.color]="themeService.TextPrincipal"
+          >
+            {{ t('firstName') }}
+          </label>
+
+          <input
+            id="prenom"
+            type="text"
+            name="prenom"
+            autocomplete="given-name"
+            maxlength="50"
+            [placeholder]="t('firstNamePlaceholder')"
+            [(ngModel)]="prenom"
+            required
+            [disabled]="isLoading"
+            class="min-h-[52px] w-full rounded-2xl border px-4 py-3.5 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60"
+            [style.background-color]="themeService.Surface2"
+            [style.border-color]="
+              isFieldInvalid(prenom)
+                ? themeService.ErrorBorder
+                : themeService.Border2
+            "
+            [style.color]="themeService.TextPrincipal"
+            [style.caret-color]="themeService.Primary"
+            [style.--tw-ring-color]="themeService.PrimarySoft"
+          />
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         ÉTAPE 2 — CONNEXION
+         ====================================================== -->
+
+    <div
+      *ngIf="currentStep === 2"
+      class="space-y-5"
+    >
+
+      <!-- INTRODUCTION -->
+
+      <div class="mb-1">
+
+        <h2
+          class="text-xl font-bold sm:text-[1.35rem]"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('secureAccount') }}
+        </h2>
+
+        <p
+          class="mt-1 text-sm leading-5"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ t('secureDescription') }}
+        </p>
+
+      </div>
+
+
+      <!-- EMAIL -->
+
+      <div>
+
+        <label
+          for="email"
+          class="mb-2 block text-sm font-semibold"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('email') }}
+        </label>
+
+        <div class="relative">
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-4"
+            [style.color]="themeService.TextSecondaire"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 7.5 12 13l9-5.5"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.5 19.5h15A1.5 1.5 0 0 0 21 18V6a1.5 1.5 0 0 0-1.5-1.5h-15A1.5 1.5 0 0 0 3 6v12a1.5 1.5 0 0 0 1.5 1.5Z"
+            />
+          </svg>
+
+          <input
+            id="email"
+            type="email"
+            name="email"
+            autocomplete="email"
+            [placeholder]="t('emailPlaceholder')"
+            [(ngModel)]="email"
+            required
+            [disabled]="isLoading"
+            class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-4 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
+            [style.background-color]="themeService.Surface2"
+            [style.border-color]="themeService.Border2"
+            [style.color]="themeService.TextPrincipal"
+            [style.caret-color]="themeService.Primary"
+            [style.--tw-ring-color]="themeService.PrimarySoft"
+          />
+
+        </div>
+
+      </div>
+
+
+      <!-- MOT DE PASSE -->
+
+      <div>
+
+        <label
+          for="password"
+          class="mb-2 block text-sm font-semibold"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('password') }}
+        </label>
+
+        <div class="relative">
+
+          <!-- ICÔNE -->
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-4"
+            [style.color]="themeService.TextSecondaire"
+            aria-hidden="true"
+          >
+            <rect
+              width="16"
+              height="11"
+              x="4"
+              y="10"
+              rx="2"
+            />
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8 10V7a4 4 0 0 1 8 0v3"
+            />
+          </svg>
+
+
+          <!-- INPUT -->
+
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            name="password"
+            autocomplete="new-password"
+            [placeholder]="t('passwordPlaceholder')"
+            [(ngModel)]="password"
+            required
+            [disabled]="isLoading"
+            class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-14 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
+            [style.background-color]="themeService.Surface2"
+            [style.border-color]="
+              submitted && password && password.length < 6
+                ? themeService.ErrorBorder
+                : themeService.Border2
+            "
+            [style.color]="themeService.TextPrincipal"
+            [style.caret-color]="themeService.Primary"
+            [style.--tw-ring-color]="themeService.PrimarySoft"
+          />
+
+
+          <!-- AFFICHER / MASQUER -->
+
+          <button
+            type="button"
+            (click)="togglePassword()"
+            [disabled]="isLoading"
+            class="absolute right-1.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40"
+            [style.color]="themeService.TextSecondaire"
+            [attr.aria-label]="
+              showPassword
+                ? t('hidePassword')
+                : t('showPassword')
+            "
+          >
+
+            <svg
+              *ngIf="!showPassword"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6-9.75-6-9.75-6Z"
+              />
+
+              <circle
+                cx="12"
+                cy="12"
+                r="2.5"
+              />
+            </svg>
+
+
+            <svg
+              *ngIf="showPassword"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m3 3 18 18"
+              />
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.58 10.58a2 2 0 0 0 2.83 2.83"
+              />
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.88 5.1A10.8 10.8 0 0 1 12 4.88c6.25 0 9.75 7.12 9.75 7.12a18.3 18.3 0 0 1-3.04 3.91M6.61 6.61C3.96 8.33 2.25 12 2.25 12s3.5 7.12 9.75 7.12c1.54 0 2.91-.36 4.1-.91"
+              />
+            </svg>
+
+          </button>
+
+        </div>
+
+
+        <!-- FORCE MOT DE PASSE -->
+
+        <div
+          *ngIf="password"
+          class="mt-2.5"
+        >
+
+          <div class="flex gap-1.5">
+
+            <span
+              *ngFor="let item of [1, 2, 3, 4, 5]"
+              class="h-1 flex-1 rounded-full transition-all duration-300"
+              [style.background-color]="
+                item <= getPasswordStrength()
+                  ? themeService.Primary
+                  : themeService.BorderSoft
+              "
+            ></span>
+
+          </div>
+
+          <p
+            class="mt-1.5 text-[11px] leading-4"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{ getPasswordStrengthLabel() }}
+
+            <span *ngIf="password.length < 6">
+              · {{ t('sixCharactersMinimum') }}
+            </span>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         ÉTAPE 3 — CONFIRMATION
+         ====================================================== -->
+
+    <div
+      *ngIf="currentStep === 3"
+      class="space-y-5"
+    >
+
+      <!-- INTRODUCTION -->
+
+      <div class="mb-1">
+
+        <h2
+          class="text-xl font-bold sm:text-[1.35rem]"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('confirmPasswordTitle') }}
+        </h2>
+
+        <p
+          class="mt-1 text-sm leading-5"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ t('confirmPasswordDescription') }}
+        </p>
+
+      </div>
+
+
+      <!-- CONFIRMATION -->
+
+      <div>
+
+        <label
+          for="confirmPassword"
+          class="mb-2 block text-sm font-semibold"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('confirmPassword') }}
+        </label>
+
+        <div class="relative">
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-4"
+            [style.color]="themeService.TextSecondaire"
+            aria-hidden="true"
+          >
+            <rect
+              width="16"
+              height="16"
+              x="4"
+              y="4"
+              rx="3"
+            />
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m9 12.75 2 2.25 4-5"
+            />
+          </svg>
+
+
+          <input
+            id="confirmPassword"
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            name="confirmPassword"
+            autocomplete="new-password"
+            [placeholder]="t('confirmPasswordPlaceholder')"
+            [(ngModel)]="confirmPassword"
+            required
+            [disabled]="isLoading"
+            class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-14 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
+            [style.background-color]="themeService.Surface2"
+            [style.border-color]="
+              isPasswordConfirmationInvalid()
+                ? themeService.ErrorBorder
+                : themeService.Border2
+            "
+            [style.color]="themeService.TextPrincipal"
+            [style.caret-color]="themeService.Primary"
+            [style.--tw-ring-color]="themeService.PrimarySoft"
+          />
+
+
+          <!-- AFFICHER / MASQUER -->
+
+          <button
+            type="button"
+            (click)="toggleConfirmPassword()"
+            [disabled]="isLoading"
+            class="absolute right-1.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40"
+            [style.color]="themeService.TextSecondaire"
+            [attr.aria-label]="
+              showConfirmPassword
+                ? t('hideConfirmation')
+                : t('showConfirmation')
+            "
+          >
+
+            <svg
+              *ngIf="!showConfirmPassword"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6-9.75-6-9.75-6Z"
+              />
+
+              <circle
+                cx="12"
+                cy="12"
+                r="2.5"
+              />
+            </svg>
+
+
+            <svg
+              *ngIf="showConfirmPassword"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m3 3 18 18"
+              />
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.58 10.58a2 2 0 0 0 2.83 2.83"
+              />
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9.88 5.1A10.8 10.8 0 0 1 12 4.88c6.25 0 9.75 7.12 9.75 7.12a18.3 18.3 0 0 1-3.04 3.91M6.61 6.61C3.96 8.33 2.25 12 2.25 12s3.5 7.12 9.75 7.12c1.54 0 2.91-.36 4.1-.91"
+              />
+            </svg>
+
+          </button>
+
+        </div>
+
+
+        <!-- ERREUR -->
+
+        <p
+          *ngIf="isPasswordConfirmationInvalid()"
+          class="mt-1.5 px-1 text-xs leading-4"
+          [style.color]="themeService.Error"
+        >
+          {{ t('passwordMismatch') }}
+        </p>
+
+      </div>
+
+
+      <!-- INFORMATION SÉCURITÉ -->
+
+      <div
+        class="rounded-2xl border p-4"
+        [style.background-color]="themeService.PrimarySoft"
+        [style.border-color]="themeService.BorderPrimary"
+      >
+
+        <div class="flex items-center gap-3">
+
+          <div
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+            [style.background-color]="themeService.Primary"
+            [style.color]="themeService.TextOnPrimary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+
+          <div class="min-w-0">
+
+            <p
+              class="text-sm font-bold"
+              [style.color]="themeService.TextPrincipal"
+            >
+              {{ t('securePassword') }}
+            </p>
+
+            <p
+              class="mt-0.5 text-xs leading-4"
+              [style.color]="themeService.TextSecondaire"
+            >
+              {{ t('securePasswordDescription') }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         ÉTAPE 4 — PROFIL
+         ====================================================== -->
+
+    <div
+      *ngIf="currentStep === 4"
+      class="space-y-4"
+    >
+
+      <!-- INTRODUCTION -->
+
+      <div class="mb-1">
+
+        <h2
+          class="text-xl font-bold sm:text-[1.35rem]"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('yourProfile') }}
+        </h2>
+
+        <p
+          class="mt-1 text-sm leading-5"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ t('profileDescription') }}
+        </p>
+
+      </div>
+
+
+      <!-- AVATAR -->
+
+      <div>
+
+        <label
+          for="avatar"
+          class="mb-2 block text-sm font-semibold"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('avatar') }}
+
+          <span class="ml-1 font-normal opacity-60">
+            ({{ t('optional') }})
+          </span>
+        </label>
+
+
+        <!-- ZONE DE SÉLECTION -->
+
+        <label
+          for="avatar"
+          class="group relative flex min-h-[150px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed px-4 py-5 text-center transition-all duration-200 hover:scale-[1.01]"
+          [style.background-color]="themeService.Surface2"
+          [style.border-color]="themeService.Border2"
+          [style.color]="themeService.TextPrincipal"
+          [class.pointer-events-none]="isLoading"
+          [class.opacity-60]="isLoading"
+        >
+
+          <!-- APERÇU -->
+
+          <div
+            *ngIf="avatarPreview"
+            class="relative mb-2 h-20 w-20 overflow-hidden rounded-full border-2 shadow-md"
+            [style.border-color]="themeService.Primary"
+          >
+
+            <img
+              [src]="avatarPreview"
+              [alt]="t('avatarPreview')"
+              class="h-full w-full object-cover"
+            />
+
+            <!-- INDICATEUR MODIFICATION -->
+
+            <div
+              class="absolute bottom-0.5 right-0.5 flex h-6 w-6 items-center justify-center rounded-full shadow-md"
+              [style.background-color]="themeService.Primary"
+              [style.color]="themeService.TextOnPrimary"
+            >
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                class="h-3.5 w-3.5"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 20h9"
+                />
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+                />
+              </svg>
+
+            </div>
+
+          </div>
+
+
+          <!-- ICÔNE PAR DÉFAUT -->
+
+          <div
+            *ngIf="!avatarPreview"
+            class="mb-2 flex h-14 w-14 items-center justify-center rounded-full"
+            [style.background-color]="themeService.PrimarySoft"
+            [style.color]="themeService.Primary"
+          >
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              class="h-7 w-7"
+              aria-hidden="true"
+            >
+              <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+              />
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 20a7.5 7.5 0 0 1 15 0"
+              />
+            </svg>
+
+          </div>
+
+
+          <!-- TEXTE -->
+
+          <p
+            class="text-sm font-semibold"
+            [style.color]="themeService.TextPrincipal"
+          >
+            {{
+              avatarPreview
+                ? t('changePhoto')
+                : t('addPhoto')
+            }}
+          </p>
+
+          <p
+            class="mt-0.5 text-[11px]"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{ t('photoInstruction') }}
+          </p>
+
+          <p
+            class="mt-1 text-[10px] opacity-60"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{ t('supportedImageFormats') }}
+          </p>
+
+
+          <!-- INPUT RÉEL -->
+
+          <input
+            id="avatar"
+            type="file"
+            name="avatar"
+            accept="image/jpeg,image/png,image/webp"
+            [disabled]="isLoading"
+            class="sr-only"
+            (change)="onAvatarSelected($event)"
+          />
+
+        </label>
+
+
+        <!-- SUPPRESSION -->
+
+        <button
+          *ngIf="avatarPreview"
+          type="button"
+          class="mt-2 text-xs font-medium transition-opacity hover:opacity-70"
+          [style.color]="themeService.TextSecondaire"
+          [disabled]="isLoading"
+          (click)="removeAvatar()"
+        >
+          {{ t('removeImage') }}
+        </button>
+
+      </div>
+
+
+      <!-- INFORMATION -->
+
+      <div
+        class="flex items-start gap-3 rounded-2xl border px-4 py-3"
+        [style.background-color]="themeService.PrimarySoft"
+        [style.border-color]="themeService.BorderPrimary"
+      >
+
+        <div
+          class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+          [style.background-color]="themeService.Primary"
+          [style.color]="themeService.TextOnPrimary"
+        >
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="h-3 w-3"
+            aria-hidden="true"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+            />
+
+            <path
+              stroke-linecap="round"
+              d="M12 10v6"
+            />
+
+            <path
+              stroke-linecap="round"
+              d="M12 7h.01"
+            />
+          </svg>
+
+        </div>
+
+        <div class="min-w-0">
+
+          <p
+            class="text-xs font-semibold"
+            [style.color]="themeService.TextPrincipal"
+          >
+            {{ t('optionalProfilePhoto') }}
+          </p>
+
+          <p
+            class="mt-0.5 text-[11px] leading-4"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{ t('optionalProfilePhotoDescription') }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         ÉTAPE 5 — RÉCAPITULATIF
+         ====================================================== -->
+
+    <div
+      *ngIf="currentStep === 5"
+      class="space-y-5"
+    >
+
+      <!-- INTRODUCTION -->
+
+      <div class="mb-1">
+
+        <h2
+          class="text-xl font-bold sm:text-[1.35rem]"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('summary') }}
+        </h2>
+
+        <p
+          class="mt-1 text-sm leading-5"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ t('summaryDescription') }}
+        </p>
+
+      </div>
+
+
+      <!-- APERÇU AVATAR -->
+
+      <div
+        class="flex items-center gap-4 rounded-2xl border p-4"
+        [style.background-color]="themeService.Surface2"
+        [style.border-color]="themeService.Border2"
+      >
+
+        <div
+          class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full"
+          [style.background-color]="themeService.PrimarySoft"
+          [style.border-color]="themeService.BorderPrimary"
+          [class.border-2]="avatarPreview"
+        >
+
+          <img
+            *ngIf="avatarPreview"
+            [src]="avatarPreview"
+            [alt]="t('avatar')"
+            class="h-full w-full object-cover"
+          />
+
+          <svg
+            *ngIf="!avatarPreview"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            class="h-8 w-8"
+            [style.color]="themeService.Primary"
+            aria-hidden="true"
+          >
+            <circle
+              cx="12"
+              cy="8"
+              r="3.5"
+            />
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.5 20a7.5 7.5 0 0 1 15 0"
+            />
+          </svg>
+
+        </div>
+
+        <div class="min-w-0">
+
+          <p
+            class="text-sm font-bold"
+            [style.color]="themeService.TextPrincipal"
+          >
+            {{ pseudo || t('yourProfile') }}
+          </p>
+
+          <p
+            class="mt-0.5 truncate text-xs"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{
+              avatarPreview
+                ? t('profilePhotoAdded')
+                : t('noPhoto')
+            }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- INFORMATIONS PERSONNELLES -->
+
+      <div
+        class="overflow-hidden rounded-2xl border"
+        [style.background-color]="themeService.Surface2"
+        [style.border-color]="themeService.Border2"
+      >
+
+        <div
+          class="border-b px-4 py-3"
+          [style.border-color]="themeService.BorderSoft"
+        >
+          <p
+            class="text-[11px] font-bold uppercase tracking-wider"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{ t('personalInformation') }}
+          </p>
+        </div>
+
+        <div class="space-y-3 p-4">
+
+          <!-- PSEUDO -->
+
+          <div class="flex items-center justify-between gap-4">
+
+            <span
+              class="shrink-0 text-sm"
+              [style.color]="themeService.TextSecondaire"
+            >
+              {{ t('username') }}
+            </span>
+
+            <span
+              class="truncate text-right text-sm font-semibold"
+              [style.color]="themeService.TextPrincipal"
+            >
+              {{ pseudo }}
+            </span>
+
+          </div>
+
+
+          <!-- NOM -->
+
+          <div class="flex items-center justify-between gap-4">
+
+            <span
+              class="shrink-0 text-sm"
+              [style.color]="themeService.TextSecondaire"
+            >
+              {{ t('lastName') }}
+            </span>
+
+            <span
+              class="truncate text-right text-sm font-semibold"
+              [style.color]="themeService.TextPrincipal"
+            >
+              {{ nom }}
+            </span>
+
+          </div>
+
+
+          <!-- PRÉNOM -->
+
+          <div class="flex items-center justify-between gap-4">
+
+            <span
+              class="shrink-0 text-sm"
+              [style.color]="themeService.TextSecondaire"
+            >
+              {{ t('firstName') }}
+            </span>
+
+            <span
+              class="truncate text-right text-sm font-semibold"
+              [style.color]="themeService.TextPrincipal"
+            >
+              {{ prenom }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- INFORMATIONS CONNEXION -->
+
+      <div
+        class="overflow-hidden rounded-2xl border"
+        [style.background-color]="themeService.Surface2"
+        [style.border-color]="themeService.Border2"
+      >
+
+        <div
+          class="border-b px-4 py-3"
+          [style.border-color]="themeService.BorderSoft"
+        >
+          <p
+            class="text-[11px] font-bold uppercase tracking-wider"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{ t('connection') }}
+          </p>
+        </div>
+
+        <div class="space-y-3 p-4">
+
+          <!-- EMAIL -->
+
+          <div class="flex items-center justify-between gap-4">
+
+            <span
+              class="shrink-0 text-sm"
+              [style.color]="themeService.TextSecondaire"
+            >
+              {{ t('email') }}
+            </span>
+
+            <span
+              class="max-w-[65%] truncate text-right text-sm font-semibold"
+              [style.color]="themeService.TextPrincipal"
+            >
+              {{ email }}
+            </span>
+
+          </div>
+
+
+          <!-- MOT DE PASSE -->
+
+          <div class="flex items-center justify-between gap-4">
+
+            <span
+              class="shrink-0 text-sm"
+              [style.color]="themeService.TextSecondaire"
+            >
+              {{ t('password') }}
+            </span>
+
+            <span
+              class="text-sm font-semibold tracking-widest"
+              [style.color]="themeService.Primary"
+            >
+              ••••••••
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- STATUT COMPTE -->
+
+      <div
+        class="flex items-start gap-3 rounded-2xl border px-4 py-4"
+        [style.background-color]="themeService.PrimarySoft"
+        [style.border-color]="themeService.BorderPrimary"
+      >
+
+        <div
+          class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+          [style.background-color]="themeService.Primary"
+          [style.color]="themeService.TextOnPrimary"
+        >
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="h-3.5 w-3.5"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+
+        </div>
+
+        <div class="min-w-0">
+
+          <p
+            class="text-xs font-semibold"
+            [style.color]="themeService.TextPrincipal"
+          >
+            {{ t('accountReady') }}
+          </p>
+
+          <p
+            class="mt-1 text-[11px] leading-5"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{ t('accountReadyDescription') }}
+
+            <strong [style.color]="themeService.Primary">
+              {{ t('visitorRole') }}
+            </strong>.
+
+            {{ t('secureInformation') }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         NAVIGATION
+         ====================================================== -->
+
+    <div
+      class="flex flex-col-reverse gap-3 pt-1 sm:flex-row sm:items-center sm:justify-between"
+    >
+
+      <!-- PRÉCÉDENT -->
+
+      <button
+        *ngIf="currentStep > 1"
+        type="button"
+        (click)="previousStep()"
+        [disabled]="isLoading"
+        class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl border px-5 py-3.5 text-sm font-semibold transition-all duration-200 hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+        [style.background-color]="themeService.Surface2"
+        [style.border-color]="themeService.Border2"
+        [style.color]="themeService.TextPrincipal"
+      >
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          class="h-4 w-4"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19 12H5"
+          />
+
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m12 19-7-7 7-7"
+          />
+        </svg>
+
+        <span>
+          {{ t('previous') }}
+        </span>
+
+      </button>
+
+
+      <!-- ESPACE ÉTAPE 1 -->
+
+      <div
+        *ngIf="currentStep === 1"
+        class="hidden sm:block"
+      ></div>
+
+
+      <!-- CONTINUER -->
+
+      <button
+        *ngIf="currentStep < 5"
+        type="submit"
+        [disabled]="isLoading"
+        class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-bold transition-all duration-200 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98] sm:w-auto"
+        [style.background-color]="themeService.Primary"
+        [style.color]="themeService.TextOnPrimary"
+        [style.box-shadow]="themeService.BoxShadowPrimary"
+      >
+
+        <span>
+          {{ t('continue') }}
+        </span>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          class="h-4 w-4"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M5 12h14"
+          />
+
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m12 5 7 7-7 7"
+          />
+        </svg>
+
+      </button>
+
+
+      <!-- CRÉER LE COMPTE — ÉTAPE 5 -->
+
+      <button
+        *ngIf="currentStep === 5"
+        type="submit"
+        [disabled]="isLoading"
+        class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-bold transition-all duration-200 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98] sm:w-auto"
+        [style.background-color]="themeService.Primary"
+        [style.color]="themeService.TextOnPrimary"
+        [style.box-shadow]="themeService.BoxShadowPrimary"
+      >
+
+        <!-- LOADER -->
+
+        <span
+          *ngIf="isLoading"
+          class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+        ></span>
+
+
+        <!-- ICON -->
+
+        <svg
+          *ngIf="!isLoading"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          class="h-5 w-5"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 5v14"
+          />
+
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M5 12h14"
+          />
+        </svg>
+
+
+        <!-- TEXTE -->
+
+        <span>
+          {{
+            isLoading
+              ? t('creatingAccount')
+              : t('createMyAccount')
+          }}
+        </span>
+
+      </button>
+
+    </div>
+
+  </form>
+
+
+  <!-- ========================================================
+       CONNEXION
+       ======================================================== -->
+
+  <div
+    class="mt-6 border-t pt-5 text-center sm:mt-7 sm:pt-6"
+    [style.border-color]="themeService.BorderSoft"
+  >
+
+    <p
+      class="text-sm leading-5"
+      [style.color]="themeService.TextSecondaire"
+    >
+      {{ t('alreadyAccount') }}
+
+      <a
+        routerLink="/login"
+        class="ml-1 cursor-pointer font-bold transition-opacity hover:opacity-70"
+        [style.color]="themeService.Primary"
+      >
+        {{ t('login') }}
+      </a>
+
+    </p>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+  <!-- ============================================================
+       TOAST NOTIFICATION
+       ============================================================ -->
+
+  <div
+    *ngIf="showNotification"
+    class="fixed left-1/2 top-5 z-[999999] -translate-x-1/2 animate-toast"
+    role="status"
+    aria-live="polite"
+  >
+
+    <div
+      class="relative flex min-w-[280px] max-w-[90vw] items-center gap-4 overflow-hidden rounded-2xl border px-5 py-3 text-white shadow-2xl backdrop-blur-xl"
+      [style.background]="
+        notificationType === 'success'
+          ? themeService.Success
+          : themeService.Error
+      "
+      [style.border-color]="
+        notificationType === 'success'
+          ? themeService.SuccessBorder
+          : themeService.ErrorBorder
+      "
+    >
+
+      <!-- ICON -->
+
+      <div
+        class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-white/15"
+      >
+
+        <i
+          *ngIf="notificationType === 'success'"
+          class="fa-solid fa-circle-check"
+        ></i>
+
+        <i
+          *ngIf="notificationType === 'error'"
+          class="fa-solid fa-circle-exclamation"
+        ></i>
+
+      </div>
+
+      <!-- TEXT -->
+
+      <div class="min-w-0 flex-1">
+
+        <p class="text-xs font-black tracking-wide">
+          {{
+            notificationType === 'success'
+              ? t('success')
+              : t('error')
+          }}
+        </p>
+
+        <p class="truncate text-xs opacity-90">
+          {{ notificationMessage }}
+        </p>
+
+      </div>
+
+      <!-- CLOSE -->
+
+      <button
+        type="button"
+        (click)="closeNotification()"
+        class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 hover:bg-white/10"
+        [attr.aria-label]="t('closeNotification')"
+      >
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+
+      <!-- SHINE -->
+
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
+      >
+
+        <div
+          class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

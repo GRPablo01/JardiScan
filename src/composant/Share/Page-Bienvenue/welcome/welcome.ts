@@ -8,7 +8,7 @@ import { RouterLink } from "@angular/router";
 
 
 @Component({
-  selector: 'app-welcome',
+  selector: 'app-welcome-bienvenue',
   standalone: true,
   imports: [
     CommonModule,
@@ -19,7 +19,7 @@ import { RouterLink } from "@angular/router";
   templateUrl: './welcome.html',
   styleUrl: './welcome.css',
 })
-export class Welcome {
+export class WelcomeBienvenue {
 
   ticketModalOpen = false;
 

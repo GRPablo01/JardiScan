@@ -17,10 +17,7 @@
   class="
     w-full
     border-t
-    px-4 py-12
-    sm:px-6
-    lg:px-10 lg:py-14
-    xl:px-14
+    px-10 py-10 pb-30
   "
   [ngStyle]="{
     background: themeService.BackgroundFooter,
@@ -29,7 +26,7 @@
 >
   <div class="mx-auto w-full max-w-[1400px]">
 
-```
+
 <!-- ========================================================
      CONTENU PRINCIPAL
 ========================================================= -->
@@ -657,77 +654,7 @@
       </a>
 
 
-      <!-- ==================================================
-           🌐 LANGUE
-      =================================================== -->
-
-      <button
-        type="button"
-        (click)="languageService.toggleLanguage()"
-        class="
-          group
-          inline-flex
-          items-center
-          gap-2
-          rounded-xl
-          border
-          px-3
-          py-2
-          text-xs
-          font-bold
-          transition-all
-          duration-300
-          hover:-translate-y-0.5
-          hover:shadow-sm
-          active:scale-95
-        "
-        [attr.aria-label]="
-          languageService.is('fr')
-            ? 'Passer en anglais'
-            : 'Switch to French'
-        "
-        [ngStyle]="{
-          background: themeService.Background1,
-          borderColor: themeService.Border1,
-          color: themeService.TextMuted
-        }"
-      >
-
-        <span
-          class="
-            text-sm
-            leading-none
-            transition-transform
-            duration-300
-            group-hover:scale-110
-          "
-          aria-hidden="true"
-        >
-          {{ languageService.getLanguageFlag(
-            languageService.currentLanguage
-          ) }}
-        </span>
-
-        <span>
-          {{ languageService.getLanguageName(
-            languageService.currentLanguage
-          ) }}
-        </span>
-
-        <i
-          class="
-            fa-solid
-            fa-chevron-down
-            text-[9px]
-            opacity-60
-            transition-transform
-            duration-300
-            group-hover:translate-y-0.5
-          "
-          aria-hidden="true"
-        ></i>
-
-      </button>
+      
 
     </div>
 

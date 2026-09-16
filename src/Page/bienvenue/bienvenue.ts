@@ -5,13 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ThemeService } from '../../../Backend/Services/theme.service';
 import { HeaderBienvenue } from '../../composant/Share/Page-Bienvenue/header-bienvenue/header-bienvenue';
-import { Welcome } from '../../composant/Share/Page-Bienvenue/welcome/welcome';
 import { Fonctionnalite } from '../../composant/Share/Page-Bienvenue/fonctionnalite/fonctionnalite';
 import { Statistiques } from '../../composant/Share/Page-Bienvenue/statistiques/statistiques';
 import { Pourquoi } from '../../composant/Share/Page-Bienvenue/pourquoi/pourquoi';
 import { Role } from '../../composant/Share/Page-Bienvenue/role/role';
 import { TicketWelcome } from '../../composant/Share/Page-Bienvenue/ticket-welcome/ticket-welcome';
 import { FooterBienvenue } from "../../composant/Share/Page-Bienvenue/footer-bienvenue/footer-bienvenue";
+import { WelcomeBienvenue } from '../../composant/Share/Page-Bienvenue/welcome/welcome';
 
 
 
@@ -26,13 +26,13 @@ import { FooterBienvenue } from "../../composant/Share/Page-Bienvenue/footer-bie
 
 
 @Component({
-  selector: 'app-accueil',
+  selector: 'app-bienvenue',
   standalone: true,
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
-    Welcome,
+    WelcomeBienvenue,
     HeaderBienvenue,
     Fonctionnalite,
     Statistiques,

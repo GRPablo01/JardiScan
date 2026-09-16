@@ -1,0 +1,1426 @@
+<section
+  *ngIf="showMessage"
+  class="bot-wrapper fixed bottom-6 right-6 flex items-end gap-4 z-[100]"
+  [class.bot-visible]="!isHiding"
+  [class.bot-hiding]="isHiding"
+>
+
+  <!-- ============================================================
+       💬 CHAT
+       Le chat est totalement indépendant de l'avatar.
+       ============================================================ -->
+  <div
+    *ngIf="chatOpen"
+    class="bot-chat relative mb-8 flex w-[min(400px,calc(100vw-110px))] flex-col overflow-hidden rounded-[26px] border border-white/40 shadow-[0_24px_70px_-12px_rgba(20,83,45,0.45)] backdrop-blur-xl"
+    role="dialog"
+    aria-label="Assistant JardiScan"
+    aria-modal="false"
+  >
+
+    <!-- ==========================================================
+         HEADER
+         =========================================================== -->
+    <div
+      class="bot-header relative flex items-center justify-between overflow-hidden px-5 py-4"
+    >
+
+      <!-- Halos décoratifs -->
+      <span
+        class="pointer-events-none absolute -left-8 -top-10 h-32 w-32 rounded-full bg-white/10 blur-xl"
+        aria-hidden="true"
+      ></span>
+
+      <span
+        class="pointer-events-none absolute -bottom-12 right-10 h-28 w-28 rounded-full bg-lime-300/20 blur-xl"
+        aria-hidden="true"
+      ></span>
+
+      <!-- ========================================================
+           IDENTITÉ
+           ========================================================= -->
+      <div class="relative flex min-w-0 items-center gap-3">
+
+        <div
+          class="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-white/20 ring-2 ring-white/40 shadow-inner"
+        >
+          <img
+            src="assets/Bot1.png"
+            alt="Assistant JardiScan"
+            class="h-full w-full object-cover"
+          />
+
+          <span
+            class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-green-400"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <div class="min-w-0">
+          <p
+            class="truncate text-[15px] font-extrabold tracking-wide text-white"
+          >
+            Assistant JardiScan
+          </p>
+
+          <div class="flex items-center gap-1.5">
+            <span
+              class="status-dot h-2 w-2 shrink-0 rounded-full bg-lime-300"
+              aria-hidden="true"
+            ></span>
+
+            <span class="text-xs font-medium text-white/80">
+              {{
+                botState === 'thinking'
+                  ? 'Réflexion...'
+                  : botState === 'speaking'
+                    ? 'Écrit...'
+                    : 'En ligne'
+              }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           ❌ FERMER LE CHAT UNIQUEMENT
+           ========================================================= -->
+      <button
+        type="button"
+        class="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white/90 transition-all duration-200 hover:scale-105 hover:bg-white/25 hover:text-white active:scale-95"
+        aria-label="Fermer la conversation"
+        title="Fermer la conversation"
+        (click)="closeChat()"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-4 w-4"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- ============================================================
+         💬 MESSAGES
+         ============================================================= -->
+    <div
+      #messagesContainer
+      class="bot-messages flex max-h-[380px] min-h-[110px] flex-col gap-3.5 overflow-y-auto scroll-smooth px-4 py-4"
+    >
+
+      <!-- ========================================================
+           MESSAGE D'ACCUEIL
+           ========================================================= -->
+      <div
+        *ngIf="displayedMessage"
+        class="msg-row flex items-end gap-2 animate-msg-in"
+      >
+        <div
+          class="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-green-700 ring-2 ring-green-100 shadow-sm"
+        >
+          <img
+            src="assets/Bot1.png"
+            alt=""
+            class="h-full w-full object-cover"
+          />
+        </div>
+
+        <div class="bot-bubble bot-bubble-bot">
+          <span class="whitespace-pre-line">
+            {{ displayedMessage }}
+          </span>
+
+          <span
+            *ngIf="botState === 'speaking'"
+            class="typing-cursor"
+            aria-hidden="true"
+          ></span>
+        </div>
+      </div>
+
+      <!-- ========================================================
+           HISTORIQUE
+           ========================================================= -->
+      <ng-container *ngFor="let message of messages">
+
+        <!-- UTILISATEUR -->
+        <div
+          *ngIf="message.sender === 'user'"
+          class="msg-row flex flex-col items-end animate-msg-in"
+        >
+          <div class="bot-bubble bot-bubble-user">
+            <span class="whitespace-pre-line">
+              {{ message.text }}
+            </span>
+          </div>
+
+          <span
+            class="msg-time mt-1 pr-1 text-[10px] font-medium"
+          >
+            {{ message.time }}
+          </span>
+        </div>
+
+        <!-- BOT -->
+        <div
+          *ngIf="message.sender === 'bot'"
+          class="msg-row flex items-end gap-2 animate-msg-in"
+        >
+          <div
+            class="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-green-700 ring-2 ring-green-100 shadow-sm"
+          >
+            <img
+              src="assets/Bot1.png"
+              alt=""
+              class="h-full w-full object-cover"
+            />
+          </div>
+
+          <div class="flex min-w-0 flex-col">
+            <div class="bot-bubble bot-bubble-bot">
+              <span class="whitespace-pre-line">
+                {{ message.text }}
+              </span>
+            </div>
+
+            <span
+              class="msg-time mt-1 pl-1 text-[10px] font-medium"
+            >
+              {{ message.time }}
+            </span>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <!-- ========================================================
+           BOT EN TRAIN DE RÉFLÉCHIR
+           ========================================================= -->
+      <div
+        *ngIf="botState === 'thinking'"
+        class="msg-row flex items-end gap-2 animate-msg-in"
+      >
+        <div
+          class="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-green-700 ring-2 ring-green-100 shadow-sm"
+        >
+          <img
+            src="assets/Bot1.png"
+            alt=""
+            class="h-full w-full object-cover"
+          />
+        </div>
+
+        <div
+          class="thinking-bubble"
+          aria-label="L'assistant réfléchit"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================
+         ⚡ SUGGESTIONS RAPIDES
+         ============================================================= -->
+    <div
+      *ngIf="messages.length === 0 && botState !== 'thinking'"
+      class="flex flex-wrap gap-2 px-4 pb-2"
+    >
+
+      <button
+        type="button"
+        class="chip"
+        (click)="quickAsk('Combien de plantes ?')"
+      >
+        🌿 Nombre de plantes
+      </button>
+
+      <button
+        type="button"
+        class="chip"
+        (click)="quickAsk('Liste des plantes')"
+      >
+        📋 Liste des plantes
+      </button>
+
+      <button
+        type="button"
+        class="chip"
+        (click)="quickAsk('Comment fonctionne JardiScan ?')"
+      >
+        ❓ Comment ça marche ?
+      </button>
+
+    </div>
+
+    <!-- ============================================================
+         ⌨️ SAISIE
+         ============================================================= -->
+    <div class="bot-input-zone border-t px-3.5 pb-2 pt-3">
+
+      <div
+        class="flex items-end gap-2 rounded-2xl p-1.5 transition-shadow duration-200 focus-within:ring-2"
+      >
+
+        <textarea
+          #messageInput
+          [(ngModel)]="userInput"
+          (keydown)="onInputKeydown($event)"
+          rows="1"
+          maxlength="500"
+          placeholder="Posez votre question sur une plante..."
+          aria-label="Votre question"
+          class="bot-input min-h-[42px] max-h-[110px] flex-1 resize-none border-0 bg-transparent px-2.5 py-2 text-sm outline-none placeholder:text-gray-400"
+        ></textarea>
+
+        <!-- ENVOYER -->
+        <button
+          type="button"
+          [disabled]="!userInput.trim() || botState === 'thinking'"
+          (click)="sendMessage()"
+          class="send-btn flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white shadow-md transition-all duration-200 enabled:hover:scale-105 enabled:hover:shadow-lg enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+          aria-label="Envoyer"
+          title="Envoyer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="h-5 w-5"
+            aria-hidden="true"
+          >
+            <path d="m22 2-7 20-4-9-9-4Z"></path>
+            <path d="M22 2 11 13"></path>
+          </svg>
+        </button>
+
+      </div>
+
+      <p class="mt-1.5 px-1.5 text-[10px] text-gray-400">
+        Entrée pour envoyer · Shift + Entrée pour revenir à la ligne
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       🤖 AVATAR
+       L'avatar reste visible lorsque le chat est fermé.
+       ============================================================= -->
+  <div class="bot-avatar-zone">
+
+    <button
+      type="button"
+      class="bot-avatar relative z-10 flex h-20 w-20 shrink-0 items-center justify-center rounded-full shadow-2xl"
+      [class.bot-speaking]="botState === 'speaking'"
+      [class.bot-idle]="botState !== 'speaking'"
+      [class.bot-thinking]="botState === 'thinking'"
+      [class.bot-avatar-chat-open]="chatOpen"
+      aria-label="Ouvrir ou fermer l'assistant"
+      [attr.aria-expanded]="chatOpen"
+      title="Ouvrir ou fermer l'assistant"
+      (click)="toggleMessage()"
+    >
+
+      <!-- ========================================================
+           IMAGES AVATAR
+           ========================================================= -->
+      <span
+        class="absolute inset-0 overflow-hidden rounded-full ring-4 ring-white/70 shadow-inner"
+      >
+
+        <!-- REPOS -->
+        <img
+          src="assets/Bot1.png"
+          alt="Assistant JardiScan"
+          class="avatar-image avatar-idle absolute inset-0 h-full w-full object-cover"
+          [class.visible]="botState !== 'speaking'"
+          [class.hidden]="botState === 'speaking'"
+        />
+
+        <!-- PARLE -->
+        <img
+          src="assets/Bot2.png"
+          alt="Assistant JardiScan"
+          class="avatar-image avatar-speaking absolute inset-0 h-full w-full object-cover"
+          [class.visible]="botState === 'speaking'"
+          [class.hidden]="botState !== 'speaking'"
+        />
+
+      </span>
+
+      <!-- ========================================================
+           INDICATEUR CHAT OUVERT
+           ========================================================= -->
+      <span
+        *ngIf="chatOpen"
+        class="avatar-close-indicator absolute -right-1 -top-1 z-20 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white text-white shadow-lg"
+        aria-hidden="true"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-3.5 w-3.5"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </span>
+
+    </button>
+
+    <!-- ========================================================
+         ❌ FERMETURE COMPLÈTE
+         Séparée du bouton X du chat.
+         ========================================================= -->
+    <button
+      type="button"
+      class="bot-hide-button"
+      aria-label="Masquer complètement l'assistant"
+      title="Masquer l'assistant"
+      (click)="hideMessage()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M18 6 6 18"></path>
+        <path d="m6 6 12 12"></path>
+      </svg>
+    </button>
+
+  </div>
+
+</section>
+
+<style>
+    /* ============================================================
+   🤖 BOT ASSISTANT — JARDISCAN
+   UI PREMIUM / GLASS / RESPONSIVE
+   ============================================================ */
+
+:host {
+  --bot-header-from: #14532d;
+  --bot-header-to: #16a34a;
+  --bot-header-text: #ffffff;
+
+  --bot-chat-bg: #f8faf7;
+  --bot-chat-border: rgba(22, 101, 52, 0.12);
+  --bot-chat-shadow:
+    0 24px 70px -12px rgba(20, 83, 45, 0.45);
+
+  --bubble-bot-bg: #eef7ee;
+  --bubble-bot-text: #14532d;
+  --bubble-bot-border: rgba(22, 163, 74, 0.22);
+
+  --bubble-user-from: #22c55e;
+  --bubble-user-to: #15803d;
+  --bubble-user-text: #ffffff;
+  --bubble-user-shadow:
+    0 6px 16px -6px rgba(21, 128, 61, 0.55);
+
+  --input-zone-bg: rgba(255, 255, 255, 0.75);
+  --input-bg: #ffffff;
+  --input-ring: rgba(22, 101, 52, 0.14);
+  --input-ring-focus: rgba(34, 197, 94, 0.55);
+  --input-text: #1f2937;
+
+  --chip-bg: #ffffff;
+  --chip-text: #166534;
+  --chip-ring: rgba(22, 101, 52, 0.18);
+
+  --avatar-ring: rgba(255, 255, 255, 0.85);
+  --avatar-glow: rgba(34, 197, 94, 0.55);
+
+  --msg-time: #9ca3af;
+  --scroll-thumb: rgba(22, 101, 52, 0.28);
+
+  --hide-button-bg: #ffffff;
+  --hide-button-text: #166534;
+  --hide-button-border: rgba(22, 101, 52, 0.14);
+}
+
+
+/* ============================================================
+   🌙 THÈME SOMBRE
+   ============================================================ */
+
+:host-context(.dark) {
+  --bot-header-from: #052e16;
+  --bot-header-to: #166534;
+  --bot-header-text: #ffffff;
+
+  --bot-chat-bg: #0b1a10;
+  --bot-chat-border: rgba(74, 222, 128, 0.16);
+  --bot-chat-shadow:
+    0 24px 70px -12px rgba(0, 0, 0, 0.7);
+
+  --bubble-bot-bg: #12301c;
+  --bubble-bot-text: #d1fae5;
+  --bubble-bot-border: rgba(74, 222, 128, 0.25);
+
+  --bubble-user-from: #22c55e;
+  --bubble-user-to: #166534;
+  --bubble-user-text: #ffffff;
+
+  --bubble-user-shadow:
+    0 6px 16px -6px rgba(0, 0, 0, 0.6);
+
+  --input-zone-bg: rgba(11, 26, 16, 0.85);
+  --input-bg: #132a1b;
+  --input-ring: rgba(74, 222, 128, 0.18);
+  --input-ring-focus: rgba(74, 222, 128, 0.6);
+  --input-text: #e5e7eb;
+
+  --chip-bg: #12301c;
+  --chip-text: #86efac;
+  --chip-ring: rgba(74, 222, 128, 0.25);
+
+  --msg-time: #6b7280;
+  --scroll-thumb: rgba(74, 222, 128, 0.3);
+
+  --hide-button-bg: #132a1b;
+  --hide-button-text: #86efac;
+  --hide-button-border: rgba(74, 222, 128, 0.2);
+}
+
+
+/* ============================================================
+   📦 WRAPPER
+   ============================================================ */
+
+.bot-wrapper {
+  isolation: isolate;
+}
+
+
+/* ============================================================
+   💬 CHAT
+   ============================================================ */
+
+.bot-chat {
+  background: var(--bot-chat-bg);
+  border-color: var(--bot-chat-border);
+  box-shadow: var(--bot-chat-shadow);
+
+  opacity: 0;
+  transform-origin: bottom right;
+
+  will-change: transform, opacity;
+}
+
+
+/* ============================================================
+   ✨ APPARITION DU CHAT
+   ============================================================ */
+
+.bot-visible .bot-chat {
+  animation:
+    bot-pop-in
+    0.45s
+    cubic-bezier(0.22, 1.2, 0.36, 1)
+    forwards;
+}
+
+
+.bot-hiding .bot-chat {
+  animation:
+    bot-pop-out
+    0.4s
+    ease-in
+    forwards;
+}
+
+
+@keyframes bot-pop-in {
+  0% {
+    opacity: 0;
+    transform:
+      translateY(24px)
+      scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+@keyframes bot-pop-out {
+  0% {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateY(24px)
+      scale(0.92);
+  }
+}
+
+
+/* ============================================================
+   🎨 HEADER
+   ============================================================ */
+
+.bot-header {
+  background:
+    linear-gradient(
+      135deg,
+      var(--bot-header-from),
+      var(--bot-header-to)
+    );
+
+  color: var(--bot-header-text);
+}
+
+
+/* ============================================================
+   💬 MESSAGES
+   ============================================================ */
+
+.bot-messages {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* ============================================================
+   🫧 BULLES
+   ============================================================ */
+
+.bot-bubble {
+  max-width: min(82%, 310px);
+  padding: 10px 14px;
+
+  font-size: 0.85rem;
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+
+/* ============================================================
+   🤖 BULLE BOT
+   ============================================================ */
+
+.bot-bubble-bot {
+  background: var(--bubble-bot-bg);
+  color: var(--bubble-bot-text);
+
+  border:
+    1px solid
+    var(--bubble-bot-border);
+
+  border-radius:
+    18px
+    18px
+    18px
+    6px;
+
+  box-shadow:
+    0 2px 8px -4px
+    rgba(20, 83, 45, 0.25);
+}
+
+
+/* ============================================================
+   👤 BULLE UTILISATEUR
+   ============================================================ */
+
+.bot-bubble-user {
+  background:
+    linear-gradient(
+      135deg,
+      var(--bubble-user-from),
+      var(--bubble-user-to)
+    );
+
+  color: var(--bubble-user-text);
+
+  border-radius:
+    18px
+    18px
+    6px
+    18px;
+
+  box-shadow:
+    var(--bubble-user-shadow);
+
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   🕐 HEURES
+   ============================================================ */
+
+.msg-time {
+  color: var(--msg-time);
+}
+
+
+/* ============================================================
+   ✨ ANIMATION MESSAGE
+   ============================================================ */
+
+.animate-msg-in {
+  animation:
+    msg-in
+    0.3s
+    ease-out
+    both;
+}
+
+
+@keyframes msg-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ============================================================
+   ✍️ CURSEUR DE FRAPPE
+   ============================================================ */
+
+.typing-cursor {
+  display: inline-block;
+
+  width: 2px;
+  height: 1em;
+
+  margin-left: 3px;
+
+  vertical-align: -0.15em;
+
+  background: var(--bubble-bot-text);
+
+  animation:
+    cursor-blink
+    0.8s
+    step-end
+    infinite;
+}
+
+
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+
+/* ============================================================
+   🤔 RÉFLEXION
+   ============================================================ */
+
+.thinking-bubble {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 14px 16px;
+
+  background: var(--bubble-bot-bg);
+
+  border:
+    1px solid
+    var(--bubble-bot-border);
+
+  border-radius:
+    18px
+    18px
+    18px
+    6px;
+}
+
+
+.thinking-bubble span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  animation:
+    thinking-bounce
+    1.2s
+    ease-in-out
+    infinite;
+}
+
+
+.thinking-bubble span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+
+.thinking-bubble span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+
+@keyframes thinking-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+
+/* ============================================================
+   ⚡ CHIPS
+   ============================================================ */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 6px 12px;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  color: var(--chip-text);
+  background: var(--chip-bg);
+
+  border:
+    1px solid
+    var(--chip-ring);
+
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+
+.chip:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 14px -6px
+    rgba(22, 101, 52, 0.4);
+
+  filter: brightness(1.03);
+}
+
+
+.chip:active {
+  transform:
+    translateY(0)
+    scale(0.97);
+}
+
+
+/* ============================================================
+   ⌨️ ZONE INPUT
+   ============================================================ */
+
+.bot-input-zone {
+  background: var(--input-zone-bg);
+  border-color: var(--bot-chat-border);
+}
+
+
+.bot-input-zone > div {
+  background: var(--input-bg);
+
+  border:
+    1px solid
+    var(--input-ring);
+
+  box-shadow:
+    0 2px 10px -4px
+    rgba(0, 0, 0, 0.12);
+}
+
+
+.bot-input-zone > div:focus-within {
+  border-color: transparent;
+
+  box-shadow:
+    0 0 0 3px
+      var(--input-ring-focus),
+    0 2px 10px -4px
+      rgba(0, 0, 0, 0.12);
+}
+
+
+.bot-input {
+  color: var(--input-text);
+}
+
+
+.bot-input::placeholder {
+  color: #9ca3af;
+}
+
+
+:host-context(.dark) .bot-input::placeholder {
+  color: #6b7280;
+}
+
+
+/* ============================================================
+   📤 BOUTON ENVOYER
+   ============================================================ */
+
+.send-btn {
+  background:
+    linear-gradient(
+      135deg,
+      var(--bubble-user-from),
+      var(--bubble-user-to)
+    );
+}
+
+
+/* ============================================================
+   🌐 SCROLLBAR
+   ============================================================ */
+
+.bot-messages {
+  scrollbar-width: thin;
+  scrollbar-color:
+    var(--scroll-thumb)
+    transparent;
+}
+
+
+.bot-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+
+.bot-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.bot-messages::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border-radius: 999px;
+}
+
+
+/* ============================================================
+   🤖 ZONE AVATAR
+   ============================================================ */
+
+.bot-avatar-zone {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   🤖 AVATAR
+   ============================================================ */
+
+.bot-avatar {
+  background:
+    linear-gradient(
+      135deg,
+      var(--bubble-user-from),
+      var(--bubble-user-to)
+    );
+
+  transition:
+    transform
+      0.25s
+      cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease;
+
+  overflow: visible;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+.bot-avatar:hover {
+  transform: scale(1.07);
+}
+
+
+.bot-avatar:active {
+  transform: scale(0.96);
+}
+
+
+.bot-avatar:focus-visible {
+  outline: none;
+
+  box-shadow:
+    0 0 0 4px
+      rgba(34, 197, 94, 0.25),
+    0 20px 40px -12px
+      rgba(20, 83, 45, 0.45);
+}
+
+
+.bot-avatar > span:first-child {
+  --tw-ring-color: var(--avatar-ring);
+}
+
+
+/* ============================================================
+   🟢 ANNEAU PULSÉ
+   ============================================================ */
+
+.bot-idle::before {
+  content: '';
+
+  position: absolute;
+
+  inset: -5px;
+
+  border:
+    2px solid
+    var(--avatar-glow);
+
+  border-radius: 999px;
+
+  animation:
+    avatar-pulse
+    2.4s
+    ease-out
+    infinite;
+
+  pointer-events: none;
+}
+
+
+@keyframes avatar-pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+
+  70%,
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+
+
+/* ============================================================
+   🤔 AVATAR RÉFLEXION
+   ============================================================ */
+
+.bot-thinking {
+  animation:
+    avatar-wiggle
+    0.9s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes avatar-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-4deg);
+  }
+
+  75% {
+    transform: rotate(4deg);
+  }
+}
+
+
+/* ============================================================
+   🗣️ AVATAR PARLE
+   ============================================================ */
+
+.bot-speaking {
+  animation:
+    avatar-breathe
+    1.4s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes avatar-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+
+/* ============================================================
+   🖼️ TRANSITION IMAGE AVATAR
+   ============================================================ */
+
+.avatar-image {
+  opacity: 0;
+
+  transform: scale(0.85);
+
+  transition:
+    opacity 0.3s ease,
+    transform
+      0.3s
+      cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+.avatar-image.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+.avatar-image.hidden {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+
+/* ============================================================
+   🟢 STATUT
+   ============================================================ */
+
+.status-dot {
+  animation:
+    status-pulse
+    1.8s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+
+    box-shadow:
+      0 0 0 0
+      rgba(190, 242, 100, 0.6);
+  }
+
+  50% {
+    opacity: 0.75;
+
+    box-shadow:
+      0 0 0 4px
+      rgba(190, 242, 100, 0);
+  }
+}
+
+
+/* ============================================================
+   ❌ BOUTON FERMETURE COMPLÈTE
+   IMPORTANT :
+   Ce bouton est indépendant du X du chat.
+   ============================================================ */
+
+.bot-hide-button {
+  position: absolute;
+
+  right: -2px;
+  bottom: -2px;
+
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 25px;
+  height: 25px;
+
+  border-radius: 999px;
+
+  background: var(--hide-button-bg);
+  color: var(--hide-button-text);
+
+  border:
+    1px solid
+    var(--hide-button-border);
+
+  box-shadow:
+    0 5px 14px -5px
+    rgba(0, 0, 0, 0.35);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.bot-hide-button svg {
+  width: 13px;
+  height: 13px;
+}
+
+
+.bot-hide-button:hover {
+  transform: scale(1.1);
+
+  box-shadow:
+    0 8px 18px -6px
+    rgba(0, 0, 0, 0.4);
+}
+
+
+.bot-hide-button:active {
+  transform: scale(0.92);
+}
+
+
+.bot-hide-button:focus-visible {
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px
+      rgba(34, 197, 94, 0.25),
+    0 8px 18px -6px
+      rgba(0, 0, 0, 0.4);
+}
+
+
+/* ============================================================
+   ❌ INDICATEUR AVATAR CHAT OUVERT
+   ============================================================ */
+
+.avatar-close-indicator {
+  background:
+    linear-gradient(
+      135deg,
+      #14532d,
+      #15803d
+    );
+
+  animation:
+    close-indicator-in
+    0.25s
+    ease-out
+    both;
+}
+
+
+@keyframes close-indicator-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* ============================================================
+   📱 PETITS ÉCRANS
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+  .bot-wrapper {
+    right: 12px;
+    bottom: 12px;
+
+    gap: 10px;
+  }
+
+  .bot-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .bot-chat {
+    width: calc(100vw - 92px);
+
+    margin-bottom: 0;
+
+    border-radius: 20px;
+  }
+
+  .bot-messages {
+    max-height: 300px;
+  }
+
+  .bot-hide-button {
+    width: 22px;
+    height: 22px;
+
+    right: -1px;
+    bottom: -1px;
+  }
+
+  .bot-hide-button svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .avatar-close-indicator {
+    width: 21px;
+    height: 21px;
+  }
+
+}
+
+
+/* ============================================================
+   📱 TRÈS PETITS ÉCRANS
+   ============================================================ */
+
+@media (max-width: 360px) {
+
+  .bot-wrapper {
+    right: 8px;
+    bottom: 8px;
+
+    gap: 8px;
+  }
+
+  .bot-avatar {
+    width: 54px;
+    height: 54px;
+  }
+
+  .bot-chat {
+    width: calc(100vw - 76px);
+
+    border-radius: 18px;
+  }
+
+  .bot-header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .bot-header .h-11 {
+    width: 38px;
+    height: 38px;
+  }
+
+  .bot-header p {
+    font-size: 13px;
+  }
+
+  .chip {
+    padding: 5px 9px;
+    font-size: 0.68rem;
+  }
+
+  .bot-bubble {
+    max-width: 86%;
+    font-size: 0.8rem;
+  }
+
+  .bot-hide-button {
+    width: 20px;
+    height: 20px;
+  }
+
+}
+
+
+/* ============================================================
+   ♿ ACCESSIBILITÉ
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .bot-chat,
+  .avatar-image,
+  .bot-avatar,
+  .chip,
+  .bot-hide-button,
+  .status-dot,
+  .thinking-bubble span,
+  .typing-cursor,
+  .bot-idle::before {
+    animation: none !important;
+    transition: none !important;
+  }
+
+}
+</style>

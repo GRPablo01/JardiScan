@@ -1,0 +1,802 @@
+
+<section
+  class="relative min-h-screen w-full overflow-hidden"
+  [style.background-color]="themeService.Background1"
+>
+
+  <!-- ============================================================
+       DÉCOR GAUCHE
+       ============================================================ -->
+
+  <div
+    class="pointer-events-none absolute inset-y-0 left-0 z-0 hidden w-1/2 overflow-visible lg:block"
+    aria-hidden="true"
+  >
+    <img
+      src="assets/ImageRegisterLoginGauche.svg"
+      alt=""
+      class="absolute left-[-18vw] top-1/2 h-[120vh] w-[72vw] max-w-none -translate-y-1/2 object-cover object-left xl:left-[-14vw] xl:w-[68vw]"
+    />
+  </div>
+
+  <!-- ============================================================
+       DÉCOR DROITE
+       ============================================================ -->
+
+  <div
+    class="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-1/2 overflow-visible lg:block"
+    aria-hidden="true"
+  >
+    <img
+      src="assets/mageRegisterLoginDroite.svg"
+      alt=""
+      class="absolute right-[-18vw] top-1/2 h-[120vh] w-[72vw] max-w-none -translate-y-1/2 object-cover object-right xl:right-[-14vw] xl:w-[68vw]"
+    />
+  </div>
+
+  <!-- ============================================================
+       PETITS ÉLÉMENTS DE DÉCOR MOBILE
+       ============================================================ -->
+
+  <div
+    class="pointer-events-none absolute -left-24 -top-24 z-0 h-72 w-72 rounded-full blur-3xl opacity-30 lg:hidden"
+    [style.background-color]="themeService.Primary"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="pointer-events-none absolute -bottom-24 -right-24 z-0 h-72 w-72 rounded-full blur-3xl opacity-20 lg:hidden"
+    [style.background-color]="themeService.Primary"
+    aria-hidden="true"
+  ></div>
+
+  
+
+  <!-- ============================================================
+       BOUTON RETOUR
+       ============================================================ -->
+
+  <a
+    routerLink="/"
+    class="group fixed left-3 top-3 z-30 flex h-11 items-center gap-2 rounded-2xl border px-3.5 text-sm font-semibold backdrop-blur-xl transition-all duration-200 hover:-translate-x-0.5 hover:opacity-85 active:scale-95 sm:left-5 sm:top-5 sm:h-12 sm:px-4"
+    [style.background-color]="themeService.GlassBackground"
+    [style.border-color]="themeService.GlassBorder"
+    [style.color]="themeService.TextPrincipal"
+    [style.box-shadow]="themeService.BoxShadowLarge"
+    [attr.aria-label]="languageService.is('fr') ? 'Retour' : 'Back'"
+  >
+    <!-- FLÈCHE -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:-translate-x-0.5 sm:h-5 sm:w-5"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19 12H5"
+      />
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m12 19-7-7 7-7"
+      />
+    </svg>
+
+    <span>
+      {{ languageService.is('fr') ? 'Retour' : 'Back' }}
+    </span>
+  </a>
+
+  <!-- ============================================================
+       CONTENU PRINCIPAL
+       ============================================================ -->
+
+  <main
+    class="relative z-20 flex min-h-screen w-full items-center justify-center px-3 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
+  >
+
+    <!-- ==========================================================
+         CARTE LOGIN
+         ========================================================== -->
+
+    <div
+      class="w-full max-w-[500px] overflow-hidden rounded-[1.75rem] border p-5 backdrop-blur-2xl sm:rounded-[2rem] sm:p-7 md:p-8 lg:p-9"
+      [style.background-color]="themeService.GlassBackground"
+      [style.border-color]="themeService.GlassBorder"
+      [style.box-shadow]="themeService.BoxShadowLarge"
+    >
+
+      <!-- ========================================================
+           HEADER
+           ======================================================== -->
+
+      <header class="mb-6 text-center sm:mb-7">
+
+        <!-- LOGO -->
+
+        <div
+          class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[18px] border p-2.5 shadow-sm sm:mb-5 sm:h-16 sm:w-16 sm:rounded-[20px]"
+          [style.background-color]="themeService.PrimarySoft"
+          [style.border-color]="themeService.BorderPrimary"
+        >
+          <img
+            src="assets/Logo.svg"
+            alt="JardiScan"
+            class="h-full w-full object-contain"
+          />
+        </div>
+
+        <!-- TITRE -->
+
+        <h1
+          class="text-[1.75rem] font-bold leading-tight tracking-tight sm:text-3xl md:text-4xl"
+          [style.color]="themeService.TextPrincipal"
+        >
+          {{ t('welcome') }}
+        </h1>
+
+        <p
+          class="mx-auto mt-2 max-w-md text-sm leading-5 sm:text-base sm:leading-6"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ t('subtitle') }}
+        </p>
+
+      </header>
+
+      <!-- ========================================================
+           MESSAGE SUCCÈS
+           ======================================================== -->
+
+      <div
+        *ngIf="successMessage"
+        class="mb-5 flex items-start gap-3 rounded-2xl border px-3.5 py-3 sm:px-4"
+        [style.background-color]="themeService.PrimarySoft"
+        [style.border-color]="themeService.BorderPrimary"
+      >
+        <div
+          class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+          [style.background-color]="themeService.Primary"
+          [style.color]="themeService.TextOnPrimary"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            class="h-3 w-3"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m5 12 4 4L19 6"
+            />
+          </svg>
+        </div>
+
+        <p
+          class="min-w-0 text-sm font-medium leading-5"
+          [style.color]="themeService.Primary"
+        >
+          {{ successMessage }}
+        </p>
+      </div>
+
+      <!-- ========================================================
+           MESSAGE ERREUR
+           ======================================================== -->
+
+      <div
+        *ngIf="errorMessage"
+        class="mb-5 flex items-start gap-3 rounded-2xl border px-3.5 py-3 sm:px-4"
+        [style.background-color]="themeService.ErrorSoft"
+        [style.border-color]="themeService.ErrorBorder"
+        role="alert"
+      >
+        <div
+          class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold"
+          [style.background-color]="themeService.Error"
+          [style.color]="themeService.TextOnPrimary"
+        >
+          !
+        </div>
+
+        <p
+          class="min-w-0 text-sm font-medium leading-5"
+          [style.color]="themeService.Error"
+        >
+          {{ errorMessage }}
+        </p>
+      </div>
+
+      <!-- ========================================================
+           FORMULAIRE
+           ======================================================== -->
+
+      <form
+        class="space-y-5"
+        (ngSubmit)="connecter()"
+        novalidate
+      >
+
+        <!-- ======================================================
+             INTRODUCTION
+             ====================================================== -->
+
+        <div class="mb-1">
+
+          <h2
+            class="text-xl font-bold sm:text-[1.35rem]"
+            [style.color]="themeService.TextPrincipal"
+          >
+            {{ t('login') }}
+          </h2>
+
+          <p
+            class="mt-1 text-sm leading-5"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{
+              languageService.is('fr')
+                ? 'Entrez vos identifiants pour continuer.'
+                : 'Enter your credentials to continue.'
+            }}
+          </p>
+
+        </div>
+
+        <!-- ======================================================
+             EMAIL
+             ====================================================== -->
+
+        <div>
+
+          <label
+            for="email"
+            class="mb-2 block text-sm font-semibold"
+            [style.color]="themeService.TextPrincipal"
+          >
+            {{ t('email') }}
+          </label>
+
+          <div class="relative">
+
+            <!-- ICÔNE EMAIL -->
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-4"
+              [style.color]="themeService.TextSecondaire"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 7.5 12 13l9-5.5"
+              />
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 19.5h15A1.5 1.5 0 0 0 21 18V6a1.5 1.5 0 0 0-1.5-1.5h-15A1.5 1.5 0 0 0 3 6v12a1.5 1.5 0 0 0 1.5 1.5Z"
+              />
+            </svg>
+
+            <!-- INPUT -->
+
+            <input
+              id="email"
+              type="email"
+              name="email"
+              autocomplete="email"
+              [placeholder]="t('emailPlaceholder')"
+              [(ngModel)]="email"
+              required
+              [disabled]="isLoading || guestLoading"
+              class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-4 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
+              [style.background-color]="themeService.Surface2"
+              [style.border-color]="
+                isEmailInvalid()
+                  ? themeService.ErrorBorder
+                  : themeService.Border2
+              "
+              [style.color]="themeService.TextPrincipal"
+              [style.caret-color]="themeService.Primary"
+              [style.--tw-ring-color]="themeService.PrimarySoft"
+            />
+
+          </div>
+
+          <!-- ERREUR EMAIL -->
+
+          <p
+            *ngIf="submitted && email && !isValidEmailForTemplate()"
+            class="mt-1.5 px-1 text-xs leading-4"
+            [style.color]="themeService.Error"
+          >
+            {{ t('emailInvalid') }}
+          </p>
+
+          <p
+            *ngIf="submitted && !email"
+            class="mt-1.5 px-1 text-xs leading-4"
+            [style.color]="themeService.Error"
+          >
+            {{ t('emailRequired') }}
+          </p>
+
+        </div>
+
+        <!-- ======================================================
+             MOT DE PASSE
+             ====================================================== -->
+
+        <div>
+
+          <div class="mb-2 flex items-center justify-between gap-3">
+
+            <label
+              for="password"
+              class="block text-sm font-semibold"
+              [style.color]="themeService.TextPrincipal"
+            >
+              {{ t('password') }}
+            </label>
+
+            <a
+              routerLink="/change-password"
+              class="shrink-0 text-xs font-semibold transition-opacity hover:opacity-70"
+              [style.color]="themeService.Primary"
+            >
+              {{ t('forgotPassword') }}
+            </a>
+
+          </div>
+
+          <div class="relative">
+
+            <!-- ICÔNE PASSWORD -->
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-4"
+              [style.color]="themeService.TextSecondaire"
+              aria-hidden="true"
+            >
+              <rect
+                width="16"
+                height="11"
+                x="4"
+                y="10"
+                rx="2"
+              />
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 10V7a4 4 0 0 1 8 0v3"
+              />
+            </svg>
+
+            <!-- INPUT PASSWORD -->
+
+            <input
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              name="password"
+              autocomplete="current-password"
+              [placeholder]="t('passwordPlaceholder')"
+              [(ngModel)]="password"
+              required
+              [disabled]="isLoading || guestLoading"
+              class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-14 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
+              [style.background-color]="themeService.Surface2"
+              [style.border-color]="
+                isPasswordInvalid()
+                  ? themeService.ErrorBorder
+                  : themeService.Border2
+              "
+              [style.color]="themeService.TextPrincipal"
+              [style.caret-color]="themeService.Primary"
+              [style.--tw-ring-color]="themeService.PrimarySoft"
+            />
+
+            <!-- AFFICHER / MASQUER -->
+
+            <button
+              type="button"
+              (click)="togglePassword()"
+              [disabled]="isLoading || guestLoading"
+              class="absolute right-1.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40"
+              [style.color]="themeService.TextSecondaire"
+              [attr.aria-label]="
+                showPassword
+                  ? (languageService.is('fr')
+                    ? 'Masquer le mot de passe'
+                    : 'Hide password')
+                  : (languageService.is('fr')
+                    ? 'Afficher le mot de passe'
+                    : 'Show password')
+              "
+            >
+
+              <!-- OEIL -->
+
+              <svg
+                *ngIf="!showPassword"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                class="h-5 w-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6-9.75-6-9.75-6Z"
+                />
+
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="2.5"
+                />
+              </svg>
+
+              <!-- OEIL BARRÉ -->
+
+              <svg
+                *ngIf="showPassword"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                class="h-5 w-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m3 3 18 18"
+                />
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.58 10.58a2 2 0 0 0 2.83 2.83"
+                />
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9.88 5.1A10.8 10.8 0 0 1 12 4.88c6.25 0 9.75 7.12 9.75 7.12a18.3 18.3 0 0 1-3.04 3.91M6.61 6.61C3.96 8.33 2.25 12 2.25 12s3.5 7.12 9.75 7.12c1.54 0 2.91-.36 4.1-.91"
+                />
+              </svg>
+
+            </button>
+
+          </div>
+
+          <!-- ====================================================
+               FORCE MOT DE PASSE
+               ==================================================== -->
+
+          <div
+            *ngIf="password"
+            class="mt-2.5"
+          >
+
+            <div class="flex gap-1.5">
+
+              <span
+                *ngFor="let item of [1, 2, 3, 4, 5]"
+                class="h-1 flex-1 rounded-full transition-all duration-300"
+                [style.background-color]="
+                  item <= getPasswordStrength()
+                    ? themeService.Primary
+                    : themeService.BorderSoft
+                "
+              ></span>
+
+            </div>
+
+            <p
+              class="mt-1.5 text-[11px] leading-4"
+              [style.color]="themeService.TextSecondaire"
+            >
+              {{ getPasswordStrengthLabel() }}
+
+              <span *ngIf="password.length < 6">
+                ·
+                {{
+                  languageService.is('fr')
+                    ? '6 caractères minimum'
+                    : '6 characters minimum'
+                }}
+              </span>
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- ======================================================
+             CONNEXION
+             ====================================================== -->
+
+        <button
+          type="submit"
+          [disabled]="isLoading || guestLoading"
+          class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-bold transition-all duration-200 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98]"
+          [style.background-color]="themeService.Primary"
+          [style.color]="themeService.TextOnPrimary"
+          [style.box-shadow]="themeService.BoxShadowPrimary"
+        >
+
+          <!-- LOADER -->
+
+          <span
+            *ngIf="isLoading"
+            class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+          ></span>
+
+          <!-- ICON -->
+
+          <svg
+            *ngIf="!isLoading"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="h-5 w-5"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 3h4.5A1.5 1.5 0 0 1 21 4.5v15a1.5 1.5 0 0 1-1.5 1.5H15"
+            />
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10 17l5-5-5-5"
+            />
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 12H3"
+            />
+          </svg>
+
+          <span>
+            {{ isLoading ? t('connecting') : t('connect') }}
+          </span>
+
+        </button>
+
+      </form>
+
+      <!-- ========================================================
+           SÉPARATEUR
+           ======================================================== -->
+
+      <div class="my-5 flex items-center gap-3 sm:my-6">
+
+        <div
+          class="h-px flex-1"
+          [style.background-color]="themeService.BorderSoft"
+        ></div>
+
+        <span
+          class="text-[10px] font-semibold uppercase tracking-wider sm:text-[11px]"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ languageService.is('fr') ? 'ou' : 'or' }}
+        </span>
+
+        <div
+          class="h-px flex-1"
+          [style.background-color]="themeService.BorderSoft"
+        ></div>
+
+      </div>
+
+      <!-- ========================================================
+           MODE INVITÉ
+           ======================================================== -->
+
+      <button
+        type="button"
+        (click)="continuerCommeInvite()"
+        [disabled]="isLoading || guestLoading"
+        class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl border px-5 py-3.5 text-sm font-semibold transition-all duration-200 hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+        [style.background-color]="themeService.Surface2"
+        [style.border-color]="themeService.Border2"
+        [style.color]="themeService.TextPrincipal"
+      >
+
+        <!-- LOADER -->
+
+        <span
+          *ngIf="guestLoading"
+          class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+        ></span>
+
+        <!-- ICON -->
+
+        <svg
+          *ngIf="!guestLoading"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          class="h-5 w-5"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+          />
+
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4.5 20.25a7.5 7.5 0 0 1 15 0"
+          />
+        </svg>
+
+        <span>
+          {{
+            guestLoading
+              ? t('guestLoading')
+              : t('guest')
+          }}
+        </span>
+
+      </button>
+
+      <!-- ========================================================
+           INSCRIPTION
+           ======================================================== -->
+
+      <div
+        class="mt-6 border-t pt-5 text-center sm:mt-7 sm:pt-6"
+        [style.border-color]="themeService.BorderSoft"
+      >
+
+        <p
+          class="text-sm leading-5"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ t('noAccount') }}
+
+          <a
+            routerLink="/register"
+            class="ml-1 cursor-pointer font-bold transition-opacity hover:opacity-70"
+            [style.color]="themeService.Primary"
+          >
+            {{ t('register') }}
+          </a>
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================
+       TOAST NOTIFICATION
+       ============================================================ -->
+
+  <div
+    *ngIf="showNotification"
+    class="fixed left-1/2 top-4 z-[999999] w-full max-w-[calc(100vw-1.5rem)] -translate-x-1/2 px-0.5 animate-toast sm:top-5 sm:max-w-[520px]"
+    role="status"
+    aria-live="polite"
+  >
+
+    <div
+      class="relative flex min-h-[64px] items-center gap-3 overflow-hidden rounded-2xl border px-4 py-3 text-white shadow-2xl backdrop-blur-xl sm:gap-4 sm:px-5"
+      [style.background]="
+        notificationType === 'success'
+          ? themeService.Success
+          : themeService.Error
+      "
+      [style.border-color]="
+        notificationType === 'success'
+          ? themeService.SuccessBorder
+          : themeService.ErrorBorder
+      "
+    >
+
+      <!-- ICON -->
+
+      <div
+        class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-white/15 sm:h-10 sm:w-10"
+      >
+
+        <i
+          *ngIf="notificationType === 'success'"
+          class="fa-solid fa-circle-check"
+        ></i>
+
+        <i
+          *ngIf="notificationType === 'error'"
+          class="fa-solid fa-circle-exclamation"
+        ></i>
+
+      </div>
+
+      <!-- TEXT -->
+
+      <div class="min-w-0 flex-1">
+
+        <p class="text-xs font-black tracking-wide">
+          {{
+            notificationType === 'success'
+              ? (languageService.is('fr')
+                ? 'Succès'
+                : 'Success')
+              : (languageService.is('fr')
+                ? 'Erreur'
+                : 'Error')
+          }}
+        </p>
+
+        <p class="truncate text-xs opacity-90">
+          {{ notificationMessage }}
+        </p>
+
+      </div>
+
+      <!-- CLOSE -->
+
+      <button
+        type="button"
+        (click)="closeNotification()"
+        class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 hover:bg-white/10"
+        [attr.aria-label]="
+          languageService.is('fr')
+            ? 'Fermer la notification'
+            : 'Close notification'
+        "
+      >
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+
+      <!-- SHINE -->
+
+      <div
+        class="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
+      >
+        <div
+          class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine"
+        ></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

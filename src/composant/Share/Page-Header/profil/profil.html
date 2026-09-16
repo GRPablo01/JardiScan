@@ -1,0 +1,910 @@
+<!-- ============================================================
+     👤 PROFIL UTILISATEUR — JARDISCAN
+
+     • Ouverture uniquement au clic
+     • Fermeture au clic extérieur
+     • Clic sur avatar = toggle
+     • Clic dans le menu = reste ouvert
+     • Liquid Glass / Premium Nature
+     • Light / Dark via ThemeService
+     • Responsive
+     • Aucune modification TS nécessaire
+     ============================================================ -->
+<div
+  class="relative flex items-center justify-center"
+
+  (click)="menuOpen = false"
+>
+
+
+  <!-- ========================================================
+       👤 BOUTON AVATAR
+       ======================================================== -->
+
+  <button
+    id="userMenuButton"
+
+    type="button"
+
+    (click)="toggleMenu(); $event.stopPropagation()"
+
+    [attr.aria-expanded]="menuOpen"
+    [attr.aria-haspopup]="true"
+    [attr.aria-controls]="'userMenuDropdown'"
+
+    [attr.aria-label]="
+      prenom || nom
+        ? 'Ouvrir le menu de ' + (prenom || '') + ' ' + (nom || '')
+        : 'Ouvrir le menu utilisateur'
+    "
+
+    class="
+      group/avatar
+      relative
+      flex
+      h-10
+      w-10
+      shrink-0
+      items-center
+      justify-center
+      rounded-full
+      border
+      p-[2px]
+      outline-none
+      transition-all
+      duration-300
+      ease-out
+      hover:scale-105
+      active:scale-95
+      focus-visible:ring-2
+      focus-visible:ring-emerald-400/30
+    "
+
+    [style.background]="themeService.GlassBackground"
+    [style.border-color]="themeService.GlassBorder"
+    [style.box-shadow]="themeService.BoxShadowSmall"
+
+    style="
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+    "
+  >
+
+
+    <!-- ======================================================
+         ✨ HALO AVATAR
+         ====================================================== -->
+
+    <span
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+        rounded-full
+        opacity-0
+        ring-1
+        ring-emerald-400/40
+        transition-opacity
+        duration-300
+        group-hover/avatar:opacity-100
+      "
+
+      aria-hidden="true"
+    ></span>
+
+
+    <!-- ======================================================
+         🖼️ AVATAR
+         ====================================================== -->
+
+    <ng-container
+      *ngIf="avatar; else avatarFallback"
+    >
+
+      <img
+        [src]="avatar"
+
+        [alt]="
+          prenom || nom
+            ? 'Avatar de ' + (prenom || '') + ' ' + (nom || '')
+            : 'Avatar utilisateur'
+        "
+
+        class="
+          relative
+          h-full
+          w-full
+          rounded-full
+          object-cover
+          ring-1
+          ring-white/20
+          transition-transform
+          duration-300
+          ease-out
+          group-hover/avatar:scale-[1.035]
+        "
+
+        loading="lazy"
+
+        (error)="avatar = null"
+      />
+
+    </ng-container>
+
+
+    <!-- ======================================================
+         👤 FALLBACK AVATAR
+         ====================================================== -->
+
+    <ng-template #avatarFallback>
+
+      <div
+        class="
+          relative
+          flex
+          h-full
+          w-full
+          items-center
+          justify-center
+          rounded-full
+          text-[11px]
+          font-bold
+          text-white
+          ring-1
+          ring-white/20
+          transition-transform
+          duration-300
+          ease-out
+          group-hover/avatar:scale-[1.035]
+        "
+
+        [style.background]="getRoleGradient(role)"
+      >
+
+        <!-- SUPERADMIN -->
+
+        <ng-container
+          *ngIf="role === 'superadmin'; else normalUser"
+        >
+
+          <i
+            class="fa-solid fa-crown text-[14px]"
+            aria-hidden="true"
+          ></i>
+
+        </ng-container>
+
+
+        <!-- UTILISATEUR NORMAL -->
+
+        <ng-template #normalUser>
+
+          {{ initials || 'IN' }}
+
+        </ng-template>
+
+      </div>
+
+    </ng-template>
+
+  </button>
+
+
+  <!-- ========================================================
+       👤 MENU UTILISATEUR
+       
+       • Aucun hover
+       • Ouverture uniquement avec menuOpen
+       ======================================================== -->
+
+  <div
+    id="userMenuDropdown"
+
+    role="menu"
+
+    aria-labelledby="userMenuButton"
+
+    (click)="$event.stopPropagation()"
+
+    class="
+      absolute
+      right-0
+      top-[calc(100%+0.75rem)]
+      z-50
+      w-[19rem]
+      overflow-hidden
+      rounded-[1.5rem]
+      border
+      shadow-2xl
+      backdrop-blur-2xl
+
+      transition-all
+      duration-300
+      ease-[cubic-bezier(0.22,1,0.36,1)]
+    "
+
+    [class.pointer-events-none]="!menuOpen"
+    [class.invisible]="!menuOpen"
+    [class.opacity-0]="!menuOpen"
+    [class.translate-y-2]="!menuOpen"
+    [class.scale-[0.97]]="!menuOpen"
+
+    [class.pointer-events-auto]="menuOpen"
+    [class.visible]="menuOpen"
+    [class.opacity-100]="menuOpen"
+    [class.translate-y-0]="menuOpen"
+    [class.scale-100]="menuOpen"
+
+    [style.background]="themeService.GlassBackground"
+    [style.border-color]="themeService.GlassBorder"
+    [style.box-shadow]="themeService.BoxShadowLarge"
+
+    style="
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+    "
+  >
+
+
+    <!-- ======================================================
+         ✨ REFLET GLASS
+         ====================================================== -->
+
+    <div
+      class="
+        pointer-events-none
+        absolute
+        inset-x-0
+        top-0
+        h-px
+        bg-gradient-to-r
+        from-transparent
+        via-white/25
+        to-transparent
+      "
+
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- ======================================================
+         👤 HEADER PROFIL
+         ====================================================== -->
+
+    <div
+      class="
+        relative
+        flex
+        items-center
+        gap-3.5
+        px-4
+        pb-4
+        pt-4
+      "
+    >
+
+
+      <!-- ====================================================
+           PETIT AVATAR
+           ==================================================== -->
+
+      <div
+        class="
+          relative
+          flex
+          h-12
+          w-12
+          shrink-0
+          items-center
+          justify-center
+          overflow-hidden
+          rounded-full
+          border
+          p-[2px]
+        "
+
+        [style.background]="themeService.Surface2"
+        [style.border-color]="themeService.GlassBorder"
+      >
+
+        <ng-container
+          *ngIf="avatar; else dropdownAvatarFallback"
+        >
+
+          <img
+            [src]="avatar"
+
+            [alt]="prenom || nom || 'Utilisateur'"
+
+            class="
+              h-full
+              w-full
+              rounded-full
+              object-cover
+            "
+
+            loading="lazy"
+
+            (error)="avatar = null"
+          />
+
+        </ng-container>
+
+
+        <!-- FALLBACK -->
+
+        <ng-template #dropdownAvatarFallback>
+
+          <div
+            class="
+              flex
+              h-full
+              w-full
+              items-center
+              justify-center
+              rounded-full
+              text-xs
+              font-bold
+              text-white
+            "
+
+            [style.background]="getRoleGradient(role)"
+          >
+
+            <!-- SUPERADMIN -->
+
+            <ng-container
+              *ngIf="role === 'superadmin'; else dropdownInitials"
+            >
+
+              <i
+                class="fa-solid fa-crown text-sm"
+                aria-hidden="true"
+              ></i>
+
+            </ng-container>
+
+
+            <!-- INITIALES -->
+
+            <ng-template #dropdownInitials>
+
+              {{ initials || 'IN' }}
+
+            </ng-template>
+
+          </div>
+
+        </ng-template>
+
+      </div>
+
+
+      <!-- ====================================================
+           INFORMATIONS
+           ==================================================== -->
+
+      <div class="min-w-0 flex-1">
+
+        <p
+          class="
+            truncate
+            text-[13px]
+            font-bold
+            leading-tight
+          "
+
+          [style.color]="themeService.TextPrincipal"
+        >
+
+          {{ prenom || 'Supporter' }} {{ nom }}
+
+        </p>
+
+
+        <div
+          class="
+            mt-1.5
+            flex
+            items-center
+            gap-1.5
+          "
+        >
+
+          <!-- STATUT -->
+
+          <span
+            class="
+              h-1.5
+              w-1.5
+              shrink-0
+              rounded-full
+            "
+
+            [style.background]="themeService.Success"
+
+            [style.box-shadow]="
+              '0 0 8px ' + themeService.Success
+            "
+
+            aria-hidden="true"
+          ></span>
+
+
+          <!-- ROLE -->
+
+          <p
+            class="
+              truncate
+              text-[9px]
+              font-semibold
+              uppercase
+              tracking-[0.15em]
+            "
+
+            [style.color]="themeService.TextSecondaire"
+          >
+
+            {{ formatRole(role) }}
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         SEPARATEUR
+         ====================================================== -->
+
+    <div
+      class="
+        mx-4
+        h-px
+        opacity-70
+      "
+
+      [style.background]="themeService.Border3"
+
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- ======================================================
+         🧭 NAVIGATION
+         ====================================================== -->
+
+    <nav
+      class="p-2.5"
+
+      aria-label="Menu utilisateur"
+    >
+
+
+      <!-- ====================================================
+           👤 PROFIL
+           ==================================================== -->
+
+      <a
+        routerLink="/profil"
+
+        role="menuitem"
+
+        class="
+          group/item
+          flex
+          min-h-[3.25rem]
+          items-center
+          gap-3
+          rounded-[0.95rem]
+          px-3
+          py-2.5
+          outline-none
+          transition-all
+          duration-200
+
+          hover:translate-x-0.5
+          hover:bg-emerald-500/10
+
+          focus-visible:bg-emerald-500/10
+          focus-visible:ring-1
+          focus-visible:ring-emerald-400/30
+        "
+
+        [style.color]="themeService.TextPrincipal"
+      >
+
+        <!-- ICON -->
+
+        <span
+          class="
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            transition-all
+            duration-200
+            group-hover/item:scale-105
+          "
+
+          [style.background]="themeService.PrimarySoft"
+
+          [style.border]="
+            '1px solid ' + themeService.BorderPrimary
+          "
+        >
+
+          <i
+            class="fa-solid fa-user text-[13px]"
+
+            [style.color]="themeService.Primary"
+
+            aria-hidden="true"
+          ></i>
+
+        </span>
+
+
+        <!-- TEXTE -->
+
+        <span
+          class="
+            min-w-0
+            flex-1
+            text-xs
+            font-semibold
+          "
+        >
+
+          Mon profil
+
+        </span>
+
+
+        <!-- CHEVRON -->
+
+        <i
+          class="
+            fa-solid
+            fa-chevron-right
+            text-[8px]
+            opacity-30
+            transition-all
+            duration-200
+            group-hover/item:translate-x-0.5
+            group-hover/item:opacity-70
+          "
+
+          aria-hidden="true"
+        ></i>
+
+      </a>
+
+
+      <!-- ====================================================
+           ⚙️ PARAMÈTRES
+           ==================================================== -->
+
+      <a
+        routerLink="/parametres"
+
+        role="menuitem"
+
+        class="
+          group/item
+          mt-1
+          flex
+          min-h-[3.25rem]
+          items-center
+          gap-3
+          rounded-[0.95rem]
+          px-3
+          py-2.5
+          outline-none
+          transition-all
+          duration-200
+
+          hover:translate-x-0.5
+          hover:bg-emerald-500/10
+
+          focus-visible:bg-emerald-500/10
+          focus-visible:ring-1
+          focus-visible:ring-emerald-400/30
+        "
+
+        [style.color]="themeService.TextPrincipal"
+      >
+
+        <!-- ICON -->
+
+        <span
+          class="
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            transition-all
+            duration-200
+            group-hover/item:scale-105
+          "
+
+          [style.background]="themeService.PrimarySoft"
+
+          [style.border]="
+            '1px solid ' + themeService.BorderPrimary
+          "
+        >
+
+          <i
+            class="fa-solid fa-gear text-[13px]"
+
+            [style.color]="themeService.Primary"
+
+            aria-hidden="true"
+          ></i>
+
+        </span>
+
+
+        <!-- TEXTE -->
+
+        <span
+          class="
+            min-w-0
+            flex-1
+            text-xs
+            font-semibold
+          "
+        >
+
+          Paramètres
+
+        </span>
+
+
+        <!-- CHEVRON -->
+
+        <i
+          class="
+            fa-solid
+            fa-chevron-right
+            text-[8px]
+            opacity-30
+            transition-all
+            duration-200
+            group-hover/item:translate-x-0.5
+            group-hover/item:opacity-70
+          "
+
+          aria-hidden="true"
+        ></i>
+
+      </a>
+
+
+      <!-- ====================================================
+           💡 CONSEILS
+           ==================================================== -->
+
+      <a
+        routerLink="/conseils"
+
+        role="menuitem"
+
+        class="
+          group/item
+          mt-1
+          flex
+          min-h-[3.25rem]
+          items-center
+          gap-3
+          rounded-[0.95rem]
+          px-3
+          py-2.5
+          outline-none
+          transition-all
+          duration-200
+
+          hover:translate-x-0.5
+          hover:bg-emerald-500/10
+
+          focus-visible:bg-emerald-500/10
+          focus-visible:ring-1
+          focus-visible:ring-emerald-400/30
+        "
+
+        [style.color]="themeService.TextPrincipal"
+      >
+
+        <!-- ICON -->
+
+        <span
+          class="
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            transition-all
+            duration-200
+            group-hover/item:scale-105
+          "
+
+          [style.background]="themeService.PrimarySoft"
+
+          [style.border]="
+            '1px solid ' + themeService.BorderPrimary
+          "
+        >
+
+          <i
+            class="fa-solid fa-lightbulb text-[13px]"
+
+            [style.color]="themeService.Primary"
+
+            aria-hidden="true"
+          ></i>
+
+        </span>
+
+
+        <!-- TEXTE -->
+
+        <span
+          class="
+            min-w-0
+            flex-1
+            text-xs
+            font-semibold
+          "
+        >
+
+          Conseils
+
+        </span>
+
+
+        <!-- CHEVRON -->
+
+        <i
+          class="
+            fa-solid
+            fa-chevron-right
+            text-[8px]
+            opacity-30
+            transition-all
+            duration-200
+            group-hover/item:translate-x-0.5
+            group-hover/item:opacity-70
+          "
+
+          aria-hidden="true"
+        ></i>
+
+      </a>
+
+    </nav>
+
+
+    <!-- ======================================================
+         SEPARATEUR FOOTER
+         ====================================================== -->
+
+    <div
+      class="
+        mx-4
+        h-px
+        opacity-70
+      "
+
+      [style.background]="themeService.Border3"
+
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- ======================================================
+         FOOTER
+         ====================================================== -->
+
+    <div
+      class="
+        flex
+        items-center
+        justify-between
+        gap-3
+        px-4
+        py-3.5
+      "
+    >
+
+
+      <!-- ====================================================
+           RÔLE
+           ==================================================== -->
+
+      <div
+        class="
+          flex
+          min-w-0
+          items-center
+          gap-2
+        "
+
+        [style.color]="themeService.TextSecondaire"
+      >
+
+        <span
+          class="
+            h-1.5
+            w-1.5
+            shrink-0
+            rounded-full
+          "
+
+          [style.background]="themeService.Success"
+
+          aria-hidden="true"
+        ></span>
+
+
+        <span
+          class="
+            truncate
+            text-[9px]
+            font-semibold
+            uppercase
+            tracking-[0.16em]
+            opacity-60
+          "
+        >
+
+          {{ formatRole(role) }}
+
+        </span>
+
+      </div>
+
+
+      <!-- ====================================================
+           COMPTE
+           ==================================================== -->
+
+      <span
+        class="
+          shrink-0
+          rounded-full
+          border
+          px-2
+          py-1
+          text-[8px]
+          font-semibold
+          uppercase
+          tracking-wider
+        "
+
+        [style.color]="themeService.Primary"
+        [style.background]="themeService.PrimarySoft"
+        [style.border-color]="themeService.BorderPrimary"
+      >
+
+        Compte
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
