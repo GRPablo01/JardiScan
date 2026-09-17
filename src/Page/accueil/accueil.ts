@@ -7,20 +7,10 @@ import { ThemeService } from '../../../Backend/Services/theme.service';
 import { Header } from '../../composant/Public/header/header';
 import { Welcome } from '../../composant/Share/Page-Accueil/welcome/welcome';
 import { BotAssistant } from '../../composant/Public/bot-assistant/bot-assistant';
-import { Teste } from '../../composant/teste/teste';
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { Bot } from '../../composant/Share/Page-Accueil/bot/bot';
+import { WidgetScan } from '../../composant/Share/Page-Accueil/widget-scan/widget-scan';
+import { MaCollection } from '../../composant/Share/Page-Accueil/ma-collection/ma-collection';
+import { Footer } from '../../composant/Public/footer/footer';
 
 
 @Component({
@@ -33,7 +23,10 @@ import { Teste } from '../../composant/teste/teste';
     Header,
     Welcome,
     BotAssistant,
-    Teste
+    Bot,
+    WidgetScan,
+    MaCollection,
+    Footer
 ],
   templateUrl: './accueil.html',
   styleUrls: ['./accueil.css'],

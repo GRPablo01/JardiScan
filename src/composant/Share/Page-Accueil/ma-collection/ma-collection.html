@@ -1,0 +1,517 @@
+<!-- ============================================================
+     🌿 JARDISCAN — MA COLLECTION
+
+     VERSION ENRICHIE :
+     • Fond végétal décoratif
+     • Plusieurs éléments visuels en arrière-plan
+     • Texte explicatif enrichi
+     • Statistique de progression
+     • Légende des états
+     • Cartes plantes premium
+     • Indication visuelle de progression
+     • Responsive
+     • ThemeService conservé
+     • Aucun changement de logique Angular
+     ============================================================ -->
+
+<section
+  class="relative w-full overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
+  [ngStyle]="{
+    'background':themeService.Background2,
+    'color': themeService.TextPrincipal
+  }"
+>
+
+
+
+  <!-- ============================================================
+       CONTENU PRINCIPAL
+       ============================================================ -->
+
+  <div
+    class="relative z-10 flex w-full flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-14"
+  >
+
+    <!-- ============================================================
+         🌱 PARTIE GAUCHE — PRÉSENTATION
+         ============================================================ -->
+
+    <div class="relative w-full max-w-2xl">
+
+      <!-- Badge -->
+      <div
+        class="mb-4 inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-semibold backdrop-blur-xl sm:text-sm"
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft,
+          'border-color': themeService.BorderPrimary,
+          'color': themeService.Primary
+        }"
+      >
+        <span
+          class="flex h-6 w-6 items-center justify-center rounded-full"
+          [ngStyle]="{
+            'background-color': themeService.Primary,
+            'color': themeService.TextOnPrimary
+          }"
+        >
+          <i class="fa-solid fa-leaf text-[11px]"></i>
+        </span>
+
+        Votre jardin numérique
+      </div>
+
+      <!-- Titre -->
+      <h1
+        class="mb-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+        [ngStyle]="{
+          'color': themeService.Primary
+        }"
+      >
+        Ma Collection
+      </h1>
+
+      <!-- Sous-titre -->
+      <h2
+        class="mb-4 max-w-2xl text-xl font-semibold leading-tight sm:text-2xl lg:text-3xl"
+        [ngStyle]="{
+          'color': themeService.TextPrincipal
+        }"
+      >
+        Toutes vos découvertes végétales,
+        <span [ngStyle]="{ 'color': themeService.Primary }">
+          réunies au même endroit.
+        </span>
+      </h2>
+
+      <!-- Description -->
+      <p
+        class="max-w-xl text-sm leading-7 sm:text-base"
+        [ngStyle]="{
+          'color': themeService.TextSecondaire
+        }"
+      >
+        Chaque plante que vous identifiez avec JardiScan vient enrichir
+        votre collection personnelle. Retrouvez vos découvertes,
+        observez votre progression et gardez une trace de votre
+        exploration du monde végétal.
+      </p>
+
+      <!-- ========================================================
+           MINI STATISTIQUE
+           ======================================================== -->
+
+      <div
+        class="mt-6 rounded-2xl border p-4 backdrop-blur-xl sm:p-5"
+        [ngStyle]="{
+          'background-color': themeService.Background3,
+          'border-color': themeService.Border3
+        }"
+      >
+
+        <div class="flex items-center justify-between gap-4">
+
+          <div class="flex items-center gap-3">
+
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
+              [ngStyle]="{
+                'background-color': themeService.PrimarySoft,
+                'color': themeService.Primary
+              }"
+            >
+              <i class="fa-solid fa-seedling"></i>
+            </div>
+
+            <div>
+              <p
+                class="text-xs font-medium"
+                [ngStyle]="{
+                  'color': themeService.TextSecondaire
+                }"
+              >
+                Votre progression
+              </p>
+
+              <p
+                class="text-sm font-bold sm:text-base"
+                [ngStyle]="{
+                  'color': themeService.TextPrincipal
+                }"
+              >
+                Construisez votre collection
+              </p>
+            </div>
+
+          </div>
+
+          <span
+            class="hidden rounded-full px-3 py-1.5 text-xs font-bold sm:inline-flex"
+            [ngStyle]="{
+              'background-color': themeService.PrimarySoft,
+              'color': themeService.Primary,
+            }"
+          >
+            Explorez encore
+          </span>
+
+        </div>
+
+        <!-- Barre décorative de progression -->
+        <div
+          class="mt-4 h-2 overflow-hidden rounded-full"
+          [ngStyle]="{
+            'background-color': themeService.Background3
+          }"
+        >
+          <div
+            class="h-full w-[58%] rounded-full"
+            [ngStyle]="{
+              'background-color': themeService.Primary
+            }"
+          ></div>
+        </div>
+
+        <p
+          class="mt-2 text-[11px]"
+          [ngStyle]="{
+            'color': themeService.TextMuted
+          }"
+        >
+          Chaque nouveau scan vous permet de compléter votre jardin.
+        </p>
+
+      </div>
+
+      <!-- ========================================================
+           LÉGENDE DES ÉTATS
+           ======================================================== -->
+
+      <div class="mt-5 flex flex-wrap gap-3">
+
+        <!-- Identifiée -->
+        <div
+          class="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-medium"
+          [ngStyle]="{
+            'background-color': themeService.Background3,
+            'border-color': themeService.Border3,
+            'color': themeService.TextSecondaire
+          }"
+        >
+          <span
+            class="flex h-5 w-5 items-center justify-center rounded-full"
+            [ngStyle]="{
+              'background-color': themeService.Primary,
+              'color': themeService.TextOnPrimary
+            }"
+          >
+            <i class="fa-solid fa-check text-[9px]"></i>
+          </span>
+
+          Plante identifiée
+        </div>
+
+        <!-- À identifier -->
+        <div
+          class="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-medium"
+          [ngStyle]="{
+            'background-color': themeService.Background3,
+            'border-color': themeService.Border3,
+            'color': themeService.TextSecondaire
+          }"
+        >
+          <span
+            class="flex h-5 w-5 items-center border justify-center rounded-full"
+            [ngStyle]="{
+              'background-color': themeService.Background4,
+              'border-color': themeService.Border4,
+              'color': themeService.TextSecondaire
+            }"
+          >
+            ?
+          </span>
+
+          Plante à découvrir
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ============================================================
+         🌿 PARTIE DROITE — APERÇU VISUEL
+         ============================================================ -->
+
+    <div
+      class="relative z-10 flex w-full max-w-xl items-center justify-center"
+    >
+
+      <!-- Décoration arrière -->
+      <div
+        class="pointer-events-none absolute h-64 w-64 rounded-full blur-3xl opacity-20"
+        [ngStyle]="{
+          'background-color': themeService.Primary
+        }"
+      ></div>
+
+      <!-- ========================================================
+           GRILLE DES CARTES
+           ======================================================== -->
+
+      <div
+        class="relative grid w-full max-w-[500px] grid-cols-2 gap-4 sm:gap-5"
+      >
+
+        <!-- ======================================================
+             🌻 PLANTE IDENTIFIÉE
+             ====================================================== -->
+
+        <div
+          class="group relative overflow-hidden rounded-[1.75rem] border shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+          [ngStyle]="{
+            'background-color': themeService.Background3,
+            'border-color': themeService.Border3
+          }"
+        >
+
+          <!-- Image -->
+          <div class="relative aspect-[4/5] w-full overflow-hidden">
+
+            <img
+              src="assets/ImageTournesole.png"
+              alt="Plante identifiée"
+              class="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+            />
+
+            <!-- Voile -->
+            <div
+              class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/60 to-transparent"
+            ></div>
+
+            <!-- Badge -->
+            <div
+              class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[10px] font-bold shadow-lg backdrop-blur-md sm:left-4 sm:top-4 sm:text-xs"
+              [ngStyle]="{
+                'background-color': themeService.Primary,
+                'color': themeService.TextOnPrimary
+              }"
+            >
+              <i class="fa-solid fa-check text-[9px]"></i>
+              Identifiée
+            </div>
+
+            <!-- Texte sur image -->
+            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4">
+
+              <p
+                class="text-[10px] font-medium uppercase tracking-wider text-white/80"
+              >
+                Découverte
+              </p>
+
+              <p
+                class="text-sm font-bold text-white sm:text-base"
+              >
+                Une nouvelle plante
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- Informations -->
+          <div class="p-3.5 sm:p-4">
+
+            <div class="mb-1 flex items-center justify-between gap-2">
+
+              <h3
+                class="truncate text-sm font-bold sm:text-base"
+                [ngStyle]="{
+                  'color': themeService.TextPrincipal
+                }"
+              >
+                Plante trouvée
+              </h3>
+
+              <span
+                class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                [ngStyle]="{
+                  'background-color': themeService.PrimarySoft,
+                  'color': themeService.Primary
+                }"
+              >
+                <i class="fa-solid fa-check text-xs"></i>
+              </span>
+
+            </div>
+
+            <p
+              class="text-[11px] leading-5 sm:text-xs"
+              [ngStyle]="{
+                'color': themeService.TextSecondaire
+              }"
+            >
+              Identifiée avec succès par JardiScan
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- ======================================================
+             🌹 PLANTE NON IDENTIFIÉE
+             ====================================================== -->
+
+        <div
+          class="group relative overflow-hidden rounded-[1.75rem] border shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+          [ngStyle]="{
+            'background-color': themeService.Background3,
+            'border-color': themeService.Border3
+          }"
+        >
+
+          <!-- Image -->
+          <div class="relative aspect-[4/5] w-full overflow-hidden">
+
+            <img
+              src="assets/ImageRose.png"
+              alt="Plante à identifier"
+              class="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-110"
+            />
+
+            <!-- Voile -->
+            <div class="absolute inset-0 bg-black/25"></div>
+
+            <!-- Question centrale -->
+            <div class="absolute inset-0 flex items-center justify-center">
+
+              <div
+                class="flex h-16 w-16 items-center justify-center rounded-full border-2 text-3xl font-bold shadow-2xl backdrop-blur-xl transition duration-300 group-hover:scale-110 sm:h-20 sm:w-20 sm:text-4xl"
+                [ngStyle]="{
+                  'background-color': themeService.Overlay,
+                  'border-color': themeService.Primary,
+                  'color': themeService.Primary
+                }"
+              >
+                ?
+              </div>
+
+            </div>
+
+            <!-- Badge -->
+            <div
+              class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-[10px] font-bold backdrop-blur-md sm:left-4 sm:top-4 sm:text-xs"
+              [ngStyle]="{
+                'background-color': themeService.Overlay,
+                'border-color': themeService.Border1,
+                'color': themeService.TextPrincipal
+              }"
+            >
+              <i class="fa-solid fa-question text-[9px]"></i>
+              À découvrir
+            </div>
+
+            <!-- Texte sur image -->
+            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4">
+
+              <p
+                class="text-[10px] font-medium uppercase tracking-wider text-white/70"
+              >
+                Prochaine étape
+              </p>
+
+              <p
+                class="text-sm font-bold text-white sm:text-base"
+              >
+                À identifier
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- Informations -->
+          <div class="p-3.5 sm:p-4">
+
+            <div class="mb-1 flex items-center justify-between gap-2">
+
+              <h3
+                class="truncate text-sm font-bold sm:text-base"
+                [ngStyle]="{
+                  'color': themeService.TextPrincipal
+                }"
+              >
+                Plante non trouvée
+              </h3>
+
+              <span
+                class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                [ngStyle]="{
+                  'background-color': themeService.Background3,
+                  'color': themeService.TextSecondaire
+                }"
+              >
+                ?
+              </span>
+
+            </div>
+
+            <p
+              class="text-[11px] leading-5 sm:text-xs"
+              [ngStyle]="{
+                'color': themeService.TextSecondaire
+              }"
+            >
+              Elle attend votre prochain scan
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ============================================================
+       🌱 MESSAGE BAS DE SECTION
+       ============================================================ -->
+
+  <div
+    class="relative z-10 mt-8 flex flex-col items-center justify-center gap-2 text-center sm:mt-10"
+  >
+
+    <div
+      class="flex items-center gap-2 text-xs font-medium sm:text-sm"
+      [ngStyle]="{
+        'color': themeService.TextSecondaire
+      }"
+    >
+      <i
+        class="fa-solid fa-sparkles"
+        [ngStyle]="{
+          'color': themeService.Primary
+        }"
+      ></i>
+
+      Votre collection évolue à chaque découverte.
+    </div>
+
+    <p
+      class="max-w-lg text-[11px] leading-5 sm:text-xs"
+      [ngStyle]="{
+        'color': themeService.TextMuted
+      }"
+    >
+      Identifiez de nouvelles plantes avec le scanner JardiScan
+      et transformez progressivement vos découvertes en véritable
+      collection végétale.
+    </p>
+
+  </div>
+
+</section>

@@ -1,0 +1,1026 @@
+<!-- ============================================================
+     🌿 JARDISCAN — FOOTER ESPACE UTILISATEUR
+
+     • Destiné aux utilisateurs connectés
+     • Aucun lien Connexion / Inscription
+     • Vrai logo JardiScan
+     • Nom + prénom depuis localStorage
+     • ThemeService 100 %
+     • Light / Dark
+     • Premium Nature Design
+     • Glassmorphism
+     • Responsive mobile → 2xl
+     • 4 colonnes desktop
+     • Angular standalone
+     • RouterLink
+     • Font Awesome
+     • Tailwind CSS
+     ============================================================ -->
+
+     <footer
+     class="relative w-full overflow-hidden"
+     [ngStyle]="{
+       'background-color': themeService.BackgroundFooter,
+       'color': themeService.TextPrincipal
+     }"
+   >
+   
+     <!-- ==========================================================
+          CONTENU PRINCIPAL
+          ========================================================== -->
+   
+     <div
+       class="
+         relative
+         mx-auto
+         w-full
+         px-5
+         py-12
+         sm:px-8
+         sm:py-14
+         lg:px-10
+         lg:py-16
+         xl:px-14
+         2xl:px-20
+       "
+     >
+   
+       <!-- ========================================================
+            GRILLE PRINCIPALE
+            ======================================================== -->
+   
+       <div
+         class="
+           grid
+           w-full
+           grid-cols-1
+           gap-10
+           sm:grid-cols-2
+           lg:grid-cols-4
+           lg:gap-8
+           xl:gap-12
+         "
+       >
+   
+         <!-- ======================================================
+              01 — IDENTITÉ JARDISCAN + UTILISATEUR
+              ====================================================== -->
+   
+         <div class="flex flex-col">
+   
+           <!-- ====================================================
+                LOGO JARDISCAN
+                ==================================================== -->
+   
+           <a
+             routerLink="/accueil"
+             aria-label="JardiScan - Accueil"
+             class="
+               group
+               mb-5
+               inline-flex
+               w-fit
+               items-center
+               gap-3
+             "
+           >
+   
+             <!-- VRAI LOGO -->
+             <div
+               class="
+                 flex
+                 h-12
+                 w-12
+                 shrink-0
+                 items-center
+                 justify-center
+                 overflow-hidden
+                 rounded-2xl
+                 border
+                 p-2
+                 backdrop-blur-xl
+                 transition-all
+                 duration-300
+                 group-hover:-translate-y-0.5
+               "
+               [ngStyle]="{
+                 'background-color': themeService.PrimarySoft,
+                 'border-color': themeService.GlassBorder,
+                 'box-shadow': themeService.BoxShadowSmall
+               }"
+             >
+   
+               <img
+                 src="assets/Logo.svg"
+                 alt="Logo JardiScan"
+                 class="
+                   h-full
+                   w-full
+                   object-contain
+                   transition-transform
+                   duration-300
+                   group-hover:scale-105
+                 "
+               />
+   
+             </div>
+   
+             <!-- NOM -->
+             <div class="flex flex-col">
+   
+               <span
+                 class="
+                   text-xl
+                   font-bold
+                   tracking-tight
+                 "
+                 [ngStyle]="{
+                   'color': themeService.TextPrincipal
+                 }"
+               >
+                 JardiScan
+               </span>
+   
+               <span
+                 class="
+                   text-xs
+                   font-medium
+                 "
+                 [ngStyle]="{
+                   'color': themeService.TextMuted
+                 }"
+               >
+                 Votre compagnon botanique
+               </span>
+   
+             </div>
+   
+           </a>
+   
+           <!-- ====================================================
+                DESCRIPTION
+                ==================================================== -->
+   
+           <p
+             class="
+               max-w-sm
+               text-sm
+               leading-6
+             "
+             [ngStyle]="{
+               'color': themeService.TextSecondaire
+             }"
+           >
+             Identifiez vos plantes, retrouvez vos découvertes et
+             gérez votre collection botanique directement depuis
+             votre espace JardiScan.
+           </p>
+   
+           <!-- ====================================================
+                CARTE UTILISATEUR CONNECTÉ
+                ==================================================== -->
+   
+           <div
+             class="
+               mt-6
+               flex
+               w-fit
+               max-w-full
+               items-center
+               gap-3
+               rounded-2xl
+               border
+               px-3
+               py-3
+               backdrop-blur-xl
+             "
+             [ngStyle]="{
+               'background-color': themeService.GlassBackground,
+               'border-color': themeService.GlassBorder,
+               'box-shadow': themeService.BoxShadowSmall
+             }"
+           >
+   
+             <!-- AVATAR / INITIALES -->
+   
+             <div
+               class="
+                 flex
+                 h-10
+                 w-10
+                 shrink-0
+                 items-center
+                 justify-center
+                 rounded-xl
+                 text-xs
+                 font-bold
+               "
+               [ngStyle]="{
+                 'background-color': themeService.PrimarySoft,
+                 'color': themeService.Primary,
+                 'border-color': themeService.GlassBorder
+               }"
+             >
+               {{ userInitials }}
+             </div>
+   
+             <!-- INFORMATIONS USER -->
+   
+             <div class="min-w-0">
+   
+               <p
+                 class="
+                   truncate
+                   text-sm
+                   font-semibold
+                 "
+                 [ngStyle]="{
+                   'color': themeService.TextPrincipal
+                 }"
+               >
+                 {{ fullName }}
+               </p>
+   
+               <div class="mt-0.5 flex items-center gap-2">
+   
+                 <span
+                   class="
+                     h-1.5
+                     w-1.5
+                     shrink-0
+                     animate-pulse
+                     rounded-full
+                   "
+                   [ngStyle]="{
+                     'background-color': themeService.Primary
+                   }"
+                 ></span>
+   
+                 <span
+                   class="text-xs"
+                   [ngStyle]="{
+                     'color': themeService.TextMuted
+                   }"
+                 >
+                   Compte connecté
+                 </span>
+   
+               </div>
+   
+             </div>
+   
+           </div>
+   
+         </div>
+   
+   
+         <!-- ======================================================
+              02 — MON ESPACE
+              ====================================================== -->
+   
+         <div>
+   
+           <h3
+             class="
+               mb-5
+               text-sm
+               font-bold
+               uppercase
+               tracking-wider
+             "
+             [ngStyle]="{
+               'color': themeService.TextPrincipal
+             }"
+           >
+             Mon espace
+           </h3>
+   
+           <nav class="flex flex-col gap-3">
+   
+             <!-- Accueil -->
+   
+             <a
+               routerLink="/accueil"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-house
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Accueil
+               </span>
+             </a>
+   
+   
+             <!-- Scanner -->
+   
+             <a
+               routerLink="/scan"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-camera
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Scanner une plante
+               </span>
+             </a>
+   
+   
+             <!-- Favoris -->
+   
+             <a
+               routerLink="/favoris"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-heart
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Mes favoris
+               </span>
+             </a>
+   
+   
+             <!-- Profil -->
+   
+             <a
+               routerLink="/profil"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-user
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Mon profil
+               </span>
+             </a>
+   
+           </nav>
+   
+         </div>
+   
+   
+         <!-- ======================================================
+              03 — JARDISCAN
+              ====================================================== -->
+   
+         <div>
+   
+           <h3
+             class="
+               mb-5
+               text-sm
+               font-bold
+               uppercase
+               tracking-wider
+             "
+             [ngStyle]="{
+               'color': themeService.TextPrincipal
+             }"
+           >
+             JardiScan
+           </h3>
+   
+           <nav class="flex flex-col gap-3">
+   
+             <!-- Découvrir -->
+   
+             <a
+               routerLink="/welcome"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-leaf
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Découvrir JardiScan
+               </span>
+             </a>
+   
+   
+             <!-- Contributeur -->
+   
+             <a
+               routerLink="/welcome/roles"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-seedling
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Devenir contributeur
+               </span>
+             </a>
+   
+   
+             <!-- Aide -->
+   
+             <a
+               routerLink="/welcome/faq"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-circle-question
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Centre d'aide
+               </span>
+             </a>
+   
+   
+             <!-- Comment ça marche -->
+   
+             <a
+               routerLink="/welcome/comment-ca-marche"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-circle-play
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Comment ça marche
+               </span>
+             </a>
+   
+   
+             <!-- Contact -->
+   
+             <a
+               href="mailto:contact@jardiscan.fr"
+               class="
+                 group
+                 flex
+                 items-center
+                 gap-3
+                 text-sm
+                 transition-all
+                 duration-200
+                 hover:translate-x-1
+               "
+               [ngStyle]="{
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i
+                 class="
+                   fa-solid
+                   fa-envelope
+                   w-4
+                   text-xs
+                 "
+                 [ngStyle]="{
+                   'color': themeService.Primary
+                 }"
+               ></i>
+   
+               <span>
+                 Nous contacter
+               </span>
+             </a>
+   
+           </nav>
+   
+         </div>
+   
+   
+         <!-- ======================================================
+              04 — RESTONS CONNECTÉS
+              ====================================================== -->
+   
+         <div>
+   
+           <h3
+             class="
+               mb-5
+               text-sm
+               font-bold
+               uppercase
+               tracking-wider
+             "
+             [ngStyle]="{
+               'color': themeService.TextPrincipal
+             }"
+           >
+             Restons connectés
+           </h3>
+   
+           <p
+             class="
+               mb-5
+               text-sm
+               leading-6
+             "
+             [ngStyle]="{
+               'color': themeService.TextSecondaire
+             }"
+           >
+             Une question, une suggestion ou une envie de
+             contribuer ? L'équipe JardiScan est là pour vous aider.
+           </p>
+   
+   
+           <!-- ====================================================
+                CARTE CONTACT
+                ==================================================== -->
+   
+           <div
+             class="
+               rounded-2xl
+               border
+               p-4
+               backdrop-blur-xl
+               transition-all
+               duration-300
+             "
+             [ngStyle]="{
+               'background-color': themeService.GlassBackground,
+               'border-color': themeService.GlassBorder,
+               'box-shadow': themeService.BoxShadowSmall
+             }"
+           >
+   
+             <div
+               class="
+                 flex
+                 items-start
+                 gap-3
+               "
+             >
+   
+               <!-- Icône -->
+   
+               <div
+                 class="
+                   flex
+                   h-10
+                   w-10
+                   shrink-0
+                   items-center
+                   justify-center
+                   rounded-xl
+                 "
+                 [ngStyle]="{
+                   'background-color': themeService.PrimarySoft,
+                   'color': themeService.Primary
+                 }"
+               >
+                 <i
+                   class="
+                     fa-solid
+                     fa-envelope
+                   "
+                 ></i>
+               </div>
+   
+   
+               <!-- Texte -->
+   
+               <div class="min-w-0">
+   
+                 <p
+                   class="
+                     text-xs
+                     font-medium
+                   "
+                   [ngStyle]="{
+                     'color': themeService.TextMuted
+                   }"
+                 >
+                   Une question ?
+                 </p>
+   
+                 <a
+                   href="mailto:contact@jardiscan.fr"
+                   class="
+                     mt-1
+                     block
+                     truncate
+                     text-sm
+                     font-semibold
+                     transition-colors
+                     duration-200
+                   "
+                   [ngStyle]="{
+                     'color': themeService.TextPrincipal
+                   }"
+                 >
+                   contact@jardiscan.fr
+                 </a>
+   
+               </div>
+   
+             </div>
+   
+           </div>
+   
+   
+           <!-- ====================================================
+                RÉSEAUX SOCIAUX
+                ==================================================== -->
+   
+           <div
+             class="
+               mt-5
+               flex
+               items-center
+               gap-2
+             "
+           >
+   
+             <!-- Facebook -->
+   
+             <a
+               href="#"
+               aria-label="Facebook"
+               class="
+                 flex
+                 h-10
+                 w-10
+                 items-center
+                 justify-center
+                 rounded-xl
+                 border
+                 transition-all
+                 duration-300
+                 hover:-translate-y-0.5
+               "
+               [ngStyle]="{
+                 'background-color': themeService.GlassBackground,
+                 'border-color': themeService.GlassBorder,
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i class="fa-brands fa-facebook-f"></i>
+             </a>
+   
+   
+             <!-- Instagram -->
+   
+             <a
+               href="#"
+               aria-label="Instagram"
+               class="
+                 flex
+                 h-10
+                 w-10
+                 items-center
+                 justify-center
+                 rounded-xl
+                 border
+                 transition-all
+                 duration-300
+                 hover:-translate-y-0.5
+               "
+               [ngStyle]="{
+                 'background-color': themeService.GlassBackground,
+                 'border-color': themeService.GlassBorder,
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i class="fa-brands fa-instagram"></i>
+             </a>
+   
+   
+             <!-- GitHub -->
+   
+             <a
+               href="#"
+               aria-label="GitHub"
+               class="
+                 flex
+                 h-10
+                 w-10
+                 items-center
+                 justify-center
+                 rounded-xl
+                 border
+                 transition-all
+                 duration-300
+                 hover:-translate-y-0.5
+               "
+               [ngStyle]="{
+                 'background-color': themeService.GlassBackground,
+                 'border-color': themeService.GlassBorder,
+                 'color': themeService.TextSecondaire
+               }"
+             >
+               <i class="fa-brands fa-github"></i>
+             </a>
+   
+           </div>
+   
+         </div>
+   
+       </div>
+   
+   
+       <!-- ========================================================
+            SÉPARATEUR
+            ======================================================== -->
+   
+       <div
+         class="
+           my-10
+           h-px
+           w-full
+         "
+         [ngStyle]="{
+           'background-color': themeService.Border1
+         }"
+       ></div>
+   
+   
+       <!-- ========================================================
+            BARRE INFÉRIEURE
+            ======================================================== -->
+   
+       <div
+         class="
+           flex
+           flex-col
+           gap-5
+           md:flex-row
+           md:items-center
+           md:justify-between
+         "
+       >
+   
+         <!-- ======================================================
+              COPYRIGHT
+              ====================================================== -->
+   
+         <div
+           class="
+             flex
+             flex-col
+             gap-1
+           "
+         >
+   
+           <p
+             class="text-sm"
+             [ngStyle]="{
+               'color': themeService.TextSecondaire
+             }"
+           >
+             © {{ currentYear }} JardiScan.
+             Tous droits réservés.
+           </p>
+   
+           <p
+             class="text-xs"
+             [ngStyle]="{
+               'color': themeService.TextMuted
+             }"
+           >
+             Fait avec
+   
+             <i
+               class="
+                 fa-solid
+                 fa-leaf
+                 mx-1
+               "
+               [ngStyle]="{
+                 'color': themeService.Primary
+               }"
+             ></i>
+   
+             pour les amoureux des plantes.
+           </p>
+   
+         </div>
+   
+   
+         <!-- ======================================================
+              LIENS LÉGAUX
+              ====================================================== -->
+   
+         <div
+           class="
+             flex
+             flex-wrap
+             items-center
+             gap-x-5
+             gap-y-2
+           "
+         >
+   
+           <a
+             href="#"
+             class="
+               text-xs
+               transition-colors
+               duration-200
+             "
+             [ngStyle]="{
+               'color': themeService.TextMuted
+             }"
+           >
+             Politique de confidentialité
+           </a>
+   
+           <a
+             href="#"
+             class="
+               text-xs
+               transition-colors
+               duration-200
+             "
+             [ngStyle]="{
+               'color': themeService.TextMuted
+             }"
+           >
+             Conditions d'utilisation
+           </a>
+   
+           <a
+             href="#"
+             class="
+               text-xs
+               transition-colors
+               duration-200
+             "
+             [ngStyle]="{
+               'color': themeService.TextMuted
+             }"
+           >
+             Mentions légales
+           </a>
+   
+         </div>
+   
+       </div>
+   
+     </div>
+   
+   </footer>

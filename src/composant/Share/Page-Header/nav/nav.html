@@ -1,20 +1,22 @@
 <!-- ============================================================
+
 🌿 JARDISCAN — NAVIGATION PRINCIPALE DESKTOP / GRAND LAPTOP
 
 • Visible à partir de 1293px
 • Navigation orientée fonctionnalités
+• 6 fonctionnalités
+• Scanner
+• Rechercher
+• JardiDex
+• Historique
+• Conseils
+• Paramètres
 • FR / EN via LanguageService
 • ThemeService conservé
 • RouterLinkActive conservé
 • Accessibilité conservée
+• Design premium glassmorphism
 
-ÉLÉMENTS :
-→ Scanner
-→ JardiDex
-→ Mes plantes
-→ Historique
-→ Conseils
-→ Paramètres
 ============================================================ -->
 
 <nav
@@ -45,7 +47,7 @@
 >
 
   <!-- ==========================================================
-  📷 SCANNER
+  📷 01 — SCANNER
   =========================================================== -->
 
   <a
@@ -53,17 +55,23 @@
     routerLinkActive="nav-active"
     #scannerActive="routerLinkActive"
     [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="scannerActive.isActive ? 'page' : null"
+
+    [attr.aria-current]="
+      scannerActive.isActive ? 'page' : null
+    "
+
     [attr.aria-label]="
       languageService.currentLanguage === 'fr'
         ? 'Scanner une plante'
         : 'Scan a plant'
     "
+
     [attr.title]="
       languageService.currentLanguage === 'fr'
         ? 'Scanner'
         : 'Scanner'
     "
+
     class="
       group
       relative
@@ -75,33 +83,42 @@
       rounded-xl
       px-2.5
       outline-none
+
       transition-all
       duration-200
       ease-out
+
       hover:-translate-y-0.5
+
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
+
     [ngStyle]="{
       'color':
         scannerActive.isActive
           ? themeService.Primary
           : themeService.TextSecondaire,
+
       '--tw-ring-color': themeService.Primary,
       '--tw-ring-offset-color': themeService.Background1
     }"
   >
 
-    <!-- Background actif / hover -->
+    <!-- BACKGROUND ACTIF / HOVER -->
+
     <span
       class="
         pointer-events-none
         absolute
         inset-0
         rounded-xl
+
         opacity-0
+
         transition-all
         duration-200
+
         group-hover:opacity-100
       "
       [class.opacity-100]="scannerActive.isActive"
@@ -111,7 +128,8 @@
       aria-hidden="true"
     ></span>
 
-    <!-- Icône -->
+    <!-- ICÔNE -->
+
     <i
       class="
         fa-solid
@@ -119,15 +137,18 @@
         relative
         z-10
         text-[15px]
+
         transition-transform
         duration-200
+
         group-hover:scale-110
       "
       [class.scale-110]="scannerActive.isActive"
       aria-hidden="true"
     ></i>
 
-    <!-- Texte -->
+    <!-- TEXTE -->
+
     <span
       class="
         relative
@@ -144,17 +165,22 @@
       }}
     </span>
 
-    <!-- Indicateur actif -->
+    <!-- INDICATEUR ACTIF -->
+
     <span
       class="
         pointer-events-none
         absolute
         bottom-1
         left-1/2
+
         h-0.5
         w-0
+
         -translate-x-1/2
+
         rounded-full
+
         transition-all
         duration-200
       "
@@ -169,25 +195,31 @@
 
 
   <!-- ==========================================================
-  🌿 JARDIDEX
+  🔎 02 — RECHERCHER
   =========================================================== -->
 
   <a
-    routerLink="/jardidex"
+    routerLink="/recherche"
     routerLinkActive="nav-active"
-    #jardidexActive="routerLinkActive"
+    #rechercheActive="routerLinkActive"
     [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="jardidexActive.isActive ? 'page' : null"
+
+    [attr.aria-current]="
+      rechercheActive.isActive ? 'page' : null
+    "
+
     [attr.aria-label]="
       languageService.currentLanguage === 'fr'
-        ? 'Ouvrir le JardiDex'
-        : 'Open JardiDex'
+        ? 'Rechercher une plante'
+        : 'Search for a plant'
     "
+
     [attr.title]="
       languageService.currentLanguage === 'fr'
-        ? 'JardiDex'
-        : 'JardiDex'
+        ? 'Rechercher'
+        : 'Search'
     "
+
     class="
       group
       relative
@@ -199,22 +231,29 @@
       rounded-xl
       px-2.5
       outline-none
+
       transition-all
       duration-200
       ease-out
+
       hover:-translate-y-0.5
+
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
+
     [ngStyle]="{
       'color':
-        jardidexActive.isActive
+        rechercheActive.isActive
           ? themeService.Primary
           : themeService.TextSecondaire,
+
       '--tw-ring-color': themeService.Primary,
       '--tw-ring-offset-color': themeService.Background1
     }"
   >
+
+    <!-- BACKGROUND ACTIF / HOVER -->
 
     <span
       class="
@@ -222,9 +261,156 @@
         absolute
         inset-0
         rounded-xl
+
         opacity-0
+
         transition-all
         duration-200
+
+        group-hover:opacity-100
+      "
+      [class.opacity-100]="rechercheActive.isActive"
+      [ngStyle]="{
+        'background-color': themeService.PrimarySoft
+      }"
+      aria-hidden="true"
+    ></span>
+
+    <!-- ICÔNE -->
+
+    <i
+      class="
+        fa-solid
+        fa-magnifying-glass
+        relative
+        z-10
+        text-[15px]
+
+        transition-transform
+        duration-200
+
+        group-hover:scale-110
+      "
+      [class.scale-110]="rechercheActive.isActive"
+      aria-hidden="true"
+    ></i>
+
+    <!-- TEXTE -->
+
+    <span
+      class="
+        relative
+        z-10
+        whitespace-nowrap
+        text-[13px]
+        font-semibold
+      "
+    >
+      {{
+        languageService.currentLanguage === 'fr'
+          ? 'Rechercher'
+          : 'Search'
+      }}
+    </span>
+
+    <!-- INDICATEUR ACTIF -->
+
+    <span
+      class="
+        pointer-events-none
+        absolute
+        bottom-1
+        left-1/2
+
+        h-0.5
+        w-0
+
+        -translate-x-1/2
+
+        rounded-full
+
+        transition-all
+        duration-200
+      "
+      [class.w-6]="rechercheActive.isActive"
+      [ngStyle]="{
+        'background-color': themeService.Primary
+      }"
+      aria-hidden="true"
+    ></span>
+
+  </a>
+
+
+  <!-- ==========================================================
+  🌿 03 — JARDIDEX
+  =========================================================== -->
+
+  <a
+    routerLink="/jardidex"
+    routerLinkActive="nav-active"
+    #jardidexActive="routerLinkActive"
+    [routerLinkActiveOptions]="{ exact: true }"
+
+    [attr.aria-current]="
+      jardidexActive.isActive ? 'page' : null
+    "
+
+    [attr.aria-label]="
+      languageService.currentLanguage === 'fr'
+        ? 'Ouvrir le JardiDex'
+        : 'Open JardiDex'
+    "
+
+    [attr.title]="'JardiDex'"
+
+    class="
+      group
+      relative
+      flex
+      h-10
+      items-center
+      gap-1.5
+      overflow-hidden
+      rounded-xl
+      px-2.5
+      outline-none
+
+      transition-all
+      duration-200
+      ease-out
+
+      hover:-translate-y-0.5
+
+      focus-visible:ring-2
+      focus-visible:ring-offset-2
+    "
+
+    [ngStyle]="{
+      'color':
+        jardidexActive.isActive
+          ? themeService.Primary
+          : themeService.TextSecondaire,
+
+      '--tw-ring-color': themeService.Primary,
+      '--tw-ring-offset-color': themeService.Background1
+    }"
+  >
+
+    <!-- BACKGROUND ACTIF / HOVER -->
+
+    <span
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+        rounded-xl
+
+        opacity-0
+
+        transition-all
+        duration-200
+
         group-hover:opacity-100
       "
       [class.opacity-100]="jardidexActive.isActive"
@@ -234,6 +420,8 @@
       aria-hidden="true"
     ></span>
 
+    <!-- ICÔNE -->
+
     <i
       class="
         fa-solid
@@ -241,13 +429,17 @@
         relative
         z-10
         text-[15px]
+
         transition-transform
         duration-200
+
         group-hover:scale-110
       "
       [class.scale-110]="jardidexActive.isActive"
       aria-hidden="true"
     ></i>
+
+    <!-- TEXTE -->
 
     <span
       class="
@@ -261,16 +453,22 @@
       JardiDex
     </span>
 
+    <!-- INDICATEUR ACTIF -->
+
     <span
       class="
         pointer-events-none
         absolute
         bottom-1
         left-1/2
+
         h-0.5
         w-0
+
         -translate-x-1/2
+
         rounded-full
+
         transition-all
         duration-200
       "
@@ -285,127 +483,7 @@
 
 
   <!-- ==========================================================
-  🪴 MES PLANTES
-  =========================================================== -->
-
-  <a
-    routerLink="/mes-plantes"
-    routerLinkActive="nav-active"
-    #mesPlantesActive="routerLinkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="mesPlantesActive.isActive ? 'page' : null"
-    [attr.aria-label]="
-      languageService.currentLanguage === 'fr'
-        ? 'Voir mes plantes'
-        : 'View my plants'
-    "
-    [attr.title]="
-      languageService.currentLanguage === 'fr'
-        ? 'Mes plantes'
-        : 'My plants'
-    "
-    class="
-      group
-      relative
-      flex
-      h-10
-      items-center
-      gap-1.5
-      overflow-hidden
-      rounded-xl
-      px-2.5
-      outline-none
-      transition-all
-      duration-200
-      ease-out
-      hover:-translate-y-0.5
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-    "
-    [ngStyle]="{
-      'color':
-        mesPlantesActive.isActive
-          ? themeService.Primary
-          : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.Primary,
-      '--tw-ring-offset-color': themeService.Background1
-    }"
-  >
-
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-0
-        rounded-xl
-        opacity-0
-        transition-all
-        duration-200
-        group-hover:opacity-100
-      "
-      [class.opacity-100]="mesPlantesActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.PrimarySoft
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <i
-      class="
-        fa-solid
-        fa-seedling
-        relative
-        z-10
-        text-[15px]
-        transition-transform
-        duration-200
-        group-hover:scale-110
-      "
-      [class.scale-110]="mesPlantesActive.isActive"
-      aria-hidden="true"
-    ></i>
-
-    <span
-      class="
-        relative
-        z-10
-        whitespace-nowrap
-        text-[13px]
-        font-semibold
-      "
-    >
-      {{
-        languageService.currentLanguage === 'fr'
-          ? 'Mes plantes'
-          : 'My plants'
-      }}
-    </span>
-
-    <span
-      class="
-        pointer-events-none
-        absolute
-        bottom-1
-        left-1/2
-        h-0.5
-        w-0
-        -translate-x-1/2
-        rounded-full
-        transition-all
-        duration-200
-      "
-      [class.w-6]="mesPlantesActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.Primary
-      }"
-      aria-hidden="true"
-    ></span>
-
-  </a>
-
-
-  <!-- ==========================================================
-  🕘 HISTORIQUE
+  🕘 04 — HISTORIQUE
   =========================================================== -->
 
   <a
@@ -413,17 +491,23 @@
     routerLinkActive="nav-active"
     #historiqueActive="routerLinkActive"
     [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="historiqueActive.isActive ? 'page' : null"
+
+    [attr.aria-current]="
+      historiqueActive.isActive ? 'page' : null
+    "
+
     [attr.aria-label]="
       languageService.currentLanguage === 'fr'
         ? 'Voir mon historique'
         : 'View my history'
     "
+
     [attr.title]="
       languageService.currentLanguage === 'fr'
         ? 'Historique'
         : 'History'
     "
+
     class="
       group
       relative
@@ -435,22 +519,29 @@
       rounded-xl
       px-2.5
       outline-none
+
       transition-all
       duration-200
       ease-out
+
       hover:-translate-y-0.5
+
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
+
     [ngStyle]="{
       'color':
         historiqueActive.isActive
           ? themeService.Primary
           : themeService.TextSecondaire,
+
       '--tw-ring-color': themeService.Primary,
       '--tw-ring-offset-color': themeService.Background1
     }"
   >
+
+    <!-- BACKGROUND ACTIF / HOVER -->
 
     <span
       class="
@@ -458,9 +549,12 @@
         absolute
         inset-0
         rounded-xl
+
         opacity-0
+
         transition-all
         duration-200
+
         group-hover:opacity-100
       "
       [class.opacity-100]="historiqueActive.isActive"
@@ -470,6 +564,8 @@
       aria-hidden="true"
     ></span>
 
+    <!-- ICÔNE -->
+
     <i
       class="
         fa-solid
@@ -477,13 +573,17 @@
         relative
         z-10
         text-[15px]
+
         transition-transform
         duration-200
+
         group-hover:scale-110
       "
       [class.scale-110]="historiqueActive.isActive"
       aria-hidden="true"
     ></i>
+
+    <!-- TEXTE -->
 
     <span
       class="
@@ -501,16 +601,22 @@
       }}
     </span>
 
+    <!-- INDICATEUR ACTIF -->
+
     <span
       class="
         pointer-events-none
         absolute
         bottom-1
         left-1/2
+
         h-0.5
         w-0
+
         -translate-x-1/2
+
         rounded-full
+
         transition-all
         duration-200
       "
@@ -526,18 +632,28 @@
 </nav>
 
 
+
 <!-- ============================================================
+
 🌿 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
 
 • Visible de 390px à 1292px
 • Dock style macOS
 • 6 fonctionnalités
+• Scanner
+• Rechercher
+• JardiDex
+• Historique
+• Conseils
+• Paramètres
 • Nom du lien au hover
 • Nom toujours visible si actif
 • FR / EN
 • ThemeService
 • RouterLinkActive
 • Safe-area iOS
+• Responsive mobile → tablette → petit laptop
+
 ============================================================ -->
 
 <div
@@ -580,9 +696,9 @@
       flex
       items-center
       justify-center
-      gap-1.5
+      gap-1
       w-fit
-      max-w-[calc(100vw-24px)]
+      max-w-[calc(100vw-16px)]
       min-h-[68px]
       rounded-[24px]
       border
@@ -591,12 +707,14 @@
       backdrop-blur-3xl
       backdrop-saturate-200
       shadow-2xl
-      sm:gap-2
+
+      sm:gap-1.5
       sm:min-h-[72px]
       sm:rounded-[26px]
       sm:px-2.5
       sm:py-2.5
-      md:gap-2.5
+
+      md:gap-2
       md:min-h-[76px]
       md:rounded-[28px]
       md:px-3
@@ -604,11 +722,15 @@
     "
     [ngStyle]="{
       'background-color': themeService.Background2,
+
       'background-image':
         'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))',
+
       'border-color': themeService.Border2,
+
       'box-shadow':
         '0 20px 50px rgba(0,0,0,0.28), 0 4px 14px rgba(0,0,0,0.18)',
+
       'color': themeService.TextPrincipal
     }"
     [attr.aria-label]="
@@ -619,7 +741,7 @@
   >
 
     <!-- ========================================================
-    📷 SCANNER
+    📷 01 — SCANNER
     ========================================================= -->
 
     <a
@@ -627,19 +749,23 @@
       routerLinkActive="is-active"
       #scannerMobileActive="routerLinkActive"
       [routerLinkActiveOptions]="{ exact: true }"
+
       [attr.aria-current]="
         scannerMobileActive.isActive ? 'page' : null
       "
+
       [attr.aria-label]="
         languageService.currentLanguage === 'fr'
           ? 'Scanner une plante'
           : 'Scan a plant'
       "
+
       [attr.title]="
         languageService.currentLanguage === 'fr'
           ? 'Scanner'
           : 'Scanner'
       "
+
       class="
         group
         relative
@@ -647,27 +773,36 @@
         shrink-0
         items-center
         justify-center
-        h-[52px]
-        w-[52px]
-        rounded-[19px]
+
+        h-[50px]
+        w-[50px]
+
+        rounded-[18px]
         border
         outline-none
+
         transition-all
         duration-300
         ease-out
+
         hover:-translate-y-1
         hover:scale-105
+
         active:translate-y-0
         active:scale-95
+
         focus-visible:ring-2
         focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
+
+        sm:h-[54px]
+        sm:w-[54px]
+        sm:rounded-[19px]
+
         md:h-[58px]
         md:w-[58px]
         md:rounded-[21px]
       "
+
       [ngStyle]="{
         'background':
           scannerMobileActive.isActive
@@ -677,24 +812,29 @@
               themeService.PrimarySoft +
               ')'
             : 'rgba(255,255,255,0.045)',
+
         'border-color':
           scannerMobileActive.isActive
             ? 'transparent'
             : themeService.Border2,
+
         'color':
           scannerMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
+
         'box-shadow':
           scannerMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
+
         '--tw-ring-color': themeService.Primary,
         '--tw-ring-offset-color': themeService.Background1
       }"
     >
 
-      <!-- POP-UP -->
+      <!-- TOOLTIP -->
+
       <span
         class="
           pointer-events-none
@@ -702,37 +842,50 @@
           left-1/2
           bottom-[calc(100%+12px)]
           z-[200]
+
           -translate-x-1/2
           translate-y-2
           scale-95
+
           whitespace-nowrap
+
           rounded-xl
           border
+
           px-3
           py-2
+
           text-[10px]
           font-extrabold
           uppercase
           tracking-[0.7px]
+
           opacity-0
+
           shadow-2xl
           backdrop-blur-2xl
+
           transition-all
           duration-200
           ease-out
+
           group-hover:translate-y-0
           group-hover:scale-100
           group-hover:opacity-100
+
           sm:text-[11px]
           sm:px-3.5
           sm:py-2
+
           md:text-xs
           md:px-4
           md:py-2.5
         "
+
         [class.translate-y-0]="scannerMobileActive.isActive"
         [class.scale-100]="scannerMobileActive.isActive"
         [class.opacity-100]="scannerMobileActive.isActive"
+
         [ngStyle]="{
           'background-color': themeService.Background2,
           'border-color': themeService.Border2,
@@ -740,6 +893,7 @@
           'box-shadow':
             '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
         }"
+
         aria-hidden="true"
       >
         {{
@@ -768,7 +922,8 @@
         ></span>
       </span>
 
-      <!-- Glow -->
+      <!-- GLOW -->
+
       <span
         class="
           pointer-events-none
@@ -776,9 +931,12 @@
           inset-[-12px]
           rounded-full
           blur-2xl
+
           opacity-0
+
           transition-all
           duration-500
+
           group-hover:opacity-60
         "
         [ngStyle]="{
@@ -787,7 +945,8 @@
         aria-hidden="true"
       ></span>
 
-      <!-- Icône -->
+      <!-- ICON -->
+
       <i
         class="
           fa-solid
@@ -795,12 +954,16 @@
           relative
           z-10
           shrink-0
-          text-[21px]
+
+          text-[20px]
+
           transition-transform
           duration-300
+
           group-hover:scale-110
           group-active:scale-90
-          sm:text-[22px]
+
+          sm:text-[21px]
           md:text-[23px]
         "
         aria-hidden="true"
@@ -810,23 +973,31 @@
 
 
     <!-- ========================================================
-    🌿 JARDIDEX
+    🔎 02 — RECHERCHER
     ========================================================= -->
 
     <a
-      routerLink="/jardidex"
+      routerLink="/recherche"
       routerLinkActive="is-active"
-      #jardidexMobileActive="routerLinkActive"
+      #rechercheMobileActive="routerLinkActive"
       [routerLinkActiveOptions]="{ exact: true }"
+
       [attr.aria-current]="
-        jardidexMobileActive.isActive ? 'page' : null
+        rechercheMobileActive.isActive ? 'page' : null
       "
+
       [attr.aria-label]="
         languageService.currentLanguage === 'fr'
-          ? 'Ouvrir le JardiDex'
-          : 'Open JardiDex'
+          ? 'Rechercher une plante'
+          : 'Search for a plant'
       "
-      [attr.title]="'JardiDex'"
+
+      [attr.title]="
+        languageService.currentLanguage === 'fr'
+          ? 'Rechercher'
+          : 'Search'
+      "
+
       class="
         group
         relative
@@ -834,48 +1005,61 @@
         shrink-0
         items-center
         justify-center
-        h-[52px]
-        w-[52px]
+
+        h-[50px]
+        w-[50px]
+
         rounded-[18px]
         border
         outline-none
+
         transition-all
         duration-300
         ease-out
+
         hover:-translate-y-1
         hover:scale-105
+
         active:translate-y-0
         active:scale-95
+
         focus-visible:ring-2
         focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
+
+        sm:h-[54px]
+        sm:w-[54px]
+        sm:rounded-[19px]
+
         md:h-[58px]
         md:w-[58px]
         md:rounded-[21px]
       "
+
       [ngStyle]="{
         'background':
-          jardidexMobileActive.isActive
+          rechercheMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
               themeService.Primary +
               ', ' +
               themeService.PrimarySoft +
               ')'
             : 'rgba(255,255,255,0.045)',
+
         'border-color':
-          jardidexMobileActive.isActive
+          rechercheMobileActive.isActive
             ? 'transparent'
             : themeService.Border2,
+
         'color':
-          jardidexMobileActive.isActive
+          rechercheMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
+
         'box-shadow':
-          jardidexMobileActive.isActive
+          rechercheMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
+
         '--tw-ring-color': themeService.Primary,
         '--tw-ring-offset-color': themeService.Background1
       }"
@@ -888,36 +1072,48 @@
           left-1/2
           bottom-[calc(100%+12px)]
           z-[200]
+
           -translate-x-1/2
           translate-y-2
           scale-95
+
           whitespace-nowrap
+
           rounded-xl
           border
+
           px-3
           py-2
+
           text-[10px]
           font-extrabold
           uppercase
           tracking-[0.7px]
+
           opacity-0
+
           shadow-2xl
           backdrop-blur-2xl
+
           transition-all
           duration-200
+
           group-hover:translate-y-0
           group-hover:scale-100
           group-hover:opacity-100
+
           sm:text-[11px]
           sm:px-3.5
-          sm:py-2
+
           md:text-xs
           md:px-4
           md:py-2.5
         "
-        [class.translate-y-0]="jardidexMobileActive.isActive"
-        [class.scale-100]="jardidexMobileActive.isActive"
-        [class.opacity-100]="jardidexMobileActive.isActive"
+
+        [class.translate-y-0]="rechercheMobileActive.isActive"
+        [class.scale-100]="rechercheMobileActive.isActive"
+        [class.opacity-100]="rechercheMobileActive.isActive"
+
         [ngStyle]="{
           'background-color': themeService.Background2,
           'border-color': themeService.Border2,
@@ -925,9 +1121,14 @@
           'box-shadow':
             '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
         }"
+
         aria-hidden="true"
       >
-        JardiDex
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Rechercher'
+            : 'Search'
+        }}
 
         <span
           class="
@@ -937,9 +1138,11 @@
             h-0
             w-0
             -translate-x-1/2
+
             border-l-[6px]
             border-r-[6px]
             border-t-[6px]
+
             border-l-transparent
             border-r-transparent
           "
@@ -956,9 +1159,228 @@
           inset-[-12px]
           rounded-full
           blur-2xl
+
           opacity-0
+
           transition-all
           duration-500
+
+          group-hover:opacity-60
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft
+        }"
+        aria-hidden="true"
+      ></span>
+
+      <i
+        class="
+          fa-solid
+          fa-magnifying-glass
+          relative
+          z-10
+          shrink-0
+
+          text-[20px]
+
+          transition-transform
+          duration-300
+
+          group-hover:scale-110
+          group-active:scale-90
+
+          sm:text-[21px]
+          md:text-[23px]
+        "
+        aria-hidden="true"
+      ></i>
+
+    </a>
+
+
+    <!-- ========================================================
+    🌿 03 — JARDIDEX
+    ========================================================= -->
+
+    <a
+      routerLink="/jardidex"
+      routerLinkActive="is-active"
+      #jardidexMobileActive="routerLinkActive"
+      [routerLinkActiveOptions]="{ exact: true }"
+
+      [attr.aria-current]="
+        jardidexMobileActive.isActive ? 'page' : null
+      "
+
+      [attr.aria-label]="
+        languageService.currentLanguage === 'fr'
+          ? 'Ouvrir le JardiDex'
+          : 'Open JardiDex'
+      "
+
+      [attr.title]="'JardiDex'"
+
+      class="
+        group
+        relative
+        flex
+        shrink-0
+        items-center
+        justify-center
+
+        h-[50px]
+        w-[50px]
+
+        rounded-[18px]
+        border
+        outline-none
+
+        transition-all
+        duration-300
+        ease-out
+
+        hover:-translate-y-1
+        hover:scale-105
+
+        active:translate-y-0
+        active:scale-95
+
+        focus-visible:ring-2
+        focus-visible:ring-offset-2
+
+        sm:h-[54px]
+        sm:w-[54px]
+        sm:rounded-[19px]
+
+        md:h-[58px]
+        md:w-[58px]
+        md:rounded-[21px]
+      "
+
+      [ngStyle]="{
+        'background':
+          jardidexMobileActive.isActive
+            ? 'linear-gradient(135deg, ' +
+              themeService.Primary +
+              ', ' +
+              themeService.PrimarySoft +
+              ')'
+            : 'rgba(255,255,255,0.045)',
+
+        'border-color':
+          jardidexMobileActive.isActive
+            ? 'transparent'
+            : themeService.Border2,
+
+        'color':
+          jardidexMobileActive.isActive
+            ? themeService.TextPrincipal
+            : themeService.TextSecondaire,
+
+        'box-shadow':
+          jardidexMobileActive.isActive
+            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
+            : 'none',
+
+        '--tw-ring-color': themeService.Primary,
+        '--tw-ring-offset-color': themeService.Background1
+      }"
+    >
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          left-1/2
+          bottom-[calc(100%+12px)]
+          z-[200]
+
+          -translate-x-1/2
+          translate-y-2
+          scale-95
+
+          whitespace-nowrap
+
+          rounded-xl
+          border
+
+          px-3
+          py-2
+
+          text-[10px]
+          font-extrabold
+          uppercase
+          tracking-[0.7px]
+
+          opacity-0
+
+          shadow-2xl
+          backdrop-blur-2xl
+
+          transition-all
+          duration-200
+
+          group-hover:translate-y-0
+          group-hover:scale-100
+          group-hover:opacity-100
+
+          sm:text-[11px]
+          sm:px-3.5
+
+          md:text-xs
+          md:px-4
+          md:py-2.5
+        "
+
+        [class.translate-y-0]="jardidexMobileActive.isActive"
+        [class.scale-100]="jardidexMobileActive.isActive"
+        [class.opacity-100]="jardidexMobileActive.isActive"
+
+        [ngStyle]="{
+          'background-color': themeService.Background2,
+          'border-color': themeService.Border2,
+          'color': themeService.TextPrincipal
+        }"
+
+        aria-hidden="true"
+      >
+        JardiDex
+
+        <span
+          class="
+            absolute
+            left-1/2
+            top-full
+            h-0
+            w-0
+            -translate-x-1/2
+
+            border-l-[6px]
+            border-r-[6px]
+            border-t-[6px]
+
+            border-l-transparent
+            border-r-transparent
+          "
+          [ngStyle]="{
+            'border-top-color': themeService.Background2
+          }"
+        ></span>
+      </span>
+
+      <span
+        class="
+          pointer-events-none
+          absolute
+          inset-[-12px]
+          rounded-full
+          blur-2xl
+
+          opacity-0
+
+          transition-all
+          duration-500
+
           group-hover:opacity-60
         "
         [ngStyle]="{
@@ -974,12 +1396,16 @@
           relative
           z-10
           shrink-0
-          text-[21px]
+
+          text-[20px]
+
           transition-transform
           duration-300
+
           group-hover:scale-110
           group-active:scale-90
-          sm:text-[22px]
+
+          sm:text-[21px]
           md:text-[23px]
         "
         aria-hidden="true"
@@ -989,192 +1415,7 @@
 
 
     <!-- ========================================================
-    🪴 MES PLANTES
-    ========================================================= -->
-
-    <a
-      routerLink="/mes-plantes"
-      routerLinkActive="is-active"
-      #mesPlantesMobileActive="routerLinkActive"
-      [routerLinkActiveOptions]="{ exact: true }"
-      [attr.aria-current]="
-        mesPlantesMobileActive.isActive ? 'page' : null
-      "
-      [attr.aria-label]="
-        languageService.currentLanguage === 'fr'
-          ? 'Voir mes plantes'
-          : 'View my plants'
-      "
-      [attr.title]="
-        languageService.currentLanguage === 'fr'
-          ? 'Mes plantes'
-          : 'My plants'
-      "
-      class="
-        group
-        relative
-        flex
-        shrink-0
-        items-center
-        justify-center
-        h-[52px]
-        w-[52px]
-        rounded-[18px]
-        border
-        outline-none
-        transition-all
-        duration-300
-        ease-out
-        hover:-translate-y-1
-        hover:scale-105
-        active:translate-y-0
-        active:scale-95
-        focus-visible:ring-2
-        focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
-        md:h-[58px]
-        md:w-[58px]
-        md:rounded-[21px]
-      "
-      [ngStyle]="{
-        'background':
-          mesPlantesMobileActive.isActive
-            ? 'linear-gradient(135deg, ' +
-              themeService.Primary +
-              ', ' +
-              themeService.PrimarySoft +
-              ')'
-            : 'rgba(255,255,255,0.045)',
-        'border-color':
-          mesPlantesMobileActive.isActive
-            ? 'transparent'
-            : themeService.Border2,
-        'color':
-          mesPlantesMobileActive.isActive
-            ? themeService.TextPrincipal
-            : themeService.TextSecondaire,
-        'box-shadow':
-          mesPlantesMobileActive.isActive
-            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
-            : 'none',
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background1
-      }"
-    >
-
-      <span
-        class="
-          pointer-events-none
-          absolute
-          left-1/2
-          bottom-[calc(100%+12px)]
-          z-[200]
-          -translate-x-1/2
-          translate-y-2
-          scale-95
-          whitespace-nowrap
-          rounded-xl
-          border
-          px-3
-          py-2
-          text-[10px]
-          font-extrabold
-          uppercase
-          tracking-[0.7px]
-          opacity-0
-          shadow-2xl
-          backdrop-blur-2xl
-          transition-all
-          duration-200
-          group-hover:translate-y-0
-          group-hover:scale-100
-          group-hover:opacity-100
-          sm:text-[11px]
-          sm:px-3.5
-          sm:py-2
-          md:text-xs
-          md:px-4
-          md:py-2.5
-        "
-        [class.translate-y-0]="mesPlantesMobileActive.isActive"
-        [class.scale-100]="mesPlantesMobileActive.isActive"
-        [class.opacity-100]="mesPlantesMobileActive.isActive"
-        [ngStyle]="{
-          'background-color': themeService.Background2,
-          'border-color': themeService.Border2,
-          'color': themeService.TextPrincipal
-        }"
-        aria-hidden="true"
-      >
-        {{
-          languageService.currentLanguage === 'fr'
-            ? 'Mes plantes'
-            : 'My plants'
-        }}
-
-        <span
-          class="
-            absolute
-            left-1/2
-            top-full
-            h-0
-            w-0
-            -translate-x-1/2
-            border-l-[6px]
-            border-r-[6px]
-            border-t-[6px]
-            border-l-transparent
-            border-r-transparent
-          "
-          [ngStyle]="{
-            'border-top-color': themeService.Background2
-          }"
-        ></span>
-      </span>
-
-      <span
-        class="
-          pointer-events-none
-          absolute
-          inset-[-12px]
-          rounded-full
-          blur-2xl
-          opacity-0
-          transition-all
-          duration-500
-          group-hover:opacity-60
-        "
-        [ngStyle]="{
-          'background-color': themeService.PrimarySoft
-        }"
-        aria-hidden="true"
-      ></span>
-
-      <i
-        class="
-          fa-solid
-          fa-seedling
-          relative
-          z-10
-          shrink-0
-          text-[21px]
-          transition-transform
-          duration-300
-          group-hover:scale-110
-          group-active:scale-90
-          sm:text-[22px]
-          md:text-[23px]
-        "
-        aria-hidden="true"
-      ></i>
-
-    </a>
-
-
-    <!-- ========================================================
-    🕘 HISTORIQUE
+    🕘 04 — HISTORIQUE
     ========================================================= -->
 
     <a
@@ -1182,19 +1423,23 @@
       routerLinkActive="is-active"
       #historiqueMobileActive="routerLinkActive"
       [routerLinkActiveOptions]="{ exact: true }"
+
       [attr.aria-current]="
         historiqueMobileActive.isActive ? 'page' : null
       "
+
       [attr.aria-label]="
         languageService.currentLanguage === 'fr'
           ? 'Voir mon historique'
           : 'View my history'
       "
+
       [attr.title]="
         languageService.currentLanguage === 'fr'
           ? 'Historique'
           : 'History'
       "
+
       class="
         group
         relative
@@ -1202,27 +1447,36 @@
         shrink-0
         items-center
         justify-center
-        h-[52px]
-        w-[52px]
+
+        h-[50px]
+        w-[50px]
+
         rounded-[18px]
         border
         outline-none
+
         transition-all
         duration-300
         ease-out
+
         hover:-translate-y-1
         hover:scale-105
+
         active:translate-y-0
         active:scale-95
+
         focus-visible:ring-2
         focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
+
+        sm:h-[54px]
+        sm:w-[54px]
+        sm:rounded-[19px]
+
         md:h-[58px]
         md:w-[58px]
         md:rounded-[21px]
       "
+
       [ngStyle]="{
         'background':
           historiqueMobileActive.isActive
@@ -1232,18 +1486,22 @@
               themeService.PrimarySoft +
               ')'
             : 'rgba(255,255,255,0.045)',
+
         'border-color':
           historiqueMobileActive.isActive
             ? 'transparent'
             : themeService.Border2,
+
         'color':
           historiqueMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
+
         'box-shadow':
           historiqueMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
+
         '--tw-ring-color': themeService.Primary,
         '--tw-ring-offset-color': themeService.Background1
       }"
@@ -1256,35 +1514,54 @@
           left-1/2
           bottom-[calc(100%+12px)]
           z-[200]
+
           -translate-x-1/2
           translate-y-2
           scale-95
+
           whitespace-nowrap
+
           rounded-xl
           border
+
           px-3
           py-2
+
           text-[10px]
           font-extrabold
           uppercase
           tracking-[0.7px]
+
           opacity-0
+
           shadow-2xl
           backdrop-blur-2xl
+
           transition-all
           duration-200
+
           group-hover:translate-y-0
           group-hover:scale-100
           group-hover:opacity-100
+
+          sm:text-[11px]
+          sm:px-3.5
+
+          md:text-xs
+          md:px-4
+          md:py-2.5
         "
+
         [class.translate-y-0]="historiqueMobileActive.isActive"
         [class.scale-100]="historiqueMobileActive.isActive"
         [class.opacity-100]="historiqueMobileActive.isActive"
+
         [ngStyle]="{
           'background-color': themeService.Background2,
           'border-color': themeService.Border2,
           'color': themeService.TextPrincipal
         }"
+
         aria-hidden="true"
       >
         {{
@@ -1301,9 +1578,11 @@
             h-0
             w-0
             -translate-x-1/2
+
             border-l-[6px]
             border-r-[6px]
             border-t-[6px]
+
             border-l-transparent
             border-r-transparent
           "
@@ -1320,9 +1599,12 @@
           inset-[-12px]
           rounded-full
           blur-2xl
+
           opacity-0
+
           transition-all
           duration-500
+
           group-hover:opacity-60
         "
         [ngStyle]="{
@@ -1338,192 +1620,17 @@
           relative
           z-10
           shrink-0
-          text-[20px]
+
+          text-[19px]
+
           transition-transform
           duration-300
+
           group-hover:scale-110
           group-active:scale-90
-          sm:text-[21px]
+
+          sm:text-[20px]
           md:text-[22px]
-        "
-        aria-hidden="true"
-      ></i>
-
-    </a>
-
-
-    <!-- ========================================================
-    💡 CONSEILS
-    ========================================================= -->
-
-    <a
-      routerLink="/conseils"
-      routerLinkActive="is-active"
-      #conseilsMobileActive="routerLinkActive"
-      [routerLinkActiveOptions]="{ exact: true }"
-      [attr.aria-current]="
-        conseilsMobileActive.isActive ? 'page' : null
-      "
-      [attr.aria-label]="
-        languageService.currentLanguage === 'fr'
-          ? 'Consulter les conseils JardiScan'
-          : 'View JardiScan tips'
-      "
-      [attr.title]="
-        languageService.currentLanguage === 'fr'
-          ? 'Conseils'
-          : 'Tips'
-      "
-      class="
-        group
-        relative
-        flex
-        shrink-0
-        items-center
-        justify-center
-        h-[52px]
-        w-[52px]
-        rounded-[18px]
-        border
-        outline-none
-        transition-all
-        duration-300
-        ease-out
-        hover:-translate-y-1
-        hover:scale-105
-        active:translate-y-0
-        active:scale-95
-        focus-visible:ring-2
-        focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
-        md:h-[58px]
-        md:w-[58px]
-        md:rounded-[21px]
-      "
-      [ngStyle]="{
-        'background':
-          conseilsMobileActive.isActive
-            ? 'linear-gradient(135deg, ' +
-              themeService.Primary +
-              ', ' +
-              themeService.PrimarySoft +
-              ')'
-            : 'rgba(255,255,255,0.045)',
-        'border-color':
-          conseilsMobileActive.isActive
-            ? 'transparent'
-            : themeService.Border2,
-        'color':
-          conseilsMobileActive.isActive
-            ? themeService.TextPrincipal
-            : themeService.TextSecondaire,
-        'box-shadow':
-          conseilsMobileActive.isActive
-            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
-            : 'none',
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background1
-      }"
-    >
-
-      <span
-        class="
-          pointer-events-none
-          absolute
-          left-1/2
-          bottom-[calc(100%+12px)]
-          z-[200]
-          -translate-x-1/2
-          translate-y-2
-          scale-95
-          whitespace-nowrap
-          rounded-xl
-          border
-          px-3
-          py-2
-          text-[10px]
-          font-extrabold
-          uppercase
-          tracking-[0.7px]
-          opacity-0
-          shadow-2xl
-          backdrop-blur-2xl
-          transition-all
-          duration-200
-          group-hover:translate-y-0
-          group-hover:scale-100
-          group-hover:opacity-100
-        "
-        [class.translate-y-0]="conseilsMobileActive.isActive"
-        [class.scale-100]="conseilsMobileActive.isActive"
-        [class.opacity-100]="conseilsMobileActive.isActive"
-        [ngStyle]="{
-          'background-color': themeService.Background2,
-          'border-color': themeService.Border2,
-          'color': themeService.TextPrincipal
-        }"
-        aria-hidden="true"
-      >
-        {{
-          languageService.currentLanguage === 'fr'
-            ? 'Conseils'
-            : 'Tips'
-        }}
-
-        <span
-          class="
-            absolute
-            left-1/2
-            top-full
-            h-0
-            w-0
-            -translate-x-1/2
-            border-l-[6px]
-            border-r-[6px]
-            border-t-[6px]
-            border-l-transparent
-            border-r-transparent
-          "
-          [ngStyle]="{
-            'border-top-color': themeService.Background2
-          }"
-        ></span>
-      </span>
-
-      <span
-        class="
-          pointer-events-none
-          absolute
-          inset-[-12px]
-          rounded-full
-          blur-2xl
-          opacity-0
-          transition-all
-          duration-500
-          group-hover:opacity-60
-        "
-        [ngStyle]="{
-          'background-color': themeService.PrimarySoft
-        }"
-        aria-hidden="true"
-      ></span>
-
-      <i
-        class="
-          fa-solid
-          fa-lightbulb
-          relative
-          z-10
-          shrink-0
-          text-[21px]
-          transition-transform
-          duration-300
-          group-hover:scale-110
-          group-active:scale-90
-          sm:text-[22px]
-          md:text-[23px]
         "
         aria-hidden="true"
       ></i>

@@ -1,0 +1,834 @@
+
+<!-- ============================================================
+     🌿 JARDISCAN — WIDGET D'ACCÈS AU SCAN
+
+     Rôle :
+     • Expliquer comment réussir son scan
+     • Guider l'utilisateur avant de lancer le scan
+     • Rediriger vers la vraie page /scan
+     • Responsive • Tailwind CSS • Angular
+     ============================================================ -->
+
+<section
+  class="
+    w-full
+    px-10
+    py-10
+  "
+>
+
+  <!-- ==========================================================
+       TITRE DE LA SECTION
+       ========================================================== -->
+
+  <div class="mb-6 sm:mb-7 lg:mb-8">
+
+    <!-- Petite introduction -->
+
+    <div
+      class="
+        mb-2
+        flex
+        items-center
+        gap-2
+        text-[11px]
+        font-bold
+        uppercase
+        tracking-[0.16em]
+        sm:text-xs
+      "
+      [ngStyle]="{
+        'color': themeService.Primary
+      }"
+    >
+      <span
+        class="h-1.5 w-1.5 rounded-full"
+        [ngStyle]="{
+          'background-color': themeService.Primary
+        }"
+      ></span>
+
+      <span>Scanner une plante</span>
+    </div>
+
+    <!-- H1 -->
+
+    <h1
+      class="
+        text-2xl
+        font-black
+        tracking-tight
+        sm:text-3xl
+        lg:text-4xl
+      "
+      [ngStyle]="{
+        'color': themeService.TextPrincipal
+      }"
+    >
+      Identifiez facilement votre plante avec JardiScan
+    </h1>
+
+    <!-- Description -->
+
+    <p
+      class="
+        mt-2
+        max-w-2xl
+        text-sm
+        leading-relaxed
+        sm:text-base
+      "
+      [ngStyle]="{
+        'color': themeService.TextSecondaire
+      }"
+    >
+      Préparez votre photo, suivez quelques conseils simples et laissez
+      JardiScan analyser votre plante pour vous aider à mieux la connaître.
+    </p>
+
+  </div>
+
+
+  <!-- ==========================================================
+       WIDGET PRINCIPAL
+       ========================================================== -->
+
+  <section
+    class="
+      relative
+      w-full
+      overflow-hidden
+      rounded-3xl
+      border
+      px-5
+      py-6
+      shadow-xl
+      sm:px-7
+      sm:py-7
+      lg:px-10
+      lg:py-9
+    "
+    [ngStyle]="{
+      'background-color': themeService.Card,
+      'border-color': themeService.Border1,
+      'color': themeService.TextPrincipal
+    }"
+  >
+
+    <!-- ==========================================================
+         DÉCORATION
+         ========================================================== -->
+
+    <div
+      class="
+        pointer-events-none
+        absolute
+        -right-16
+        -top-16
+        h-40
+        w-40
+        rounded-full
+        opacity-10
+        blur-3xl
+      "
+      [ngStyle]="{
+        'background-color': themeService.Primary
+      }"
+    ></div>
+
+    <div
+      class="
+        pointer-events-none
+        absolute
+        -bottom-20
+        -left-16
+        h-40
+        w-40
+        rounded-full
+        opacity-5
+        blur-3xl
+      "
+      [ngStyle]="{
+        'background-color': themeService.Accent
+      }"
+    ></div>
+
+
+    <!-- ==========================================================
+         CONTENU
+         ========================================================== -->
+
+    <div class="relative z-10">
+
+
+      <!-- ========================================================
+           HEADER
+           ======================================================== -->
+
+      <div
+        class="
+          flex
+          flex-col
+          gap-4
+          sm:flex-row
+          sm:items-start
+          sm:justify-between
+        "
+      >
+
+        <!-- TITRE -->
+
+        <div class="flex min-w-0 items-start gap-3">
+
+          <!-- Icône -->
+
+          <div
+            class="
+              flex
+              h-12
+              w-12
+              shrink-0
+              items-center
+              justify-center
+              rounded-2xl
+              shadow-lg
+            "
+            [ngStyle]="{
+              'background-color': themeService.Primary,
+              'color': themeService.TextOnPrimary
+            }"
+          >
+            <i class="fa-solid fa-camera text-lg"></i>
+          </div>
+
+
+          <!-- Texte -->
+
+          <div class="min-w-0">
+
+            <p
+              class="
+                mb-1
+                text-[11px]
+                font-bold
+                uppercase
+                tracking-wider
+              "
+              [ngStyle]="{
+                'color': themeService.Primary
+              }"
+            >
+              Identification
+            </p>
+
+            <h2
+              class="
+                text-base
+                font-bold
+                sm:text-lg
+              "
+              [ngStyle]="{
+                'color': themeService.TextPrincipal
+              }"
+            >
+              Identifiez votre plante
+            </h2>
+
+            <p
+              class="
+                mt-1
+                text-xs
+                leading-relaxed
+                sm:text-sm
+              "
+              [ngStyle]="{
+                'color': themeService.TextSecondaire
+              }"
+            >
+              Suivez quelques étapes simples avant de lancer votre scan.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- BADGE -->
+
+        <div
+          class="
+            flex
+            w-fit
+            shrink-0
+            items-center
+            gap-1.5
+            rounded-full
+            border
+            px-3
+            py-1.5
+            text-[11px]
+            font-semibold
+          "
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            'border-color': themeService.BorderPrimary,
+            'color': themeService.Primary
+          }"
+        >
+          <span
+            class="h-1.5 w-1.5 rounded-full"
+            [ngStyle]="{
+              'background-color': themeService.Primary
+            }"
+          ></span>
+
+          Scan assisté par IA
+        </div>
+
+      </div>
+
+
+      <!-- ========================================================
+           INTRODUCTION
+           ======================================================== -->
+
+      <div
+        class="
+          mt-6
+          rounded-2xl
+          border
+          p-4
+          sm:p-5
+        "
+        [ngStyle]="{
+          'background-color': themeService.Background2,
+          'border-color': themeService.Border2
+        }"
+      >
+
+        <div class="flex items-start gap-3">
+
+          <!-- Icône -->
+
+          <div
+            class="
+              flex
+              h-9
+              w-9
+              shrink-0
+              items-center
+              justify-center
+              rounded-xl
+            "
+            [ngStyle]="{
+              'background-color': themeService.PrimarySoft,
+              'color': themeService.Primary
+            }"
+          >
+            <i class="fa-solid fa-circle-info text-sm"></i>
+          </div>
+
+
+          <!-- Texte -->
+
+          <div class="min-w-0">
+
+            <h3
+              class="text-sm font-bold"
+              [ngStyle]="{
+                'color': themeService.TextPrincipal
+              }"
+            >
+              Comment réussir votre scan ?
+            </h3>
+
+            <p
+              class="
+                mt-1
+                text-xs
+                leading-relaxed
+                sm:text-sm
+              "
+              [ngStyle]="{
+                'color': themeService.TextSecondaire
+              }"
+            >
+              Une photo claire et bien cadrée permet à JardiScan
+              d'obtenir de meilleures informations sur votre plante.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================================
+           ÉTAPES
+           ======================================================== -->
+
+      <div class="mt-5">
+
+        <div
+          class="
+            grid
+            grid-cols-1
+            gap-3
+            sm:grid-cols-3
+          "
+        >
+
+          <!-- ====================================================
+               ÉTAPE 01
+               ==================================================== -->
+
+          <div
+            class="
+              group
+              relative
+              rounded-2xl
+              border
+              p-4
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+            "
+            [ngStyle]="{
+              'background-color': themeService.Background2,
+              'border-color': themeService.Border2
+            }"
+          >
+
+            <div
+              class="
+                mb-3
+                flex
+                h-9
+                w-9
+                items-center
+                justify-center
+                rounded-xl
+                text-xs
+                font-bold
+              "
+              [ngStyle]="{
+                'background-color': themeService.PrimarySoft,
+                'color': themeService.Primary
+              }"
+            >
+              01
+            </div>
+
+            <h4
+              class="text-sm font-bold"
+              [ngStyle]="{
+                'color': themeService.TextPrincipal
+              }"
+            >
+              Cadrez la plante
+            </h4>
+
+            <p
+              class="
+                mt-1
+                text-xs
+                leading-relaxed
+              "
+              [ngStyle]="{
+                'color': themeService.TextSecondaire
+              }"
+            >
+              Montrez clairement la plante ou ses feuilles dans
+              le cadre.
+            </p>
+
+          </div>
+
+
+          <!-- ====================================================
+               ÉTAPE 02
+               ==================================================== -->
+
+          <div
+            class="
+              group
+              relative
+              rounded-2xl
+              border
+              p-4
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+            "
+            [ngStyle]="{
+              'background-color': themeService.Background2,
+              'border-color': themeService.Border2
+            }"
+          >
+
+            <div
+              class="
+                mb-3
+                flex
+                h-9
+                w-9
+                items-center
+                justify-center
+                rounded-xl
+                text-xs
+                font-bold
+              "
+              [ngStyle]="{
+                'background-color': themeService.PrimarySoft,
+                'color': themeService.Primary
+              }"
+            >
+              02
+            </div>
+
+            <h4
+              class="text-sm font-bold"
+              [ngStyle]="{
+                'color': themeService.TextPrincipal
+              }"
+            >
+              Soignez la lumière
+            </h4>
+
+            <p
+              class="
+                mt-1
+                text-xs
+                leading-relaxed
+              "
+              [ngStyle]="{
+                'color': themeService.TextSecondaire
+              }"
+            >
+              Privilégiez une lumière naturelle et évitez les
+              zones trop sombres.
+            </p>
+
+          </div>
+
+
+          <!-- ====================================================
+               ÉTAPE 03
+               ==================================================== -->
+
+          <div
+            class="
+              group
+              relative
+              rounded-2xl
+              border
+              p-4
+              transition-all
+              duration-300
+              hover:-translate-y-0.5
+            "
+            [ngStyle]="{
+              'background-color': themeService.Background2,
+              'border-color': themeService.Border2
+            }"
+          >
+
+            <div
+              class="
+                mb-3
+                flex
+                h-9
+                w-9
+                items-center
+                justify-center
+                rounded-xl
+                text-xs
+                font-bold
+              "
+              [ngStyle]="{
+                'background-color': themeService.PrimarySoft,
+                'color': themeService.Primary
+              }"
+            >
+              03
+            </div>
+
+            <h4
+              class="text-sm font-bold"
+              [ngStyle]="{
+                'color': themeService.TextPrincipal
+              }"
+            >
+              Lancez l'analyse
+            </h4>
+
+            <p
+              class="
+                mt-1
+                text-xs
+                leading-relaxed
+              "
+              [ngStyle]="{
+                'color': themeService.TextSecondaire
+              }"
+            >
+              Ouvrez le scanner puis prenez ou sélectionnez
+              votre photo.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================================
+           CONSEILS RAPIDES
+           ======================================================== -->
+
+      <div
+        class="
+          mt-4
+          flex
+          flex-col
+          gap-3
+          rounded-2xl
+          border
+          p-4
+          sm:flex-row
+          sm:items-center
+        "
+        [ngStyle]="{
+          'background-color': themeService.Background3,
+          'border-color': themeService.Border2
+        }"
+      >
+
+        <!-- Icône -->
+
+        <div
+          class="
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+          "
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            'color': themeService.Primary
+          }"
+        >
+          <i class="fa-solid fa-lightbulb text-xs"></i>
+        </div>
+
+
+        <!-- Texte -->
+
+        <div class="min-w-0 flex-1">
+
+          <p
+            class="text-xs font-bold"
+            [ngStyle]="{
+              'color': themeService.TextPrincipal
+            }"
+          >
+            Petit conseil
+          </p>
+
+          <p
+            class="
+              mt-0.5
+              text-[11px]
+              leading-relaxed
+              sm:text-xs
+            "
+            [ngStyle]="{
+              'color': themeService.TextSecondaire
+            }"
+          >
+            Évitez les photos floues, trop sombres ou prises
+            de trop loin.
+          </p>
+
+        </div>
+
+
+        <!-- Validation -->
+
+        <div
+          class="
+            hidden
+            h-8
+            w-8
+            shrink-0
+            items-center
+            justify-center
+            rounded-full
+            sm:flex
+          "
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            'color': themeService.Primary
+          }"
+        >
+          <i class="fa-solid fa-check text-xs"></i>
+        </div>
+
+      </div>
+
+
+      <!-- ========================================================
+           ACTIONS
+           ======================================================== -->
+
+      <div
+        class="
+          mt-5
+          grid
+          grid-cols-1
+          gap-3
+          sm:grid-cols-[1fr_auto]
+        "
+      >
+
+        <!-- CTA PRINCIPAL -->
+
+        <button
+          type="button"
+          routerLink="/scan"
+          class="
+            group
+            flex
+            min-h-12
+            items-center
+            justify-center
+            gap-2.5
+            rounded-2xl
+            px-5
+            py-3
+            text-sm
+            font-bold
+            shadow-lg
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:shadow-xl
+            active:translate-y-0
+          "
+          [ngStyle]="{
+            'background-color': themeService.Primary,
+            'color': themeService.TextOnPrimary
+          }"
+        >
+
+          <i
+            class="
+              fa-solid
+              fa-camera
+              transition-transform
+              duration-200
+              group-hover:scale-110
+            "
+          ></i>
+
+          <span>Commencer mon scan</span>
+
+          <i
+            class="
+              fa-solid
+              fa-arrow-right
+              text-xs
+              transition-transform
+              duration-200
+              group-hover:translate-x-1
+            "
+          ></i>
+
+        </button>
+
+
+        <!-- CTA SECONDAIRE -->
+
+        <button
+          type="button"
+          routerLink="/scan"
+          class="
+            group
+            flex
+            min-h-12
+            items-center
+            justify-center
+            gap-2
+            rounded-2xl
+            border
+            px-5
+            py-3
+            text-sm
+            font-semibold
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+          "
+          [ngStyle]="{
+            'background-color': themeService.Background2,
+            'border-color': themeService.Border1,
+            'color': themeService.TextPrincipal
+          }"
+        >
+
+          <i
+            class="
+              fa-solid
+              fa-circle-play
+              text-xs
+            "
+            [ngStyle]="{
+              'color': themeService.Primary
+            }"
+          ></i>
+
+          <span>Voir le scanner</span>
+
+        </button>
+
+      </div>
+
+
+      <!-- ========================================================
+           FOOTER DU WIDGET
+           ======================================================== -->
+
+      <div
+        class="
+          mt-4
+          flex
+          items-center
+          justify-center
+          gap-2
+          text-center
+          text-[10px]
+          sm:text-[11px]
+        "
+        [ngStyle]="{
+          'color': themeService.TextTertiaire
+        }"
+      >
+
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+        <span>
+          JardiScan vous accompagne avant, pendant et après votre scan
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</section>

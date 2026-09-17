@@ -1,27 +1,510 @@
-<section
-  class="flex min-h-[calc(100vh-5rem)] w-full flex-col items-center justify-center px-5 py-12 text-center sm:px-8 lg:px-12"
+<!-- ============================================================
+🌿 JARDISCAN — SECTION ACCUEIL
+============================================================ -->
+<section [ngStyle]="{'background':themeService.Background1}"
+  class="
+ 
+    relative
+    w-full
+    overflow-hidden
+    2xl:mt-17
+    px-10
+    py-10
+  "
 >
-  <div class="w-full max-w-4xl">
 
-    <h1
-      class="text-4xl font-bold tracking-tight text-[var(--TextePrincipal)] sm:text-5xl lg:text-6xl"
-    >
-      Bonjour, bienvenue sur JardiScan
-    </h1>
+  <!-- ==========================================================
+       CONTENEUR PRINCIPAL
+       ========================================================== -->
 
-    <p
-      class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[var(--TexteSecondaire)] sm:text-lg"
-    >
-      Qu’est-ce qu’on fait aujourd’hui ?
-      Découvrez vos plantes, identifiez-les et prenez-en soin simplement.
-    </p>
+  <div class="w-full">
 
-    <button
-      type="button"
-      class="mt-8 rounded-2xl bg-[var(--Forest)] px-7 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
+
+    <!-- ========================================================
+         GRILLE ÉDITORIALE
+
+         MOBILE
+         → 1 colonne
+
+         TABLETTE
+         → 3 colonnes
+         → Image 1 / Bloc 2 / Image 3
+
+         LAPTOP / DESKTOP
+         → 12 colonnes
+         → 2 / 4 / 2 / 4
+         ======================================================== -->
+
+    <div
+      class="
+        grid
+
+        grid-cols-1
+        gap-6
+
+        sm:grid-cols-3
+        sm:items-start
+        sm:gap-5
+
+        lg:grid-cols-12
+        lg:items-start
+        lg:gap-4
+
+        xl:gap-5
+
+        2xl:gap-7
+      "
     >
-      Commencer
-    </button>
+
+
+      <!-- ======================================================
+           IMAGE 1
+           
+           MOBILE :
+           ❌ masquée
+
+           TABLETTE :
+           ✅ affichée
+
+           LAPTOP / DESKTOP :
+           ✅ 2 colonnes
+           ====================================================== -->
+
+      <div
+        class="
+          group
+          relative
+
+          hidden
+
+          sm:block
+          sm:col-span-1
+
+          lg:col-span-2
+        "
+      >
+
+        <div
+          class="
+            relative
+            overflow-hidden
+            rounded-[26px]
+
+            h-[400px]
+
+            sm:h-[500px]
+
+            lg:h-[500px]
+
+            xl:h-[570px]
+
+            2xl:h-[680px]
+          "
+        >
+
+          <img
+            src="assets/ImageAccueil-1.png"
+            alt="Illustration JardiScan"
+            class="
+              h-full
+              w-full
+              object-cover
+
+              transition-transform
+              duration-700
+              ease-out
+
+              group-hover:scale-[1.04]
+            "
+          />
+        </div>
+
+      </div>
+
+
+      <!-- ======================================================
+           BLOC 2 — TEXTE + IMAGE 2
+
+           MOBILE :
+           → texte
+           → image 2
+
+           TABLETTE :
+           → même bloc au centre
+
+           LAPTOP / DESKTOP :
+           → 4 colonnes
+           ====================================================== -->
+
+      <div
+        class="
+          flex
+          flex-col
+
+          sm:col-span-1
+
+          lg:col-span-4
+        "
+      >
+
+
+        <!-- ====================================================
+             TEXTE D'INTRODUCTION
+             ==================================================== -->
+
+        <div
+          class="
+            mb-5
+            px-1
+
+            sm:mb-6
+
+            lg:mb-6
+
+            xl:mb-7
+          "
+        >
+
+          <p [ngStyle]="{'color':themeService.TextPrincipal}"
+            class="
+              mb-2
+              text-[10px]
+              font-medium
+              uppercase
+              tracking-[0.18em]
+              
+
+              sm:text-[11px]
+            "
+          >
+            Bienvenue sur JardiScan
+          </p>
+
+
+          <h1 [ngStyle]="{'color':themeService.TextPrincipal}"
+            class="
+              text-3xl
+              font-semibold
+              leading-[1.05]
+              tracking-[-0.04em]
+              
+
+              sm:text-3xl
+
+              lg:text-[2.35rem]
+
+              xl:text-5xl
+
+              2xl:text-6xl
+            "
+          >
+
+            Identifiez vos plantes,
+
+            <br />
+
+            <span 
+              [ngStyle]="{'color':themeService.Primary}"
+            >
+              découvrez leurs secrets.
+            </span>
+
+          </h1>
+
+        </div>
+
+
+        <!-- ====================================================
+             IMAGE 2
+
+             📱 MOBILE
+             → image principale
+
+             📲 TABLETTE
+             → image centrale
+
+             💻 DESKTOP
+             → image centrale
+             ==================================================== -->
+
+        <div
+          class="
+            group
+            relative
+            overflow-hidden
+            rounded-[28px]
+
+            h-[390px]
+
+            sm:h-[500px]
+
+            lg:h-[500px]
+
+            xl:h-[570px]
+
+            2xl:h-[660px]
+          "
+        >
+
+          <img
+            src="assets/ImageAccueil-2.png"
+            alt="Illustration JardiScan"
+            class="
+              h-full
+              w-full
+              object-cover
+
+              transition-transform
+              duration-700
+              ease-out
+
+              group-hover:scale-[1.035]
+            "
+          />
+
+
+          <!-- Dégradé -->
+
+          <div
+            class="
+              pointer-events-none
+              absolute
+              inset-0
+              bg-gradient-to-t
+              from-black/20
+              via-transparent
+              to-black/5
+            "
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ======================================================
+           IMAGE 3
+
+           MOBILE :
+           ❌ masquée
+
+           TABLETTE :
+           ✅ affichée
+
+           LAPTOP / DESKTOP :
+           ✅ 2 colonnes
+           ====================================================== -->
+
+      <div
+        class="
+          group
+          relative
+
+          hidden
+
+          sm:block
+          sm:col-span-1
+
+          lg:col-span-2
+        "
+      >
+
+        <div
+          class="
+            relative
+            overflow-hidden
+            rounded-[26px]
+
+            h-[400px]
+
+            sm:h-[500px]
+
+            lg:h-[500px]
+
+            xl:h-[570px]
+
+            2xl:h-[680px]
+          "
+        >
+
+          <img
+            src="assets/ImageAccueil-3.png"
+            alt="Illustration JardiScan"
+            class="
+              h-full
+              w-full
+              object-cover
+
+              transition-transform
+              duration-700
+              ease-out
+
+              group-hover:scale-[1.04]
+            "
+          />
+
+
+          <div
+            class="
+              pointer-events-none
+              absolute
+              inset-0
+              bg-gradient-to-b
+              from-black/5
+              via-transparent
+              to-black/10
+            "
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ======================================================
+           BLOC 4 — IMAGE 4 + DESCRIPTION
+
+           MOBILE :
+           ❌ masqué
+
+           TABLETTE :
+           ❌ masqué
+
+           LAPTOP / DESKTOP :
+           ✅ affiché
+           ====================================================== -->
+
+      <div
+        class="
+          hidden
+
+          lg:flex
+          lg:flex-col
+          lg:col-span-4
+        "
+      >
+
+
+        <!-- ====================================================
+             IMAGE 4
+             ==================================================== -->
+
+        <div
+          class="
+            group
+            relative
+            overflow-hidden
+            rounded-[28px]
+
+            h-[500px]
+
+            xl:h-[570px]
+
+            2xl:h-[660px]
+          "
+        >
+
+          <img
+            src="assets/ImageAccueil-4.png"
+            alt="Illustration JardiScan"
+            class="
+              h-full
+              w-full
+              object-cover
+
+              transition-transform
+              duration-700
+              ease-out
+
+              group-hover:scale-[1.035]
+            "
+          />
+
+
+          <div
+            class="
+              pointer-events-none
+              absolute
+              inset-0
+              bg-gradient-to-t
+              from-black/15
+              via-transparent
+              to-transparent
+            "
+          ></div>
+
+        </div>
+
+
+        <!-- ====================================================
+             TEXTE SOUS IMAGE
+             ==================================================== -->
+
+        <div
+          class="
+            mt-4
+            px-1
+
+            sm:mt-5
+
+            lg:mt-5
+
+            xl:mt-6
+          "
+        >
+
+          <div
+            class="
+              flex
+              items-start
+              gap-3
+            "
+          >
+
+            <!-- Indicateur -->
+
+            <span
+              class="
+                mt-1.5
+                h-2
+                w-2
+                shrink-0
+                rounded-full
+                bg-[var(--Primary)]
+              "
+            ></span>
+
+
+            <p [ngStyle]="{'color':themeService.TextPrincipal}"
+              class="
+                max-w-lg
+                text-[13px]
+                leading-5
+
+                sm:text-sm
+                sm:leading-6
+
+                lg:text-sm
+                lg:leading-6
+
+                xl:text-base
+                xl:leading-7
+              "
+            >
+              Une nouvelle façon de découvrir,
+              comprendre et prendre soin de vos plantes
+              simplement au quotidien.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
 
   </div>
+
 </section>
