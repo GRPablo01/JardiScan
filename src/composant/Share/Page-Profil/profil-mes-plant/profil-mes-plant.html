@@ -1,0 +1,1661 @@
+
+
+<!-- ====================================================== -->
+<!-- 🌿 LISTE DES PLANTES -->
+<!-- ====================================================== -->
+
+<div
+  *ngIf="
+    !chargementPlantes &&
+    !erreurPlantes &&
+    plantes.length > 0
+  "
+  class="
+    mx-auto
+    mt-6
+    grid
+    max-w-7xl
+    grid-cols-1
+    gap-5
+    sm:grid-cols-2
+    xl:grid-cols-3
+  "
+>
+
+  <!-- ==================================================== -->
+  <!-- 🌱 CARTE PLANTE -->
+  <!-- ==================================================== -->
+
+  <article
+    *ngFor="
+      let plante of plantes;
+      trackBy: trackByPlante
+    "
+    (click)="ouvrirDetailsPlante(plante)"
+    tabindex="0"
+    role="button"
+    (keydown.enter)="ouvrirDetailsPlante(plante)"
+    (keydown.space)="ouvrirDetailsPlante(plante)"
+    class="
+      group
+      relative
+      h-72
+      cursor-pointer
+      overflow-hidden
+      rounded-3xl
+      border
+      border-[#8FAF91]/20
+      bg-[#F3F1E8]
+      shadow-[0_10px_35px_rgba(19,58,60,0.07)]
+      outline-none
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      hover:border-[#4F8061]/40
+      hover:shadow-[0_20px_50px_rgba(19,58,60,0.16)]
+      focus:ring-2
+      focus:ring-[#4F8061]/40
+      focus:ring-offset-2
+      sm:h-80
+      lg:h-96
+    "
+  >
+
+    <!-- ================================================== -->
+    <!-- 📸 IMAGE -->
+    <!-- ================================================== -->
+
+    <ng-container
+      *ngIf="
+        getImagePlante(plante);
+        else imageVide
+      "
+    >
+
+      <img
+        [src]="getImagePlante(plante)"
+        [alt]="getNomPlante(plante)"
+        loading="lazy"
+        decoding="async"
+        (error)="imageErreur($event)"
+        class="
+          absolute
+          inset-0
+          h-full
+          w-full
+          object-cover
+          transition-all
+          duration-700
+          ease-out
+          group-hover:scale-105
+        "
+        [class.grayscale]="
+          isPlanteVerrouillee(plante)
+        "
+      />
+
+    </ng-container>
+
+    <!-- ================================================== -->
+    <!-- 🌱 AUCUNE IMAGE -->
+    <!-- ================================================== -->
+
+    <ng-template #imageVide>
+
+      <div
+        class="
+          absolute
+          inset-0
+          flex
+          items-center
+          justify-center
+          bg-[#F3F1E8]
+          text-[#8FAF91]
+        "
+      >
+
+        <i
+          class="
+            fa-solid
+            fa-seedling
+            text-5xl
+            transition-transform
+            duration-500
+            group-hover:scale-110
+          "
+        ></i>
+
+      </div>
+
+    </ng-template>
+
+    <!-- ================================================== -->
+    <!-- 🌑 OVERLAY -->
+    <!-- ================================================== -->
+
+    <div
+      class="
+        pointer-events-none
+        absolute
+        inset-0
+        bg-gradient-to-t
+        from-black/70
+        via-black/10
+        to-transparent
+        opacity-80
+        transition-opacity
+        duration-300
+        group-hover:opacity-100
+      "
+    ></div>
+
+    <!-- ================================================== -->
+    <!-- 🔒 VERROU -->
+    <!-- ================================================== -->
+
+    <div
+      *ngIf="isPlanteVerrouillee(plante)"
+      class="
+        absolute
+        right-4
+        top-4
+        z-20
+        flex
+        h-10
+        w-10
+        items-center
+        justify-center
+        rounded-full
+        border
+        border-white/30
+        bg-black/40
+        text-white
+        shadow-lg
+        backdrop-blur-md
+      "
+      title="Plante non débloquée"
+    >
+
+      <i
+        class="
+          fa-solid
+          fa-lock
+          text-sm
+        "
+      ></i>
+
+    </div>
+
+    <!-- ================================================== -->
+    <!-- 🔓 PLANTE DÉBLOQUÉE -->
+    <!-- ================================================== -->
+
+    <div
+      *ngIf="isPlanteDebloquee(plante)"
+      class="
+        absolute
+        right-4
+        top-4
+        z-20
+        flex
+        h-10
+        w-10
+        items-center
+        justify-center
+        rounded-full
+        bg-[#4F8061]/90
+        text-white
+        shadow-lg
+        backdrop-blur-md
+      "
+      title="Plante débloquée"
+    >
+
+      <i
+        class="
+          fa-solid
+          fa-check
+          text-sm
+        "
+      ></i>
+
+    </div>
+
+    <!-- ================================================== -->
+    <!-- 🔢 NUMÉRO -->
+    <!-- ================================================== -->
+
+    <span
+      *ngIf="
+        getNumeroPlante(plante) !== null
+      "
+      class="
+        absolute
+        left-4
+        top-4
+        z-10
+        inline-flex
+        items-center
+        rounded-full
+        border
+        border-white/30
+        bg-white/90
+        px-3
+        py-1.5
+        text-xs
+        font-extrabold
+        text-[#133A3C]
+        shadow-lg
+        backdrop-blur-md
+      "
+    >
+      #{{ getNumeroPlante(plante) }}
+    </span>
+
+    <!-- ================================================== -->
+    <!-- 🌿 NOM -->
+    <!-- ================================================== -->
+
+    <div
+      class="
+        pointer-events-none
+        absolute
+        inset-x-0
+        bottom-0
+        z-10
+        p-5
+        sm:p-6
+      "
+    >
+
+      <span
+        *ngIf="getFamille(plante)"
+        class="
+          mb-2
+          inline-flex
+          items-center
+          gap-1.5
+          rounded-full
+          bg-white/90
+          px-3
+          py-1.5
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-wider
+          text-[#1F5A4D]
+          shadow-sm
+          backdrop-blur-md
+        "
+      >
+
+        <i
+          class="
+            fa-solid
+            fa-leaf
+            text-[9px]
+          "
+        ></i>
+
+        {{ getFamille(plante) }}
+
+      </span>
+
+      <h2
+        class="
+          text-xl
+          font-extrabold
+          leading-tight
+          text-white
+          drop-shadow-lg
+          sm:text-2xl
+        "
+      >
+        {{ getNomPlante(plante) }}
+      </h2>
+
+      <p
+        *ngIf="getNomScientifique(plante)"
+        class="
+          mt-1
+          truncate
+          text-sm
+          italic
+          text-white/80
+          drop-shadow
+        "
+      >
+        {{ getNomScientifique(plante) }}
+      </p>
+
+      <!-- STATUT -->
+
+      <div
+        class="
+          mt-3
+          flex
+          items-center
+          gap-2
+          text-xs
+          font-bold
+          text-white
+        "
+      >
+
+        <ng-container
+          *ngIf="
+            isPlanteDebloquee(plante);
+            else planteVerrouillee
+          "
+        >
+
+          <span
+            class="
+              inline-flex
+              items-center
+              gap-1.5
+              rounded-full
+              bg-[#4F8061]/90
+              px-3
+              py-1.5
+              backdrop-blur-md
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-unlock
+                text-[10px]
+              "
+            ></i>
+
+            Débloquée
+
+          </span>
+
+        </ng-container>
+
+        <ng-template #planteVerrouillee>
+
+          <span
+            class="
+              inline-flex
+              items-center
+              gap-1.5
+              rounded-full
+              bg-black/45
+              px-3
+              py-1.5
+              backdrop-blur-md
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-lock
+                text-[10px]
+              "
+            ></i>
+
+            À découvrir
+
+          </span>
+
+        </ng-template>
+
+      </div>
+
+    </div>
+
+    <!-- ================================================== -->
+    <!-- 👁️ INDICATEUR -->
+    <!-- ================================================== -->
+
+    <div
+      class="
+        pointer-events-none
+        absolute
+        bottom-5
+        right-5
+        z-20
+        flex
+        h-10
+        w-10
+        items-center
+        justify-center
+        rounded-full
+        bg-black/25
+        text-white
+        opacity-0
+        backdrop-blur-md
+        transition-all
+        duration-300
+        group-hover:scale-100
+        group-hover:opacity-100
+      "
+    >
+
+      <i
+        class="
+          fa-solid
+          fa-expand
+        "
+      ></i>
+
+    </div>
+
+  </article>
+
+</div>
+
+<!-- ====================================================== -->
+<!-- ❌ AUCUNE PLANTE -->
+<!-- ====================================================== -->
+
+<div
+  *ngIf="
+    !chargementPlantes &&
+    !erreurPlantes &&
+    plantes.length === 0
+  "
+  class="
+    mx-auto
+    mt-8
+    flex
+    max-w-2xl
+    flex-col
+    items-center
+    justify-center
+    rounded-3xl
+    border
+    border-[#8FAF91]/20
+    bg-[#F3F1E8]
+    px-6
+    py-14
+    text-center
+  "
+>
+
+  <div
+    class="
+      flex
+      h-16
+      w-16
+      items-center
+      justify-center
+      rounded-2xl
+      bg-[#4F8061]/10
+      text-[#4F8061]
+    "
+  >
+
+    <i
+      class="
+        fa-solid
+        fa-seedling
+        text-2xl
+      "
+    ></i>
+
+  </div>
+
+  <h2
+    class="
+      mt-5
+      text-xl
+      font-extrabold
+      text-[#133A3C]
+    "
+  >
+    Aucune plante disponible
+  </h2>
+
+  <p
+    class="
+      mt-2
+      max-w-md
+      text-sm
+      leading-6
+      text-[#133A3C]/60
+    "
+  >
+    Les plantes du JardiDex apparaîtront ici
+    lorsqu'elles seront disponibles.
+  </p>
+
+  <button
+    type="button"
+    (click)="rechargerPlantes()"
+    class="
+      mt-6
+      inline-flex
+      items-center
+      gap-2
+      rounded-2xl
+      bg-[#1F5A4D]
+      px-5
+      py-3
+      text-sm
+      font-bold
+      text-white
+      shadow-[0_8px_20px_rgba(31,90,77,0.18)]
+      transition-all
+      duration-200
+      hover:-translate-y-0.5
+      hover:bg-[#133A3C]
+    "
+  >
+
+    <i
+      class="
+        fa-solid
+        fa-rotate
+      "
+    ></i>
+
+    Recharger
+
+  </button>
+
+</div>
+
+<!-- ====================================================== -->
+<!-- 🔄 CHARGEMENT -->
+<!-- ====================================================== -->
+
+<div
+  *ngIf="chargementPlantes"
+  class="
+    mx-auto
+    mt-8
+    grid
+    max-w-7xl
+    grid-cols-1
+    gap-5
+    sm:grid-cols-2
+    xl:grid-cols-3
+  "
+>
+
+  <div
+    *ngFor="let skeleton of [1, 2, 3, 4, 5, 6]"
+    class="
+      h-72
+      animate-pulse
+      rounded-3xl
+      bg-[#8FAF91]/10
+      sm:h-80
+      lg:h-96
+    "
+  ></div>
+
+</div>
+
+<!-- ====================================================== -->
+<!-- ❌ ERREUR -->
+<!-- ====================================================== -->
+
+<div
+  *ngIf="
+    !chargementPlantes &&
+    erreurPlantes
+  "
+  class="
+    mx-auto
+    mt-8
+    max-w-2xl
+    rounded-3xl
+    border
+    border-red-200
+    bg-red-50
+    p-6
+    text-center
+  "
+>
+
+  <div
+    class="
+      mx-auto
+      flex
+      h-14
+      w-14
+      items-center
+      justify-center
+      rounded-2xl
+      bg-red-100
+      text-red-600
+    "
+  >
+
+    <i
+      class="
+        fa-solid
+        fa-triangle-exclamation
+      "
+    ></i>
+
+  </div>
+
+  <h2
+    class="
+      mt-4
+      font-extrabold
+      text-red-900
+    "
+  >
+    Impossible de charger les plantes
+  </h2>
+
+  <p
+    class="
+      mt-2
+      text-sm
+      text-red-800/70
+    "
+  >
+    {{ erreurPlantes }}
+  </p>
+
+  <button
+    type="button"
+    (click)="rechargerPlantes()"
+    class="
+      mt-5
+      inline-flex
+      items-center
+      gap-2
+      rounded-2xl
+      bg-red-600
+      px-5
+      py-3
+      text-sm
+      font-bold
+      text-white
+      transition
+      hover:bg-red-700
+    "
+  >
+
+    <i
+      class="
+        fa-solid
+        fa-rotate
+      "
+    ></i>
+
+    Réessayer
+
+  </button>
+
+</div>
+
+<!-- ====================================================== -->
+<!-- 🌿 POPUP — DÉTAILS DE LA PLANTE -->
+<!-- ====================================================== -->
+
+<div
+  *ngIf="planteSelectionnee"
+  class="
+    fixed
+    inset-0
+    z-[9999]
+    flex
+    items-center
+    justify-center
+    bg-[#133A3C]/70
+    p-4
+    backdrop-blur-md
+    sm:p-6
+    lg:p-8
+  "
+  (click)="fermerDetailsPlante()"
+>
+
+  <!-- ==================================================== -->
+  <!-- 📦 MODAL -->
+  <!-- ==================================================== -->
+
+  <div
+    class="
+      relative
+      flex
+      max-h-[92vh]
+      w-full
+      max-w-5xl
+      flex-col
+      overflow-hidden
+      rounded-[2rem]
+      border
+      border-white/20
+      bg-white
+      shadow-[0_30px_100px_rgba(0,0,0,0.30)]
+      lg:flex-row
+    "
+    (click)="$event.stopPropagation()"
+  >
+
+    <!-- ================================================== -->
+    <!-- ❌ FERMER -->
+    <!-- ================================================== -->
+
+    <button
+      type="button"
+      (click)="fermerDetailsPlante()"
+      aria-label="Fermer"
+      title="Fermer"
+      class="
+        absolute
+        right-4
+        top-4
+        z-30
+        flex
+        h-11
+        w-11
+        items-center
+        justify-center
+        rounded-full
+        border
+        border-white/30
+        bg-black/35
+        text-white
+        shadow-lg
+        backdrop-blur-md
+        transition-all
+        duration-200
+        hover:scale-105
+        hover:bg-black/55
+        focus:outline-none
+        focus:ring-2
+        focus:ring-white/70
+      "
+    >
+
+      <i
+        class="
+          fa-solid
+          fa-xmark
+          text-lg
+        "
+      ></i>
+
+    </button>
+
+    <!-- ================================================== -->
+    <!-- 📸 IMAGE PRINCIPALE -->
+    <!-- ================================================== -->
+
+    <div
+      class="
+        relative
+        h-64
+        shrink-0
+        bg-[#F3F1E8]
+        sm:h-80
+        lg:h-auto
+        lg:w-[46%]
+      "
+    >
+
+      <ng-container
+        *ngIf="
+          getImagePlante(planteSelectionnee);
+          else popupImageVide
+        "
+      >
+
+        <img
+          [src]="getImagePlante(planteSelectionnee)"
+          [alt]="getNomPlante(planteSelectionnee)"
+          loading="eager"
+          decoding="async"
+          (error)="imageErreur($event)"
+          class="
+            h-full
+            w-full
+            object-cover
+          "
+          [class.grayscale]="
+            isPlanteVerrouillee(planteSelectionnee)
+          "
+        />
+
+      </ng-container>
+
+      <!-- ================================================ -->
+      <!-- 🌱 AUCUNE IMAGE -->
+      <!-- ================================================ -->
+
+      <ng-template #popupImageVide>
+
+        <div
+          class="
+            flex
+            h-full
+            w-full
+            items-center
+            justify-center
+            bg-[#F3F1E8]
+            text-[#8FAF91]
+          "
+        >
+
+          <i
+            class="
+              fa-solid
+              fa-seedling
+              text-6xl
+            "
+          ></i>
+
+        </div>
+
+      </ng-template>
+
+      <!-- ================================================ -->
+      <!-- 🌑 OVERLAY -->
+      <!-- ================================================ -->
+
+      <div
+        class="
+          pointer-events-none
+          absolute
+          inset-0
+          bg-gradient-to-t
+          from-black/50
+          via-transparent
+          to-transparent
+        "
+      ></div>
+
+      <!-- ================================================ -->
+      <!-- 🔢 NUMÉRO -->
+      <!-- ================================================ -->
+
+      <span
+        *ngIf="
+          getNumeroPlante(planteSelectionnee) !== null
+        "
+        class="
+          absolute
+          bottom-5
+          left-5
+          rounded-full
+          bg-white/90
+          px-3
+          py-1.5
+          text-xs
+          font-extrabold
+          text-[#133A3C]
+          shadow-lg
+          backdrop-blur-md
+        "
+      >
+        #{{ getNumeroPlante(planteSelectionnee) }}
+      </span>
+
+      <!-- ================================================ -->
+      <!-- 🔒 STATUT -->
+      <!-- ================================================ -->
+
+      <span
+        *ngIf="
+          isPlanteVerrouillee(planteSelectionnee)
+        "
+        class="
+          absolute
+          bottom-5
+          right-5
+          inline-flex
+          items-center
+          gap-2
+          rounded-full
+          bg-black/55
+          px-3
+          py-2
+          text-xs
+          font-bold
+          text-white
+          backdrop-blur-md
+        "
+      >
+
+        <i
+          class="
+            fa-solid
+            fa-lock
+          "
+        ></i>
+
+        À découvrir
+
+      </span>
+
+      <span
+        *ngIf="
+          isPlanteDebloquee(planteSelectionnee)
+        "
+        class="
+          absolute
+          bottom-5
+          right-5
+          inline-flex
+          items-center
+          gap-2
+          rounded-full
+          bg-[#4F8061]/90
+          px-3
+          py-2
+          text-xs
+          font-bold
+          text-white
+          backdrop-blur-md
+        "
+      >
+
+        <i
+          class="
+            fa-solid
+            fa-unlock
+          "
+        ></i>
+
+        Débloquée
+
+      </span>
+
+    </div>
+
+    <!-- ================================================== -->
+    <!-- 📋 INFORMATIONS -->
+    <!-- ================================================== -->
+
+    <div
+      class="
+        min-w-0
+        flex-1
+        overflow-y-auto
+        p-6
+        sm:p-8
+        lg:p-10
+      "
+    >
+
+      <!-- ================================================= -->
+      <!-- SURTITRE -->
+      <!-- ================================================= -->
+
+      <span
+        class="
+          inline-flex
+          items-center
+          rounded-full
+          bg-[#4F8061]/10
+          px-3
+          py-1.5
+          text-[10px]
+          font-bold
+          uppercase
+          tracking-[0.18em]
+          text-[#4F8061]
+        "
+      >
+        JARDIDEX
+      </span>
+
+      <!-- ================================================= -->
+      <!-- NOM -->
+      <!-- ================================================= -->
+
+      <h2
+        class="
+          mt-3
+          text-3xl
+          font-extrabold
+          leading-tight
+          tracking-tight
+          text-[#133A3C]
+          sm:text-4xl
+        "
+      >
+        {{ getNomPlante(planteSelectionnee) }}
+      </h2>
+
+      <!-- ================================================= -->
+      <!-- NOM SCIENTIFIQUE -->
+      <!-- ================================================= -->
+
+      <p
+        *ngIf="
+          getNomScientifique(planteSelectionnee)
+        "
+        class="
+          mt-2
+          flex
+          items-center
+          gap-2
+          text-sm
+          italic
+          text-[#4F8061]
+        "
+      >
+
+        <i
+          class="
+            fa-solid
+            fa-dna
+            text-xs
+          "
+        ></i>
+
+        <span>
+          {{ getNomScientifique(planteSelectionnee) }}
+        </span>
+
+      </p>
+
+      <!-- ================================================= -->
+      <!-- INFORMATIONS -->
+      <!-- ================================================= -->
+
+      <div
+        class="
+          mt-7
+          grid
+          grid-cols-1
+          gap-3
+          sm:grid-cols-2
+        "
+      >
+
+        <!-- =============================================== -->
+        <!-- FAMILLE -->
+        <!-- =============================================== -->
+
+        <div
+          *ngIf="
+            getFamille(planteSelectionnee)
+          "
+          class="
+            rounded-2xl
+            border
+            border-[#8FAF91]/20
+            bg-[#4F8061]/5
+            p-4
+          "
+        >
+
+          <div
+            class="
+              flex
+              items-center
+              gap-2
+              text-xs
+              font-bold
+              uppercase
+              tracking-wider
+              text-[#4F8061]
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-leaf
+              "
+            ></i>
+
+            Famille
+
+          </div>
+
+          <p
+            class="
+              mt-2
+              text-sm
+              font-semibold
+              text-[#133A3C]
+            "
+          >
+            {{ getFamille(planteSelectionnee) }}
+          </p>
+
+        </div>
+
+        <!-- =============================================== -->
+        <!-- CATÉGORIE -->
+        <!-- =============================================== -->
+
+        <div
+          *ngIf="
+            getCategorie(planteSelectionnee)
+          "
+          class="
+            rounded-2xl
+            border
+            border-[#8FAF91]/20
+            bg-[#F3F1E8]
+            p-4
+          "
+        >
+
+          <div
+            class="
+              flex
+              items-center
+              gap-2
+              text-xs
+              font-bold
+              uppercase
+              tracking-wider
+              text-[#4F8061]
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-layer-group
+              "
+            ></i>
+
+            Catégorie
+
+          </div>
+
+          <p
+            class="
+              mt-2
+              text-sm
+              font-semibold
+              text-[#133A3C]
+            "
+          >
+            {{ getCategorie(planteSelectionnee) }}
+          </p>
+
+        </div>
+
+        <!-- =============================================== -->
+        <!-- EXPOSITION -->
+        <!-- =============================================== -->
+
+        <div
+          *ngIf="
+            planteSelectionnee.exposition
+          "
+          class="
+            rounded-2xl
+            border
+            border-amber-100
+            bg-amber-50
+            p-4
+          "
+        >
+
+          <div
+            class="
+              flex
+              items-center
+              gap-2
+              text-xs
+              font-bold
+              uppercase
+              tracking-wider
+              text-amber-700
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-sun
+              "
+            ></i>
+
+            Exposition
+
+          </div>
+
+          <p
+            class="
+              mt-2
+              text-sm
+              font-semibold
+              text-amber-900
+            "
+          >
+            {{ planteSelectionnee.exposition }}
+          </p>
+
+        </div>
+
+        <!-- =============================================== -->
+        <!-- ARROSAGE -->
+        <!-- =============================================== -->
+
+        <div
+          *ngIf="
+            planteSelectionnee.arrosage
+          "
+          class="
+            rounded-2xl
+            border
+            border-sky-100
+            bg-sky-50
+            p-4
+          "
+        >
+
+          <div
+            class="
+              flex
+              items-center
+              gap-2
+              text-xs
+              font-bold
+              uppercase
+              tracking-wider
+              text-sky-700
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-droplet
+              "
+            ></i>
+
+            Arrosage
+
+          </div>
+
+          <p
+            class="
+              mt-2
+              text-sm
+              font-semibold
+              text-sky-900
+            "
+          >
+            {{ planteSelectionnee.arrosage }}
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- ================================================= -->
+      <!-- 📸 AUTRES IMAGES -->
+      <!-- ================================================= -->
+
+      <div
+        *ngIf="
+          getImagesPlante(planteSelectionnee).length > 1
+        "
+        class="mt-7"
+      >
+
+        <div
+          class="
+            flex
+            items-center
+            gap-2
+            text-sm
+            font-bold
+            text-[#133A3C]
+          "
+        >
+
+          <span
+            class="
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              rounded-xl
+              bg-[#4F8061]/10
+              text-[#4F8061]
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-images
+                text-xs
+              "
+            ></i>
+
+          </span>
+
+          Photos de la plante
+
+        </div>
+
+        <div
+          class="
+            mt-3
+            grid
+            grid-cols-2
+            gap-3
+            sm:grid-cols-3
+          "
+        >
+
+          <div
+            *ngFor="
+              let image of getImagesPlante(planteSelectionnee)
+            "
+            class="
+              aspect-square
+              overflow-hidden
+              rounded-2xl
+              border
+              border-[#8FAF91]/20
+              bg-[#F3F1E8]
+            "
+          >
+
+            <img
+              [src]="getImageUpload(image)"
+              [alt]="getNomPlante(planteSelectionnee)"
+              loading="lazy"
+              decoding="async"
+              (error)="imageErreur($event)"
+              class="
+                h-full
+                w-full
+                object-cover
+                transition-transform
+                duration-500
+                hover:scale-105
+              "
+              [class.grayscale]="
+                isPlanteVerrouillee(planteSelectionnee)
+              "
+            />
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ================================================= -->
+      <!-- DESCRIPTION -->
+      <!-- ================================================= -->
+
+      <div
+        *ngIf="
+          planteSelectionnee.description
+        "
+        class="mt-7"
+      >
+
+        <div
+          class="
+            flex
+            items-center
+            gap-2
+            text-sm
+            font-bold
+            text-[#133A3C]
+          "
+        >
+
+          <span
+            class="
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              rounded-xl
+              bg-[#4F8061]/10
+              text-[#4F8061]
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-align-left
+                text-xs
+              "
+            ></i>
+
+          </span>
+
+          Description
+
+        </div>
+
+        <p
+          class="
+            mt-3
+            text-sm
+            leading-7
+            text-[#133A3C]/65
+          "
+        >
+          {{ planteSelectionnee.description }}
+        </p>
+
+      </div>
+
+      <!-- ================================================= -->
+      <!-- 🔒 MESSAGE PLANTE VERROUILLÉE -->
+      <!-- ================================================= -->
+
+      <div
+        *ngIf="
+          isPlanteVerrouillee(planteSelectionnee)
+        "
+        class="
+          mt-7
+          rounded-2xl
+          border
+          border-[#8FAF91]/20
+          bg-[#F3F1E8]
+          p-4
+        "
+      >
+
+        <div
+          class="
+            flex
+            items-start
+            gap-3
+          "
+        >
+
+          <div
+            class="
+              flex
+              h-10
+              w-10
+              shrink-0
+              items-center
+              justify-center
+              rounded-xl
+              bg-[#133A3C]
+              text-white
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-lock
+                text-sm
+              "
+            ></i>
+
+          </div>
+
+          <div>
+
+            <p
+              class="
+                text-sm
+                font-extrabold
+                text-[#133A3C]
+              "
+            >
+              Plante à découvrir
+            </p>
+
+            <p
+              class="
+                mt-1
+                text-xs
+                leading-5
+                text-[#133A3C]/60
+              "
+            >
+              Cette plante n'est pas encore présente
+              dans ton JardiDex.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ================================================= -->
+      <!-- 🔓 MESSAGE PLANTE DÉBLOQUÉE -->
+      <!-- ================================================= -->
+
+      <div
+        *ngIf="
+          isPlanteDebloquee(planteSelectionnee)
+        "
+        class="
+          mt-7
+          rounded-2xl
+          border
+          border-[#4F8061]/20
+          bg-[#4F8061]/5
+          p-4
+        "
+      >
+
+        <div
+          class="
+            flex
+            items-start
+            gap-3
+          "
+        >
+
+          <div
+            class="
+              flex
+              h-10
+              w-10
+              shrink-0
+              items-center
+              justify-center
+              rounded-xl
+              bg-[#4F8061]
+              text-white
+            "
+          >
+
+            <i
+              class="
+                fa-solid
+                fa-check
+                text-sm
+              "
+            ></i>
+
+          </div>
+
+          <div>
+
+            <p
+              class="
+                text-sm
+                font-extrabold
+                text-[#133A3C]
+              "
+            >
+              Plante débloquée
+            </p>
+
+            <p
+              class="
+                mt-1
+                text-xs
+                leading-5
+                text-[#133A3C]/60
+              "
+            >
+              Cette plante fait partie de ton JardiDex.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ================================================= -->
+      <!-- BOUTON FERMER -->
+      <!-- ================================================= -->
+
+      <div
+        class="
+          mt-8
+          flex
+          justify-end
+        "
+      >
+
+        <button
+          type="button"
+          (click)="fermerDetailsPlante()"
+          class="
+            inline-flex
+            items-center
+            gap-2
+            rounded-2xl
+            bg-[#1F5A4D]
+            px-5
+            py-3
+            text-sm
+            font-bold
+            text-white
+            shadow-[0_8px_20px_rgba(31,90,77,0.18)]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#133A3C]
+            hover:shadow-[0_12px_24px_rgba(31,90,77,0.22)]
+          "
+        >
+
+          <i
+            class="
+              fa-solid
+              fa-xmark
+            "
+          ></i>
+
+          Fermer
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

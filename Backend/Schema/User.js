@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 // =====================================================
 
 const utilisateurSchema = new mongoose.Schema(
+
   {
+
     // =====================================================
     // KEY UNIQUE
     // =====================================================
@@ -14,6 +16,7 @@ const utilisateurSchema = new mongoose.Schema(
       type: String,
       unique: true
     },
+
 
     // =====================================================
     // 🔐 RESET PASSWORD
@@ -29,6 +32,7 @@ const utilisateurSchema = new mongoose.Schema(
       default: null
     },
 
+
     // =====================================================
     // PSEUDO
     // =====================================================
@@ -42,6 +46,7 @@ const utilisateurSchema = new mongoose.Schema(
       maxlength: 30
     },
 
+
     // =====================================================
     // NOM
     // =====================================================
@@ -53,6 +58,7 @@ const utilisateurSchema = new mongoose.Schema(
       maxlength: 50
     },
 
+
     // =====================================================
     // PRÉNOM
     // =====================================================
@@ -63,6 +69,7 @@ const utilisateurSchema = new mongoose.Schema(
       trim: true,
       maxlength: 50
     },
+
 
     // =====================================================
     // EMAIL
@@ -76,6 +83,7 @@ const utilisateurSchema = new mongoose.Schema(
       trim: true
     },
 
+
     // =====================================================
     // MOT DE PASSE
     // =====================================================
@@ -87,71 +95,165 @@ const utilisateurSchema = new mongoose.Schema(
       select: false
     },
 
+
     // =====================================================
-    // JARDIDEX
-    // Collection de plantes découvertes
+    // 🌿 JARDIDEX
+    //
+    // Collection personnelle de plantes de l'utilisateur.
+    //
+    // Une entrée représente UNE ESPÈCE dans le JardiDex.
+    //
+    // Exemple :
+    //
+    // {
+    //   plante: ObjectId(...),
+    //   numero: 12,
+    //   quantite: 3,
+    //   dateDecouverte: Date,
+    //   favorite: false
+    // }
+    //
     // =====================================================
 
     jardiDex: {
+
       type: [
+
         {
+
+          // -------------------------------------------------
+          // 🌱 PLANTE
+          // -------------------------------------------------
+
           plante: {
+
             type: mongoose.Schema.Types.ObjectId,
+
             ref: 'Plante',
+
             required: true
           },
 
+
+          // -------------------------------------------------
+          // 🔢 NUMÉRO DE LA PLANTE
+          //
+          // Exemple :
+          // plante #12
+          // -------------------------------------------------
+
+          numero: {
+
+            type: Number,
+
+            default: null
+          },
+
+
+          // -------------------------------------------------
+          // 🔢 QUANTITÉ
+          //
+          // Nombre de fois que l'utilisateur possède
+          // cette plante.
+          //
+          // Minimum : 1
+          // -------------------------------------------------
+
+          quantite: {
+
+            type: Number,
+
+            default: 1,
+
+            min: 1
+          },
+
+
+          // -------------------------------------------------
+          // 📅 DATE DE DÉCOUVERTE
+          // -------------------------------------------------
+
           dateDecouverte: {
+
             type: Date,
+
             default: Date.now
           },
 
+
+          // -------------------------------------------------
+          // ⭐ FAVORITE
+          // -------------------------------------------------
+
           favorite: {
+
             type: Boolean,
+
             default: false
           }
+
         }
+
       ],
 
       default: []
     },
 
+
     // =====================================================
-    // AVATAR
+    // 🖼️ AVATAR
     // =====================================================
 
     avatar: {
+
       type: String,
+
       default: ''
     },
 
+
     // =====================================================
-    // ROLE
+    // 👤 ROLE
     // =====================================================
 
     role: {
+
       type: String,
+
       enum: [
         'VISITEUR',
+        'PROFESSIONNEL',
+        'MODERATEUR',
+        'ADMIN'
       ],
+
       default: 'VISITEUR',
+
       required: true
     },
 
+
     // =====================================================
-    // STATUT DU COMPTE
+    // 🟢 STATUT DU COMPTE
     // =====================================================
 
     estActif: {
+
       type: Boolean,
+
       default: true
     }
+
   },
 
   {
+
     timestamps: true
+
   }
+
 );
+
 
 // =====================================================
 // EXPORT

@@ -8,14 +8,13 @@
      • Liquid Glass / Premium Nature
      • Light / Dark via ThemeService
      • Responsive
-     • Aucune modification TS nécessaire
+     • Déconnexion avec nettoyage du localStorage
      ============================================================ -->
+
 <div
   class="relative flex items-center justify-center"
-
   (click)="menuOpen = false"
 >
-
 
   <!-- ========================================================
        👤 BOUTON AVATAR
@@ -23,21 +22,16 @@
 
   <button
     id="userMenuButton"
-
     type="button"
-
     (click)="toggleMenu(); $event.stopPropagation()"
-
     [attr.aria-expanded]="menuOpen"
     [attr.aria-haspopup]="true"
     [attr.aria-controls]="'userMenuDropdown'"
-
     [attr.aria-label]="
       prenom || nom
         ? 'Ouvrir le menu de ' + (prenom || '') + ' ' + (nom || '')
         : 'Ouvrir le menu utilisateur'
     "
-
     class="
       group/avatar
       relative
@@ -59,17 +53,14 @@
       focus-visible:ring-2
       focus-visible:ring-emerald-400/30
     "
-
     [style.background]="themeService.GlassBackground"
     [style.border-color]="themeService.GlassBorder"
     [style.box-shadow]="themeService.BoxShadowSmall"
-
     style="
       backdrop-filter: blur(22px) saturate(180%);
       -webkit-backdrop-filter: blur(22px) saturate(180%);
     "
   >
-
 
     <!-- ======================================================
          ✨ HALO AVATAR
@@ -88,28 +79,22 @@
         duration-300
         group-hover/avatar:opacity-100
       "
-
       aria-hidden="true"
     ></span>
-
 
     <!-- ======================================================
          🖼️ AVATAR
          ====================================================== -->
 
-    <ng-container
-      *ngIf="avatar; else avatarFallback"
-    >
+    <ng-container *ngIf="avatar; else avatarFallback">
 
       <img
         [src]="avatar"
-
         [alt]="
           prenom || nom
             ? 'Avatar de ' + (prenom || '') + ' ' + (nom || '')
             : 'Avatar utilisateur'
         "
-
         class="
           relative
           h-full
@@ -123,14 +108,11 @@
           ease-out
           group-hover/avatar:scale-[1.035]
         "
-
         loading="lazy"
-
         (error)="avatar = null"
       />
 
     </ng-container>
-
 
     <!-- ======================================================
          👤 FALLBACK AVATAR
@@ -157,7 +139,6 @@
           ease-out
           group-hover/avatar:scale-[1.035]
         "
-
         [style.background]="getRoleGradient(role)"
       >
 
@@ -173,7 +154,6 @@
           ></i>
 
         </ng-container>
-
 
         <!-- UTILISATEUR NORMAL -->
 
@@ -199,13 +179,9 @@
 
   <div
     id="userMenuDropdown"
-
     role="menu"
-
     aria-labelledby="userMenuButton"
-
     (click)="$event.stopPropagation()"
-
     class="
       absolute
       right-0
@@ -217,34 +193,28 @@
       border
       shadow-2xl
       backdrop-blur-2xl
-
       transition-all
       duration-300
       ease-[cubic-bezier(0.22,1,0.36,1)]
     "
-
     [class.pointer-events-none]="!menuOpen"
     [class.invisible]="!menuOpen"
     [class.opacity-0]="!menuOpen"
     [class.translate-y-2]="!menuOpen"
     [class.scale-[0.97]]="!menuOpen"
-
     [class.pointer-events-auto]="menuOpen"
     [class.visible]="menuOpen"
     [class.opacity-100]="menuOpen"
     [class.translate-y-0]="menuOpen"
     [class.scale-100]="menuOpen"
-
     [style.background]="themeService.Background2"
     [style.border-color]="themeService.Border2"
     [style.box-shadow]="themeService.BoxShadow"
-
     style="
       backdrop-filter: blur(30px) saturate(180%);
       -webkit-backdrop-filter: blur(30px) saturate(180%);
     "
   >
-
 
     <!-- ======================================================
          ✨ REFLET GLASS
@@ -262,7 +232,6 @@
         via-white/25
         to-transparent
       "
-
       aria-hidden="true"
     ></div>
 
@@ -283,9 +252,8 @@
       "
     >
 
-
       <!-- ====================================================
-           PETIT AVATAR
+           🖼️ PETIT AVATAR
            ==================================================== -->
 
       <div
@@ -302,7 +270,6 @@
           border
           p-[2px]
         "
-
         [style.background]="themeService.Surface2"
         [style.border-color]="themeService.GlassBorder"
       >
@@ -313,18 +280,14 @@
 
           <img
             [src]="avatar"
-
             [alt]="prenom || nom || 'Utilisateur'"
-
             class="
               h-full
               w-full
               rounded-full
               object-cover
             "
-
             loading="lazy"
-
             (error)="avatar = null"
           />
 
@@ -347,7 +310,6 @@
               font-bold
               text-white
             "
-
             [style.background]="getRoleGradient(role)"
           >
 
@@ -393,12 +355,9 @@
             font-bold
             leading-tight
           "
-
           [style.color]="themeService.TextPrincipal"
         >
-
           {{ prenom || 'Supporter' }} {{ nom }}
-
         </p>
 
 
@@ -420,13 +379,10 @@
               shrink-0
               rounded-full
             "
-
             [style.background]="themeService.Success"
-
             [style.box-shadow]="
               '0 0 8px ' + themeService.Success
             "
-
             aria-hidden="true"
           ></span>
 
@@ -441,12 +397,9 @@
               uppercase
               tracking-[0.15em]
             "
-
             [style.color]="themeService.TextSecondaire"
           >
-
             {{ formatRole(role) }}
-
           </p>
 
         </div>
@@ -466,9 +419,7 @@
         h-px
         opacity-70
       "
-
       [style.background]="themeService.Border3"
-
       aria-hidden="true"
     ></div>
 
@@ -479,10 +430,8 @@
 
     <nav
       class="p-2.5"
-
       aria-label="Menu utilisateur"
     >
-
 
       <!-- ====================================================
            👤 PROFIL
@@ -490,9 +439,7 @@
 
       <a
         routerLink="/profil"
-
         role="menuitem"
-
         class="
           group/item
           flex
@@ -505,15 +452,12 @@
           outline-none
           transition-all
           duration-200
-
           hover:translate-x-0.5
           hover:bg-emerald-500/10
-
           focus-visible:bg-emerald-500/10
           focus-visible:ring-1
           focus-visible:ring-emerald-400/30
         "
-
         [style.color]="themeService.TextPrincipal"
       >
 
@@ -532,9 +476,7 @@
             duration-200
             group-hover/item:scale-105
           "
-
           [style.background]="themeService.PrimarySoft"
-
           [style.border]="
             '1px solid ' + themeService.BorderPrimary
           "
@@ -542,9 +484,7 @@
 
           <i
             class="fa-solid fa-user text-[13px]"
-
             [style.color]="themeService.Primary"
-
             aria-hidden="true"
           ></i>
 
@@ -561,9 +501,7 @@
             font-semibold
           "
         >
-
           Mon profil
-
         </span>
 
 
@@ -580,7 +518,6 @@
             group-hover/item:translate-x-0.5
             group-hover/item:opacity-70
           "
-
           aria-hidden="true"
         ></i>
 
@@ -593,9 +530,7 @@
 
       <a
         routerLink="/parametres"
-
         role="menuitem"
-
         class="
           group/item
           mt-1
@@ -609,15 +544,12 @@
           outline-none
           transition-all
           duration-200
-
           hover:translate-x-0.5
           hover:bg-emerald-500/10
-
           focus-visible:bg-emerald-500/10
           focus-visible:ring-1
           focus-visible:ring-emerald-400/30
         "
-
         [style.color]="themeService.TextPrincipal"
       >
 
@@ -636,9 +568,7 @@
             duration-200
             group-hover/item:scale-105
           "
-
           [style.background]="themeService.PrimarySoft"
-
           [style.border]="
             '1px solid ' + themeService.BorderPrimary
           "
@@ -646,9 +576,7 @@
 
           <i
             class="fa-solid fa-gear text-[13px]"
-
             [style.color]="themeService.Primary"
-
             aria-hidden="true"
           ></i>
 
@@ -665,9 +593,7 @@
             font-semibold
           "
         >
-
           Paramètres
-
         </span>
 
 
@@ -684,7 +610,6 @@
             group-hover/item:translate-x-0.5
             group-hover/item:opacity-70
           "
-
           aria-hidden="true"
         ></i>
 
@@ -697,9 +622,7 @@
 
       <a
         routerLink="/conseils"
-
         role="menuitem"
-
         class="
           group/item
           mt-1
@@ -713,15 +636,12 @@
           outline-none
           transition-all
           duration-200
-
           hover:translate-x-0.5
           hover:bg-emerald-500/10
-
           focus-visible:bg-emerald-500/10
           focus-visible:ring-1
           focus-visible:ring-emerald-400/30
         "
-
         [style.color]="themeService.TextPrincipal"
       >
 
@@ -740,9 +660,7 @@
             duration-200
             group-hover/item:scale-105
           "
-
           [style.background]="themeService.PrimarySoft"
-
           [style.border]="
             '1px solid ' + themeService.BorderPrimary
           "
@@ -750,9 +668,7 @@
 
           <i
             class="fa-solid fa-lightbulb text-[13px]"
-
             [style.color]="themeService.Primary"
-
             aria-hidden="true"
           ></i>
 
@@ -769,9 +685,7 @@
             font-semibold
           "
         >
-
           Conseils
-
         </span>
 
 
@@ -788,7 +702,6 @@
             group-hover/item:translate-x-0.5
             group-hover/item:opacity-70
           "
-
           aria-hidden="true"
         ></i>
 
@@ -798,18 +711,125 @@
 
 
     <!-- ======================================================
+         🚪 DÉCONNEXION
+         ====================================================== -->
+
+    <div
+      class="
+        mx-2.5
+        mt-1
+        rounded-[1rem]
+      "
+    >
+
+      <button
+        type="button"
+        role="menuitem"
+        (click)="seDeconnecter()"
+        class="
+          group/logout
+          flex
+          w-full
+          min-h-[3.25rem]
+          items-center
+          gap-3
+          rounded-[0.95rem]
+          px-3
+          py-2.5
+          outline-none
+          transition-all
+          duration-200
+          hover:translate-x-0.5
+          hover:bg-red-500/10
+          focus-visible:bg-red-500/10
+          focus-visible:ring-1
+          focus-visible:ring-red-400/30
+        "
+        [style.color]="themeService.TextPrincipal"
+      >
+
+        <!-- ICON -->
+
+        <span
+          class="
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-xl
+            transition-all
+            duration-200
+            group-hover/logout:scale-105
+          "
+          style="
+            background: rgba(239, 68, 68, 0.10);
+            border: 1px solid rgba(239, 68, 68, 0.18);
+          "
+        >
+
+          <i
+            class="
+              fa-solid
+              fa-right-from-bracket
+              text-[13px]
+            "
+            style="color: #ef4444;"
+            aria-hidden="true"
+          ></i>
+
+        </span>
+
+
+        <!-- TEXTE -->
+
+        <span
+          class="
+            min-w-0
+            flex-1
+            text-left
+            text-xs
+            font-semibold
+          "
+        >
+          Se déconnecter
+        </span>
+
+
+        <!-- CHEVRON -->
+
+        <i
+          class="
+            fa-solid
+            fa-chevron-right
+            text-[8px]
+            opacity-30
+            transition-all
+            duration-200
+            group-hover/logout:translate-x-0.5
+            group-hover/logout:opacity-70
+          "
+          aria-hidden="true"
+        ></i>
+
+      </button>
+
+    </div>
+
+
+    <!-- ======================================================
          SEPARATEUR FOOTER
          ====================================================== -->
 
     <div
       class="
         mx-4
+        mt-2
         h-px
         opacity-70
       "
-
       [style.background]="themeService.Border3"
-
       aria-hidden="true"
     ></div>
 
@@ -829,7 +849,6 @@
       "
     >
 
-
       <!-- ====================================================
            RÔLE
            ==================================================== -->
@@ -841,7 +860,6 @@
           items-center
           gap-2
         "
-
         [style.color]="themeService.TextSecondaire"
       >
 
@@ -852,9 +870,7 @@
             shrink-0
             rounded-full
           "
-
           [style.background]="themeService.Success"
-
           aria-hidden="true"
         ></span>
 
@@ -869,9 +885,7 @@
             opacity-60
           "
         >
-
           {{ formatRole(role) }}
-
         </span>
 
       </div>
@@ -893,14 +907,11 @@
           uppercase
           tracking-wider
         "
-
         [style.color]="themeService.Primary"
         [style.background]="themeService.PrimarySoft"
         [style.border-color]="themeService.BorderPrimary"
       >
-
         Compte
-
       </span>
 
     </div>

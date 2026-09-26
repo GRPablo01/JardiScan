@@ -1,0 +1,1403 @@
+<!-- ============================================================
+     🌿 JARDISCAN — BARRE DE NAVIGATION COMPLÈTE
+
+     📱 MOBILE / TABLETTE
+     • < 390px         : masquée
+     • 390px → 1023px  : disponible
+     • ≥ 1024px        : masquée
+     • Dock vertical à gauche
+     • Bouton OUVRIR toujours visible
+     • Icônes Font Awesome uniquement
+     • Labels masqués
+     • Navigation scrollable
+     • Clic extérieur = fermeture
+     • ThemeService conservé
+     • Navigation dynamique par rôle
+     • Navigation par pageChange
+
+     💻 DESKTOP / LAPTOP
+     • ≥ 1024px
+     • Sidebar fixe
+     • 260px
+     • Labels visibles
+     • Navigation scrollable
+     • ThemeService conservé
+     • Navigation dynamique par rôle
+     • Navigation par pageChange
+     ============================================================ -->
+
+
+<!-- ============================================================
+     📱 BOUTON OUVRIR — MOBILE / TABLETTE
+     ============================================================ -->
+
+     <button
+     type="button"
+     class="
+       fixed
+       left-3
+       top-36
+       hidden
+       min-[390px]:flex
+       lg:hidden
+       z-[100]
+       h-11
+       w-11
+       -translate-y-1/2
+       items-center
+       justify-center
+       rounded-2xl
+       border
+       transition-all
+       duration-300
+       ease-out
+       active:scale-95
+       cursor-pointer
+     "
+     [ngStyle]="{
+       'background-color': themeService.Background2,
+       'border-color': themeService.Border2,
+       'color': themeService.TextPrincipal,
+       'box-shadow': '0 12px 35px rgba(15,23,42,0.16)'
+     }"
+     (click)="mobileSidebarOpen = true"
+     [attr.aria-expanded]="mobileSidebarOpen"
+     aria-label="Ouvrir la navigation"
+   >
+   
+     <i
+       class="
+         fa-solid
+         fa-bars
+         text-[16px]
+       "
+       aria-hidden="true"
+     ></i>
+   
+   </button>
+   
+   
+   <!-- ============================================================
+        📱 OVERLAY MOBILE / TABLETTE
+        ============================================================ -->
+   
+   <div
+     *ngIf="mobileSidebarOpen"
+     class="
+       fixed
+       inset-0
+       hidden
+       min-[390px]:block
+       lg:hidden
+       z-[80]
+     "
+     (click)="closeMobileSidebar()"
+     aria-hidden="true"
+   ></div>
+   
+   
+   <!-- ============================================================
+        📱 SIDEBAR MOBILE / TABLETTE
+        ============================================================ -->
+   
+   <aside
+     *ngIf="mobileSidebarOpen"
+     class="
+       fixed
+       left-3
+       top-1/2
+       hidden
+       min-[390px]:flex
+       lg:hidden
+       z-[101]
+       h-[min(78vh,620px)]
+       w-[76px]
+       -translate-y-1/2
+       flex-col
+       overflow-hidden
+       rounded-[1.75rem]
+       border
+       transition-all
+       duration-300
+       ease-out
+     "
+     [ngStyle]="{
+       'background-color': themeService.Background2,
+       'border-color': themeService.Border2,
+       'color': themeService.TextPrincipal,
+       'box-shadow':
+         '0 18px 55px rgba(15,23,42,0.16), 0 4px 14px rgba(15,23,42,0.06)'
+     }"
+     aria-label="Navigation mobile et tablette"
+   >
+   
+     <!-- ==========================================================
+          CONTENU SCROLLABLE
+          ========================================================== -->
+   
+     <div
+       class="
+         flex
+         min-h-0
+         flex-1
+         flex-col
+         items-center
+         overflow-y-auto
+         overflow-x-hidden
+         px-2
+         py-4
+         scroll-smooth
+         [scrollbar-width:none]
+         [-ms-overflow-style:none]
+         [&::-webkit-scrollbar]:hidden
+       "
+     >
+   
+       <!-- ========================================================
+            MENU
+            ======================================================== -->
+   
+       <section class="w-full shrink-0">
+   
+         <p
+           class="
+             mb-2
+             text-center
+             text-[0.55rem]
+             font-semibold
+             uppercase
+             tracking-[0.08em]
+           "
+           [ngStyle]="{
+             'color': themeService.TextSecondaire
+           }"
+         >
+           Menu
+         </p>
+   
+   
+         <!-- ======================================================
+              LIENS MENU
+              ====================================================== -->
+   
+         <button
+           *ngFor="let item of menuLinks"
+           type="button"
+           class="
+             group
+             relative
+             mb-1
+             flex
+             h-12
+             w-full
+             items-center
+             justify-center
+             rounded-[0.95rem]
+             border-0
+             transition-all
+             duration-300
+             ease-out
+             active:scale-95
+             outline-none
+             focus-visible:ring-2
+             focus-visible:ring-offset-2
+             cursor-pointer
+           "
+           [ngStyle]="{
+             'background-color':
+               pageActive === item.page
+                 ? themeService.PrimarySoft
+                 : 'transparent',
+   
+             'color':
+               pageActive === item.page
+                 ? themeService.Primary
+                 : themeService.TextSecondaire,
+   
+             '--tw-ring-color': themeService.Primary,
+   
+             '--tw-ring-offset-color':
+               themeService.Background2
+           }"
+           (click)="selectionnerPage(item.page)"
+           [attr.aria-current]="
+             pageActive === item.page
+               ? 'page'
+               : null
+           "
+           [attr.aria-label]="item.label"
+           [title]="item.label"
+         >
+   
+           <!-- INDICATEUR ACTIF -->
+   
+           <span
+             class="
+               pointer-events-none
+               absolute
+               left-0
+               top-1/2
+               h-6
+               w-[3px]
+               -translate-y-1/2
+               rounded-r-full
+               transition-all
+               duration-300
+             "
+             [class.opacity-100]="
+               pageActive === item.page
+             "
+             [class.opacity-0]="
+               pageActive !== item.page
+             "
+             [ngStyle]="{
+               'background-color':
+                 themeService.Primary
+             }"
+             aria-hidden="true"
+           ></span>
+   
+   
+           <!-- ICÔNE -->
+   
+           <span
+             class="
+               flex
+               h-6
+               w-6
+               items-center
+               justify-center
+             "
+           >
+   
+             <i
+               [class]="item.icon"
+               class="
+                 text-[17px]
+                 transition-transform
+                 duration-300
+                 group-hover:scale-110
+               "
+               [class.scale-110]="
+                 pageActive === item.page
+               "
+               aria-hidden="true"
+             ></i>
+   
+           </span>
+   
+         </button>
+   
+       </section>
+   
+   
+       <!-- ========================================================
+            SÉPARATEUR
+            ======================================================== -->
+   
+       <div
+         class="
+           my-3
+           h-px
+           w-9
+           shrink-0
+         "
+         [ngStyle]="{
+           'background-color':
+             themeService.Border2
+         }"
+         aria-hidden="true"
+       ></div>
+   
+   
+       <!-- ========================================================
+            GÉNÉRAL
+            ======================================================== -->
+   
+       <section class="w-full shrink-0">
+   
+         <p
+           class="
+             mb-2
+             text-center
+             text-[0.55rem]
+             font-semibold
+             uppercase
+             tracking-[0.08em]
+           "
+           [ngStyle]="{
+             'color':
+               themeService.TextSecondaire
+           }"
+         >
+           Général
+         </p>
+   
+   
+         <!-- ======================================================
+              LIENS GÉNÉRAUX
+              ====================================================== -->
+   
+         <button
+           *ngFor="let item of generalLinks"
+           type="button"
+           class="
+             group
+             relative
+             mb-1
+             flex
+             h-12
+             w-full
+             items-center
+             justify-center
+             rounded-[0.95rem]
+             border-0
+             transition-all
+             duration-300
+             ease-out
+             active:scale-95
+             outline-none
+             focus-visible:ring-2
+             focus-visible:ring-offset-2
+             cursor-pointer
+           "
+           [ngStyle]="{
+             'background-color':
+               pageActive === item.page
+                 ? themeService.PrimarySoft
+                 : 'transparent',
+   
+             'color':
+               pageActive === item.page
+                 ? themeService.Primary
+                 : themeService.TextSecondaire,
+   
+             '--tw-ring-color':
+               themeService.Primary,
+   
+             '--tw-ring-offset-color':
+               themeService.Background2
+           }"
+           (click)="selectionnerPage(item.page)"
+           [attr.aria-current]="
+             pageActive === item.page
+               ? 'page'
+               : null
+           "
+           [attr.aria-label]="item.label"
+           [title]="item.label"
+         >
+   
+           <!-- INDICATEUR ACTIF -->
+   
+           <span
+             class="
+               pointer-events-none
+               absolute
+               left-0
+               top-1/2
+               h-6
+               w-[3px]
+               -translate-y-1/2
+               rounded-r-full
+               transition-all
+               duration-300
+             "
+             [class.opacity-100]="
+               pageActive === item.page
+             "
+             [class.opacity-0]="
+               pageActive !== item.page
+             "
+             [ngStyle]="{
+               'background-color':
+                 themeService.Primary
+             }"
+             aria-hidden="true"
+           ></span>
+   
+   
+           <!-- ICÔNE -->
+   
+           <span
+             class="
+               flex
+               h-6
+               w-6
+               items-center
+               justify-center
+             "
+           >
+   
+             <i
+               [class]="item.icon"
+               class="
+                 text-[17px]
+                 transition-transform
+                 duration-300
+                 group-hover:scale-110
+               "
+               [class.scale-110]="
+                 pageActive === item.page
+               "
+               aria-hidden="true"
+             ></i>
+   
+           </span>
+   
+         </button>
+   
+       </section>
+   
+   
+       <!-- ========================================================
+            SECTION RÔLE
+            ======================================================== -->
+   
+       <ng-container *ngIf="roleLinks.length > 0">
+   
+         <!-- SÉPARATEUR -->
+   
+         <div
+           class="
+             my-3
+             h-px
+             w-9
+             shrink-0
+           "
+           [ngStyle]="{
+             'background-color':
+               themeService.Border2
+           }"
+           aria-hidden="true"
+         ></div>
+   
+   
+         <section class="w-full shrink-0">
+   
+           <!-- TITRE -->
+   
+           <p
+             class="
+               mb-2
+               text-center
+               text-[0.55rem]
+               font-semibold
+               uppercase
+               tracking-[0.08em]
+             "
+             [ngStyle]="{
+               'color':
+                 themeService.TextSecondaire
+             }"
+           >
+             {{ roleLabel }}
+           </p>
+   
+   
+           <!-- ====================================================
+                LIENS RÔLE
+                ==================================================== -->
+   
+           <button
+             *ngFor="let item of roleLinks"
+             type="button"
+             class="
+               group
+               relative
+               mb-1
+               flex
+               h-12
+               w-full
+               items-center
+               justify-center
+               rounded-[0.95rem]
+               border-0
+               transition-all
+               duration-300
+               ease-out
+               active:scale-95
+               outline-none
+               focus-visible:ring-2
+               focus-visible:ring-offset-2
+               cursor-pointer
+             "
+             [ngStyle]="{
+               'background-color':
+                 pageActive === item.page
+                   ? themeService.PrimarySoft
+                   : 'transparent',
+   
+               'color':
+                 pageActive === item.page
+                   ? themeService.Primary
+                   : themeService.TextSecondaire,
+   
+               '--tw-ring-color':
+                 themeService.Primary,
+   
+               '--tw-ring-offset-color':
+                 themeService.Background2
+             }"
+             (click)="selectionnerPage(item.page)"
+             [attr.aria-current]="
+               pageActive === item.page
+                 ? 'page'
+                 : null
+             "
+             [attr.aria-label]="item.label"
+             [title]="item.label"
+           >
+   
+             <!-- INDICATEUR ACTIF -->
+   
+             <span
+               class="
+                 pointer-events-none
+                 absolute
+                 left-0
+                 top-1/2
+                 h-6
+                 w-[3px]
+                 -translate-y-1/2
+                 rounded-r-full
+                 transition-all
+                 duration-300
+               "
+               [class.opacity-100]="
+                 pageActive === item.page
+               "
+               [class.opacity-0]="
+                 pageActive !== item.page
+               "
+               [ngStyle]="{
+                 'background-color':
+                   themeService.Primary
+               }"
+               aria-hidden="true"
+             ></span>
+   
+   
+             <!-- ICÔNE -->
+   
+             <span
+               class="
+                 flex
+                 h-6
+                 w-6
+                 items-center
+                 justify-center
+               "
+             >
+   
+               <i
+                 [class]="item.icon"
+                 class="
+                   text-[17px]
+                   transition-transform
+                   duration-300
+                   group-hover:scale-110
+                 "
+                 [class.scale-110]="
+                   pageActive === item.page
+                 "
+                 aria-hidden="true"
+               ></i>
+   
+             </span>
+   
+           </button>
+   
+         </section>
+   
+       </ng-container>
+   
+     </div>
+   
+   
+     <!-- ==========================================================
+          PETIT FOOTER MOBILE
+          ========================================================== -->
+   
+     <div
+       class="
+         shrink-0
+         px-2
+         pb-2
+         pt-2
+       "
+     >
+   
+       <div
+         class="
+           flex
+           h-10
+           w-full
+           items-center
+           justify-center
+           rounded-xl
+         "
+         [ngStyle]="{
+           'background-color':
+             themeService.PrimarySoft,
+   
+           'color':
+             themeService.Primary
+         }"
+         [title]="role || 'VISITEUR'"
+       >
+   
+         <i
+           class="
+             fa-solid
+             fa-leaf
+             text-[14px]
+           "
+           aria-hidden="true"
+         ></i>
+   
+       </div>
+   
+     </div>
+   
+   </aside>
+   
+   
+   <!-- ============================================================
+        🌿 JARDISCAN — NAVIGATION DESKTOP / LAPTOP
+   
+        • ≥ 1024px
+        • Sidebar fixe
+        • 260px
+        • Icônes Font Awesome
+        • Labels visibles
+        • ThemeService conservé
+        • Navigation dynamique par rôle
+        • Menu / Général / Rôle
+        ============================================================ -->
+   
+   <aside
+     class="
+       hidden
+       lg:flex
+       fixed
+       left-4
+       top-20
+       xl:top-24
+       2xl:top-20
+       bottom-4
+       z-50
+       w-[260px]
+       flex-col
+       overflow-hidden
+       rounded-[1.75rem]
+       border
+     "
+     [ngStyle]="{
+       'background-color':
+         themeService.Background2,
+   
+       'border-color':
+         themeService.Border2,
+   
+       'color':
+         themeService.TextPrincipal,
+   
+       'box-shadow':
+         '0 18px 55px rgba(15,23,42,0.08), 0 4px 14px rgba(15,23,42,0.04)'
+     }"
+     aria-label="Navigation principale"
+   >
+   
+     <!-- ==========================================================
+          CONTENU SCROLLABLE
+          ========================================================== -->
+   
+     <div
+       class="
+         flex
+         min-h-0
+         flex-1
+         flex-col
+         overflow-y-auto
+         overflow-x-hidden
+         px-5
+         pt-7
+         pb-4
+         scroll-smooth
+         [scrollbar-width:none]
+         [-ms-overflow-style:none]
+         [&::-webkit-scrollbar]:hidden
+       "
+     >
+   
+       <!-- ========================================================
+            MENU
+            ======================================================== -->
+   
+       <section class="shrink-0">
+   
+         <p
+           class="
+             mb-3
+             px-3
+             text-[0.68rem]
+             font-semibold
+             uppercase
+             tracking-[0.08em]
+           "
+           [ngStyle]="{
+             'color':
+               themeService.TextSecondaire
+           }"
+         >
+           Menu
+         </p>
+   
+   
+         <!-- ======================================================
+              LIENS MENU
+              ====================================================== -->
+   
+         <button
+           *ngFor="let item of menuLinks"
+           type="button"
+           class="
+             group
+             relative
+             mb-1
+             flex
+             h-[50px]
+             w-full
+             items-center
+             gap-3.5
+             rounded-[0.95rem]
+             border-0
+             px-3
+             text-left
+             text-[0.93rem]
+             font-medium
+             tracking-[-0.01em]
+             transition-all
+             duration-300
+             ease-out
+             hover:translate-x-[2px]
+             active:scale-[0.985]
+             cursor-pointer
+             outline-none
+             focus-visible:ring-2
+             focus-visible:ring-offset-2
+           "
+           [ngStyle]="{
+             'background-color':
+               pageActive === item.page
+                 ? themeService.PrimarySoft
+                 : 'transparent',
+   
+             'color':
+               pageActive === item.page
+                 ? themeService.Primary
+                 : themeService.TextSecondaire,
+   
+             '--tw-ring-color':
+               themeService.Primary,
+   
+             '--tw-ring-offset-color':
+               themeService.Background2
+           }"
+           (click)="selectionnerPage(item.page)"
+           [attr.aria-current]="
+             pageActive === item.page
+               ? 'page'
+               : null
+           "
+           [attr.aria-label]="item.label"
+         >
+   
+           <!-- INDICATEUR ACTIF -->
+   
+           <span
+             class="
+               pointer-events-none
+               absolute
+               -left-5
+               top-1/2
+               h-7
+               w-[4px]
+               -translate-y-1/2
+               rounded-r-full
+               transition-all
+               duration-300
+             "
+             [class.opacity-100]="
+               pageActive === item.page
+             "
+             [class.opacity-0]="
+               pageActive !== item.page
+             "
+             [ngStyle]="{
+               'background-color':
+                 themeService.Primary
+             }"
+             aria-hidden="true"
+           ></span>
+   
+   
+           <!-- ICÔNE FONT AWESOME -->
+   
+           <span
+             class="
+               flex
+               h-[20px]
+               w-[20px]
+               shrink-0
+               items-center
+               justify-center
+             "
+           >
+   
+             <i
+               [class]="item.icon"
+               class="
+                 text-[16px]
+                 transition-transform
+                 duration-300
+                 group-hover:scale-110
+               "
+               [class.scale-110]="
+                 pageActive === item.page
+               "
+               aria-hidden="true"
+             ></i>
+   
+           </span>
+   
+   
+           <!-- LABEL -->
+   
+           <span class="truncate">
+             {{ item.label }}
+           </span>
+   
+         </button>
+   
+       </section>
+   
+   
+       <!-- ========================================================
+            SÉPARATEUR
+            ======================================================== -->
+   
+       <div
+         class="
+           my-5
+           h-px
+           w-full
+           shrink-0
+         "
+         [ngStyle]="{
+           'background-color':
+             themeService.Border2
+         }"
+         aria-hidden="true"
+       ></div>
+   
+   
+       <!-- ========================================================
+            GÉNÉRAL
+            ======================================================== -->
+   
+       <section class="shrink-0">
+   
+         <p
+           class="
+             mb-3
+             px-3
+             text-[0.68rem]
+             font-semibold
+             uppercase
+             tracking-[0.08em]
+           "
+           [ngStyle]="{
+             'color':
+               themeService.TextSecondaire
+           }"
+         >
+           Général
+         </p>
+   
+   
+         <!-- ======================================================
+              LIENS GÉNÉRAUX
+              ====================================================== -->
+   
+         <button
+           *ngFor="let item of generalLinks"
+           type="button"
+           class="
+             group
+             relative
+             mb-1
+             flex
+             h-[50px]
+             w-full
+             items-center
+             gap-3.5
+             rounded-[0.95rem]
+             border-0
+             px-3
+             text-left
+             text-[0.93rem]
+             font-medium
+             tracking-[-0.01em]
+             transition-all
+             duration-300
+             ease-out
+             hover:translate-x-[2px]
+             active:scale-[0.985]
+             cursor-pointer
+             outline-none
+             focus-visible:ring-2
+             focus-visible:ring-offset-2
+           "
+           [ngStyle]="{
+             'background-color':
+               pageActive === item.page
+                 ? themeService.PrimarySoft
+                 : 'transparent',
+   
+             'color':
+               pageActive === item.page
+                 ? themeService.Primary
+                 : themeService.TextSecondaire,
+   
+             '--tw-ring-color':
+               themeService.Primary,
+   
+             '--tw-ring-offset-color':
+               themeService.Background2
+           }"
+           (click)="selectionnerPage(item.page)"
+           [attr.aria-current]="
+             pageActive === item.page
+               ? 'page'
+               : null
+           "
+           [attr.aria-label]="item.label"
+         >
+   
+           <!-- INDICATEUR -->
+   
+           <span
+             class="
+               pointer-events-none
+               absolute
+               -left-5
+               top-1/2
+               h-7
+               w-[4px]
+               -translate-y-1/2
+               rounded-r-full
+               transition-all
+               duration-300
+             "
+             [class.opacity-100]="
+               pageActive === item.page
+             "
+             [class.opacity-0]="
+               pageActive !== item.page
+             "
+             [ngStyle]="{
+               'background-color':
+                 themeService.Primary
+             }"
+             aria-hidden="true"
+           ></span>
+   
+   
+           <!-- ICÔNE -->
+   
+           <span
+             class="
+               flex
+               h-[20px]
+               w-[20px]
+               shrink-0
+               items-center
+               justify-center
+             "
+           >
+   
+             <i
+               [class]="item.icon"
+               class="
+                 text-[16px]
+                 transition-transform
+                 duration-300
+                 group-hover:scale-110
+               "
+               [class.scale-110]="
+                 pageActive === item.page
+               "
+               aria-hidden="true"
+             ></i>
+   
+           </span>
+   
+   
+           <!-- LABEL -->
+   
+           <span class="truncate">
+             {{ item.label }}
+           </span>
+   
+         </button>
+   
+       </section>
+   
+   
+       <!-- ========================================================
+            SECTION RÔLE
+            ======================================================== -->
+   
+       <ng-container *ngIf="roleLinks.length > 0">
+   
+         <!-- SÉPARATEUR -->
+   
+         <div
+           class="
+             my-5
+             h-px
+             w-full
+             shrink-0
+           "
+           [ngStyle]="{
+             'background-color':
+               themeService.Border2
+           }"
+           aria-hidden="true"
+         ></div>
+   
+   
+         <section class="shrink-0">
+   
+           <!-- TITRE -->
+   
+           <p
+             class="
+               mb-3
+               px-3
+               text-[0.68rem]
+               font-semibold
+               uppercase
+               tracking-[0.08em]
+             "
+             [ngStyle]="{
+               'color':
+                 themeService.TextSecondaire
+             }"
+           >
+             {{ roleLabel }}
+           </p>
+   
+   
+           <!-- ====================================================
+                LIENS RÔLE
+                ==================================================== -->
+   
+           <button
+             *ngFor="let item of roleLinks"
+             type="button"
+             class="
+               group
+               relative
+               mb-1
+               flex
+               h-[50px]
+               w-full
+               items-center
+               gap-3.5
+               rounded-[0.95rem]
+               border-0
+               px-3
+               text-left
+               text-[0.93rem]
+               font-medium
+               tracking-[-0.01em]
+               transition-all
+               duration-300
+               ease-out
+               hover:translate-x-[2px]
+               active:scale-[0.985]
+               cursor-pointer
+               outline-none
+               focus-visible:ring-2
+               focus-visible:ring-offset-2
+             "
+             [ngStyle]="{
+               'background-color':
+                 pageActive === item.page
+                   ? themeService.PrimarySoft
+                   : 'transparent',
+   
+               'color':
+                 pageActive === item.page
+                   ? themeService.Primary
+                   : themeService.TextSecondaire,
+   
+               '--tw-ring-color':
+                 themeService.Primary,
+   
+               '--tw-ring-offset-color':
+                 themeService.Background2
+             }"
+             (click)="selectionnerPage(item.page)"
+             [attr.aria-current]="
+               pageActive === item.page
+                 ? 'page'
+                 : null
+             "
+             [attr.aria-label]="item.label"
+           >
+   
+             <!-- INDICATEUR -->
+   
+             <span
+               class="
+                 pointer-events-none
+                 absolute
+                 -left-5
+                 top-1/2
+                 h-7
+                 w-[4px]
+                 -translate-y-1/2
+                 rounded-r-full
+                 transition-all
+                 duration-300
+               "
+               [class.opacity-100]="
+                 pageActive === item.page
+               "
+               [class.opacity-0]="
+                 pageActive !== item.page
+               "
+               [ngStyle]="{
+                 'background-color':
+                   themeService.Primary
+               }"
+               aria-hidden="true"
+             ></span>
+   
+   
+             <!-- ICÔNE -->
+   
+             <span
+               class="
+                 flex
+                 h-[20px]
+                 w-[20px]
+                 shrink-0
+                 items-center
+                 justify-center
+               "
+             >
+   
+               <i
+                 [class]="item.icon"
+                 class="
+                   text-[16px]
+                   transition-transform
+                   duration-300
+                   group-hover:scale-110
+                 "
+                 [class.scale-110]="
+                   pageActive === item.page
+                 "
+                 aria-hidden="true"
+               ></i>
+   
+             </span>
+   
+   
+             <!-- LABEL -->
+   
+             <span class="truncate">
+               {{ item.label }}
+             </span>
+   
+           </button>
+   
+         </section>
+   
+       </ng-container>
+   
+     </div>
+   
+   
+     <!-- ==========================================================
+          FOOTER DESKTOP
+          ========================================================== -->
+   
+     <div
+       class="
+         shrink-0
+         px-5
+         pb-5
+         pt-3
+       "
+     >
+   
+       <div
+         class="
+           relative
+           overflow-hidden
+           rounded-[1.35rem]
+           p-4
+           text-white
+         "
+         [ngStyle]="{
+           'background-color':
+             themeService.Primary,
+   
+           'box-shadow':
+             '0 10px 30px rgba(6,40,29,0.12)'
+         }"
+       >
+   
+         <!-- DÉCORATIONS -->
+   
+         <div
+           class="
+             pointer-events-none
+             absolute
+             -right-12
+             -top-12
+             h-32
+             w-32
+             rounded-full
+             border
+             border-white/10
+           "
+         ></div>
+   
+   
+         <div
+           class="
+             pointer-events-none
+             absolute
+             -bottom-16
+             -left-10
+             h-40
+             w-40
+             rounded-full
+             border
+             border-white/10
+           "
+         ></div>
+   
+   
+         <div
+           class="
+             pointer-events-none
+             absolute
+             right-3
+             top-3
+             h-16
+             w-16
+             rounded-full
+             bg-white/[0.05]
+             blur-xl
+           "
+         ></div>
+   
+   
+         <!-- ICÔNE -->
+   
+         <div
+           class="
+             relative
+             mb-3
+             flex
+             h-7
+             w-7
+             items-center
+             justify-center
+             rounded-full
+             bg-white/10
+             ring-1
+             ring-white/10
+           "
+         >
+   
+           <i
+             class="
+               fa-solid
+               fa-mobile-screen-button
+               text-[13px]
+             "
+             aria-hidden="true"
+           ></i>
+   
+         </div>
+   
+   
+         <!-- TITRE -->
+   
+         <h3
+           class="
+             relative
+             text-[1rem]
+             font-semibold
+             leading-[1.15]
+             tracking-[-0.025em]
+           "
+         >
+           Découvrez<br />
+           JardiScan Mobile
+         </h3>
+   
+   
+         <!-- DESCRIPTION -->
+   
+         <p
+           class="
+             relative
+             mt-2
+             text-[0.65rem]
+             leading-[1.5]
+             text-white/60
+           "
+         >
+           Retrouvez vos plantes partout avec vous.
+         </p>
+   
+   
+         <!-- BADGE RÔLE -->
+   
+         <div
+           class="
+             relative
+             mt-3
+             inline-flex
+             items-center
+             rounded-full
+             border
+             border-white/10
+             bg-white/[0.08]
+             px-3
+             py-1.5
+             text-[0.62rem]
+             font-semibold
+             uppercase
+             tracking-[0.08em]
+             text-white/80
+           "
+         >
+           {{ role || 'VISITEUR' }}
+         </div>
+   
+       </div>
+   
+     </div>
+   
+   </aside>

@@ -6,6 +6,7 @@
      • Contenu JardiBot au centre
      • Image du bot à gauche
      • Présentation à droite
+     • FR / EN via LanguageService
      • Responsive mobile → 2xl
      • Compatible ThemeService
      • Aucun changement de logique Angular
@@ -42,6 +43,7 @@
     "
   />
 
+
   <!-- ==========================================================
        🖼️ DÉCORATION — COIN BAS DROITE
        ========================================================== -->
@@ -64,6 +66,7 @@
       object-contain
     "
   />
+
 
   <!-- ==========================================================
        🌿 CONTENU PRINCIPAL
@@ -176,11 +179,16 @@
           }"
         ></div>
 
+
         <!-- Image du bot -->
 
         <img
           src="assets/LogoBOT.png"
-          alt="Assistant JardiScan"
+          [alt]="
+            languageService.is('fr')
+              ? 'Assistant JardiScan'
+              : 'JardiScan Assistant'
+          "
           class="
             relative
             z-10
@@ -258,7 +266,13 @@
 
         <i class="fa-solid fa-sparkles"></i>
 
-        <span>Votre assistant jardin</span>
+        <span>
+          {{
+            languageService.is('fr')
+              ? 'Votre assistant jardin'
+              : 'Your garden assistant'
+          }}
+        </span>
 
       </div>
 
@@ -291,7 +305,11 @@
         }"
       >
 
-        Assistant
+        {{
+          languageService.is('fr')
+            ? 'Assistant'
+            : 'Assistant'
+        }}
 
         <span
           [ngStyle]="{
@@ -325,7 +343,11 @@
           color: themeService.TextPrincipal
         }"
       >
-        Votre compagnon pour mieux utiliser JardiScan.
+        {{
+          languageService.is('fr')
+            ? 'Votre compagnon pour mieux utiliser JardiScan.'
+            : 'Your companion to get the most out of JardiScan.'
+        }}
       </p>
 
 
@@ -351,11 +373,11 @@
           color: themeService.TextSecondaire
         }"
       >
-        Besoin d'aide avec JardiScan ? Notre assistant vous
-        accompagne pour comprendre les fonctionnalités de
-        l'application, identifier vos plantes, retrouver vos
-        informations et découvrir les outils disponibles pour
-        mieux gérer votre jardin.
+        {{
+          languageService.is('fr')
+            ? 'Besoin d’aide avec JardiScan ? Notre assistant vous accompagne pour comprendre les fonctionnalités de l’application, identifier vos plantes, retrouver vos informations et découvrir les outils disponibles pour mieux gérer votre jardin.'
+            : 'Need help with JardiScan? Our assistant helps you understand the application features, identify your plants, find your information and discover the tools available to better manage your garden.'
+        }}
       </p>
 
 
@@ -442,6 +464,7 @@
             <i class="fa-solid fa-circle-question"></i>
           </span>
 
+
           <!-- Nom -->
 
           <h3
@@ -457,8 +480,13 @@
               color: themeService.TextPrincipal
             }"
           >
-            Aide rapide
+            {{
+              languageService.is('fr')
+                ? 'Aide rapide'
+                : 'Quick help'
+            }}
           </h3>
+
 
           <!-- Description -->
 
@@ -476,8 +504,11 @@
               color: themeService.TextSecondaire
             }"
           >
-            Obtenez rapidement des réponses pour utiliser
-            les fonctionnalités de JardiScan.
+            {{
+              languageService.is('fr')
+                ? 'Obtenez rapidement des réponses pour utiliser les fonctionnalités de JardiScan.'
+                : 'Get quick answers to help you use JardiScan features.'
+            }}
           </p>
 
         </div>
@@ -545,6 +576,7 @@
             <i class="fa-solid fa-leaf"></i>
           </span>
 
+
           <!-- Nom -->
 
           <h3
@@ -560,8 +592,13 @@
               color: themeService.TextPrincipal
             }"
           >
-            Identifier
+            {{
+              languageService.is('fr')
+                ? 'Identifier'
+                : 'Identify'
+            }}
           </h3>
+
 
           <!-- Description -->
 
@@ -579,8 +616,11 @@
               color: themeService.TextSecondaire
             }"
           >
-            Identifiez une plante et découvrez les informations
-            essentielles qui la concernent.
+            {{
+              languageService.is('fr')
+                ? 'Identifiez une plante et découvrez les informations essentielles qui la concernent.'
+                : 'Identify a plant and discover the essential information about it.'
+            }}
           </p>
 
         </div>
@@ -648,6 +688,7 @@
             <i class="fa-solid fa-lightbulb"></i>
           </span>
 
+
           <!-- Nom -->
 
           <h3
@@ -663,8 +704,13 @@
               color: themeService.TextPrincipal
             }"
           >
-            Conseils
+            {{
+              languageService.is('fr')
+                ? 'Conseils'
+                : 'Tips'
+            }}
           </h3>
+
 
           <!-- Description -->
 
@@ -682,8 +728,11 @@
               color: themeService.TextSecondaire
             }"
           >
-            Découvrez des conseils utiles pour mieux comprendre
-            et entretenir votre jardin.
+            {{
+              languageService.is('fr')
+                ? 'Découvrez des conseils utiles pour mieux comprendre et entretenir votre jardin.'
+                : 'Discover useful tips to better understand and care for your garden.'
+            }}
           </p>
 
         </div>
@@ -731,8 +780,13 @@
       >
 
         <span>
-          Accéder à l'assistant
+          {{
+            languageService.is('fr')
+              ? 'Accéder à l’assistant'
+              : 'Open the assistant'
+          }}
         </span>
+
 
         <span
           class="

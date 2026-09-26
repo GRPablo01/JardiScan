@@ -1,0 +1,1187 @@
+<!-- ============================================================
+🌱 PAGE AJOUTER UNE PLANTE — JARDISCAN
+============================================================ -->
+
+<div class="w-full pb-10">
+
+    <!-- ========================================================
+    🌿 EN-TÊTE
+    ========================================================= -->
+
+    <div class="mb-8 flex flex-col gap-2">
+
+        <div class="flex items-center gap-3">
+
+            <div
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
+                [ngStyle]="{
+                    'background-color': themeService.Leaf + '18',
+                    'color': themeService.Leaf
+                }"
+            >
+                <i class="fa-solid fa-seedling text-lg"></i>
+            </div>
+
+            <div>
+
+                <h1
+                    class="text-3xl font-bold tracking-tight md:text-4xl"
+                    [ngStyle]="{
+                        'color': themeService.TextPrincipal
+                    }"
+                >
+                    Ajouter une plante
+                </h1>
+
+                <p
+                    class="mt-1 text-base md:text-lg"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Ajoutez une nouvelle plante à votre collection JardiScan.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================================
+    📦 FORMULAIRE PRINCIPAL
+    ========================================================= -->
+
+    <form
+        (ngSubmit)="ajouterPlante()"
+        class="space-y-6"
+    >
+
+
+        <!-- ====================================================
+        🌱 IDENTITÉ DE LA PLANTE
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6 flex items-start gap-4">
+
+                <div
+                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
+                    [ngStyle]="{
+                        'background-color': themeService.Leaf + '18',
+                        'color': themeService.Leaf
+                    }"
+                >
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div>
+
+                    <h2 class="text-xl font-semibold">
+                        Identité de la plante
+                    </h2>
+
+                    <p
+                        class="mt-1 text-sm"
+                        [ngStyle]="{
+                            'color': themeService.TextSecondaire
+                        }"
+                    >
+                        Renseignez les informations principales de votre plante.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+            NOM COMMUN + NOM SCIENTIFIQUE
+            ================================================== -->
+
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+                <!-- NOM COMMUN -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Nom commun
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.nomCommun"
+                        name="nomCommun"
+                        required
+                        maxlength="100"
+                        placeholder="Ex : Tournesol"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+
+                <!-- NOM SCIENTIFIQUE -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Nom scientifique
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.nomScientifique"
+                        name="nomScientifique"
+                        required
+                        maxlength="150"
+                        placeholder="Ex : Helianthus annuus"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+            FAMILLE
+            ================================================== -->
+
+            <div class="mt-5">
+
+                <label class="mb-2 block text-sm font-semibold">
+
+                    Famille
+
+                    <span class="text-red-500">*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    [(ngModel)]="nouvellePlante.famille"
+                    name="famille"
+                    required
+                    maxlength="100"
+                    placeholder="Ex : Asteraceae"
+                    class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                    [ngStyle]="{
+                        'background-color': themeService.Background1,
+                        'border-color': themeService.Border2,
+                        'color': themeService.TextPrincipal,
+                        '--tw-ring-color': themeService.Leaf + '40'
+                    }"
+                />
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ====================================================
+        📝 DESCRIPTION
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6">
+
+                <h2 class="text-xl font-semibold">
+                    Description
+                </h2>
+
+                <p
+                    class="mt-1 text-sm"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Décrivez les principales caractéristiques de la plante.
+                </p>
+
+            </div>
+
+
+            <label class="mb-2 block text-sm font-semibold">
+
+                Description
+
+                <span class="text-red-500">*</span>
+
+            </label>
+
+
+            <textarea
+                [(ngModel)]="nouvellePlante.description"
+                name="description"
+                required
+                rows="5"
+                maxlength="2000"
+                placeholder="Décrivez votre plante..."
+                class="w-full resize-none rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                [ngStyle]="{
+                    'background-color': themeService.Background1,
+                    'border-color': themeService.Border2,
+                    'color': themeService.TextPrincipal,
+                    '--tw-ring-color': themeService.Leaf + '40'
+                }"
+            ></textarea>
+
+
+            <div
+                class="mt-2 flex justify-end text-xs"
+                [ngStyle]="{
+                    'color': themeService.TextSecondaire
+                }"
+            >
+                {{ nouvellePlante.description.length }} / 2000
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+        🌍 ORIGINE
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6">
+
+                <h2 class="text-xl font-semibold">
+                    Origine
+                </h2>
+
+                <p
+                    class="mt-1 text-sm"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Indiquez l'origine géographique de la plante.
+                </p>
+
+            </div>
+
+
+            <label class="mb-2 block text-sm font-semibold">
+
+                Origine
+
+                <span class="text-red-500">*</span>
+
+            </label>
+
+
+            <input
+                type="text"
+                [(ngModel)]="nouvellePlante.origine"
+                name="origine"
+                required
+                maxlength="150"
+                placeholder="Ex : Amérique du Nord"
+                class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                [ngStyle]="{
+                    'background-color': themeService.Background1,
+                    'border-color': themeService.Border2,
+                    'color': themeService.TextPrincipal,
+                    '--tw-ring-color': themeService.Leaf + '40'
+                }"
+            />
+
+        </section>
+
+
+        <!-- ====================================================
+        🎨 CARACTÉRISTIQUES
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6">
+
+                <h2 class="text-xl font-semibold">
+                    Caractéristiques
+                </h2>
+
+                <p
+                    class="mt-1 text-sm"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Définissez les principales caractéristiques de la plante.
+                </p>
+
+            </div>
+
+
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+
+                <!-- COULEUR -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Couleur
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.couleur"
+                        name="couleur"
+                        required
+                        maxlength="100"
+                        placeholder="Ex : Jaune"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+
+                <!-- CYCLE -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Cycle
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.cycle"
+                        name="cycle"
+                        required
+                        maxlength="100"
+                        placeholder="Ex : Annuel"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+
+                <!-- PÉRIODE FLORAISON -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Période de floraison
+
+                        <span
+                            class="ml-1 text-xs font-normal"
+                            [ngStyle]="{
+                                'color': themeService.TextSecondaire
+                            }"
+                        >
+                            (facultatif)
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.periodeFloraison"
+                        name="periodeFloraison"
+                        maxlength="100"
+                        placeholder="Ex : Juin à septembre"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+
+                <!-- PÉRIODE RÉCOLTE -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Période de récolte
+
+                        <span
+                            class="ml-1 text-xs font-normal"
+                            [ngStyle]="{
+                                'color': themeService.TextSecondaire
+                            }"
+                        >
+                            (facultatif)
+                        </span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.periodeRecolte"
+                        name="periodeRecolte"
+                        maxlength="100"
+                        placeholder="Ex : Septembre à octobre"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+        ☀️ CONDITIONS DE CULTURE
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6">
+
+                <h2 class="text-xl font-semibold">
+                    Conditions de culture
+                </h2>
+
+                <p
+                    class="mt-1 text-sm"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Définissez les besoins de la plante pour son développement.
+                </p>
+
+            </div>
+
+
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+
+                <!-- EXPOSITION -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Exposition
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.exposition"
+                        name="exposition"
+                        required
+                        maxlength="100"
+                        placeholder="Ex : Plein soleil"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+
+                <!-- ARROSAGE -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Arrosage
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.arrosage"
+                        name="arrosage"
+                        required
+                        placeholder="Ex : Régulier"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+
+                <!-- SOL -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Sol
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.sol"
+                        name="sol"
+                        required
+                        placeholder="Ex : Sol riche et bien drainé"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+
+                <!-- HUMIDITÉ -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Humidité
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        [(ngModel)]="nouvellePlante.humidite"
+                        name="humidite"
+                        required
+                        maxlength="100"
+                        placeholder="Ex : Moyenne"
+                        class="w-full rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                        [ngStyle]="{
+                            'background-color': themeService.Background1,
+                            'border-color': themeService.Border2,
+                            'color': themeService.TextPrincipal,
+                            '--tw-ring-color': themeService.Leaf + '40'
+                        }"
+                    />
+
+                </div>
+
+
+                <!-- TEMPÉRATURE MINIMALE -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Température minimale
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <div class="relative">
+
+                        <input
+                            type="number"
+                            [(ngModel)]="nouvellePlante.temperatureMin"
+                            name="temperatureMin"
+                            required
+                            step="0.1"
+                            placeholder="Ex : -5"
+                            class="w-full rounded-2xl border px-4 py-3 pr-12 text-sm outline-none transition-all focus:ring-2"
+                            [ngStyle]="{
+                                'background-color': themeService.Background1,
+                                'border-color': themeService.Border2,
+                                'color': themeService.TextPrincipal,
+                                '--tw-ring-color': themeService.Leaf + '40'
+                            }"
+                        />
+
+                        <span
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-sm"
+                            [ngStyle]="{
+                                'color': themeService.TextSecondaire
+                            }"
+                        >
+                            °C
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TEMPÉRATURE MAXIMALE -->
+
+                <div>
+
+                    <label class="mb-2 block text-sm font-semibold">
+
+                        Température maximale
+
+                        <span class="text-red-500">*</span>
+
+                    </label>
+
+                    <div class="relative">
+
+                        <input
+                            type="number"
+                            [(ngModel)]="nouvellePlante.temperatureMax"
+                            name="temperatureMax"
+                            required
+                            step="0.1"
+                            placeholder="Ex : 35"
+                            class="w-full rounded-2xl border px-4 py-3 pr-12 text-sm outline-none transition-all focus:ring-2"
+                            [ngStyle]="{
+                                'background-color': themeService.Background1,
+                                'border-color': themeService.Border2,
+                                'color': themeService.TextPrincipal,
+                                '--tw-ring-color': themeService.Leaf + '40'
+                            }"
+                        />
+
+                        <span
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-sm"
+                            [ngStyle]="{
+                                'color': themeService.TextSecondaire
+                            }"
+                        >
+                            °C
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+        ⚠️ SÉCURITÉ
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6">
+
+                <h2 class="text-xl font-semibold">
+                    Sécurité
+                </h2>
+
+                <p
+                    class="mt-1 text-sm"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Indiquez les éventuels risques liés à la plante.
+                </p>
+
+            </div>
+
+
+            <label class="mb-2 block text-sm font-semibold">
+
+                Parties dangereuses
+
+                <span class="text-red-500">*</span>
+
+            </label>
+
+
+            <textarea
+                [(ngModel)]="nouvellePlante.partiesDangereuses"
+                name="partiesDangereuses"
+                required
+                rows="4"
+                placeholder="Ex : Feuilles et graines toxiques en cas d'ingestion..."
+                class="w-full resize-none rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                [ngStyle]="{
+                    'background-color': themeService.Background1,
+                    'border-color': themeService.Border2,
+                    'color': themeService.TextPrincipal,
+                    '--tw-ring-color': themeService.Leaf + '40'
+                }"
+            ></textarea>
+
+        </section>
+
+
+        <!-- ====================================================
+        🍽️ UTILISATION CULINAIRE
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6">
+
+                <h2 class="text-xl font-semibold">
+                    Utilisation culinaire
+                </h2>
+
+                <p
+                    class="mt-1 text-sm"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Indiquez si la plante possède une utilisation alimentaire.
+                </p>
+
+            </div>
+
+
+            <label class="mb-2 block text-sm font-semibold">
+
+                Usage culinaire
+
+                <span class="text-red-500">*</span>
+
+            </label>
+
+
+            <textarea
+                [(ngModel)]="nouvellePlante.usageCulinaire"
+                name="usageCulinaire"
+                required
+                rows="4"
+                placeholder="Ex : Les feuilles peuvent être utilisées en salade..."
+                class="w-full resize-none rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                [ngStyle]="{
+                    'background-color': themeService.Background1,
+                    'border-color': themeService.Border2,
+                    'color': themeService.TextPrincipal,
+                    '--tw-ring-color': themeService.Leaf + '40'
+                }"
+            ></textarea>
+
+        </section>
+
+
+        <!-- ====================================================
+        🔁 INFORMATIONS COMPLÉMENTAIRES
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6">
+
+                <h2 class="text-xl font-semibold">
+                    Informations complémentaires
+                </h2>
+
+                <p
+                    class="mt-1 text-sm"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Ajoutez une information supplémentaire si nécessaire.
+                </p>
+
+            </div>
+
+
+            <label class="mb-2 block text-sm font-semibold">
+
+                Retour
+
+                <span
+                    class="ml-1 text-xs font-normal"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    (facultatif)
+                </span>
+
+            </label>
+
+
+            <textarea
+                [(ngModel)]="nouvellePlante.retoure"
+                name="retoure"
+                rows="4"
+                placeholder="Ajoutez une remarque ou une information complémentaire..."
+                class="w-full resize-none rounded-2xl border px-4 py-3 text-sm outline-none transition-all focus:ring-2"
+                [ngStyle]="{
+                    'background-color': themeService.Background1,
+                    'border-color': themeService.Border2,
+                    'color': themeService.TextPrincipal,
+                    '--tw-ring-color': themeService.Leaf + '40'
+                }"
+            ></textarea>
+
+        </section>
+
+
+        <!-- ====================================================
+        🖼️ IMAGE
+        ==================================================== -->
+
+        <section
+            class="overflow-hidden rounded-[28px] border p-6 sm:p-7"
+            [ngStyle]="{
+                'background-color': themeService.Background2,
+                'border-color': themeService.Border2,
+                'color': themeService.TextPrincipal,
+                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            }"
+        >
+
+            <div class="mb-6">
+
+                <h2 class="text-xl font-semibold">
+                    Image de la plante
+                </h2>
+
+                <p
+                    class="mt-1 text-sm"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    Ajoutez une image pour illustrer votre plante.
+                </p>
+
+            </div>
+
+
+            <!-- ==================================================
+            SÉLECTION IMAGE
+            ================================================== -->
+
+            <label
+                class="flex min-h-[180px] cursor-pointer flex-col items-center justify-center rounded-[24px] border-2 border-dashed p-6 text-center transition-all hover:scale-[1.005]"
+                [ngStyle]="{
+                    'border-color': themeService.Border2,
+                    'background-color': themeService.Background1
+                }"
+            >
+
+                <input
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    class="hidden"
+                    (change)="selectionnerImage($event)"
+                />
+
+
+                <div
+                    class="mb-4 flex h-14 w-14 items-center justify-center rounded-full"
+                    [ngStyle]="{
+                        'background-color': themeService.Leaf + '18',
+                        'color': themeService.Leaf
+                    }"
+                >
+                    <i class="fa-solid fa-image text-xl"></i>
+                </div>
+
+
+                <p class="text-sm font-semibold">
+
+                    {{
+                        imageSelectionnee
+                            ? imageSelectionnee.name
+                            : 'Choisir une image'
+                    }}
+
+                </p>
+
+
+                <p
+                    class="mt-1 text-xs"
+                    [ngStyle]="{
+                        'color': themeService.TextSecondaire
+                    }"
+                >
+                    PNG, JPG ou WEBP — maximum 5 Mo
+                </p>
+
+            </label>
+
+
+            <!-- ==================================================
+            APERÇU IMAGE
+            ================================================== -->
+
+            <div
+                *ngIf="imagePreview"
+                class="mt-5 overflow-hidden rounded-[24px] border"
+                [ngStyle]="{
+                    'border-color': themeService.Border2
+                }"
+            >
+
+                <img
+                    [src]="imagePreview"
+                    alt="Aperçu de la plante"
+                    class="h-64 w-full object-cover"
+                />
+
+            </div>
+
+        </section>
+
+
+        <!-- ====================================================
+        ❌ ERREUR
+        ==================================================== -->
+
+        <div
+            *ngIf="creationErreur"
+            class="flex items-start gap-3 rounded-2xl border px-4 py-4 text-sm"
+            [ngStyle]="{
+                'background-color': '#ef444418',
+                'border-color': '#ef444440',
+                'color': '#ef4444'
+            }"
+        >
+
+            <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
+
+            <span>
+                {{ creationErreur }}
+            </span>
+
+        </div>
+
+
+        <!-- ====================================================
+        ✅ SUCCÈS
+        ==================================================== -->
+
+        <div
+            *ngIf="creationSucces"
+            class="flex items-start gap-3 rounded-2xl border px-4 py-4 text-sm"
+            [ngStyle]="{
+                'background-color': themeService.Leaf + '18',
+                'border-color': themeService.Leaf + '40',
+                'color': themeService.Leaf
+            }"
+        >
+
+            <i class="fa-solid fa-circle-check mt-0.5"></i>
+
+            <span>
+                {{ creationSucces }}
+            </span>
+
+        </div>
+
+
+        <!-- ====================================================
+        ℹ️ LÉGENDE DES CHAMPS
+        ==================================================== -->
+
+        <div
+            class="flex items-center gap-2 text-xs"
+            [ngStyle]="{
+                'color': themeService.TextSecondaire
+            }"
+        >
+
+            <span class="font-semibold text-red-500">
+                *
+            </span>
+
+            <span>
+                Champs obligatoires
+            </span>
+
+        </div>
+
+
+        <!-- ====================================================
+        🔘 ACTIONS
+        ==================================================== -->
+
+        <div
+            class="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end"
+        >
+
+            <!-- ANNULER -->
+
+            <button
+                type="button"
+                routerLink="/mes-plantes"
+                class="rounded-full border px-6 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5"
+                [ngStyle]="{
+                    'background-color': themeService.Background2,
+                    'border-color': themeService.Border2,
+                    'color': themeService.TextPrincipal
+                }"
+            >
+                Annuler
+            </button>
+
+
+            <!-- AJOUTER -->
+
+            <button
+                type="submit"
+                [disabled]="creationLoading"
+                class="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                [ngStyle]="{
+                    'background-color': themeService.Primary,
+                    'color': '#ffffff',
+                    'box-shadow': '0 8px 22px rgba(0,0,0,0.12)'
+                }"
+            >
+
+                <i
+                    *ngIf="!creationLoading"
+                    class="fa-solid fa-plus mr-2"
+                ></i>
+
+                <i
+                    *ngIf="creationLoading"
+                    class="fa-solid fa-circle-notch fa-spin mr-2"
+                ></i>
+
+                {{
+                    creationLoading
+                        ? 'Ajout en cours...'
+                        : 'Ajouter la plante'
+                }}
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>

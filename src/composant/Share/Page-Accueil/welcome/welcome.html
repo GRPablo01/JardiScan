@@ -1,9 +1,16 @@
 <!-- ============================================================
 🌿 JARDISCAN — SECTION ACCUEIL
+• FR / EN via LanguageService
+• Light / Dark via ThemeService
+• Responsive mobile → 2xl
+• Images conservées
+• Structure conservée
 ============================================================ -->
-<section [ngStyle]="{'background':themeService.Background1}"
+<section
+  [ngStyle]="{
+    'background': themeService.Background1
+  }"
   class="
- 
     relative
     w-full
     overflow-hidden
@@ -12,13 +19,11 @@
     py-10
   "
 >
-
   <!-- ==========================================================
        CONTENEUR PRINCIPAL
-       ========================================================== -->
+  =========================================================== -->
 
   <div class="w-full">
-
 
     <!-- ========================================================
          GRILLE ÉDITORIALE
@@ -33,12 +38,11 @@
          LAPTOP / DESKTOP
          → 12 colonnes
          → 2 / 4 / 2 / 4
-         ======================================================== -->
+    ========================================================= -->
 
     <div
       class="
         grid
-
         grid-cols-1
         gap-6
 
@@ -51,143 +55,137 @@
         lg:gap-4
 
         xl:gap-5
-
         2xl:gap-7
       "
     >
 
-
       <!-- ======================================================
            IMAGE 1
-           
-           MOBILE :
+
+           MOBILE
            ❌ masquée
 
-           TABLETTE :
+           TABLETTE
            ✅ affichée
 
-           LAPTOP / DESKTOP :
+           LAPTOP / DESKTOP
            ✅ 2 colonnes
-           ====================================================== -->
+      ======================================================= -->
 
       <div
         class="
           group
           relative
-
           hidden
-
           sm:block
           sm:col-span-1
-
           lg:col-span-2
         "
       >
-
         <div
           class="
             relative
             overflow-hidden
             rounded-[26px]
-
             h-[400px]
-
             sm:h-[500px]
-
             lg:h-[500px]
-
             xl:h-[570px]
-
             2xl:h-[680px]
           "
         >
-
           <img
             src="assets/ImageAccueil-1.png"
-            alt="Illustration JardiScan"
+            [alt]="
+              languageService.is('fr')
+                ? 'Illustration JardiScan'
+                : 'JardiScan illustration'
+            "
             class="
               h-full
               w-full
               object-cover
-
               transition-transform
               duration-700
               ease-out
-
               group-hover:scale-[1.04]
             "
           />
         </div>
-
       </div>
 
 
       <!-- ======================================================
            BLOC 2 — TEXTE + IMAGE 2
 
-           MOBILE :
+           MOBILE
            → texte
            → image 2
 
-           TABLETTE :
+           TABLETTE
            → même bloc au centre
 
-           LAPTOP / DESKTOP :
+           LAPTOP / DESKTOP
            → 4 colonnes
-           ====================================================== -->
+      ======================================================= -->
 
       <div
         class="
           flex
           flex-col
-
           sm:col-span-1
-
           lg:col-span-4
         "
       >
 
-
         <!-- ====================================================
              TEXTE D'INTRODUCTION
-             ==================================================== -->
+        ===================================================== -->
 
         <div
           class="
             mb-5
             px-1
-
             sm:mb-6
-
             lg:mb-6
-
             xl:mb-7
           "
         >
 
-          <p [ngStyle]="{'color':themeService.TextPrincipal}"
+          <!-- PETIT TITRE -->
+
+          <p
+            [ngStyle]="{
+              'color': themeService.TextPrincipal
+            }"
             class="
               mb-2
               text-[10px]
               font-medium
               uppercase
               tracking-[0.18em]
-              
-
               sm:text-[11px]
             "
           >
-            Bienvenue sur JardiScan
+            {{
+              languageService.is('fr')
+                ? 'Bienvenue sur JardiScan'
+                : 'Welcome to JardiScan'
+            }}
           </p>
 
 
-          <h1 [ngStyle]="{'color':themeService.TextPrincipal}"
+          <!-- TITRE PRINCIPAL -->
+
+          <h1
+            [ngStyle]="{
+              'color': themeService.TextPrincipal
+            }"
             class="
               text-3xl
               font-semibold
               leading-[1.05]
               tracking-[-0.04em]
-              
 
               sm:text-3xl
 
@@ -198,17 +196,25 @@
               2xl:text-6xl
             "
           >
-
-            Identifiez vos plantes,
+            {{
+              languageService.is('fr')
+                ? 'Identifiez vos plantes,'
+                : 'Identify your plants,'
+            }}
 
             <br />
 
-            <span 
-              [ngStyle]="{'color':themeService.Primary}"
+            <span
+              [ngStyle]="{
+                'color': themeService.Primary
+              }"
             >
-              découvrez leurs secrets.
+              {{
+                languageService.is('fr')
+                  ? 'découvrez leurs secrets.'
+                  : 'discover their secrets.'
+              }}
             </span>
-
           </h1>
 
         </div>
@@ -217,15 +223,15 @@
         <!-- ====================================================
              IMAGE 2
 
-             📱 MOBILE
+             MOBILE
              → image principale
 
-             📲 TABLETTE
+             TABLETTE
              → image centrale
 
-             💻 DESKTOP
+             DESKTOP
              → image centrale
-             ==================================================== -->
+        ===================================================== -->
 
         <div
           class="
@@ -248,22 +254,24 @@
 
           <img
             src="assets/ImageAccueil-2.png"
-            alt="Illustration JardiScan"
+            [alt]="
+              languageService.is('fr')
+                ? 'Illustration JardiScan'
+                : 'JardiScan illustration'
+            "
             class="
               h-full
               w-full
               object-cover
-
               transition-transform
               duration-700
               ease-out
-
               group-hover:scale-[1.035]
             "
           />
 
 
-          <!-- Dégradé -->
+          <!-- DÉGRADÉ -->
 
           <div
             class="
@@ -285,26 +293,23 @@
       <!-- ======================================================
            IMAGE 3
 
-           MOBILE :
+           MOBILE
            ❌ masquée
 
-           TABLETTE :
+           TABLETTE
            ✅ affichée
 
-           LAPTOP / DESKTOP :
+           LAPTOP / DESKTOP
            ✅ 2 colonnes
-           ====================================================== -->
+      ======================================================= -->
 
       <div
         class="
           group
           relative
-
           hidden
-
           sm:block
           sm:col-span-1
-
           lg:col-span-2
         "
       >
@@ -329,16 +334,18 @@
 
           <img
             src="assets/ImageAccueil-3.png"
-            alt="Illustration JardiScan"
+            [alt]="
+              languageService.is('fr')
+                ? 'Illustration JardiScan'
+                : 'JardiScan illustration'
+            "
             class="
               h-full
               w-full
               object-cover
-
               transition-transform
               duration-700
               ease-out
-
               group-hover:scale-[1.04]
             "
           />
@@ -364,30 +371,28 @@
       <!-- ======================================================
            BLOC 4 — IMAGE 4 + DESCRIPTION
 
-           MOBILE :
+           MOBILE
            ❌ masqué
 
-           TABLETTE :
+           TABLETTE
            ❌ masqué
 
-           LAPTOP / DESKTOP :
+           LAPTOP / DESKTOP
            ✅ affiché
-           ====================================================== -->
+      ======================================================= -->
 
       <div
         class="
           hidden
-
           lg:flex
           lg:flex-col
           lg:col-span-4
         "
       >
 
-
         <!-- ====================================================
              IMAGE 4
-             ==================================================== -->
+        ===================================================== -->
 
         <div
           class="
@@ -406,16 +411,18 @@
 
           <img
             src="assets/ImageAccueil-4.png"
-            alt="Illustration JardiScan"
+            [alt]="
+              languageService.is('fr')
+                ? 'Illustration JardiScan'
+                : 'JardiScan illustration'
+            "
             class="
               h-full
               w-full
               object-cover
-
               transition-transform
               duration-700
               ease-out
-
               group-hover:scale-[1.035]
             "
           />
@@ -438,7 +445,7 @@
 
         <!-- ====================================================
              TEXTE SOUS IMAGE
-             ==================================================== -->
+        ===================================================== -->
 
         <div
           class="
@@ -461,21 +468,28 @@
             "
           >
 
-            <!-- Indicateur -->
+            <!-- INDICATEUR -->
 
             <span
+              [ngStyle]="{
+                'background': themeService.Primary
+              }"
               class="
                 mt-1.5
                 h-2
                 w-2
                 shrink-0
                 rounded-full
-                bg-[var(--Primary)]
               "
             ></span>
 
 
-            <p [ngStyle]="{'color':themeService.TextPrincipal}"
+            <!-- DESCRIPTION -->
+
+            <p
+              [ngStyle]="{
+                'color': themeService.TextPrincipal
+              }"
               class="
                 max-w-lg
                 text-[13px]
@@ -491,9 +505,11 @@
                 xl:leading-7
               "
             >
-              Une nouvelle façon de découvrir,
-              comprendre et prendre soin de vos plantes
-              simplement au quotidien.
+              {{
+                languageService.is('fr')
+                  ? 'Une nouvelle façon de découvrir, comprendre et prendre soin de vos plantes simplement au quotidien.'
+                  : 'A new way to discover, understand and care for your plants every day.'
+              }}
             </p>
 
           </div>
@@ -503,7 +519,6 @@
       </div>
 
     </div>
-
 
   </div>
 

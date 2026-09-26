@@ -1,9 +1,4 @@
-
-
-
-
 <!-- ============================================================
-
 🌿 JARDISCAN — NAVIGATION PUBLIQUE DESKTOP / GRAND LAPTOP
 
 • Visible à partir de 1293px
@@ -11,13 +6,15 @@
 • ThemeService conservé
 • RouterLinkActive conservé
 • Accessibilité conservée
+• Hover fluide et homogène
+• État actif indépendant pour chaque lien
+• Animation douce sans déplacement du conteneur
 • Liens :
   → Découvrir
   → Nouveauté
   → Conseil
   → Paramètre
   → Fonctionnalité
-
 ============================================================ -->
 
 <nav
@@ -28,17 +25,13 @@
     justify-center
     gap-0.5
     rounded-2xl
-    border
     px-1
     py-1
     backdrop-blur-2xl
     backdrop-saturate-150
   "
   [ngStyle]="{
-    'background-color': themeService.GlassBackground,
-    'border-color': themeService.GlassBorder,
-    'box-shadow': themeService.BoxShadowSmall,
-    'color': themeService.TextPrincipal
+    color: themeService.TextPrincipal
   }"
   aria-label="Navigation publique JardiScan"
 >
@@ -74,23 +67,22 @@
       rounded-xl
       px-2.5
       outline-none
-      transition-all
-      duration-200
-      ease-out
-      hover:-translate-y-0.5
+      transition-colors
+      duration-300
+      ease-[cubic-bezier(0.22,1,0.36,1)]
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
     [ngStyle]="{
-      'color':
-        discoverActive.isActive
-          ? themeService.Primary
-          : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.Primary,
-      '--tw-ring-offset-color': themeService.Background1
+      color: discoverActive.isActive
+        ? themeService.BG3
+        : themeService.TextSecondaire,
+      '--tw-ring-color': themeService.BG3,
+      '--tw-ring-offset-color': themeService.BG3
     }"
   >
 
+    <!-- Fond hover / actif -->
     <span
       class="
         pointer-events-none
@@ -98,17 +90,41 @@
         inset-0
         rounded-xl
         opacity-0
-        transition-all
-        duration-200
+        scale-[0.94]
+        transition-[opacity,transform]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-100
         group-hover:opacity-100
       "
       [class.opacity-100]="discoverActive.isActive"
+      [class.scale-100]="discoverActive.isActive"
       [ngStyle]="{
-        'background-color': themeService.PrimarySoft
+        'background-color': themeService.BG3
       }"
       aria-hidden="true"
     ></span>
 
+    <!-- Légère lumière interne -->
+    <span
+      class="
+        pointer-events-none
+        absolute
+        inset-px
+        rounded-[11px]
+        opacity-0
+        transition-opacity
+        duration-300
+        ease-out
+        group-hover:opacity-100
+      "
+      [ngStyle]="{
+        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
+      }"
+      aria-hidden="true"
+    ></span>
+
+    <!-- Icône -->
     <i
       class="
         fa-solid
@@ -117,13 +133,16 @@
         z-10
         text-[15px]
         transition-transform
-        duration-200
-        group-hover:scale-110
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-[1.08]
+        group-hover:-rotate-2
       "
-      [class.scale-110]="discoverActive.isActive"
+      [class.scale-[1.08]]="discoverActive.isActive"
       aria-hidden="true"
     ></i>
 
+    <!-- Texte -->
     <span
       class="
         relative
@@ -131,6 +150,10 @@
         whitespace-nowrap
         text-[13px]
         font-semibold
+        transition-[transform,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:translate-x-0.5
       "
     >
       {{
@@ -140,6 +163,7 @@
       }}
     </span>
 
+    <!-- Indicateur actif -->
     <span
       class="
         pointer-events-none
@@ -150,10 +174,13 @@
         w-0
         -translate-x-1/2
         rounded-full
-        transition-all
-        duration-200
+        transition-[width,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
       "
       [class.w-6]="discoverActive.isActive"
+      [class.opacity-0]="!discoverActive.isActive"
+      [class.opacity-100]="discoverActive.isActive"
       [ngStyle]="{
         'background-color': themeService.Primary
       }"
@@ -171,6 +198,7 @@
     routerLink="/nouveaute"
     routerLinkActive="nav-active"
     #nouveauteActive="routerLinkActive"
+    [routerLinkActiveOptions]="{ exact: true }"
     [attr.aria-current]="nouveauteActive.isActive ? 'page' : null"
     [attr.aria-label]="
       languageService.currentLanguage === 'fr'
@@ -193,23 +221,22 @@
       rounded-xl
       px-2.5
       outline-none
-      transition-all
-      duration-200
-      ease-out
-      hover:-translate-y-0.5
+      transition-colors
+      duration-300
+      ease-[cubic-bezier(0.22,1,0.36,1)]
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
     [ngStyle]="{
-      'color':
-        nouveauteActive.isActive
-          ? themeService.Primary
-          : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.Primary,
-      '--tw-ring-offset-color': themeService.Background1
+      color: nouveauteActive.isActive
+        ? themeService.BG3
+        : themeService.TextSecondaire,
+      '--tw-ring-color': themeService.BG3,
+      '--tw-ring-offset-color': themeService.BG3
     }"
   >
 
+    <!-- Fond hover / actif -->
     <span
       class="
         pointer-events-none
@@ -217,31 +244,59 @@
         inset-0
         rounded-xl
         opacity-0
-        transition-all
-        duration-200
+        scale-[0.94]
+        transition-[opacity,transform]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-100
         group-hover:opacity-100
       "
       [class.opacity-100]="nouveauteActive.isActive"
+      [class.scale-100]="nouveauteActive.isActive"
       [ngStyle]="{
-        'background-color': themeService.PrimarySoft
+        'background-color': themeService.BG3
       }"
       aria-hidden="true"
     ></span>
 
+    <!-- Lumière interne -->
+    <span
+      class="
+        pointer-events-none
+        absolute
+        inset-px
+        rounded-[11px]
+        opacity-0
+        transition-opacity
+        duration-300
+        ease-out
+        group-hover:opacity-100
+      "
+      [ngStyle]="{
+        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
+      }"
+      aria-hidden="true"
+    ></span>
+
+    <!-- Icône -->
     <i
       class="
-        fa-solid fa-wand-magic-sparkles
+        fa-solid
+        fa-wand-magic-sparkles
         relative
         z-10
         text-[15px]
         transition-transform
-        duration-200
-        group-hover:scale-110
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-[1.08]
+        group-hover:-rotate-2
       "
-      [class.scale-110]="nouveauteActive.isActive"
+      [class.scale-[1.08]]="nouveauteActive.isActive"
       aria-hidden="true"
     ></i>
 
+    <!-- Texte -->
     <span
       class="
         relative
@@ -249,6 +304,10 @@
         whitespace-nowrap
         text-[13px]
         font-semibold
+        transition-[transform,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:translate-x-0.5
       "
     >
       {{
@@ -258,6 +317,7 @@
       }}
     </span>
 
+    <!-- Indicateur actif -->
     <span
       class="
         pointer-events-none
@@ -268,10 +328,13 @@
         w-0
         -translate-x-1/2
         rounded-full
-        transition-all
-        duration-200
+        transition-[width,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
       "
       [class.w-6]="nouveauteActive.isActive"
+      [class.opacity-0]="!nouveauteActive.isActive"
+      [class.opacity-100]="nouveauteActive.isActive"
       [ngStyle]="{
         'background-color': themeService.Primary
       }"
@@ -289,6 +352,7 @@
     routerLink="/conseil"
     routerLinkActive="nav-active"
     #conseilActive="routerLinkActive"
+    [routerLinkActiveOptions]="{ exact: true }"
     [attr.aria-current]="conseilActive.isActive ? 'page' : null"
     [attr.aria-label]="
       languageService.currentLanguage === 'fr'
@@ -311,23 +375,22 @@
       rounded-xl
       px-2.5
       outline-none
-      transition-all
-      duration-200
-      ease-out
-      hover:-translate-y-0.5
+      transition-colors
+      duration-300
+      ease-[cubic-bezier(0.22,1,0.36,1)]
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
     [ngStyle]="{
-      'color':
-        conseilActive.isActive
-          ? themeService.Primary
-          : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.Primary,
-      '--tw-ring-offset-color': themeService.Background1
+      color: conseilActive.isActive
+        ? themeService.BG3
+        : themeService.TextSecondaire,
+      '--tw-ring-color': themeService.BG3,
+      '--tw-ring-offset-color': themeService.BG3
     }"
   >
 
+    <!-- Fond hover / actif -->
     <span
       class="
         pointer-events-none
@@ -335,17 +398,41 @@
         inset-0
         rounded-xl
         opacity-0
-        transition-all
-        duration-200
+        scale-[0.94]
+        transition-[opacity,transform]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-100
         group-hover:opacity-100
       "
       [class.opacity-100]="conseilActive.isActive"
+      [class.scale-100]="conseilActive.isActive"
       [ngStyle]="{
-        'background-color': themeService.PrimarySoft
+        'background-color': themeService.BG3
       }"
       aria-hidden="true"
     ></span>
 
+    <!-- Lumière interne -->
+    <span
+      class="
+        pointer-events-none
+        absolute
+        inset-px
+        rounded-[11px]
+        opacity-0
+        transition-opacity
+        duration-300
+        ease-out
+        group-hover:opacity-100
+      "
+      [ngStyle]="{
+        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
+      }"
+      aria-hidden="true"
+    ></span>
+
+    <!-- Icône -->
     <i
       class="
         fa-solid
@@ -354,13 +441,16 @@
         z-10
         text-[15px]
         transition-transform
-        duration-200
-        group-hover:scale-110
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-[1.08]
+        group-hover:-rotate-2
       "
-      [class.scale-110]="conseilActive.isActive"
+      [class.scale-[1.08]]="conseilActive.isActive"
       aria-hidden="true"
     ></i>
 
+    <!-- Texte -->
     <span
       class="
         relative
@@ -368,6 +458,10 @@
         whitespace-nowrap
         text-[13px]
         font-semibold
+        transition-[transform,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:translate-x-0.5
       "
     >
       {{
@@ -377,6 +471,7 @@
       }}
     </span>
 
+    <!-- Indicateur actif -->
     <span
       class="
         pointer-events-none
@@ -387,10 +482,13 @@
         w-0
         -translate-x-1/2
         rounded-full
-        transition-all
-        duration-200
+        transition-[width,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
       "
       [class.w-6]="conseilActive.isActive"
+      [class.opacity-0]="!conseilActive.isActive"
+      [class.opacity-100]="conseilActive.isActive"
       [ngStyle]="{
         'background-color': themeService.Primary
       }"
@@ -408,6 +506,7 @@
     routerLink="/parametre"
     routerLinkActive="nav-active"
     #parametreActive="routerLinkActive"
+    [routerLinkActiveOptions]="{ exact: true }"
     [attr.aria-current]="parametreActive.isActive ? 'page' : null"
     [attr.aria-label]="
       languageService.currentLanguage === 'fr'
@@ -430,23 +529,22 @@
       rounded-xl
       px-2.5
       outline-none
-      transition-all
-      duration-200
-      ease-out
-      hover:-translate-y-0.5
+      transition-colors
+      duration-300
+      ease-[cubic-bezier(0.22,1,0.36,1)]
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
     [ngStyle]="{
-      'color':
-        parametreActive.isActive
-          ? themeService.Primary
-          : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.Primary,
-      '--tw-ring-offset-color': themeService.Background1
+      color: parametreActive.isActive
+        ? themeService.BG3
+        : themeService.TextSecondaire,
+      '--tw-ring-color': themeService.BG3,
+      '--tw-ring-offset-color': themeService.BG3
     }"
   >
 
+    <!-- Fond hover / actif -->
     <span
       class="
         pointer-events-none
@@ -454,17 +552,41 @@
         inset-0
         rounded-xl
         opacity-0
-        transition-all
-        duration-200
+        scale-[0.94]
+        transition-[opacity,transform]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-100
         group-hover:opacity-100
       "
       [class.opacity-100]="parametreActive.isActive"
+      [class.scale-100]="parametreActive.isActive"
       [ngStyle]="{
-        'background-color': themeService.PrimarySoft
+        'background-color': themeService.BG3
       }"
       aria-hidden="true"
     ></span>
 
+    <!-- Lumière interne -->
+    <span
+      class="
+        pointer-events-none
+        absolute
+        inset-px
+        rounded-[11px]
+        opacity-0
+        transition-opacity
+        duration-300
+        ease-out
+        group-hover:opacity-100
+      "
+      [ngStyle]="{
+        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
+      }"
+      aria-hidden="true"
+    ></span>
+
+    <!-- Icône -->
     <i
       class="
         fa-solid
@@ -473,13 +595,16 @@
         z-10
         text-[15px]
         transition-transform
-        duration-200
-        group-hover:scale-110
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-[1.08]
+        group-hover:-rotate-2
       "
-      [class.scale-110]="parametreActive.isActive"
+      [class.scale-[1.08]]="parametreActive.isActive"
       aria-hidden="true"
     ></i>
 
+    <!-- Texte -->
     <span
       class="
         relative
@@ -487,6 +612,10 @@
         whitespace-nowrap
         text-[13px]
         font-semibold
+        transition-[transform,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:translate-x-0.5
       "
     >
       {{
@@ -496,6 +625,7 @@
       }}
     </span>
 
+    <!-- Indicateur actif -->
     <span
       class="
         pointer-events-none
@@ -506,10 +636,13 @@
         w-0
         -translate-x-1/2
         rounded-full
-        transition-all
-        duration-200
+        transition-[width,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
       "
       [class.w-6]="parametreActive.isActive"
+      [class.opacity-0]="!parametreActive.isActive"
+      [class.opacity-100]="parametreActive.isActive"
       [ngStyle]="{
         'background-color': themeService.Primary
       }"
@@ -524,9 +657,10 @@
   =========================================================== -->
 
   <a
-    routerLink="fonctionnalites"
+    routerLink="/fonctionnalites"
     routerLinkActive="nav-active"
     #fonctionnaliteActive="routerLinkActive"
+    [routerLinkActiveOptions]="{ exact: true }"
     [attr.aria-current]="fonctionnaliteActive.isActive ? 'page' : null"
     [attr.aria-label]="
       languageService.currentLanguage === 'fr'
@@ -549,23 +683,22 @@
       rounded-xl
       px-2.5
       outline-none
-      transition-all
-      duration-200
-      ease-out
-      hover:-translate-y-0.5
+      transition-colors
+      duration-300
+      ease-[cubic-bezier(0.22,1,0.36,1)]
       focus-visible:ring-2
       focus-visible:ring-offset-2
     "
     [ngStyle]="{
-      'color':
-        fonctionnaliteActive.isActive
-          ? themeService.Primary
-          : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.Primary,
-      '--tw-ring-offset-color': themeService.Background1
+      color: fonctionnaliteActive.isActive
+        ? themeService.BG3
+        : themeService.TextSecondaire,
+      '--tw-ring-color': themeService.BG3,
+      '--tw-ring-offset-color': themeService.BG3
     }"
   >
 
+    <!-- Fond hover / actif -->
     <span
       class="
         pointer-events-none
@@ -573,31 +706,59 @@
         inset-0
         rounded-xl
         opacity-0
-        transition-all
-        duration-200
+        scale-[0.94]
+        transition-[opacity,transform]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-100
         group-hover:opacity-100
       "
       [class.opacity-100]="fonctionnaliteActive.isActive"
+      [class.scale-100]="fonctionnaliteActive.isActive"
       [ngStyle]="{
-        'background-color': themeService.PrimarySoft
+        'background-color': themeService.BG3
       }"
       aria-hidden="true"
     ></span>
 
+    <!-- Lumière interne -->
+    <span
+      class="
+        pointer-events-none
+        absolute
+        inset-px
+        rounded-[11px]
+        opacity-0
+        transition-opacity
+        duration-300
+        ease-out
+        group-hover:opacity-100
+      "
+      [ngStyle]="{
+        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
+      }"
+      aria-hidden="true"
+    ></span>
+
+    <!-- Icône -->
     <i
       class="
-        fa-solid fa-gears
+        fa-solid
+        fa-gears
         relative
         z-10
         text-[15px]
         transition-transform
-        duration-200
-        group-hover:scale-110
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:scale-[1.08]
+        group-hover:-rotate-2
       "
-      [class.scale-110]="fonctionnaliteActive.isActive"
+      [class.scale-[1.08]]="fonctionnaliteActive.isActive"
       aria-hidden="true"
     ></i>
 
+    <!-- Texte -->
     <span
       class="
         relative
@@ -605,6 +766,10 @@
         whitespace-nowrap
         text-[13px]
         font-semibold
+        transition-[transform,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        group-hover:translate-x-0.5
       "
     >
       {{
@@ -614,6 +779,7 @@
       }}
     </span>
 
+    <!-- Indicateur actif -->
     <span
       class="
         pointer-events-none
@@ -624,10 +790,13 @@
         w-0
         -translate-x-1/2
         rounded-full
-        transition-all
-        duration-200
+        transition-[width,opacity]
+        duration-300
+        ease-[cubic-bezier(0.22,1,0.36,1)]
       "
       [class.w-6]="fonctionnaliteActive.isActive"
+      [class.opacity-0]="!fonctionnaliteActive.isActive"
+      [class.opacity-100]="fonctionnaliteActive.isActive"
       [ngStyle]="{
         'background-color': themeService.Primary
       }"
@@ -637,7 +806,6 @@
   </a>
 
 </nav>
-
 
 
 
@@ -683,7 +851,7 @@
   [ngStyle]="{
     background:
       'linear-gradient(to top, ' +
-      themeService.Background1 +
+      themeService.BG1 +
       ' 0%, transparent 100%)'
   }"
 >
@@ -723,10 +891,10 @@
       md:py-3
     "
     [ngStyle]="{
-      'background-color': themeService.Background2,
+      'background-color': themeService.BG2,
       'background-image':
         'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))',
-      'border-color': themeService.Border2,
+      'border-color': themeService.BR2,
       'box-shadow':
         '0 20px 50px rgba(0,0,0,0.28), 0 4px 14px rgba(0,0,0,0.18)',
       'color': themeService.TextPrincipal
@@ -789,15 +957,15 @@
         'background':
           discoverMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
-              themeService.Primary +
+              themeService.Primary1 +
               ', ' +
-              themeService.PrimarySoft +
+              themeService.PrimarySoft1 +
               ')'
             : 'rgba(255,255,255,0.045)',
         'border-color':
           discoverMobileActive.isActive
             ? 'transparent'
-            : themeService.Border2,
+            : themeService.BR2,
         'color':
           discoverMobileActive.isActive
             ? themeService.TextPrincipal
@@ -806,8 +974,8 @@
           discoverMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background1
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG1
       }"
     >
 
@@ -852,8 +1020,8 @@
         [class.scale-100]="discoverMobileActive.isActive"
         [class.opacity-100]="discoverMobileActive.isActive"
         [ngStyle]="{
-          'background-color': themeService.Background2,
-          'border-color': themeService.Border2,
+          'background-color': themeService.BG2,
+          'border-color': themeService.BR2,
           'color': themeService.TextPrincipal,
           'box-shadow':
             '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
@@ -881,7 +1049,7 @@
             border-r-transparent
           "
           [ngStyle]="{
-            'border-top-color': themeService.Background2
+            'border-top-color': themeService.BG2
           }"
         ></span>
       </span>
@@ -981,27 +1149,27 @@
       [class.border-transparent]="nouveauteMobileActive.isActive"
       [ngStyle]="{
         'background':
-          nouveauteMobileActive.isActive
+          discoverMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
-              themeService.Primary +
+              themeService.Primary1 +
               ', ' +
-              themeService.PrimarySoft +
+              themeService.PrimarySoft1 +
               ')'
             : 'rgba(255,255,255,0.045)',
         'border-color':
-          nouveauteMobileActive.isActive
+          discoverMobileActive.isActive
             ? 'transparent'
-            : themeService.Border2,
+            : themeService.BR2,
         'color':
-          nouveauteMobileActive.isActive
+          discoverMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
         'box-shadow':
-          nouveauteMobileActive.isActive
+          discoverMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background1
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG1
       }"
     >
 
@@ -1175,27 +1343,27 @@
       [class.border-transparent]="conseilMobileActive.isActive"
       [ngStyle]="{
         'background':
-          conseilMobileActive.isActive
+          discoverMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
-              themeService.Primary +
+              themeService.Primary1 +
               ', ' +
-              themeService.PrimarySoft +
+              themeService.PrimarySoft1 +
               ')'
             : 'rgba(255,255,255,0.045)',
         'border-color':
-          conseilMobileActive.isActive
+          discoverMobileActive.isActive
             ? 'transparent'
-            : themeService.Border2,
+            : themeService.BR2,
         'color':
-          conseilMobileActive.isActive
+          discoverMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
         'box-shadow':
-          conseilMobileActive.isActive
+          discoverMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background1
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG1
       }"
     >
 
@@ -1369,27 +1537,27 @@
       [class.border-transparent]="parametreMobileActive.isActive"
       [ngStyle]="{
         'background':
-          parametreMobileActive.isActive
+          discoverMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
-              themeService.Primary +
+              themeService.Primary1 +
               ', ' +
-              themeService.PrimarySoft +
+              themeService.PrimarySoft1 +
               ')'
             : 'rgba(255,255,255,0.045)',
         'border-color':
-          parametreMobileActive.isActive
+          discoverMobileActive.isActive
             ? 'transparent'
-            : themeService.Border2,
+            : themeService.BR2,
         'color':
-          parametreMobileActive.isActive
+          discoverMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
         'box-shadow':
-          parametreMobileActive.isActive
+          discoverMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background1
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG1
       }"
     >
 
@@ -1563,27 +1731,27 @@
       [class.border-transparent]="fonctionnaliteMobileActive.isActive"
       [ngStyle]="{
         'background':
-          fonctionnaliteMobileActive.isActive
+          discoverMobileActive.isActive
             ? 'linear-gradient(135deg, ' +
-              themeService.Primary +
+              themeService.Primary1 +
               ', ' +
-              themeService.PrimarySoft +
+              themeService.PrimarySoft1 +
               ')'
             : 'rgba(255,255,255,0.045)',
         'border-color':
-          fonctionnaliteMobileActive.isActive
+          discoverMobileActive.isActive
             ? 'transparent'
-            : themeService.Border2,
+            : themeService.BR2,
         'color':
-          fonctionnaliteMobileActive.isActive
+          discoverMobileActive.isActive
             ? themeService.TextPrincipal
             : themeService.TextSecondaire,
         'box-shadow':
-          fonctionnaliteMobileActive.isActive
+          discoverMobileActive.isActive
             ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
             : 'none',
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background1
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG1
       }"
     >
 

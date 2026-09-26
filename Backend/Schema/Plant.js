@@ -1,318 +1,206 @@
 const mongoose = require('mongoose');
 
-
 // ============================================================
-// 🖼️ IMAGE DE RÉFÉRENCE
-// ============================================================
-
-const PlantImageSchema = new mongoose.Schema(
-  {
-    // ----------------------------------------------------------
-    // URL / CHEMIN DE L'IMAGE
-    // ----------------------------------------------------------
-
-    url: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    // ----------------------------------------------------------
-    // VUE DE LA PLANTE
-    // ----------------------------------------------------------
-
-    vue: {
-      type: String,
-      enum: [
-        'front',
-        'side',
-        'top',
-        'close-up',
-        'far'
-      ],
-      required: true
-    }
-  },
-  {
-    _id: true
-  }
-);
-
-
-// ============================================================
-// 💬 RETOUR D'UNE AUTRE PERSONNE
+// 🌿 SCHÉMA PLANTE — JARDISCAN
 // ============================================================
 
-const PlantRetourSchema = new mongoose.Schema(
-  {
-    // ----------------------------------------------------------
-    // NOM DE LA PERSONNE
-    // ----------------------------------------------------------
+const planteSchema = new mongoose.Schema(
+    {
 
-    nom: {
-      type: String,
-      trim: true,
-      default: 'Utilisateur'
-    },
+        // ========================================================
+        // 🌱 IDENTITÉ DE LA PLANTE
+        // ========================================================
 
-    // ----------------------------------------------------------
-    // NOTE
-    // ----------------------------------------------------------
-
-    note: {
-      type: Number,
-      min: 1,
-      max: 5,
-      default: 5
-    },
-
-    // ----------------------------------------------------------
-    // COMMENTAIRE
-    // ----------------------------------------------------------
-
-    commentaire: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    // ----------------------------------------------------------
-    // DATE DU RETOUR
-    // ----------------------------------------------------------
-
-    date: {
-      type: Date,
-      default: Date.now
-    }
-  },
-  {
-    _id: true
-  }
-);
-
-
-// ============================================================
-// 🌱 PLANTE
-// ============================================================
-
-const PlantSchema = new mongoose.Schema(
-  {
-
-    // ==========================================================
-    // 🌿 IDENTITÉ
-    // ==========================================================
-
-    nomCommun: {
-      type: String,
-      required: true,
-      trim: true,
-      index: true
-    },
-
-    nomScientifique: {
-      type: String,
-      required: true,
-      trim: true,
-      index: true
-    },
-
-    famille: {
-      type: String,
-      trim: true,
-      index: true
-    },
-
-
-    // ==========================================================
-    // 📝 DESCRIPTION
-    // ==========================================================
-
-    description: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 🌍 ORIGINE
-    // ==========================================================
-
-    origine: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 🖼️ IMAGES DE RÉFÉRENCE
-    // ==========================================================
-
-    images: {
-      type: [PlantImageSchema],
-
-      validate: {
-        validator: function (images) {
-          return images.length === 5;
+        nomCommun: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 100
         },
 
-        message: 'Une plante doit posséder exactement 5 images.'
-      },
+        nomScientifique: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 150
+        },
 
-      default: []
+        famille: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 100
+        },
+
+        description: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        origine: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 150
+        },
+
+        // ========================================================
+        // 🖼️ IMAGES
+        // ========================================================
+
+        images: [
+            {
+                url: {
+                    type: String,
+                    required: true,
+                    trim: true
+                },
+
+                vue: {
+                    type: String,
+                    enum: [
+                        'front',
+                        'side',
+                        'top',
+                        'close-up',
+                        'far'
+                    ],
+                    default: 'front'
+                }
+            }
+        ],
+
+        // ========================================================
+        // 🎨 CARACTÉRISTIQUES
+        // ========================================================
+
+        couleur: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 100
+        },
+
+        nombre: {
+
+            type: Number,
+
+            required: true,
+
+            min: 1,
+
+            default: 1
+
+        },
+        
+        periodeFloraison: {
+            type: String,
+            required: false,
+            trim: true,
+            maxlength: 100
+        },
+
+        periodeRecolte: {
+            type: String,
+            required: false,
+            trim: true,
+            maxlength: 100
+        },
+
+        cycle: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 100
+        },
+
+        // ========================================================
+        // ☀️ CONDITIONS DE CULTURE
+        // ========================================================
+
+        exposition: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 100
+        },
+
+        arrosage: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        sol: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        temperatureMin: {
+            type: Number,
+            required: true
+        },
+
+        temperatureMax: {
+            type: Number,
+            required: true
+        },
+
+        humidite: {
+            type: String,
+            required: true,
+            trim: true,
+            maxlength: 100
+        },
+
+        // ========================================================
+        // ⚠️ SÉCURITÉ
+        // ========================================================
+
+        partiesDangereuses: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        // ========================================================
+        // 🍽️ UTILISATION CULINAIRE
+        // ========================================================
+
+        usageCulinaire: {
+            type: String,
+            required: true,
+            trim: true
+        },
+
+        // ========================================================
+        // 🔁 RETOUR / INFORMATIONS COMPLÉMENTAIRES
+        // FACULTATIF
+        // ========================================================
+
+        retoure: {
+            type: String,
+            required: false,
+            trim: true,
+            default: null
+        }
+
     },
 
+    // ============================================================
+    // ⚙️ OPTIONS MONGOOSE
+    // ============================================================
 
-    // ==========================================================
-    // 🎨 COULEURS PRINCIPALES
-    // ==========================================================
-
-    couleursPrincipal: {
-      type: [String],
-      default: []
-    },
-
-
-    // ==========================================================
-    // 🌸 FLORAISON
-    // ==========================================================
-
-    periodeFloraison: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 🍎 RÉCOLTE
-    // ==========================================================
-
-    periodeRecolte: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 🔄 CYCLE DE VIE
-    // ==========================================================
-
-    cycle: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // ☀️ EXPOSITION
-    // ==========================================================
-
-    exposition: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 💧 ARROSAGE
-    // ==========================================================
-
-    arrosage: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 🌱 SOL
-    // ==========================================================
-
-    sol: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 🌡️ TEMPÉRATURE
-    // ==========================================================
-
-    temperatureMin: {
-      type: Number
-    },
-
-    temperatureMax: {
-      type: Number
-    },
-
-
-    // ==========================================================
-    // 💦 HUMIDITÉ
-    // ==========================================================
-
-    humidite: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // ☠️ PARTIES DANGEREUSES
-    // ==========================================================
-
-    partiesDangereuses: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 🍳 USAGE CULINAIRE
-    // ==========================================================
-
-    usageCulinaire: {
-      type: String,
-      trim: true
-    },
-
-
-    // ==========================================================
-    // 💬 RETOURS DES AUTRES PERSONNES
-    // ==========================================================
-
-    retour: {
-      type: [PlantRetourSchema],
-      default: []
+    {
+        timestamps: true
     }
-
-  },
-
-  // ============================================================
-  // ⏱️ DATES AUTOMATIQUES
-  // ============================================================
-
-  {
-    timestamps: true
-  }
 );
 
 
 // ============================================================
-// 🔎 INDEX TEXTE
+// 📦 EXPORT
 // ============================================================
 
-PlantSchema.index({
-  nomCommun: 'text',
-  nomScientifique: 'text',
-  famille: 'text',
-  description: 'text',
-  origine: 'text',
-  usageCulinaire: 'text'
-});
-
-
-// ============================================================
-// 📤 EXPORT
-// ============================================================
-
-module.exports = mongoose.model('Plant', PlantSchema);
+module.exports = mongoose.model('Plante', planteSchema);

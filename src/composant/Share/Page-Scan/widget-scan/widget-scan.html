@@ -1,0 +1,1130 @@
+<section class="min-h-screen w-full bg-[#F3F1E8] px-4 py-6 sm:px-6 lg:px-8">
+
+  <!-- ========================================================= -->
+  <!-- 🌿 CONTENEUR PRINCIPAL -->
+  <!-- ========================================================= -->
+
+  <div class="mx-auto flex w-full max-w-6xl flex-col gap-6">
+
+    <!-- ======================================================= -->
+    <!-- HEADER -->
+    <!-- ======================================================= -->
+
+    <header
+      class="relative overflow-hidden rounded-[2rem] border border-[#8FAF91]/30 bg-white p-6 shadow-sm sm:p-8"
+    >
+
+      <div
+        class="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#8FAF91]/15 blur-3xl"
+      ></div>
+
+      <div
+        class="absolute -bottom-20 -left-16 h-40 w-40 rounded-full bg-[#4F8061]/10 blur-3xl"
+      ></div>
+
+      <div class="relative z-10">
+
+        <span
+          class="inline-flex items-center gap-2 rounded-full bg-[#1F5A4D]/10 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-[#1F5A4D]"
+        >
+          <i class="fa-solid fa-leaf"></i>
+          JardiScan
+        </span>
+
+        <h1
+          class="mt-4 text-3xl font-extrabold tracking-tight text-[#133A3C] sm:text-4xl"
+        >
+          Identifier une plante
+        </h1>
+
+        <p
+          class="mt-3 max-w-2xl text-sm leading-6 text-[#4F8061] sm:text-base"
+        >
+          Prenez une photo ou importez une image pour découvrir quelle plante
+          se trouve devant vous.
+        </p>
+
+      </div>
+
+    </header>
+
+
+    <!-- ======================================================= -->
+    <!-- ZONE DE SCAN -->
+    <!-- ======================================================= -->
+
+    <main class="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+
+      <!-- ===================================================== -->
+      <!-- CAMÉRA / IMAGE -->
+      <!-- ===================================================== -->
+
+      <section
+        class="overflow-hidden rounded-[2rem] border border-[#8FAF91]/30 bg-white shadow-sm"
+      >
+
+        <!-- TITRE -->
+
+        <div
+          class="flex items-center justify-between gap-4 border-b border-[#8FAF91]/20 px-5 py-5 sm:px-6"
+        >
+
+          <div class="flex items-center gap-3">
+
+            <div
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#1F5A4D]/10 text-[#1F5A4D]"
+            >
+              <i class="fa-solid fa-camera text-lg"></i>
+            </div>
+
+            <div>
+
+              <h2 class="font-bold text-[#133A3C]">
+                Scanner une plante
+              </h2>
+
+              <p class="text-xs text-[#4F8061]">
+                Photo nette recommandée
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================== -->
+        <!-- 📸 APERÇU DU SCAN -->
+        <!-- =================================================== -->
+
+        <div class="p-5 sm:p-6">
+
+          <!-- ================================================= -->
+          <!-- ZONE CAMÉRA -->
+          <!-- ================================================= -->
+
+          <div
+            class="relative flex min-h-[360px] items-center justify-center overflow-hidden rounded-[1.75rem] bg-[#133A3C]"
+          >
+
+            <!-- VIDÉO -->
+
+            <video
+              #video
+              *ngIf="cameraActive && !imageUrls.length && !scanning"
+              autoplay
+              muted
+              playsinline
+              class="absolute inset-0 h-full w-full object-cover"
+            ></video>
+
+
+            <!-- IMAGE PRINCIPALE -->
+
+            <img
+              *ngIf="imageUrls.length > 0"
+              [src]="imageUrls[0]"
+              alt="Aperçu de la plante"
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+
+
+            <!-- OVERLAY IMAGE -->
+
+            <div
+              *ngIf="imageUrls.length > 0"
+              class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/10"
+            ></div>
+
+
+            <!-- CADRE CAMÉRA -->
+
+            <div
+              *ngIf="cameraActive && !imageUrls.length && !scanning"
+              class="pointer-events-none absolute inset-8 rounded-[1.5rem] border border-white/20"
+            >
+
+              <span
+                class="absolute -left-px -top-px h-10 w-10 rounded-tl-2xl border-l-2 border-t-2 border-white"
+              ></span>
+
+              <span
+                class="absolute -right-px -top-px h-10 w-10 rounded-tr-2xl border-r-2 border-t-2 border-white"
+              ></span>
+
+              <span
+                class="absolute -bottom-px -left-px h-10 w-10 rounded-bl-2xl border-b-2 border-l-2 border-white"
+              ></span>
+
+              <span
+                class="absolute -bottom-px -right-px h-10 w-10 rounded-br-2xl border-b-2 border-r-2 border-white"
+              ></span>
+
+            </div>
+
+
+            <!-- CAMÉRA ACTIVE -->
+
+            <div
+              *ngIf="cameraActive && !imageUrls.length && !scanning"
+              class="absolute left-1/2 top-6 z-20 -translate-x-1/2"
+            >
+
+              <div
+                class="flex items-center gap-2 rounded-full bg-black/40 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md"
+              >
+
+                <span
+                  class="h-2 w-2 animate-pulse rounded-full bg-red-400"
+                ></span>
+
+                Caméra active
+
+              </div>
+
+            </div>
+
+
+            <!-- ÉTAT VIDE -->
+
+            <div
+              *ngIf="!cameraActive && !cameraError && !imageUrls.length && !scanning"
+              class="relative z-10 flex flex-col items-center px-6 text-center text-white"
+            >
+
+              <div
+                class="flex h-20 w-20 items-center justify-center rounded-[1.75rem] bg-white/10 ring-1 ring-white/20"
+              >
+                <i class="fa-solid fa-camera text-3xl"></i>
+              </div>
+
+              <h3 class="mt-6 text-xl font-bold">
+                Prêt à scanner
+              </h3>
+
+              <p
+                class="mt-2 max-w-sm text-sm leading-6 text-white/65"
+              >
+                Prenez une photo de votre plante ou importez une image
+                depuis votre appareil.
+              </p>
+
+            </div>
+
+
+            <!-- ERREUR CAMÉRA -->
+
+            <div
+              *ngIf="cameraError && !imageUrls.length && !scanning"
+              class="relative z-10 flex max-w-md flex-col items-center px-6 text-center text-white"
+            >
+
+              <div
+                class="flex h-20 w-20 items-center justify-center rounded-[1.75rem] bg-red-400/15 ring-1 ring-red-300/20"
+              >
+                <i
+                  class="fa-solid fa-camera-slash text-3xl text-red-300"
+                ></i>
+              </div>
+
+              <h3 class="mt-6 text-xl font-bold">
+                Caméra indisponible
+              </h3>
+
+              <p class="mt-2 text-sm leading-6 text-white/65">
+                {{ cameraErrorMessage }}
+              </p>
+
+              <button
+                type="button"
+                (click)="demarrerCamera()"
+                class="mt-5 rounded-2xl bg-white/10 px-5 py-3 text-sm font-bold text-white ring-1 ring-white/20 transition hover:bg-white/15"
+              >
+                <i class="fa-solid fa-rotate-right mr-2"></i>
+                Réessayer
+              </button>
+
+            </div>
+
+
+            <!-- ANALYSE -->
+
+            <div
+              *ngIf="scanning"
+              class="relative z-20 flex w-full max-w-md flex-col items-center px-6 text-center text-white"
+            >
+
+              <div
+                class="flex h-20 w-20 items-center justify-center rounded-[1.75rem] bg-white/10 ring-1 ring-white/20"
+              >
+                <i
+                  class="fa-solid fa-wand-magic-sparkles animate-pulse text-3xl"
+                ></i>
+              </div>
+
+              <h3 class="mt-6 text-xl font-bold">
+                Analyse en cours
+              </h3>
+
+              <p class="mt-2 text-sm leading-6 text-white/65">
+                {{ comparisonStatus }}
+              </p>
+
+              <div class="mt-6 w-full">
+
+                <div
+                  class="mb-2 flex items-center justify-between text-xs font-semibold text-white/70"
+                >
+                  <span>Analyse</span>
+
+                  <span>
+                    {{ comparisonProgress }}%
+                  </span>
+                </div>
+
+                <div
+                  class="h-2 overflow-hidden rounded-full bg-white/10"
+                >
+
+                  <div
+                    class="h-full rounded-full bg-white transition-all duration-300"
+                    [style.width.%]="comparisonProgress"
+                  ></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- BADGE IMAGES -->
+
+            <div
+              *ngIf="imageUrls.length > 0 && !scanning"
+              class="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between gap-3"
+            >
+
+              <div
+                class="rounded-full bg-black/50 px-3 py-2 text-xs font-semibold text-white backdrop-blur-md"
+              >
+                <i class="fa-solid fa-images mr-2"></i>
+
+                {{ nombreImages }} / {{ maxImages }}
+                image{{ nombreImages > 1 ? 's' : '' }}
+              </div>
+
+              <button
+                type="button"
+                (click)="supprimerImage(0)"
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/90 text-[#133A3C] shadow-lg transition hover:bg-white"
+                aria-label="Supprimer l'image"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- 🖼️ MINIATURES -->
+          <!-- ================================================= -->
+
+          <div
+            *ngIf="imageUrls.length > 0"
+            class="mt-4 grid grid-cols-5 gap-2"
+          >
+
+            <div
+              *ngFor="let image of imageUrls; let i = index"
+              class="group relative aspect-square overflow-hidden rounded-xl bg-[#F3F1E8]"
+            >
+
+              <img
+                [src]="image"
+                [alt]="'Photo de scan ' + (i + 1)"
+                class="h-full w-full object-cover"
+              />
+
+              <div
+                class="absolute left-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-black/50 text-[10px] font-bold text-white backdrop-blur-sm"
+              >
+                {{ i + 1 }}
+              </div>
+
+              <button
+                type="button"
+                (click)="supprimerImage(i)"
+                [disabled]="scanning"
+                class="absolute right-1.5 top-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-black/50 text-xs text-white opacity-0 backdrop-blur-sm transition group-hover:opacity-100 disabled:pointer-events-none"
+                aria-label="Supprimer cette image"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- 📸 ACTIONS -->
+          <!-- ================================================= -->
+
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+
+            <button
+              type="button"
+              (click)="cameraActive ? arreterCamera() : demarrerCamera()"
+              [disabled]="scanning"
+              class="flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-[#1F5A4D] px-5 py-4 font-bold text-white shadow-sm transition hover:bg-[#133A3C] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+            >
+
+              <i
+                class="fa-solid"
+                [ngClass]="cameraActive ? 'fa-video-slash' : 'fa-camera'"
+              ></i>
+
+              <span>
+                {{ cameraActive ? 'Éteindre la caméra' : 'Allumer la caméra' }}
+              </span>
+
+            </button>
+
+
+            <button
+              type="button"
+              (click)="ouvrirFilePicker()"
+              [disabled]="!peutAjouterImages"
+              class="flex min-h-14 items-center justify-center gap-3 rounded-2xl border border-[#8FAF91]/40 bg-[#F3F1E8] px-5 py-4 font-bold text-[#133A3C] transition hover:bg-[#8FAF91]/20 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+            >
+
+              <i class="fa-solid fa-image"></i>
+
+              <span>
+                Importer une photo
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- INPUT -->
+
+          <input
+            id="fileInput"
+            type="file"
+            accept="image/*"
+            multiple
+            class="hidden"
+            (change)="onFileSelected($event)"
+          />
+
+
+          <!-- ================================================= -->
+          <!-- 📸 PRENDRE UNE PHOTO -->
+          <!-- ================================================= -->
+
+          <button
+            *ngIf="cameraActive"
+            type="button"
+            (click)="prendrePhoto()"
+            [disabled]="!peutCapturer"
+            class="mt-3 flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl border-2 border-[#1F5A4D] bg-white px-5 py-4 font-bold text-[#1F5A4D] transition hover:bg-[#1F5A4D] hover:text-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
+          >
+
+            <i class="fa-solid fa-circle-dot text-lg"></i>
+
+            <span>
+              Prendre une photo
+            </span>
+
+          </button>
+
+
+          <!-- ================================================= -->
+          <!-- 🧠 LANCER IDENTIFICATION -->
+          <!-- ================================================= -->
+
+          <button
+            *ngIf="imageUrls.length > 0"
+            type="button"
+            (click)="lancerScan()"
+            [disabled]="scanning"
+            class="mt-3 flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-[#4F8061] px-5 py-4 font-bold text-white shadow-sm transition hover:bg-[#1F5A4D] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+
+            <i
+              *ngIf="!scanning"
+              class="fa-solid fa-wand-magic-sparkles"
+            ></i>
+
+            <i
+              *ngIf="scanning"
+              class="fa-solid fa-spinner fa-spin"
+            ></i>
+
+            <span>
+              {{
+                scanning
+                  ? 'Identification en cours...'
+                  : 'Identifier cette plante'
+              }}
+            </span>
+
+          </button>
+
+
+          <!-- ================================================= -->
+          <!-- ❌ ERREUR -->
+          <!-- ================================================= -->
+
+          <div
+            *ngIf="erreurScan && messageScan"
+            class="mt-4 flex gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 text-red-800"
+          >
+
+            <div
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-100"
+            >
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+
+            <div>
+
+              <p class="text-sm font-bold">
+                Identification impossible
+              </p>
+
+              <p class="mt-1 text-xs leading-5 text-red-700">
+                {{ messageScan }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- ✅ SCAN TERMINÉ -->
+          <!-- ================================================= -->
+
+          <div
+            *ngIf="scanTermine && !erreurScan"
+            class="mt-4 flex items-center gap-3 rounded-2xl border border-[#8FAF91]/40 bg-[#8FAF91]/10 p-4 text-[#1F5A4D]"
+          >
+
+            <div
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#1F5A4D]/10"
+            >
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div>
+
+              <p class="text-sm font-bold">
+                Identification terminée
+              </p>
+
+              <p class="mt-1 text-xs leading-5">
+                {{ messageScan }}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================== -->
+      <!-- CONSEILS -->
+      <!-- ===================================================== -->
+
+      <aside class="flex flex-col gap-6">
+
+        <!-- CONSEILS PHOTO -->
+
+        <section
+          class="rounded-[2rem] border border-[#8FAF91]/30 bg-white p-6 shadow-sm"
+        >
+
+          <div class="flex items-center gap-3">
+
+            <div
+              class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#8FAF91]/20 text-[#1F5A4D]"
+            >
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+
+            <div>
+
+              <h2 class="font-bold text-[#133A3C]">
+                Conseils pour le scan
+              </h2>
+
+              <p class="text-xs text-[#4F8061]">
+                Améliorez vos résultats
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="mt-6 space-y-4">
+
+            <div class="flex gap-3">
+
+              <div
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#1F5A4D]/10 text-sm text-[#1F5A4D]"
+              >
+                <i class="fa-solid fa-sun"></i>
+              </div>
+
+              <div>
+
+                <p class="text-sm font-bold text-[#133A3C]">
+                  Bonne lumière
+                </p>
+
+                <p class="mt-1 text-xs leading-5 text-[#4F8061]">
+                  Évitez les zones trop sombres ou les contre-jours.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-3">
+
+              <div
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#1F5A4D]/10 text-sm text-[#1F5A4D]"
+              >
+                <i class="fa-solid fa-expand"></i>
+              </div>
+
+              <div>
+
+                <p class="text-sm font-bold text-[#133A3C]">
+                  Plante bien visible
+                </p>
+
+                <p class="mt-1 text-xs leading-5 text-[#4F8061]">
+                  Placez la plante au centre de l'image.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-3">
+
+              <div
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#1F5A4D]/10 text-sm text-[#1F5A4D]"
+              >
+                <i class="fa-solid fa-leaf"></i>
+              </div>
+
+              <div>
+
+                <p class="text-sm font-bold text-[#133A3C]">
+                  Montrez les feuilles
+                </p>
+
+                <p class="mt-1 text-xs leading-5 text-[#4F8061]">
+                  Les détails des feuilles peuvent aider à différencier
+                  certaines espèces.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-3">
+
+              <div
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#1F5A4D]/10 text-sm text-[#1F5A4D]"
+              >
+                <i class="fa-solid fa-ban"></i>
+              </div>
+
+              <div>
+
+                <p class="text-sm font-bold text-[#133A3C]">
+                  Évitez le flou
+                </p>
+
+                <p class="mt-1 text-xs leading-5 text-[#4F8061]">
+                  Gardez votre téléphone stable pendant la prise de vue.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ÉTAPES -->
+
+        <section
+          class="rounded-[2rem] border border-[#8FAF91]/30 bg-[#1F5A4D] p-6 text-white shadow-sm"
+        >
+
+          <span
+            class="text-xs font-bold uppercase tracking-[0.18em] text-white/60"
+          >
+            Comment ça marche ?
+          </span>
+
+          <h2 class="mt-3 text-xl font-extrabold">
+            Trois étapes simples
+          </h2>
+
+          <div class="mt-6 space-y-5">
+
+            <div class="flex gap-4">
+
+              <div
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-sm font-extrabold"
+              >
+                1
+              </div>
+
+              <div>
+
+                <p class="font-bold">
+                  Photographiez
+                </p>
+
+                <p class="mt-1 text-xs leading-5 text-white/65">
+                  Prenez une photo claire de votre plante.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-4">
+
+              <div
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-sm font-extrabold"
+              >
+                2
+              </div>
+
+              <div>
+
+                <p class="font-bold">
+                  Analysez
+                </p>
+
+                <p class="mt-1 text-xs leading-5 text-white/65">
+                  JardiScan analyse les caractéristiques visibles.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="flex gap-4">
+
+              <div
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-sm font-extrabold"
+              >
+                3
+              </div>
+
+              <div>
+
+                <p class="font-bold">
+                  Découvrez
+                </p>
+
+                <p class="mt-1 text-xs leading-5 text-white/65">
+                  Consultez les résultats et ajoutez la plante à votre JardiDex.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </aside>
+
+    </main>
+
+
+    <!-- ========================================================= -->
+    <!-- 🌱 RÉSULTAT DE L'IDENTIFICATION -->
+    <!-- ========================================================= -->
+
+    <section
+      *ngIf="scanTermine && planteDetectee"
+      class="overflow-hidden rounded-[2rem] border border-[#8FAF91]/30 bg-white shadow-sm"
+    >
+
+      <!-- HEADER RÉSULTAT -->
+
+      <div
+        class="flex flex-col gap-4 border-b border-[#8FAF91]/20 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+      >
+
+        <div class="flex items-center gap-3">
+
+          <div
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#1F5A4D]/10 text-[#1F5A4D]"
+          >
+            <i class="fa-solid fa-leaf text-lg"></i>
+          </div>
+
+          <div>
+
+            <span
+              class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#4F8061]"
+            >
+              Résultat du scan
+            </span>
+
+            <h2
+              class="mt-1 text-xl font-extrabold text-[#133A3C] sm:text-2xl"
+            >
+              Plante identifiée
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <!-- SCORE -->
+
+        <div
+          class="flex items-center gap-3 self-start rounded-2xl bg-[#F3F1E8] px-4 py-3 sm:self-auto"
+        >
+
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-[#1F5A4D] text-sm font-extrabold text-white"
+          >
+            {{ getResultScore() }}%
+          </div>
+
+          <div>
+
+            <p class="text-xs font-bold text-[#133A3C]">
+              Confiance
+            </p>
+
+            <p class="text-[11px] text-[#4F8061]">
+              {{ getScoreLabel() }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONTENU -->
+
+      <div
+        class="grid gap-6 p-5 sm:p-6 lg:grid-cols-[280px_1fr]"
+      >
+
+        <!-- IMAGE -->
+
+        <div class="space-y-3">
+
+          <div
+            class="relative aspect-square overflow-hidden rounded-[1.75rem] bg-[#F3F1E8]"
+          >
+
+            <img
+              *ngIf="getResultMainImage()"
+              [src]="getResultMainImage()"
+              [alt]="getResultPlantName()"
+              (error)="handleImageError($event)"
+              class="h-full w-full object-cover"
+            />
+
+            <div
+              *ngIf="!getResultMainImage()"
+              class="flex h-full w-full items-center justify-center text-[#8FAF91]"
+            >
+              <i class="fa-solid fa-leaf text-5xl"></i>
+            </div>
+
+            <div
+              class="absolute bottom-3 left-3 rounded-full bg-black/55 px-3 py-2 text-xs font-bold text-white backdrop-blur-md"
+            >
+              <i class="fa-solid fa-sparkles mr-1"></i>
+              {{ getResultScore() }}%
+            </div>
+
+          </div>
+
+
+          <!-- IMAGES RÉFÉRENCE -->
+
+          <div
+            *ngIf="getResultImages().length > 1"
+            class="grid grid-cols-4 gap-2"
+          >
+
+            <div
+              *ngFor="let image of getResultImages(); let i = index"
+              class="aspect-square overflow-hidden rounded-xl bg-[#F3F1E8]"
+            >
+
+              <img
+                [src]="image"
+                [alt]="'Image de référence ' + (i + 1)"
+                (error)="handleImageError($event)"
+                class="h-full w-full object-cover"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- INFORMATIONS -->
+
+        <div class="flex flex-col">
+
+          <!-- NOM -->
+
+          <div>
+
+            <span
+              class="text-xs font-bold uppercase tracking-[0.15em] text-[#4F8061]"
+            >
+              Identification
+            </span>
+
+            <h3
+              class="mt-2 text-3xl font-extrabold tracking-tight text-[#133A3C]"
+            >
+              {{ getResultPlantName() }}
+            </h3>
+
+            <p
+              *ngIf="getResultScientificName()"
+              class="mt-2 text-sm italic text-[#4F8061]"
+            >
+              {{ getResultScientificName() }}
+            </p>
+
+          </div>
+
+
+          <!-- CARACTÉRISTIQUES -->
+
+          <div
+            class="mt-6 grid gap-3 sm:grid-cols-2"
+          >
+
+            <div
+              *ngIf="getResultFamily()"
+              class="rounded-2xl bg-[#F3F1E8] p-4"
+            >
+
+              <div
+                class="flex items-center gap-2 text-[#4F8061]"
+              >
+
+                <i class="fa-solid fa-seedling"></i>
+
+                <span
+                  class="text-[11px] font-bold uppercase tracking-wider"
+                >
+                  Famille
+                </span>
+
+              </div>
+
+              <p
+                class="mt-2 font-bold text-[#133A3C]"
+              >
+                {{ getResultFamily() }}
+              </p>
+
+            </div>
+
+
+            <div
+              class="rounded-2xl bg-[#F3F1E8] p-4"
+            >
+
+              <div
+                class="flex items-center gap-2 text-[#4F8061]"
+              >
+
+                <i class="fa-solid fa-chart-simple"></i>
+
+                <span
+                  class="text-[11px] font-bold uppercase tracking-wider"
+                >
+                  Correspondance
+                </span>
+
+              </div>
+
+              <p
+                class="mt-2 font-bold text-[#133A3C]"
+              >
+                {{ getResultScore() }}%
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- BARRE DE CONFIANCE -->
+
+          <div class="mt-5">
+
+            <div
+              class="mb-2 flex items-center justify-between"
+            >
+
+              <span
+                class="text-xs font-semibold text-[#4F8061]"
+              >
+                Fiabilité de l'identification
+              </span>
+
+              <span
+                class="text-xs font-extrabold text-[#1F5A4D]"
+              >
+                {{ getResultScore() }}%
+              </span>
+
+            </div>
+
+            <div
+              class="h-2 overflow-hidden rounded-full bg-[#F3F1E8]"
+            >
+
+              <div
+                class="h-full rounded-full bg-[#4F8061] transition-all duration-700"
+                [style.width.%]="getResultScore()"
+              ></div>
+
+            </div>
+
+            <p
+              class="mt-2 text-[11px] text-[#4F8061]"
+            >
+              {{ getScoreDescription() }}
+            </p>
+
+          </div>
+
+
+          <!-- DESCRIPTION -->
+
+          <div
+            *ngIf="getResultDescription()"
+            class="mt-6"
+          >
+
+            <div
+              class="flex items-center gap-2"
+            >
+
+              <i
+                class="fa-solid fa-align-left text-[#4F8061]"
+              ></i>
+
+              <h4
+                class="text-sm font-bold text-[#133A3C]"
+              >
+                Description
+              </h4>
+
+            </div>
+
+            <p
+              class="mt-2 text-sm leading-6 text-[#4F8061]"
+            >
+              {{ getResultDescription() }}
+            </p>
+
+          </div>
+
+
+          <!-- MESSAGE JARDIDEX -->
+
+          <div
+            *ngIf="messageScan && !scanning"
+            class="mt-5 rounded-2xl bg-[#8FAF91]/10 p-4 text-sm font-semibold text-[#1F5A4D]"
+          >
+            <i class="fa-solid fa-circle-info mr-2"></i>
+            {{ messageScan }}
+          </div>
+
+
+          <!-- ACTIONS -->
+
+          <div
+            class="mt-6 grid gap-3 sm:grid-cols-2"
+          >
+
+            <button
+              type="button"
+              (click)="ajouterAuJardiDex()"
+              class="flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#1F5A4D] px-5 py-3 font-bold text-white transition hover:bg-[#133A3C] active:scale-[0.98]"
+            >
+
+              <i class="fa-solid fa-bookmark"></i>
+
+              Ajouter au JardiDex
+
+            </button>
+
+
+            <button
+              type="button"
+              (click)="resetScan()"
+              class="flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-[#8FAF91]/40 bg-[#F3F1E8] px-5 py-3 font-bold text-[#133A3C] transition hover:bg-[#8FAF91]/20 active:scale-[0.98]"
+            >
+
+              <i class="fa-solid fa-rotate"></i>
+
+              Nouveau scan
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</section>

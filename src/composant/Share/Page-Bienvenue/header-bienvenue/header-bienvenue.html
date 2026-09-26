@@ -32,8 +32,8 @@
     backdrop-blur-2xl
   "
   [ngStyle]="{
-    'background': themeService.GlassBackground,
-    'border-color': themeService.Border1,
+    'background': themeService.BG1,
+    'border-color': themeService.BR2,
     'box-shadow': themeService.BoxShadowSmall
   }"
 >
@@ -105,10 +105,6 @@
       transition-all
       duration-300
     "
-    [ngStyle]="{
-      'color': themeService.TextPrincipal,
-      '--tw-ring-color': themeService.Primary
-    }"
   >
 
     <!-- ==================================================
@@ -126,7 +122,6 @@
         justify-center
         overflow-hidden
         rounded-2xl
-        border
         transition-all
         duration-300
         group-hover:scale-105
@@ -136,10 +131,7 @@
         lg:h-12
         lg:w-12
       "
-      [ngStyle]="{
-        'background': themeService.PrimarySoft,
-        'border-color': themeService.BorderPrimary
-      }"
+      
     >
 
       <!-- =================================================
@@ -158,27 +150,6 @@
           p-1
         "
       />
-
-      <!-- =================================================
-      ✨ EFFET LUMINEUX
-      ================================================== -->
-
-      <span
-        aria-hidden="true"
-        class="
-          pointer-events-none
-          absolute
-          inset-0
-          z-20
-          -translate-x-full
-          skew-x-[-20deg]
-          bg-white/20
-          transition-transform
-          duration-500
-          group-hover:translate-x-[150%]
-        "
-      ></span>
-
     </div>
 
     <!-- ==================================================

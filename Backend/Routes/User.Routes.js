@@ -1,4 +1,5 @@
 const express = require('express');
+
 const multer = require('multer');
 
 const router = express.Router();
@@ -8,21 +9,27 @@ const {
   connecter,
   obtenirUtilisateurs,
   obtenirUtilisateurParId,
+  modifierUtilisateur,
+  supprimerUtilisateur,
+  modifierRoleUtilisateur,
   genererResetPasswordKey,
   obtenirUtilisateurParEmail,
   verifyResetKey
 } = require('../Controller/User.Controller');
+
 
 // =====================================================
 // 📁 CONFIGURATION UPLOAD AVATAR
 // =====================================================
 
 const storage = multer.diskStorage({
+
   destination: (req, file, cb) => {
     cb(null, 'uploads/users');
   },
 
   filename: (req, file, cb) => {
+
     const extension = file.originalname
       .split('.')
       .pop()
@@ -33,9 +40,12 @@ const storage = multer.diskStorage({
 
     cb(null, nomFichier);
   }
+
 });
 
+
 const upload = multer({
+
   storage,
 
   limits: {
@@ -51,6 +61,7 @@ const upload = multer({
     ];
 
     if (!typesAutorises.includes(file.mimetype)) {
+
       return cb(
         new Error(
           'Format d’image non autorisé. Utilisez JPG, PNG ou WEBP.'
@@ -60,7 +71,9 @@ const upload = multer({
 
     cb(null, true);
   }
+
 });
+
 
 // =====================================================
 // 👤 INSCRIPTION
@@ -72,6 +85,7 @@ router.post(
   inscrire
 );
 
+
 // =====================================================
 // 🔐 CONNEXION
 // =====================================================
@@ -80,6 +94,7 @@ router.post(
   '/login',
   connecter
 );
+
 
 // =====================================================
 // 👥 UTILISATEURS
@@ -90,15 +105,48 @@ router.get(
   obtenirUtilisateurs
 );
 
-router.get(
-  '/:id',
-  obtenirUtilisateurParId
-);
 
 router.get(
   '/email/:email',
   obtenirUtilisateurParEmail
 );
+
+
+router.get(
+  '/:id',
+  obtenirUtilisateurParId
+);
+
+
+// =====================================================
+// ✏️ MODIFICATION UTILISATEUR
+// =====================================================
+
+router.put(
+  '/:id',
+  modifierUtilisateur
+);
+
+
+// =====================================================
+// 🗑️ SUPPRESSION UTILISATEUR
+// =====================================================
+
+router.delete(
+  '/:id',
+  supprimerUtilisateur
+);
+
+
+// =====================================================
+// 🔐 MODIFICATION ROLE
+// =====================================================
+
+router.put(
+  '/:key/role',
+  modifierRoleUtilisateur
+);
+
 
 // =====================================================
 // 🔐 RESET PASSWORD
@@ -109,11 +157,11 @@ router.post(
   genererResetPasswordKey
 );
 
+
 router.post(
   '/verify-reset-key',
   verifyResetKey
 );
-
 
 
 module.exports = router;

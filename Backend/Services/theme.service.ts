@@ -64,6 +64,27 @@ export class ThemeService {
   // ============================================================
   // 🖥️ BACKGROUNDS
   // ============================================================
+  BG1 = '';
+  BG2 = '';
+  BG3 = '';
+  BG4 = '';
+  BG5 = '';
+
+  BR1 = '';
+  BR2 = '';
+  BR3 = '';
+  BR4 = '';
+  BR5 = '';
+
+
+  Primary1 = '';
+  PrimaryHover1 = '';
+  PrimaryActive1 = '';
+  PrimarySoft1 = '';
+  PrimaryText1 = '';
+  PrimaryBorder1 = '';
+
+
 
   Background1 = '';
   Background2 = '';
@@ -289,6 +310,32 @@ export class ThemeService {
 
     if (isDark) {
 
+      this.BG1 = '#263633';
+      this.BG2 = '#2D403B';
+      this.BG3 = '#334741';
+      this.BG4 = '#3A4D47';
+      this.BG5 = '#40534C';
+
+      this.BR2 = '#3A4D47';
+      this.BR3 = '#40534C';
+      this.BR4 = '#475A53';
+      this.BR5 = '#4E625A';
+
+
+      this.Primary1       = '#6FBF8F';
+      this.PrimaryHover1  = '#82D2A0';
+      this.PrimaryActive1 = '#5EAA7B';
+      this.PrimarySoft1   = '#244535';
+      this.PrimaryText1   = '#10251A';
+      this.PrimaryBorder1 = '#4F9B70';
+
+
+
+
+
+
+
+
       // --------------------------------------------------------
       // 🌿 PRIMARY
       // --------------------------------------------------------
@@ -468,6 +515,29 @@ export class ThemeService {
 
       return;
     }
+
+
+    this.BG1 = '#F3F1E8';
+    this.BG2 = '#D8D8C8';
+    this.BG3 = '#C4C8B8';
+    this.BG4 = '#AEB6A5';
+    this.BG5 = '#969F8E';
+
+   
+    this.BR2 = '#C4C8B8';
+    this.BR3 = '#AEB6A5';
+    this.BR4 = '#969F8E';
+    this.BR5 = '#858F7D';
+
+
+    this.Primary1 = '#2F6B4F';
+    this.PrimaryHover1 = '#397A5B';
+    this.PrimaryActive1 = '#285B44';
+    this.PrimarySoft1 = '#DCE9DF';
+    this.PrimaryText1 = '#FFFFFF';
+    this.PrimaryBorder1 = '#24563F';
+
+
 
 
     // ==========================================================

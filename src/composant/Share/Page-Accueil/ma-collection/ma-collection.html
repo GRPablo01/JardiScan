@@ -1,7 +1,8 @@
 <!-- ============================================================
      🌿 JARDISCAN — MA COLLECTION
 
-     VERSION ENRICHIE :
+     VERSION ENRICHIE FR / EN :
+
      • Fond végétal décoratif
      • Plusieurs éléments visuels en arrière-plan
      • Texte explicatif enrichi
@@ -11,18 +12,17 @@
      • Indication visuelle de progression
      • Responsive
      • ThemeService conservé
+     • LanguageService conservé
      • Aucun changement de logique Angular
      ============================================================ -->
 
 <section
   class="relative w-full overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
   [ngStyle]="{
-    'background':themeService.Background2,
+    'background': themeService.Background2,
     'color': themeService.TextPrincipal
   }"
 >
-
-
 
   <!-- ============================================================
        CONTENU PRINCIPAL
@@ -57,7 +57,11 @@
           <i class="fa-solid fa-leaf text-[11px]"></i>
         </span>
 
-        Votre jardin numérique
+        {{
+          languageService.is('fr')
+            ? 'Votre jardin numérique'
+            : 'Your digital garden'
+        }}
       </div>
 
       <!-- Titre -->
@@ -67,7 +71,11 @@
           'color': themeService.Primary
         }"
       >
-        Ma Collection
+        {{
+          languageService.is('fr')
+            ? 'Ma Collection'
+            : 'My Collection'
+        }}
       </h1>
 
       <!-- Sous-titre -->
@@ -77,9 +85,18 @@
           'color': themeService.TextPrincipal
         }"
       >
-        Toutes vos découvertes végétales,
+        {{
+          languageService.is('fr')
+            ? 'Toutes vos découvertes végétales,'
+            : 'All your plant discoveries,'
+        }}
+
         <span [ngStyle]="{ 'color': themeService.Primary }">
-          réunies au même endroit.
+          {{
+            languageService.is('fr')
+              ? 'réunies au même endroit.'
+              : 'gathered in one place.'
+          }}
         </span>
       </h2>
 
@@ -90,10 +107,11 @@
           'color': themeService.TextSecondaire
         }"
       >
-        Chaque plante que vous identifiez avec JardiScan vient enrichir
-        votre collection personnelle. Retrouvez vos découvertes,
-        observez votre progression et gardez une trace de votre
-        exploration du monde végétal.
+        {{
+          languageService.is('fr')
+            ? 'Chaque plante que vous identifiez avec JardiScan vient enrichir votre collection personnelle. Retrouvez vos découvertes, observez votre progression et gardez une trace de votre exploration du monde végétal.'
+            : 'Every plant you identify with JardiScan enriches your personal collection. Keep track of your discoveries, follow your progress and record your exploration of the plant world.'
+        }}
       </p>
 
       <!-- ========================================================
@@ -123,13 +141,18 @@
             </div>
 
             <div>
+
               <p
                 class="text-xs font-medium"
                 [ngStyle]="{
                   'color': themeService.TextSecondaire
                 }"
               >
-                Votre progression
+                {{
+                  languageService.is('fr')
+                    ? 'Votre progression'
+                    : 'Your progress'
+                }}
               </p>
 
               <p
@@ -138,20 +161,28 @@
                   'color': themeService.TextPrincipal
                 }"
               >
-                Construisez votre collection
+                {{
+                  languageService.is('fr')
+                    ? 'Construisez votre collection'
+                    : 'Build your collection'
+                }}
               </p>
-            </div>
 
+            </div>
           </div>
 
           <span
             class="hidden rounded-full px-3 py-1.5 text-xs font-bold sm:inline-flex"
             [ngStyle]="{
               'background-color': themeService.PrimarySoft,
-              'color': themeService.Primary,
+              'color': themeService.Primary
             }"
           >
-            Explorez encore
+            {{
+              languageService.is('fr')
+                ? 'Explorez encore'
+                : 'Keep exploring'
+            }}
           </span>
 
         </div>
@@ -177,7 +208,11 @@
             'color': themeService.TextMuted
           }"
         >
-          Chaque nouveau scan vous permet de compléter votre jardin.
+          {{
+            languageService.is('fr')
+              ? 'Chaque nouveau scan vous permet de compléter votre jardin.'
+              : 'Every new scan helps you grow your digital garden.'
+          }}
         </p>
 
       </div>
@@ -197,6 +232,7 @@
             'color': themeService.TextSecondaire
           }"
         >
+
           <span
             class="flex h-5 w-5 items-center justify-center rounded-full"
             [ngStyle]="{
@@ -207,7 +243,12 @@
             <i class="fa-solid fa-check text-[9px]"></i>
           </span>
 
-          Plante identifiée
+          {{
+            languageService.is('fr')
+              ? 'Plante identifiée'
+              : 'Plant identified'
+          }}
+
         </div>
 
         <!-- À identifier -->
@@ -219,8 +260,9 @@
             'color': themeService.TextSecondaire
           }"
         >
+
           <span
-            class="flex h-5 w-5 items-center border justify-center rounded-full"
+            class="flex h-5 w-5 items-center justify-center rounded-full border"
             [ngStyle]="{
               'background-color': themeService.Background4,
               'border-color': themeService.Border4,
@@ -230,7 +272,12 @@
             ?
           </span>
 
-          Plante à découvrir
+          {{
+            languageService.is('fr')
+              ? 'Plante à découvrir'
+              : 'Plant to discover'
+          }}
+
         </div>
 
       </div>
@@ -279,7 +326,11 @@
 
             <img
               src="assets/ImageTournesole.png"
-              alt="Plante identifiée"
+              [alt]="
+                languageService.is('fr')
+                  ? 'Plante identifiée'
+                  : 'Identified plant'
+              "
               class="h-full w-full object-cover transition duration-700 group-hover:scale-110"
             />
 
@@ -297,22 +348,37 @@
               }"
             >
               <i class="fa-solid fa-check text-[9px]"></i>
-              Identifiée
+
+              {{
+                languageService.is('fr')
+                  ? 'Identifiée'
+                  : 'Identified'
+              }}
             </div>
 
             <!-- Texte sur image -->
-            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4">
+            <div
+              class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4"
+            >
 
               <p
                 class="text-[10px] font-medium uppercase tracking-wider text-white/80"
               >
-                Découverte
+                {{
+                  languageService.is('fr')
+                    ? 'Découverte'
+                    : 'Discovery'
+                }}
               </p>
 
               <p
                 class="text-sm font-bold text-white sm:text-base"
               >
-                Une nouvelle plante
+                {{
+                  languageService.is('fr')
+                    ? 'Une nouvelle plante'
+                    : 'A new plant'
+                }}
               </p>
 
             </div>
@@ -330,7 +396,11 @@
                   'color': themeService.TextPrincipal
                 }"
               >
-                Plante trouvée
+                {{
+                  languageService.is('fr')
+                    ? 'Plante trouvée'
+                    : 'Plant found'
+                }}
               </h3>
 
               <span
@@ -351,7 +421,11 @@
                 'color': themeService.TextSecondaire
               }"
             >
-              Identifiée avec succès par JardiScan
+              {{
+                languageService.is('fr')
+                  ? 'Identifiée avec succès par JardiScan'
+                  : 'Successfully identified by JardiScan'
+              }}
             </p>
 
           </div>
@@ -376,7 +450,11 @@
 
             <img
               src="assets/ImageRose.png"
-              alt="Plante à identifier"
+              [alt]="
+                languageService.is('fr')
+                  ? 'Plante à identifier'
+                  : 'Plant to identify'
+              "
               class="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-110"
             />
 
@@ -384,7 +462,9 @@
             <div class="absolute inset-0 bg-black/25"></div>
 
             <!-- Question centrale -->
-            <div class="absolute inset-0 flex items-center justify-center">
+            <div
+              class="absolute inset-0 flex items-center justify-center"
+            >
 
               <div
                 class="flex h-16 w-16 items-center justify-center rounded-full border-2 text-3xl font-bold shadow-2xl backdrop-blur-xl transition duration-300 group-hover:scale-110 sm:h-20 sm:w-20 sm:text-4xl"
@@ -408,23 +488,40 @@
                 'color': themeService.TextPrincipal
               }"
             >
+
               <i class="fa-solid fa-question text-[9px]"></i>
-              À découvrir
+
+              {{
+                languageService.is('fr')
+                  ? 'À découvrir'
+                  : 'To discover'
+              }}
+
             </div>
 
             <!-- Texte sur image -->
-            <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4">
+            <div
+              class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4"
+            >
 
               <p
                 class="text-[10px] font-medium uppercase tracking-wider text-white/70"
               >
-                Prochaine étape
+                {{
+                  languageService.is('fr')
+                    ? 'Prochaine étape'
+                    : 'Next step'
+                }}
               </p>
 
               <p
                 class="text-sm font-bold text-white sm:text-base"
               >
-                À identifier
+                {{
+                  languageService.is('fr')
+                    ? 'À identifier'
+                    : 'To identify'
+                }}
               </p>
 
             </div>
@@ -442,7 +539,11 @@
                   'color': themeService.TextPrincipal
                 }"
               >
-                Plante non trouvée
+                {{
+                  languageService.is('fr')
+                    ? 'Plante non trouvée'
+                    : 'Plant not found'
+                }}
               </h3>
 
               <span
@@ -463,7 +564,11 @@
                 'color': themeService.TextSecondaire
               }"
             >
-              Elle attend votre prochain scan
+              {{
+                languageService.is('fr')
+                  ? 'Elle attend votre prochain scan'
+                  : 'Waiting for your next scan'
+              }}
             </p>
 
           </div>
@@ -491,6 +596,7 @@
         'color': themeService.TextSecondaire
       }"
     >
+
       <i
         class="fa-solid fa-sparkles"
         [ngStyle]="{
@@ -498,7 +604,12 @@
         }"
       ></i>
 
-      Votre collection évolue à chaque découverte.
+      {{
+        languageService.is('fr')
+          ? 'Votre collection évolue à chaque découverte.'
+          : 'Your collection grows with every discovery.'
+      }}
+
     </div>
 
     <p
@@ -507,9 +618,11 @@
         'color': themeService.TextMuted
       }"
     >
-      Identifiez de nouvelles plantes avec le scanner JardiScan
-      et transformez progressivement vos découvertes en véritable
-      collection végétale.
+      {{
+        languageService.is('fr')
+          ? 'Identifiez de nouvelles plantes avec le scanner JardiScan et transformez progressivement vos découvertes en véritable collection végétale.'
+          : 'Identify new plants with the JardiScan scanner and gradually turn your discoveries into a true plant collection.'
+      }}
     </p>
 
   </div>

@@ -1,21 +1,7 @@
 // ============================================================
 // 🌱 PLANT SERVICE — JARDISCAN
 //
-// VERSION ROBUSTE — COMPATIBLE AVEC LES DEUX FORMATS MONGODB
-//
-// FORMAT 1 :
-// images: [
-//   "/uploads/plants/image.png"
-// ]
-//
-// FORMAT 2 :
-// images: [
-//   {
-//     url: "/uploads/plants/image.png",
-//     vue: "front",
-//     _id: "..."
-//   }
-// ]
+// VERSION COMPLÈTE — SANS CONSOLE.LOG / CONSOLE.WARN
 //
 // ============================================================
 
@@ -28,27 +14,24 @@ import {
 
 import {
   Observable,
-  from
+  from,
+  of
 } from 'rxjs';
 
 import {
+  map,
   switchMap
 } from 'rxjs/operators';
-
 
 // ============================================================
 // 📸 IMAGE MONGODB
 // ============================================================
 
 export interface PlantImage {
-
   url: string;
-
   vue?: string;
-
   _id?: string;
 }
-
 
 // ============================================================
 // 🌱 INTERFACE PLANT
@@ -63,21 +46,23 @@ export interface Plant {
   _id?: string;
 
   // ----------------------------------------------------------
+  // 🔢 NUMÉRO AUTOMATIQUE
+  // ----------------------------------------------------------
+
+  nombre?: number;
+
+  // ----------------------------------------------------------
   // 🌿 IDENTITÉ
   // ----------------------------------------------------------
 
   nomCommun: string;
-
   nomScientifique: string;
 
   famille?: string;
-
   genre?: string;
-
   espece?: string;
 
-  categorie: string;
-
+  categorie?: string;
   sousCategorie?: string;
 
   // ----------------------------------------------------------
@@ -88,14 +73,6 @@ export interface Plant {
 
   // ----------------------------------------------------------
   // 📸 IMAGES
-  //
-  // Compatible :
-  //
-  // string[]
-  //
-  // ET
-  //
-  // PlantImage[]
   // ----------------------------------------------------------
 
   imageUrl?: string;
@@ -105,41 +82,38 @@ export interface Plant {
   >;
 
   // ----------------------------------------------------------
-  // 🌍 ORIGINE / HABITAT
+  // 🌍 ORIGINE
   // ----------------------------------------------------------
 
   origine?: string;
-
   habitat?: string;
 
   // ----------------------------------------------------------
-  // 🌱 ENTRETIEN
+  // 🌱 CONDITIONS DE CULTURE
   // ----------------------------------------------------------
 
   exposition?: string;
-
   arrosage?: string;
-
   sol?: string;
-
   humidite?: string;
-
   engrais?: string;
-
   taille?: string;
+
+  // ----------------------------------------------------------
+  // 🌡️ TEMPÉRATURES
+  // ----------------------------------------------------------
+
+  temperatureMin?: number;
+  temperatureMax?: number;
 
   // ----------------------------------------------------------
   // 📏 CARACTÉRISTIQUES
   // ----------------------------------------------------------
 
   hauteur?: string;
-
   floraison?: string;
-
   periodeFloraison?: string;
-
   periodeRecolte?: string;
-
   cycle?: string;
 
   // ----------------------------------------------------------
@@ -153,32 +127,37 @@ export interface Plant {
   // ----------------------------------------------------------
 
   toxicite?: boolean;
-
   toxique?: boolean;
-
   comestible?: boolean;
-
   partiesDangereuses?: string;
+
+  // ----------------------------------------------------------
+  // 🍽️ UTILISATION CULINAIRE
+  // ----------------------------------------------------------
+
+  usageCulinaire?: string;
 
   // ----------------------------------------------------------
   // 🌸 ÉLÉMENTS
   // ----------------------------------------------------------
 
   fruits?: string[];
-
   fleurs?: string[];
-
   conseils?: string[];
 
   // ----------------------------------------------------------
-  // 📅 DATES
+  // 🔁 INFORMATIONS COMPLÉMENTAIRES
+  // ----------------------------------------------------------
+
+  retoure?: string | null;
+
+  // ----------------------------------------------------------
+  // 📅 DATES MONGODB
   // ----------------------------------------------------------
 
   createdAt?: string;
-
   updatedAt?: string;
 }
-
 
 // ============================================================
 // 🔎 RÉPONSE API
@@ -187,18 +166,33 @@ export interface Plant {
 export interface PlantApiResponse {
 
   success?: boolean;
-
   message?: string;
+
+  // ----------------------------------------------------------
+  // UNE PLANTE
+  // ----------------------------------------------------------
 
   plant?: Plant;
 
+  // ----------------------------------------------------------
+  // LISTE
+  // ----------------------------------------------------------
+
+  plantes?: Plant[];
   plants?: Plant[];
+
+  // ----------------------------------------------------------
+  // DATA
+  // ----------------------------------------------------------
 
   data?: Plant | Plant[];
 
+  // ----------------------------------------------------------
+  // NOMBRE
+  // ----------------------------------------------------------
+
   count?: number;
 }
-
 
 // ============================================================
 // 🤖 RÉPONSE IDENTIFICATION
@@ -207,31 +201,25 @@ export interface PlantApiResponse {
 export interface PlantIdentificationResponse {
 
   success?: boolean;
-
   message?: string;
 
   plant?: Plant;
-
   plants?: Plant[];
 
   data?: Plant | Plant[];
 
   name?: string;
-
   nomCommun?: string;
-
   nomScientifique?: string;
 
   confidence?: number;
-
   score?: number;
 
   [key: string]: any;
 }
 
-
 // ============================================================
-// 🌱 SERVICE PLANT
+// 🌱 SERVICE
 // ============================================================
 
 @Injectable({
@@ -240,15 +228,12 @@ export interface PlantIdentificationResponse {
 export class PlantService {
 
   // ==========================================================
-  // ⚙️ CONFIGURATION
+  // ⚙️ CONFIGURATION IMAGE
   // ==========================================================
 
   private readonly IMAGE_WIDTH = 800;
-
   private readonly IMAGE_HEIGHT = 800;
-
   private readonly IMAGE_QUALITY = 0.80;
-
 
   // ==========================================================
   // 🌐 API
@@ -260,7 +245,6 @@ export class PlantService {
   private readonly serverUrl =
     'http://localhost:3000';
 
-
   // ==========================================================
   // 📂 DOSSIER IMAGES
   // ==========================================================
@@ -268,33 +252,177 @@ export class PlantService {
   private readonly plantsUploadPath =
     `${this.serverUrl}/uploads/plants`;
 
-
   // ==========================================================
-  // 💉 CONSTRUCTOR
+  // 💉 CONSTRUCTEUR
   // ==========================================================
 
   constructor(
     private readonly http: HttpClient
   ) {}
 
-
   // ==========================================================
-  // 🌿 GET — TOUTES LES PLANTES
+  // 🔧 EXTRAIRE LES PLANTES D'UNE RÉPONSE API
+  //
+  // Compatible avec :
+  //
+  // 1. [ ... ]
+  // 2. { plantes: [...] }
+  // 3. { plants: [...] }
+  // 4. { plant: [...] }
+  // 5. { data: [...] }
+  // 6. { data: {...} }
+  // 7. { plant: {...} }
+  //
   // ==========================================================
 
-  getPlants():
-    Observable<Plant[] | PlantApiResponse> {
+  private extractPlants(
+    response: PlantApiResponse | Plant[] | unknown
+  ): Plant[] {
 
-    
+    // --------------------------------------------------------
+    // 1️⃣ TABLEAU DIRECT
+    // --------------------------------------------------------
 
-    return this.http.get<
-      Plant[] | PlantApiResponse
-    >(this.apiUrl);
+    if (Array.isArray(response)) {
+      return response;
+    }
+
+    // --------------------------------------------------------
+    // 2️⃣ RÉPONSE INVALIDE
+    // --------------------------------------------------------
+
+    if (
+      !response ||
+      typeof response !== 'object'
+    ) {
+      return [];
+    }
+
+    const apiResponse =
+      response as PlantApiResponse;
+
+    // --------------------------------------------------------
+    // 3️⃣ { plantes: [...] }
+    // --------------------------------------------------------
+
+    if (
+      Array.isArray(apiResponse.plantes)
+    ) {
+      return apiResponse.plantes;
+    }
+
+    // --------------------------------------------------------
+    // 4️⃣ { plants: [...] }
+    // --------------------------------------------------------
+
+    if (
+      Array.isArray(apiResponse.plants)
+    ) {
+      return apiResponse.plants;
+    }
+
+    // --------------------------------------------------------
+    // 5️⃣ { plant: [...] }
+    // --------------------------------------------------------
+
+    if (
+      Array.isArray(apiResponse.plant)
+    ) {
+      return apiResponse.plant;
+    }
+
+    // --------------------------------------------------------
+    // 6️⃣ { data: [...] }
+    // --------------------------------------------------------
+
+    if (
+      Array.isArray(apiResponse.data)
+    ) {
+      return apiResponse.data;
+    }
+
+    // --------------------------------------------------------
+    // 7️⃣ { data: {...} }
+    // --------------------------------------------------------
+
+    if (
+      apiResponse.data &&
+      typeof apiResponse.data === 'object' &&
+      !Array.isArray(apiResponse.data)
+    ) {
+      return [
+        apiResponse.data as Plant
+      ];
+    }
+
+    // --------------------------------------------------------
+    // 8️⃣ { plant: {...} }
+    // --------------------------------------------------------
+
+    if (
+      apiResponse.plant &&
+      typeof apiResponse.plant === 'object' &&
+      !Array.isArray(apiResponse.plant)
+    ) {
+      return [
+        apiResponse.plant
+      ];
+    }
+
+    // --------------------------------------------------------
+    // 9️⃣ AUCUN FORMAT RECONNU
+    // --------------------------------------------------------
+
+    return [];
   }
 
+  // ==========================================================
+  // 🌿 GET — RÉCUPÉRER TOUTES LES PLANTES
+  //
+  // GET /api/plant
+  //
+  // ==========================================================
+
+  getPlants(): Observable<Plant[]> {
+
+    return this.http
+      .get<PlantApiResponse | Plant[]>(
+        this.apiUrl
+      )
+      .pipe(
+        map(
+          (response) =>
+            this.extractPlants(response)
+        )
+      );
+  }
+
+  // ==========================================================
+  // 🌿 GET ALL — RÉCUPÉRER TOUTES LES PLANTES
+  //
+  // GET /api/plant
+  //
+  // ==========================================================
+
+  getAllPlants(): Observable<Plant[]> {
+
+    return this.http
+      .get<PlantApiResponse | Plant[]>(
+        this.apiUrl
+      )
+      .pipe(
+        map(
+          (response) =>
+            this.extractPlants(response)
+        )
+      );
+  }
 
   // ==========================================================
   // 🌱 GET — UNE PLANTE
+  //
+  // GET /api/plant/:id
+  //
   // ==========================================================
 
   getPlantById(
@@ -302,11 +430,6 @@ export class PlantService {
   ): Observable<Plant> {
 
     if (!id?.trim()) {
-
-      console.error(
-        '❌ [GET PLANT] ID manquant'
-      );
-
       throw new Error(
         'ID de plante manquant'
       );
@@ -318,14 +441,48 @@ export class PlantService {
     const url =
       `${this.apiUrl}/${encodeURIComponent(cleanId)}`;
 
-    
+    return this.http
+      .get<PlantApiResponse>(url)
+      .pipe(
+        map(
+          (response) => {
 
-    return this.http.get<Plant>(url);
+            // ------------------------------------------------
+            // Backend :
+            //
+            // { plant: {...} }
+            // ------------------------------------------------
+
+            if (response?.plant) {
+              return response.plant;
+            }
+
+            // ------------------------------------------------
+            // Compatibilité data
+            // ------------------------------------------------
+
+            if (
+              response?.data &&
+              !Array.isArray(response.data)
+            ) {
+              return response.data;
+            }
+
+            // ------------------------------------------------
+            // Réponse directement = plante
+            // ------------------------------------------------
+
+            return response as unknown as Plant;
+          }
+        )
+      );
   }
 
-
   // ==========================================================
-  // 🔎 RECHERCHE
+  // 🔎 RECHERCHER DES PLANTES
+  //
+  // GET /api/plant/search?q=tomate
+  //
   // ==========================================================
 
   searchPlants(
@@ -335,29 +492,43 @@ export class PlantService {
     const value =
       search?.trim() || '';
 
+    if (!value) {
+      return of([]);
+    }
+
     const params =
       new HttpParams()
         .set(
-          'search',
+          'q',
           value
         );
 
     const url =
       `${this.apiUrl}/search`;
 
-    
-
-    return this.http.get<Plant[]>(
-      url,
-      {
-        params
-      }
-    );
+    return this.http
+      .get<
+        PlantApiResponse |
+        Plant[]
+      >(
+        url,
+        {
+          params
+        }
+      )
+      .pipe(
+        map(
+          (response) =>
+            this.extractPlants(response)
+        )
+      );
   }
-
 
   // ==========================================================
   // 🏷️ PLANTES PAR CATÉGORIE
+  //
+  // GET /api/plant/categorie/:categorie
+  //
   // ==========================================================
 
   getPlantsByCategory(
@@ -365,7 +536,6 @@ export class PlantService {
   ): Observable<Plant[]> {
 
     if (!categorie?.trim()) {
-
       throw new Error(
         'Catégorie manquante'
       );
@@ -379,14 +549,24 @@ export class PlantService {
         cleanCategory
       )}`;
 
-    
-
-    return this.http.get<Plant[]>(url);
+    return this.http
+      .get<
+        Plant[] |
+        PlantApiResponse
+      >(url)
+      .pipe(
+        map(
+          (response) =>
+            this.extractPlants(response)
+        )
+      );
   }
-
 
   // ==========================================================
   // 🌳 PLANTES PAR FAMILLE
+  //
+  // GET /api/plant/famille/:famille
+  //
   // ==========================================================
 
   getPlantsByFamily(
@@ -394,7 +574,6 @@ export class PlantService {
   ): Observable<Plant[]> {
 
     if (!famille?.trim()) {
-
       throw new Error(
         'Famille manquante'
       );
@@ -408,25 +587,21 @@ export class PlantService {
         cleanFamily
       )}`;
 
-    
-
-    return this.http.get<Plant[]>(url);
+    return this.http
+      .get<
+        Plant[] |
+        PlantApiResponse
+      >(url)
+      .pipe(
+        map(
+          (response) =>
+            this.extractPlants(response)
+        )
+      );
   }
 
-
   // ==========================================================
-  // 🖼️ EXTRAIRE LE CHEMIN D'UNE IMAGE
-  //
-  // Accepte :
-  //
-  // "/uploads/plants/image.png"
-  //
-  // OU
-  //
-  // {
-  //   url: "/uploads/plants/image.png",
-  //   vue: "front"
-  // }
+  // 🖼️ EXTRAIRE CHEMIN IMAGE
   // ==========================================================
 
   private extractImagePath(
@@ -440,10 +615,8 @@ export class PlantService {
     if (
       typeof image === 'string'
     ) {
-
       return image.trim();
     }
-
 
     // --------------------------------------------------------
     // OBJECT
@@ -460,29 +633,19 @@ export class PlantService {
       if (
         typeof imageObject.url === 'string'
       ) {
-
         return imageObject.url.trim();
       }
     }
 
-
-    // --------------------------------------------------------
-    // INVALIDE
-    // --------------------------------------------------------
-
-    console.warn(
-      '⚠️ [IMAGE] Format image inconnu :',
-      image
-    );
-
     return '';
   }
-
 
   // ==========================================================
   // 🖼️ CONSTRUIRE URL IMAGE
   //
-  // ⚠️ JAMAIS DE PLACEHOLDER
+  // Aucun placeholder.
+  // Aucun asset local.
+  //
   // ==========================================================
 
   getImageUrl(
@@ -490,56 +653,38 @@ export class PlantService {
   ): string {
 
     // --------------------------------------------------------
-    // IMAGE ABSENTE
+    // ABSENTE
     // --------------------------------------------------------
 
     if (
       imagePath === undefined ||
       imagePath === null
     ) {
-
-      console.warn(
-        '⚠️ [IMAGE] Aucun chemin'
-      );
-
       return '';
     }
-
 
     let cleanPath =
       String(imagePath).trim();
 
-
     if (!cleanPath) {
-
       return '';
     }
 
-
-
-
-    // ========================================================
-    // 🚫 PLACEHOLDER INTERDIT
-    // ========================================================
+    // --------------------------------------------------------
+    // 🚫 PLACEHOLDER
+    // --------------------------------------------------------
 
     if (
       cleanPath
         .toLowerCase()
         .includes('placeholder')
     ) {
-
-      console.warn(
-        '🚫 [IMAGE] PLACEHOLDER REFUSÉ :',
-        cleanPath
-      );
-
       return '';
     }
 
-
-    // ========================================================
-    // 🚫 ASSETS INTERDITS
-    // ========================================================
+    // --------------------------------------------------------
+    // 🚫 ASSETS LOCAUX
+    // --------------------------------------------------------
 
     if (
       cleanPath
@@ -547,114 +692,77 @@ export class PlantService {
         .toLowerCase()
         .startsWith('assets/')
     ) {
-
-      console.warn(
-        '🚫 [IMAGE] ASSET LOCAL REFUSÉ :',
-        cleanPath
-      );
-
       return '';
     }
 
-
-    // ========================================================
+    // --------------------------------------------------------
     // 🌐 URL ABSOLUE
-    // ========================================================
+    // --------------------------------------------------------
 
     if (
       cleanPath.startsWith('http://') ||
       cleanPath.startsWith('https://')
     ) {
-
-      
-
       return cleanPath;
     }
 
-
-    // ========================================================
+    // --------------------------------------------------------
     // 💾 DATA URL
-    // ========================================================
+    // --------------------------------------------------------
 
     if (
       cleanPath.startsWith('data:')
     ) {
-
       return cleanPath;
     }
 
-
-    // ========================================================
-    // 🧹 SUPPRESSION SLASH
-    // ========================================================
+    // --------------------------------------------------------
+    // 🧹 SUPPRESSION DES SLASHES INITIAUX
+    // --------------------------------------------------------
 
     cleanPath =
       cleanPath.replace(/^\/+/, '');
 
-
-    // ========================================================
-    // 📂 /uploads/...
-    // ========================================================
+    // --------------------------------------------------------
+    // 📂 uploads/...
+    // --------------------------------------------------------
 
     if (
       cleanPath.startsWith('uploads/')
     ) {
-
-      const url =
-        `${this.serverUrl}/${cleanPath}`;
-
-     
-
-      return url;
+      return `${this.serverUrl}/${cleanPath}`;
     }
 
-
-    // ========================================================
+    // --------------------------------------------------------
     // 🌱 plants/...
-    // ========================================================
+    // --------------------------------------------------------
 
     if (
       cleanPath.startsWith('plants/')
     ) {
-
-      const url =
-        `${this.serverUrl}/uploads/${cleanPath}`;
-
-      
-
-      return url;
+      return `${this.serverUrl}/uploads/${cleanPath}`;
     }
 
-
-    // ========================================================
+    // --------------------------------------------------------
     // 📸 NOM DE FICHIER
-    // ========================================================
+    // --------------------------------------------------------
 
     const filename =
       cleanPath
         .split('/')
         .pop() || '';
 
-
     if (!filename) {
-
       return '';
     }
 
-
-    const url =
-      `${this.plantsUploadPath}/${encodeURIComponent(
-        filename
-      )}`;
-
-    
-
-    return url;
+    return `${this.plantsUploadPath}/${encodeURIComponent(
+      filename
+    )}`;
   }
 
-
   // ==========================================================
-  // 📸 RÉCUPÉRER IMAGE PRINCIPALE
+  // 📸 IMAGE PRINCIPALE
   // ==========================================================
 
   getMainImage(
@@ -662,19 +770,11 @@ export class PlantService {
   ): string {
 
     if (!plant) {
-
-      console.warn(
-        '⚠️ [MAIN IMAGE] Plante absente'
-      );
-
       return '';
     }
 
-    
-
-
     // --------------------------------------------------------
-    // 1️⃣ IMAGE URL
+    // 1️⃣ imageUrl
     // --------------------------------------------------------
 
     if (
@@ -687,16 +787,12 @@ export class PlantService {
         );
 
       if (image) {
-
-        
-
         return image;
       }
     }
 
-
     // --------------------------------------------------------
-    // 2️⃣ PREMIÈRE IMAGE DU TABLEAU
+    // 2️⃣ images[]
     // --------------------------------------------------------
 
     if (
@@ -720,31 +816,20 @@ export class PlantService {
           this.getImageUrl(path);
 
         if (image) {
-
-          
-
           return image;
         }
       }
     }
 
-
     // --------------------------------------------------------
-    // 🚫 RIEN
+    // 🚫 AUCUNE IMAGE
     // --------------------------------------------------------
-
-    console.warn(
-      '🚫 Aucune image principale'
-    );
 
     return '';
   }
 
-
   // ==========================================================
   // 📸 TOUTES LES IMAGES
-  //
-  // Compatible STRING + OBJECT
   // ==========================================================
 
   getPlantImages(
@@ -752,108 +837,56 @@ export class PlantService {
   ): string[] {
 
     if (!plant) {
-
       return [];
     }
 
-    
-
     const result: string[] = [];
 
-
-    // ========================================================
-    // 📸 images[]
-    // ========================================================
+    // --------------------------------------------------------
+    // images[]
+    // --------------------------------------------------------
 
     if (
       Array.isArray(plant.images)
     ) {
 
-      
-
-
       for (
-        let index = 0;
-        index < plant.images.length;
-        index++
+        const rawImage of plant.images
       ) {
-
-        const rawImage =
-          plant.images[index];
-
-
-       
-
-
-        // ----------------------------------------------------
-        // EXTRACTION
-        // ----------------------------------------------------
 
         const path =
           this.extractImagePath(
             rawImage
           );
 
-
         if (!path) {
-
-          console.warn(
-            `⚠️ Image [${index}] ignorée : chemin introuvable`
-          );
-
           continue;
         }
-
-
-        // ----------------------------------------------------
-        // URL
-        // ----------------------------------------------------
 
         const image =
           this.getImageUrl(path);
 
-
         if (!image) {
-
-          console.warn(
-            `🚫 Image [${index}] refusée :`,
-            path
-          );
-
           continue;
         }
 
-
         // ----------------------------------------------------
-        // DOUBLON
+        // Éviter les doublons
         // ----------------------------------------------------
 
         if (
           result.includes(image)
         ) {
-
-          console.warn(
-            `⚠️ Image [${index}] doublon :`,
-            image
-          );
-
           continue;
         }
 
-
         result.push(image);
-
-
-        
       }
     }
 
-
-    // ========================================================
-    // 📸 imageUrl
-    //
-    // Seulement si images[] n'a rien donné.
-    // ========================================================
+    // --------------------------------------------------------
+    // imageUrl
+    // --------------------------------------------------------
 
     if (
       result.length === 0 &&
@@ -865,25 +898,16 @@ export class PlantService {
           plant.imageUrl
         );
 
-
       if (image) {
-
         result.push(image);
-
-        
       }
     }
-
-
-   
-
 
     return result;
   }
 
-
   // ==========================================================
-  // 🌱 NOM AFFICHAGE
+  // 🌱 NOM D'AFFICHAGE
   // ==========================================================
 
   getPlantDisplayName(
@@ -891,7 +915,6 @@ export class PlantService {
   ): string {
 
     if (!plant) {
-
       return 'Plante inconnue';
     }
 
@@ -901,7 +924,6 @@ export class PlantService {
       'Plante inconnue'
     );
   }
-
 
   // ==========================================================
   // 🔬 NOM SCIENTIFIQUE
@@ -917,7 +939,6 @@ export class PlantService {
     );
   }
 
-
   // ==========================================================
   // 🏷️ CATÉGORIE
   // ==========================================================
@@ -931,7 +952,6 @@ export class PlantService {
       ''
     );
   }
-
 
   // ==========================================================
   // 🌳 FAMILLE
@@ -947,9 +967,25 @@ export class PlantService {
     );
   }
 
+  // ==========================================================
+  // 🔢 NUMÉRO DE PLANTE
+  // ==========================================================
+
+  getPlantNumber(
+    plant: Plant
+  ): number | null {
+
+    if (
+      typeof plant?.nombre === 'number'
+    ) {
+      return plant.nombre;
+    }
+
+    return null;
+  }
 
   // ==========================================================
-  // 📐 REDIMENSIONNEMENT 800x800
+  // 📐 REDIMENSIONNEMENT 800 × 800
   // ==========================================================
 
   resizeImageTo800x800(
@@ -957,22 +993,19 @@ export class PlantService {
   ): Promise<Blob> {
 
     return new Promise(
-      (resolve, reject) => {
+      (
+        resolve,
+        reject
+      ) => {
 
         if (!image) {
-
           reject(
             new Error(
               'Image manquante'
             )
           );
-
           return;
         }
-
-
-        
-
 
         const imageUrl =
           URL.createObjectURL(image);
@@ -980,17 +1013,14 @@ export class PlantService {
         const img =
           new Image();
 
-
         img.onload = () => {
 
           try {
 
-           
-
-
             const canvas =
-              document.createElement('canvas');
-
+              document.createElement(
+                'canvas'
+              );
 
             canvas.width =
               this.IMAGE_WIDTH;
@@ -998,10 +1028,10 @@ export class PlantService {
             canvas.height =
               this.IMAGE_HEIGHT;
 
-
             const context =
-              canvas.getContext('2d');
-
+              canvas.getContext(
+                '2d'
+              );
 
             if (!context) {
 
@@ -1018,7 +1048,6 @@ export class PlantService {
               return;
             }
 
-
             // ------------------------------------------------
             // FOND BLANC
             // ------------------------------------------------
@@ -1033,13 +1062,15 @@ export class PlantService {
               this.IMAGE_HEIGHT
             );
 
+            // ------------------------------------------------
+            // DIMENSIONS SOURCE
+            // ------------------------------------------------
 
             const sourceWidth =
               img.naturalWidth;
 
             const sourceHeight =
               img.naturalHeight;
-
 
             if (
               !sourceWidth ||
@@ -1059,16 +1090,21 @@ export class PlantService {
               return;
             }
 
+            // ------------------------------------------------
+            // RATIOS
+            // ------------------------------------------------
 
             const sourceRatio =
               sourceWidth /
               sourceHeight;
 
-
             const targetRatio =
               this.IMAGE_WIDTH /
               this.IMAGE_HEIGHT;
 
+            // ------------------------------------------------
+            // DIMENSIONS DE DESSIN
+            // ------------------------------------------------
 
             let drawWidth =
               this.IMAGE_WIDTH;
@@ -1076,12 +1112,8 @@ export class PlantService {
             let drawHeight =
               this.IMAGE_HEIGHT;
 
-            let offsetX =
-              0;
-
-            let offsetY =
-              0;
-
+            let offsetX = 0;
+            let offsetY = 0;
 
             // ------------------------------------------------
             // PAYSAGE
@@ -1109,7 +1141,6 @@ export class PlantService {
                 );
             }
 
-
             // ------------------------------------------------
             // PORTRAIT
             // ------------------------------------------------
@@ -1136,6 +1167,9 @@ export class PlantService {
                 );
             }
 
+            // ------------------------------------------------
+            // QUALITÉ
+            // ------------------------------------------------
 
             context.imageSmoothingEnabled =
               true;
@@ -1143,6 +1177,9 @@ export class PlantService {
             context.imageSmoothingQuality =
               'high';
 
+            // ------------------------------------------------
+            // DESSIN
+            // ------------------------------------------------
 
             context.drawImage(
               img,
@@ -1152,14 +1189,16 @@ export class PlantService {
               drawHeight
             );
 
+            // ------------------------------------------------
+            // JPEG
+            // ------------------------------------------------
 
             canvas.toBlob(
-              blob => {
+              (blob) => {
 
                 URL.revokeObjectURL(
                   imageUrl
                 );
-
 
                 if (!blob) {
 
@@ -1171,10 +1210,6 @@ export class PlantService {
 
                   return;
                 }
-
-
-                
-                
 
                 resolve(blob);
               },
@@ -1192,15 +1227,10 @@ export class PlantService {
           }
         };
 
-
         img.onerror = () => {
 
           URL.revokeObjectURL(
             imageUrl
-          );
-
-          console.error(
-            '❌ Impossible de charger l’image'
           );
 
           reject(
@@ -1210,16 +1240,17 @@ export class PlantService {
           );
         };
 
-
         img.src =
           imageUrl;
       }
     );
   }
 
-
   // ==========================================================
   // 🤖 IDENTIFICATION
+  //
+  // POST /api/plant/identify
+  //
   // ==========================================================
 
   identifyPlant(
@@ -1227,31 +1258,22 @@ export class PlantService {
   ): Observable<PlantIdentificationResponse> {
 
     if (!image) {
-
       throw new Error(
         'Image manquante pour identification'
       );
     }
 
-
     const identifyUrl =
       `${this.apiUrl}/identify`;
 
-
-    console.log('');
-    
-    
-
     const formData =
       new FormData();
-
 
     formData.append(
       'image',
       image,
       'plant-scan-800x800.jpg'
     );
-
 
     return this.http.post<
       PlantIdentificationResponse
@@ -1261,9 +1283,8 @@ export class PlantService {
     );
   }
 
-
   // ==========================================================
-  // 🤖 IDENTIFICATION + RESIZE
+  // 🤖 IDENTIFICATION + REDIMENSIONNEMENT
   // ==========================================================
 
   identifyPlantResized(
@@ -1271,32 +1292,21 @@ export class PlantService {
   ): Observable<PlantIdentificationResponse> {
 
     if (!image) {
-
       throw new Error(
         'Image manquante pour identification'
       );
     }
 
-
-    
-
-
     return from(
-      this.resizeImageTo800x800(image)
+      this.resizeImageTo800x800(
+        image
+      )
     ).pipe(
-
       switchMap(
-        resizedImage => {
-
-          
-
-         
-
-
-          return this.identifyPlant(
+        (resizedImage) =>
+          this.identifyPlant(
             resizedImage
-          );
-        }
+          )
       )
     );
   }

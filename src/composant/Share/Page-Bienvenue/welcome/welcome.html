@@ -18,7 +18,7 @@
     relative
     w-full
     mt-0
-    2xl:mt-20
+    2xl:mt-17
     h-[472px]
     sm:h-[461px]
     lg:h-[526px]
@@ -27,7 +27,7 @@
     overflow-hidden
   "
   [ngStyle]="{
-    'background-color': themeService.Background1,
+    'background-color': themeService.BG1,
     'color': themeService.TextPrincipal
   }"
 >
@@ -112,8 +112,8 @@
 
   <div
     [ngStyle]="{
-      'background': themeService.Background2,
-      'border': '1px solid ' + themeService.Border2
+      'background': themeService.BG2,
+      'border': '1px solid ' + themeService.BR2
     }"
     class="
       absolute
@@ -151,7 +151,7 @@
 
     <i
       [ngStyle]="{
-        'color': themeService.Primary
+        'color': themeService.Primary1
       }"
       class="
         fa-solid
@@ -250,7 +250,7 @@
       <span
         class="block"
         [ngStyle]="{
-          'color': themeService.Primary
+          'color': themeService.Primary1
         }"
       >
 
@@ -340,7 +340,7 @@
       type="button"
       routerLink="/login"
       [ngStyle]="{
-        'background': themeService.Primary,
+        'background': themeService.Primary1,
         'color': '#FFFFFF'
       }"
       class="
@@ -449,9 +449,8 @@
       type="button"
       routerLink="/decouvrir"
       [ngStyle]="{
-        'background': themeService.Background2,
-        'color': themeService.TextPrincipal,
-        'border': '1px solid ' + themeService.Border2
+        'color': themeService.Primary1,
+        'border': '1px solid ' + themeService.BorderPrimary
       }"
       class="
         group

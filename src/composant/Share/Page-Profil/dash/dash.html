@@ -1,0 +1,79 @@
+<!-- ============================================================
+     🌿 JARDISCAN — LAYOUT PRINCIPAL
+     ============================================================ -->
+
+     <section class="min-h-screen w-full" [ngStyle]="{'background':themeService.Background1}">
+
+        <!-- ========================================================
+             🌿 BARRE LATÉRALE
+             ======================================================== -->
+    
+        <app-barre (pageChange)="pageActive = $event"></app-barre>
+    
+    
+        <!-- ========================================================
+             📦 ZONE PRINCIPALE
+             ======================================================== -->
+    
+        <section
+            class="
+                min-h-screen
+                w-full
+                px-4
+                pb-10
+                sm:px-6
+                lg:pl-80
+                lg:pr-8
+                xl:pl-80
+                xl:pr-10
+                mt-6
+                xl:mt-6
+                2xl:mt-20
+            "
+        >
+    
+            <!-- ====================================================
+                 👤 HEADER PROFIL
+                 ==================================================== -->
+    
+            <div class="mb-6 w-full">
+                <app-header-profil></app-header-profil>
+            </div>
+    
+    
+            <!-- ====================================================
+            🌱 CONTENU DE LA PAGE ACTIVE
+            ==================================================== -->
+            <main class="w-full">
+
+                <app-profil-accueil
+                    *ngIf="pageActive === 'accueil'"
+                ></app-profil-accueil>
+
+
+                <app-profil-mes-plant
+                    *ngIf="pageActive === 'mesplantes'"
+                ></app-profil-mes-plant>
+
+
+                <!-- À ajouter ensuite si nécessaire -->
+
+                
+                <app-profil-ajoute-plant
+                *ngIf="pageActive === 'nouvelleplante'"
+                ></app-profil-ajoute-plant>
+
+                <!--<app-identifier
+                    *ngIf="pageActive === 'identifier'"
+                ></app-identifier>
+
+                <app-parametre
+                    *ngIf="pageActive === 'parametre'"
+                ></app-parametre>
+                -->
+
+            </main>
+    
+        </section>
+    
+    </section>

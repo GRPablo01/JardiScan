@@ -8,6 +8,12 @@ import { Connexion } from '../Page/connexion/connexion';
 import { Inscription } from '../Page/inscription/inscription';
 import { Accueil } from '../Page/accueil/accueil';
 import { ChangePassword } from '../Page/change-password/change-password';
+import { Scan } from '../Page/scan/scan';
+import { MonProfil } from '../Page/mon-profil/mon-profil';
+import { Diagnostiquer } from '../Page/diagnostiquer/diagnostiquer';
+import { Saison } from '../Page/saison/saison';
+import { Rechercher } from '../Page/rechercher/rechercher';
+
 
 
 export const routes: Routes = [
@@ -20,4 +26,9 @@ export const routes: Routes = [
     { path: 'register', component: Inscription},
     { path: 'accueil', component: Accueil},
     { path: 'change-password', component: ChangePassword },
+    { path: 'scan', component: Scan },
+    { path: 'profil', component: MonProfil },
+    { path: 'diagnostic', component: Diagnostiquer },
+    { path: 'saison', component: Saison},
+    { path: 'search', component: Rechercher},
 ];

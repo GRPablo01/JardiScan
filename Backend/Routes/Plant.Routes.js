@@ -10,12 +10,13 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const mongoose = require('mongoose');
 
 const {
-  createPlant,
-  getPlants,
-  getPlantById,
-  identifyPlant
+    createPlant,
+    getAllPlants,
+    getPlantById,
+    identifyPlant
 } = require('../Controller/Plant.Controller');
 
 // ============================================================
@@ -34,31 +35,18 @@ console.log('🌱 Plant.Routes.js chargé');
 console.log('==========================================');
 
 // ============================================================
-// 📁 DOSSIER UPLOAD
+// 📁 DOSSIER UPLOADS PLANTES
 // ============================================================
-//
-// Structure :
-//
-// projet/
-// ├── uploads/
-// │   └── plants/
-// ├── Controller/
-// ├── Routes/
-// └── server.js
-//
-// process.cwd() permet d'utiliser la racine depuis laquelle
-// le serveur Node.js est lancé.
-//
 
 const uploadDirectory = path.join(
-  process.cwd(),
-  'uploads',
-  'plants'
+    process.cwd(),
+    'uploads',
+    'plants'
 );
 
 console.log(
-  '📁 Dossier upload :',
-  uploadDirectory
+    '📁 Dossier upload plantes :',
+    uploadDirectory
 );
 
 // ============================================================
@@ -67,36 +55,36 @@ console.log(
 
 try {
 
-  if (!fs.existsSync(uploadDirectory)) {
+    if (!fs.existsSync(uploadDirectory)) {
 
-    fs.mkdirSync(
-      uploadDirectory,
-      {
-        recursive: true
-      }
-    );
+        fs.mkdirSync(
+            uploadDirectory,
+            {
+                recursive: true
+            }
+        );
 
-    console.log(
-      '📂 Dossier uploads/plants créé'
-    );
+        console.log(
+            '📂 Dossier uploads/plants créé'
+        );
 
-  } else {
+    } else {
 
-    console.log(
-      '📂 Dossier uploads/plants déjà présent'
-    );
+        console.log(
+            '📂 Dossier uploads/plants déjà présent'
+        );
 
-  }
+    }
 
 } catch (error) {
 
-  console.error(
-    '❌ Impossible de créer le dossier uploads/plants'
-  );
+    console.error(
+        '❌ Impossible de créer uploads/plants'
+    );
 
-  console.error(
-    error
-  );
+    console.error(
+        error
+    );
 
 }
 
@@ -106,75 +94,58 @@ try {
 
 const storage = multer.diskStorage({
 
-  // ----------------------------------------------------------
-  // DESTINATION
-  // ----------------------------------------------------------
+    // ----------------------------------------------------------
+    // DESTINATION
+    // ----------------------------------------------------------
 
-  destination: (req, file, cb) => {
+    destination: (req, file, cb) => {
 
-    console.log(
-      '📂 Destination upload :',
-      uploadDirectory
-    );
+        console.log(
+            '📂 Destination upload :',
+            uploadDirectory
+        );
 
-    cb(
-      null,
-      uploadDirectory
-    );
+        cb(
+            null,
+            uploadDirectory
+        );
 
-  },
+    },
 
-  // ----------------------------------------------------------
-  // NOM DU FICHIER
-  // ----------------------------------------------------------
+    // ----------------------------------------------------------
+    // NOM DU FICHIER
+    // ----------------------------------------------------------
 
-  filename: (req, file, cb) => {
+    filename: (req, file, cb) => {
 
-    const extension =
-      path.extname(
-        file.originalname
-      ).toLowerCase();
+        const extension = path
+            .extname(file.originalname || '')
+            .toLowerCase();
 
-    const uniqueName =
-      `plant-${Date.now()}-${Math.round(
-        Math.random() * 1e9
-      )}${extension}`;
+        const uniqueName =
+            `plant-${Date.now()}-${Math.round(
+                Math.random() * 1e9
+            )}${extension}`;
 
-    console.log(
-      '📝 Nom fichier généré :',
-      uniqueName
-    );
+        console.log(
+            '📝 Nom fichier généré :',
+            uniqueName
+        );
 
-    cb(
-      null,
-      uniqueName
-    );
+        cb(
+            null,
+            uniqueName
+        );
 
-  }
+    }
 
 });
 
 // ============================================================
-// 🛡️ CONFIGURATION UPLOAD
+// 🛡️ FILTRE DES IMAGES
 // ============================================================
 
-const upload = multer({
-
-  storage,
-
-  limits: {
-
-    // Maximum 10 Mo par image
-    fileSize:
-      10 * 1024 * 1024,
-
-    // Maximum 10 images
-    files:
-      10
-
-  },
-
-  fileFilter: (req, file, cb) => {
+const fileFilter = (req, file, cb) => {
 
     console.log('');
     console.log('==========================================');
@@ -182,719 +153,1216 @@ const upload = multer({
     console.log('==========================================');
 
     console.log(
-      'Nom :',
-      file.originalname
+        'Nom original :',
+        file.originalname
     );
 
     console.log(
-      'Type :',
-      file.mimetype
+        'Type MIME :',
+        file.mimetype
     );
 
     console.log(
-      'Champ :',
-      file.fieldname
+        'Champ :',
+        file.fieldname
     );
 
-    // --------------------------------------------------------
+    // ----------------------------------------------------------
     // Vérification MIME
-    // --------------------------------------------------------
+    // ----------------------------------------------------------
 
     if (
-      !file.mimetype ||
-      !file.mimetype.startsWith('image/')
+        !file.mimetype ||
+        !file.mimetype.startsWith('image/')
     ) {
 
-      console.error(
-        '❌ Type MIME non autorisé :',
-        file.mimetype
-      );
+        console.error(
+            '❌ Type MIME non autorisé :',
+            file.mimetype
+        );
 
-      return cb(
-        new Error(
-          'Seules les images sont autorisées.'
-        )
-      );
+        return cb(
+            new Error(
+                'Seules les images sont autorisées.'
+            )
+        );
 
     }
 
-    // --------------------------------------------------------
+    // ----------------------------------------------------------
     // Extensions autorisées
-    // --------------------------------------------------------
+    // ----------------------------------------------------------
 
     const allowedExtensions = [
-      '.jpg',
-      '.jpeg',
-      '.png',
-      '.webp',
-      '.gif'
+        '.jpg',
+        '.jpeg',
+        '.png',
+        '.webp',
+        '.gif'
     ];
 
-    const extension =
-      path.extname(
-        file.originalname
-      ).toLowerCase();
+    const extension = path
+        .extname(file.originalname || '')
+        .toLowerCase();
 
     if (
-      !allowedExtensions.includes(
-        extension
-      )
+        !allowedExtensions.includes(extension)
     ) {
 
-      console.error(
-        '❌ Extension non autorisée :',
-        extension
-      );
+        console.error(
+            '❌ Extension non autorisée :',
+            extension
+        );
 
-      return cb(
-        new Error(
-          'Format d’image non autorisé.'
-        )
-      );
+        return cb(
+            new Error(
+                'Format d’image non autorisé.'
+            )
+        );
 
     }
 
     console.log(
-      '✅ Image acceptée'
+        '✅ Image acceptée'
     );
 
     cb(
-      null,
-      true
+        null,
+        true
     );
 
-  }
+};
+
+// ============================================================
+// 📸 INSTANCE MULTER
+// ============================================================
+
+const upload = multer({
+
+    storage,
+
+    limits: {
+
+        // 10 Mo maximum par image
+        fileSize: 10 * 1024 * 1024,
+
+        // Maximum 10 fichiers
+        files: 10
+
+    },
+
+    fileFilter
 
 });
 
 // ============================================================
-// 🔎 LOG REQUEST
+// 🔎 LOG GLOBAL DES ROUTES PLANTES
 // ============================================================
 
 router.use(
-  (req, res, next) => {
+    (req, res, next) => {
 
-    console.log('');
-    console.log('==========================================');
-    console.log('🌱 PLANT ROUTE');
-    console.log('==========================================');
+        console.log('');
+        console.log('==========================================');
+        console.log('🌱 PLANT ROUTE');
+        console.log('==========================================');
 
-    console.log(
-      '➡️ Méthode :',
-      req.method
-    );
+        console.log(
+            '➡️ Méthode :',
+            req.method
+        );
 
-    console.log(
-      '➡️ URL :',
-      req.originalUrl
-    );
+        console.log(
+            '➡️ URL complète :',
+            req.originalUrl
+        );
 
-    console.log(
-      '➡️ URL routeur :',
-      req.url
-    );
+        console.log(
+            '➡️ URL router :',
+            req.url
+        );
 
-    console.log(
-      '➡️ IP :',
-      req.ip
-    );
+        console.log(
+            '➡️ IP :',
+            req.ip
+        );
 
-    console.log(
-      '➡️ Heure :',
-      new Date().toISOString()
-    );
+        console.log(
+            '➡️ Heure :',
+            new Date().toISOString()
+        );
 
-    console.log('==========================================');
+        console.log(
+            '=========================================='
+        );
 
-    next();
+        next();
 
-  }
+    }
 );
 
 // ============================================================
+// 🔎 POST /api/plant/identify
 // 🔎 POST /api/plants/identify
 // ============================================================
 //
-// Identifier une plante à partir d'une image.
+// Le même router est monté dans server.js sur :
 //
-// Angular doit envoyer :
+// app.use('/api/plant', plantRoutes);
+// app.use('/api/plants', plantRoutes);
 //
-// FormData
-// └── image
+// La route finale fonctionne donc avec :
 //
-// Exemple côté Angular :
+// POST /api/plant/identify
+// POST /api/plants/identify
 //
-// formData.append(
-//   'image',
-//   blob,
-//   'plant.jpg'
-// );
+// ------------------------------------------------------------
+// 📸 Champs acceptés
+// ------------------------------------------------------------
 //
-// IMPORTANT :
-// Cette route est placée AVANT /:id.
+// 1. image
+//    → une image
+//
+// 2. images
+//    → plusieurs images
+//
+// Le controller existant peut continuer à utiliser :
+//
+// req.file
+//
+// tandis que les fichiers complets sont disponibles dans :
+//
+// req.files
 //
 // ============================================================
 
 router.post(
-  '/identify',
-  upload.single('image'),
-  async (req, res, next) => {
+    '/identify',
 
-    console.log('');
-    console.log('==========================================');
-    console.log('🔎 IDENTIFICATION PLANTE');
-    console.log('==========================================');
+    upload.fields([
+        {
+            name: 'image',
+            maxCount: 1
+        },
+        {
+            name: 'images',
+            maxCount: 10
+        }
+    ]),
 
-    console.log(
-      '📡 Route : POST /api/plants/identify'
-    );
+    async (req, res, next) => {
 
-    // --------------------------------------------------------
-    // Vérification de l'image
-    // --------------------------------------------------------
+        console.log('');
+        console.log('==========================================');
+        console.log('🔎 IDENTIFICATION PLANTE');
+        console.log('==========================================');
 
-    if (!req.file) {
+        console.log(
+            '📡 Route :',
+            req.originalUrl
+        );
 
-      console.error(
-        '❌ Aucune image reçue'
-      );
+        // ======================================================
+        // 📸 RÉCUPÉRATION DES FICHIERS
+        // ======================================================
 
-      return res.status(400).json({
+        const fichiersImage =
+            req.files?.image || [];
 
-        success: false,
+        const fichiersImages =
+            req.files?.images || [];
 
-        message:
-          'Aucune image n’a été envoyée.'
+        const fichiersRecus = [
+            ...fichiersImage,
+            ...fichiersImages
+        ];
 
-      });
+        // ======================================================
+        // ❌ AUCUNE IMAGE
+        // ======================================================
+
+        if (
+            fichiersRecus.length === 0
+        ) {
+
+            console.error(
+                '❌ Aucune image reçue'
+            );
+
+            console.error(
+                '📦 req.files :',
+                req.files
+            );
+
+            console.error(
+                '📦 req.body :',
+                req.body
+            );
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    'Aucune image n’a été envoyée.',
+
+                expectedFields: [
+                    'image',
+                    'images'
+                ]
+
+            });
+
+        }
+
+        // ======================================================
+        // 📸 NORMALISATION POUR LE CONTROLLER
+        // ======================================================
+        //
+        // Ton ancien controller utilise probablement :
+        //
+        // req.file
+        //
+        // On conserve donc req.file avec la première image.
+        //
+        // Les autres restent disponibles dans req.files.
+        //
+        // ======================================================
+
+        req.file =
+            fichiersRecus[0];
+
+        // ======================================================
+        // 📸 INFORMATIONS DES IMAGES
+        // ======================================================
+
+        console.log('');
+        console.log(
+            `📸 ${fichiersRecus.length} image(s) reçue(s)`
+        );
+
+        fichiersRecus.forEach(
+            (file, index) => {
+
+                console.log('');
+
+                console.log(
+                    `📸 IMAGE ${index + 1}`
+                );
+
+                console.log(
+                    '   Champ :',
+                    file.fieldname
+                );
+
+                console.log(
+                    '   Original :',
+                    file.originalname
+                );
+
+                console.log(
+                    '   Serveur :',
+                    file.filename
+                );
+
+                console.log(
+                    '   MIME :',
+                    file.mimetype
+                );
+
+                console.log(
+                    '   Taille :',
+                    file.size
+                );
+
+                console.log(
+                    '   Path :',
+                    file.path
+                );
+
+                console.log(
+                    '   URL :',
+                    `/uploads/plants/${file.filename}`
+                );
+
+            }
+        );
+
+        // ======================================================
+        // 🌱 INFORMATIONS DISPONIBLES POUR LE CONTROLLER
+        // ======================================================
+
+        console.log('');
+        console.log('==========================================');
+        console.log('🌱 DONNÉES IDENTIFICATION');
+        console.log('==========================================');
+
+        console.log(
+            '📸 req.file :',
+            req.file
+                ? req.file.filename
+                : null
+        );
+
+        console.log(
+            '📸 Nombre req.files :',
+            fichiersRecus.length
+        );
+
+        console.log(
+            '📦 Body :',
+            req.body
+        );
+
+        console.log(
+            '==========================================');
+
+        // ======================================================
+        // 🧠 CONTROLLER IDENTIFICATION
+        // ======================================================
+
+        try {
+
+            await identifyPlant(
+                req,
+                res,
+                next
+            );
+
+        } catch (error) {
+
+            console.error('');
+            console.error(
+                '❌ ERREUR IDENTIFICATION PLANTE'
+            );
+
+            console.error(
+                'Message :',
+                error.message
+            );
+
+            console.error(
+                'Nom :',
+                error.name
+            );
+
+            console.error(
+                'Code :',
+                error.code || 'N/A'
+            );
+
+            console.error(
+                'Stack :',
+                error.stack
+            );
+
+            next(error);
+
+        }
 
     }
-
-    // --------------------------------------------------------
-    // Informations fichier
-    // --------------------------------------------------------
-
-    console.log(
-      '📸 Image reçue :',
-      req.file.originalname
-    );
-
-    console.log(
-      '📝 Nom serveur :',
-      req.file.filename
-    );
-
-    console.log(
-      '📦 MIME :',
-      req.file.mimetype
-    );
-
-    console.log(
-      '📏 Taille :',
-      req.file.size
-    );
-
-    console.log(
-      '📁 Path :',
-      req.file.path
-    );
-
-    console.log(
-      '🌐 URL :',
-      `/uploads/plants/${req.file.filename}`
-    );
-
-    // --------------------------------------------------------
-    // Controller
-    // --------------------------------------------------------
-
-    try {
-
-      await identifyPlant(
-        req,
-        res,
-        next
-      );
-
-    } catch (error) {
-
-      console.error(
-        '❌ Erreur identification plante :',
-        error
-      );
-
-      next(error);
-
-    }
-
-  }
 );
 
 // ============================================================
 // 🌱 GET /api/plant
 // ============================================================
-//
-// Récupérer toutes les plantes.
-//
-// IMPORTANT :
-// Cette route est conservée telle quelle pour ne pas casser
-// ton fonctionnement actuel.
-//
-// Si ton server.js contient :
-//
-// app.use('/api/plant', plantRoutes);
-//
-// alors cette route devient :
-//
-// GET /api/plant
-//
-// ============================================================
 
 router.get(
-  '/',
-  async (req, res, next) => {
+    '/',
+    async (req, res, next) => {
 
-    console.log('');
-    console.log('==========================================');
-    console.log('🌿 GET ALL PLANTS');
-    console.log('==========================================');
+        console.log('');
+        console.log('==========================================');
+        console.log('🌿 GET ALL PLANTS');
+        console.log('==========================================');
 
-    console.log(
-      '📡 Route : GET /api/plant'
-    );
+        console.log(
+            '📡 Route :',
+            req.originalUrl
+        );
 
-    try {
+        console.log(
+            '📦 Query :',
+            req.query
+        );
 
-      await getPlants(
-        req,
-        res,
-        next
-      );
+        // ------------------------------------------------------
+        // Vérification MongoDB
+        // ------------------------------------------------------
 
-    } catch (error) {
+        const mongoState =
+            mongoose.connection.readyState;
 
-      console.error(
-        '❌ Erreur GET /api/plant :',
-        error
-      );
+        console.log(
+            '🗄️ MongoDB state :',
+            mongoState
+        );
 
-      next(error);
+        if (
+            mongoState !== 1
+        ) {
+
+            console.error(
+                '❌ MongoDB n’est pas connecté'
+            );
+
+            return res.status(503).json({
+
+                success: false,
+
+                message:
+                    'La base de données MongoDB n’est pas disponible.'
+
+            });
+
+        }
+
+        // ------------------------------------------------------
+        // Controller
+        // ------------------------------------------------------
+
+        try {
+
+            console.log(
+                '🔄 Appel de getAllPlants()...'
+            );
+
+            await getAllPlants(
+                req,
+                res,
+                next
+            );
+
+            console.log(
+                '✅ getAllPlants() terminé'
+            );
+
+        } catch (error) {
+
+            console.error('');
+            console.error(
+                '=========================================='
+            );
+
+            console.error(
+                '❌ ERREUR GET /api/plant'
+            );
+
+            console.error(
+                '=========================================='
+            );
+
+            console.error(
+                'Message :',
+                error.message
+            );
+
+            console.error(
+                'Nom :',
+                error.name
+            );
+
+            console.error(
+                'Code :',
+                error.code || 'N/A'
+            );
+
+            console.error(
+                'Stack :',
+                error.stack
+            );
+
+            console.error(
+                '=========================================='
+            );
+
+            next(error);
+
+        }
 
     }
-
-  }
 );
 
 // ============================================================
 // 🧪 GET /api/plant/debug/uploads
 // ============================================================
-//
-// Vérifier les images présentes sur le serveur.
-//
-// IMPORTANT :
-// Cette route doit être placée AVANT /:id.
-//
-// ============================================================
 
 router.get(
-  '/debug/uploads',
-  (req, res) => {
+    '/debug/uploads',
+    (req, res) => {
 
-    console.log('');
-    console.log('==========================================');
-    console.log('🧪 DEBUG UPLOADS');
-    console.log('==========================================');
+        console.log('');
+        console.log('==========================================');
+        console.log('🧪 DEBUG UPLOADS');
+        console.log('==========================================');
 
-    try {
+        try {
 
-      const exists =
-        fs.existsSync(
-          uploadDirectory
-        );
+            const exists =
+                fs.existsSync(
+                    uploadDirectory
+                );
 
-      const files =
-        exists
-          ? fs.readdirSync(
-              uploadDirectory
-            )
-          : [];
+            const files =
+                exists
+                    ? fs.readdirSync(
+                        uploadDirectory
+                    )
+                    : [];
 
-      console.log(
-        '📁 Directory :',
-        uploadDirectory
-      );
+            console.log(
+                '📁 Directory :',
+                uploadDirectory
+            );
 
-      console.log(
-        '📂 Exists :',
-        exists
-      );
+            console.log(
+                '📂 Existe :',
+                exists
+            );
 
-      console.log(
-        '📸 Nombre fichiers :',
-        files.length
-      );
+            console.log(
+                '📸 Nombre fichiers :',
+                files.length
+            );
 
-      res.status(200).json({
+            return res.status(200).json({
 
-        success: true,
+                success: true,
 
-        directory:
-          uploadDirectory,
+                directory:
+                    uploadDirectory,
 
-        exists,
+                exists,
 
-        count:
-          files.length,
+                count:
+                    files.length,
 
-        files
+                files
 
-      });
+            });
 
-    } catch (error) {
+        } catch (error) {
 
-      console.error(
-        '❌ Erreur debug uploads :',
-        error
-      );
+            console.error(
+                '❌ Erreur debug uploads :',
+                error
+            );
 
-      res.status(500).json({
+            return res.status(500).json({
 
-        success: false,
+                success: false,
 
-        message:
-          'Impossible de lire le dossier uploads.',
+                message:
+                    'Impossible de lire le dossier uploads.',
 
-        error:
-          error.message
+                error:
+                    error.message
 
-      });
+            });
+
+        }
 
     }
-
-  }
 );
 
 // ============================================================
 // 🌱 GET /api/plant/:id
 // ============================================================
-//
-// Récupérer une plante par son ID.
-//
-// IMPORTANT :
-// Cette route est placée après /debug/uploads.
-//
-// ============================================================
 
 router.get(
-  '/:id',
-  async (req, res, next) => {
+    '/:id',
+    async (req, res, next) => {
 
-    console.log('');
-    console.log('==========================================');
-    console.log('🌿 GET PLANT BY ID');
-    console.log('==========================================');
+        console.log('');
+        console.log('==========================================');
+        console.log('🌿 GET PLANT BY ID');
+        console.log('==========================================');
 
-    console.log(
-      '🆔 ID :',
-      req.params.id
-    );
+        console.log(
+            '🆔 ID :',
+            req.params.id
+        );
 
-    console.log(
-      `📡 Route : GET /api/plant/${req.params.id}`
-    );
+        console.log(
+            `📡 Route : ${req.originalUrl}`
+        );
 
-    try {
+        try {
 
-      await getPlantById(
-        req,
-        res,
-        next
-      );
+            await getPlantById(
+                req,
+                res,
+                next
+            );
 
-    } catch (error) {
+        } catch (error) {
 
-      console.error(
-        '❌ Erreur GET plante :',
-        error
-      );
+            console.error('');
+            console.error(
+                '❌ ERREUR GET PLANTE PAR ID'
+            );
 
-      next(error);
+            console.error(
+                'Message :',
+                error.message
+            );
+
+            console.error(
+                'Nom :',
+                error.name
+            );
+
+            console.error(
+                'Code :',
+                error.code || 'N/A'
+            );
+
+            console.error(
+                'Stack :',
+                error.stack
+            );
+
+            next(error);
+
+        }
 
     }
-
-  }
 );
 
 // ============================================================
 // 🌱 POST /api/plant
 // ============================================================
 //
-// Créer une plante avec images.
+// Création d'une plante.
 //
-// Angular doit envoyer :
+// Angular doit envoyer un FormData.
 //
-// FormData
-//
-// ├── nomCommun
-// ├── nomScientifique
-// ├── famille
-// ├── genre
-// ├── espece
-// ├── categorie
-// └── images[]
+// Champ image :
+// images
 //
 // ============================================================
 
 router.post(
-  '/',
-  upload.array(
-    'images',
-    10
-  ),
-  async (req, res, next) => {
+    '/',
+    upload.array(
+        'images',
+        10
+    ),
+    async (req, res, next) => {
 
-    console.log('');
-    console.log('==========================================');
-    console.log('🌱 POST /api/plant');
-    console.log('==========================================');
+        console.log('');
+        console.log('==========================================');
+        console.log('🌱 POST /api/plant');
+        console.log('==========================================');
 
-    // --------------------------------------------------------
-    // BODY
-    // --------------------------------------------------------
+        // ------------------------------------------------------
+        // BODY
+        // ------------------------------------------------------
 
-    console.log(
-      '📦 Body :',
-      req.body
-    );
+        console.log('');
+        console.log('📦 BODY REÇU :');
 
-    // --------------------------------------------------------
-    // FICHIERS
-    // --------------------------------------------------------
+        console.log(
+            JSON.stringify(
+                req.body,
+                null,
+                2
+            )
+        );
 
-    console.log(
-      '📸 Nombre images :',
-      req.files
-        ? req.files.length
-        : 0
-    );
+        // ------------------------------------------------------
+        // FICHIERS
+        // ------------------------------------------------------
 
-    // --------------------------------------------------------
-    // DÉTAILS DES FICHIERS
-    // --------------------------------------------------------
+        console.log(
+            '📸 Nombre images :',
+            req.files
+                ? req.files.length
+                : 0
+        );
 
-    if (
-      req.files &&
-      req.files.length > 0
-    ) {
+        // ------------------------------------------------------
+        // DÉTAILS DES IMAGES
+        // ------------------------------------------------------
 
-      req.files.forEach(
-        (file, index) => {
+        if (
+            req.files &&
+            req.files.length > 0
+        ) {
 
-          console.log('');
-          console.log(
-            `📸 IMAGE ${index + 1}`
-          );
+            req.files.forEach(
+                (file, index) => {
 
-          console.log(
-            '   Nom original :',
-            file.originalname
-          );
+                    console.log('');
 
-          console.log(
-            '   Nom serveur :',
-            file.filename
-          );
+                    console.log(
+                        `📸 IMAGE ${index + 1}`
+                    );
 
-          console.log(
-            '   MIME :',
-            file.mimetype
-          );
+                    console.log(
+                        '   Nom original :',
+                        file.originalname
+                    );
 
-          console.log(
-            '   Taille :',
-            file.size
-          );
+                    console.log(
+                        '   Nom serveur :',
+                        file.filename
+                    );
 
-          console.log(
-            '   Path :',
-            file.path
-          );
+                    console.log(
+                        '   MIME :',
+                        file.mimetype
+                    );
 
-          console.log(
-            '   URL :',
-            `/uploads/plants/${file.filename}`
-          );
+                    console.log(
+                        '   Taille :',
+                        file.size
+                    );
+
+                    console.log(
+                        '   Path :',
+                        file.path
+                    );
+
+                    console.log(
+                        '   URL :',
+                        `/uploads/plants/${file.filename}`
+                    );
+
+                }
+            );
+
+        } else {
+
+            console.log(
+                'ℹ️ Aucune image reçue'
+            );
 
         }
-      );
 
-    } else {
+        // ------------------------------------------------------
+        // VALIDATION MINIMALE
+        // ------------------------------------------------------
 
-      console.log(
-        'ℹ️ Aucune image reçue'
-      );
+        if (
+            !req.body ||
+            !req.body.nomCommun ||
+            !String(
+                req.body.nomCommun
+            ).trim()
+        ) {
+
+            console.error(
+                '❌ nomCommun manquant'
+            );
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    'Le nom commun de la plante est obligatoire.',
+
+                field:
+                    'nomCommun'
+
+            });
+
+        }
+
+        // ------------------------------------------------------
+        // Controller
+        // ------------------------------------------------------
+
+        try {
+
+            await createPlant(
+                req,
+                res,
+                next
+            );
+
+        } catch (error) {
+
+            console.error('');
+            console.error(
+                '=========================================='
+            );
+
+            console.error(
+                '❌ ERREUR CREATE PLANT'
+            );
+
+            console.error(
+                '=========================================='
+            );
+
+            console.error(
+                'Message :',
+                error.message
+            );
+
+            console.error(
+                'Nom :',
+                error.name
+            );
+
+            console.error(
+                'Code :',
+                error.code || 'N/A'
+            );
+
+            console.error(
+                'Détails :',
+                error.errors || null
+            );
+
+            console.error(
+                'Stack :',
+                error.stack
+            );
+
+            console.error(
+                '=========================================='
+            );
+
+            next(error);
+
+        }
 
     }
-
-    // --------------------------------------------------------
-    // CONTROLLER
-    // --------------------------------------------------------
-
-    try {
-
-      await createPlant(
-        req,
-        res,
-        next
-      );
-
-    } catch (error) {
-
-      console.error(
-        '❌ Erreur création plante :',
-        error
-      );
-
-      next(error);
-
-    }
-
-  }
 );
 
 // ============================================================
-// ❌ GESTION DES ERREURS MULTER
+// ❌ GESTIONNAIRE ERREURS PLANT ROUTES
 // ============================================================
 
 router.use(
-  (err, req, res, next) => {
+    (err, req, res, next) => {
 
-    console.error('');
-    console.error('==========================================');
-    console.error('❌ ERREUR PLANT ROUTES');
-    console.error('==========================================');
+        console.error('');
+        console.error(
+            '=========================================='
+        );
 
-    console.error(
-      'Message :',
-      err.message
-    );
+        console.error(
+            '❌ ERREUR PLANT ROUTES'
+        );
 
-    console.error(
-      'Code :',
-      err.code || 'N/A'
-    );
+        console.error(
+            '=========================================='
+        );
 
-    // ========================================================
-    // 🛡️ MULTER ERROR
-    // ========================================================
+        console.error(
+            '📡 Méthode :',
+            req.method
+        );
 
-    if (
-      err instanceof multer.MulterError
-    ) {
+        console.error(
+            '📍 URL :',
+            req.originalUrl
+        );
 
-      console.error(
-        '❌ Erreur Multer :',
-        err.code
-      );
+        console.error(
+            '🔴 Message :',
+            err.message
+        );
 
-      let message =
-        'Erreur lors de l’upload.';
+        console.error(
+            '🔴 Nom :',
+            err.name
+        );
 
-      switch (err.code) {
+        console.error(
+            '🔴 Code :',
+            err.code || 'N/A'
+        );
 
-        case 'LIMIT_FILE_SIZE':
+        console.error(
+            '🔴 Stack :',
+            err.stack
+        );
 
-          message =
-            'Une image dépasse la taille maximale de 10 Mo.';
+        // ======================================================
+        // MULTER
+        // ======================================================
 
-          break;
+        if (
+            err instanceof multer.MulterError
+        ) {
 
-        case 'LIMIT_FILE_COUNT':
+            console.error(
+                '❌ Erreur Multer :',
+                err.code
+            );
 
-          message =
-            'Le nombre maximum de fichiers est de 10.';
+            let message =
+                'Erreur lors de l’upload.';
 
-          break;
+            switch (err.code) {
 
-        case 'LIMIT_UNEXPECTED_FILE':
+                case 'LIMIT_FILE_SIZE':
 
-          message =
-            'Champ fichier inattendu. Utilisez "image" pour l’identification ou "images" pour la création.';
+                    message =
+                        'Une image dépasse la taille maximale de 10 Mo.';
 
-          break;
+                    break;
 
-        case 'LIMIT_PART_COUNT':
+                case 'LIMIT_FILE_COUNT':
 
-          message =
-            'Trop de parties dans la requête.';
+                    message =
+                        'Le nombre maximum de fichiers est de 10.';
 
-          break;
+                    break;
 
-        case 'LIMIT_FIELD_COUNT':
+                case 'LIMIT_UNEXPECTED_FILE':
 
-          message =
-            'Trop de champs dans la requête.';
+                    message =
+                        'Champ fichier inattendu. Utilisez "image" ou "images".';
 
-          break;
+                    break;
 
-        case 'LIMIT_FIELD_KEY':
+                case 'LIMIT_PART_COUNT':
 
-          message =
-            'Nom de champ trop long.';
+                    message =
+                        'Trop de parties dans la requête.';
 
-          break;
+                    break;
 
-        case 'LIMIT_FIELD_VALUE':
+                case 'LIMIT_FIELD_COUNT':
 
-          message =
-            'Valeur de champ trop longue.';
+                    message =
+                        'Trop de champs dans la requête.';
 
-          break;
+                    break;
 
-        default:
+                case 'LIMIT_FIELD_KEY':
 
-          message =
-            err.message ||
-            message;
+                    message =
+                        'Nom de champ trop long.';
 
-      }
+                    break;
 
-      return res.status(400).json({
+                case 'LIMIT_FIELD_VALUE':
 
-        success: false,
+                    message =
+                        'Valeur de champ trop longue.';
 
-        message,
+                    break;
 
-        error:
-          err.code
+                default:
 
-      });
+                    message =
+                        err.message ||
+                        message;
+
+            }
+
+            return res.status(400).json({
+
+                success: false,
+
+                message,
+
+                error:
+                    err.code
+
+            });
+
+        }
+
+        // ======================================================
+        // FILE FILTER
+        // ======================================================
+
+        if (
+            err.message ===
+                'Seules les images sont autorisées.'
+            ||
+            err.message ===
+                'Format d’image non autorisé.'
+        ) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    err.message
+
+            });
+
+        }
+
+        // ======================================================
+        // VALIDATION MONGOOSE
+        // ======================================================
+
+        if (
+            err.name ===
+            'ValidationError'
+        ) {
+
+            const details = {};
+
+            if (
+                err.errors
+            ) {
+
+                Object.entries(
+                    err.errors
+                ).forEach(
+                    ([field, value]) => {
+
+                        details[field] =
+                            value.message;
+
+                    }
+                );
+
+            }
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    'Les données de la plante sont invalides.',
+
+                error:
+                    err.message,
+
+                details
+
+            });
+
+        }
+
+        // ======================================================
+        // CAST ERROR
+        // ======================================================
+
+        if (
+            err.name ===
+            'CastError'
+        ) {
+
+            return res.status(400).json({
+
+                success: false,
+
+                message:
+                    'Identifiant de plante invalide.',
+
+                error:
+                    err.message
+
+            });
+
+        }
+
+        // ======================================================
+        // DUPLICATE KEY
+        // ======================================================
+
+        if (
+            err.code === 11000
+        ) {
+
+            return res.status(409).json({
+
+                success: false,
+
+                message:
+                    'Une plante avec cette valeur existe déjà.',
+
+                error:
+                    err.message,
+
+                details:
+                    err.keyValue || null
+
+            });
+
+        }
+
+        // ======================================================
+        // MISSING SCHEMA
+        // ======================================================
+
+        if (
+            err.name ===
+            'MissingSchemaError'
+        ) {
+
+            console.error('');
+            console.error(
+                '🚨 MISSING SCHEMA MONGOOSE'
+            );
+
+            console.error(
+                'Le controller utilise probablement un modèle qui n’est pas enregistré.'
+            );
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    'Erreur de configuration des modèles MongoDB.',
+
+                error:
+                    err.message
+
+            });
+
+        }
+
+        // ======================================================
+        // MONGODB
+        // ======================================================
+
+        if (
+            err.name ===
+                'MongoServerError'
+            ||
+            err.name ===
+                'MongoError'
+        ) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    'Erreur MongoDB.',
+
+                error:
+                    err.message
+
+            });
+
+        }
+
+        // ======================================================
+        // ERREUR GÉNÉRALE
+        // ======================================================
+
+        return res.status(
+            err.status ||
+            err.statusCode ||
+            500
+        ).json({
+
+            success: false,
+
+            message:
+                err.message ||
+                'Une erreur serveur est survenue.'
+
+        });
 
     }
-
-    // ========================================================
-    // ❌ ERREUR PERSONNALISÉE
-    // ========================================================
-
-    if (err) {
-
-      return res.status(
-        err.status || 500
-      ).json({
-
-        success: false,
-
-        message:
-          err.message ||
-          'Une erreur serveur est survenue.'
-
-      });
-
-    }
-
-    next();
-
-  }
 );
 
 // ============================================================
@@ -907,27 +1375,31 @@ console.log('✅ ROUTES PLANTES PRÊTES');
 console.log('==========================================');
 
 console.log(
-  '🔎 POST /api/plants/identify'
+    '🔎 POST /api/plant/identify'
 );
 
 console.log(
-  '🌱 GET  /api/plant'
+    '🔎 POST /api/plants/identify'
 );
 
 console.log(
-  '🌱 GET  /api/plant/:id'
+    '🌱 GET  /api/plant'
 );
 
 console.log(
-  '🌱 POST /api/plant'
+    '🌱 GET  /api/plant/:id'
 );
 
 console.log(
-  '🧪 GET  /api/plant/debug/uploads'
+    '🌱 POST /api/plant'
 );
 
 console.log(
-  '📸 Upload : /uploads/plants'
+    '🧪 GET  /api/plant/debug/uploads'
+);
+
+console.log(
+    '📸 Upload : /uploads/plants'
 );
 
 console.log('==========================================');

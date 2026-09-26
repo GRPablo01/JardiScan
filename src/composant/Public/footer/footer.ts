@@ -9,6 +9,8 @@ import { RouterLink } from '@angular/router';
 import { DebugResponsive } from '../../debug-responsive/debug-responsive';
 import { ThemeService } from '../../../../Backend/Services/theme.service';
 import { PlantService } from '../../../../Backend/Services/plant.service';
+import { Language2 } from '../../Share/Icon/language/language';
+import { LanguageService } from '../../../../Backend/Services/language.service';
 
 @Component({
   selector: 'app-footer',
@@ -45,7 +47,7 @@ export class Footer {
 
   constructor(
     public themeService: ThemeService,
-    public plantService: PlantService,
+    public languageService:LanguageService
   ) {
     this.loadUserFromLocalStorage();
   }

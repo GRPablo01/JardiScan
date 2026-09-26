@@ -3,11 +3,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
 
 import { ThemeService } from '../../../../../Backend/Services/theme.service';
 import { LanguageService } from '../../../../../Backend/Services/language.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profil',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './profil.html',
   styleUrl: './profil.css',
 })
@@ -42,7 +43,8 @@ export class Profil implements OnInit {
 
   constructor(
     public themeService: ThemeService,
-    public languageService: LanguageService
+    public languageService: LanguageService,
+    private router: Router
   ) {}
 
   // ============================================================
@@ -183,10 +185,7 @@ export class Profil implements OnInit {
           this.avatar = `${this.BACKEND_URL}${avatarPath}`;
         }
 
-        console.log(
-          'Avatar récupéré :',
-          this.avatar
-        );
+        
 
       } else {
 
@@ -308,5 +307,16 @@ export class Profil implements OnInit {
       default:
         return 'from-emerald-400 via-teal-500 to-green-500';
     }
+  }
+
+  seDeconnecter(): void {
+    this.menuOpen = false;
+  
+    localStorage.removeItem('utilisateur');
+    localStorage.removeItem('mode');
+    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
+  
+    this.router.navigate(['/login']);
   }
 }

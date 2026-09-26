@@ -1,1143 +1,2478 @@
 <!-- ============================================================
-     🌿 JARDISCAN — PAGE ACCUEIL
-     Dashboard utilisateur — Premium Emerald Glass
+     🌿 JARDISCAN — PAGE SCANNER UNE PLANTE
+
+     • Page dédiée au scan
+     • Welcome
+     • Scanner principal
+     • Caméra / Import
+     • Modes de scan
+     • Conseils photo
+     • Aperçu du résultat
+     • Historique récent
+     • Conseils plante
+     • Assistant JardiScan
+     • CTA final
+     • Light / Dark
+     • Responsive
+     • Angular + Tailwind
+     • Aucun footer
      ============================================================ -->
 
-<section
-  class="relative min-h-screen overflow-hidden bg-[var(--Background1)] text-[var(--TextPrincipal)] transition-colors duration-300"
+<main
+  class="
+    min-h-screen
+    overflow-x-hidden
+    bg-[#F6F8F5]
+    text-[#111512]
+    transition-colors
+    duration-300
+    dark:bg-[#111512]
+    dark:text-[#F4F7F2]
+  "
 >
 
-  <!-- ==========================================================
-       🌿 FOND DÉCORATIF
-       ========================================================== -->
+  <!-- ============================================================
+       🌿 BACKGROUND
+       ============================================================ -->
 
   <div
-    class="pointer-events-none absolute inset-0 overflow-hidden"
+    class="
+      pointer-events-none
+      fixed
+      inset-0
+      -z-0
+      overflow-hidden
+    "
     aria-hidden="true"
   >
+
     <div
-      class="absolute -left-32 top-32 h-72 w-72 rounded-full bg-[var(--Primary)]/10 blur-3xl"
+      class="
+        absolute
+        -right-48
+        -top-48
+        h-[600px]
+        w-[600px]
+        rounded-full
+        bg-[#22C55E]/8
+        blur-3xl
+        dark:bg-[#22C55E]/5
+      "
     ></div>
 
     <div
-      class="absolute -right-32 top-10 h-96 w-96 rounded-full bg-[var(--Accent)]/10 blur-3xl"
+      class="
+        absolute
+        -bottom-48
+        -left-48
+        h-[600px]
+        w-[600px]
+        rounded-full
+        bg-[#A3E635]/8
+        blur-3xl
+        dark:bg-[#A3E635]/4
+      "
     ></div>
 
-    <div
-      class="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-[var(--Primary)]/5 blur-3xl"
-    ></div>
   </div>
 
 
-  <!-- ==========================================================
-       📦 CONTENU PRINCIPAL
-       ========================================================== -->
+  <!-- ============================================================
+       🌱 01 — WELCOME
+       ============================================================ -->
 
-  <div class="relative z-10 mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8 xl:px-10">
+  <section
+    class="
+      relative
+      z-10
+      mx-auto
+      w-full
+      max-w-[1500px]
+      px-5
+      pb-12
+      pt-10
+      sm:px-8
+      lg:px-12
+      lg:pb-20
+      lg:pt-16
+    "
+  >
 
-
-    <!-- ========================================================
-         👋 HERO / BIENVENUE
-         ======================================================== -->
-
-    <section
-      class="relative mb-8 overflow-hidden rounded-[2rem] border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 shadow-[var(--BoxShadowLarge)] backdrop-blur-2xl sm:p-8 lg:p-10"
+    <div
+      class="
+        grid
+        items-center
+        gap-12
+        lg:grid-cols-[1fr_0.75fr]
+        lg:gap-20
+      "
     >
 
-      <!-- Décoration -->
+      <!-- TEXTE -->
 
-      <div
-        class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--Primary)]/10 blur-3xl"
-      ></div>
-
-      <div
-        class="pointer-events-none absolute -bottom-32 left-1/3 h-56 w-56 rounded-full bg-[var(--Accent)]/10 blur-3xl"
-      ></div>
-
-
-      <div
-        class="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"
-      >
-
-        <!-- Texte -->
-
-        <div class="max-w-3xl">
-
-          <div
-            class="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--Primary)]/20 bg-[var(--Primary)]/10 px-4 py-2 text-sm font-medium text-[var(--Primary)]"
-          >
-            <span
-              class="h-2 w-2 animate-pulse rounded-full bg-[var(--Primary)]"
-            ></span>
-
-            Votre jardin vous attend
-          </div>
-
-
-          <h1
-            class="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl"
-          >
-            Bonjour et bienvenue sur
-            <span class="text-[var(--Primary)]">
-              JardiScan
-            </span>
-            🌿
-          </h1>
-
-
-          <p
-            class="mt-4 max-w-2xl text-base leading-7 text-[var(--TextSecondaire)] sm:text-lg"
-          >
-            Identifiez vos plantes, retrouvez votre collection et découvrez
-            chaque jour de nouvelles informations pour mieux comprendre
-            votre jardin.
-          </p>
-
-
-          <!-- Boutons -->
-
-          <div class="mt-7 flex flex-col gap-3 sm:flex-row">
-
-            <a
-              routerLink="/scan"
-              class="group inline-flex items-center justify-center gap-3 rounded-2xl bg-[var(--Primary)] px-6 py-3.5 font-bold text-[var(--TextOnPrimary)] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--PrimaryHover)] hover:shadow-xl"
-            >
-              <i class="fa-solid fa-camera text-lg"></i>
-
-              Scanner une plante
-
-              <i
-                class="fa-solid fa-arrow-right transition-transform duration-300 group-hover:translate-x-1"
-              ></i>
-            </a>
-
-
-            <a
-              routerLink="/myplants"
-              class="inline-flex items-center justify-center gap-3 rounded-2xl border border-[var(--GlassBorder)] bg-[var(--Surface)]/70 px-6 py-3.5 font-semibold text-[var(--TextPrincipal)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--Primary)]/40 hover:bg-[var(--Primary)]/10"
-            >
-              <i class="fa-solid fa-leaf text-[var(--Primary)]"></i>
-
-              Voir mes plantes
-            </a>
-
-          </div>
-
-        </div>
-
-
-        <!-- Illustration / résumé -->
-
-        <div class="relative shrink-0 lg:w-[360px]">
-
-          <div
-            class="relative overflow-hidden rounded-[2rem] border border-[var(--GlassBorder)] bg-[var(--Surface)]/70 p-6 backdrop-blur-xl"
-          >
-
-            <div class="flex items-center justify-between">
-
-              <div>
-                <p class="text-sm text-[var(--TextTertiaire)]">
-                  Votre jardin
-                </p>
-
-                <p class="mt-1 text-2xl font-black">
-                  En pleine croissance 🌱
-                </p>
-              </div>
-
-              <div
-                class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-2xl text-[var(--Primary)]"
-              >
-                <i class="fa-solid fa-seedling"></i>
-              </div>
-
-            </div>
-
-
-            <div class="mt-6">
-
-              <div class="mb-2 flex items-center justify-between text-sm">
-                <span class="text-[var(--TextSecondaire)]">
-                  Collection
-                </span>
-
-                <span class="font-bold">
-                  68%
-                </span>
-              </div>
-
-              <div
-                class="h-2 overflow-hidden rounded-full bg-[var(--Background3)]"
-              >
-                <div
-                  class="h-full w-[68%] rounded-full bg-[var(--Primary)]"
-                ></div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ========================================================
-         📊 STATISTIQUES
-         ======================================================== -->
-
-    <section class="mb-8">
-
-      <div class="mb-4 flex items-end justify-between">
-
-        <div>
-          <p class="text-sm font-semibold uppercase tracking-wider text-[var(--Primary)]">
-            Votre activité
-          </p>
-
-          <h2 class="mt-1 text-2xl font-black">
-            Votre jardin en chiffres
-          </h2>
-        </div>
-
-      </div>
-
-
-      <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
-
-        <!-- Stat 1 -->
+      <div>
 
         <div
-          class="group rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--Primary)]/30"
+          class="
+            mb-5
+            inline-flex
+            items-center
+            gap-2
+            rounded-full
+            border
+            border-[#22C55E]/20
+            bg-[#22C55E]/8
+            px-4
+            py-2
+            text-xs
+            font-semibold
+            uppercase
+            tracking-[0.12em]
+            text-[#15803D]
+            dark:border-[#22C55E]/20
+            dark:bg-[#22C55E]/10
+            dark:text-[#86EFAC]
+          "
         >
+          <span
+            class="
+              h-2
+              w-2
+              rounded-full
+              bg-[#22C55E]
+              shadow-[0_0_12px_rgba(34,197,94,0.7)]
+            "
+          ></span>
 
-          <div class="flex items-start justify-between">
-
-            <div
-              class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-leaf text-xl"></i>
-            </div>
-
-            <span class="text-xs font-bold text-[var(--Primary)]">
-              +12%
-            </span>
-
-          </div>
-
-          <p class="mt-5 text-3xl font-black">
-            24
-          </p>
-
-          <p class="mt-1 text-sm text-[var(--TextSecondaire)]">
-            Plantes identifiées
-          </p>
-
+          Scanner JardiScan
         </div>
 
 
-        <!-- Stat 2 -->
-
-        <div
-          class="group rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--Primary)]/30"
+        <h1
+          class="
+            max-w-[760px]
+            text-4xl
+            font-semibold
+            leading-[1.03]
+            tracking-[-0.045em]
+            sm:text-5xl
+            lg:text-6xl
+            xl:text-7xl
+          "
         >
-
-          <div
-            class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--Accent)]/10 text-[var(--Accent)]"
-          >
-            <i class="fa-solid fa-heart text-xl"></i>
-          </div>
-
-          <p class="mt-5 text-3xl font-black">
-            12
-          </p>
-
-          <p class="mt-1 text-sm text-[var(--TextSecondaire)]">
-            Plantes favorites
-          </p>
-
-        </div>
+          Découvrez quelle plante
+          <span class="text-[#22C55E]">
+            se trouve devant vous.
+          </span>
+        </h1>
 
 
-        <!-- Stat 3 -->
-
-        <div
-          class="group rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--Primary)]/30"
+        <p
+          class="
+            mt-6
+            max-w-[650px]
+            text-base
+            leading-7
+            text-[#5D665F]
+            sm:text-lg
+            dark:text-[#A7B0A8]
+          "
         >
-
-          <div
-            class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-[var(--Primary)]"
-          >
-            <i class="fa-solid fa-camera text-xl"></i>
-          </div>
-
-          <p class="mt-5 text-3xl font-black">
-            38
-          </p>
-
-          <p class="mt-1 text-sm text-[var(--TextSecondaire)]">
-            Scans réalisés
-          </p>
-
-        </div>
-
-
-        <!-- Stat 4 -->
-
-        <div
-          class="group rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--Primary)]/30"
-        >
-
-          <div
-            class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-[var(--Primary)]"
-          >
-            <i class="fa-solid fa-sun text-xl"></i>
-          </div>
-
-          <p class="mt-5 text-3xl font-black">
-            7
-          </p>
-
-          <p class="mt-1 text-sm text-[var(--TextSecondaire)]">
-            Conseils consultés
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ========================================================
-         ⚡ ACTIONS RAPIDES
-         ======================================================== -->
-
-    <section class="mb-8">
-
-      <div class="mb-5">
-
-        <p class="text-sm font-semibold uppercase tracking-wider text-[var(--Primary)]">
-          Accès rapide
+          Photographiez une plante ou importez une image depuis votre
+          appareil. JardiScan vous aide à l'identifier et à retrouver
+          les informations essentielles pour mieux la connaître.
         </p>
 
-        <h2 class="mt-1 text-2xl font-black">
-          Que souhaitez-vous faire ?
-        </h2>
 
-      </div>
-
-
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
-        <a
-          routerLink="/scan"
-          class="group rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--Primary)]/40 hover:bg-[var(--Primary)]/5"
-        >
-
-          <div
-            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--Primary)] text-xl text-[var(--TextOnPrimary)] shadow-lg"
-          >
-            <i class="fa-solid fa-camera"></i>
-          </div>
-
-          <h3 class="mt-5 text-lg font-bold">
-            Scanner une plante
-          </h3>
-
-          <p class="mt-2 text-sm leading-6 text-[var(--TextSecondaire)]">
-            Identifiez rapidement une plante grâce à votre appareil photo.
-          </p>
-
-          <span
-            class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[var(--Primary)]"
-          >
-            Commencer
-
-            <i
-              class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"
-            ></i>
-          </span>
-
-        </a>
-
-
-        <a
-          routerLink="/myplants"
-          class="group rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--Primary)]/40 hover:bg-[var(--Primary)]/5"
-        >
-
-          <div
-            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-xl text-[var(--Primary)]"
-          >
-            <i class="fa-solid fa-seedling"></i>
-          </div>
-
-          <h3 class="mt-5 text-lg font-bold">
-            Ma collection
-          </h3>
-
-          <p class="mt-2 text-sm leading-6 text-[var(--TextSecondaire)]">
-            Retrouvez toutes les plantes identifiées dans votre jardin.
-          </p>
-
-          <span
-            class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[var(--Primary)]"
-          >
-            Ouvrir
-
-            <i
-              class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"
-            ></i>
-          </span>
-
-        </a>
-
-
-        <a
-          routerLink="/favoris"
-          class="group rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--Primary)]/40 hover:bg-[var(--Primary)]/5"
-        >
-
-          <div
-            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--Accent)]/10 text-xl text-[var(--Accent)]"
-          >
-            <i class="fa-solid fa-heart"></i>
-          </div>
-
-          <h3 class="mt-5 text-lg font-bold">
-            Mes favoris
-          </h3>
-
-          <p class="mt-2 text-sm leading-6 text-[var(--TextSecondaire)]">
-            Accédez en un instant aux plantes que vous aimez.
-          </p>
-
-          <span
-            class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[var(--Primary)]"
-          >
-            Voir mes favoris
-
-            <i
-              class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"
-            ></i>
-          </span>
-
-        </a>
-
-
-        <a
-          routerLink="/conseils"
-          class="group rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[var(--Primary)]/40 hover:bg-[var(--Primary)]/5"
-        >
-
-          <div
-            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-xl text-[var(--Primary)]"
-          >
-            <i class="fa-solid fa-lightbulb"></i>
-          </div>
-
-          <h3 class="mt-5 text-lg font-bold">
-            Conseils jardin
-          </h3>
-
-          <p class="mt-2 text-sm leading-6 text-[var(--TextSecondaire)]">
-            Découvrez des conseils simples pour prendre soin de vos plantes.
-          </p>
-
-          <span
-            class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[var(--Primary)]"
-          >
-            Découvrir
-
-            <i
-              class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"
-            ></i>
-          </span>
-
-        </a>
-
-      </div>
-
-    </section>
-
-
-    <!-- ========================================================
-         🌱 PLANTES RÉCENTES
-         ======================================================== -->
-
-    <section class="mb-8">
-
-      <div class="mb-5 flex items-end justify-between gap-4">
-
-        <div>
-
-          <p class="text-sm font-semibold uppercase tracking-wider text-[var(--Primary)]">
-            Votre collection
-          </p>
-
-          <h2 class="mt-1 text-2xl font-black">
-            Plantes récemment identifiées
-          </h2>
-
-        </div>
-
-
-        <a
-          routerLink="/myplants"
-          class="hidden items-center gap-2 text-sm font-bold text-[var(--Primary)] sm:flex"
-        >
-          Voir toute la collection
-
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-
-      </div>
-
-
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-
-        <!-- Plante 1 -->
-
-        <article
-          class="group overflow-hidden rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-        >
-
-          <div class="relative h-48 overflow-hidden bg-[var(--Background3)]">
-
-            <div
-              class="flex h-full items-center justify-center text-6xl text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-leaf"></i>
-            </div>
-
-            <span
-              class="absolute left-3 top-3 rounded-full bg-[var(--Surface)]/90 px-3 py-1 text-xs font-bold backdrop-blur"
-            >
-              Identifiée
-            </span>
-
-            <button
-              type="button"
-              aria-label="Ajouter aux favoris"
-              class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--Surface)]/90 text-[var(--TextSecondaire)] backdrop-blur transition hover:text-red-500"
-            >
-              <i class="fa-regular fa-heart"></i>
-            </button>
-
-          </div>
-
-
-          <div class="p-5">
-
-            <h3 class="font-bold">
-              Monstera deliciosa
-            </h3>
-
-            <p class="mt-1 text-sm italic text-[var(--TextTertiaire)]">
-              Monstera
-            </p>
-
-            <div class="mt-4 flex items-center justify-between">
-
-              <span class="text-xs text-[var(--TextSecondaire)]">
-                Il y a 2 h
-              </span>
-
-              <i class="fa-solid fa-arrow-right text-[var(--Primary)]"></i>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- Plante 2 -->
-
-        <article
-          class="group overflow-hidden rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-        >
-
-          <div class="relative h-48 overflow-hidden bg-[var(--Background3)]">
-
-            <div
-              class="flex h-full items-center justify-center text-6xl text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-seedling"></i>
-            </div>
-
-            <span
-              class="absolute left-3 top-3 rounded-full bg-[var(--Surface)]/90 px-3 py-1 text-xs font-bold backdrop-blur"
-            >
-              Identifiée
-            </span>
-
-            <button
-              type="button"
-              aria-label="Ajouter aux favoris"
-              class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--Surface)]/90 text-[var(--TextSecondaire)] backdrop-blur transition hover:text-red-500"
-            >
-              <i class="fa-regular fa-heart"></i>
-            </button>
-
-          </div>
-
-
-          <div class="p-5">
-
-            <h3 class="font-bold">
-              Lavandula angustifolia
-            </h3>
-
-            <p class="mt-1 text-sm italic text-[var(--TextTertiaire)]">
-              Lavande
-            </p>
-
-            <div class="mt-4 flex items-center justify-between">
-
-              <span class="text-xs text-[var(--TextSecondaire)]">
-                Hier
-              </span>
-
-              <i class="fa-solid fa-arrow-right text-[var(--Primary)]"></i>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- Plante 3 -->
-
-        <article
-          class="group overflow-hidden rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-        >
-
-          <div class="relative h-48 overflow-hidden bg-[var(--Background3)]">
-
-            <div
-              class="flex h-full items-center justify-center text-6xl text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-tree"></i>
-            </div>
-
-            <span
-              class="absolute left-3 top-3 rounded-full bg-[var(--Surface)]/90 px-3 py-1 text-xs font-bold backdrop-blur"
-            >
-              Identifiée
-            </span>
-
-            <button
-              type="button"
-              aria-label="Ajouter aux favoris"
-              class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--Surface)]/90 text-[var(--TextSecondaire)] backdrop-blur transition hover:text-red-500"
-            >
-              <i class="fa-regular fa-heart"></i>
-            </button>
-
-          </div>
-
-
-          <div class="p-5">
-
-            <h3 class="font-bold">
-              Ficus lyrata
-            </h3>
-
-            <p class="mt-1 text-sm italic text-[var(--TextTertiaire)]">
-              Figuier lyre
-            </p>
-
-            <div class="mt-4 flex items-center justify-between">
-
-              <span class="text-xs text-[var(--TextSecondaire)]">
-                Il y a 2 jours
-              </span>
-
-              <i class="fa-solid fa-arrow-right text-[var(--Primary)]"></i>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- Plante 4 -->
-
-        <article
-          class="group overflow-hidden rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-        >
-
-          <div class="relative h-48 overflow-hidden bg-[var(--Background3)]">
-
-            <div
-              class="flex h-full items-center justify-center text-6xl text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-spa"></i>
-            </div>
-
-            <span
-              class="absolute left-3 top-3 rounded-full bg-[var(--Surface)]/90 px-3 py-1 text-xs font-bold backdrop-blur"
-            >
-              Identifiée
-            </span>
-
-            <button
-              type="button"
-              aria-label="Ajouter aux favoris"
-              class="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--Surface)]/90 text-[var(--TextSecondaire)] backdrop-blur transition hover:text-red-500"
-            >
-              <i class="fa-regular fa-heart"></i>
-            </button>
-
-          </div>
-
-
-          <div class="p-5">
-
-            <h3 class="font-bold">
-              Rosa
-            </h3>
-
-            <p class="mt-1 text-sm italic text-[var(--TextTertiaire)]">
-              Rosier
-            </p>
-
-            <div class="mt-4 flex items-center justify-between">
-
-              <span class="text-xs text-[var(--TextSecondaire)]">
-                Il y a 3 jours
-              </span>
-
-              <i class="fa-solid fa-arrow-right text-[var(--Primary)]"></i>
-
-            </div>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- ========================================================
-         📅 ACTIVITÉ + CONSEIL
-         ======================================================== -->
-
-    <section class="mb-8 grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-
-
-      <!-- Activité -->
-
-      <div
-        class="rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 backdrop-blur-xl sm:p-7"
-      >
-
-        <div class="flex items-center justify-between">
-
-          <div>
-
-            <p class="text-sm font-semibold uppercase tracking-wider text-[var(--Primary)]">
-              Journal
-            </p>
-
-            <h2 class="mt-1 text-2xl font-black">
-              Activité récente
-            </h2>
-
-          </div>
-
-          <div
-            class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-[var(--Primary)]"
-          >
-            <i class="fa-solid fa-clock-rotate-left"></i>
-          </div>
-
-        </div>
-
-
-        <div class="mt-7 space-y-6">
-
-          <!-- Item -->
-
-          <div class="flex gap-4">
-
-            <div
-              class="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-camera"></i>
-            </div>
-
-            <div class="min-w-0 flex-1">
-
-              <div class="flex flex-col justify-between gap-1 sm:flex-row">
-
-                <p class="font-semibold">
-                  Nouvelle plante identifiée
-                </p>
-
-                <span class="text-xs text-[var(--TextTertiaire)]">
-                  Il y a 2 h
-                </span>
-
-              </div>
-
-              <p class="mt-1 text-sm text-[var(--TextSecondaire)]">
-                Vous avez identifié une
-                <span class="font-medium text-[var(--TextPrincipal)]">
-                  Monstera deliciosa
-                </span>.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <!-- Item -->
-
-          <div class="flex gap-4">
-
-            <div
-              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--Accent)]/10 text-[var(--Accent)]"
-            >
-              <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <div class="min-w-0 flex-1">
-
-              <div class="flex flex-col justify-between gap-1 sm:flex-row">
-
-                <p class="font-semibold">
-                  Plante ajoutée aux favoris
-                </p>
-
-                <span class="text-xs text-[var(--TextTertiaire)]">
-                  Hier
-                </span>
-
-              </div>
-
-              <p class="mt-1 text-sm text-[var(--TextSecondaire)]">
-                Vous avez ajouté
-                <span class="font-medium text-[var(--TextPrincipal)]">
-                  Lavande
-                </span>
-                à vos favoris.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <!-- Item -->
-
-          <div class="flex gap-4">
-
-            <div
-              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-lightbulb"></i>
-            </div>
-
-            <div class="min-w-0 flex-1">
-
-              <div class="flex flex-col justify-between gap-1 sm:flex-row">
-
-                <p class="font-semibold">
-                  Conseil consulté
-                </p>
-
-                <span class="text-xs text-[var(--TextTertiaire)]">
-                  Il y a 2 jours
-                </span>
-
-              </div>
-
-              <p class="mt-1 text-sm text-[var(--TextSecondaire)]">
-                Vous avez consulté un conseil sur
-                <span class="font-medium text-[var(--TextPrincipal)]">
-                  l'arrosage en été
-                </span>.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- Conseil du jour -->
-
-      <div
-        class="relative overflow-hidden rounded-3xl border border-[var(--Primary)]/20 bg-[var(--Primary)]/10 p-6 backdrop-blur-xl sm:p-7"
-      >
+        <!-- ACTIONS -->
 
         <div
-          class="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[var(--Accent)]/10 blur-3xl"
-        ></div>
-
-
-        <div class="relative">
-
-          <div
-            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--Primary)] text-xl text-[var(--TextOnPrimary)]"
-          >
-            <i class="fa-solid fa-sun"></i>
-          </div>
-
-
-          <p class="mt-6 text-sm font-semibold uppercase tracking-wider text-[var(--Primary)]">
-            Conseil du jour
-          </p>
-
-          <h2 class="mt-2 text-2xl font-black">
-            Pensez à vos plantes aujourd'hui 🌱
-          </h2>
-
-          <p class="mt-4 text-sm leading-7 text-[var(--TextSecondaire)]">
-            En période chaude, observez régulièrement vos plantes.
-            Vérifiez l'humidité du sol avant d'arroser et privilégiez
-            un arrosage adapté aux besoins de chaque espèce.
-          </p>
-
+          class="
+            mt-8
+            flex
+            flex-col
+            gap-3
+            sm:flex-row
+          "
+        >
 
           <a
-            routerLink="/conseils"
-            class="mt-6 inline-flex items-center gap-2 font-bold text-[var(--Primary)]"
+            href="#scanner"
+            class="
+              inline-flex
+              h-12
+              items-center
+              justify-center
+              gap-2
+              rounded-2xl
+              bg-[#22C55E]
+              px-6
+              text-sm
+              font-semibold
+              text-white
+              shadow-[0_12px_30px_rgba(34,197,94,0.20)]
+              transition
+              duration-200
+              hover:-translate-y-0.5
+              hover:bg-[#16A34A]
+            "
           >
-            Découvrir les conseils
+            <i class="fa-solid fa-camera"></i>
+            Scanner une plante
+          </a>
 
-            <i class="fa-solid fa-arrow-right"></i>
+          <a
+            href="#comment-ca-marche"
+            class="
+              inline-flex
+              h-12
+              items-center
+              justify-center
+              gap-2
+              rounded-2xl
+              border
+              border-[#DCE4DD]
+              bg-white
+              px-6
+              text-sm
+              font-semibold
+              text-[#263029]
+              transition
+              hover:border-[#22C55E]/40
+              hover:bg-[#F8FBF8]
+              dark:border-[#303932]
+              dark:bg-[#181D19]
+              dark:text-[#E8EEE9]
+              dark:hover:bg-[#202620]
+            "
+          >
+            <i class="fa-solid fa-circle-info"></i>
+            Comment ça marche
           </a>
 
         </div>
 
+
+        <!-- INFOS -->
+
+        <div
+          class="
+            mt-8
+            flex
+            flex-wrap
+            gap-x-6
+            gap-y-3
+            text-sm
+            text-[#69736C]
+            dark:text-[#919B93]
+          "
+        >
+
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-camera text-[#22C55E]"></i>
+            Caméra
+          </span>
+
+          <span class="flex items-center gap-2">
+            <i class="fa-regular fa-image text-[#22C55E]"></i>
+            Import d'image
+          </span>
+
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-leaf text-[#22C55E]"></i>
+            Identification
+          </span>
+
+        </div>
+
       </div>
 
-    </section>
+
+      <!-- VISUEL -->
+
+      <div class="relative">
+
+        <div
+          class="
+            absolute
+            -inset-6
+            rounded-[50px]
+            bg-[#22C55E]/10
+            blur-3xl
+          "
+        ></div>
+
+        <div
+          class="
+            relative
+            mx-auto
+            max-w-[480px]
+            overflow-hidden
+            rounded-[36px]
+            border
+            border-[#DCE4DD]
+            bg-white
+            p-3
+            shadow-[0_30px_80px_rgba(17,21,18,0.10)]
+            dark:border-[#303932]
+            dark:bg-[#181D19]
+            dark:shadow-[0_30px_80px_rgba(0,0,0,0.25)]
+          "
+        >
+
+          <div
+            class="
+              relative
+              flex
+              min-h-[380px]
+              items-center
+              justify-center
+              overflow-hidden
+              rounded-[28px]
+              bg-[#E5EEE5]
+              dark:bg-[#202620]
+            "
+          >
+
+            <div
+              class="
+                absolute
+                inset-0
+                bg-[radial-gradient(circle_at_50%_40%,rgba(34,197,94,0.18),transparent_35%),linear-gradient(145deg,#DCE8DD,#F2F6F1)]
+                dark:bg-[radial-gradient(circle_at_50%_40%,rgba(34,197,94,0.10),transparent_35%),linear-gradient(145deg,#182018,#252D26)]
+              "
+            ></div>
 
 
-    <!-- ========================================================
-         🌍 DÉCOUVRIR JARDISCAN
-         ======================================================== -->
+            <!-- PLANTE VISUELLE -->
 
-    <section class="mb-8">
+            <div
+              class="
+                relative
+                z-10
+                h-[230px]
+                w-[190px]
+              "
+            >
 
-      <div class="mb-5">
+              <div
+                class="
+                  absolute
+                  bottom-0
+                  left-1/2
+                  h-[145px]
+                  w-[15px]
+                  -translate-x-1/2
+                  rotate-[7deg]
+                  rounded-full
+                  bg-[#3F7D45]
+                "
+              ></div>
 
-        <p class="text-sm font-semibold uppercase tracking-wider text-[var(--Primary)]">
-          Explorez
+              <div
+                class="
+                  absolute
+                  left-[28px]
+                  top-[65px]
+                  h-[90px]
+                  w-[48px]
+                  rotate-[-38deg]
+                  rounded-[100%_0_100%_0]
+                  bg-[#5AAA5F]
+                "
+              ></div>
+
+              <div
+                class="
+                  absolute
+                  right-[20px]
+                  top-[35px]
+                  h-[100px]
+                  w-[52px]
+                  rotate-[40deg]
+                  rounded-[0_100%_0_100%]
+                  bg-[#4D9852]
+                "
+              ></div>
+
+              <div
+                class="
+                  absolute
+                  left-[12px]
+                  top-[125px]
+                  h-[78px]
+                  w-[44px]
+                  rotate-[-48deg]
+                  rounded-[100%_0_100%_0]
+                  bg-[#68B86B]
+                "
+              ></div>
+
+              <div
+                class="
+                  absolute
+                  right-[2px]
+                  top-[118px]
+                  h-[82px]
+                  w-[46px]
+                  rotate-[45deg]
+                  rounded-[0_100%_0_100%]
+                  bg-[#59A65D]
+                "
+              ></div>
+
+            </div>
+
+
+            <!-- SCAN FRAME -->
+
+            <div
+              class="
+                absolute
+                left-1/2
+                top-1/2
+                z-20
+                h-[255px]
+                w-[205px]
+                -translate-x-1/2
+                -translate-y-1/2
+              "
+            >
+
+              <span
+                class="
+                  absolute
+                  left-0
+                  top-0
+                  h-9
+                  w-9
+                  rounded-tl-xl
+                  border-l-2
+                  border-t-2
+                  border-[#A3E635]
+                "
+              ></span>
+
+              <span
+                class="
+                  absolute
+                  right-0
+                  top-0
+                  h-9
+                  w-9
+                  rounded-tr-xl
+                  border-r-2
+                  border-t-2
+                  border-[#A3E635]
+                "
+              ></span>
+
+              <span
+                class="
+                  absolute
+                  bottom-0
+                  left-0
+                  h-9
+                  w-9
+                  rounded-bl-xl
+                  border-b-2
+                  border-l-2
+                  border-[#A3E635]
+                "
+              ></span>
+
+              <span
+                class="
+                  absolute
+                  bottom-0
+                  right-0
+                  h-9
+                  w-9
+                  rounded-br-xl
+                  border-b-2
+                  border-r-2
+                  border-[#A3E635]
+                "
+              ></span>
+
+            </div>
+
+
+            <div
+              class="
+                absolute
+                left-5
+                top-5
+                z-30
+                flex
+                items-center
+                gap-2
+                rounded-full
+                bg-black/25
+                px-3
+                py-2
+                text-xs
+                font-medium
+                text-white
+                backdrop-blur-md
+              "
+            >
+              <span
+                class="
+                  h-2
+                  w-2
+                  rounded-full
+                  bg-[#A3E635]
+                  shadow-[0_0_10px_rgba(163,230,53,0.9)]
+                "
+              ></span>
+
+              Scanner prêt
+            </div>
+
+
+            <div
+              class="
+                absolute
+                bottom-5
+                left-1/2
+                z-30
+                -translate-x-1/2
+                rounded-full
+                bg-black/25
+                px-4
+                py-2
+                text-xs
+                font-medium
+                text-white
+                backdrop-blur-md
+              "
+            >
+              Placez la plante dans le cadre
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       📷 02 — SCANNER PRINCIPAL
+       ============================================================ -->
+
+  <section
+    id="scanner"
+    class="
+      relative
+      z-10
+      mx-auto
+      max-w-[1500px]
+      scroll-mt-20
+      px-5
+      py-10
+      sm:px-8
+      lg:px-12
+      lg:py-16
+    "
+  >
+
+    <div
+      class="
+        grid
+        gap-5
+        lg:grid-cols-[1fr_300px]
+      "
+    >
+
+      <!-- CAMERA -->
+
+      <div
+        class="
+          overflow-hidden
+          rounded-[32px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          p-3
+          shadow-[0_20px_60px_rgba(17,21,18,0.06)]
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
+
+        <div
+          class="
+            relative
+            min-h-[500px]
+            overflow-hidden
+            rounded-[25px]
+            bg-[#E5EEE5]
+            dark:bg-[#202620]
+          "
+        >
+
+          <div
+            class="
+              absolute
+              inset-0
+              bg-[radial-gradient(circle_at_50%_40%,rgba(34,197,94,0.12),transparent_30%),linear-gradient(135deg,#DCE8DD,#F0F5F0)]
+              dark:bg-[radial-gradient(circle_at_50%_40%,rgba(34,197,94,0.08),transparent_30%),linear-gradient(135deg,#182018,#252D26)]
+            "
+          ></div>
+
+
+          <!-- TOP BAR -->
+
+          <div
+            class="
+              absolute
+              left-5
+              right-5
+              top-5
+              z-30
+              flex
+              items-center
+              justify-between
+            "
+          >
+
+            <div
+              class="
+                flex
+                items-center
+                gap-2
+                rounded-full
+                bg-black/25
+                px-3
+                py-2
+                text-xs
+                font-medium
+                text-white
+                backdrop-blur-md
+              "
+            >
+              <span class="h-2 w-2 rounded-full bg-[#A3E635]"></span>
+              Caméra prête
+            </div>
+
+
+            <button
+              type="button"
+              aria-label="Changer de caméra"
+              class="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-full
+                bg-black/25
+                text-white
+                backdrop-blur-md
+                transition
+                hover:bg-black/40
+              "
+            >
+              <i class="fa-solid fa-camera-rotate"></i>
+            </button>
+
+          </div>
+
+
+          <!-- PLANTE -->
+
+          <div
+            class="
+              absolute
+              left-1/2
+              top-1/2
+              z-10
+              h-[270px]
+              w-[210px]
+              -translate-x-1/2
+              -translate-y-1/2
+            "
+          >
+
+            <div
+              class="
+                absolute
+                bottom-0
+                left-1/2
+                h-[170px]
+                w-[16px]
+                -translate-x-1/2
+                rounded-full
+                bg-[#3F7D45]
+              "
+            ></div>
+
+            <div
+              class="
+                absolute
+                left-[15px]
+                top-[75px]
+                h-[105px]
+                w-[55px]
+                rotate-[-40deg]
+                rounded-[100%_0_100%_0]
+                bg-[#5BA85F]
+              "
+            ></div>
+
+            <div
+              class="
+                absolute
+                right-[0]
+                top-[30px]
+                h-[115px]
+                w-[58px]
+                rotate-[42deg]
+                rounded-[0_100%_0_100%]
+                bg-[#4D9852]
+              "
+            ></div>
+
+            <div
+              class="
+                absolute
+                left-[0]
+                top-[145px]
+                h-[90px]
+                w-[50px]
+                rotate-[-48deg]
+                rounded-[100%_0_100%_0]
+                bg-[#69B96D]
+              "
+            ></div>
+
+            <div
+              class="
+                absolute
+                right-[-10px]
+                top-[135px]
+                h-[92px]
+                w-[52px]
+                rotate-[46deg]
+                rounded-[0_100%_0_100%]
+                bg-[#59A65D]
+              "
+            ></div>
+
+          </div>
+
+
+          <!-- CADRE -->
+
+          <div
+            class="
+              absolute
+              left-1/2
+              top-1/2
+              z-20
+              h-[320px]
+              w-[250px]
+              -translate-x-1/2
+              -translate-y-1/2
+            "
+          >
+
+            <span class="absolute left-0 top-0 h-10 w-10 rounded-tl-2xl border-l-2 border-t-2 border-[#A3E635]"></span>
+            <span class="absolute right-0 top-0 h-10 w-10 rounded-tr-2xl border-r-2 border-t-2 border-[#A3E635]"></span>
+            <span class="absolute bottom-0 left-0 h-10 w-10 rounded-bl-2xl border-b-2 border-l-2 border-[#A3E635]"></span>
+            <span class="absolute bottom-0 right-0 h-10 w-10 rounded-br-2xl border-b-2 border-r-2 border-[#A3E635]"></span>
+
+          </div>
+
+
+          <!-- BOTTOM CONTROLS -->
+
+          <div
+            class="
+              absolute
+              bottom-6
+              left-1/2
+              z-30
+              flex
+              -translate-x-1/2
+              items-center
+              gap-5
+            "
+          >
+
+            <button
+              type="button"
+              aria-label="Importer une image"
+              class="
+                flex
+                h-12
+                w-12
+                items-center
+                justify-center
+                rounded-full
+                bg-black/25
+                text-white
+                backdrop-blur-md
+                transition
+                hover:bg-black/40
+              "
+            >
+              <i class="fa-regular fa-image"></i>
+            </button>
+
+
+            <button
+              type="button"
+              aria-label="Prendre une photo"
+              class="
+                flex
+                h-[72px]
+                w-[72px]
+                items-center
+                justify-center
+                rounded-full
+                border-4
+                border-white
+                bg-[#22C55E]
+                text-white
+                shadow-[0_10px_30px_rgba(0,0,0,0.25)]
+                transition
+                hover:scale-105
+                hover:bg-[#16A34A]
+              "
+            >
+              <i class="fa-solid fa-camera text-2xl"></i>
+            </button>
+
+
+            <button
+              type="button"
+              aria-label="Réglages"
+              class="
+                flex
+                h-12
+                w-12
+                items-center
+                justify-center
+                rounded-full
+                bg-black/25
+                text-white
+                backdrop-blur-md
+                transition
+                hover:bg-black/40
+              "
+            >
+              <i class="fa-solid fa-sliders"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PANNEAU -->
+
+      <aside
+        class="
+          flex
+          flex-col
+          rounded-[32px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          p-6
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
+
+        <div>
+
+          <span
+            class="
+              text-xs
+              font-semibold
+              uppercase
+              tracking-[0.15em]
+              text-[#22C55E]
+            "
+          >
+            Scanner
+          </span>
+
+          <h2 class="mt-2 text-xl font-semibold">
+            Prêt à identifier ?
+          </h2>
+
+          <p
+            class="
+              mt-3
+              text-sm
+              leading-6
+              text-[#69736C]
+              dark:text-[#919B93]
+            "
+          >
+            Cadrez une feuille, une fleur ou la plante entière.
+          </p>
+
+        </div>
+
+
+        <div class="my-6 h-px bg-[#E3E9E3] dark:bg-[#303932]"></div>
+
+
+        <!-- MODE -->
+
+        <div>
+
+          <p
+            class="
+              mb-3
+              text-xs
+              font-semibold
+              uppercase
+              tracking-wider
+              text-[#69736C]
+              dark:text-[#919B93]
+            "
+          >
+            Mode de capture
+          </p>
+
+
+          <button
+            type="button"
+            class="
+              flex
+              w-full
+              items-center
+              gap-3
+              rounded-2xl
+              border
+              border-[#22C55E]/30
+              bg-[#22C55E]/8
+              p-3
+              text-left
+              dark:bg-[#22C55E]/10
+            "
+          >
+
+            <span
+              class="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-xl
+                bg-[#22C55E]
+                text-white
+              "
+            >
+              <i class="fa-solid fa-camera"></i>
+            </span>
+
+            <span>
+              <span class="block text-sm font-semibold">
+                Caméra
+              </span>
+
+              <span
+                class="
+                  mt-0.5
+                  block
+                  text-xs
+                  text-[#69736C]
+                  dark:text-[#919B93]
+                "
+              >
+                Scanner en direct
+              </span>
+            </span>
+
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              mt-2
+              flex
+              w-full
+              items-center
+              gap-3
+              rounded-2xl
+              border
+              border-transparent
+              p-3
+              text-left
+              transition
+              hover:bg-[#F3F7F3]
+              dark:hover:bg-[#202620]
+            "
+          >
+
+            <span
+              class="
+                flex
+                h-10
+                w-10
+                items-center
+                justify-center
+                rounded-xl
+                bg-[#A3E635]/15
+                text-[#65A30D]
+              "
+            >
+              <i class="fa-regular fa-image"></i>
+            </span>
+
+            <span>
+              <span class="block text-sm font-semibold">
+                Galerie
+              </span>
+
+              <span
+                class="
+                  mt-0.5
+                  block
+                  text-xs
+                  text-[#69736C]
+                  dark:text-[#919B93]
+                "
+              >
+                Importer une photo
+              </span>
+            </span>
+
+          </button>
+
+        </div>
+
+
+        <div class="mt-auto pt-8">
+
+          <div
+            class="
+              rounded-2xl
+              bg-[#F4F8F4]
+              p-4
+              dark:bg-[#202620]
+            "
+          >
+
+            <div class="flex items-center gap-2">
+
+              <i class="fa-solid fa-lightbulb text-[#A3E635]"></i>
+
+              <span class="text-sm font-semibold">
+                Astuce
+              </span>
+
+            </div>
+
+            <p
+              class="
+                mt-2
+                text-xs
+                leading-5
+                text-[#69736C]
+                dark:text-[#919B93]
+              "
+            >
+              Une feuille nette et bien éclairée donne généralement
+              une meilleure base pour l'identification.
+            </p>
+
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       🔎 03 — LES DIFFÉRENTS MODES DE SCAN
+       ============================================================ -->
+
+  <section
+    class="
+      relative
+      z-10
+      mx-auto
+      max-w-[1500px]
+      px-5
+      py-16
+      sm:px-8
+      lg:px-12
+      lg:py-24
+    "
+  >
+
+    <div class="max-w-2xl">
+
+      <span
+        class="
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.18em]
+          text-[#22C55E]
+        "
+      >
+        Plusieurs possibilités
+      </span>
+
+      <h2
+        class="
+          mt-3
+          text-3xl
+          font-semibold
+          tracking-[-0.035em]
+          sm:text-4xl
+        "
+      >
+        Scannez comme vous voulez.
+      </h2>
+
+      <p
+        class="
+          mt-4
+          leading-7
+          text-[#69736C]
+          dark:text-[#919B93]
+        "
+      >
+        JardiScan s'adapte à votre appareil et à votre manière
+        d'identifier une plante.
+      </p>
+
+    </div>
+
+
+    <div
+      class="
+        mt-10
+        grid
+        gap-5
+        md:grid-cols-2
+        lg:grid-cols-4
+      "
+    >
+
+      <!-- CARD -->
+
+      <article
+        class="
+          rounded-[28px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          p-6
+          transition
+          duration-200
+          hover:-translate-y-1
+          hover:border-[#22C55E]/30
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
+
+        <div
+          class="
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-2xl
+            bg-[#22C55E]/10
+            text-xl
+            text-[#22C55E]
+          "
+        >
+          <i class="fa-solid fa-camera"></i>
+        </div>
+
+        <h3 class="mt-6 font-semibold">
+          Caméra en direct
+        </h3>
+
+        <p
+          class="
+            mt-2
+            text-sm
+            leading-6
+            text-[#69736C]
+            dark:text-[#919B93]
+          "
+        >
+          Utilisez directement la caméra de votre ordinateur,
+          tablette ou téléphone.
         </p>
 
-        <h2 class="mt-1 text-2xl font-black">
-          Découvrez l'univers végétal
-        </h2>
+      </article>
 
-        <p class="mt-2 max-w-2xl text-sm leading-6 text-[var(--TextSecondaire)]">
-          Allez plus loin dans votre découverte des plantes et de la
-          biodiversité qui vous entoure.
+
+      <article
+        class="
+          rounded-[28px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          p-6
+          transition
+          duration-200
+          hover:-translate-y-1
+          hover:border-[#22C55E]/30
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
+
+        <div
+          class="
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-2xl
+            bg-[#A3E635]/15
+            text-xl
+            text-[#65A30D]
+          "
+        >
+          <i class="fa-regular fa-image"></i>
+        </div>
+
+        <h3 class="mt-6 font-semibold">
+          Importer une photo
+        </h3>
+
+        <p
+          class="
+            mt-2
+            text-sm
+            leading-6
+            text-[#69736C]
+            dark:text-[#919B93]
+          "
+        >
+          Choisissez une photo existante depuis votre appareil.
         </p>
 
-      </div>
+      </article>
 
 
-      <div class="grid gap-4 md:grid-cols-3">
+      <article
+        class="
+          rounded-[28px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          p-6
+          transition
+          duration-200
+          hover:-translate-y-1
+          hover:border-[#22C55E]/30
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
 
-
-        <!-- Découverte 1 -->
-
-        <a
-          routerLink="/decouvrir"
-          class="group relative min-h-[230px] overflow-hidden rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1"
+        <div
+          class="
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-2xl
+            bg-[#22C55E]/10
+            text-xl
+            text-[#22C55E]
+          "
         >
+          <i class="fa-solid fa-camera-rotate"></i>
+        </div>
 
-          <div
-            class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[var(--Primary)]/10 blur-2xl"
-          ></div>
+        <h3 class="mt-6 font-semibold">
+          Changer de caméra
+        </h3>
 
-          <div class="relative">
-
-            <div
-              class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-compass"></i>
-            </div>
-
-            <h3 class="mt-5 text-xl font-black">
-              Découvrir
-            </h3>
-
-            <p class="mt-2 text-sm leading-6 text-[var(--TextSecondaire)]">
-              Explorez de nouvelles plantes et enrichissez vos connaissances.
-            </p>
-
-            <span
-              class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[var(--Primary)]"
-            >
-              Explorer
-
-              <i
-                class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"
-              ></i>
-            </span>
-
-          </div>
-
-        </a>
-
-
-        <!-- Découverte 2 -->
-
-        <a
-          routerLink="/nouveaute"
-          class="group relative min-h-[230px] overflow-hidden rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1"
+        <p
+          class="
+            mt-2
+            text-sm
+            leading-6
+            text-[#69736C]
+            dark:text-[#919B93]
+          "
         >
+          Passez d'une caméra à l'autre lorsque votre appareil
+          en possède plusieurs.
+        </p>
 
-          <div
-            class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[var(--Accent)]/10 blur-2xl"
-          ></div>
-
-          <div class="relative">
-
-            <div
-              class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--Accent)]/10 text-[var(--Accent)]"
-            >
-              <i class="fa-solid fa-sparkles"></i>
-            </div>
-
-            <h3 class="mt-5 text-xl font-black">
-              Nouveautés
-            </h3>
-
-            <p class="mt-2 text-sm leading-6 text-[var(--TextSecondaire)]">
-              Découvrez les nouvelles fonctionnalités et contenus de JardiScan.
-            </p>
-
-            <span
-              class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[var(--Primary)]"
-            >
-              Découvrir
-
-              <i
-                class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"
-              ></i>
-            </span>
-
-          </div>
-
-        </a>
+      </article>
 
 
-        <!-- Découverte 3 -->
+      <article
+        class="
+          rounded-[28px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          p-6
+          transition
+          duration-200
+          hover:-translate-y-1
+          hover:border-[#22C55E]/30
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
 
-        <a
-          routerLink="/conseils"
-          class="group relative min-h-[230px] overflow-hidden rounded-3xl border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1"
+        <div
+          class="
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-2xl
+            bg-[#A3E635]/15
+            text-xl
+            text-[#65A30D]
+          "
         >
+          <i class="fa-solid fa-expand"></i>
+        </div>
 
-          <div
-            class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[var(--Primary)]/10 blur-2xl"
-          ></div>
+        <h3 class="mt-6 font-semibold">
+          Cadrage guidé
+        </h3>
 
-          <div class="relative">
+        <p
+          class="
+            mt-2
+            text-sm
+            leading-6
+            text-[#69736C]
+            dark:text-[#919B93]
+          "
+        >
+          Le cadre vous aide à placer correctement la plante
+          avant la capture.
+        </p>
 
-            <div
-              class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-[var(--Primary)]"
-            >
-              <i class="fa-solid fa-book-open"></i>
-            </div>
+      </article>
 
-            <h3 class="mt-5 text-xl font-black">
-              Conseils
-            </h3>
+    </div>
 
-            <p class="mt-2 text-sm leading-6 text-[var(--TextSecondaire)]">
-              Apprenez à mieux observer, entretenir et protéger vos plantes.
-            </p>
-
-            <span
-              class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[var(--Primary)]"
-            >
-              Lire les conseils
-
-              <i
-                class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"
-              ></i>
-            </span>
-
-          </div>
-
-        </a>
-
-      </div>
-
-    </section>
+  </section>
 
 
-    <!-- ========================================================
-         🤖 ASSISTANT JARDISCAN
-         ======================================================== -->
+  <!-- ============================================================
+       💡 04 — CONSEILS
+       ============================================================ -->
 
-    <section
-      class="relative mb-8 overflow-hidden rounded-[2rem] border border-[var(--Primary)]/20 bg-[var(--Primary)]/5 p-6 sm:p-8"
+  <section
+    class="
+      relative
+      z-10
+      border-y
+      border-[#DCE4DD]
+      bg-white/70
+      dark:border-[#303932]
+      dark:bg-[#181D19]/60
+    "
+  >
+
+    <div
+      class="
+        mx-auto
+        max-w-[1500px]
+        px-5
+        py-16
+        sm:px-8
+        lg:px-12
+        lg:py-24
+      "
     >
 
       <div
-        class="pointer-events-none absolute -right-20 -bottom-24 h-72 w-72 rounded-full bg-[var(--Primary)]/10 blur-3xl"
-      ></div>
+        class="
+          grid
+          items-center
+          gap-12
+          lg:grid-cols-[0.7fr_1fr]
+          lg:gap-20
+        "
+      >
+
+        <div>
+
+          <span
+            class="
+              text-xs
+              font-semibold
+              uppercase
+              tracking-[0.18em]
+              text-[#22C55E]
+            "
+          >
+            Avant de scanner
+          </span>
+
+          <h2
+            class="
+              mt-3
+              text-3xl
+              font-semibold
+              tracking-[-0.035em]
+              sm:text-4xl
+            "
+          >
+            Quelques secondes de préparation
+            peuvent faire la différence.
+          </h2>
+
+          <p
+            class="
+              mt-5
+              max-w-xl
+              leading-7
+              text-[#69736C]
+              dark:text-[#919B93]
+            "
+          >
+            Essayez de présenter clairement la plante afin de faciliter
+            son identification.
+          </p>
+
+        </div>
+
+
+        <div
+          class="
+            grid
+            gap-4
+            sm:grid-cols-2
+          "
+        >
+
+          <div
+            class="
+              rounded-[26px]
+              border
+              border-[#DCE4DD]
+              bg-[#F6F8F5]
+              p-6
+              dark:border-[#303932]
+              dark:bg-[#202620]
+            "
+          >
+
+            <i class="fa-solid fa-sun text-xl text-[#A3E635]"></i>
+
+            <h3 class="mt-5 font-semibold">
+              Lumière suffisante
+            </h3>
+
+            <p
+              class="
+                mt-2
+                text-sm
+                leading-6
+                text-[#69736C]
+                dark:text-[#919B93]
+              "
+            >
+              Évitez les images trop sombres ou fortement à contre-jour.
+            </p>
+
+          </div>
+
+
+          <div
+            class="
+              rounded-[26px]
+              border
+              border-[#DCE4DD]
+              bg-[#F6F8F5]
+              p-6
+              dark:border-[#303932]
+              dark:bg-[#202620]
+            "
+          >
+
+            <i class="fa-solid fa-crosshairs text-xl text-[#22C55E]"></i>
+
+            <h3 class="mt-5 font-semibold">
+              Plante centrée
+            </h3>
+
+            <p
+              class="
+                mt-2
+                text-sm
+                leading-6
+                text-[#69736C]
+                dark:text-[#919B93]
+              "
+            >
+              Gardez la partie intéressante de la plante dans le cadre.
+            </p>
+
+          </div>
+
+
+          <div
+            class="
+              rounded-[26px]
+              border
+              border-[#DCE4DD]
+              bg-[#F6F8F5]
+              p-6
+              dark:border-[#303932]
+              dark:bg-[#202620]
+            "
+          >
+
+            <i class="fa-solid fa-hand text-xl text-[#22C55E]"></i>
+
+            <h3 class="mt-5 font-semibold">
+              Évitez les mouvements
+            </h3>
+
+            <p
+              class="
+                mt-2
+                text-sm
+                leading-6
+                text-[#69736C]
+                dark:text-[#919B93]
+              "
+            >
+              Gardez votre appareil stable au moment de prendre la photo.
+            </p>
+
+          </div>
+
+
+          <div
+            class="
+              rounded-[26px]
+              border
+              border-[#DCE4DD]
+              bg-[#F6F8F5]
+              p-6
+              dark:border-[#303932]
+              dark:bg-[#202620]
+            "
+          >
+
+            <i class="fa-solid fa-leaf text-xl text-[#A3E635]"></i>
+
+            <h3 class="mt-5 font-semibold">
+              Une plante à la fois
+            </h3>
+
+            <p
+              class="
+                mt-2
+                text-sm
+                leading-6
+                text-[#69736C]
+                dark:text-[#919B93]
+              "
+            >
+              Si possible, évitez de mélanger plusieurs plantes dans
+              la même image.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       🌱 05 — APERÇU D'UN RÉSULTAT
+       ============================================================ -->
+
+  <section
+    class="
+      relative
+      z-10
+      mx-auto
+      max-w-[1500px]
+      px-5
+      py-16
+      sm:px-8
+      lg:px-12
+      lg:py-24
+    "
+  >
+
+    <div class="max-w-2xl">
+
+      <span
+        class="
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.18em]
+          text-[#22C55E]
+        "
+      >
+        Après le scan
+      </span>
+
+      <h2
+        class="
+          mt-3
+          text-3xl
+          font-semibold
+          tracking-[-0.035em]
+          sm:text-4xl
+        "
+      >
+        Un résultat simple à comprendre.
+      </h2>
+
+    </div>
+
+
+    <div
+      class="
+        mt-10
+        overflow-hidden
+        rounded-[36px]
+        border
+        border-[#DCE4DD]
+        bg-[#EAF3EA]
+        dark:border-[#303932]
+        dark:bg-[#1B241C]
+      "
+    >
+
+      <div
+        class="
+          grid
+          lg:grid-cols-[0.9fr_1fr]
+        "
+      >
+
+        <!-- IMAGE -->
+
+        <div
+          class="
+            relative
+            flex
+            min-h-[420px]
+            items-center
+            justify-center
+            overflow-hidden
+            bg-[#DCE9DC]
+            dark:bg-[#263126]
+          "
+        >
+
+          <div
+            class="
+              absolute
+              h-[300px]
+              w-[300px]
+              rounded-full
+              bg-[#22C55E]/15
+              blur-3xl
+            "
+          ></div>
+
+          <i
+            class="
+              fa-solid
+              fa-leaf
+              relative
+              text-[150px]
+              text-[#4F9B55]
+            "
+          ></i>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div class="p-8 sm:p-10 lg:p-14">
+
+          <div
+            class="
+              flex
+              items-center
+              justify-between
+            "
+          >
+
+            <span
+              class="
+                rounded-full
+                bg-[#22C55E]/10
+                px-3
+                py-1.5
+                text-xs
+                font-semibold
+                text-[#15803D]
+                dark:text-[#86EFAC]
+              "
+            >
+              Identification
+            </span>
+
+            <span
+              class="
+                text-xs
+                text-[#69736C]
+                dark:text-[#919B93]
+              "
+            >
+              Exemple
+            </span>
+
+          </div>
+
+
+          <h3
+            class="
+              mt-8
+              text-3xl
+              font-semibold
+              tracking-[-0.03em]
+            "
+          >
+            Plante identifiée
+          </h3>
+
+          <p
+            class="
+              mt-2
+              text-sm
+              italic
+              text-[#69736C]
+              dark:text-[#919B93]
+            "
+          >
+            Nom scientifique
+          </p>
+
+
+          <div class="mt-8">
+
+            <div
+              class="
+                mb-3
+                flex
+                items-center
+                justify-between
+              "
+            >
+
+              <span class="text-sm font-medium">
+                Correspondance
+              </span>
+
+              <span
+                class="
+                  text-sm
+                  font-semibold
+                  text-[#22C55E]
+                "
+              >
+                96 %
+              </span>
+
+            </div>
+
+            <div
+              class="
+                h-2
+                overflow-hidden
+                rounded-full
+                bg-[#D8E3D8]
+                dark:bg-[#303932]
+              "
+            >
+
+              <div
+                class="
+                  h-full
+                  w-[96%]
+                  rounded-full
+                  bg-[#22C55E]
+                "
+              ></div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="
+              mt-8
+              grid
+              grid-cols-2
+              gap-3
+            "
+          >
+
+            <div
+              class="
+                rounded-2xl
+                bg-white/70
+                p-4
+                dark:bg-[#202620]
+              "
+            >
+
+              <i class="fa-solid fa-droplet text-[#22C55E]"></i>
+
+              <p class="mt-3 text-xs text-[#69736C] dark:text-[#919B93]">
+                Arrosage
+              </p>
+
+              <p class="mt-1 text-sm font-semibold">
+                Modéré
+              </p>
+
+            </div>
+
+
+            <div
+              class="
+                rounded-2xl
+                bg-white/70
+                p-4
+                dark:bg-[#202620]
+              "
+            >
+
+              <i class="fa-solid fa-sun text-[#A3E635]"></i>
+
+              <p class="mt-3 text-xs text-[#69736C] dark:text-[#919B93]">
+                Lumière
+              </p>
+
+              <p class="mt-1 text-sm font-semibold">
+                Lumineuse
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="
+              mt-7
+              inline-flex
+              items-center
+              gap-2
+              rounded-2xl
+              bg-[#111512]
+              px-5
+              py-3
+              text-sm
+              font-semibold
+              text-white
+              transition
+              hover:bg-[#263029]
+              dark:bg-[#F4F7F2]
+              dark:text-[#111512]
+            "
+          >
+            Voir la fiche complète
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       🕘 06 — SCANS RÉCENTS
+       ============================================================ -->
+
+  <section
+    class="
+      relative
+      z-10
+      mx-auto
+      max-w-[1500px]
+      px-5
+      pb-16
+      sm:px-8
+      lg:px-12
+      lg:pb-24
+    "
+  >
+
+    <div
+      class="
+        flex
+        flex-col
+        justify-between
+        gap-4
+        sm:flex-row
+        sm:items-end
+      "
+    >
+
+      <div>
+
+        <span
+          class="
+            text-xs
+            font-semibold
+            uppercase
+            tracking-[0.18em]
+            text-[#22C55E]
+          "
+        >
+          Votre activité
+        </span>
+
+        <h2
+          class="
+            mt-3
+            text-3xl
+            font-semibold
+            tracking-[-0.035em]
+          "
+        >
+          Vos scans récents.
+        </h2>
+
+      </div>
+
+
+      <a
+        href="/historique"
+        class="
+          inline-flex
+          items-center
+          gap-2
+          text-sm
+          font-semibold
+          text-[#15803D]
+          hover:text-[#166534]
+          dark:text-[#86EFAC]
+        "
+      >
+        Voir tout l'historique
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+
+    <div
+      class="
+        mt-8
+        grid
+        gap-4
+        sm:grid-cols-2
+        lg:grid-cols-4
+      "
+    >
+
+      <!-- SCAN -->
+
+      <article
+        class="
+          overflow-hidden
+          rounded-[26px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
+
+        <div
+          class="
+            flex
+            h-[180px]
+            items-center
+            justify-center
+            bg-[#E5EEE5]
+            dark:bg-[#202620]
+          "
+        >
+          <i class="fa-solid fa-leaf text-6xl text-[#4F9B55]"></i>
+        </div>
+
+        <div class="p-5">
+
+          <p class="font-semibold">
+            Plante identifiée
+          </p>
+
+          <p
+            class="
+              mt-1
+              text-xs
+              text-[#69736C]
+              dark:text-[#919B93]
+            "
+          >
+            Aujourd'hui
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article
+        class="
+          overflow-hidden
+          rounded-[26px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
+
+        <div
+          class="
+            flex
+            h-[180px]
+            items-center
+            justify-center
+            bg-[#EAF0E8]
+            dark:bg-[#202620]
+          "
+        >
+          <i class="fa-solid fa-seedling text-6xl text-[#65A30D]"></i>
+        </div>
+
+        <div class="p-5">
+
+          <p class="font-semibold">
+            Nouvelle plante
+          </p>
+
+          <p
+            class="
+              mt-1
+              text-xs
+              text-[#69736C]
+              dark:text-[#919B93]
+            "
+          >
+            Hier
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article
+        class="
+          overflow-hidden
+          rounded-[26px]
+          border
+          border-[#DCE4DD]
+          bg-white
+          dark:border-[#303932]
+          dark:bg-[#181D19]
+        "
+      >
+
+        <div
+          class="
+            flex
+            h-[180px]
+            items-center
+            justify-center
+            bg-[#E5EEE5]
+            dark:bg-[#202620]
+          "
+        >
+          <i class="fa-solid fa-leaf text-6xl text-[#3F7D45]"></i>
+        </div>
+
+        <div class="p-5">
+
+          <p class="font-semibold">
+            Scan précédent
+          </p>
+
+          <p
+            class="
+              mt-1
+              text-xs
+              text-[#69736C]
+              dark:text-[#919B93]
+            "
+          >
+            Il y a 3 jours
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article
+        class="
+          flex
+          min-h-[250px]
+          flex-col
+          items-center
+          justify-center
+          rounded-[26px]
+          border
+          border-dashed
+          border-[#BFD0C0]
+          bg-[#F6F8F5]
+          p-6
+          text-center
+          dark:border-[#3A493D]
+          dark:bg-[#181D19]
+        "
+      >
+
+        <div
+          class="
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-full
+            bg-[#22C55E]/10
+            text-[#22C55E]
+          "
+        >
+          <i class="fa-solid fa-plus"></i>
+        </div>
+
+        <p class="mt-4 text-sm font-semibold">
+          Nouveau scan
+        </p>
+
+        <p
+          class="
+            mt-1
+            text-xs
+            text-[#69736C]
+            dark:text-[#919B93]
+          "
+        >
+          Commencez une nouvelle identification.
+        </p>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       🌿 07 — CONSEILS APRÈS IDENTIFICATION
+       ============================================================ -->
+
+  <section
+    class="
+      relative
+      z-10
+      border-y
+      border-[#DCE4DD]
+      bg-white/60
+      dark:border-[#303932]
+      dark:bg-[#181D19]/60
+    "
+  >
+
+    <div
+      class="
+        mx-auto
+        max-w-[1500px]
+        px-5
+        py-16
+        sm:px-8
+        lg:px-12
+        lg:py-24
+      "
+    >
+
+      <div class="max-w-2xl">
+
+        <span
+          class="
+            text-xs
+            font-semibold
+            uppercase
+            tracking-[0.18em]
+            text-[#22C55E]
+          "
+        >
+          Après l'identification
+        </span>
+
+        <h2
+          class="
+            mt-3
+            text-3xl
+            font-semibold
+            tracking-[-0.035em]
+            sm:text-4xl
+          "
+        >
+          Ne vous arrêtez pas au nom de la plante.
+        </h2>
+
+        <p
+          class="
+            mt-4
+            leading-7
+            text-[#69736C]
+            dark:text-[#919B93]
+          "
+        >
+          Découvrez ensuite les informations qui peuvent vous aider
+          à mieux comprendre son entretien.
+        </p>
+
+      </div>
 
 
       <div
-        class="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between"
+        class="
+          mt-10
+          grid
+          gap-4
+          sm:grid-cols-2
+          lg:grid-cols-4
+        "
+      >
+
+        <div
+          class="
+            rounded-[26px]
+            border
+            border-[#DCE4DD]
+            bg-[#F6F8F5]
+            p-6
+            dark:border-[#303932]
+            dark:bg-[#202620]
+          "
+        >
+          <i class="fa-solid fa-droplet text-xl text-[#22C55E]"></i>
+          <h3 class="mt-5 font-semibold">Arrosage</h3>
+          <p class="mt-2 text-sm leading-6 text-[#69736C] dark:text-[#919B93]">
+            Retrouvez les besoins en eau de la plante.
+          </p>
+        </div>
+
+
+        <div
+          class="
+            rounded-[26px]
+            border
+            border-[#DCE4DD]
+            bg-[#F6F8F5]
+            p-6
+            dark:border-[#303932]
+            dark:bg-[#202620]
+          "
+        >
+          <i class="fa-solid fa-sun text-xl text-[#A3E635]"></i>
+          <h3 class="mt-5 font-semibold">Lumière</h3>
+          <p class="mt-2 text-sm leading-6 text-[#69736C] dark:text-[#919B93]">
+            Découvrez son environnement lumineux idéal.
+          </p>
+        </div>
+
+
+        <div
+          class="
+            rounded-[26px]
+            border
+            border-[#DCE4DD]
+            bg-[#F6F8F5]
+            p-6
+            dark:border-[#303932]
+            dark:bg-[#202620]
+          "
+        >
+          <i class="fa-solid fa-seedling text-xl text-[#22C55E]"></i>
+          <h3 class="mt-5 font-semibold">Sol</h3>
+          <p class="mt-2 text-sm leading-6 text-[#69736C] dark:text-[#919B93]">
+            Consultez les indications concernant le substrat.
+          </p>
+        </div>
+
+
+        <div
+          class="
+            rounded-[26px]
+            border
+            border-[#DCE4DD]
+            bg-[#F6F8F5]
+            p-6
+            dark:border-[#303932]
+            dark:bg-[#202620]
+          "
+        >
+          <i class="fa-solid fa-heart-pulse text-xl text-[#A3E635]"></i>
+          <h3 class="mt-5 font-semibold">Entretien</h3>
+          <p class="mt-2 text-sm leading-6 text-[#69736C] dark:text-[#919B93]">
+            Gardez les conseils importants à portée de main.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       🤖 08 — ASSISTANT
+       ============================================================ -->
+
+  <section
+    class="
+      relative
+      z-10
+      mx-auto
+      max-w-[1500px]
+      px-5
+      py-16
+      sm:px-8
+      lg:px-12
+      lg:py-24
+    "
+  >
+
+    <div
+      class="
+        overflow-hidden
+        rounded-[34px]
+        border
+        border-[#DCE4DD]
+        bg-white
+        dark:border-[#303932]
+        dark:bg-[#181D19]
+      "
+    >
+
+      <div
+        class="
+          flex
+          flex-col
+          gap-8
+          p-8
+          sm:p-10
+          lg:flex-row
+          lg:items-center
+          lg:justify-between
+          lg:p-12
+        "
       >
 
         <div class="flex items-start gap-5">
 
           <div
-            class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[var(--Primary)] text-2xl text-[var(--TextOnPrimary)] shadow-lg"
+            class="
+              flex
+              h-14
+              w-14
+              shrink-0
+              items-center
+              justify-center
+              rounded-2xl
+              bg-[#22C55E]/10
+              text-2xl
+              text-[#22C55E]
+            "
           >
-            <i class="fa-solid fa-robot"></i>
+            <i class="fa-solid fa-leaf"></i>
           </div>
 
 
           <div>
 
-            <div class="flex flex-wrap items-center gap-3">
+            <div class="flex flex-wrap items-center gap-2">
 
-              <h2 class="text-2xl font-black">
+              <h2 class="text-xl font-semibold">
                 Assistant JardiScan
               </h2>
 
               <span
-                class="inline-flex items-center gap-1.5 rounded-full bg-[var(--Primary)]/10 px-3 py-1 text-xs font-bold text-[var(--Primary)]"
+                class="
+                  rounded-full
+                  bg-[#22C55E]/10
+                  px-2.5
+                  py-1
+                  text-[11px]
+                  font-semibold
+                  text-[#15803D]
+                  dark:text-[#86EFAC]
+                "
               >
-                <span
-                  class="h-1.5 w-1.5 rounded-full bg-[var(--Primary)]"
-                ></span>
-
                 Disponible
               </span>
 
             </div>
 
-
-            <p class="mt-2 max-w-2xl text-sm leading-6 text-[var(--TextSecondaire)]">
-              Une question sur une plante, un conseil de jardinage ou une
-              fonctionnalité JardiScan ? L'assistant est là pour vous aider.
+            <p
+              class="
+                mt-2
+                max-w-2xl
+                text-sm
+                leading-6
+                text-[#69736C]
+                dark:text-[#919B93]
+              "
+            >
+              Une question pendant votre scan ou après votre
+              identification ? L'assistant peut vous accompagner.
             </p>
 
           </div>
@@ -1147,125 +2482,179 @@
 
         <button
           type="button"
-          class="inline-flex shrink-0 items-center justify-center gap-3 rounded-2xl bg-[var(--Primary)] px-6 py-3.5 font-bold text-[var(--TextOnPrimary)] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--PrimaryHover)]"
+          class="
+            inline-flex
+            shrink-0
+            items-center
+            justify-center
+            gap-2
+            rounded-2xl
+            bg-[#22C55E]
+            px-5
+            py-3
+            text-sm
+            font-semibold
+            text-white
+            transition
+            hover:bg-[#16A34A]
+          "
         >
-          <i class="fa-solid fa-message"></i>
-
           Ouvrir l'assistant
-
+          <i class="fa-solid fa-arrow-right"></i>
         </button>
 
       </div>
 
-    </section>
+    </div>
+
+  </section>
 
 
-    <!-- ========================================================
-         🌿 CTA FINAL
-         ======================================================== -->
+  <!-- ============================================================
+       🚀 09 — CTA FINAL
+       ============================================================ -->
 
-    <section
-      class="relative overflow-hidden rounded-[2rem] border border-[var(--GlassBorder)] bg-[var(--GlassBackground)] p-8 text-center backdrop-blur-2xl sm:p-12"
+  <section
+    class="
+      relative
+      z-10
+      mx-auto
+      max-w-[1500px]
+      px-5
+      pb-24
+      sm:px-8
+      lg:px-12
+      lg:pb-32
+    "
+  >
+
+    <div
+      class="
+        relative
+        overflow-hidden
+        rounded-[38px]
+        bg-[#172019]
+        px-6
+        py-14
+        text-center
+        sm:px-10
+        lg:px-16
+        lg:py-20
+      "
     >
 
       <div
-        class="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--Primary)]/10 blur-3xl"
+        class="
+          pointer-events-none
+          absolute
+          -right-32
+          -top-32
+          h-[350px]
+          w-[350px]
+          rounded-full
+          bg-[#22C55E]/20
+          blur-3xl
+        "
+      ></div>
+
+      <div
+        class="
+          pointer-events-none
+          absolute
+          -bottom-40
+          -left-32
+          h-[350px]
+          w-[350px]
+          rounded-full
+          bg-[#A3E635]/10
+          blur-3xl
+        "
       ></div>
 
 
-      <div class="relative mx-auto max-w-3xl">
+      <div class="relative">
 
-        <div
-          class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--Primary)]/10 text-2xl text-[var(--Primary)]"
+        <span
+          class="
+            inline-flex
+            items-center
+            gap-2
+            rounded-full
+            border
+            border-white/10
+            bg-white/5
+            px-4
+            py-2
+            text-xs
+            font-semibold
+            text-[#A3E635]
+          "
         >
-          <i class="fa-solid fa-leaf"></i>
-        </div>
+          <i class="fa-solid fa-seedling"></i>
+          JardiScan
+        </span>
 
 
         <h2
-          class="mt-6 text-3xl font-black tracking-tight sm:text-4xl"
+          class="
+            mx-auto
+            mt-6
+            max-w-3xl
+            text-3xl
+            font-semibold
+            tracking-[-0.035em]
+            text-white
+            sm:text-4xl
+            lg:text-5xl
+          "
         >
-          Continuez à explorer votre jardin
+          Une nouvelle plante vous attend.
         </h2>
 
 
         <p
-          class="mx-auto mt-4 max-w-2xl text-base leading-7 text-[var(--TextSecondaire)]"
+          class="
+            mx-auto
+            mt-5
+            max-w-xl
+            leading-7
+            text-[#B8C3BA]
+          "
         >
-          Chaque plante peut raconter une histoire.
-          Utilisez JardiScan pour observer, identifier et mieux connaître
-          le monde végétal qui vous entoure.
+          Prenez une photo et commencez une nouvelle découverte
+          avec JardiScan.
         </p>
 
 
-        <div class="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-
-          <a
-            routerLink="/scan"
-            class="inline-flex items-center justify-center gap-3 rounded-2xl bg-[var(--Primary)] px-7 py-3.5 font-bold text-[var(--TextOnPrimary)] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--PrimaryHover)]"
-          >
-            <i class="fa-solid fa-camera"></i>
-
-            Scanner une plante
-          </a>
-
-
-          <a
-            routerLink="/decouvrir"
-            class="inline-flex items-center justify-center gap-3 rounded-2xl border border-[var(--GlassBorder)] bg-[var(--Surface)]/70 px-7 py-3.5 font-bold transition-all duration-300 hover:bg-[var(--Primary)]/10"
-          >
-            <i class="fa-solid fa-compass text-[var(--Primary)]"></i>
-
-            Explorer JardiScan
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ========================================================
-         © FOOTER
-         ======================================================== -->
-
-    <footer
-      class="flex flex-col gap-4 py-8 text-sm text-[var(--TextTertiaire)] sm:flex-row sm:items-center sm:justify-between"
-    >
-
-      <p>
-        © 2026 JardiScan
-      </p>
-
-
-      <div class="flex flex-wrap gap-5">
-
         <a
-          routerLink="/welcome/faq"
-          class="transition-colors hover:text-[var(--Primary)]"
+          href="#scanner"
+          class="
+            mt-8
+            inline-flex
+            h-12
+            items-center
+            justify-center
+            gap-2
+            rounded-2xl
+            bg-[#22C55E]
+            px-7
+            text-sm
+            font-semibold
+            text-white
+            shadow-[0_10px_30px_rgba(34,197,94,0.20)]
+            transition
+            hover:-translate-y-0.5
+            hover:bg-[#16A34A]
+          "
         >
-          Aide
-        </a>
-
-        <a
-          routerLink="/welcome"
-          class="transition-colors hover:text-[var(--Primary)]"
-        >
-          À propos
-        </a>
-
-        <a
-          routerLink="/profil"
-          class="transition-colors hover:text-[var(--Primary)]"
-        >
-          Mon profil
+          <i class="fa-solid fa-camera"></i>
+          Scanner une nouvelle plante
         </a>
 
       </div>
 
-    </footer>
+    </div>
 
-  </div>
+  </section>
 
-</section>
+</main>

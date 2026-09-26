@@ -1,0 +1,731 @@
+```html
+<!-- ============================================================
+     🌿 JARDISCAN — RECHERCHE
+     ============================================================ -->
+
+<div
+  class="min-h-full w-full px-4 py-6 sm:px-6 lg:px-8"
+  [style.color]="themeService.TextPrincipal"
+>
+  <div class="mx-auto w-full max-w-7xl">
+
+    <!-- ========================================================
+         HEADER
+         ======================================================== -->
+
+    <section class="mb-8">
+
+      <div class="mb-2 flex items-center gap-3">
+
+        <div
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
+          [style.background]="themeService.PrimarySoft"
+          [style.color]="themeService.Primary"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div>
+
+          <p
+            class="text-sm font-medium"
+            [style.color]="themeService.TextSecondaire"
+          >
+            Découvrir
+          </p>
+
+          <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
+            Recherche de plantes
+          </h1>
+
+        </div>
+
+      </div>
+
+      <p
+        class="max-w-2xl text-sm leading-6 sm:text-base"
+        [style.color]="themeService.TextSecondaire"
+      >
+        Recherche une plante parmi toutes les espèces disponibles
+        dans JardiScan et ajoute-la directement à ton JardiDex.
+      </p>
+
+    </section>
+
+
+    <!-- ========================================================
+         BARRE DE RECHERCHE
+         ======================================================== -->
+
+    <section class="mb-8">
+
+      <div
+        class="relative flex min-h-[64px] items-center rounded-3xl border px-4 shadow-sm transition-all"
+        [style.background]="themeService.Background2"
+        [style.border-color]="themeService.Border2"
+      >
+
+        <i
+          class="fa-solid fa-magnifying-glass mr-3 text-lg"
+          [style.color]="themeService.TextSecondaire"
+        ></i>
+
+        <input
+          [(ngModel)]="recherche"
+          type="text"
+          placeholder="Rechercher une plante, une espèce, une famille..."
+          class="min-w-0 flex-1 bg-transparent text-sm font-medium outline-none sm:text-base"
+          [style.color]="themeService.TextPrincipal"
+        />
+
+        <button
+          *ngIf="recherche"
+          type="button"
+          (click)="effacerRecherche()"
+          class="ml-3 flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition hover:opacity-70"
+          [style.background]="themeService.Background3"
+          [style.color]="themeService.TextSecondaire"
+          aria-label="Effacer la recherche"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         INDICATEUR JARDIDEX
+         ======================================================== -->
+
+    <section
+      *ngIf="!chargement && !erreur"
+      class="mb-8"
+    >
+
+      <div
+        class="flex flex-col gap-4 rounded-3xl border p-4 sm:flex-row sm:items-center sm:justify-between"
+        [style.background]="themeService.Background2"
+        [style.border-color]="themeService.Border2"
+      >
+
+        <div class="flex items-center gap-3">
+
+          <div
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
+            [style.background]="themeService.PrimarySoft"
+            [style.color]="themeService.Primary"
+          >
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+
+          <div>
+
+            <p
+              class="text-xs font-medium"
+              [style.color]="themeService.TextSecondaire"
+            >
+              Mon JardiDex
+            </p>
+
+            <p class="text-sm font-bold">
+              {{ nombrePlantesJardiDex }}
+              plante{{ nombrePlantesJardiDex > 1 ? 's' : '' }}
+              enregistrée{{ nombrePlantesJardiDex > 1 ? 's' : '' }}
+            </p>
+
+          </div>
+
+        </div>
+
+        <a
+          routerLink="/jardidex"
+          class="inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-2.5 text-xs font-semibold transition hover:-translate-y-0.5"
+          [style.background]="themeService.PrimarySoft"
+          [style.color]="themeService.Primary"
+        >
+          <i class="fa-solid fa-arrow-right"></i>
+          Voir mon JardiDex
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         CHARGEMENT
+         ======================================================== -->
+
+    <section
+      *ngIf="chargement"
+      class="mb-8"
+    >
+
+      <div
+        class="rounded-3xl border p-8 text-center"
+        [style.background]="themeService.Background2"
+        [style.border-color]="themeService.Border2"
+      >
+
+        <div
+          class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full"
+          [style.background]="themeService.PrimarySoft"
+          [style.color]="themeService.Primary"
+        >
+          <i class="fa-solid fa-spinner fa-spin"></i>
+        </div>
+
+        <h2 class="mb-1 text-lg font-bold">
+          Chargement des plantes
+        </h2>
+
+        <p
+          class="text-sm"
+          [style.color]="themeService.TextSecondaire"
+        >
+          Récupération des plantes disponibles dans JardiScan...
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         ERREUR
+         ======================================================== -->
+
+    <section
+      *ngIf="!chargement && erreur"
+      class="mb-8"
+    >
+
+      <div
+        class="rounded-3xl border p-8 text-center"
+        [style.background]="themeService.Background2"
+        [style.border-color]="themeService.Border2"
+      >
+
+        <div
+          class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full"
+          [style.background]="themeService.Background3"
+          [style.color]="themeService.Primary"
+        >
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+
+        <h2 class="mb-2 text-lg font-bold">
+          Impossible de charger les plantes
+        </h2>
+
+        <p
+          class="mb-5 text-sm"
+          [style.color]="themeService.TextSecondaire"
+        >
+          {{ messageErreur }}
+        </p>
+
+        <button
+          type="button"
+          (click)="rechargerPlantes()"
+          class="rounded-2xl px-5 py-3 text-sm font-semibold transition hover:scale-[1.02]"
+          [style.background]="themeService.Primary"
+          [style.color]="themeService.Background1"
+        >
+          <i class="fa-solid fa-rotate-right mr-2"></i>
+          Réessayer
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         CONTENU
+         ======================================================== -->
+
+    <ng-container *ngIf="!chargement && !erreur">
+
+
+      <!-- ======================================================
+           RECHERCHES POPULAIRES
+           ====================================================== -->
+
+      <section
+        *ngIf="!recherche && recherchesPopulaires.length"
+        class="mb-10"
+      >
+
+        <div class="mb-4 flex items-end justify-between gap-4">
+
+          <div>
+
+            <p
+              class="mb-1 text-xs font-semibold uppercase tracking-wider"
+              [style.color]="themeService.Primary"
+            >
+              Explorer
+            </p>
+
+            <h2 class="text-xl font-bold">
+              Recherches populaires
+            </h2>
+
+          </div>
+
+          <span
+            class="hidden text-xs sm:block"
+            [style.color]="themeService.TextSecondaire"
+          >
+            {{ plantes.length }} plantes disponibles
+          </span>
+
+        </div>
+
+
+        <div class="flex flex-wrap gap-2">
+
+          <button
+            *ngFor="let terme of recherchesPopulaires"
+            type="button"
+            (click)="rechercher(terme)"
+            class="rounded-full border px-4 py-2 text-sm font-medium transition hover:-translate-y-0.5"
+            [style.background]="themeService.Background2"
+            [style.border-color]="themeService.Border2"
+            [style.color]="themeService.TextPrincipal"
+          >
+
+            <i
+              class="fa-solid fa-arrow-trend-up mr-2"
+              [style.color]="themeService.Primary"
+            ></i>
+
+            {{ terme }}
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ======================================================
+           CATÉGORIES
+           ====================================================== -->
+
+      <section
+        *ngIf="!recherche && categories.length"
+        class="mb-10"
+      >
+
+        <div class="mb-4">
+
+          <p
+            class="mb-1 text-xs font-semibold uppercase tracking-wider"
+            [style.color]="themeService.Primary"
+          >
+            Parcourir
+          </p>
+
+          <h2 class="text-xl font-bold">
+            Catégories
+          </h2>
+
+        </div>
+
+
+        <div
+          class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+        >
+
+          <button
+            *ngFor="let categorie of categories"
+            type="button"
+            (click)="rechercherCategorie(categorie.nom)"
+            class="group flex items-center gap-4 rounded-3xl border p-4 text-left transition duration-200 hover:-translate-y-1 hover:shadow-md"
+            [style.background]="themeService.Background2"
+            [style.border-color]="themeService.Border2"
+          >
+
+            <div
+              class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition group-hover:scale-105"
+              [style.background]="themeService.PrimarySoft"
+              [style.color]="themeService.Primary"
+            >
+
+              <i [class]="categorie.icon"></i>
+
+            </div>
+
+
+            <div class="min-w-0 flex-1">
+
+              <div
+                class="flex items-center justify-between gap-3"
+              >
+
+                <h3 class="truncate text-sm font-bold">
+                  {{ categorie.nom }}
+                </h3>
+
+                <span
+                  class="shrink-0 text-xs font-semibold"
+                  [style.color]="themeService.Primary"
+                >
+                  {{ categorie.nombre }}
+                </span>
+
+              </div>
+
+              <p
+                class="mt-1 text-xs"
+                [style.color]="themeService.TextSecondaire"
+              >
+                {{ categorie.description }}
+              </p>
+
+            </div>
+
+
+            <i
+              class="fa-solid fa-chevron-right text-xs transition group-hover:translate-x-1"
+              [style.color]="themeService.TextSecondaire"
+            ></i>
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ======================================================
+           RÉSULTATS
+           ====================================================== -->
+
+      <section>
+
+        <div
+          class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"
+        >
+
+          <div>
+
+            <p
+              class="mb-1 text-xs font-semibold uppercase tracking-wider"
+              [style.color]="themeService.Primary"
+            >
+              {{ recherche ? 'Résultats' : 'Toutes les plantes' }}
+            </p>
+
+            <h2 class="text-xl font-bold">
+
+              <ng-container *ngIf="recherche">
+
+                Résultats pour « {{ recherche }} »
+
+              </ng-container>
+
+              <ng-container *ngIf="!recherche">
+
+                Découvrir les plantes
+
+              </ng-container>
+
+            </h2>
+
+          </div>
+
+
+          <span
+            class="text-sm"
+            [style.color]="themeService.TextSecondaire"
+          >
+
+            {{ nombreResultats }}
+
+            résultat{{ nombreResultats > 1 ? 's' : '' }}
+
+          </span>
+
+        </div>
+
+
+        <!-- ====================================================
+             AUCUNE PLANTE EN BASE
+             ==================================================== -->
+
+        <div
+          *ngIf="!plantes.length"
+          class="rounded-3xl border p-10 text-center"
+          [style.background]="themeService.Background2"
+          [style.border-color]="themeService.Border2"
+        >
+
+          <div
+            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl"
+            [style.background]="themeService.PrimarySoft"
+            [style.color]="themeService.Primary"
+          >
+            <i class="fa-solid fa-seedling text-xl"></i>
+          </div>
+
+          <h3 class="mb-2 text-lg font-bold">
+            Aucune plante disponible
+          </h3>
+
+          <p
+            class="mx-auto max-w-md text-sm"
+            [style.color]="themeService.TextSecondaire"
+          >
+            La base de données ne contient actuellement aucune plante.
+          </p>
+
+        </div>
+
+
+        <!-- ====================================================
+             AUCUN RÉSULTAT
+             ==================================================== -->
+
+        <div
+          *ngIf="plantes.length && !plantesAffichees.length"
+          class="rounded-3xl border p-10 text-center"
+          [style.background]="themeService.Background2"
+          [style.border-color]="themeService.Border2"
+        >
+
+          <div
+            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl"
+            [style.background]="themeService.PrimarySoft"
+            [style.color]="themeService.Primary"
+          >
+            <i
+              class="fa-solid fa-magnifying-glass-minus text-xl"
+            ></i>
+          </div>
+
+          <h3 class="mb-2 text-lg font-bold">
+            Aucune plante trouvée
+          </h3>
+
+          <p
+            class="mx-auto mb-5 max-w-md text-sm"
+            [style.color]="themeService.TextSecondaire"
+          >
+            Aucun résultat ne correspond à « {{ recherche }} ».
+          </p>
+
+          <button
+            type="button"
+            (click)="effacerRecherche()"
+            class="rounded-2xl px-5 py-3 text-sm font-semibold"
+            [style.background]="themeService.Primary"
+            [style.color]="themeService.Background1"
+          >
+
+            <i class="fa-solid fa-arrow-rotate-left mr-2"></i>
+
+            Réinitialiser la recherche
+
+          </button>
+
+        </div>
+
+
+        <!-- ====================================================
+             GRILLE DES PLANTES
+             ==================================================== -->
+
+        <div
+          *ngIf="plantesAffichees.length"
+          class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 xl:grid-cols-5"
+        >
+
+
+          <!-- ==================================================
+               CARTE PLANTE
+               ================================================== -->
+
+          <article
+            *ngFor="let plante of plantesAffichees"
+            class="group overflow-hidden rounded-3xl border transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+            [style.background]="themeService.Background2"
+            [style.border-color]="themeService.Border2"
+          >
+
+
+            <!-- ================================================
+                 IMAGE
+                 ================================================ -->
+
+            <div
+              class="relative aspect-square overflow-hidden"
+              [style.background]="themeService.Background3"
+            >
+
+              <img
+                *ngIf="getImage(plante)"
+                [src]="getImage(plante)"
+                [alt]="getNom(plante)"
+                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+
+
+              <!-- IMAGE ABSENTE -->
+
+              <div
+                *ngIf="!getImage(plante)"
+                class="flex h-full w-full items-center justify-center"
+                [style.color]="themeService.TextSecondaire"
+              >
+
+                <i class="fa-solid fa-seedling text-3xl"></i>
+
+              </div>
+
+
+              <!-- NUMÉRO -->
+
+              <div
+                *ngIf="getNumero(plante) !== null"
+                class="absolute left-2 top-2 rounded-full px-2.5 py-1 text-[10px] font-bold backdrop-blur-sm"
+                [style.background]="themeService.Background1"
+                [style.color]="themeService.TextPrincipal"
+              >
+
+                #{{ getNumero(plante) }}
+
+              </div>
+
+
+              <!-- CATÉGORIE -->
+
+              <div
+                *ngIf="getCategorie(plante)"
+                class="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] truncate rounded-full px-2.5 py-1 text-[10px] font-semibold backdrop-blur-sm"
+                [style.background]="themeService.Background1"
+                [style.color]="themeService.TextPrincipal"
+              >
+
+                {{ getCategorie(plante) }}
+
+              </div>
+
+            </div>
+
+
+            <!-- ================================================
+                 INFORMATIONS
+                 ================================================ -->
+
+            <div class="p-3 sm:p-4">
+
+              <!-- NOM -->
+
+              <h3
+                class="truncate text-sm font-bold sm:text-base"
+                [title]="getNom(plante)"
+              >
+                {{ getNom(plante) }}
+              </h3>
+
+
+              <!-- NOM SCIENTIFIQUE -->
+
+              <p
+                *ngIf="getNomScientifique(plante)"
+                class="mt-1 truncate text-xs italic"
+                [style.color]="themeService.TextSecondaire"
+                [title]="getNomScientifique(plante)"
+              >
+                {{ getNomScientifique(plante) }}
+              </p>
+
+
+              <!-- FAMILLE -->
+
+              <div
+                *ngIf="getFamille(plante)"
+                class="mt-3 flex items-center gap-1.5 text-[11px]"
+                [style.color]="themeService.TextSecondaire"
+              >
+
+                <i class="fa-solid fa-leaf"></i>
+
+                <span class="truncate">
+                  {{ getFamille(plante) }}
+                </span>
+
+              </div>
+
+
+              <!-- ==============================================
+                   JARDIDEX
+                   ============================================== -->
+
+              <div class="mt-4">
+
+
+                <!-- ============================================
+                     AJOUTER AU JARDIDEX
+                     ============================================ -->
+
+                <button
+                  *ngIf="!estDansJardiDex(plante)"
+                  type="button"
+                  (click)="ajouterAuJardiDex(plante)"
+                  class="flex w-full items-center justify-center gap-2 rounded-2xl px-3 py-2.5 text-xs font-semibold transition duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                  [style.background]="themeService.Primary"
+                  [style.color]="themeService.Background1"
+                >
+
+                  <i class="fa-solid fa-plus"></i>
+
+                  <span>
+                    Ajouter au JardiDex
+                  </span>
+
+                </button>
+
+
+                <!-- ============================================
+                     DÉJÀ DANS LE JARDIDEX
+                     ============================================ -->
+
+                <div
+                  *ngIf="estDansJardiDex(plante)"
+                  class="flex w-full items-center justify-center gap-2 rounded-2xl border px-3 py-2.5 text-xs font-semibold"
+                  [style.background]="themeService.PrimarySoft"
+                  [style.border-color]="themeService.Border2"
+                  [style.color]="themeService.Primary"
+                >
+
+                  <i class="fa-solid fa-check"></i>
+
+                  <span>
+                    Dans le JardiDex
+                  </span>
+
+                </div>
+
+
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+    </ng-container>
+
+  </div>
+
+</div>

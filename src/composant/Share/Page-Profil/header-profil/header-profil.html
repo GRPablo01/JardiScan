@@ -1,0 +1,337 @@
+<!-- ============================================================
+HEADER JARDISCAN
+============================================================ -->
+<header class="
+             left-[292px]
+             right-4
+             2xl:top-20
+             xl:top-24
+             z-40
+             h-[82px]
+             rounded-[1.65rem]
+
+             px-5
+            
+           " [ngStyle]="{
+            'background-color': themeService.Background2,
+            'border-color': themeService.Border2,
+            'box-shadow': themeService.BoxShadowSmall
+        }">
+  <div class="
+      flex
+      h-full
+      items-center
+      justify-between
+  ">
+
+    <!-- ========================================================
+       🔎 RECHERCHE
+       ======================================================== -->
+
+    <div class="
+          flex
+          h-[52px]
+          w-[375px]
+          items-center
+
+          rounded-full
+          border
+
+          px-4
+
+          transition-all
+          duration-200
+      " [ngStyle]="{
+          'background-color': themeService.Surface1,
+          'border-color': themeService.BorderSoft,
+          'box-shadow': themeService.BoxShadowSmall
+      }">
+
+      <!-- Icône recherche -->
+
+      <svg viewBox="0 0 24 24" class="
+              h-[23px]
+              w-[23px]
+              shrink-0
+          " fill="none" stroke="currentColor" stroke-width="1.6" [ngStyle]="{
+              'color': themeService.TextPrincipal
+          }">
+        <circle cx="11" cy="11" r="7.5"></circle>
+
+        <path d="M16.5 16.5L21 21" stroke-linecap="round"></path>
+      </svg>
+
+      <!-- Champ -->
+
+      <input type="text" placeholder="Rechercher" class="
+              ml-3
+              w-full
+              bg-transparent
+
+              text-[0.82rem]
+              font-normal
+
+              outline-none
+
+              transition-colors
+              duration-200
+          " [ngStyle]="{
+              'color': themeService.TextPrincipal,
+              '--placeholder-color': themeService.TextMuted
+          }" />
+
+      <!-- Raccourci clavier -->
+
+      <div class="
+              flex
+              h-7
+              min-w-[43px]
+
+              items-center
+              justify-center
+              gap-0.5
+
+              rounded-[0.45rem]
+
+              px-2
+
+              text-[0.72rem]
+              font-medium
+          " [ngStyle]="{
+              'background-color': themeService.Background3,
+              'color': themeService.TextSecondaire
+          }">
+        <span class="text-[0.9rem]">
+          ⌘
+        </span>
+
+        <span>
+          F
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- ========================================================
+       ⚡ ACTIONS HEADER
+       ======================================================== -->
+
+    <div class="
+          flex
+          items-center
+          gap-3
+      ">
+
+      <!-- ====================================================
+           💬 MESSAGES
+           ==================================================== -->
+
+      <button type="button" class="
+              flex
+              h-[52px]
+              w-[52px]
+              items-center
+              justify-center
+
+              rounded-full
+              border
+
+              transition-all
+              duration-200
+
+              hover:-translate-y-0.5
+          " [ngStyle]="{
+              'background-color': themeService.Surface1,
+              'border-color': themeService.BorderSoft,
+              'color': themeService.TextPrincipal,
+              'box-shadow': themeService.BoxShadowSmall
+          }" aria-label="Messages">
+
+        <svg viewBox="0 0 24 24" class="h-[21px] w-[21px]" fill="none" stroke="currentColor" stroke-width="1.6">
+          <rect x="3.5" y="5" width="17" height="14" rx="4"></rect>
+
+          <path d="M6.5 8L12 12L17.5 8" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+
+      </button>
+
+
+      <!-- ====================================================
+           🔔 NOTIFICATIONS
+           ==================================================== -->
+
+      <button type="button" class="
+              relative
+              flex
+              h-[52px]
+              w-[52px]
+              items-center
+              justify-center
+
+              rounded-full
+              border
+
+              transition-all
+              duration-200
+
+              hover:-translate-y-0.5
+          " [ngStyle]="{
+              'background-color': themeService.Surface1,
+              'border-color': themeService.BorderSoft,
+              'color': themeService.TextPrincipal,
+              'box-shadow': themeService.BoxShadowSmall
+          }" aria-label="Notifications">
+
+        <svg viewBox="0 0 24 24" class="h-[21px] w-[21px]" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M18 9.5C18 6.2 15.8 4 12 4C8.2 4 6 6.2 6 9.5V13L4.5 16H19.5L18 13V9.5Z" stroke-linejoin="round">
+          </path>
+
+          <path d="M10 19C10.5 20 11.2 20.5 12 20.5C12.8 20.5 13.5 20 14 19" stroke-linecap="round"></path>
+        </svg>
+
+
+        <!-- Badge -->
+
+        <span class="
+                  absolute
+                  right-[11px]
+                  top-[10px]
+
+                  h-[7px]
+                  w-[7px]
+
+                  rounded-full
+
+                  border
+              " [ngStyle]="{
+                  'background-color': themeService.Primary,
+                  'border-color': themeService.Surface1
+              }"></span>
+
+      </button>
+
+
+      <!-- ====================================================
+           👤 PROFIL
+           ==================================================== -->
+
+      <button type="button" class="
+              ml-2
+
+              flex
+              items-center
+              gap-3
+
+              rounded-full
+
+              px-1
+              py-1
+
+              text-left
+
+              transition-all
+              duration-200
+
+              hover:-translate-y-0.5
+          " [ngStyle]="{
+              'background-color': 'transparent'
+          }" aria-label="Profil utilisateur">
+
+        <!-- ==================================================
+               AVATAR
+               ================================================== -->
+
+        <div class="
+                  flex
+                  h-[56px]
+                  w-[56px]
+                  shrink-0
+
+                  items-center
+                  justify-center
+
+                  overflow-hidden
+                  rounded-full
+
+                  border
+
+                  transition-all
+                  duration-300
+              " [ngStyle]="{
+                  'background-color': themeService.PrimarySoft,
+                  'border-color': themeService.BorderPrimary
+              }">
+
+          <!-- Avatar image -->
+
+          <img *ngIf="avatar" [src]="avatar" alt="Avatar" class="
+                      h-full
+                      w-full
+                      object-cover
+                  " />
+
+          <!-- Initiales -->
+
+          <span *ngIf="!avatar" class="
+                      text-[0.85rem]
+                      font-semibold
+                  " [ngStyle]="{
+                      'color': themeService.Primary
+                  }">
+            {{ initials || 'IN' }}
+          </span>
+
+        </div>
+
+
+        <!-- ==================================================
+               INFORMATIONS UTILISATEUR
+               ================================================== -->
+
+        <div class="
+                  hidden
+                  min-w-[155px]
+
+                  flex-col
+                  justify-center
+
+                  lg:flex
+              ">
+
+          <!-- Nom -->
+
+          <span class="
+                      text-[0.98rem]
+                      font-medium
+                      leading-tight
+                      tracking-[-0.02em]
+                  " [ngStyle]="{
+                      'color': themeService.TextPrincipal
+                  }">
+            {{ prenom || 'Utilisateur' }}
+            {{ nom || '' }}
+          </span>
+
+
+          <!-- Email -->
+
+          <span class="
+                      mt-1
+                      text-[0.78rem]
+                      font-normal
+                      leading-tight
+                  " [ngStyle]="{
+                      'color': themeService.TextMuted
+                  }">
+            {{ email || 'utilisateur@email.com' }}
+          </span>
+
+        </div>
+
+      </button>
+
+    </div>
+
+  </div>
+</header>

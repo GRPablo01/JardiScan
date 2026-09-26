@@ -21,28 +21,12 @@
   id="roles"
   class="relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24 xl:px-14"
   [ngStyle]="{
-    background: themeService.Background2
+    background: themeService.BG2
   }"
 >
 
 
-  <!-- ==========================================================
-       DÉCORATIONS
-       ========================================================== -->
-
-  <div
-    class="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full opacity-[0.04] blur-3xl"
-    [ngStyle]="{
-      background: themeService.Primary
-    }"
-  ></div>
-
-  <div
-    class="pointer-events-none absolute -right-40 bottom-20 h-96 w-96 rounded-full opacity-[0.05] blur-3xl"
-    [ngStyle]="{
-      background: themeService.Primary
-    }"
-  ></div>
+  
 
 
   <!-- ==========================================================
@@ -68,8 +52,8 @@
       <div
         class="mx-auto inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:scale-105 sm:text-xs"
         [ngStyle]="{
-          background: themeService.Background3,
-          borderColor: themeService.Border3,
+          background: themeService.BG3,
+          borderColor: themeService.BR3,
           color: themeService.TextPrincipal,
           boxShadow: themeService.BoxShadow
         }"
@@ -77,15 +61,13 @@
 
         <span
           class="flex h-6 w-6 items-center justify-center rounded-full"
-          [ngStyle]="{
-            background: themeService.Primary
-          }"
+          
         >
 
           <i
-            class="fa-solid fa-users text-[10px]"
+            class="fa-solid fa-users text-[20px]"
             [ngStyle]="{
-              color: '#FFFFFF'
+              color: themeService.Primary1,
             }"
           ></i>
 
@@ -122,7 +104,7 @@
 
         <span
           [ngStyle]="{
-            color: themeService.Primary
+            color: themeService.Primary1
           }"
         >
           {{ languageService.is('fr')
@@ -166,7 +148,7 @@
       <div
         class="h-px flex-1"
         [ngStyle]="{
-          background: themeService.Border3
+          background: themeService.BR3
         }"
       ></div>
 
@@ -174,9 +156,9 @@
       <div
         class="mx-3 flex h-9 w-9 items-center justify-center rounded-full border text-xs shadow-sm"
         [ngStyle]="{
-          borderColor: themeService.Border3,
-          background: themeService.Background3,
-          color: themeService.Primary
+          borderColor: themeService.BR3,
+          background: themeService.BG3,
+          color: themeService.Primary1
         }"
       >
 
@@ -188,7 +170,7 @@
       <div
         class="h-px flex-1"
         [ngStyle]="{
-          background: themeService.Border3
+          background: themeService.BR3
         }"
       ></div>
 
@@ -196,894 +178,624 @@
 
 
     <!-- ========================================================
-         CARTES DES PROFILS
-         ======================================================== -->
-
+     CARTES DES PROFILS
+     ======================================================== -->
     <div
-      class="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4"
+    class="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4"
     >
 
-
-      <!-- ======================================================
-           01 — UTILISATEUR
-           ======================================================= -->
-
-      <article
-        class="profile-card profile-delay-1 group relative overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-7"
-        [ngStyle]="{
-          background: themeService.Background3,
-          borderColor: themeService.Border3,
-          boxShadow: themeService.BoxShadow
-        }"
-      >
-
-        <!-- Halo -->
-
-        <div
-          class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-[0.08]"
-          [ngStyle]="{
-            background: themeService.Primary
-          }"
-        ></div>
-
-
-        <!-- Numéro -->
-
-        <div
-          class="absolute right-6 top-6 text-xs font-black opacity-30"
-          [ngStyle]="{
-            color: themeService.TextSecondaire
-          }"
-        >
-          01
-        </div>
-
-
-        <!-- Icône -->
-
-        <div
-          class="relative flex h-16 w-16 items-center justify-center rounded-2xl text-2xl shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-          [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
-          }"
-        >
-
-          <i class="fa-solid fa-seedling"></i>
-
-        </div>
-
-
-        <!-- Badge -->
-
-        <div
-          class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em]"
-          [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
-          }"
-        >
-
-          <i class="fa-solid fa-user"></i>
-
-          {{ languageService.is('fr')
-            ? 'Profil découverte'
-            : 'Discovery profile' }}
-
-        </div>
-
-
-        <!-- Titre -->
-
-        <h3
-          class="mt-5 text-2xl font-black tracking-tight"
-          [ngStyle]="{
-            color: themeService.TextPrincipal
-          }"
-        >
-          {{ languageService.is('fr')
-            ? 'Utilisateur'
-            : 'User' }}
-        </h3>
-
-
-        <!-- Description -->
-
-        <p
-          class="mt-3 text-sm leading-7"
-          [ngStyle]="{
-            color: themeService.TextSecondaire
-          }"
-        >
-
-          {{ languageService.is('fr')
-            ? 'Le point de départ pour découvrir JardiScan, identifier des plantes et profiter des fonctionnalités essentielles de la plateforme.'
-            : 'The starting point for discovering JardiScan, identifying plants and enjoying the platform’s essential features.' }}
-
-        </p>
-
-
-        <!-- Séparateur -->
-
-        <div
-          class="my-6 h-px w-full opacity-40"
-          [ngStyle]="{
-            background: themeService.Border3
-          }"
-        ></div>
-
-
-        <!-- Fonctionnalités -->
-
-        <div class="space-y-3">
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Découvrir JardiScan'
-              : 'Discover JardiScan' }}
-
-          </div>
-
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Utiliser les fonctionnalités'
-              : 'Use the features' }}
-
-          </div>
-
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Commencer son parcours'
-              : 'Start your journey' }}
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- ======================================================
-           02 — CONTRIBUTEUR
-           ======================================================= -->
-
-      <article
-        class="profile-card profile-delay-2 group relative overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-7"
-        [ngStyle]="{
-          background: themeService.Background3,
-          borderColor: themeService.Border3,
-          boxShadow: themeService.BoxShadow
-        }"
-      >
-
-        <div
-          class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-[0.08]"
-          [ngStyle]="{
-            background: themeService.Primary
-          }"
-        ></div>
-
-
-        <!-- Numéro -->
-
-        <div
-          class="absolute right-6 top-6 text-xs font-black opacity-30"
-          [ngStyle]="{
-            color: themeService.TextSecondaire
-          }"
-        >
-          02
-        </div>
-
-
-        <!-- Icône -->
-
-        <div
-          class="relative flex h-16 w-16 items-center justify-center rounded-2xl text-2xl shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-          [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
-          }"
-        >
-
-          <i class="fa-solid fa-pen-to-square"></i>
-
-        </div>
-
-
-        <!-- Badge -->
-
-        <div
-          class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em]"
-          [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
-          }"
-        >
-
-          <i class="fa-solid fa-hand-holding-heart"></i>
-
-          {{ languageService.is('fr')
-            ? 'Profil participatif'
-            : 'Participative profile' }}
-
-        </div>
-
-
-        <!-- Titre -->
-
-        <h3
-          class="mt-5 text-2xl font-black tracking-tight"
-          [ngStyle]="{
-            color: themeService.TextPrincipal
-          }"
-        >
-          {{ languageService.is('fr')
-            ? 'Contributeur'
-            : 'Contributor' }}
-        </h3>
-
-
-        <!-- Description -->
-
-        <p
-          class="mt-3 text-sm leading-7"
-          [ngStyle]="{
-            color: themeService.TextSecondaire
-          }"
-        >
-
-          {{ languageService.is('fr')
-            ? 'Participe à l’enrichissement de JardiScan en partageant des informations, des observations et des contenus utiles avec la communauté.'
-            : 'Helps enrich JardiScan by sharing information, observations and useful content with the community.' }}
-
-        </p>
-
-
-        <!-- Séparateur -->
-
-        <div
-          class="my-6 h-px w-full opacity-40"
-          [ngStyle]="{
-            background: themeService.Border3
-          }"
-        ></div>
-
-
-        <!-- Fonctionnalités -->
-
-        <div class="space-y-3">
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Partager ses découvertes'
-              : 'Share discoveries' }}
-
-          </div>
-
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Enrichir les informations'
-              : 'Enrich information' }}
-
-          </div>
-
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Participer à la communauté'
-              : 'Join the community' }}
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- ======================================================
-           03 — EXPERT
-           ======================================================= -->
-
-      <article
-        class="profile-card profile-delay-3 group relative overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-7"
-        [ngStyle]="{
-          background: themeService.Background3,
-          borderColor: themeService.Border3,
-          boxShadow: themeService.BoxShadow
-        }"
-      >
-
-        <div
-          class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-[0.08]"
-          [ngStyle]="{
-            background: themeService.Primary
-          }"
-        ></div>
-
-
-        <!-- Numéro -->
-
-        <div
-          class="absolute right-6 top-6 text-xs font-black opacity-30"
-          [ngStyle]="{
-            color: themeService.TextSecondaire
-          }"
-        >
-          03
-        </div>
-
-
-        <!-- Icône -->
-
-        <div
-          class="relative flex h-16 w-16 items-center justify-center rounded-2xl text-2xl shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-          [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
-          }"
-        >
-
-          <i class="fa-solid fa-leaf"></i>
-
-        </div>
-
-
-        <!-- Badge -->
-
-        <div
-          class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em]"
-          [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
-          }"
-        >
-
-          <i class="fa-solid fa-star"></i>
-
-          {{ languageService.is('fr')
-            ? 'Profil spécialisé'
-            : 'Specialist profile' }}
-
-        </div>
-
-
-        <!-- Titre -->
-
-        <h3
-          class="mt-5 text-2xl font-black tracking-tight"
-          [ngStyle]="{
-            color: themeService.TextPrincipal
-          }"
-        >
-          {{ languageService.is('fr')
-            ? 'Expert'
-            : 'Expert' }}
-        </h3>
-
-
-        <!-- Description -->
-
-        <p
-          class="mt-3 text-sm leading-7"
-          [ngStyle]="{
-            color: themeService.TextSecondaire
-          }"
-        >
-
-          {{ languageService.is('fr')
-            ? 'Utilisateur disposant d’une solide expérience dans le domaine des plantes et capable d’apporter des connaissances utiles aux autres membres.'
-            : 'An experienced user with strong knowledge of plants who can provide useful information to other members.' }}
-
-        </p>
-
-
-        <!-- Séparateur -->
-
-        <div
-          class="my-6 h-px w-full opacity-40"
-          [ngStyle]="{
-            background: themeService.Border3
-          }"
-        ></div>
-
-
-        <!-- Fonctionnalités -->
-
-        <div class="space-y-3">
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Partager son expertise'
-              : 'Share expertise' }}
-
-          </div>
-
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Apporter des connaissances'
-              : 'Share knowledge' }}
-
-          </div>
-
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Aider la communauté'
-              : 'Help the community' }}
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- ======================================================
-           04 — AMBASSADEUR
-           ======================================================= -->
-
-      <article
-        class="profile-card profile-delay-4 group relative overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-7"
-        [ngStyle]="{
-          background: themeService.Background3,
-          borderColor: themeService.Border3,
-          boxShadow: themeService.BoxShadow
-        }"
-      >
-
-        <div
-          class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-[0.08]"
-          [ngStyle]="{
-            background: themeService.Primary
-          }"
-        ></div>
-
-
-        <!-- Numéro -->
-
-        <div
-          class="absolute right-6 top-6 text-xs font-black opacity-30"
-          [ngStyle]="{
-            color: themeService.TextSecondaire
-          }"
-        >
-          04
-        </div>
-
-
-        <!-- Icône -->
-
-        <div
-          class="relative flex h-16 w-16 items-center justify-center rounded-2xl text-2xl shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-          [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
-          }"
-        >
-
-          <i class="fa-solid fa-award"></i>
-
-        </div>
-
-
-        <!-- Badge -->
-
-        <div
-          class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em]"
-          [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
-          }"
-        >
-
-          <i class="fa-solid fa-crown"></i>
-
-          {{ languageService.is('fr')
-            ? 'Profil communautaire'
-            : 'Community profile' }}
-
-        </div>
-
-
-        <!-- Titre -->
-
-        <h3
-          class="mt-5 text-2xl font-black tracking-tight"
-          [ngStyle]="{
-            color: themeService.TextPrincipal
-          }"
-        >
-          {{ languageService.is('fr')
-            ? 'Ambassadeur'
-            : 'Ambassador' }}
-        </h3>
-
-
-        <!-- Description -->
-
-        <p
-          class="mt-3 text-sm leading-7"
-          [ngStyle]="{
-            color: themeService.TextSecondaire
-          }"
-        >
-
-          {{ languageService.is('fr')
-            ? 'Utilisateur fortement impliqué dans la communauté, qui contribue à faire connaître JardiScan et encourage les échanges entre jardiniers.'
-            : 'A highly involved community member who helps promote JardiScan and encourages interaction between gardeners.' }}
-
-        </p>
-
-
-        <!-- Séparateur -->
-
-        <div
-          class="my-6 h-px w-full opacity-40"
-          [ngStyle]="{
-            background: themeService.Border3
-          }"
-        ></div>
-
-
-        <!-- Fonctionnalités -->
-
-        <div class="space-y-3">
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Faire connaître JardiScan'
-              : 'Promote JardiScan' }}
-
-          </div>
-
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Encourager la communauté'
-              : 'Support the community' }}
-
-          </div>
-
-
-          <div
-            class="flex items-center gap-3 text-xs font-bold"
-            [ngStyle]="{
-              color: themeService.TextSecondaire
-            }"
-          >
-
-            <i
-              class="fa-solid fa-circle-check"
-              [ngStyle]="{
-                color: themeService.Primary
-              }"
-            ></i>
-
-            {{ languageService.is('fr')
-              ? 'Partager son expérience'
-              : 'Share experience' }}
-
-          </div>
-
-        </div>
-
-      </article>
-
-    </div>
-
-
-    <!-- ========================================================
-         BANDEAU EXPLICATIF
-         ======================================================== -->
-
-    <div
-      class="relative mt-8 overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-300 hover:shadow-xl sm:p-7 lg:p-8"
+    <!-- ======================================================
+        01 — UTILISATEUR
+        ======================================================= -->
+
+    <article
+      class="profile-card profile-delay-1 group relative overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-7"
       [ngStyle]="{
-        background: themeService.Background3,
-        borderColor: themeService.Border3,
+        background: themeService.BG3,
+        borderColor: themeService.BR3,
         boxShadow: themeService.BoxShadow
       }"
     >
 
-      <!-- Décoration -->
-
+      <!-- Halo -->
       <div
-        class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full opacity-[0.05] blur-3xl"
+        class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-[0.08]"
         [ngStyle]="{
-          background: themeService.Primary
+          background: themeService.Primary1
         }"
       ></div>
 
-
+      <!-- Numéro -->
       <div
-        class="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between"
+        class="absolute right-6 top-6 text-xs font-black"
+        [ngStyle]="{
+          color: themeService.BG1
+        }"
       >
+        01
+      </div>
 
+      <!-- Icône -->
+      <div
+        class="relative flex h-16 w-16 items-center justify-center rounded-2xl text-2xl shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+        [ngStyle]="{
+          background: themeService.BG4,
+          borderColor: themeService.BR4,
+          color: themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-seedling"></i>
+      </div>
 
-        <!-- Texte -->
+      <!-- Badge -->
+      <div
+        class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em]"
+        [ngStyle]="{
+          background: themeService.BG4,
+          borderColor: themeService.BR4,
+          color: themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-user"></i>
 
-        <div class="flex items-start gap-4">
+        {{ languageService.is('fr')
+          ? 'Profil découverte'
+          : 'Discovery profile' }}
+      </div>
 
-          <!-- Icône -->
+      <!-- Titre -->
+      <h3
+        class="mt-5 text-2xl font-black tracking-tight"
+        [ngStyle]="{
+          color: themeService.TextPrincipal
+        }"
+      >
+        {{ languageService.is('fr')
+          ? 'Utilisateur'
+          : 'User' }}
+      </h3>
 
-          <div
-            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg shadow-sm"
-            [ngStyle]="{
-              background: themeService.Background4,
-              color: themeService.Primary
-            }"
-          >
+      <!-- Description -->
+      <p
+        class="mt-3 text-sm leading-7"
+        [ngStyle]="{
+          color: themeService.TextSecondaire
+        }"
+      >
+        {{ languageService.is('fr')
+          ? 'Le point de départ pour découvrir JardiScan, identifier des plantes et profiter des fonctionnalités essentielles de la plateforme.'
+          : 'The starting point for discovering JardiScan, identifying plants and enjoying the platform’s essential features.' }}
+      </p>
 
-            <i class="fa-solid fa-seedling"></i>
+      <!-- Séparateur -->
+      <div
+        class="my-6 h-px w-full opacity-40"
+        [ngStyle]="{
+          background: themeService.BG1
+        }"
+      ></div>
 
-          </div>
-
-
-          <!-- Contenu -->
-
-          <div>
-
-            <div
-              class="flex flex-wrap items-center gap-2"
-            >
-
-              <h3
-                class="text-base font-black sm:text-lg"
-                [ngStyle]="{
-                  color: themeService.TextPrincipal
-                }"
-              >
-
-                {{ languageService.is('fr')
-                  ? 'Votre parcours commence ici.'
-                  : 'Your journey starts here.' }}
-
-              </h3>
-
-
-              <span
-                class="rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-wider"
-                [ngStyle]="{
-                  background: themeService.Background4,
-                  color: themeService.Primary
-                }"
-              >
-                JardiScan
-              </span>
-
-            </div>
-
-
-            <p
-              class="mt-2 max-w-3xl text-sm leading-6"
-              [ngStyle]="{
-                color: themeService.TextSecondaire
-              }"
-            >
-
-              {{ languageService.is('fr')
-                ? 'Chaque profil possède sa propre manière de participer à JardiScan. L’objectif est de créer une communauté où chacun peut apprendre, partager et progresser.'
-                : 'Each profile has its own way of participating in JardiScan. The goal is to build a community where everyone can learn, share and grow.' }}
-
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <!-- Indicateur -->
+      <!-- Fonctionnalités -->
+      <div class="space-y-3">
 
         <div
-          class="flex shrink-0 items-center gap-3 rounded-2xl border px-4 py-3"
+          class="flex items-center gap-3 text-xs font-bold"
           [ngStyle]="{
-            background: themeService.Background4,
-            borderColor: themeService.Border4,
-            color: themeService.Primary
+            color: themeService.TextSecondaire
           }"
         >
-
-          <div
-            class="flex h-9 w-9 items-center justify-center rounded-xl"
+          <i
+            class="fa-solid fa-circle-check"
             [ngStyle]="{
-              background: themeService.Background3,
-              color: themeService.Primary
+              color: themeService.Primary1
             }"
-          >
+          ></i>
 
-            <i class="fa-solid fa-arrow-trend-up"></i>
+          {{ languageService.is('fr')
+            ? 'Découvrir JardiScan'
+            : 'Discover JardiScan' }}
+        </div>
 
-          </div>
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
 
+          {{ languageService.is('fr')
+            ? 'Utiliser les fonctionnalités'
+            : 'Use the features' }}
+        </div>
 
-          <div>
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
 
-            <div
-              class="text-[9px] font-black uppercase tracking-wider"
-              [ngStyle]="{
-                color: themeService.TextSecondaire
-              }"
-            >
-              {{ languageService.is('fr')
-                ? 'Progression'
-                : 'Progression' }}
-            </div>
-
-            <div
-              class="text-sm font-black"
-              [ngStyle]="{
-                color: themeService.TextPrincipal
-              }"
-            >
-              {{ languageService.is('fr')
-                ? 'Selon votre activité'
-                : 'Based on your activity' }}
-            </div>
-
-          </div>
-
+          {{ languageService.is('fr')
+            ? 'Commencer son parcours'
+            : 'Start your journey' }}
         </div>
 
       </div>
 
-    </div>
+    </article>
 
+
+    <!-- ======================================================
+        02 — CONTRIBUTEUR
+        ======================================================= -->
+
+    <article
+      class="profile-card profile-delay-2 group relative overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-7"
+      [ngStyle]="{
+        background: themeService.BG3,
+        borderColor: themeService.BR3,
+        boxShadow: themeService.BoxShadow
+      }"
+    >
+
+      <!-- Halo -->
+      <div
+        class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-[0.08]"
+        [ngStyle]="{
+          background: themeService.Primary1
+        }"
+      ></div>
+
+      <!-- Numéro -->
+      <div
+        class="absolute right-6 top-6 text-xs font-black"
+        [ngStyle]="{
+          color: themeService.BG1
+        }"
+      >
+        02
+      </div>
+
+      <!-- Icône -->
+      <div
+        class="relative flex h-16 w-16 items-center justify-center rounded-2xl text-2xl shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+        [ngStyle]="{
+          background: themeService.BG4,
+          borderColor: themeService.BR4,
+          color: themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-pen-to-square"></i>
+      </div>
+
+      <!-- Badge -->
+      <div
+        class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em]"
+        [ngStyle]="{
+          background: themeService.BG4,
+          borderColor: themeService.BR4,
+          color: themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-hand-holding-heart"></i>
+
+        {{ languageService.is('fr')
+          ? 'Profil participatif'
+          : 'Participative profile' }}
+      </div>
+
+      <!-- Titre -->
+      <h3
+        class="mt-5 text-2xl font-black tracking-tight"
+        [ngStyle]="{
+          color: themeService.TextPrincipal
+        }"
+      >
+        {{ languageService.is('fr')
+          ? 'Contributeur'
+          : 'Contributor' }}
+      </h3>
+
+      <!-- Description -->
+      <p
+        class="mt-3 text-sm leading-7"
+        [ngStyle]="{
+          color: themeService.TextSecondaire
+        }"
+      >
+        {{ languageService.is('fr')
+          ? 'Participe à l’enrichissement de JardiScan en partageant des informations, des observations et des contenus utiles avec la communauté.'
+          : 'Helps enrich JardiScan by sharing information, observations and useful content with the community.' }}
+      </p>
+
+      <!-- Séparateur -->
+      <div
+        class="my-6 h-px w-full opacity-40"
+        [ngStyle]="{
+          background: themeService.BG1
+        }"
+      ></div>
+
+      <!-- Fonctionnalités -->
+      <div class="space-y-3">
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Partager ses découvertes'
+            : 'Share discoveries' }}
+        </div>
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Enrichir les informations'
+            : 'Enrich information' }}
+        </div>
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Participer à la communauté'
+            : 'Join the community' }}
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ======================================================
+        03 — EXPERT
+        ======================================================= -->
+
+    <article
+      class="profile-card profile-delay-3 group relative overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-7"
+      [ngStyle]="{
+        background: themeService.BG3,
+        borderColor: themeService.BR3,
+        boxShadow: themeService.BoxShadow
+      }"
+    >
+
+      <!-- Halo -->
+      <div
+        class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-[0.08]"
+        [ngStyle]="{
+          background: themeService.Primary1
+        }"
+      ></div>
+
+      <!-- Numéro -->
+      <div
+        class="absolute right-6 top-6 text-xs font-black"
+        [ngStyle]="{
+          color: themeService.BG1
+        }"
+      >
+        03
+      </div>
+
+      <!-- Icône -->
+      <div
+        class="relative flex h-16 w-16 items-center justify-center rounded-2xl text-2xl shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+        [ngStyle]="{
+          background: themeService.BG4,
+          borderColor: themeService.BR4,
+          color: themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-leaf"></i>
+      </div>
+
+      <!-- Badge -->
+      <div
+        class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em]"
+        [ngStyle]="{
+          background: themeService.BG4,
+          borderColor: themeService.BR4,
+          color: themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-star"></i>
+
+        {{ languageService.is('fr')
+          ? 'Profil spécialisé'
+          : 'Specialist profile' }}
+      </div>
+
+      <!-- Titre -->
+      <h3
+        class="mt-5 text-2xl font-black tracking-tight"
+        [ngStyle]="{
+          color: themeService.TextPrincipal
+        }"
+      >
+        {{ languageService.is('fr')
+          ? 'Expert'
+          : 'Expert' }}
+      </h3>
+
+      <!-- Description -->
+      <p
+        class="mt-3 text-sm leading-7"
+        [ngStyle]="{
+          color: themeService.TextSecondaire
+        }"
+      >
+        {{ languageService.is('fr')
+          ? 'Utilisateur disposant d’une solide expérience dans le domaine des plantes et capable d’apporter des connaissances utiles aux autres membres.'
+          : 'An experienced user with strong knowledge of plants who can provide useful information to other members.' }}
+      </p>
+
+      <!-- Séparateur -->
+      <div
+        class="my-6 h-px w-full opacity-40"
+        [ngStyle]="{
+          background: themeService.BG1
+        }"
+      ></div>
+
+      <!-- Fonctionnalités -->
+      <div class="space-y-3">
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Partager son expertise'
+            : 'Share expertise' }}
+        </div>
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Apporter des connaissances'
+            : 'Share knowledge' }}
+        </div>
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Aider la communauté'
+            : 'Help the community' }}
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- ======================================================
+        04 — AMBASSADEUR
+        ======================================================= -->
+
+    <article
+      class="profile-card profile-delay-4 group relative overflow-hidden rounded-[2rem] border p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl sm:p-7"
+      [ngStyle]="{
+        background: themeService.BG3,
+        borderColor: themeService.BR3,
+        boxShadow: themeService.BoxShadow
+      }"
+    >
+
+      <!-- Halo -->
+      <div
+        class="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-[0.08]"
+        [ngStyle]="{
+          background: themeService.Primary1
+        }"
+      ></div>
+
+      <!-- Numéro -->
+      <div
+        class="absolute right-6 top-6 text-xs font-black"
+        [ngStyle]="{
+          color: themeService.BG1
+        }"
+      >
+        04
+      </div>
+
+      <!-- Icône -->
+      <div
+        class="relative flex h-16 w-16 items-center justify-center rounded-2xl text-2xl shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+        [ngStyle]="{
+          background: themeService.BG4,
+          borderColor: themeService.BR4,
+          color: themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-award"></i>
+      </div>
+
+      <!-- Badge -->
+      <div
+        class="mt-6 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em]"
+        [ngStyle]="{
+          background: themeService.BG4,
+          borderColor: themeService.BR4,
+          color: themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-crown"></i>
+
+        {{ languageService.is('fr')
+          ? 'Profil communautaire'
+          : 'Community profile' }}
+      </div>
+
+      <!-- Titre -->
+      <h3
+        class="mt-5 text-2xl font-black tracking-tight"
+        [ngStyle]="{
+          color: themeService.TextPrincipal
+        }"
+      >
+        {{ languageService.is('fr')
+          ? 'Ambassadeur'
+          : 'Ambassador' }}
+      </h3>
+
+      <!-- Description -->
+      <p
+        class="mt-3 text-sm leading-7"
+        [ngStyle]="{
+          color: themeService.TextSecondaire
+        }"
+      >
+        {{ languageService.is('fr')
+          ? 'Utilisateur fortement impliqué dans la communauté, qui contribue à faire connaître JardiScan et encourage les échanges entre jardiniers.'
+          : 'A highly involved community member who helps promote JardiScan and encourages interaction between gardeners.' }}
+      </p>
+
+      <!-- Séparateur -->
+      <div
+        class="my-6 h-px w-full opacity-40"
+        [ngStyle]="{
+          background: themeService.BG1
+        }"
+      ></div>
+
+      <!-- Fonctionnalités -->
+      <div class="space-y-3">
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Faire connaître JardiScan'
+            : 'Promote JardiScan' }}
+        </div>
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Encourager la communauté'
+            : 'Support the community' }}
+        </div>
+
+        <div
+          class="flex items-center gap-3 text-xs font-bold"
+          [ngStyle]="{
+            color: themeService.TextSecondaire
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check"
+            [ngStyle]="{
+              color: themeService.Primary1
+            }"
+          ></i>
+
+          {{ languageService.is('fr')
+            ? 'Partager son expérience'
+            : 'Share experience' }}
+        </div>
+
+      </div>
+
+    </article>
+
+    </div>
 
     <!-- ========================================================
          PHRASE FINALE
@@ -1101,7 +813,7 @@
         <i
           class="fa-solid fa-leaf"
           [ngStyle]="{
-            color: themeService.Primary
+            color: themeService.Primary1
           }"
         ></i>
 
@@ -1116,7 +828,7 @@
         <i
           class="fa-solid fa-leaf"
           [ngStyle]="{
-            color: themeService.Primary
+            color: themeService.Primary1
           }"
         ></i>
 

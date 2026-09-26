@@ -1,1294 +1,1866 @@
-const Plant = require('../Schema/Plant');
+// ============================================================
+// 🌿 CONTROLLER PLANTE — JARDISCAN
+// ============================================================
+
+const mongoose = require('mongoose');
 const fs = require('fs');
+const path = require('path');
 
-
-// ============================================================
-// ⚙️ CONFIGURATION
-// ============================================================
-
-const MAX_PLANT_IMAGES = 5;
-
-const DEFAULT_VIEWS = [
-  'front',
-  'side',
-  'top',
-  'close-up',
-  'far'
-];
-
-const ALLOWED_VIEWS = [
-  'front',
-  'side',
-  'top',
-  'close-up',
-  'far'
-];
-
+const Plante = require('../Schema/Plant');
 
 // ============================================================
-// 🛠️ UTILITAIRES
+// 🖼️ SHARP
 // ============================================================
 
+let sharp = null;
 
-/**
- * Transforme une valeur en tableau.
- *
- * Accepte :
- *
- * ["a", "b"]
- *
- * ou
- *
- * '["a", "b"]'
- */
-function parseArray(value) {
+try {
+    sharp = require('sharp');
+} catch (error) {
+    console.warn(
+        '⚠️ Le module "sharp" n’est pas installé.'
+    );
 
-  if (
-    value === undefined ||
-    value === null ||
-    value === ''
-  ) {
-    return [];
-  }
-
-  if (Array.isArray(value)) {
-    return value;
-  }
-
-  try {
-
-    const parsed = JSON.parse(value);
-
-    return Array.isArray(parsed)
-      ? parsed
-      : [];
-
-  } catch (error) {
-
-    return [];
-
-  }
+    console.warn(
+        '➡️ Lance : npm install sharp'
+    );
 }
 
+// ============================================================
+// ⚙️ CONFIGURATION IDENTIFICATION
+// ============================================================
 
-/**
- * Transforme une valeur en nombre.
- */
-function parseNumber(value) {
+const NOMBRE_RESULTATS_IDENTIFICATION = 4;
 
-  if (
-    value === undefined ||
-    value === null ||
-    value === ''
-  ) {
-    return undefined;
-  }
+const TAILLE_SIGNATURE = 32;
 
-  const number = Number(value);
+const DOSSIER_UPLOADS_PLANTES = path.join(
+    process.cwd(),
+    'uploads',
+    'plants'
+);
 
-  return Number.isNaN(number)
-    ? undefined
-    : number;
+// ============================================================
+// 🧹 NORMALISER UNE VALEUR
+// ============================================================
+
+function valeurTexte(valeur) {
+
+    if (
+        valeur === undefined ||
+        valeur === null
+    ) {
+        return '';
+    }
+
+    return String(valeur).trim();
 }
 
+// ============================================================
+// 🖼️ RÉCUPÉRER LES FICHIERS D'IDENTIFICATION
+// ============================================================
 
-/**
- * Supprime les fichiers uploadés
- * lorsqu'une opération échoue.
- */
-function deleteUploadedFiles(files) {
+function recupererFichiersIdentification(req) {
 
-  if (!Array.isArray(files)) {
-    return;
-  }
+    const fichiers = [];
 
-  files.forEach((file) => {
+    // --------------------------------------------------------
+    // req.files provenant de upload.fields()
+    // --------------------------------------------------------
+
+    if (
+        req.files &&
+        !Array.isArray(req.files) &&
+        typeof req.files === 'object'
+    ) {
+
+        if (Array.isArray(req.files.image)) {
+
+            fichiers.push(
+                ...req.files.image
+            );
+        }
+
+        if (Array.isArray(req.files.images)) {
+
+            fichiers.push(
+                ...req.files.images
+            );
+        }
+    }
+
+    // --------------------------------------------------------
+    // req.files provenant de upload.array()
+    // --------------------------------------------------------
+
+    if (Array.isArray(req.files)) {
+
+        fichiers.push(
+            ...req.files
+        );
+    }
+
+    // --------------------------------------------------------
+    // Compatibilité req.file
+    // --------------------------------------------------------
+
+    if (
+        req.file &&
+        !fichiers.some(
+            fichier =>
+                fichier.path === req.file.path
+        )
+    ) {
+
+        fichiers.push(
+            req.file
+        );
+    }
+
+    // --------------------------------------------------------
+    // Éviter les doublons
+    // --------------------------------------------------------
+
+    const uniques = [];
+
+    const chemins = new Set();
+
+    for (const fichier of fichiers) {
+
+        if (!fichier) {
+            continue;
+        }
+
+        const cle = fichier.path ||
+            fichier.filename ||
+            fichier.originalname;
+
+        if (!cle) {
+            continue;
+        }
+
+        if (chemins.has(cle)) {
+            continue;
+        }
+
+        chemins.add(cle);
+
+        uniques.push(fichier);
+    }
+
+    return uniques;
+}
+
+// ============================================================
+// 🖼️ CRÉER UNE SIGNATURE D'IMAGE
+// ============================================================
+
+async function creerSignatureImage(cheminImage) {
+
+    if (!sharp) {
+
+        throw new Error(
+            'Le module sharp est nécessaire pour l’identification des plantes.'
+        );
+    }
+
+    if (!cheminImage) {
+
+        throw new Error(
+            'Chemin de fichier image manquant.'
+        );
+    }
+
+    if (!fs.existsSync(cheminImage)) {
+
+        throw new Error(
+            `Image introuvable : ${cheminImage}`
+        );
+    }
+
+    const buffer = await sharp(cheminImage)
+        .resize(
+            TAILLE_SIGNATURE,
+            TAILLE_SIGNATURE,
+            {
+                fit: 'cover'
+            }
+        )
+        .removeAlpha()
+        .raw()
+        .toBuffer();
+
+    return buffer;
+}
+
+// ============================================================
+// 📊 CALCULER LA DISTANCE ENTRE DEUX IMAGES
+// ============================================================
+
+function calculerDistanceImages(
+    signatureA,
+    signatureB
+) {
+
+    if (
+        !signatureA ||
+        !signatureB
+    ) {
+        return Number.MAX_SAFE_INTEGER;
+    }
+
+    const longueur = Math.min(
+        signatureA.length,
+        signatureB.length
+    );
+
+    if (longueur === 0) {
+
+        return Number.MAX_SAFE_INTEGER;
+    }
+
+    let somme = 0;
+
+    for (
+        let index = 0;
+        index < longueur;
+        index++
+    ) {
+
+        const difference =
+            signatureA[index] -
+            signatureB[index];
+
+        somme +=
+            difference * difference;
+    }
+
+    return Math.sqrt(
+        somme / longueur
+    );
+}
+
+// ============================================================
+// 📈 CONVERTIR DISTANCE EN SCORE
+// ============================================================
+
+function distanceVersScore(distance) {
+
+    if (
+        !Number.isFinite(distance)
+    ) {
+        return 0;
+    }
+
+    /*
+     * Distance RGB moyenne.
+     *
+     * 0   = image identique
+     * 255 = différence maximale
+     */
+
+    const score =
+        100 -
+        (distance / 255) * 100;
+
+    return Math.max(
+        0,
+        Math.min(
+            100,
+            score
+        )
+    );
+}
+
+// ============================================================
+// 🖼️ RÉCUPÉRER LE CHEMIN PHYSIQUE D'UNE IMAGE PLANTE
+// ============================================================
+
+function cheminPhysiqueImagePlante(image) {
+
+    if (!image) {
+        return null;
+    }
+
+    const url = valeurTexte(
+        image.url
+    );
+
+    if (!url) {
+        return null;
+    }
+
+    /*
+     * Exemple :
+     *
+     * /uploads/plants/photo.png
+     *
+     * devient :
+     *
+     * /projet/uploads/plants/photo.png
+     */
+
+    const nomFichier = path.basename(
+        url
+    );
+
+    if (!nomFichier) {
+        return null;
+    }
+
+    return path.join(
+        DOSSIER_UPLOADS_PLANTES,
+        nomFichier
+    );
+}
+
+// ============================================================
+// 🧠 IDENTIFIER UNE PLANTE
+//
+// POST /api/plant/identify
+// POST /api/plants/identify
+//
+// Multipart :
+// image  OU images
+//
+// Body possible :
+// jardiDex
+// utilisateurId
+// ============================================================
+
+exports.identifyPlant = async (
+    req,
+    res
+) => {
 
     try {
 
-      if (
-        file?.path &&
-        fs.existsSync(file.path)
-      ) {
+        console.log('');
+        console.log(
+            '=========================================='
+        );
+        console.log(
+            '🔎 IDENTIFICATION PLANTE'
+        );
+        console.log(
+            '=========================================='
+        );
 
-        fs.unlinkSync(file.path);
+        // ====================================================
+        // 📸 RÉCUPÉRATION DES IMAGES
+        // ====================================================
 
-      }
+        const fichiers =
+            recupererFichiersIdentification(req);
+
+        console.log(
+            `📸 ${fichiers.length} image(s) reçue(s)`
+        );
+
+        // ====================================================
+        // ❌ AUCUNE IMAGE
+        // ====================================================
+
+        if (fichiers.length === 0) {
+
+            return res.status(400).json({
+
+                message:
+                    'Aucune image reçue pour l’identification.',
+
+                expectedFields: [
+                    'image',
+                    'images'
+                ]
+
+            });
+        }
+
+        // ====================================================
+        // 📋 INFORMATIONS DES IMAGES
+        // ====================================================
+
+        fichiers.forEach(
+            (fichier, index) => {
+
+                console.log('');
+                console.log(
+                    `📸 IMAGE ${index + 1}`
+                );
+
+                console.log(
+                    '   Champ :',
+                    fichier.fieldname
+                );
+
+                console.log(
+                    '   Original :',
+                    fichier.originalname
+                );
+
+                console.log(
+                    '   Serveur :',
+                    fichier.filename
+                );
+
+                console.log(
+                    '   MIME :',
+                    fichier.mimetype
+                );
+
+                console.log(
+                    '   Taille :',
+                    fichier.size
+                );
+
+                console.log(
+                    '   Path :',
+                    fichier.path
+                );
+
+                console.log(
+                    '   URL :',
+                    `/uploads/plants/${fichier.filename}`
+                );
+
+            }
+        );
+
+        // ====================================================
+        // 📦 DONNÉES UTILISATEUR
+        // ====================================================
+
+        let jardiDex = [];
+
+        if (
+            req.body &&
+            req.body.jardiDex
+        ) {
+
+            try {
+
+                if (
+                    Array.isArray(
+                        req.body.jardiDex
+                    )
+                ) {
+
+                    jardiDex =
+                        req.body.jardiDex;
+
+                } else {
+
+                    jardiDex =
+                        JSON.parse(
+                            req.body.jardiDex
+                        );
+
+                }
+
+            } catch (error) {
+
+                jardiDex = [];
+            }
+        }
+
+        const utilisateurId =
+            valeurTexte(
+                req.body?.utilisateurId
+            );
+
+        console.log('');
+        console.log(
+            '=========================================='
+        );
+        console.log(
+            '🌱 DONNÉES IDENTIFICATION'
+        );
+        console.log(
+            '=========================================='
+        );
+
+        console.log(
+            '📦 utilisateurId :',
+            utilisateurId || 'non fourni'
+        );
+
+        console.log(
+            '🌿 JardiDex :',
+            jardiDex
+        );
+
+        // ====================================================
+        // 🧩 VÉRIFICATION SHARP
+        // ====================================================
+
+        if (!sharp) {
+
+            return res.status(500).json({
+
+                message:
+                    'Le système d’identification nécessite le module sharp.',
+
+                installation:
+                    'npm install sharp'
+
+            });
+        }
+
+        // ====================================================
+        // 🌱 RÉCUPÉRER LES PLANTES
+        // ====================================================
+
+        const plantes =
+            await Plante
+                .find({})
+                .sort({
+                    nombre: 1
+                })
+                .lean();
+
+        console.log(
+            `🌱 ${plantes.length} plante(s) disponible(s) pour comparaison`
+        );
+
+        // ====================================================
+        // ❌ AUCUNE PLANTE EN BASE
+        // ====================================================
+
+        if (plantes.length === 0) {
+
+            return res.status(404).json({
+
+                message:
+                    'Aucune plante disponible dans la base pour effectuer une identification.',
+
+                resultats: []
+
+            });
+        }
+
+        // ====================================================
+        // 🖼️ CRÉER LES SIGNATURES DES IMAGES SCANNÉES
+        // ====================================================
+
+        const signaturesScan = [];
+
+        for (
+            const fichier of fichiers
+        ) {
+
+            try {
+
+                const signature =
+                    await creerSignatureImage(
+                        fichier.path
+                    );
+
+                signaturesScan.push(
+                    signature
+                );
+
+            } catch (error) {
+
+                console.error(
+                    '⚠️ Impossible d’analyser l’image :',
+                    fichier.originalname
+                );
+
+                console.error(
+                    error.message
+                );
+
+            }
+        }
+
+        // ====================================================
+        // ❌ AUCUNE IMAGE ANALYSABLE
+        // ====================================================
+
+        if (
+            signaturesScan.length === 0
+        ) {
+
+            return res.status(400).json({
+
+                message:
+                    'Les images reçues ne peuvent pas être analysées.',
+
+                resultats: []
+
+            });
+        }
+
+        // ====================================================
+        // 🌿 COMPARAISON AVEC LES PLANTES
+        // ====================================================
+
+        const resultats = [];
+
+        for (
+            const plante of plantes
+        ) {
+
+            // ------------------------------------------------
+            // Vérifier les images de la plante
+            // ------------------------------------------------
+
+            if (
+                !Array.isArray(
+                    plante.images
+                ) ||
+                plante.images.length === 0
+            ) {
+
+                continue;
+            }
+
+            const distancesPlante = [];
+
+            // ------------------------------------------------
+            // Toutes les images de référence
+            // ------------------------------------------------
+
+            for (
+                const imagePlante of plante.images
+            ) {
+
+                const cheminImage =
+                    cheminPhysiqueImagePlante(
+                        imagePlante
+                    );
+
+                if (!cheminImage) {
+                    continue;
+                }
+
+                if (
+                    !fs.existsSync(
+                        cheminImage
+                    )
+                ) {
+
+                    continue;
+                }
+
+                let signatureReference;
+
+                try {
+
+                    signatureReference =
+                        await creerSignatureImage(
+                            cheminImage
+                        );
+
+                } catch (error) {
+
+                    continue;
+                }
+
+                // --------------------------------------------
+                // Comparaison avec chaque image du scan
+                // --------------------------------------------
+
+                for (
+                    const signatureScan
+                    of signaturesScan
+                ) {
+
+                    const distance =
+                        calculerDistanceImages(
+                            signatureScan,
+                            signatureReference
+                        );
+
+                    distancesPlante.push(
+                        distance
+                    );
+
+                }
+            }
+
+            // ------------------------------------------------
+            // Aucune image utilisable
+            // ------------------------------------------------
+
+            if (
+                distancesPlante.length === 0
+            ) {
+
+                continue;
+            }
+
+            // ------------------------------------------------
+            // Garder la meilleure correspondance
+            // ------------------------------------------------
+
+            const meilleureDistance =
+                Math.min(
+                    ...distancesPlante
+                );
+
+            const score =
+                distanceVersScore(
+                    meilleureDistance
+                );
+
+            resultats.push({
+
+                plante,
+
+                score: Number(
+                    score.toFixed(2)
+                ),
+
+                distance:
+                    Number(
+                        meilleureDistance.toFixed(4)
+                    )
+
+            });
+        }
+
+        // ====================================================
+        // 📊 TRI DES RÉSULTATS
+        // ====================================================
+
+        resultats.sort(
+            (a, b) =>
+                b.score - a.score
+        );
+
+        const meilleursResultats =
+            resultats
+                .slice(
+                    0,
+                    NOMBRE_RESULTATS_IDENTIFICATION
+                );
+
+        // ====================================================
+        // 🧾 FORMAT FINAL
+        // ====================================================
+
+        const resultatsFormates =
+            meilleursResultats.map(
+                (resultat, index) => {
+
+                    const plante =
+                        resultat.plante;
+
+                    return {
+
+                        rang:
+                            index + 1,
+
+                        score:
+                            resultat.score,
+
+                        confiance:
+                            `${resultat.score}%`,
+
+                        distance:
+                            resultat.distance,
+
+                        plante: {
+
+                            _id:
+                                plante._id,
+
+                            nombre:
+                                plante.nombre,
+
+                            nomCommun:
+                                plante.nomCommun,
+
+                            nomScientifique:
+                                plante.nomScientifique,
+
+                            famille:
+                                plante.famille,
+
+                            description:
+                                plante.description,
+
+                            origine:
+                                plante.origine,
+
+                            couleur:
+                                plante.couleur,
+
+                            periodeFloraison:
+                                plante.periodeFloraison,
+
+                            periodeRecolte:
+                                plante.periodeRecolte,
+
+                            cycle:
+                                plante.cycle,
+
+                            exposition:
+                                plante.exposition,
+
+                            arrosage:
+                                plante.arrosage,
+
+                            sol:
+                                plante.sol,
+
+                            temperatureMin:
+                                plante.temperatureMin,
+
+                            temperatureMax:
+                                plante.temperatureMax,
+
+                            humidite:
+                                plante.humidite,
+
+                            partiesDangereuses:
+                                plante.partiesDangereuses,
+
+                            usageCulinaire:
+                                plante.usageCulinaire,
+
+                            retoure:
+                                plante.retoure,
+
+                            images:
+                                plante.images
+
+                        }
+
+                    };
+
+                }
+            );
+
+        // ====================================================
+        // 🏆 MEILLEUR RÉSULTAT
+        // ====================================================
+
+        const meilleur =
+            resultatsFormates.length > 0
+                ? resultatsFormates[0]
+                : null;
+
+        console.log('');
+        console.log(
+            '=========================================='
+        );
+        console.log(
+            '🏆 RÉSULTAT IDENTIFICATION'
+        );
+        console.log(
+            '=========================================='
+        );
+
+        if (meilleur) {
+
+            console.log(
+                '🌱 Plante :',
+                meilleur.plante.nomCommun
+            );
+
+            console.log(
+                '📊 Score :',
+                `${meilleur.score}%`
+            );
+
+            console.log(
+                '🔬 Nom scientifique :',
+                meilleur.plante.nomScientifique
+            );
+
+        } else {
+
+            console.log(
+                '❌ Aucune correspondance trouvée'
+            );
+
+        }
+
+        console.log(
+            `📊 ${resultatsFormates.length} résultat(s)`
+        );
+
+        // ====================================================
+        // 📤 RÉPONSE
+        // ====================================================
+
+        return res.status(200).json({
+
+            success: true,
+
+            message:
+                meilleur
+                    ? 'Identification terminée avec succès.'
+                    : 'Aucune correspondance suffisamment exploitable.',
+
+            identification: meilleur,
+
+            resultats:
+                resultatsFormates,
+
+            nombreResultats:
+                resultatsFormates.length,
+
+            nombreImagesAnalysees:
+                signaturesScan.length,
+
+            utilisateurId:
+                utilisateurId || null,
+
+            jardiDex
+
+        });
 
     } catch (error) {
 
-      console.error(
-        '⚠️ Impossible de supprimer le fichier :',
-        file?.path,
-        error.message
-      );
+        console.error('');
+        console.error(
+            '=========================================='
+        );
+        console.error(
+            '❌ ERREUR IDENTIFICATION PLANTE'
+        );
+        console.error(
+            '=========================================='
+        );
 
+        console.error(
+            'Message :',
+            error.message
+        );
+
+        console.error(
+            'Nom :',
+            error.name
+        );
+
+        console.error(
+            'Code :',
+            error.code || 'N/A'
+        );
+
+        console.error(
+            'Stack :',
+            error.stack
+        );
+
+        return res.status(500).json({
+
+            success: false,
+
+            message:
+                'Erreur lors de l’identification de la plante.',
+
+            error:
+                error.message
+
+        });
     }
-
-  });
-}
-
-
-/**
- * Récupère les vues envoyées par Angular.
- *
- * Formats acceptés :
- *
- * vue[]
- *
- * ou
- *
- * vue = ["front", "side", ...]
- */
-function parseViews(value) {
-
-  const views = parseArray(value);
-
-  if (views.length > 0) {
-    return views;
-  }
-
-  return [];
-}
-
-
-/**
- * Transforme une valeur en booléen.
- */
-function parseBoolean(value) {
-
-  if (
-    value === true ||
-    value === 'true' ||
-    value === '1' ||
-    value === 1
-  ) {
-    return true;
-  }
-
-  return false;
-}
-
-
-/**
- * Nettoie une chaîne.
- */
-function parseString(value) {
-
-  if (
-    value === undefined ||
-    value === null
-  ) {
-    return undefined;
-  }
-
-  return String(value).trim();
-}
-
-
-// ============================================================
-// 🌱 CRÉER UNE PLANTE
-// ============================================================
-
-const createPlant = async (req, res) => {
-
-  let files = [];
-
-  try {
-
-    // ========================================================
-    // 📸 RÉCUPÉRATION DES IMAGES
-    // ========================================================
-
-    files = Array.isArray(req.files)
-      ? req.files
-      : [];
-
-
-    // ========================================================
-    // 🚨 EXACTEMENT 5 IMAGES
-    // ========================================================
-
-    if (files.length !== MAX_PLANT_IMAGES) {
-
-      deleteUploadedFiles(files);
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          `Une plante doit posséder exactement ${MAX_PLANT_IMAGES} photos.`,
-
-        count: files.length,
-
-        required: MAX_PLANT_IMAGES
-
-      });
-
-    }
-
-
-    // ========================================================
-    // 👁️ RÉCUPÉRATION DES VUES
-    // ========================================================
-
-    let views = parseViews(req.body.vue);
-
-
-    /**
-     * Si aucune vue n'est envoyée,
-     * on utilise automatiquement les 5 vues.
-     */
-
-    if (views.length === 0) {
-
-      views = [
-        ...DEFAULT_VIEWS
-      ];
-
-    }
-
-
-    // ========================================================
-    // 🚨 EXACTEMENT 5 VUES
-    // ========================================================
-
-    if (
-      views.length !== MAX_PLANT_IMAGES
-    ) {
-
-      deleteUploadedFiles(files);
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          `Il faut définir exactement ${MAX_PLANT_IMAGES} vues pour les photos.`,
-
-        count: views.length,
-
-        required: MAX_PLANT_IMAGES
-
-      });
-
-    }
-
-
-    // ========================================================
-    // 🚨 VÉRIFICATION DES VUES
-    // ========================================================
-
-    const invalidViews = views.filter(
-      (view) => !ALLOWED_VIEWS.includes(view)
-    );
-
-
-    if (invalidViews.length > 0) {
-
-      deleteUploadedFiles(files);
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Une ou plusieurs vues sont invalides.',
-
-        invalidViews,
-
-        allowedViews:
-          ALLOWED_VIEWS
-
-      });
-
-    }
-
-
-    // ========================================================
-    // 🚨 UNE SEULE PHOTO PAR VUE
-    // ========================================================
-
-    const uniqueViews = new Set(views);
-
-
-    if (
-      uniqueViews.size !== MAX_PLANT_IMAGES
-    ) {
-
-      deleteUploadedFiles(files);
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Chaque photo doit correspondre à une vue différente.'
-
-      });
-
-    }
-
-
-    // ========================================================
-    // 🖼️ CONSTRUCTION DES IMAGES
-    // ========================================================
-
-    const images = files.map(
-      (file, index) => {
-
-        return {
-
-          url:
-            `/uploads/plants/${file.filename}`,
-
-          vue:
-            views[index]
-
-        };
-
-      }
-    );
-
-
-    // ========================================================
-    // 🎨 COULEURS PRINCIPALES
-    // ========================================================
-
-    const couleursPrincipal =
-      parseArray(
-        req.body.couleursPrincipal
-      );
-
-
-    // ========================================================
-    // 💬 RETOURS
-    // ========================================================
-
-    /**
-     * Les retours peuvent être envoyés
-     * lors de la création.
-     *
-     * Exemple :
-     *
-     * retour:
-     * [
-     *   {
-     *     nom: "Paul",
-     *     note: 5,
-     *     commentaire: "Très belle plante."
-     *   }
-     * ]
-     *
-     * Mais normalement il est préférable
-     * de les ajouter via addPlantRetour().
-     */
-
-    const retour =
-      parseArray(
-        req.body.retour
-      );
-
-
-    // ========================================================
-    // 🌱 CRÉATION DE LA PLANTE
-    // ========================================================
-
-    const plant = await Plant.create({
-
-      // ------------------------------------------------------
-      // 🌿 IDENTITÉ
-      // ------------------------------------------------------
-
-      nomCommun:
-        parseString(
-          req.body.nomCommun
-        ),
-
-      nomScientifique:
-        parseString(
-          req.body.nomScientifique
-        ),
-
-      famille:
-        parseString(
-          req.body.famille
-        ),
-
-
-      // ------------------------------------------------------
-      // 📝 DESCRIPTION
-      // ------------------------------------------------------
-
-      description:
-        parseString(
-          req.body.description
-        ),
-
-
-      // ------------------------------------------------------
-      // 🌍 ORIGINE
-      // ------------------------------------------------------
-
-      origine:
-        parseString(
-          req.body.origine
-        ),
-
-
-      // ------------------------------------------------------
-      // 🖼️ 5 IMAGES
-      // ------------------------------------------------------
-
-      images,
-
-
-      // ------------------------------------------------------
-      // 🎨 COULEURS PRINCIPALES
-      // ------------------------------------------------------
-
-      couleursPrincipal,
-
-
-      // ------------------------------------------------------
-      // 🌸 FLORAISON
-      // ------------------------------------------------------
-
-      periodeFloraison:
-        parseString(
-          req.body.periodeFloraison
-        ),
-
-
-      // ------------------------------------------------------
-      // 🍎 RÉCOLTE
-      // ------------------------------------------------------
-
-      periodeRecolte:
-        parseString(
-          req.body.periodeRecolte
-        ),
-
-
-      // ------------------------------------------------------
-      // 🔄 CYCLE
-      // ------------------------------------------------------
-
-      cycle:
-        parseString(
-          req.body.cycle
-        ),
-
-
-      // ------------------------------------------------------
-      // ☀️ EXPOSITION
-      // ------------------------------------------------------
-
-      exposition:
-        parseString(
-          req.body.exposition
-        ),
-
-
-      // ------------------------------------------------------
-      // 💧 ARROSAGE
-      // ------------------------------------------------------
-
-      arrosage:
-        parseString(
-          req.body.arrosage
-        ),
-
-
-      // ------------------------------------------------------
-      // 🌱 SOL
-      // ------------------------------------------------------
-
-      sol:
-        parseString(
-          req.body.sol
-        ),
-
-
-      // ------------------------------------------------------
-      // 🌡️ TEMPÉRATURE
-      // ------------------------------------------------------
-
-      temperatureMin:
-        parseNumber(
-          req.body.temperatureMin
-        ),
-
-      temperatureMax:
-        parseNumber(
-          req.body.temperatureMax
-        ),
-
-
-      // ------------------------------------------------------
-      // 💦 HUMIDITÉ
-      // ------------------------------------------------------
-
-      humidite:
-        parseString(
-          req.body.humidite
-        ),
-
-
-      // ------------------------------------------------------
-      // ☠️ PARTIES DANGEREUSES
-      // ------------------------------------------------------
-
-      partiesDangereuses:
-        parseString(
-          req.body.partiesDangereuses
-        ),
-
-
-      // ------------------------------------------------------
-      // 🍳 USAGE CULINAIRE
-      // ------------------------------------------------------
-
-      usageCulinaire:
-        parseString(
-          req.body.usageCulinaire
-        ),
-
-
-      // ------------------------------------------------------
-      // 💬 RETOURS
-      // ------------------------------------------------------
-
-      retour
-
-    });
-
-
-    // ========================================================
-    // ✅ RÉPONSE
-    // ========================================================
-
-    return res.status(201).json({
-
-      success: true,
-
-      message:
-        'Plante créée avec succès avec ses 5 photos de référence.',
-
-      plant
-
-    });
-
-
-  } catch (error) {
-
-    console.error(
-      '❌ Erreur création plante :',
-      error
-    );
-
-
-    // ========================================================
-    // 🧹 NETTOYAGE DES IMAGES
-    // ========================================================
-
-    deleteUploadedFiles(files);
-
-
-    // ========================================================
-    // 🚨 ERREUR MONGOOSE
-    // ========================================================
-
-    if (
-      error.name === 'ValidationError'
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Les données de la plante sont invalides.',
-
-        errors:
-          Object.values(
-            error.errors
-          ).map(
-            (err) => err.message
-          )
-
-      });
-
-    }
-
-
-    // ========================================================
-    // 🚨 ID MONGOOSE INVALIDE
-    // ========================================================
-
-    if (
-      error.name === 'CastError'
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Identifiant de plante invalide.'
-
-      });
-
-    }
-
-
-    // ========================================================
-    // 🚨 ERREUR GÉNÉRALE
-    // ========================================================
-
-    return res.status(500).json({
-
-      success: false,
-
-      message:
-        'Impossible de créer la plante.',
-
-      error:
-        error.message
-
-    });
-
-  }
-
 };
 
-
 // ============================================================
-// 🌿 RÉCUPÉRER TOUTES LES PLANTES
+// 🟢 CRÉER UNE PLANTE
+//
+// POST /api/plant
 // ============================================================
 
-const getPlants = async (req, res) => {
+exports.createPlant = async (
+    req,
+    res
+) => {
 
-  try {
+    try {
 
-    const plants =
-      await Plant
-        .find()
-        .sort({
-          createdAt: -1
+        const {
+
+            nomCommun,
+            nomScientifique,
+            famille,
+            description,
+            origine,
+            couleur,
+            periodeFloraison,
+            periodeRecolte,
+            cycle,
+            exposition,
+            arrosage,
+            sol,
+            temperatureMin,
+            temperatureMax,
+            humidite,
+            partiesDangereuses,
+            usageCulinaire,
+            retoure
+
+        } = req.body;
+
+        // ====================================================
+        // 🔎 CHAMPS OBLIGATOIRES
+        // ====================================================
+
+        const champsManquants = [];
+
+        if (!valeurTexte(nomCommun)) {
+            champsManquants.push(
+                'nomCommun'
+            );
+        }
+
+        if (!valeurTexte(nomScientifique)) {
+            champsManquants.push(
+                'nomScientifique'
+            );
+        }
+
+        if (!valeurTexte(famille)) {
+            champsManquants.push(
+                'famille'
+            );
+        }
+
+        if (!valeurTexte(description)) {
+            champsManquants.push(
+                'description'
+            );
+        }
+
+        if (!valeurTexte(origine)) {
+            champsManquants.push(
+                'origine'
+            );
+        }
+
+        if (!valeurTexte(couleur)) {
+            champsManquants.push(
+                'couleur'
+            );
+        }
+
+        if (!valeurTexte(cycle)) {
+            champsManquants.push(
+                'cycle'
+            );
+        }
+
+        if (!valeurTexte(exposition)) {
+            champsManquants.push(
+                'exposition'
+            );
+        }
+
+        if (!valeurTexte(arrosage)) {
+            champsManquants.push(
+                'arrosage'
+            );
+        }
+
+        if (!valeurTexte(sol)) {
+            champsManquants.push(
+                'sol'
+            );
+        }
+
+        if (
+            temperatureMin === undefined ||
+            temperatureMin === null ||
+            temperatureMin === ''
+        ) {
+
+            champsManquants.push(
+                'temperatureMin'
+            );
+        }
+
+        if (
+            temperatureMax === undefined ||
+            temperatureMax === null ||
+            temperatureMax === ''
+        ) {
+
+            champsManquants.push(
+                'temperatureMax'
+            );
+        }
+
+        if (!valeurTexte(humidite)) {
+            champsManquants.push(
+                'humidite'
+            );
+        }
+
+        if (!valeurTexte(partiesDangereuses)) {
+            champsManquants.push(
+                'partiesDangereuses'
+            );
+        }
+
+        if (!valeurTexte(usageCulinaire)) {
+            champsManquants.push(
+                'usageCulinaire'
+            );
+        }
+
+        if (
+            champsManquants.length > 0
+        ) {
+
+            return res.status(400).json({
+
+                message:
+                    'Certains champs obligatoires sont manquants.',
+
+                champsManquants
+
+            });
+        }
+
+        // ====================================================
+        // 🌡️ TEMPÉRATURES
+        // ====================================================
+
+        const temperatureMinNombre =
+            Number(
+                temperatureMin
+            );
+
+        const temperatureMaxNombre =
+            Number(
+                temperatureMax
+            );
+
+        if (
+            Number.isNaN(
+                temperatureMinNombre
+            ) ||
+            Number.isNaN(
+                temperatureMaxNombre
+            )
+        ) {
+
+            return res.status(400).json({
+
+                message:
+                    'Les températures doivent être des nombres.'
+
+            });
+        }
+
+        if (
+            temperatureMinNombre >
+            temperatureMaxNombre
+        ) {
+
+            return res.status(400).json({
+
+                message:
+                    'La température minimale ne peut pas être supérieure à la température maximale.'
+
+            });
+        }
+
+        // ====================================================
+        // 🔢 NUMÉRO AUTOMATIQUE
+        // ====================================================
+
+        const dernierePlante =
+            await Plante
+                .findOne()
+                .sort({
+                    nombre: -1
+                })
+                .select('nombre')
+                .lean();
+
+        const prochainNombre =
+            dernierePlante &&
+            typeof dernierePlante.nombre === 'number'
+                ? dernierePlante.nombre + 1
+                : 1;
+
+        // ====================================================
+        // 🖼️ IMAGES
+        // ====================================================
+
+        let imagesFinales = [];
+
+        if (
+            Array.isArray(req.files)
+        ) {
+
+            imagesFinales =
+                req.files.map(
+                    (file, index) => ({
+
+                        url:
+                            `/uploads/plants/${file.filename}`,
+
+                        vue:
+                            index === 0
+                                ? 'front'
+                                : 'side'
+
+                    })
+                );
+        }
+
+        // ====================================================
+        // 🌱 PLANTE
+        // ====================================================
+
+        const nouvellePlante =
+            new Plante({
+
+                nomCommun:
+                    valeurTexte(
+                        nomCommun
+                    ),
+
+                nomScientifique:
+                    valeurTexte(
+                        nomScientifique
+                    ),
+
+                famille:
+                    valeurTexte(
+                        famille
+                    ),
+
+                description:
+                    valeurTexte(
+                        description
+                    ),
+
+                origine:
+                    valeurTexte(
+                        origine
+                    ),
+
+                nombre:
+                    prochainNombre,
+
+                images:
+                    imagesFinales,
+
+                couleur:
+                    valeurTexte(
+                        couleur
+                    ),
+
+                periodeFloraison:
+                    valeurTexte(
+                        periodeFloraison
+                    ) || null,
+
+                periodeRecolte:
+                    valeurTexte(
+                        periodeRecolte
+                    ) || null,
+
+                cycle:
+                    valeurTexte(
+                        cycle
+                    ),
+
+                exposition:
+                    valeurTexte(
+                        exposition
+                    ),
+
+                arrosage:
+                    valeurTexte(
+                        arrosage
+                    ),
+
+                sol:
+                    valeurTexte(
+                        sol
+                    ),
+
+                temperatureMin:
+                    temperatureMinNombre,
+
+                temperatureMax:
+                    temperatureMaxNombre,
+
+                humidite:
+                    valeurTexte(
+                        humidite
+                    ),
+
+                partiesDangereuses:
+                    valeurTexte(
+                        partiesDangereuses
+                    ),
+
+                usageCulinaire:
+                    valeurTexte(
+                        usageCulinaire
+                    ),
+
+                retoure:
+                    valeurTexte(
+                        retoure
+                    ) || null
+
+            });
+
+        const planteSauvegardee =
+            await nouvellePlante.save();
+
+        return res.status(201).json({
+
+            message:
+                'Plante créée avec succès.',
+
+            plante:
+                planteSauvegardee
+
         });
 
+    } catch (error) {
 
-    return res.status(200).json({
+        console.error(
+            '❌ Erreur création plante :',
+            error
+        );
 
-      success: true,
+        return res.status(500).json({
 
-      count:
-        plants.length,
+            message:
+                'Erreur lors de la création de la plante.',
 
-      plants
+            error:
+                error.message
 
-    });
-
-
-  } catch (error) {
-
-    console.error(
-      '❌ Erreur récupération plantes :',
-      error
-    );
-
-
-    return res.status(500).json({
-
-      success: false,
-
-      message:
-        'Impossible de récupérer les plantes.',
-
-      error:
-        error.message
-
-    });
-
-  }
-
+        });
+    }
 };
 
-
 // ============================================================
-// 🌱 RÉCUPÉRER UNE PLANTE PAR ID
+// 🟢 RÉCUPÉRER TOUTES LES PLANTES
+//
+// GET /api/plant
 // ============================================================
 
-const getPlantById = async (req, res) => {
+exports.getAllPlants = async (
+    req,
+    res
+) => {
 
-  try {
+    try {
 
-    const plant =
-      await Plant.findById(
-        req.params.id
-      );
+        const plantes =
+            await Plante
+                .find({})
+                .sort({
+                    nombre: 1
+                });
 
+        return res.status(200).json(
+            plantes
+        );
 
-    // ========================================================
-    // 🚨 PLANTE INTROUVABLE
-    // ========================================================
+    } catch (error) {
 
-    if (!plant) {
+        console.error(
+            '❌ Erreur GET ALL PLANTS :',
+            error
+        );
 
-      return res.status(404).json({
+        return res.status(500).json({
 
-        success: false,
+            message:
+                'Erreur lors de la récupération des plantes.',
 
-        message:
-          'Plante introuvable.'
+            error:
+                error.message
 
-      });
-
+        });
     }
-
-
-    // ========================================================
-    // ✅ RÉPONSE
-    // ========================================================
-
-    return res.status(200).json({
-
-      success: true,
-
-      plant
-
-    });
-
-
-  } catch (error) {
-
-    console.error(
-      '❌ Erreur récupération plante :',
-      error
-    );
-
-
-    // ========================================================
-    // 🚨 ID INVALIDE
-    // ========================================================
-
-    if (
-      error.name === 'CastError'
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Identifiant de plante invalide.'
-
-      });
-
-    }
-
-
-    return res.status(500).json({
-
-      success: false,
-
-      message:
-        'Impossible de récupérer la plante.',
-
-      error:
-        error.message
-
-    });
-
-  }
-
 };
 
-
 // ============================================================
-// 💬 AJOUTER UN RETOUR SUR UNE PLANTE
+// 🟢 RÉCUPÉRER UNE PLANTE
+//
+// GET /api/plant/:id
 // ============================================================
 
-const addPlantRetour = async (req, res) => {
+exports.getPlanteById = async (
+    req,
+    res
+) => {
 
-  try {
+    try {
 
-    // ========================================================
-    // 🔎 RÉCUPÉRATION DE LA PLANTE
-    // ========================================================
+        const { id } =
+            req.params;
 
-    const plant =
-      await Plant.findById(
-        req.params.id
-      );
+        if (
+            !mongoose.Types.ObjectId.isValid(
+                id
+            )
+        ) {
 
+            return res.status(400).json({
 
-    if (!plant) {
+                message:
+                    'Identifiant de plante invalide.'
 
-      return res.status(404).json({
+            });
+        }
 
-        success: false,
+        const plante =
+            await Plante.findById(
+                id
+            );
 
-        message:
-          'Plante introuvable.'
+        if (!plante) {
 
-      });
+            return res.status(404).json({
 
+                message:
+                    'Plante introuvable.'
+
+            });
+        }
+
+        return res.status(200).json({
+
+            plante
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            '❌ Erreur récupération plante :',
+            error
+        );
+
+        return res.status(500).json({
+
+            message:
+                'Erreur lors de la récupération de la plante.',
+
+            error:
+                error.message
+
+        });
     }
-
-
-    // ========================================================
-    // 👤 NOM
-    // ========================================================
-
-    const nom =
-      parseString(
-        req.body.nom
-      ) || 'Utilisateur';
-
-
-    // ========================================================
-    // ⭐ NOTE
-    // ========================================================
-
-    const note =
-      parseNumber(
-        req.body.note
-      );
-
-
-    if (
-      note === undefined ||
-      note < 1 ||
-      note > 5
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'La note doit être comprise entre 1 et 5.'
-
-      });
-
-    }
-
-
-    // ========================================================
-    // 💬 COMMENTAIRE
-    // ========================================================
-
-    const commentaire =
-      parseString(
-        req.body.commentaire
-      );
-
-
-    if (!commentaire) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Le commentaire est obligatoire.'
-
-      });
-
-    }
-
-
-    // ========================================================
-    // ➕ AJOUT DU RETOUR
-    // ========================================================
-
-    plant.retour.push({
-
-      nom,
-
-      note,
-
-      commentaire,
-
-      date:
-        new Date()
-
-    });
-
-
-    // ========================================================
-    // 💾 SAUVEGARDE
-    // ========================================================
-
-    await plant.save();
-
-
-    // ========================================================
-    // ✅ RÉPONSE
-    // ========================================================
-
-    return res.status(201).json({
-
-      success: true,
-
-      message:
-        'Votre retour a été ajouté avec succès.',
-
-      retour:
-        plant.retour[
-          plant.retour.length - 1
-        ],
-
-      plant
-
-    });
-
-
-  } catch (error) {
-
-    console.error(
-      '❌ Erreur ajout retour :',
-      error
-    );
-
-
-    if (
-      error.name === 'ValidationError'
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Le retour est invalide.',
-
-        errors:
-          Object.values(
-            error.errors
-          ).map(
-            (err) => err.message
-          )
-
-      });
-
-    }
-
-
-    if (
-      error.name === 'CastError'
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Identifiant de plante invalide.'
-
-      });
-
-    }
-
-
-    return res.status(500).json({
-
-      success: false,
-
-      message:
-        'Impossible d’ajouter le retour.',
-
-      error:
-        error.message
-
-    });
-
-  }
-
 };
 
-
 // ============================================================
-// 🔎 IDENTIFIER UNE PLANTE
-// ============================================================
+// 🔄 ALIAS COMPATIBILITÉ
 //
-// IMPORTANT
-// ------------------------------------------------------------
-// Il n'y a volontairement PAS de PlantNet API.
-//
-// L'identification de JardiScan est effectuée localement
-// dans Angular.
-//
-// Le serveur conserve cet endpoint afin de ne pas casser
-// les routes existantes.
-//
+// Permet à Plant.Routes.js d'utiliser :
+// getPlantById
 // ============================================================
 
-const identifyPlant = async (req, res) => {
+exports.getPlantById =
+    exports.getPlanteById;
 
-  let file = null;
+// ============================================================
+// 🟠 MODIFIER UNE PLANTE
+//
+// PUT /api/plant/:id
+// ============================================================
 
-  try {
+exports.updatePlante = async (
+    req,
+    res
+) => {
 
-    // ========================================================
-    // 📸 RÉCUPÉRATION DE L'IMAGE
-    // ========================================================
+    try {
 
-    file = req.file;
+        const { id } =
+            req.params;
 
+        if (
+            !mongoose.Types.ObjectId.isValid(
+                id
+            )
+        ) {
 
-    if (!file) {
+            return res.status(400).json({
 
-      return res.status(400).json({
+                message:
+                    'Identifiant de plante invalide.'
 
-        success: false,
+            });
+        }
 
-        message:
-          'Aucune image reçue pour identification.'
+        const donnees = {};
 
-      });
+        const champsTexte = [
 
-    }
-
-
-    console.log(
-      '🔎 Image reçue pour identification locale :',
-      file.path
-    );
-
-
-    // ========================================================
-    // 🌱 RÉCUPÉRATION DES PLANTES
-    // ========================================================
-    //
-    // On récupère uniquement les données nécessaires
-    // à la comparaison locale dans Angular.
-    //
-    // ========================================================
-
-    const plants =
-      await Plant
-        .find()
-        .select(
-          [
             'nomCommun',
             'nomScientifique',
             'famille',
             'description',
             'origine',
-            'images',
-            'couleursPrincipal',
+            'couleur',
             'periodeFloraison',
             'periodeRecolte',
             'cycle',
             'exposition',
             'arrosage',
             'sol',
-            'temperatureMin',
-            'temperatureMax',
             'humidite',
             'partiesDangereuses',
             'usageCulinaire',
-            'retour'
-          ].join(' ')
-        )
-        .sort({
-          createdAt: -1
+            'retoure'
+
+        ];
+
+        champsTexte.forEach(
+            champ => {
+
+                if (
+                    req.body[champ] !==
+                    undefined
+                ) {
+
+                    donnees[champ] =
+                        req.body[champ] ===
+                        null
+
+                            ? null
+
+                            : String(
+                                req.body[champ]
+                            ).trim();
+
+                }
+
+            }
+        );
+
+        // ====================================================
+        // 🌡️ TEMPÉRATURE MIN
+        // ====================================================
+
+        if (
+            req.body.temperatureMin !==
+            undefined &&
+            req.body.temperatureMin !==
+            ''
+        ) {
+
+            const valeur =
+                Number(
+                    req.body.temperatureMin
+                );
+
+            if (
+                Number.isNaN(
+                    valeur
+                )
+            ) {
+
+                return res.status(400).json({
+
+                    message:
+                        'temperatureMin doit être un nombre.'
+
+                });
+            }
+
+            donnees.temperatureMin =
+                valeur;
+        }
+
+        // ====================================================
+        // 🌡️ TEMPÉRATURE MAX
+        // ====================================================
+
+        if (
+            req.body.temperatureMax !==
+            undefined &&
+            req.body.temperatureMax !==
+            ''
+        ) {
+
+            const valeur =
+                Number(
+                    req.body.temperatureMax
+                );
+
+            if (
+                Number.isNaN(
+                    valeur
+                )
+            ) {
+
+                return res.status(400).json({
+
+                    message:
+                        'temperatureMax doit être un nombre.'
+
+                });
+            }
+
+            donnees.temperatureMax =
+                valeur;
+        }
+
+        // ====================================================
+        // 🖼️ IMAGES
+        // ====================================================
+
+        if (
+            Array.isArray(
+                req.files
+            )
+        ) {
+
+            donnees.images =
+                req.files.map(
+                    (file, index) => ({
+
+                        url:
+                            `/uploads/plants/${file.filename}`,
+
+                        vue:
+                            index === 0
+                                ? 'front'
+                                : 'side'
+
+                    })
+                );
+        }
+
+        // ====================================================
+        // 💾 MISE À JOUR
+        // ====================================================
+
+        const planteModifiee =
+            await Plante.findByIdAndUpdate(
+
+                id,
+
+                donnees,
+
+                {
+                    new: true,
+                    runValidators: true
+                }
+
+            );
+
+        if (!planteModifiee) {
+
+            return res.status(404).json({
+
+                message:
+                    'Plante introuvable.'
+
+            });
+        }
+
+        return res.status(200).json({
+
+            message:
+                'Plante modifiée avec succès.',
+
+            plante:
+                planteModifiee
+
         });
 
+    } catch (error) {
 
-    // ========================================================
-    // ℹ️ IDENTIFICATION LOCALE
-    // ========================================================
-    //
-    // Le serveur ne fait aucune reconnaissance IA.
-    //
-    // Angular récupère les plantes et leurs 5 images
-    // puis effectue la comparaison directement
-    // dans le navigateur.
-    //
-    // Aucun service externe.
-    // Aucun abonnement.
-    // Aucune clé API.
-    //
-    // ========================================================
+        console.error(
+            '❌ Erreur modification plante :',
+            error
+        );
 
+        return res.status(500).json({
 
-    return res.status(200).json({
+            message:
+                'Erreur lors de la modification de la plante.',
 
-      success: true,
+            error:
+                error.message
 
-      local: true,
+        });
+    }
+};
 
-      message:
-        'Image reçue. L’identification est effectuée localement dans JardiScan.',
+// ============================================================
+// 🔴 SUPPRIMER UNE PLANTE
+//
+// DELETE /api/plant/:id
+// ============================================================
 
-      imageUrl:
-        `/uploads/plants/${file.filename}`,
-
-      count:
-        plants.length,
-
-      plants
-
-    });
-
-
-  } catch (error) {
-
-    console.error(
-      '❌ Erreur identification locale :',
-      error
-    );
-
-
-    // ========================================================
-    // 🧹 SUPPRESSION DE L'IMAGE TEMPORAIRE
-    // ========================================================
+exports.deletePlante = async (
+    req,
+    res
+) => {
 
     try {
 
-      if (
-        file?.path &&
-        fs.existsSync(file.path)
-      ) {
+        const { id } =
+            req.params;
 
-        fs.unlinkSync(file.path);
+        if (
+            !mongoose.Types.ObjectId.isValid(
+                id
+            )
+        ) {
 
-      }
+            return res.status(400).json({
 
-    } catch (deleteError) {
+                message:
+                    'Identifiant de plante invalide.'
 
-      console.error(
-        '⚠️ Impossible de supprimer l’image temporaire :',
-        deleteError.message
-      );
+            });
+        }
 
-    }
+        const planteSupprimee =
+            await Plante.findByIdAndDelete(
+                id
+            );
 
+        if (!planteSupprimee) {
 
-    return res.status(500).json({
+            return res.status(404).json({
 
-      success: false,
+                message:
+                    'Plante introuvable.'
 
-      message:
-        'Impossible de préparer l’identification locale.',
+            });
+        }
 
-      error:
-        error.message
+        return res.status(200).json({
 
-    });
+            message:
+                'Plante supprimée avec succès.',
 
-  }
+            plante:
+                planteSupprimee
 
-};
+        });
 
+    } catch (error) {
 
-// ============================================================
-// 📊 RÉCUPÉRER LES RETOURS D'UNE PLANTE
-// ============================================================
-
-const getPlantRetours = async (req, res) => {
-
-  try {
-
-    const plant =
-      await Plant
-        .findById(
-          req.params.id
-        )
-        .select(
-          'nomCommun retour'
+        console.error(
+            '❌ Erreur suppression plante :',
+            error
         );
 
+        return res.status(500).json({
 
-    if (!plant) {
+            message:
+                'Erreur lors de la suppression de la plante.',
 
-      return res.status(404).json({
+            error:
+                error.message
 
-        success: false,
-
-        message:
-          'Plante introuvable.'
-
-      });
-
+        });
     }
-
-
-    return res.status(200).json({
-
-      success: true,
-
-      count:
-        plant.retour.length,
-
-      retours:
-        plant.retour
-
-    });
-
-
-  } catch (error) {
-
-    console.error(
-      '❌ Erreur récupération retours :',
-      error
-    );
-
-
-    if (
-      error.name === 'CastError'
-    ) {
-
-      return res.status(400).json({
-
-        success: false,
-
-        message:
-          'Identifiant de plante invalide.'
-
-      });
-
-    }
-
-
-    return res.status(500).json({
-
-      success: false,
-
-      message:
-        'Impossible de récupérer les retours.',
-
-      error:
-        error.message
-
-    });
-
-  }
-
 };
 
-
 // ============================================================
-// 📤 EXPORTS
+// 🔎 RECHERCHER DES PLANTES
+//
+// GET /api/plants/search?q=tomate
 // ============================================================
 
-module.exports = {
+exports.searchPlantes = async (
+    req,
+    res
+) => {
 
-  createPlant,
+    try {
 
-  getPlants,
+        const q =
+            valeurTexte(
+                req.query.q
+            );
 
-  getPlantById,
+        if (!q) {
 
-  identifyPlant,
+            return res.status(400).json({
 
-  addPlantRetour,
+                message:
+                    'Le paramètre de recherche "q" est obligatoire.'
 
-  getPlantRetours
+            });
+        }
 
+        const regex =
+            new RegExp(
+
+                q.replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    '\\$&'
+                ),
+
+                'i'
+
+            );
+
+        const plantes =
+            await Plante
+                .find({
+
+                    $or: [
+
+                        {
+                            nomCommun:
+                                regex
+                        },
+
+                        {
+                            nomScientifique:
+                                regex
+                        },
+
+                        {
+                            famille:
+                                regex
+                        },
+
+                        {
+                            origine:
+                                regex
+                        }
+
+                    ]
+
+                })
+                .sort({
+
+                    nombre: 1
+
+                });
+
+        return res.status(200).json({
+
+            count:
+                plantes.length,
+
+            plantes
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            '❌ Erreur recherche plantes :',
+            error
+        );
+
+        return res.status(500).json({
+
+            message:
+                'Erreur lors de la recherche des plantes.',
+
+            error:
+                error.message
+
+        });
+    }
 };

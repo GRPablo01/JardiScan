@@ -21,7 +21,7 @@
     overflow-hidden
   "
   [ngStyle]="{
-    'background-color': themeService.Background2,
+    'background-color': themeService.BG2,
     'color': themeService.TextPrincipal
   }"
 >
@@ -74,10 +74,9 @@
           backdrop-blur-md
         "
         [ngStyle]="{
-          'background-color': themeService.Background1 + 'CC',
-          'border-color': themeService.Border2,
-          'color': themeService.Primary,
-          'animation-delay': '0.05s'
+          'background-color': themeService.BG3,
+          'border-color': themeService.BR3,
+          'color': themeService.TextPrincipal,
         }"
       >
 
@@ -91,11 +90,9 @@
             justify-center
             rounded-full
           "
-          [ngStyle]="{
-            'background-color': themeService.Primary + '18'
-          }"
+          
         >
-          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <i [ngStyle]="{'color':themeService.Primary1}" class="fa-solid fa-wand-magic-sparkles"></i>
         </span>
 
         <span>
@@ -125,7 +122,6 @@
         "
         [ngStyle]="{
           'color': themeService.TextPrincipal,
-          'animation-delay': '0.12s'
         }"
       >
 
@@ -137,7 +133,7 @@
 
         <span
           [ngStyle]="{
-            'color': themeService.Primary
+            'color': themeService.Primary1
           }"
         >
           JardiScan
@@ -164,7 +160,7 @@
           lg:leading-9
         "
         [ngStyle]="{
-          'color': themeService.TextPrincipal,
+          'color': themeService.TextSecondaire,
           'opacity': '0.72',
           'animation-delay': '0.2s'
         }"
@@ -218,7 +214,7 @@
           md:block
         "
         [ngStyle]="{
-          'background-color': themeService.Border1
+          'background-color': themeService.BG3
         }"
       >
 
@@ -241,8 +237,9 @@
       </div>
 
 
+      
       <!-- ==========================================================
-           ÉTAPE 1 — SCANNEZ
+          ÉTAPE 1 — RECHERCHEZ
       =========================================================== -->
 
       <article
@@ -262,14 +259,12 @@
           xl:p-9
         "
         [ngStyle]="{
-          'background-color': themeService.Background3,
-          'border-color': themeService.Border3,
+          'background-color': themeService.BG3,
+          'border-color': themeService.BG3,
           'animation-delay': '0.25s'
         }"
       >
-
         <!-- Numéro + icône -->
-
         <div class="flex items-center justify-between">
 
           <div
@@ -291,19 +286,22 @@
               lg:text-2xl
             "
             [ngStyle]="{
-              'background-color': themeService.Primary,
+              'background-color': themeService.BG4,
               'color': '#ffffff',
-              'box-shadow': '0 12px 30px ' + themeService.Primary + '30'
+              
             }"
           >
-            <i class="fa-solid fa-camera"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
-          <span
+          <span 
+          [ngStyle]="{
+              'color':themeService.BG1,
+              
+            }"
             class="
               text-4xl
               font-black
-              opacity-10
               transition-transform
               duration-300
               group-hover:scale-110
@@ -317,7 +315,6 @@
 
 
         <!-- Contenu -->
-
         <div class="mt-6 lg:mt-8">
 
           <span
@@ -329,7 +326,7 @@
               sm:text-xs
             "
             [ngStyle]="{
-              'color': themeService.Primary
+              'color': themeService.Primary1
             }"
           >
             {{
@@ -349,8 +346,8 @@
           >
             {{
               languageService.is('fr')
-                ? 'Scannez'
-                : 'Scan'
+                ? 'Recherchez'
+                : 'Search'
             }}
           </h3>
 
@@ -369,8 +366,8 @@
           >
             {{
               languageService.is('fr')
-                ? 'Identifiez facilement votre plante ou votre espace grâce à JardiScan.'
-                : 'Easily identify your plant or growing space with JardiScan.'
+                ? 'Trouvez rapidement une plante grâce à la recherche JardiScan et explorez facilement notre catalogue.'
+                : 'Quickly find a plant with JardiScan search and easily explore our plant catalog.'
             }}
           </p>
 
@@ -378,17 +375,15 @@
 
 
         <!-- Séparateur -->
-
         <div
           class="my-5 h-px w-full"
           [ngStyle]="{
-            'background-color': themeService.Border1
+            'background-color': themeService.BR3
           }"
         ></div>
 
 
         <!-- Indication -->
-
         <div
           class="
             flex
@@ -415,18 +410,18 @@
               rounded-lg
             "
             [ngStyle]="{
-              'background-color': themeService.Primary + '14',
-              'color': themeService.Primary
+              'background-color': themeService.PrimarySoft1,
+              'color': themeService.Primary1
             }"
           >
-            <i class="fa-solid fa-qrcode"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
           </span>
 
           <span>
             {{
               languageService.is('fr')
-                ? 'Identification rapide'
-                : 'Quick identification'
+                ? 'Recherche rapide'
+                : 'Quick search'
             }}
           </span>
 
@@ -435,8 +430,9 @@
       </article>
 
 
+
       <!-- ==========================================================
-           ÉTAPE 2 — ANALYSEZ
+          ÉTAPE 2 — DÉCOUVREZ
       =========================================================== -->
 
       <article
@@ -456,16 +452,16 @@
           xl:p-9
         "
         [ngStyle]="{
-          'background-color': themeService.Background3,
-          'border-color': themeService.Border3,
+          'background-color': themeService.BG3,
+          'border-color': themeService.BG3,
           'animation-delay': '0.38s'
         }"
       >
 
         <!-- Numéro + icône -->
-
         <div class="flex items-center justify-between">
 
+          <!-- Icône -->
           <div
             class="
               flex
@@ -485,23 +481,26 @@
               lg:text-2xl
             "
             [ngStyle]="{
-              'background-color': themeService.Primary + '18',
-              'color': themeService.Primary
+              'background-color': themeService.BG4,
+              'color': '#ffffff'
             }"
           >
-            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <i class="fa-solid fa-leaf"></i>
           </div>
 
+          <!-- Numéro -->
           <span
             class="
               text-4xl
               font-black
-              opacity-10
               transition-transform
               duration-300
               group-hover:scale-110
               lg:text-5xl
             "
+            [ngStyle]="{
+              'color': themeService.BG1
+            }"
           >
             02
           </span>
@@ -510,9 +509,9 @@
 
 
         <!-- Contenu -->
-
         <div class="mt-6 lg:mt-8">
 
+          <!-- Label -->
           <span
             class="
               text-[11px]
@@ -522,7 +521,7 @@
               sm:text-xs
             "
             [ngStyle]="{
-              'color': themeService.Primary
+              'color': themeService.Primary1
             }"
           >
             {{
@@ -532,6 +531,7 @@
             }}
           </span>
 
+          <!-- Titre -->
           <h3
             class="
               mt-2
@@ -542,11 +542,12 @@
           >
             {{
               languageService.is('fr')
-                ? 'Analysez'
-                : 'Analyze'
+                ? 'Découvrez'
+                : 'Discover'
             }}
           </h3>
 
+          <!-- Description -->
           <p
             class="
               mt-3
@@ -562,8 +563,8 @@
           >
             {{
               languageService.is('fr')
-                ? 'JardiScan vous fournit rapidement des informations utiles pour mieux comprendre votre jardin.'
-                : 'JardiScan quickly provides useful information to help you better understand your garden.'
+                ? 'Consultez les informations essentielles de chaque plante, ses caractéristiques et les conseils pour en prendre soin.'
+                : 'Explore essential plant information, characteristics, and care advice for every plant.'
             }}
           </p>
 
@@ -571,17 +572,15 @@
 
 
         <!-- Séparateur -->
-
         <div
           class="my-5 h-px w-full"
           [ngStyle]="{
-            'background-color': themeService.Border1
+            'background-color': themeService.BR3
           }"
         ></div>
 
 
         <!-- Indication -->
-
         <div
           class="
             flex
@@ -597,6 +596,7 @@
           }"
         >
 
+          <!-- Petite icône -->
           <span
             class="
               flex
@@ -608,18 +608,19 @@
               rounded-lg
             "
             [ngStyle]="{
-              'background-color': themeService.Primary + '14',
-              'color': themeService.Primary
+              'background-color': themeService.PrimarySoft1,
+              'color': themeService.Primary1
             }"
           >
-            <i class="fa-solid fa-chart-simple"></i>
+            <i class="fa-solid fa-circle-info"></i>
           </span>
 
+          <!-- Texte -->
           <span>
             {{
               languageService.is('fr')
-                ? 'Informations utiles'
-                : 'Useful information'
+                ? 'Informations détaillées'
+                : 'Detailed information'
             }}
           </span>
 
@@ -629,7 +630,7 @@
 
 
       <!-- ==========================================================
-           ÉTAPE 3 — AGISSEZ
+          ÉTAPE 3 — COLLECTIONNEZ
       =========================================================== -->
 
       <article
@@ -649,16 +650,16 @@
           xl:p-9
         "
         [ngStyle]="{
-          'background-color': themeService.Background3,
-          'border-color': themeService.Border3,
+          'background-color': themeService.BG3,
+          'border-color': themeService.BG3,
           'animation-delay': '0.51s'
         }"
       >
 
         <!-- Numéro + icône -->
-
         <div class="flex items-center justify-between">
 
+          <!-- Icône -->
           <div
             class="
               flex
@@ -678,23 +679,26 @@
               lg:text-2xl
             "
             [ngStyle]="{
-              'background-color': themeService.Primary + '18',
-              'color': themeService.Primary
+              'background-color': themeService.BG4,
+              'color': '#ffffff'
             }"
           >
-            <i class="fa-solid fa-lightbulb"></i>
+            <i class="fa-solid fa-bookmark"></i>
           </div>
 
+          <!-- Numéro -->
           <span
             class="
               text-4xl
               font-black
-              opacity-10
               transition-transform
               duration-300
               group-hover:scale-110
               lg:text-5xl
             "
+            [ngStyle]="{
+              'color': themeService.BG1
+            }"
           >
             03
           </span>
@@ -703,9 +707,9 @@
 
 
         <!-- Contenu -->
-
         <div class="mt-6 lg:mt-8">
 
+          <!-- Label -->
           <span
             class="
               text-[11px]
@@ -715,7 +719,7 @@
               sm:text-xs
             "
             [ngStyle]="{
-              'color': themeService.Primary
+              'color': themeService.Primary1
             }"
           >
             {{
@@ -725,6 +729,7 @@
             }}
           </span>
 
+          <!-- Titre -->
           <h3
             class="
               mt-2
@@ -735,11 +740,12 @@
           >
             {{
               languageService.is('fr')
-                ? 'Agissez'
-                : 'Take action'
+                ? 'Collectionnez'
+                : 'Collect'
             }}
           </h3>
 
+          <!-- Description -->
           <p
             class="
               mt-3
@@ -755,8 +761,8 @@
           >
             {{
               languageService.is('fr')
-                ? 'Découvrez les conseils adaptés à votre plante et prenez soin de votre jardin au bon moment.'
-                : 'Discover advice tailored to your plant and take care of your garden at the right time.'
+                ? 'Ajoutez vos plantes à votre JardiDex, construisez votre collection et retrouvez-les facilement à tout moment.'
+                : 'Add plants to your JardiDex, build your collection, and easily find them again whenever you want.'
             }}
           </p>
 
@@ -764,17 +770,15 @@
 
 
         <!-- Séparateur -->
-
         <div
           class="my-5 h-px w-full"
           [ngStyle]="{
-            'background-color': themeService.Border1
+            'background-color': themeService.BR3
           }"
         ></div>
 
 
         <!-- Indication -->
-
         <div
           class="
             flex
@@ -790,6 +794,7 @@
           }"
         >
 
+          <!-- Petite icône -->
           <span
             class="
               flex
@@ -801,24 +806,27 @@
               rounded-lg
             "
             [ngStyle]="{
-              'background-color': themeService.Primary + '14',
-              'color': themeService.Primary
+              'background-color': themeService.PrimarySoft1,
+              'color': themeService.Primary1
             }"
           >
             <i class="fa-solid fa-seedling"></i>
           </span>
 
+          <!-- Texte -->
           <span>
             {{
               languageService.is('fr')
-                ? 'Conseils personnalisés'
-                : 'Personalized advice'
+                ? 'Votre collection personnelle'
+                : 'Your personal collection'
             }}
           </span>
 
         </div>
 
       </article>
+
+
 
     </div>
 
@@ -857,7 +865,7 @@
           rounded-full
         "
         [ngStyle]="{
-          'background-color': themeService.Primary
+          'background-color': themeService.Primary1
         }"
       ></span>
 
@@ -877,7 +885,7 @@
           rounded-full
         "
         [ngStyle]="{
-          'background-color': themeService.Primary
+          'background-color': themeService.Primary1
         }"
       ></span>
 
@@ -902,7 +910,7 @@
         sm:text-sm
       "
       [ngStyle]="{
-        'color': themeService.Primary,
+        'color': themeService.Primary1,
         'animation-delay': '0.72s'
       }"
     >

@@ -17,16 +17,11 @@
      • Backdrop blur
      ============================================================ -->
 
-
-<!-- ============================================================
-     SECTION ASSISTANCE
-     ============================================================ -->
-
 <section
   id="aide"
   class="relative w-full overflow-hidden px-4 py-16 sm:px-6 sm:py-20 lg:px-10 lg:py-24 xl:px-14"
   [ngStyle]="{
-    background: themeService.Background1
+    background: themeService.BG1
   }"
 >
 
@@ -48,8 +43,8 @@
     <div
       class="reveal reveal-delay-1 group relative overflow-hidden rounded-[2rem] border p-6 shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl sm:p-8 lg:p-10 xl:p-12"
       [ngStyle]="{
-        background: themeService.Background2,
-        borderColor: themeService.Border2,
+        background: themeService.BG2,
+        borderColor: themeService.BR2,
         boxShadow: themeService.BoxShadow
       }"
     >
@@ -67,8 +62,8 @@
         <div
           class="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] transition-all duration-300 hover:scale-105 sm:text-[11px]"
           [ngStyle]="{
-            background: themeService.Background3,
-            borderColor: themeService.Border3,
+            background: themeService.BR3,
+            borderColor: themeService.BR3,
             color: themeService.TextPrincipal,
             boxShadow: themeService.BoxShadow
           }"
@@ -76,14 +71,12 @@
 
           <span
             class="flex h-6 w-6 items-center justify-center rounded-full"
-            [ngStyle]="{
-              background: themeService.Primary
-            }"
+            
           >
             <i
-              class="fa-solid fa-headset text-[10px]"
+              class="fa-solid fa-headset text-[20px]"
               [ngStyle]="{
-                color: '#FFFFFF'
+                color: themeService.Primary1
               }"
             ></i>
           </span>
@@ -95,7 +88,7 @@
           <span
             class="h-1.5 w-1.5 animate-pulse rounded-full"
             [ngStyle]="{
-              background: themeService.Primary
+              background: themeService.Primary1
             }"
           ></span>
 
@@ -113,8 +106,8 @@
         <div
           class="mt-7 flex h-20 w-20 items-center justify-center rounded-[1.5rem] border text-3xl shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 sm:h-24 sm:w-24 sm:text-4xl"
           [ngStyle]="{
-            background: themeService.Background3,
-            borderColor: themeService.Border3,
+            background: themeService.BG3,
+            borderColor: themeService.BR3,
             boxShadow: themeService.BoxShadow
           }"
         >
@@ -122,7 +115,7 @@
           <i
             class="fa-solid fa-headset"
             [ngStyle]="{
-              color: themeService.Primary
+              color: themeService.Primary1
             }"
           ></i>
 
@@ -147,7 +140,7 @@
           <span
             class="mt-3 block text-lg font-bold leading-tight sm:text-xl lg:text-2xl"
             [ngStyle]="{
-              color: themeService.Primary
+              color: themeService.Primary1
             }"
           >
 
@@ -190,22 +183,20 @@
           <div
             class="group/info flex items-center gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             [ngStyle]="{
-              background: themeService.Background3,
-              borderColor: themeService.Border3,
+              background: themeService.BG3,
+              borderColor: themeService.BR3,
               boxShadow: themeService.BoxShadow
             }"
           >
 
             <div
               class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover/info:scale-110"
-              [ngStyle]="{
-                background: themeService.PrimarySoft
-              }"
+              
             >
               <i
                 class="fa-solid fa-user-lock"
                 [ngStyle]="{
-                  color: themeService.Primary
+                  color: themeService.Primary1
                 }"
               ></i>
             </div>
@@ -215,14 +206,14 @@
               <p
                 class="text-[10px] font-black uppercase tracking-[0.16em]"
                 [ngStyle]="{
-                  color: themeService.TextMuted
+                  color: themeService.TextSecondaire
                 }"
               >
                 {{ languageService.is('fr') ? 'Accès' : 'Access' }}
               </p>
 
               <p
-                class="mt-1 text-sm font-bold"
+                class="mt-1 text-md font-bold"
                 [ngStyle]="{
                   color: themeService.TextPrincipal
                 }"
@@ -242,22 +233,19 @@
           <div
             class="group/info flex items-center gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             [ngStyle]="{
-              background: themeService.Background3,
-              borderColor: themeService.Border3,
+              background: themeService.BG3,
+              borderColor: themeService.BR3,
               boxShadow: themeService.BoxShadow
             }"
           >
 
             <div
               class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 group-hover/info:scale-110"
-              [ngStyle]="{
-                background: themeService.PrimarySoft
-              }"
             >
               <i
                 class="fa-solid fa-headset"
                 [ngStyle]="{
-                  color: themeService.Primary
+                  color: themeService.Primary1
                 }"
               ></i>
             </div>
@@ -267,14 +255,14 @@
               <p
                 class="text-[10px] font-black uppercase tracking-[0.16em]"
                 [ngStyle]="{
-                  color: themeService.TextMuted
+                  color: themeService.TextSecondaire
                 }"
               >
                 {{ languageService.is('fr') ? 'Support' : 'Support' }}
               </p>
 
               <p
-                class="mt-1 text-sm font-bold"
+                class="mt-1 text-md font-bold"
                 [ngStyle]="{
                   color: themeService.TextPrincipal
                 }"
@@ -299,7 +287,7 @@
           type="button"
           class="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-4 text-sm font-black shadow-xl transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:gap-4 active:scale-[0.98] sm:w-auto"
           [ngStyle]="{
-            background: themeService.Primary,
+            background: themeService.Primary1,
             borderColor: themeService.BorderPrimary,
             color: '#FFFFFF',
             boxShadow: themeService.BoxShadow
@@ -308,7 +296,7 @@
         >
 
           <span
-            class="flex h-8 w-8 items-center justify-center rounded-lg bg-black/10"
+            class="flex h-8 w-8 items-center justify-center rounded-lg"
           >
             <i class="fa-solid fa-ticket"></i>
           </span>
@@ -337,8 +325,8 @@
     <div
       class="reveal reveal-delay-2 relative overflow-hidden rounded-[2rem] border p-6 shadow-xl sm:p-8 lg:p-10"
       [ngStyle]="{
-        background: themeService.Background2,
-        borderColor: themeService.Border2,
+        background: themeService.BG2,
+        borderColor: themeService.BR2,
         boxShadow: themeService.BoxShadow
       }"
     >
@@ -358,8 +346,8 @@
           <div
             class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border text-lg shadow-sm"
             [ngStyle]="{
-              background: themeService.Background3,
-              borderColor: themeService.Border3,
+              background: themeService.BG3,
+              borderColor: themeService.BR3,
               boxShadow: themeService.BoxShadow
             }"
           >
@@ -367,7 +355,7 @@
             <i
               class="fa-solid fa-list-check"
               [ngStyle]="{
-                color: themeService.Primary
+                color: themeService.Primary1
               }"
             ></i>
 
@@ -379,7 +367,7 @@
             <span
               class="text-[10px] font-black uppercase tracking-[0.2em]"
               [ngStyle]="{
-                color: themeService.Primary
+                color: themeService.Primary1
               }"
             >
               {{ languageService.is('fr')
@@ -429,8 +417,8 @@
             <div
               class="group relative flex gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               [ngStyle]="{
-                background: themeService.Background3,
-                borderColor: themeService.Border3,
+                background: themeService.BG3,
+                borderColor: themeService.BG3,
                 boxShadow: themeService.BoxShadow
               }"
             >
@@ -438,9 +426,9 @@
               <div
                 class="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-sm transition-all duration-300 group-hover:scale-110"
                 [ngStyle]="{
-                  background: themeService.Background4,
-                  borderColor: themeService.Border4,
-                  color: themeService.Primary
+                  background: themeService.BG4,
+                  borderColor: themeService.BG4,
+                  color: themeService.Primary1
                 }"
               >
                 <i class="fa-solid fa-right-to-bracket"></i>
@@ -452,7 +440,7 @@
                 <span
                   class="text-[10px] font-black uppercase tracking-widest"
                   [ngStyle]="{
-                    color: themeService.Primary
+                    color: themeService.Primary1
                   }"
                 >
                   {{ languageService.is('fr')
@@ -494,8 +482,8 @@
             <div
               class="group relative flex gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               [ngStyle]="{
-                background: themeService.Background3,
-                borderColor: themeService.Border3,
+                background: themeService.BG3,
+                borderColor: themeService.BG3,
                 boxShadow: themeService.BoxShadow
               }"
             >
@@ -503,9 +491,9 @@
               <div
                 class="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-sm transition-all duration-300 group-hover:scale-110"
                 [ngStyle]="{
-                  background: themeService.Background4,
-                  borderColor: themeService.Border4,
-                  color: themeService.Primary
+                  background: themeService.BG4,
+                  borderColor: themeService.BG4,
+                  color: themeService.Primary1
                 }"
               >
                 <i class="fa-solid fa-pen-to-square"></i>
@@ -517,7 +505,7 @@
                 <span
                   class="text-[10px] font-black uppercase tracking-widest"
                   [ngStyle]="{
-                    color: themeService.Primary
+                    color: themeService.Primary1
                   }"
                 >
                   {{ languageService.is('fr')
@@ -559,8 +547,8 @@
             <div
               class="group relative flex gap-4 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               [ngStyle]="{
-                background: themeService.Background3,
-                borderColor: themeService.Border3,
+                background: themeService.BG3,
+                borderColor: themeService.BG3,
                 boxShadow: themeService.BoxShadow
               }"
             >
@@ -568,9 +556,9 @@
               <div
                 class="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-black shadow-sm transition-all duration-300 group-hover:scale-110"
                 [ngStyle]="{
-                  background: themeService.Background4,
-                  borderColor: themeService.Border4,
-                  color: themeService.Primary
+                  background: themeService.BG4,
+                  borderColor: themeService.BG4,
+                  color: themeService.Primary1
                 }"
               >
                 <i class="fa-solid fa-paper-plane"></i>
@@ -582,7 +570,7 @@
                 <span
                   class="text-[10px] font-black uppercase tracking-widest"
                   [ngStyle]="{
-                    color: themeService.Primary
+                    color: themeService.Primary1
                   }"
                 >
                   {{ languageService.is('fr')
@@ -628,7 +616,7 @@
         <div
           class="mt-6 rounded-2xl border p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:p-5"
           [ngStyle]="{
-            background: themeService.Background4,
+            background: themeService.BG4,
             borderColor: themeService.BorderPrimary,
             boxShadow: themeService.BoxShadow
           }"
@@ -639,13 +627,13 @@
             <div
               class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
               [ngStyle]="{
-                background: themeService.Background1
+                background: themeService.BG5
               }"
             >
               <i
                 class="fa-solid fa-lightbulb"
                 [ngStyle]="{
-                  color: themeService.Primary
+                  color: themeService.Primary1
                 }"
               ></i>
             </div>
@@ -656,7 +644,7 @@
               <p
                 class="text-xs font-black uppercase tracking-wider"
                 [ngStyle]="{
-                  color: themeService.Primary
+                  color: themeService.Primary1
                 }"
               >
                 {{ languageService.is('fr')
@@ -713,8 +701,8 @@
     <div
       class="modal-enter relative my-auto flex max-h-[94vh] w-full max-w-3xl flex-col overflow-hidden rounded-[1.75rem] border shadow-2xl sm:rounded-[2rem]"
       [ngStyle]="{
-        background: themeService.Background1,
-        borderColor: themeService.Border1,
+        background: themeService.BG1,
+        borderColor: themeService.BR1,
         boxShadow: themeService.BoxShadow
       }"
       (click)="$event.stopPropagation()"
@@ -728,22 +716,20 @@
       <div
         class="flex shrink-0 items-start justify-between gap-4 border-b p-5 sm:p-7"
         [ngStyle]="{
-          borderColor: themeService.Border1
+          borderColor: themeService.BR1
         }"
       >
 
         <div class="flex min-w-0 items-start gap-3 sm:gap-4">
 
           <div
-            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-xl shadow-sm sm:h-14 sm:w-14 sm:text-2xl"
-            [ngStyle]="{
-              background: themeService.PrimarySoft
-            }"
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-xl sm:h-14 sm:w-14 sm:text-2xl"
+           
           >
             <i
               class="fa-solid fa-ticket"
               [ngStyle]="{
-                color: themeService.Primary
+                color: themeService.Primary1
               }"
             ></i>
           </div>
@@ -766,7 +752,7 @@
             <p
               class="mt-1 text-xs leading-5 sm:text-sm"
               [ngStyle]="{
-                color: themeService.TextMuted
+                color: themeService.TextSecondaire
               }"
             >
               {{ languageService.is('fr')
@@ -812,8 +798,8 @@
           <div
             class="overflow-hidden rounded-3xl border"
             [ngStyle]="{
-              background: themeService.Background2,
-              borderColor: themeService.Border2,
+              background: themeService.BG2,
+              borderColor: themeService.BR2,
               boxShadow: themeService.BoxShadow
             }"
           >
@@ -824,7 +810,7 @@
             <div
               class="flex flex-col gap-4 border-b border-dashed p-5 sm:flex-row sm:items-center sm:justify-between"
               [ngStyle]="{
-                borderColor: themeService.Border1
+                borderColor: themeService.BR1
               }"
             >
 
@@ -833,7 +819,7 @@
                 <p
                   class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
                   [ngStyle]="{
-                    color: themeService.TextMuted
+                    color: themeService.TextSecondaire
                   }"
                 >
                   {{ languageService.is('fr')
@@ -858,7 +844,7 @@
               <span
                 class="inline-flex w-fit shrink-0 items-center gap-2 rounded-full px-3 py-1.5 text-xs font-black"
                 [ngStyle]="{
-                  background: themeService.Primary,
+                  background: themeService.Primary1,
                   color: '#FFFFFF',
                   boxShadow: themeService.BoxShadow
                 }"
@@ -888,7 +874,7 @@
                 <p
                   class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
                   [ngStyle]="{
-                    color: themeService.TextMuted
+                    color: themeService.TextSecondaire
                   }"
                 >
                   {{ languageService.is('fr')
@@ -900,22 +886,20 @@
                 <div
                   class="mt-2 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-all duration-300 hover:-translate-y-0.5"
                   [ngStyle]="{
-                    background: themeService.Background1,
-                    borderColor: themeService.Border1,
+                    background: themeService.BG3,
+                    borderColor: themeService.BR3,
                     color: themeService.TextPrincipal
                   }"
                 >
 
                   <div
                     class="flex h-8 w-8 items-center justify-center rounded-lg"
-                    [ngStyle]="{
-                      background: themeService.PrimarySoft
-                    }"
+                    
                   >
                     <i
-                      class="fa-solid fa-user-tag text-xs"
+                      class="fa-solid fa-user-tag text-md"
                       [ngStyle]="{
-                        color: themeService.Primary
+                        color: themeService.Primary1
                       }"
                     ></i>
                   </div>
@@ -938,7 +922,7 @@
                 <p
                   class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
                   [ngStyle]="{
-                    color: themeService.TextMuted
+                    color: themeService.TextSecondaire
                   }"
                 >
                   {{ languageService.is('fr')
@@ -950,8 +934,8 @@
                 <div
                   class="mt-2 rounded-xl border px-4 py-3 text-sm"
                   [ngStyle]="{
-                    background: themeService.Background1,
-                    borderColor: themeService.Border1,
+                    background: themeService.BG3,
+                    borderColor: themeService.BR3,
                     color: themeService.TextPrincipal
                   }"
                 >
@@ -970,7 +954,7 @@
                 <p
                   class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
                   [ngStyle]="{
-                    color: themeService.TextMuted
+                    color: themeService.TextSecondaire
                   }"
                 >
                   {{ languageService.is('fr')
@@ -982,9 +966,9 @@
                 <div
                   class="mt-2 rounded-xl border p-4 text-sm leading-7"
                   [ngStyle]="{
-                    background: themeService.Background1,
-                    borderColor: themeService.Border1,
-                    color: themeService.TextSecondaire
+                    background: themeService.BG3,
+                    borderColor: themeService.BR3,
+                    color: themeService.TextPrincipal
                   }"
                 >
 
@@ -1011,7 +995,7 @@
                 <p
                   class="text-[10px] font-black uppercase tracking-[0.18em] sm:text-[11px]"
                   [ngStyle]="{
-                    color: themeService.TextMuted
+                    color: themeService.TextSecondaire
                   }"
                 >
                   {{ languageService.is('fr')
@@ -1023,8 +1007,8 @@
                 <div
                   class="mt-2 flex items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 hover:-translate-y-0.5"
                   [ngStyle]="{
-                    background: themeService.Background1,
-                    borderColor: themeService.Border1
+                    background: themeService.BG3,
+                    borderColor: themeService.BR3,
                   }"
                 >
 
