@@ -42,7 +42,7 @@ export class Connexion implements OnInit {
 
   ngOnInit(): void {
     // 🧠 Titre de la page
-    this.titleService.setTitle('JardiScan | Connexion');
+    this.titleService.setTitle('Natureora | Connexion');
 
     // 👤 Vérification de la connexion utilisateur
     const utilisateurString = localStorage.getItem('utilisateur');

@@ -1,7 +1,7 @@
 
 <section
   class="relative min-h-screen w-full overflow-hidden"
-  [style.background-color]="themeService.Background1"
+  [style.background-color]="themeService.BG1"
 >
 
   <!-- ============================================================
@@ -34,21 +34,7 @@
     />
   </div>
 
-  <!-- ============================================================
-       PETITS ÉLÉMENTS DE DÉCOR MOBILE
-       ============================================================ -->
-
-  <div
-    class="pointer-events-none absolute -left-24 -top-24 z-0 h-72 w-72 rounded-full blur-3xl opacity-30 lg:hidden"
-    [style.background-color]="themeService.Primary"
-    aria-hidden="true"
-  ></div>
-
-  <div
-    class="pointer-events-none absolute -bottom-24 -right-24 z-0 h-72 w-72 rounded-full blur-3xl opacity-20 lg:hidden"
-    [style.background-color]="themeService.Primary"
-    aria-hidden="true"
-  ></div>
+  
 
   
 
@@ -59,10 +45,7 @@
   <a
     routerLink="/"
     class="group fixed left-3 top-3 z-30 flex h-11 items-center gap-2 rounded-2xl border px-3.5 text-sm font-semibold backdrop-blur-xl transition-all duration-200 hover:-translate-x-0.5 hover:opacity-85 active:scale-95 sm:left-5 sm:top-5 sm:h-12 sm:px-4"
-    [style.background-color]="themeService.GlassBackground"
-    [style.border-color]="themeService.GlassBorder"
-    [style.color]="themeService.TextPrincipal"
-    [style.box-shadow]="themeService.BoxShadowLarge"
+    [ngStyle]="{'background':themeService.BG2,'border':'1px solid' + themeService.BR2}"
     [attr.aria-label]="languageService.is('fr') ? 'Retour' : 'Back'"
   >
     <!-- FLÈCHE -->
@@ -106,9 +89,7 @@
 
     <div
       class="w-full max-w-[500px] overflow-hidden rounded-[1.75rem] border p-5 backdrop-blur-2xl sm:rounded-[2rem] sm:p-7 md:p-8 lg:p-9"
-      [style.background-color]="themeService.GlassBackground"
-      [style.border-color]="themeService.GlassBorder"
-      [style.box-shadow]="themeService.BoxShadowLarge"
+      [ngStyle]="{'background':themeService.BG2,'border':'1px solid' + themeService.BR2,'box-shadow':themeService.BoxShadowLarge}"
     >
 
       <!-- ========================================================
@@ -120,9 +101,7 @@
         <!-- LOGO -->
 
         <div
-          class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[18px] border p-2.5 shadow-sm sm:mb-5 sm:h-16 sm:w-16 sm:rounded-[20px]"
-          [style.background-color]="themeService.PrimarySoft"
-          [style.border-color]="themeService.BorderPrimary"
+          class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[18px] p-2.5 shadow-sm sm:mb-5 sm:h-16 sm:w-16 sm:rounded-[20px]"
         >
           <img
             src="assets/Logo.svg"
@@ -304,11 +283,11 @@
               required
               [disabled]="isLoading || guestLoading"
               class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-4 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
-              [style.background-color]="themeService.Surface2"
+              [style.background-color]="themeService.BG3"
               [style.border-color]="
                 isEmailInvalid()
                   ? themeService.ErrorBorder
-                  : themeService.Border2
+                  : themeService.BR2
               "
               [style.color]="themeService.TextPrincipal"
               [style.caret-color]="themeService.Primary"
@@ -356,7 +335,7 @@
             <a
               routerLink="/change-password"
               class="shrink-0 text-xs font-semibold transition-opacity hover:opacity-70"
-              [style.color]="themeService.Primary"
+              [style.color]="themeService.Primary1"
             >
               {{ t('forgotPassword') }}
             </a>
@@ -404,11 +383,11 @@
               required
               [disabled]="isLoading || guestLoading"
               class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-14 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
-              [style.background-color]="themeService.Surface2"
+              [style.background-color]="themeService.BG3"
               [style.border-color]="
                 isPasswordInvalid()
                   ? themeService.ErrorBorder
-                  : themeService.Border2
+                  : themeService.BR2
               "
               [style.color]="themeService.TextPrincipal"
               [style.caret-color]="themeService.Primary"
@@ -542,10 +521,9 @@
         <button
           type="submit"
           [disabled]="isLoading || guestLoading"
-          class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-bold transition-all duration-200 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98]"
-          [style.background-color]="themeService.Primary"
-          [style.color]="themeService.TextOnPrimary"
-          [style.box-shadow]="themeService.BoxShadowPrimary"
+          class="flex min-h-[52px] w-full items-center justify-center text-white gap-2 rounded-2xl px-5 py-3.5 text-sm font-bold transition-all duration-200 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98]"
+          [style.background-color]="themeService.Primary1"
+          
         >
 
           <!-- LOADER -->
@@ -627,10 +605,8 @@
         type="button"
         (click)="continuerCommeInvite()"
         [disabled]="isLoading || guestLoading"
-        class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl border px-5 py-3.5 text-sm font-semibold transition-all duration-200 hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
-        [style.background-color]="themeService.Surface2"
-        [style.border-color]="themeService.Border2"
-        [style.color]="themeService.TextPrincipal"
+        class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-semibold transition-all duration-200 hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+        [ngStyle]="{'background':themeService.BG3,'border':'1px solid'+themeService.BR3}"
       >
 
         <!-- LOADER -->
@@ -692,8 +668,15 @@
 
           <a
             routerLink="/register"
-            class="ml-1 cursor-pointer font-bold transition-opacity hover:opacity-70"
-            [style.color]="themeService.Primary"
+            class="ml-1 cursor-pointer rounded-xl px-2.5 py-1.5 font-bold transition-all duration-200"
+            [ngStyle]="{
+              color: themeService.Primary1,
+              background: registerHover
+                ? (themeService.Primary1 + '14')
+                : 'transparent'
+            }"
+            (mouseenter)="registerHover = true"
+            (mouseleave)="registerHover = false"
           >
             {{ t('register') }}
           </a>

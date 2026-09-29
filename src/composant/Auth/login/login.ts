@@ -43,6 +43,8 @@ interface LoginUser {
   resetPasswordKey?: string | null;
   resetPasswordExpire?: string | null;
 
+
+
   // ==========================================================
   // INFORMATIONS UTILISATEUR
   // ==========================================================
@@ -159,6 +161,8 @@ export class Login {
   // ==========================================================
   // SERVICES
   // ==========================================================
+
+  registerHover = false;
 
   public readonly themeService =
     inject(ThemeService);
@@ -310,7 +314,7 @@ export class Login {
           'Connexion',
 
         welcome:
-          'Bienvenue sur JardiScan',
+          'Bienvenue sur Natureora',
 
         subtitle:
           'Connectez-vous pour accéder à votre espace.',
@@ -407,7 +411,7 @@ export class Login {
           'Login',
 
         welcome:
-          'Welcome to JardiScan',
+          'Welcome to Natureora',
 
         subtitle:
           'Log in to access your personal space.',

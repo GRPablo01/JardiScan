@@ -51,10 +51,7 @@ if (!fs.existsSync(plantsUploadPath)) {
     recursive: true
   });
 
-  console.log(
-    '📁 Dossier créé :',
-    plantsUploadPath
-  );
+  
 }
 
 if (!fs.existsSync(usersUploadPath)) {
@@ -62,10 +59,7 @@ if (!fs.existsSync(usersUploadPath)) {
     recursive: true
   });
 
-  console.log(
-    '📁 Dossier créé :',
-    usersUploadPath
-  );
+  
 }
 
 // ==========================================
@@ -294,35 +288,9 @@ app.listen(
   PORT,
   () => {
 
-    console.log('');
+    
 
-    console.log(
-      '======================================'
-    );
-
-    console.log(
-      '🌱 JARDISCAN SERVER'
-    );
-
-    console.log(
-      `🚀 Serveur démarré sur http://localhost:${PORT}`
-    );
-
-    console.log(
-      '📸 Uploads plantes disponibles sur /uploads/plants'
-    );
-
-    console.log(
-      '👤 Uploads utilisateurs disponibles sur /uploads/users'
-    );
-
-    console.log(
-      `📁 Dossier plantes : ${plantsUploadPath}`
-    );
-
-    console.log(
-      '======================================'
-    );
+    
 
   }
 );

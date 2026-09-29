@@ -310,16 +310,17 @@ export class ThemeService {
 
     if (isDark) {
 
-      this.BG1 = '#263633';
-      this.BG2 = '#2D403B';
-      this.BG3 = '#334741';
-      this.BG4 = '#3A4D47';
-      this.BG5 = '#40534C';
+      this.BG1 = '#2C302B';
+      this.BG2 = '#30332E';
+      this.BG3 = '#3A3D37';
+      this.BG4 = '#3E403A';
+      this.BG5 = '#464841';
 
-      this.BR2 = '#3A4D47';
-      this.BR3 = '#40534C';
-      this.BR4 = '#475A53';
-      this.BR5 = '#4E625A';
+      this.BR1 = '#3A3D37';
+      this.BR2 = '#3F423B';
+      this.BR3 = '#454841';
+      this.BR4 = '#4E524B';
+      this.BR5 = '#5A5F56';
 
 
       this.Primary1       = '#6FBF8F';
@@ -328,6 +329,24 @@ export class ThemeService {
       this.PrimarySoft1   = '#244535';
       this.PrimaryText1   = '#10251A';
       this.PrimaryBorder1 = '#4F9B70';
+
+      // --------------------------------------------------------
+      // ✅ SUCCESS
+      // --------------------------------------------------------
+      this.Success = '#22C55E';
+      this.SuccessHover = '#16A34A';
+      this.SuccessSoft = 'rgba(34, 197, 94, 0.12)';
+      this.SuccessBorder = '#15803D';
+
+      // --------------------------------------------------------
+      // ❌ ERROR
+      // --------------------------------------------------------
+      this.Error = '#EF4444';
+      this.ErrorHover = '#DC2626';
+      this.ErrorSoft = 'rgba(239, 68, 68, 0.12)';
+      this.ErrorBorder = '#B91C1C';
+
+
 
 
 
@@ -518,16 +537,17 @@ export class ThemeService {
 
 
     this.BG1 = '#F3F1E8';
-    this.BG2 = '#D8D8C8';
-    this.BG3 = '#C4C8B8';
-    this.BG4 = '#AEB6A5';
-    this.BG5 = '#969F8E';
+    this.BG2 = '#E8E6DC';
+    this.BG3 = '#DEDCD2';
+    this.BG4 = '#D4D2C8';
+    this.BG5 = '#CAC8BE';
 
    
-    this.BR2 = '#C4C8B8';
-    this.BR3 = '#AEB6A5';
-    this.BR4 = '#969F8E';
-    this.BR5 = '#858F7D';
+    this.BR1 = '#DAD7C9';
+    this.BR2 = '#CFCBB9';
+    this.BR3 = '#DAD7C9';
+    this.BR4 = '#C8C5B5';
+    this.BR5 = '#B6B4AA';
 
 
     this.Primary1 = '#2F6B4F';
@@ -536,6 +556,37 @@ export class ThemeService {
     this.PrimarySoft1 = '#DCE9DF';
     this.PrimaryText1 = '#FFFFFF';
     this.PrimaryBorder1 = '#24563F';
+    
+
+    // ----------------------------------------------------------
+    // ✅ SUCCESS
+    // ----------------------------------------------------------
+
+    this.Success = '#16A34A';
+    this.SuccessHover = '#15803D';
+    this.SuccessSoft = 'rgba(22, 163, 74, 0.10)';
+    this.SuccessBorder = '#15803D';
+
+
+    // ----------------------------------------------------------
+    // ⚠️ WARNING
+    // ----------------------------------------------------------
+
+    this.Warning = '#D97706';
+    this.WarningHover = '#B45309';
+    this.WarningSoft = 'rgba(217, 119, 6, 0.10)';
+    this.WarningBorder = '#B45309';
+
+
+    // ----------------------------------------------------------
+    // ❌ ERROR
+    // ----------------------------------------------------------
+
+    this.Error = '#DC2626';
+    this.ErrorHover = '#B91C1C';
+    this.ErrorSoft = 'rgba(220, 38, 38, 0.10)';
+    this.ErrorBorder = '#B91C1C';
+
 
 
 
@@ -628,35 +679,7 @@ export class ThemeService {
     this.TextOnSecondary = '#FFFFFF';
 
 
-    // ----------------------------------------------------------
-    // ✅ SUCCESS
-    // ----------------------------------------------------------
-
-    this.Success = '#16A34A';
-    this.SuccessHover = '#15803D';
-    this.SuccessSoft = 'rgba(22, 163, 74, 0.10)';
-    this.SuccessBorder = '#15803D';
-
-
-    // ----------------------------------------------------------
-    // ⚠️ WARNING
-    // ----------------------------------------------------------
-
-    this.Warning = '#D97706';
-    this.WarningHover = '#B45309';
-    this.WarningSoft = 'rgba(217, 119, 6, 0.10)';
-    this.WarningBorder = '#B45309';
-
-
-    // ----------------------------------------------------------
-    // ❌ ERROR
-    // ----------------------------------------------------------
-
-    this.Error = '#DC2626';
-    this.ErrorHover = '#B91C1C';
-    this.ErrorSoft = 'rgba(220, 38, 38, 0.10)';
-    this.ErrorBorder = '#B91C1C';
-
+    
 
     // ----------------------------------------------------------
     // ℹ️ INFO

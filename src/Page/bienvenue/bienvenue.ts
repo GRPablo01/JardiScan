@@ -56,7 +56,7 @@ export class Bienvenue implements OnInit {
 
   ngOnInit(): void {
     // 🧠 Titre de la page
-    this.titleService.setTitle('JardiScan | Bienvenue');
+    this.titleService.setTitle('Natureora | Bienvenue');
 
     // 👤 Vérification de la connexion utilisateur
     const utilisateurString = localStorage.getItem('utilisateur');

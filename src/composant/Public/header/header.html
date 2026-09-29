@@ -21,8 +21,7 @@
 
 ============================================================ -->
 
-<header
-  class="
+<header class="
     fixed
     top-0
     left-0
@@ -30,13 +29,11 @@
     w-full
     border-b
     backdrop-blur-2xl
-  "
-  [ngStyle]="{
-    'background': themeService.GlassBackground,
-    'border-color': themeService.Border1,
+  " [ngStyle]="{
+    'background': themeService.BG1,
+    'border-color': themeService.BR1,
     'box-shadow': themeService.BoxShadowSmall
-  }"
->
+  }">
 
   <!-- ==========================================================
   🌿 CONTENEUR PRINCIPAL
@@ -50,8 +47,7 @@
   • Bouton bienvenue à droite
   =========================================================== -->
 
-  <div
-    class="
+  <div class="
       relative
       flex
       min-h-[72px]
@@ -63,11 +59,10 @@
       lg:px-6
       xl:px-8
       2xl:px-10
-    "
-  >
+    ">
 
 
-<!-- ========================================================
+    <!-- ========================================================
 🌿 ZONE GAUCHE
 
 • Toujours à gauche
@@ -77,24 +72,19 @@
 • app-liste-icon juste à côté
 ========================================================= -->
 
-<div
-  class="
+    <div class="
     flex
     shrink-0
     items-center
     gap-2
     sm:gap-3
-  "
->
+  ">
 
-  <!-- ======================================================
+      <!-- ======================================================
   🌿 LOGO JARDISCAN
   ======================================================= -->
 
-  <a
-    routerLink="/accueil"
-    aria-label="JardiScan - Accueil de présentation"
-    class="
+      <a routerLink="/accueil" aria-label="JardiScan - Accueil de présentation" class="
       group
       flex
       shrink-0
@@ -104,19 +94,13 @@
       outline-none
       transition-all
       duration-300
-    "
-    [ngStyle]="{
-      'color': themeService.TextPrincipal,
-      '--tw-ring-color': themeService.Primary
-    }"
-  >
+    ">
 
-    <!-- ==================================================
+        <!-- ==================================================
     🖼️ CONTENEUR DU LOGO
     =================================================== -->
 
-    <div
-      class="
+        <div class="
         relative
         flex
         h-10
@@ -126,7 +110,6 @@
         justify-center
         overflow-hidden
         rounded-2xl
-        border
         transition-all
         duration-300
         group-hover:scale-105
@@ -135,37 +118,26 @@
         sm:w-11
         lg:h-12
         lg:w-12
-      "
-      [ngStyle]="{
-        'background': themeService.PrimarySoft,
-        'border-color': themeService.BorderPrimary
-      }"
-    >
+      ">
 
-      <!-- =================================================
+          <!-- =================================================
       🖼️ LOGO
       ================================================== -->
 
-      <img
-        src="assets/Logo.svg"
-        alt="Logo JardiScan"
-        class="
+          <img src="assets/Logo.svg" alt="Logo JardiScan" class="
           relative
           z-10
           h-full
           w-full
           object-contain
           p-1
-        "
-      />
+        " />
 
-      <!-- =================================================
+          <!-- =================================================
       ✨ EFFET LUMINEUX
       ================================================== -->
 
-      <span
-        aria-hidden="true"
-        class="
+          <span aria-hidden="true" class="
           pointer-events-none
           absolute
           inset-0
@@ -176,61 +148,52 @@
           transition-transform
           duration-500
           group-hover:translate-x-[150%]
-        "
-      ></span>
+        "></span>
 
-    </div>
+        </div>
 
-    <!-- ==================================================
+        <!-- ==================================================
     🌿 NOM DE L'APPLICATION
     =================================================== -->
 
-    <div
-      class="
+        <div class="
         hidden
         min-w-0
         flex-col
         leading-none
         sm:flex
-      "
-    >
+      ">
 
-      <p
-        class="
+          <p class="
           truncate
           text-lg
           font-black
           tracking-tight
           sm:text-xl
-        "
-        [ngStyle]="{
+        " [ngStyle]="{
           'color': themeService.TextPrincipal
-        }"
-      >
-        JardiScan
-      </p>
+        }">
+            Natureora
+          </p>
 
-      <span
-        class="
+          <span class="
           mt-1
           truncate
           text-[10px]
           font-semibold
           uppercase
           tracking-[0.18em]
-        "
-        [ngStyle]="{
+        " [ngStyle]="{
           'color': themeService.TextTertiaire
-        }"
-      >
-        Jardin intelligent
-      </span>
+        }">
+            Conseil intelligent
+          </span>
 
-    </div>
+        </div>
 
-  </a>
+      </a>
 
-  <!-- ======================================================
+      <!-- ======================================================
   🌿 LISTE DES ICÔNES
 
   • Directement à côté du logo
@@ -238,19 +201,17 @@
   • Aucun changement du composant
   ======================================================= -->
 
-  <div
-    class="
+      <div class="
       flex
       shrink-0
       items-center
-    "
-  >
-    <app-liste-icon></app-liste-icon>
-  </div>
+    ">
+        <app-liste-icon></app-liste-icon>
+      </div>
 
-</div>
+    </div>
 
-<!-- ========================================================
+    <!-- ========================================================
 🖥️ NAVIGATION DESKTOP
 
 • À partir de 1293px
@@ -260,8 +221,7 @@
 • Ne touche jamais directement les bords
 ========================================================= -->
 
-<div
-  class="
+    <div class="
     absolute
     left-1/2
     top-1/2
@@ -269,18 +229,17 @@
     -translate-x-1/2
     -translate-y-1/2
     min-[1293px]:block
-  "
->
+  ">
 
-  <!-- ====================================================
+      <!-- ====================================================
   🌿 NAVIGATION PUBLIQUE
   ===================================================== -->
 
-  <app-nav></app-nav>
+      <app-nav></app-nav>
 
-</div>
+    </div>
 
-<!-- ========================================================
+    <!-- ========================================================
 👤 BOUTON BIENVENUE
 
 • Toujours à droite
@@ -289,16 +248,14 @@
 • Indépendant de la navigation
 ========================================================= -->
 
-<div
-  class="
+    <div class="
     ml-auto
     flex
     shrink-0
     items-center
-  "
->
-  <app-profil></app-profil>
-</div>
+  ">
+      <app-profil></app-profil>
+    </div>
 
 
   </div>
@@ -319,16 +276,14 @@
 
 ============================================================ -->
 
-<div
-  class="
+<div class="
     hidden
     w-full
     min-[390px]:block
     min-[1293px]:hidden
     pt-[72px]
-  "
->
+  ">
 
-<app-nav></app-nav>
+  <app-nav></app-nav>
 
 </div>

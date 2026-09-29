@@ -1,6 +1,6 @@
 <!-- ============================================================
-     🌿 JARDISCAN — POURQUOI JARDISCAN
-     
+     🌿 NATUREORA — POURQUOI NATUREORA
+
      • FR / EN avec LanguageService
      • ThemeService conservé
      • Images visibles uniquement sur desktop
@@ -11,6 +11,7 @@
      • UI / UX premium
      • Animations d'entrée
      • Aucun changement de logique Angular
+     • Aucun système de scan / caméra
 ============================================================ -->
 
 <section
@@ -52,7 +53,8 @@
       overflow-hidden
       z-0
       pointer-events-none
-      jwhy-side-image
+      natureora-side-image
+      natureora-side-left
     "
   >
     <img
@@ -68,7 +70,6 @@
       "
     />
   </div>
-
 
   <!-- ========================================================
        CONTENU CENTRAL
@@ -93,608 +94,657 @@
     "
   >
 
-    <div
+
+<div
+  class="
+    natureora-content
+    relative
+    w-full
+    max-w-[1100px]
+    flex
+    flex-col
+    items-center
+    justify-center
+    text-center
+  "
+>
+
+  <!-- ====================================================
+       PETIT BADGE
+  ===================================================== -->
+
+  <div
+    class="
+      natureora-reveal
+      inline-flex
+      items-center
+      gap-2.5
+      rounded-full
+      border
+      px-4
+      py-2
+      text-[11px]
+      sm:text-xs
+      font-bold
+      uppercase
+      tracking-[0.16em]
+      backdrop-blur-md
+    "
+    [ngStyle]="{
+      'border-color': themeService.BG2,
+      'background-color': themeService.BG2,
+      'color': themeService.TextPrincipal,
+      'animation-delay': '0.05s'
+    }"
+  >
+
+    <span
       class="
-        jwhy-content
-        relative
-        w-full
-        max-w-[1100px]
         flex
-        flex-col
+        h-6
+        w-6
         items-center
         justify-center
-        text-center
+        rounded-full
       "
+      [ngStyle]="{
+        'color': themeService.Primary1
+      }"
+    >
+      <i class="fa-solid fa-seedling"></i>
+    </span>
+
+    <span>
+      {{
+        languageService.is('fr')
+          ? 'Pourquoi Natureora'
+          : 'Why Natureora'
+      }}
+    </span>
+
+  </div>
+
+
+  <!-- ====================================================
+       TITRE
+  ===================================================== -->
+
+  <h2
+    id="pourquoi-natureora-title"
+    class="
+      natureora-reveal
+      mt-6
+      sm:mt-7
+      m-0
+      max-w-5xl
+      text-4xl
+      sm:text-5xl
+      md:text-6xl
+      lg:text-7xl
+      xl:text-8xl
+      font-extrabold
+      leading-[0.95]
+      tracking-[-0.045em]
+    "
+    [ngStyle]="{
+      'color': themeService.TextPrincipal,
+      'animation-delay': '0.12s'
+    }"
+  >
+
+    {{
+      languageService.is('fr')
+        ? 'Pourquoi'
+        : 'Why'
+    }}
+
+    <span
+      class="
+        relative
+        inline-block
+        ml-1
+        sm:ml-2
+      "
+      [ngStyle]="{
+        'color': themeService.Primary1
+      }"
     >
 
-      <!-- ====================================================
-           PETIT BADGE
-      ===================================================== -->
+      Natureora ?
 
-      <div
+      <!-- Soulignement animé -->
+
+      <span
         class="
-          jwhy-reveal
-          inline-flex
-          items-center
-          gap-2.5
+          absolute
+          -bottom-2
+          sm:-bottom-3
+          left-0
+          h-[4px]
+          sm:h-[5px]
+          w-full
+          origin-left
           rounded-full
-          border
-          px-4
-          py-2
-          text-[11px]
-          sm:text-xs
-          font-bold
-          uppercase
-          tracking-[0.16em]
-          backdrop-blur-md
         "
         [ngStyle]="{
-          'border-color': themeService.BG2,
-          'background-color': themeService.BG2,
-          'color': themeService.TextPrincipal,
-          'animation-delay': '0.05s'
+          'background-color': themeService.Primary1,
+          'animation': 'natureoraUnderline 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both'
         }"
-      >
-        <span
-          class="
-            flex
-            h-6
-            w-6
-            items-center
-            justify-center
-            rounded-full
-          "
-          [ngStyle]="{
-            'color': themeService.Primary1
-          }"
-        >
-          <i class="fa-solid fa-circle-question"></i>
-        </span>
+      ></span>
 
-        <span>
-          {{
-            languageService.is('fr')
-              ? 'Pourquoi JardiScan'
-              : 'Why JardiScan'
-          }}
-        </span>
-      </div>
+    </span>
+
+  </h2>
 
 
-      <!-- ====================================================
-           TITRE
-      ===================================================== -->
+  <!-- ====================================================
+       SOUS-TITRE
+  ===================================================== -->
 
-      <h2
-        id="pourquoi-title"
+  <p
+    class="
+      natureora-reveal
+      mt-6
+      sm:mt-7
+      max-w-3xl
+      text-sm
+      sm:text-base
+      lg:text-lg
+      leading-7
+      sm:leading-8
+    "
+    [ngStyle]="{
+      'color': themeService.TextSecondaire,
+      'animation-delay': '0.2s'
+    }"
+  >
+
+    {{
+      languageService.is('fr')
+        ? 'Une solution pensée pour vous accompagner et vous aider à mieux comprendre votre jardin, au quotidien.'
+        : 'A solution designed to support you and help you better understand your garden, every day.'
+    }}
+
+  </p>
+
+
+  <!-- ====================================================
+       DESCRIPTION
+  ===================================================== -->
+
+  <div
+    class="
+      natureora-description
+      mt-8
+      sm:mt-10
+      lg:mt-11
+      w-full
+      max-w-4xl
+      space-y-5
+      sm:space-y-6
+      text-sm
+      sm:text-base
+      lg:text-lg
+      xl:text-xl
+      leading-7
+      sm:leading-8
+      lg:leading-9
+    "
+  >
+
+    <!-- ==================================================
+         PARAGRAPHE 1
+    =================================================== -->
+
+    <p
+      class="
+        natureora-reveal
+        m-0
+        flex
+        items-start
+        justify-center
+        gap-2
+        sm:gap-3
+      "
+      [ngStyle]="{
+        'color': themeService.TextPrincipal,
+        'animation-delay': '0.28s'
+      }"
+    >
+
+      <i
         class="
-          jwhy-reveal
-          mt-6
-          sm:mt-7
-          m-0
-          max-w-5xl
-          text-4xl
-          sm:text-5xl
-          md:text-6xl
-          lg:text-7xl
-          xl:text-8xl
-          font-extrabold
-          leading-[0.95]
-          tracking-[-0.045em]
+          fa-solid
+          fa-lightbulb
+          mt-1
+          shrink-0
+          text-lg
+          sm:text-xl
         "
         [ngStyle]="{
-          'color': themeService.TextPrincipal,
-          'animation-delay': '0.12s'
+          'color': themeService.Primary1
         }"
-      >
+        aria-hidden="true"
+      ></i>
 
-        {{
-          languageService.is('fr')
-            ? 'Pourquoi'
-            : 'Why'
-        }}
+      <span>
 
-        <span
-          class="
-            relative
-            inline-block
-            ml-1
-            sm:ml-2
-          "
-          [ngStyle]="{
-            'color': themeService.Primary1
-          }"
+        <ng-container
+          *ngIf="languageService.is('fr'); else natureoraParagraphOneEn"
         >
 
-          JardiScan ?
-
-          <!-- Soulignement animé -->
+          Natureora est une application pensée pour
 
           <span
-            class="
-              absolute
-              -bottom-2
-              sm:-bottom-3
-              left-0
-              h-[4px]
-              sm:h-[5px]
-              w-full
-              origin-left
-              rounded-full
-            "
-            [ngStyle]="{
-              'background-color': themeService.Primary1,
-              'animation': 'jwhyUnderline 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both'
-            }"
-          ></span>
-
-        </span>
-
-      </h2>
-
-
-      <!-- ====================================================
-           SOUS-TITRE
-      ===================================================== -->
-
-      <p
-        class="
-          jwhy-reveal
-          mt-6
-          sm:mt-7
-          max-w-3xl
-          text-sm
-          sm:text-base
-          lg:text-lg
-          leading-7
-          sm:leading-8
-        "
-        [ngStyle]="{
-          'color': themeService.TextSecondaire,
-          'animation-delay': '0.2s'
-        }"
-      >
-        {{
-          languageService.is('fr')
-            ? 'Une solution pensée pour vous aider à mieux comprendre vos plantes, au quotidien.'
-            : 'A solution designed to help you better understand your plants, every day.'
-        }}
-      </p>
-
-
-      <!-- ====================================================
-           DESCRIPTION
-      ===================================================== -->
-
-      <div
-        class="
-          jwhy-description
-          mt-8
-          sm:mt-10
-          lg:mt-11
-          w-full
-          max-w-4xl
-          space-y-5
-          sm:space-y-6
-          text-sm
-          sm:text-base
-          lg:text-lg
-          xl:text-xl
-          leading-7
-          sm:leading-8
-          lg:leading-9
-        "
-      >
-
-        <!-- ==================================================
-             PARAGRAPHE 1
-        =================================================== -->
-
-        <p
-          class="
-            jwhy-reveal
-            m-0
-            flex
-            items-start
-            justify-center
-            gap-2
-            sm:gap-3
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal,
-            'animation-delay': '0.28s'
-          }"
-        >
-
-          <i
-            class="
-              fa-solid
-              fa-camera
-              mt-1
-              shrink-0
-              text-lg
-              sm:text-xl
-            "
+            class="font-bold"
             [ngStyle]="{
               'color': themeService.Primary1
             }"
-            aria-hidden="true"
-          ></i>
-
-          <span>
-            <ng-container *ngIf="languageService.is('fr'); else whyParagraphOneEn">
-
-              JardiScan est une application qui vous permet de
-              <span
-                class="font-bold"
-                [ngStyle]="{
-                  'color': themeService.Primary1
-                }"
-              >
-                scanner vos plantes et de les comprendre en un instant.
-              </span>
-
-              Il vous suffit de prendre une photo pour obtenir des informations
-              claires sur l'espèce, ses besoins et les bons gestes à adopter
-              au quotidien.
-
-            </ng-container>
-
-            <ng-template #whyParagraphOneEn>
-
-              JardiScan is an application that lets you
-              <span
-                class="font-bold"
-                [ngStyle]="{
-                  'color': themeService.Primary1
-                }"
-              >
-                scan your plants and understand them in an instant.
-              </span>
-
-              Simply take a photo to get clear information about the species,
-              its needs, and the right actions to take every day.
-
-            </ng-template>
+          >
+            vous donner les bons conseils au bon moment.
           </span>
 
-        </p>
+          Que vous souhaitiez comprendre une plante, découvrir ses besoins
+          ou apprendre les bons gestes, vous trouvez des informations
+          simples et accessibles.
 
+        </ng-container>
 
-        <!-- ==================================================
-             PARAGRAPHE 2
-        =================================================== -->
+        <ng-template #natureoraParagraphOneEn>
 
-        <p
-          class="
-            jwhy-reveal
-            m-0
-            flex
-            items-start
-            justify-center
-            gap-2
-            sm:gap-3
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal,
-            'animation-delay': '0.36s'
-          }"
-        >
+          Natureora is an application designed to
 
-          <i
-            class="
-              fa-solid
-              fa-droplet
-              mt-1
-              shrink-0
-              text-lg
-              sm:text-xl
-            "
+          <span
+            class="font-bold"
             [ngStyle]="{
               'color': themeService.Primary1
             }"
-            aria-hidden="true"
-          ></i>
-
-          <span>
-            <ng-container *ngIf="languageService.is('fr'); else whyParagraphTwoEn">
-
-              Nous savons qu'il n'est pas toujours facile de savoir quand arroser,
-              tailler ou soigner une plante. C'est pourquoi JardiScan vous
-              accompagne avec des conseils simples et adaptés, directement
-              accessibles depuis votre poche.
-
-            </ng-container>
-
-            <ng-template #whyParagraphTwoEn>
-
-              We know that it is not always easy to know when to water,
-              prune, or care for a plant. That's why JardiScan supports you
-              with simple and personalized advice, always available
-              right from your pocket.
-
-            </ng-template>
+          >
+            give you the right advice at the right time.
           </span>
 
-        </p>
+          Whether you want to understand a plant, discover its needs,
+          or learn the right gardening habits, you get clear and
+          accessible information.
+
+        </ng-template>
+
+      </span>
+
+    </p>
 
 
-        <!-- ==================================================
-             PARAGRAPHE 3
-        =================================================== -->
+    <!-- ==================================================
+         PARAGRAPHE 2
+    =================================================== -->
 
-        <p
-          class="
-            jwhy-reveal
-            m-0
-            flex
-            items-start
-            justify-center
-            gap-2
-            sm:gap-3
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal,
-            'animation-delay': '0.44s'
-          }"
+    <p
+      class="
+        natureora-reveal
+        m-0
+        flex
+        items-start
+        justify-center
+        gap-2
+        sm:gap-3
+      "
+      [ngStyle]="{
+        'color': themeService.TextPrincipal,
+        'animation-delay': '0.36s'
+      }"
+    >
+
+      <i
+        class="
+          fa-solid
+          fa-book-open
+          mt-1
+          shrink-0
+          text-lg
+          sm:text-xl
+        "
+        [ngStyle]="{
+          'color': themeService.Primary1
+        }"
+        aria-hidden="true"
+      ></i>
+
+      <span>
+
+        <ng-container
+          *ngIf="languageService.is('fr'); else natureoraParagraphTwoEn"
         >
 
-          <i
-            class="
-              fa-solid
-              fa-leaf
-              mt-1
-              shrink-0
-              text-lg
-              sm:text-xl
-            "
+          Il n'est pas toujours évident de savoir comment prendre soin
+          d'une plante ou de comprendre ce dont elle a réellement besoin.
+          Natureora rassemble des
+
+          <span
+            class="font-bold"
             [ngStyle]="{
               'color': themeService.Primary1
             }"
-            aria-hidden="true"
-          ></i>
-
-          <span>
-
-            <ng-container *ngIf="languageService.is('fr'); else whyParagraphThreeEn">
-
-              Que vous soyez
-              <span
-                class="font-bold"
-                [ngStyle]="{
-                  'color': themeService.Primary1
-                }"
-              >
-                jardinier débutant ou passionné,
-              </span>
-
-              JardiScan vous aide à prendre soin de votre environnement végétal
-              avec des outils rapides, intuitifs et motivants pour faire
-              prospérer chacune de vos plantes.
-
-            </ng-container>
-
-            <ng-template #whyParagraphThreeEn>
-
-              Whether you are a
-              <span
-                class="font-bold"
-                [ngStyle]="{
-                  'color': themeService.Primary
-                }"
-              >
-                beginner or passionate gardener,
-              </span>
-
-              JardiScan helps you take care of your plants with fast,
-              intuitive, and motivating tools designed to help
-              every plant thrive.
-
-            </ng-template>
-
+          >
+            conseils pratiques, des explications claires et des informations utiles
           </span>
 
-        </p>
+          pour vous aider à faire les bons choix au quotidien.
 
-      </div>
+        </ng-container>
+
+        <ng-template #natureoraParagraphTwoEn>
+
+          It is not always easy to know how to care for a plant or
+          understand what it really needs. Natureora brings together
+
+          <span
+            class="font-bold"
+            [ngStyle]="{
+              'color': themeService.Primary1
+            }"
+          >
+            practical advice, clear explanations, and useful information
+          </span>
+
+          to help you make the right choices every day.
+
+        </ng-template>
+
+      </span>
+
+    </p>
 
 
-      <!-- ====================================================
-           BADGE FINAL
-      ===================================================== -->
+    <!-- ==================================================
+         PARAGRAPHE 3
+    =================================================== -->
 
-      <div
+    <p
+      class="
+        natureora-reveal
+        m-0
+        flex
+        items-start
+        justify-center
+        gap-2
+        sm:gap-3
+      "
+      [ngStyle]="{
+        'color': themeService.TextPrincipal,
+        'animation-delay': '0.44s'
+      }"
+    >
+
+      <i
         class="
-          jwhy-reveal
-          mt-8
-          sm:mt-10
-          inline-flex
-          max-w-full
-          items-center
-          justify-center
-          gap-3
-          rounded-full
-          border
-          px-5
-          sm:px-6
-          py-3
-          font-semibold
-          text-xs
-          sm:text-sm
-          lg:text-base
-          backdrop-blur-md
+          fa-solid
+          fa-leaf
+          mt-1
+          shrink-0
+          text-lg
+          sm:text-xl
         "
         [ngStyle]="{
-          'border-color': themeService.BG2,
-          'color': themeService.TextPrincipal,
-          'background-color': themeService.BG2,
-          'animation-delay': '0.52s'
+          'color': themeService.Primary1
         }"
-      >
+        aria-hidden="true"
+      ></i>
 
-        <span
-          class="
-            inline-block
-            h-2
-            w-2
-            shrink-0
-            animate-pulse
-            rounded-full
-          "
-          [ngStyle]="{
-            'background-color': themeService.Primary1
-          }"
-        ></span>
+      <span>
 
-        <span>
-          {{
-            languageService.is('fr')
-              ? 'Scanner · Comprendre · Faire prospérer'
-              : 'Scan · Understand · Help thrive'
-          }}
-        </span>
+        <ng-container
+          *ngIf="languageService.is('fr'); else natureoraParagraphThreeEn"
+        >
 
-      </div>
+          Que vous soyez
+
+          <span
+            class="font-bold"
+            [ngStyle]="{
+              'color': themeService.Primary1
+            }"
+          >
+            débutant ou passionné de jardinage,
+          </span>
+
+          Natureora vous accompagne avec une expérience simple,
+          intuitive et agréable pour mieux connaître vos plantes,
+          progresser et faire grandir votre jardin.
+
+        </ng-container>
+
+        <ng-template #natureoraParagraphThreeEn>
+
+          Whether you are a
+
+          <span
+            class="font-bold"
+            [ngStyle]="{
+              'color': themeService.Primary1
+            }"
+          >
+            beginner or passionate gardener,
+          </span>
+
+          Natureora supports you with a simple, intuitive, and enjoyable
+          experience to better understand your plants, improve your skills,
+          and help your garden grow.
+
+        </ng-template>
+
+      </span>
+
+    </p>
+
+  </div>
 
 
-      <!-- ====================================================
-           MINI INDICATEURS
-      ===================================================== -->
+  <!-- ====================================================
+       BADGE FINAL
+  ===================================================== -->
 
-      <div
-        class="
-          jwhy-reveal
-          mt-7
-          flex
-          flex-wrap
-          items-center
-          justify-center
-          gap-3
-          sm:gap-4
-        "
+  <div
+    class="
+      natureora-reveal
+      mt-8
+      sm:mt-10
+      inline-flex
+      max-w-full
+      items-center
+      justify-center
+      gap-3
+      rounded-full
+      border
+      px-5
+      sm:px-6
+      py-3
+      font-semibold
+      text-xs
+      sm:text-sm
+      lg:text-base
+      backdrop-blur-md
+    "
+    [ngStyle]="{
+      'border-color': themeService.BG2,
+      'color': themeService.TextPrincipal,
+      'background-color': themeService.BG2,
+      'animation-delay': '0.52s'
+    }"
+  >
+
+    <span
+      class="
+        inline-block
+        h-2
+        w-2
+        shrink-0
+        animate-pulse
+        rounded-full
+      "
+      [ngStyle]="{
+        'background-color': themeService.Primary1
+      }"
+    ></span>
+
+    <span>
+      {{
+        languageService.is('fr')
+          ? 'Découvrir · Comprendre · Cultiver'
+          : 'Discover · Understand · Grow'
+      }}
+    </span>
+
+  </div>
+
+
+  <!-- ====================================================
+       MINI INDICATEURS
+  ===================================================== -->
+
+  <div
+    class="
+      natureora-reveal
+      mt-7
+      flex
+      flex-wrap
+      items-center
+      justify-center
+      gap-3
+      sm:gap-4
+    "
+    [ngStyle]="{
+      'animation-delay': '0.6s'
+    }"
+  >
+
+    <!-- ==================================================
+         CONSEILS
+    =================================================== -->
+
+    <div
+      class="
+        inline-flex
+        items-center
+        gap-2
+        rounded-full
+        border
+        px-3.5
+        py-2
+        text-[11px]
+        sm:text-xs
+        font-medium
+        backdrop-blur-md
+      "
+      [ngStyle]="{
+        'border-color': themeService.BG2,
+        'color': themeService.TextPrincipal,
+        'background-color': themeService.BG2
+      }"
+    >
+
+      <i
+        class="fa-solid fa-lightbulb"
         [ngStyle]="{
-          'animation-delay': '0.6s'
+          'color': themeService.Primary1
         }"
-      >
+      ></i>
 
-        <!-- Identifier -->
+      {{
+        languageService.is('fr')
+          ? 'Conseils'
+          : 'Advice'
+      }}
 
-        <div
-          class="
-            inline-flex
-            items-center
-            gap-2
-            rounded-full
-            border
-            px-3.5
-            py-2
-            text-[11px]
-            sm:text-xs
-            font-medium
-            backdrop-blur-md
-          "
-          [ngStyle]="{
-          'border-color': themeService.BG2,
-          'color': themeService.TextPrincipal,
-          'background-color': themeService.BG2,
-          }"
-        >
-          <i
-            class="fa-solid fa-camera"
-            [ngStyle]="{
-              'color': themeService.Primary1
-            }"
-          ></i>
-
-          {{
-            languageService.is('fr')
-              ? 'Identifier'
-              : 'Identify'
-          }}
-        </div>
+    </div>
 
 
-        <!-- Comprendre -->
+    <!-- ==================================================
+         COMPRENDRE
+    =================================================== -->
 
-        <div
-          class="
-            inline-flex
-            items-center
-            gap-2
-            rounded-full
-            border
-            px-3.5
-            py-2
-            text-[11px]
-            sm:text-xs
-            font-medium
-            backdrop-blur-md
-          "
-          [ngStyle]="{
-          'border-color': themeService.BG2,
-          'color': themeService.TextPrincipal,
-          'background-color': themeService.BG2,
-          }"
-        >
-        
-          <i
-            class="fa-solid fa-lightbulb"
-            [ngStyle]="{
-              'color': themeService.Primary1
-            }"
-          ></i>
+    <div
+      class="
+        inline-flex
+        items-center
+        gap-2
+        rounded-full
+        border
+        px-3.5
+        py-2
+        text-[11px]
+        sm:text-xs
+        font-medium
+        backdrop-blur-md
+      "
+      [ngStyle]="{
+        'border-color': themeService.BG2,
+        'color': themeService.TextPrincipal,
+        'background-color': themeService.BG2
+      }"
+    >
 
-          {{
-            languageService.is('fr')
-              ? 'Comprendre'
-              : 'Understand'
-          }}
-        </div>
+      <i
+        class="fa-solid fa-book-open"
+        [ngStyle]="{
+          'color': themeService.Primary1
+        }"
+      ></i>
+
+      {{
+        languageService.is('fr')
+          ? 'Comprendre'
+          : 'Understand'
+      }}
+
+    </div>
 
 
-        <!-- Entretenir -->
+    <!-- ==================================================
+         CULTIVER
+    =================================================== -->
 
-        <div
-          class="
-            inline-flex
-            items-center
-            gap-2
-            rounded-full
-            border
-            px-3.5
-            py-2
-            text-[11px]
-            sm:text-xs
-            font-medium
-            backdrop-blur-md
-          "
-          [ngStyle]="{
-          'border-color': themeService.BG2,
-          'color': themeService.TextPrincipal,
-          'background-color': themeService.BG2,
-          }"
-        >
-        
-          <i
-            class="fa-solid fa-seedling"
-            [ngStyle]="{
-              'color': themeService.Primary1
-            }"
-          ></i>
+    <div
+      class="
+        inline-flex
+        items-center
+        gap-2
+        rounded-full
+        border
+        px-3.5
+        py-2
+        text-[11px]
+        sm:text-xs
+        font-medium
+        backdrop-blur-md
+      "
+      [ngStyle]="{
+        'border-color': themeService.BG2,
+        'color': themeService.TextPrincipal,
+        'background-color': themeService.BG2
+      }"
+    >
 
-          {{
-            languageService.is('fr')
-              ? 'Faire prospérer'
-              : 'Help thrive'
-          }}
-        </div>
+      <i
+        class="fa-solid fa-seedling"
+        [ngStyle]="{
+          'color': themeService.Primary1
+        }"
+      ></i>
 
-      </div>
+      {{
+        languageService.is('fr')
+          ? 'Cultiver'
+          : 'Grow'
+      }}
 
     </div>
 
   </div>
 
+</div>
+
+
+  </div>
 
   <!-- ========================================================
        IMAGE DROITE
@@ -716,27 +766,29 @@
       overflow-hidden
       z-0
       pointer-events-none
-      jwhy-side-image
+      natureora-side-image
+      natureora-side-right
     "
   >
 
-    <img
-      src="assets/ImageFonctionnaliteDroite.svg"
-      alt=""
-      aria-hidden="true"
-      class="
-        block
-        w-full
-        h-full
-        object-contain
-        object-right
-      "
-    />
+
+<img
+  src="assets/ImageFonctionnaliteDroite.svg"
+  alt=""
+  aria-hidden="true"
+  class="
+    block
+    w-full
+    h-full
+    object-contain
+    object-right
+  "
+/>
+
 
   </div>
 
 </section>
-
 
 <!-- ============================================================
      🎬 ANIMATIONS
@@ -744,7 +796,7 @@
 
 <style>
 
-  @keyframes jwhyUnderline {
+  @keyframes natureoraUnderline {
 
     0% {
       transform: scaleX(0);
@@ -759,7 +811,7 @@
   }
 
 
-  @keyframes jwhyFadeUp {
+  @keyframes natureoraFadeUp {
 
     0% {
       opacity: 0;
@@ -774,7 +826,7 @@
   }
 
 
-  @keyframes jwhySideLeft {
+  @keyframes natureoraSideLeft {
 
     0% {
       opacity: 0;
@@ -789,7 +841,7 @@
   }
 
 
-  @keyframes jwhySideRight {
+  @keyframes natureoraSideRight {
 
     0% {
       opacity: 0;
@@ -804,31 +856,56 @@
   }
 
 
-  .jwhy-reveal {
+  .natureora-reveal {
+
     opacity: 0;
-    animation: jwhyFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    animation:
+      natureoraFadeUp
+      0.75s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      forwards;
+
   }
 
 
-  .jwhy-side-image {
+  .natureora-side-image {
+
     animation-duration: 1s;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+
+    animation-timing-function:
+      cubic-bezier(0.22, 1, 0.36, 1);
+
     animation-fill-mode: both;
+
   }
 
 
-  .jwhy-side-image:first-child {
-    animation-name: jwhySideLeft;
+  .natureora-side-left {
+
+    animation-name: natureoraSideLeft;
+
+  }
+
+
+  .natureora-side-right {
+
+    animation-name: natureoraSideRight;
+
   }
 
 
   @media (prefers-reduced-motion: reduce) {
 
-    .jwhy-reveal,
-    .jwhy-side-image {
+    .natureora-reveal,
+    .natureora-side-image {
+
       animation: none !important;
+
       opacity: 1 !important;
+
       transform: none !important;
+
     }
 
   }
@@ -836,8 +913,10 @@
 
   @media (max-width: 1023px) {
 
-    .jwhy-content {
+    .natureora-content {
+
       max-width: 900px;
+
     }
 
   }
@@ -845,8 +924,10 @@
 
   @media (max-width: 640px) {
 
-    .jwhy-description p {
+    .natureora-description p {
+
       text-align: left;
+
     }
 
   }

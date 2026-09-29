@@ -43,17 +43,9 @@
     justify-center
     gap-1
     rounded-2xl
-    border
     px-1.5
     py-1.5
-    shadow-sm
   "
-  [ngStyle]="{
-    'background-color': themeService.Background2,
-    'border-color': themeService.Border2,
-    'box-shadow': themeService.BoxShadowSmall,
-    'color': themeService.TextPrincipal
-  }"
   [attr.aria-label]="
     languageService.currentLanguage === 'fr'
       ? 'Navigation principale JardiScan'
@@ -654,7 +646,7 @@
   [ngStyle]="{
     'background':
       'linear-gradient(to top, ' +
-      themeService.Background1 +
+      themeService.BG1 +
       ' 0%, transparent 100%)'
   }"
 >
@@ -688,8 +680,8 @@
       md:py-3
     "
     [ngStyle]="{
-      'background-color': themeService.Background2,
-      'border-color': themeService.Border2,
+      'background-color': themeService.BG2,
+      'border-color': themeService.BR2,
       'box-shadow':
         '0 18px 40px rgba(0,0,0,0.20), 0 4px 12px rgba(0,0,0,0.10)',
       'color': themeService.TextPrincipal
@@ -754,13 +746,13 @@
       [ngStyle]="{
         'background-color':
           diagnosticMobileActive.isActive
-            ? themeService.Primary
-            : themeService.Background3,
+            ? themeService.Primary1
+            : themeService.BG3,
 
         'border-color':
           diagnosticMobileActive.isActive
-            ? themeService.Primary
-            : themeService.Border2,
+            ? themeService.Primary1
+            : themeService.BR2,
 
         'color':
           diagnosticMobileActive.isActive
@@ -769,8 +761,8 @@
 
         'box-shadow': 'none',
 
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background2
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG2
       }"
     >
 
@@ -854,8 +846,8 @@
           group-hover:scale-100
         "
         [ngStyle]="{
-          'background-color': themeService.Background3,
-          'border-color': themeService.Border2,
+          'background-color': themeService.BG3,
+          'border-color': themeService.BR2,
           'color': themeService.TextPrincipal
         }"
         aria-hidden="true"
@@ -923,13 +915,13 @@
       [ngStyle]="{
         'background-color':
           rechercheMobileActive.isActive
-            ? themeService.Primary
-            : themeService.Background3,
+            ? themeService.Primary1
+            : themeService.BG3,
 
         'border-color':
           rechercheMobileActive.isActive
-            ? themeService.Primary
-            : themeService.Border2,
+            ? themeService.Primary1
+            : themeService.BR2,
 
         'color':
           rechercheMobileActive.isActive
@@ -938,8 +930,8 @@
 
         'box-shadow': 'none',
 
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background2
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG2
       }"
     >
 
@@ -978,7 +970,7 @@
           'background-color':
             rechercheMobileActive.isActive
               ? 'rgba(255,255,255,0.08)'
-              : themeService.PrimarySoft
+              : themeService.PrimarySoft1
         }"
         aria-hidden="true"
       ></span>
@@ -1023,8 +1015,8 @@
           group-hover:scale-100
         "
         [ngStyle]="{
-          'background-color': themeService.Background3,
-          'border-color': themeService.Border2,
+          'background-color': themeService.BG3,
+          'border-color': themeService.BR2,
           'color': themeService.TextPrincipal
         }"
         aria-hidden="true"
@@ -1092,13 +1084,13 @@
       [ngStyle]="{
         'background-color':
           assistantMobileActive.isActive
-            ? themeService.Primary
-            : themeService.Background3,
+            ? themeService.Primary1
+            : themeService.BG3,
 
         'border-color':
           assistantMobileActive.isActive
-            ? themeService.Primary
-            : themeService.Border2,
+            ? themeService.Primary1
+            : themeService.BR2,
 
         'color':
           assistantMobileActive.isActive
@@ -1107,8 +1099,8 @@
 
         'box-shadow': 'none',
 
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background2
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG2
       }"
     >
 
@@ -1147,7 +1139,7 @@
           'background-color':
             assistantMobileActive.isActive
               ? 'rgba(255,255,255,0.08)'
-              : themeService.PrimarySoft
+              : themeService.PrimarySoft1
         }"
         aria-hidden="true"
       ></span>
@@ -1192,8 +1184,8 @@
           group-hover:scale-100
         "
         [ngStyle]="{
-          'background-color': themeService.Background3,
-          'border-color': themeService.Border2,
+          'background-color': themeService.BG3,
+          'border-color': themeService.BR2,
           'color': themeService.TextPrincipal
         }"
         aria-hidden="true"
@@ -1257,13 +1249,13 @@
       [ngStyle]="{
         'background-color':
           saisonMobileActive.isActive
-            ? themeService.Primary
-            : themeService.Background3,
+            ? themeService.Primary1
+            : themeService.BG3,
 
         'border-color':
           saisonMobileActive.isActive
-            ? themeService.Primary
-            : themeService.Border2,
+            ? themeService.Primary1
+            : themeService.BR2,
 
         'color':
           saisonMobileActive.isActive
@@ -1272,8 +1264,8 @@
 
         'box-shadow': 'none',
 
-        '--tw-ring-color': themeService.Primary,
-        '--tw-ring-offset-color': themeService.Background2
+        '--tw-ring-color': themeService.Primary1,
+        '--tw-ring-offset-color': themeService.BG2
       }"
     >
 
@@ -1316,7 +1308,7 @@
           'background-color':
             saisonMobileActive.isActive
               ? 'rgba(255,255,255,0.08)'
-              : themeService.PrimarySoft
+              : themeService.PrimarySoft1
         }"
         aria-hidden="true"
       ></span>
@@ -1365,8 +1357,8 @@
           group-hover:scale-100
         "
         [ngStyle]="{
-          'background-color': themeService.Background3,
-          'border-color': themeService.Border2,
+          'background-color': themeService.BG3,
+          'border-color': themeService.BR2,
           'color': themeService.TextPrincipal
         }"
         aria-hidden="true"

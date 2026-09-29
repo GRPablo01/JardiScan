@@ -1,624 +1,549 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../../../../../Backend/Services/user.service';
 import { RouterLink } from '@angular/router';
-import { ThemeService } from '../../../../../Backend/Services/theme.service';
 
+import { UserService } from '../../../../../Backend/Services/user.service';
+import { ThemeService } from '../../../../../Backend/Services/theme.service';
 
 @Component({
   selector: 'app-reset-password',
-  standalone:true,
-  imports:[
+  standalone: true,
+  imports: [
     CommonModule,
     FormsModule,
     RouterLink
   ],
-  templateUrl:'./reset-password.html',
-  styleUrl:'./reset-password.css',
+  templateUrl: './reset-password.html',
+  styleUrl: './reset-password.css'
 })
 export class ResetPassword {
 
-
-
-  // ==============================
+  // ============================================================
   // 📧 EMAIL
-  // ==============================
+  // ============================================================
 
-  email:string = '';
-
-
+  email: string = '';
 
 
-  // ==============================
-  // 🔑 RESET KEY
-  // ==============================
+  // ============================================================
+  // 🔑 CLÉ DE RÉINITIALISATION
+  // ============================================================
 
-  resetPasswordKey:string = '';
-
-  showResetKey=false;
-
+  resetPasswordKey: string = '';
+  showResetKey: boolean = false;
 
 
-  // ==============================
-  // 🔐 PASSWORD
-  // ==============================
+  // ============================================================
+  // 🔐 MOT DE PASSE
+  // ============================================================
 
-  nouveauPassword:string='';
+  nouveauPassword: string = '';
+  confirmationPassword: string = '';
 
-  confirmationPassword:string='';
-
-
-  showPassword=false;
-
-  showConfirmPassword=false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
 
+  // ============================================================
+  // ⚙️ ÉTAT
+  // ============================================================
+
+  loading: boolean = false;
+  etape: number = 1;
 
 
-  // ==============================
-  // ⚙️ ETAT
-  // ==============================
+  // ============================================================
+  // 🔔 NOTIFICATION
+  // ============================================================
 
-  loading=false;
+  showNotification: boolean = false;
 
-  etape:number=1;
+  notificationType: 'success' | 'error' = 'success';
 
+  notificationMessage: string = '';
 
-  message='';
-
-  error='';
-
+  private notificationTimeout?: ReturnType<typeof setTimeout>;
 
 
-  // ==============================
-  // 🔔 TOAST
-  // ==============================
-
-  showSuccessToast=false;
-
-  showErrorToast=false;
-
-
-
-
+  // ============================================================
+  // CONSTRUCTEUR
+  // ============================================================
 
   constructor(
-    private userService:UserService,
-    public themeService:ThemeService
-  ){}
+    private userService: UserService,
+    public themeService: ThemeService
+  ) {}
 
 
+  // ============================================================
+  // 🔔 AFFICHER NOTIFICATION
+  // ============================================================
 
+  private showToast(
+    type: 'success' | 'error',
+    message: string
+  ): void {
 
+    if (this.notificationTimeout) {
+      clearTimeout(this.notificationTimeout);
+    }
 
-  // ======================================================
-  // 🔔 TOAST SUCCESS
-  // ======================================================
+    this.notificationType = type;
+    this.notificationMessage = message;
+    this.showNotification = true;
 
-  successToast(msg:string){
-
-
-    this.message=msg;
-
-    this.showSuccessToast=true;
-
-
-    setTimeout(()=>{
-
-      this.showSuccessToast=false;
-
-    },4000);
-
-
+    this.notificationTimeout = setTimeout(() => {
+      this.closeNotification();
+    }, 4000);
   }
 
 
+  // ============================================================
+  // ✅ NOTIFICATION SUCCESS
+  // ============================================================
 
-
-
-  // ======================================================
-  // 🔔 TOAST ERROR
-  // ======================================================
-
-  errorToast(msg:string){
-
-
-    this.error=msg;
-
-    this.showErrorToast=true;
-
-
-    setTimeout(()=>{
-
-      this.showErrorToast=false;
-
-    },4000);
-
-
+  successToast(message: string): void {
+    this.showToast('success', message);
   }
 
 
+  // ============================================================
+  // ❌ NOTIFICATION ERROR
+  // ============================================================
+
+  errorToast(message: string): void {
+    this.showToast('error', message);
+  }
 
 
+  // ============================================================
+  // ❌ FERMER NOTIFICATION
+  // ============================================================
+
+  closeNotification(): void {
+
+    this.showNotification = false;
+
+    if (this.notificationTimeout) {
+      clearTimeout(this.notificationTimeout);
+      this.notificationTimeout = undefined;
+    }
+  }
 
 
+  // ============================================================
+  // 📧 ÉTAPE 1
+  // ENVOYER LA CLÉ DE RÉINITIALISATION
+  // ============================================================
 
-  // ======================================================
-  // 📧 ETAPE 1
-  // ENVOYER CLE RESET
-  // ======================================================
+  envoyerLienReset(): void {
 
-  envoyerLienReset(){
+    if (this.loading) {
+      return;
+    }
 
-
-    this.message='';
-    this.error='';
+    this.clearNotifications();
 
 
+    // ----------------------------------------------------------
+    // VALIDATION EMAIL
+    // ----------------------------------------------------------
 
-    if(!this.email){
+    const email = this.email.trim();
 
+    if (!email) {
 
       this.errorToast(
-        "Veuillez entrer votre adresse mail"
+        'Veuillez entrer votre adresse e-mail'
       );
 
-
       return;
-
     }
 
 
+    // ----------------------------------------------------------
+    // VALIDATION FORMAT EMAIL
+    // ----------------------------------------------------------
+
+    const emailRegex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+
+      this.errorToast(
+        'Veuillez entrer une adresse e-mail valide'
+      );
+
+      return;
+    }
 
 
-    this.loading=true;
+    this.email = email;
+    this.loading = true;
 
 
-
-    console.log(
-      "📧 Recherche utilisateur :",
-      this.email
-    );
-
-
-
-
+    // ----------------------------------------------------------
+    // RECHERCHE UTILISATEUR
+    // ----------------------------------------------------------
 
     this.userService
-    .getUserByEmail(this.email)
+      .getUserByEmail(this.email)
+      .subscribe({
 
-    .subscribe({
+        next: () => {
 
+          // ----------------------------------------------------
+          // ENVOI DE LA CLÉ
+          // ----------------------------------------------------
 
+          this.userService
+            .sendResetPassword(this.email)
+            .subscribe({
 
-      next:(user)=>{
+              next: () => {
 
+                this.loading = false;
 
-        console.log(
-          "✅ Utilisateur trouvé :",
-          user
-        );
+                this.etape = 2;
 
+                this.successToast(
+                  'Une clé de réinitialisation a été envoyée à votre adresse e-mail'
+                );
+              },
 
+              error: () => {
 
+                this.loading = false;
 
-        this.userService
-        .sendResetPassword(this.email)
+                this.errorToast(
+                  'Une erreur est survenue pendant l’envoi de la clé'
+                );
+              }
 
-        .subscribe({
+            });
+        },
 
+        error: () => {
 
+          this.loading = false;
 
-          next:(response)=>{
+          this.errorToast(
+            'Aucun compte trouvé avec cette adresse e-mail'
+          );
+        }
 
-
-            console.log(
-              "📨 Mail envoyé :",
-              response
-            );
-
-
-            this.loading=false;
-
-
-            this.etape=2;
-
-
-
-            this.successToast(
-              "Une clé de réinitialisation a été envoyée"
-            );
-
-
-          },
-
-
-
-
-          error:(err)=>{
-
-
-            console.error(
-              err
-            );
-
-
-            this.loading=false;
-
-
-            this.errorToast(
-              "Erreur pendant l'envoi de la clé"
-            );
-
-
-          }
-
-
-
-        });
-
-
-
-      },
-
-
-
-
-
-      error:()=>{
-
-
-        this.loading=false;
-
-
-        this.errorToast(
-          "Aucun compte trouvé avec cette adresse mail"
-        );
-
-
-      }
-
-
-
-    });
-
-
-
+      });
   }
 
 
+  // ============================================================
+  // 🔑 ÉTAPE 2
+  // VÉRIFIER LA CLÉ
+  // ============================================================
+
+  verifierCle(): void {
+
+    if (this.loading) {
+      return;
+    }
+
+    this.clearNotifications();
 
 
+    // ----------------------------------------------------------
+    // VALIDATION
+    // ----------------------------------------------------------
 
+    const key = this.resetPasswordKey.trim();
 
-
-
-
-
-  // ======================================================
-  // 🔑 ETAPE 2
-  // VERIFICATION CLE
-  // ======================================================
-
-
-  verifierCle(){
-
-
-    console.clear();
-
-
-    console.log(
-      "🔑 Vérification clé reset"
-    );
-
-
-
-    this.message='';
-
-    this.error='';
-
-
-
-
-
-    if(!this.resetPasswordKey){
-
+    if (!key) {
 
       this.errorToast(
-        "Veuillez entrer votre clé de réinitialisation"
+        'Veuillez entrer votre clé de réinitialisation'
       );
 
-
       return;
-
     }
 
 
+    this.resetPasswordKey = key;
+    this.loading = true;
 
 
-    this.loading=true;
+    // ----------------------------------------------------------
+    // DONNÉES
+    // ----------------------------------------------------------
 
-
-
-
-    const body={
-
-
-      email:this.email,
-
-
-      resetPasswordKey:this.resetPasswordKey
-
-
+    const body = {
+      email: this.email,
+      resetPasswordKey: this.resetPasswordKey
     };
 
 
-
-
-    console.log(
-      "📦 Données envoyées :",
-      body
-    );
-
-
-
-
+    // ----------------------------------------------------------
+    // VÉRIFICATION
+    // ----------------------------------------------------------
 
     this.userService
-    .verifyResetKey(body)
+      .verifyResetKey(body)
+      .subscribe({
 
-    .subscribe({
+        next: () => {
 
+          this.loading = false;
 
+          this.etape = 3;
 
-      next:(response)=>{
+          this.successToast(
+            'Votre clé de réinitialisation est valide'
+          );
+        },
 
+        error: () => {
 
-        console.log(
-          "✅ Clé valide :",
-          response
-        );
+          this.loading = false;
 
+          this.errorToast(
+            'Clé incorrecte ou expirée'
+          );
+        }
 
-
-        this.loading=false;
-
-
-        this.etape=3;
-
-
-
-        this.successToast(
-          "Clé validée"
-        );
-
-
-
-      },
-
-
-
-
-
-      error:(err)=>{
-
-
-        console.error(
-          "❌ Erreur clé :",
-          err
-        );
-
-
-        this.loading=false;
-
-
-        this.errorToast(
-          "Clé incorrecte ou expirée"
-        );
-
-
-
-      }
-
-
-
-    });
-
-
-
+      });
   }
 
 
+  // ============================================================
+  // 🔐 ÉTAPE 3
+  // MODIFIER LE MOT DE PASSE
+  // ============================================================
+
+  modifierPassword(): void {
+
+    if (this.loading) {
+      return;
+    }
+
+    this.clearNotifications();
 
 
+    // ----------------------------------------------------------
+    // VALIDATION MOT DE PASSE
+    // ----------------------------------------------------------
 
-
-
-
-
-  // ======================================================
-  // 🔐 ETAPE 3
-  // MODIFICATION PASSWORD
-  // ======================================================
-
-
-  modifierPassword(){
-
-
-
-    console.clear();
-
-
-
-    console.log(
-      "🔐 Modification password"
-    );
-
-
-
-    this.message='';
-
-    this.error='';
-
-
-
-
-
-    if(!this.nouveauPassword){
-
+    if (!this.nouveauPassword) {
 
       this.errorToast(
-        "Veuillez entrer un nouveau mot de passe"
+        'Veuillez entrer un nouveau mot de passe'
       );
 
-
       return;
-
     }
 
 
+    if (this.nouveauPassword.length < 6) {
+
+      this.errorToast(
+        'Votre mot de passe doit contenir au moins 6 caractères'
+      );
+
+      return;
+    }
 
 
+    // ----------------------------------------------------------
+    // VALIDATION CONFIRMATION
+    // ----------------------------------------------------------
+
+    if (!this.confirmationPassword) {
+
+      this.errorToast(
+        'Veuillez confirmer votre nouveau mot de passe'
+      );
+
+      return;
+    }
 
 
-
-    if(
+    if (
       this.nouveauPassword !==
       this.confirmationPassword
-    ){
-
+    ) {
 
       this.errorToast(
-        "Les mots de passe ne correspondent pas"
+        'Les mots de passe ne correspondent pas'
       );
 
-
       return;
-
     }
 
 
+    this.loading = true;
 
 
+    // ----------------------------------------------------------
+    // DONNÉES
+    // ----------------------------------------------------------
 
+    const data = {
 
-    this.loading=true;
+      email: this.email,
 
+      resetPasswordKey:
+        this.resetPasswordKey,
 
-
-
-    const data={
-
-
-      email:this.email,
-
-
-      resetPasswordKey:this.resetPasswordKey,
-
-
-      password:this.nouveauPassword
-
+      password:
+        this.nouveauPassword
 
     };
 
 
-
-
-
-    console.log(
-      "📦 DATA RESET PASSWORD",
-      data
-    );
-
-
-
-
-
+    // ----------------------------------------------------------
+    // RESET PASSWORD
+    // ----------------------------------------------------------
 
     this.userService
-    .resetPassword(data)
+      .resetPassword(data)
+      .subscribe({
 
-    .subscribe({
+        next: () => {
 
+          this.loading = false;
 
-
-      next:(response)=>{
-
-
-        console.log(
-          "✅ Password modifié :",
-          response
-        );
+          this.successToast(
+            'Mot de passe modifié avec succès'
+          );
 
 
+          // ----------------------------------------------------
+          // REDIRECTION
+          // ----------------------------------------------------
 
-        this.loading=false;
+          setTimeout(() => {
 
+            window.location.href = '/login';
 
+          }, 4000);
 
-        this.successToast(
-          "Mot de passe modifié avec succès"
-        );
+        },
 
+        error: (err) => {
 
+          this.loading = false;
 
+          this.errorToast(
+            err?.error?.message ||
+            'Impossible de modifier le mot de passe'
+          );
+        }
 
-
-        setTimeout(()=>{
-
-
-          window.location.href='/connexion';
-
-
-        },4000);
-
-
-
-      },
-
-
-
-
-
-      error:(err)=>{
-
-
-        console.error(
-          "❌ Reset password erreur",
-          err
-        );
-
-
-
-        this.loading=false;
-
-
-
-
-        this.errorToast(
-
-          err.error?.message ||
-
-          "Impossible de modifier le mot de passe"
-
-        );
-
-
-
-      }
-
-
-
-
-    });
-
-
-
+      });
   }
 
 
+  // ============================================================
+  // 🔄 RETOUR ÉTAPE 1
+  // ============================================================
+
+  retourEtapeEmail(): void {
+
+    if (this.loading) {
+      return;
+    }
+
+    this.clearNotifications();
+
+    this.etape = 1;
+
+    this.resetPasswordKey = '';
+
+    this.showResetKey = false;
+  }
 
 
+  // ============================================================
+  // 🔄 RETOUR ÉTAPE 2
+  // ============================================================
+
+  retourEtapeCle(): void {
+
+    if (this.loading) {
+      return;
+    }
+
+    this.clearNotifications();
+
+    this.etape = 2;
+  }
+
+
+  // ============================================================
+  // 👁️ TOGGLE CLÉ
+  // ============================================================
+
+  toggleResetKey(): void {
+    this.showResetKey =
+      !this.showResetKey;
+  }
+
+
+  // ============================================================
+  // 👁️ TOGGLE MOT DE PASSE
+  // ============================================================
+
+  togglePassword(): void {
+    this.showPassword =
+      !this.showPassword;
+  }
+
+
+  // ============================================================
+  // 👁️ TOGGLE CONFIRMATION
+  // ============================================================
+
+  toggleConfirmPassword(): void {
+    this.showConfirmPassword =
+      !this.showConfirmPassword;
+  }
+
+
+  // ============================================================
+  // 🧹 NETTOYER LES NOTIFICATIONS
+  // ============================================================
+
+  private clearNotifications(): void {
+
+    this.showNotification = false;
+
+    this.notificationMessage = '';
+
+    if (this.notificationTimeout) {
+
+      clearTimeout(
+        this.notificationTimeout
+      );
+
+      this.notificationTimeout =
+        undefined;
+    }
+  }
+
+
+  // ============================================================
+  // 🧹 DESTROY
+  // ============================================================
+
+  ngOnDestroy(): void {
+
+    if (this.notificationTimeout) {
+
+      clearTimeout(
+        this.notificationTimeout
+      );
+
+      this.notificationTimeout =
+        undefined;
+    }
+  }
 
 }

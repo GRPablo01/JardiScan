@@ -25,14 +25,6 @@ const {
 
 const router = express.Router();
 
-// ============================================================
-// 🌱 INITIALISATION
-// ============================================================
-
-console.log('');
-console.log('==========================================');
-console.log('🌱 Plant.Routes.js chargé');
-console.log('==========================================');
 
 // ============================================================
 // 📁 DOSSIER UPLOADS PLANTES
@@ -64,15 +56,10 @@ try {
             }
         );
 
-        console.log(
-            '📂 Dossier uploads/plants créé'
-        );
-
+       
     } else {
 
-        console.log(
-            '📂 Dossier uploads/plants déjà présent'
-        );
+        
 
     }
 
@@ -147,26 +134,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
 
-    console.log('');
-    console.log('==========================================');
-    console.log('📸 FICHIER IMAGE REÇU');
-    console.log('==========================================');
-
-    console.log(
-        'Nom original :',
-        file.originalname
-    );
-
-    console.log(
-        'Type MIME :',
-        file.mimetype
-    );
-
-    console.log(
-        'Champ :',
-        file.fieldname
-    );
-
+    
     // ----------------------------------------------------------
     // Vérification MIME
     // ----------------------------------------------------------
@@ -262,39 +230,7 @@ const upload = multer({
 router.use(
     (req, res, next) => {
 
-        console.log('');
-        console.log('==========================================');
-        console.log('🌱 PLANT ROUTE');
-        console.log('==========================================');
-
-        console.log(
-            '➡️ Méthode :',
-            req.method
-        );
-
-        console.log(
-            '➡️ URL complète :',
-            req.originalUrl
-        );
-
-        console.log(
-            '➡️ URL router :',
-            req.url
-        );
-
-        console.log(
-            '➡️ IP :',
-            req.ip
-        );
-
-        console.log(
-            '➡️ Heure :',
-            new Date().toISOString()
-        );
-
-        console.log(
-            '=========================================='
-        );
+        
 
         next();
 
@@ -352,15 +288,7 @@ router.post(
 
     async (req, res, next) => {
 
-        console.log('');
-        console.log('==========================================');
-        console.log('🔎 IDENTIFICATION PLANTE');
-        console.log('==========================================');
-
-        console.log(
-            '📡 Route :',
-            req.originalUrl
-        );
+        
 
         // ======================================================
         // 📸 RÉCUPÉRATION DES FICHIERS
@@ -436,87 +364,17 @@ router.post(
         // 📸 INFORMATIONS DES IMAGES
         // ======================================================
 
-        console.log('');
-        console.log(
-            `📸 ${fichiersRecus.length} image(s) reçue(s)`
-        );
-
+        
         fichiersRecus.forEach(
             (file, index) => {
 
-                console.log('');
-
-                console.log(
-                    `📸 IMAGE ${index + 1}`
-                );
-
-                console.log(
-                    '   Champ :',
-                    file.fieldname
-                );
-
-                console.log(
-                    '   Original :',
-                    file.originalname
-                );
-
-                console.log(
-                    '   Serveur :',
-                    file.filename
-                );
-
-                console.log(
-                    '   MIME :',
-                    file.mimetype
-                );
-
-                console.log(
-                    '   Taille :',
-                    file.size
-                );
-
-                console.log(
-                    '   Path :',
-                    file.path
-                );
-
-                console.log(
-                    '   URL :',
-                    `/uploads/plants/${file.filename}`
-                );
+               
 
             }
         );
 
-        // ======================================================
-        // 🌱 INFORMATIONS DISPONIBLES POUR LE CONTROLLER
-        // ======================================================
-
-        console.log('');
-        console.log('==========================================');
-        console.log('🌱 DONNÉES IDENTIFICATION');
-        console.log('==========================================');
-
-        console.log(
-            '📸 req.file :',
-            req.file
-                ? req.file.filename
-                : null
-        );
-
-        console.log(
-            '📸 Nombre req.files :',
-            fichiersRecus.length
-        );
-
-        console.log(
-            '📦 Body :',
-            req.body
-        );
-
-        console.log(
-            '==========================================');
-
+        
+        
         // ======================================================
         // 🧠 CONTROLLER IDENTIFICATION
         // ======================================================
@@ -571,20 +429,7 @@ router.get(
     '/',
     async (req, res, next) => {
 
-        console.log('');
-        console.log('==========================================');
-        console.log('🌿 GET ALL PLANTS');
-        console.log('==========================================');
-
-        console.log(
-            '📡 Route :',
-            req.originalUrl
-        );
-
-        console.log(
-            '📦 Query :',
-            req.query
-        );
+        
 
         // ------------------------------------------------------
         // Vérification MongoDB
@@ -593,10 +438,7 @@ router.get(
         const mongoState =
             mongoose.connection.readyState;
 
-        console.log(
-            '🗄️ MongoDB state :',
-            mongoState
-        );
+        
 
         if (
             mongoState !== 1
@@ -623,9 +465,7 @@ router.get(
 
         try {
 
-            console.log(
-                '🔄 Appel de getAllPlants()...'
-            );
+            
 
             await getAllPlants(
                 req,
@@ -633,9 +473,7 @@ router.get(
                 next
             );
 
-            console.log(
-                '✅ getAllPlants() terminé'
-            );
+            
 
         } catch (error) {
 
@@ -691,10 +529,7 @@ router.get(
     '/debug/uploads',
     (req, res) => {
 
-        console.log('');
-        console.log('==========================================');
-        console.log('🧪 DEBUG UPLOADS');
-        console.log('==========================================');
+        
 
         try {
 
@@ -710,20 +545,9 @@ router.get(
                     )
                     : [];
 
-            console.log(
-                '📁 Directory :',
-                uploadDirectory
-            );
+            
 
-            console.log(
-                '📂 Existe :',
-                exists
-            );
-
-            console.log(
-                '📸 Nombre fichiers :',
-                files.length
-            );
+            
 
             return res.status(200).json({
 
@@ -773,19 +597,7 @@ router.get(
     '/:id',
     async (req, res, next) => {
 
-        console.log('');
-        console.log('==========================================');
-        console.log('🌿 GET PLANT BY ID');
-        console.log('==========================================');
-
-        console.log(
-            '🆔 ID :',
-            req.params.id
-        );
-
-        console.log(
-            `📡 Route : ${req.originalUrl}`
-        );
+       
 
         try {
 
@@ -850,36 +662,7 @@ router.post(
     ),
     async (req, res, next) => {
 
-        console.log('');
-        console.log('==========================================');
-        console.log('🌱 POST /api/plant');
-        console.log('==========================================');
-
-        // ------------------------------------------------------
-        // BODY
-        // ------------------------------------------------------
-
-        console.log('');
-        console.log('📦 BODY REÇU :');
-
-        console.log(
-            JSON.stringify(
-                req.body,
-                null,
-                2
-            )
-        );
-
-        // ------------------------------------------------------
-        // FICHIERS
-        // ------------------------------------------------------
-
-        console.log(
-            '📸 Nombre images :',
-            req.files
-                ? req.files.length
-                : 0
-        );
+        
 
         // ------------------------------------------------------
         // DÉTAILS DES IMAGES
@@ -1365,44 +1148,6 @@ router.use(
     }
 );
 
-// ============================================================
-// 📤 EXPORT
-// ============================================================
 
-console.log('');
-console.log('==========================================');
-console.log('✅ ROUTES PLANTES PRÊTES');
-console.log('==========================================');
-
-console.log(
-    '🔎 POST /api/plant/identify'
-);
-
-console.log(
-    '🔎 POST /api/plants/identify'
-);
-
-console.log(
-    '🌱 GET  /api/plant'
-);
-
-console.log(
-    '🌱 GET  /api/plant/:id'
-);
-
-console.log(
-    '🌱 POST /api/plant'
-);
-
-console.log(
-    '🧪 GET  /api/plant/debug/uploads'
-);
-
-console.log(
-    '📸 Upload : /uploads/plants'
-);
-
-console.log('==========================================');
-console.log('');
 
 module.exports = router;

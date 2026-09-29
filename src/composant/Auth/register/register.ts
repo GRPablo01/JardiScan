@@ -233,6 +233,8 @@ export class Register {
 
   notificationType: NotificationType = 'success';
 
+  loginHover = false
+
   private notificationTimeout:
     ReturnType<typeof setTimeout> | null = null;
 

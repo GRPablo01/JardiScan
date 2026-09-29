@@ -43,7 +43,7 @@ export class Accueil implements OnInit {
 
   ngOnInit(): void {
     // 🧠 Titre de la page
-    this.titleService.setTitle('JardiScan | Accueil');
+    this.titleService.setTitle('Natureora | Accueil');
 
     // 👤 Vérification de la connexion utilisateur
     const utilisateurString = localStorage.getItem('utilisateur');

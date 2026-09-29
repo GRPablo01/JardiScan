@@ -42,7 +42,7 @@ export class ChangePassword implements OnInit {
 
   ngOnInit(): void {
     // 🧠 Titre de la page
-    this.titleService.setTitle('JardiScan | Changer Password');
+    this.titleService.setTitle('Natureora | Changer Password');
 
     // 👤 Vérification de la connexion utilisateur
     const utilisateurString = localStorage.getItem('utilisateur');

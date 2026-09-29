@@ -44,7 +44,7 @@ export class Inscription implements OnInit {
 
   ngOnInit(): void {
     // 🧠 Titre de la page
-    this.titleService.setTitle('JardiScan | Inscription');
+    this.titleService.setTitle('Natureora | Inscription');
 
     // 👤 Vérification de la connexion utilisateur
     const utilisateurString = localStorage.getItem('utilisateur');

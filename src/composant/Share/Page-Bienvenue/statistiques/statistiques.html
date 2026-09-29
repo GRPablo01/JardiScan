@@ -1,5 +1,5 @@
 <!-- ============================================================
-     🌿 JARDISCAN — COMMENT ÇA FONCTIONNE
+     🌿 NATUREORA — COMMENT ÇA FONCTIONNE
 
      Version FULL WIDTH
 
@@ -46,893 +46,903 @@
     "
   >
 
-    <!-- ============================================================
-         EN-TÊTE
-    ============================================================= -->
+```
+<!-- ============================================================
+     EN-TÊTE
+============================================================= -->
 
-    <div class="w-full text-center">
+<div class="w-full text-center">
 
-      <!-- Petit label -->
+  <!-- Petit label -->
+
+  <div
+    class="
+      jhow-reveal
+      mx-auto
+      mb-5
+      inline-flex
+      items-center
+      gap-2.5
+      rounded-full
+      border
+      px-4
+      py-2
+      text-[11px]
+      font-bold
+      uppercase
+      tracking-[0.18em]
+      sm:text-xs
+      backdrop-blur-md
+    "
+    [ngStyle]="{
+      'background-color': themeService.BG3,
+      'border-color': themeService.BR3,
+      'color': themeService.TextPrincipal
+    }"
+  >
+    <span
+      class="
+        flex
+        h-6
+        w-6
+        shrink-0
+        items-center
+        justify-center
+        rounded-full
+      "
+      [ngStyle]="{
+        'background-color': themeService.PrimarySoft1
+      }"
+    >
+      <i
+        class="fa-solid fa-sparkles"
+        [ngStyle]="{
+          'color': themeService.Primary1
+        }"
+      ></i>
+    </span>
+
+    <span>
+      {{
+        languageService.is('fr')
+          ? 'Simple & naturel'
+          : 'Simple & natural'
+      }}
+    </span>
+  </div>
+
+
+  <!-- Titre -->
+
+  <h2
+    class="
+      jhow-reveal
+      text-3xl
+      font-black
+      leading-[1]
+      tracking-tight
+      sm:text-4xl
+      md:text-5xl
+      lg:text-6xl
+      xl:text-7xl
+    "
+    [ngStyle]="{
+      'color': themeService.TextPrincipal
+    }"
+  >
+    {{
+      languageService.is('fr')
+        ? 'Comment fonctionne'
+        : 'How does'
+    }}
+
+    <span
+      [ngStyle]="{
+        'color': themeService.Primary1
+      }"
+    >
+      Natureora
+    </span>
+
+    ?
+  </h2>
+
+
+  <!-- Description -->
+
+  <p
+    class="
+      jhow-reveal
+      mx-auto
+      mt-5
+      max-w-3xl
+      text-sm
+      leading-7
+      sm:text-base
+      sm:leading-8
+      lg:text-lg
+      lg:leading-9
+    "
+    [ngStyle]="{
+      'color': themeService.TextSecondaire,
+      'opacity': '0.72',
+      'animation-delay': '0.2s'
+    }"
+  >
+    {{
+      languageService.is('fr')
+        ? 'Explorez la nature, découvrez les plantes qui vous entourent et profitez de conseils simples pour mieux prendre soin de votre jardin.'
+        : 'Explore nature, discover the plants around you, and enjoy simple advice to better care for your garden.'
+    }}
+  </p>
+
+</div>
+
+
+<!-- ============================================================
+     ÉTAPES — PLEINE LARGEUR
+============================================================= -->
+
+<div
+  class="
+    relative
+    mt-10
+    grid
+    w-full
+    grid-cols-1
+    gap-5
+    sm:mt-12
+    md:grid-cols-3
+    md:gap-6
+    lg:mt-16
+    lg:gap-8
+    xl:gap-10
+  "
+>
+
+  <!-- ==========================================================
+       LIGNE ENTRE LES CARTES — DESKTOP
+  =========================================================== -->
+
+  <div
+    class="
+      pointer-events-none
+      absolute
+      left-[16%]
+      right-[16%]
+      top-[54px]
+      hidden
+      h-px
+      md:block
+    "
+    [ngStyle]="{
+      'background-color': themeService.BR3
+    }"
+  >
+    <span
+      class="
+        absolute
+        left-1/2
+        top-1/2
+        h-1
+        w-1
+        -translate-x-1/2
+        -translate-y-1/2
+        rounded-full
+      "
+      [ngStyle]="{
+        'background-color': themeService.Primary1
+      }"
+    ></span>
+  </div>
+
+
+  <!-- ==========================================================
+       ÉTAPE 1 — EXPLOREZ
+  =========================================================== -->
+
+  <article
+    class="
+      jhow-card
+      group
+      relative
+      z-10
+      w-full
+      rounded-[1.75rem]
+      border
+      p-6
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      lg:p-8
+      xl:p-9
+    "
+    [ngStyle]="{
+      'background-color': themeService.BG3,
+      'border-color': themeService.BG3,
+      'animation-delay': '0.25s'
+    }"
+  >
+
+    <!-- Numéro + icône -->
+
+    <div class="flex items-center justify-between">
 
       <div
         class="
-          jhow-reveal
-          mx-auto
-          mb-5
-          inline-flex
+          flex
+          h-14
+          w-14
           items-center
-          gap-2.5
-          rounded-full
-          border
-          px-4
-          py-2
-          text-[11px]
-          sm:text-xs
-          font-bold
-          uppercase
-          tracking-[0.18em]
-          backdrop-blur-md
+          justify-center
+          rounded-2xl
+          text-xl
+          shadow-sm
+          transition-all
+          duration-300
+          group-hover:scale-105
+          group-hover:rotate-2
+          lg:h-16
+          lg:w-16
+          lg:text-2xl
         "
         [ngStyle]="{
-          'background-color': themeService.BG3,
-          'border-color': themeService.BR3,
-          'color': themeService.TextPrincipal,
+          'background-color': themeService.BG4,
+          'color': '#ffffff'
         }"
       >
-
-        <span
-          class="
-            flex
-            h-6
-            w-6
-            shrink-0
-            items-center
-            justify-center
-            rounded-full
-          "
-          
-        >
-          <i [ngStyle]="{'color':themeService.Primary1}" class="fa-solid fa-wand-magic-sparkles"></i>
-        </span>
-
-        <span>
-          {{
-            languageService.is('fr')
-              ? 'Simple & rapide'
-              : 'Simple & fast'
-          }}
-        </span>
-
+        <i class="fa-solid fa-compass"></i>
       </div>
 
-
-      <!-- Titre -->
-
-      <h2
+      <span
         class="
-          jhow-reveal
-          text-3xl
+          text-4xl
           font-black
-          tracking-tight
-          sm:text-4xl
-          md:text-5xl
-          lg:text-6xl
-          xl:text-7xl
-          leading-[1]
+          transition-transform
+          duration-300
+          group-hover:scale-110
+          lg:text-5xl
         "
         [ngStyle]="{
-          'color': themeService.TextPrincipal,
+          'color': themeService.BG1
         }"
       >
+        01
+      </span>
 
+    </div>
+
+
+    <!-- Contenu -->
+
+    <div class="mt-6 lg:mt-8">
+
+      <span
+        class="
+          text-[11px]
+          font-bold
+          uppercase
+          tracking-[0.16em]
+          sm:text-xs
+        "
+        [ngStyle]="{
+          'color': themeService.Primary1
+        }"
+      >
         {{
           languageService.is('fr')
-            ? 'Comment fonctionne'
-            : 'How does'
+            ? 'Étape 01'
+            : 'Step 01'
         }}
-
-        <span
-          [ngStyle]="{
-            'color': themeService.Primary1
-          }"
-        >
-          JardiScan
-        </span>
-
-        ?
-
-      </h2>
+      </span>
 
 
-      <!-- Description -->
+      <h3
+        class="
+          mt-2
+          text-xl
+          font-extrabold
+          lg:text-2xl
+        "
+        [ngStyle]="{
+          'color': themeService.TextPrincipal
+        }"
+      >
+        {{
+          languageService.is('fr')
+            ? 'Explorez'
+            : 'Explore'
+        }}
+      </h3>
+
 
       <p
         class="
-          jhow-reveal
-          mx-auto
-          mt-5
-          max-w-3xl
+          mt-3
           text-sm
-          leading-7
-          sm:text-base
-          sm:leading-8
-          lg:text-lg
-          lg:leading-9
+          leading-6
+          lg:text-base
+          lg:leading-7
         "
         [ngStyle]="{
-          'color': themeService.TextSecondaire,
-          'opacity': '0.72',
-          'animation-delay': '0.2s'
+          'color': themeService.TextPrincipal,
+          'opacity': '0.7'
         }"
       >
-
         {{
           languageService.is('fr')
-            ? 'En quelques secondes, identifiez votre plante, comprenez ses besoins et obtenez des conseils adaptés à votre jardin.'
-            : 'In just a few seconds, identify your plant, understand its needs, and get advice tailored to your garden.'
+            ? 'Parcourez facilement l’univers végétal de Natureora et découvrez de nouvelles plantes adaptées à vos envies.'
+            : 'Easily explore Natureora’s plant world and discover new plants that match your interests.'
         }}
-
       </p>
 
     </div>
 
 
-    <!-- ============================================================
-         ÉTAPES — PLEINE LARGEUR
-    ============================================================= -->
+    <!-- Séparateur -->
 
     <div
-      class="
-        relative
-        mt-10
-        grid
-        w-full
-        grid-cols-1
-        gap-5
-        sm:mt-12
-        md:grid-cols-3
-        md:gap-6
-        lg:mt-16
-        lg:gap-8
-        xl:gap-10
-      "
-    >
-
-      <!-- ==========================================================
-           LIGNE ENTRE LES CARTES — DESKTOP
-      =========================================================== -->
-
-      <div
-        class="
-          pointer-events-none
-          absolute
-          left-[16%]
-          right-[16%]
-          top-[54px]
-          hidden
-          h-px
-          md:block
-        "
-        [ngStyle]="{
-          'background-color': themeService.BG3
-        }"
-      >
-
-        <span
-          class="
-            absolute
-            left-1/2
-            top-1/2
-            h-1
-            w-1
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-          "
-          [ngStyle]="{
-            'background-color': themeService.Primary
-          }"
-        ></span>
-
-      </div>
-
-
-      
-      <!-- ==========================================================
-          ÉTAPE 1 — RECHERCHEZ
-      =========================================================== -->
-
-      <article
-        class="
-          jhow-card
-          group
-          relative
-          z-10
-          w-full
-          rounded-[1.75rem]
-          border
-          p-6
-          transition-all
-          duration-300
-          hover:-translate-y-1
-          lg:p-8
-          xl:p-9
-        "
-        [ngStyle]="{
-          'background-color': themeService.BG3,
-          'border-color': themeService.BG3,
-          'animation-delay': '0.25s'
-        }"
-      >
-        <!-- Numéro + icône -->
-        <div class="flex items-center justify-between">
-
-          <div
-            class="
-              flex
-              h-14
-              w-14
-              items-center
-              justify-center
-              rounded-2xl
-              text-xl
-              shadow-sm
-              transition-all
-              duration-300
-              group-hover:scale-105
-              group-hover:rotate-2
-              lg:h-16
-              lg:w-16
-              lg:text-2xl
-            "
-            [ngStyle]="{
-              'background-color': themeService.BG4,
-              'color': '#ffffff',
-              
-            }"
-          >
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </div>
-
-          <span 
-          [ngStyle]="{
-              'color':themeService.BG1,
-              
-            }"
-            class="
-              text-4xl
-              font-black
-              transition-transform
-              duration-300
-              group-hover:scale-110
-              lg:text-5xl
-            "
-          >
-            01
-          </span>
-
-        </div>
-
-
-        <!-- Contenu -->
-        <div class="mt-6 lg:mt-8">
-
-          <span
-            class="
-              text-[11px]
-              font-bold
-              uppercase
-              tracking-[0.16em]
-              sm:text-xs
-            "
-            [ngStyle]="{
-              'color': themeService.Primary1
-            }"
-          >
-            {{
-              languageService.is('fr')
-                ? 'Étape 01'
-                : 'Step 01'
-            }}
-          </span>
-
-          <h3
-            class="
-              mt-2
-              text-xl
-              font-extrabold
-              lg:text-2xl
-            "
-          >
-            {{
-              languageService.is('fr')
-                ? 'Recherchez'
-                : 'Search'
-            }}
-          </h3>
-
-          <p
-            class="
-              mt-3
-              text-sm
-              leading-6
-              lg:text-base
-              lg:leading-7
-            "
-            [ngStyle]="{
-              'color': themeService.TextPrincipal,
-              'opacity': '0.7'
-            }"
-          >
-            {{
-              languageService.is('fr')
-                ? 'Trouvez rapidement une plante grâce à la recherche JardiScan et explorez facilement notre catalogue.'
-                : 'Quickly find a plant with JardiScan search and easily explore our plant catalog.'
-            }}
-          </p>
-
-        </div>
-
-
-        <!-- Séparateur -->
-        <div
-          class="my-5 h-px w-full"
-          [ngStyle]="{
-            'background-color': themeService.BR3
-          }"
-        ></div>
-
-
-        <!-- Indication -->
-        <div
-          class="
-            flex
-            items-center
-            gap-2
-            text-xs
-            font-semibold
-            lg:text-sm
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal,
-            'opacity': '0.6'
-          }"
-        >
-
-          <span
-            class="
-              flex
-              h-7
-              w-7
-              shrink-0
-              items-center
-              justify-center
-              rounded-lg
-            "
-            [ngStyle]="{
-              'background-color': themeService.PrimarySoft1,
-              'color': themeService.Primary1
-            }"
-          >
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </span>
-
-          <span>
-            {{
-              languageService.is('fr')
-                ? 'Recherche rapide'
-                : 'Quick search'
-            }}
-          </span>
-
-        </div>
-
-      </article>
-
-
-
-      <!-- ==========================================================
-          ÉTAPE 2 — DÉCOUVREZ
-      =========================================================== -->
-
-      <article
-        class="
-          jhow-card
-          group
-          relative
-          z-10
-          w-full
-          rounded-[1.75rem]
-          border
-          p-6
-          transition-all
-          duration-300
-          hover:-translate-y-1
-          lg:p-8
-          xl:p-9
-        "
-        [ngStyle]="{
-          'background-color': themeService.BG3,
-          'border-color': themeService.BG3,
-          'animation-delay': '0.38s'
-        }"
-      >
-
-        <!-- Numéro + icône -->
-        <div class="flex items-center justify-between">
-
-          <!-- Icône -->
-          <div
-            class="
-              flex
-              h-14
-              w-14
-              items-center
-              justify-center
-              rounded-2xl
-              text-xl
-              shadow-sm
-              transition-all
-              duration-300
-              group-hover:scale-105
-              group-hover:rotate-2
-              lg:h-16
-              lg:w-16
-              lg:text-2xl
-            "
-            [ngStyle]="{
-              'background-color': themeService.BG4,
-              'color': '#ffffff'
-            }"
-          >
-            <i class="fa-solid fa-leaf"></i>
-          </div>
-
-          <!-- Numéro -->
-          <span
-            class="
-              text-4xl
-              font-black
-              transition-transform
-              duration-300
-              group-hover:scale-110
-              lg:text-5xl
-            "
-            [ngStyle]="{
-              'color': themeService.BG1
-            }"
-          >
-            02
-          </span>
-
-        </div>
-
-
-        <!-- Contenu -->
-        <div class="mt-6 lg:mt-8">
-
-          <!-- Label -->
-          <span
-            class="
-              text-[11px]
-              font-bold
-              uppercase
-              tracking-[0.16em]
-              sm:text-xs
-            "
-            [ngStyle]="{
-              'color': themeService.Primary1
-            }"
-          >
-            {{
-              languageService.is('fr')
-                ? 'Étape 02'
-                : 'Step 02'
-            }}
-          </span>
-
-          <!-- Titre -->
-          <h3
-            class="
-              mt-2
-              text-xl
-              font-extrabold
-              lg:text-2xl
-            "
-          >
-            {{
-              languageService.is('fr')
-                ? 'Découvrez'
-                : 'Discover'
-            }}
-          </h3>
-
-          <!-- Description -->
-          <p
-            class="
-              mt-3
-              text-sm
-              leading-6
-              lg:text-base
-              lg:leading-7
-            "
-            [ngStyle]="{
-              'color': themeService.TextPrincipal,
-              'opacity': '0.7'
-            }"
-          >
-            {{
-              languageService.is('fr')
-                ? 'Consultez les informations essentielles de chaque plante, ses caractéristiques et les conseils pour en prendre soin.'
-                : 'Explore essential plant information, characteristics, and care advice for every plant.'
-            }}
-          </p>
-
-        </div>
-
-
-        <!-- Séparateur -->
-        <div
-          class="my-5 h-px w-full"
-          [ngStyle]="{
-            'background-color': themeService.BR3
-          }"
-        ></div>
-
-
-        <!-- Indication -->
-        <div
-          class="
-            flex
-            items-center
-            gap-2
-            text-xs
-            font-semibold
-            lg:text-sm
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal,
-            'opacity': '0.6'
-          }"
-        >
-
-          <!-- Petite icône -->
-          <span
-            class="
-              flex
-              h-7
-              w-7
-              shrink-0
-              items-center
-              justify-center
-              rounded-lg
-            "
-            [ngStyle]="{
-              'background-color': themeService.PrimarySoft1,
-              'color': themeService.Primary1
-            }"
-          >
-            <i class="fa-solid fa-circle-info"></i>
-          </span>
-
-          <!-- Texte -->
-          <span>
-            {{
-              languageService.is('fr')
-                ? 'Informations détaillées'
-                : 'Detailed information'
-            }}
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- ==========================================================
-          ÉTAPE 3 — COLLECTIONNEZ
-      =========================================================== -->
-
-      <article
-        class="
-          jhow-card
-          group
-          relative
-          z-10
-          w-full
-          rounded-[1.75rem]
-          border
-          p-6
-          transition-all
-          duration-300
-          hover:-translate-y-1
-          lg:p-8
-          xl:p-9
-        "
-        [ngStyle]="{
-          'background-color': themeService.BG3,
-          'border-color': themeService.BG3,
-          'animation-delay': '0.51s'
-        }"
-      >
-
-        <!-- Numéro + icône -->
-        <div class="flex items-center justify-between">
-
-          <!-- Icône -->
-          <div
-            class="
-              flex
-              h-14
-              w-14
-              items-center
-              justify-center
-              rounded-2xl
-              text-xl
-              shadow-sm
-              transition-all
-              duration-300
-              group-hover:scale-105
-              group-hover:rotate-2
-              lg:h-16
-              lg:w-16
-              lg:text-2xl
-            "
-            [ngStyle]="{
-              'background-color': themeService.BG4,
-              'color': '#ffffff'
-            }"
-          >
-            <i class="fa-solid fa-bookmark"></i>
-          </div>
-
-          <!-- Numéro -->
-          <span
-            class="
-              text-4xl
-              font-black
-              transition-transform
-              duration-300
-              group-hover:scale-110
-              lg:text-5xl
-            "
-            [ngStyle]="{
-              'color': themeService.BG1
-            }"
-          >
-            03
-          </span>
-
-        </div>
-
-
-        <!-- Contenu -->
-        <div class="mt-6 lg:mt-8">
-
-          <!-- Label -->
-          <span
-            class="
-              text-[11px]
-              font-bold
-              uppercase
-              tracking-[0.16em]
-              sm:text-xs
-            "
-            [ngStyle]="{
-              'color': themeService.Primary1
-            }"
-          >
-            {{
-              languageService.is('fr')
-                ? 'Étape 03'
-                : 'Step 03'
-            }}
-          </span>
-
-          <!-- Titre -->
-          <h3
-            class="
-              mt-2
-              text-xl
-              font-extrabold
-              lg:text-2xl
-            "
-          >
-            {{
-              languageService.is('fr')
-                ? 'Collectionnez'
-                : 'Collect'
-            }}
-          </h3>
-
-          <!-- Description -->
-          <p
-            class="
-              mt-3
-              text-sm
-              leading-6
-              lg:text-base
-              lg:leading-7
-            "
-            [ngStyle]="{
-              'color': themeService.TextPrincipal,
-              'opacity': '0.7'
-            }"
-          >
-            {{
-              languageService.is('fr')
-                ? 'Ajoutez vos plantes à votre JardiDex, construisez votre collection et retrouvez-les facilement à tout moment.'
-                : 'Add plants to your JardiDex, build your collection, and easily find them again whenever you want.'
-            }}
-          </p>
-
-        </div>
-
-
-        <!-- Séparateur -->
-        <div
-          class="my-5 h-px w-full"
-          [ngStyle]="{
-            'background-color': themeService.BR3
-          }"
-        ></div>
-
-
-        <!-- Indication -->
-        <div
-          class="
-            flex
-            items-center
-            gap-2
-            text-xs
-            font-semibold
-            lg:text-sm
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal,
-            'opacity': '0.6'
-          }"
-        >
-
-          <!-- Petite icône -->
-          <span
-            class="
-              flex
-              h-7
-              w-7
-              shrink-0
-              items-center
-              justify-center
-              rounded-lg
-            "
-            [ngStyle]="{
-              'background-color': themeService.PrimarySoft1,
-              'color': themeService.Primary1
-            }"
-          >
-            <i class="fa-solid fa-seedling"></i>
-          </span>
-
-          <!-- Texte -->
-          <span>
-            {{
-              languageService.is('fr')
-                ? 'Votre collection personnelle'
-                : 'Your personal collection'
-            }}
-          </span>
-
-        </div>
-
-      </article>
-
-
-
-    </div>
-
-
-    <!-- ============================================================
-         MINI PROMESSE
-    ============================================================= -->
-
-    <div
-      class="
-        jhow-reveal
-        mx-auto
-        mt-9
-        flex
-        w-full
-        items-center
-        justify-center
-        gap-3
-        text-center
-        text-xs
-        sm:mt-11
-        sm:text-sm
-      "
+      class="my-5 h-px w-full"
       [ngStyle]="{
-        'color': themeService.TextPrincipal,
-        'opacity': '0.6',
-        'animation-delay': '0.65s'
+        'background-color': themeService.BR3
       }"
-    >
-
-      <span
-        class="
-          h-1.5
-          w-1.5
-          shrink-0
-          rounded-full
-        "
-        [ngStyle]="{
-          'background-color': themeService.Primary1
-        }"
-      ></span>
-
-      <span>
-        {{
-          languageService.is('fr')
-            ? 'De l’identification aux conseils, tout est pensé pour simplifier votre jardinage.'
-            : 'From identification to advice, everything is designed to make gardening easier.'
-        }}
-      </span>
-
-      <span
-        class="
-          h-1.5
-          w-1.5
-          shrink-0
-          rounded-full
-        "
-        [ngStyle]="{
-          'background-color': themeService.Primary1
-        }"
-      ></span>
-
-    </div>
+    ></div>
 
 
-    <!-- ============================================================
-         INDICATEUR FINAL
-    ============================================================= -->
+    <!-- Indication -->
 
     <div
       class="
-        jhow-reveal
-        mx-auto
-        mt-7
         flex
         items-center
-        justify-center
         gap-2
         text-xs
         font-semibold
-        sm:text-sm
+        lg:text-sm
       "
       [ngStyle]="{
-        'color': themeService.Primary1,
-        'animation-delay': '0.72s'
+        'color': themeService.TextPrincipal,
+        'opacity': '0.6'
       }"
     >
 
-      <i class="fa-solid fa-arrow-right"></i>
+      <span
+        class="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-lg
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft1,
+          'color': themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-compass"></i>
+      </span>
 
       <span>
         {{
           languageService.is('fr')
-            ? 'Scanner. Analyser. Agir.'
-            : 'Scan. Analyze. Take action.'
+            ? 'Explorez librement'
+            : 'Explore freely'
         }}
       </span>
 
-      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
+  </article>
+
+
+  <!-- ==========================================================
+       ÉTAPE 2 — APPRENEZ
+  =========================================================== -->
+
+  <article
+    class="
+      jhow-card
+      group
+      relative
+      z-10
+      w-full
+      rounded-[1.75rem]
+      border
+      p-6
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      lg:p-8
+      xl:p-9
+    "
+    [ngStyle]="{
+      'background-color': themeService.BG3,
+      'border-color': themeService.BG3,
+      'animation-delay': '0.38s'
+    }"
+  >
+
+    <!-- Numéro + icône -->
+
+    <div class="flex items-center justify-between">
+
+      <div
+        class="
+          flex
+          h-14
+          w-14
+          items-center
+          justify-center
+          rounded-2xl
+          text-xl
+          shadow-sm
+          transition-all
+          duration-300
+          group-hover:scale-105
+          group-hover:rotate-2
+          lg:h-16
+          lg:w-16
+          lg:text-2xl
+        "
+        [ngStyle]="{
+          'background-color': themeService.BG4,
+          'color': '#ffffff'
+        }"
+      >
+        <i class="fa-solid fa-book-open"></i>
+      </div>
+
+
+      <span
+        class="
+          text-4xl
+          font-black
+          transition-transform
+          duration-300
+          group-hover:scale-110
+          lg:text-5xl
+        "
+        [ngStyle]="{
+          'color': themeService.BG1
+        }"
+      >
+        02
+      </span>
 
     </div>
+
+
+    <!-- Contenu -->
+
+    <div class="mt-6 lg:mt-8">
+
+      <span
+        class="
+          text-[11px]
+          font-bold
+          uppercase
+          tracking-[0.16em]
+          sm:text-xs
+        "
+        [ngStyle]="{
+          'color': themeService.Primary1
+        }"
+      >
+        {{
+          languageService.is('fr')
+            ? 'Étape 02'
+            : 'Step 02'
+        }}
+      </span>
+
+
+      <h3
+        class="
+          mt-2
+          text-xl
+          font-extrabold
+          lg:text-2xl
+        "
+        [ngStyle]="{
+          'color': themeService.TextPrincipal
+        }"
+      >
+        {{
+          languageService.is('fr')
+            ? 'Apprenez'
+            : 'Learn'
+        }}
+      </h3>
+
+
+      <p
+        class="
+          mt-3
+          text-sm
+          leading-6
+          lg:text-base
+          lg:leading-7
+        "
+        [ngStyle]="{
+          'color': themeService.TextPrincipal,
+          'opacity': '0.7'
+        }"
+      >
+        {{
+          languageService.is('fr')
+            ? 'Accédez aux informations essentielles sur les plantes, leurs caractéristiques et les bonnes pratiques pour en prendre soin.'
+            : 'Access essential plant information, their characteristics, and good practices to help you care for them.'
+        }}
+      </p>
+
+    </div>
+
+
+    <!-- Séparateur -->
+
+    <div
+      class="my-5 h-px w-full"
+      [ngStyle]="{
+        'background-color': themeService.BR3
+      }"
+    ></div>
+
+
+    <!-- Indication -->
+
+    <div
+      class="
+        flex
+        items-center
+        gap-2
+        text-xs
+        font-semibold
+        lg:text-sm
+      "
+      [ngStyle]="{
+        'color': themeService.TextPrincipal,
+        'opacity': '0.6'
+      }"
+    >
+
+      <span
+        class="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-lg
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft1,
+          'color': themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-lightbulb"></i>
+      </span>
+
+      <span>
+        {{
+          languageService.is('fr')
+            ? 'Des conseils utiles'
+            : 'Useful advice'
+        }}
+      </span>
+
+    </div>
+
+  </article>
+
+
+  <!-- ==========================================================
+       ÉTAPE 3 — CULTIVEZ
+  =========================================================== -->
+
+  <article
+    class="
+      jhow-card
+      group
+      relative
+      z-10
+      w-full
+      rounded-[1.75rem]
+      border
+      p-6
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      lg:p-8
+      xl:p-9
+    "
+    [ngStyle]="{
+      'background-color': themeService.BG3,
+      'border-color': themeService.BG3,
+      'animation-delay': '0.51s'
+    }"
+  >
+
+    <!-- Numéro + icône -->
+
+    <div class="flex items-center justify-between">
+
+      <div
+        class="
+          flex
+          h-14
+          w-14
+          items-center
+          justify-center
+          rounded-2xl
+          text-xl
+          shadow-sm
+          transition-all
+          duration-300
+          group-hover:scale-105
+          group-hover:rotate-2
+          lg:h-16
+          lg:w-16
+          lg:text-2xl
+        "
+        [ngStyle]="{
+          'background-color': themeService.BG4,
+          'color': '#ffffff'
+        }"
+      >
+        <i class="fa-solid fa-seedling"></i>
+      </div>
+
+
+      <span
+        class="
+          text-4xl
+          font-black
+          transition-transform
+          duration-300
+          group-hover:scale-110
+          lg:text-5xl
+        "
+        [ngStyle]="{
+          'color': themeService.BG1
+        }"
+      >
+        03
+      </span>
+
+    </div>
+
+
+    <!-- Contenu -->
+
+    <div class="mt-6 lg:mt-8">
+
+      <span
+        class="
+          text-[11px]
+          font-bold
+          uppercase
+          tracking-[0.16em]
+          sm:text-xs
+        "
+        [ngStyle]="{
+          'color': themeService.Primary1
+        }"
+      >
+        {{
+          languageService.is('fr')
+            ? 'Étape 03'
+            : 'Step 03'
+        }}
+      </span>
+
+
+      <h3
+        class="
+          mt-2
+          text-xl
+          font-extrabold
+          lg:text-2xl
+        "
+        [ngStyle]="{
+          'color': themeService.TextPrincipal
+        }"
+      >
+        {{
+          languageService.is('fr')
+            ? 'Cultivez'
+            : 'Grow'
+        }}
+      </h3>
+
+
+      <p
+        class="
+          mt-3
+          text-sm
+          leading-6
+          lg:text-base
+          lg:leading-7
+        "
+        [ngStyle]="{
+          'color': themeService.TextPrincipal,
+          'opacity': '0.7'
+        }"
+      >
+        {{
+          languageService.is('fr')
+            ? 'Organisez votre univers végétal, gardez vos plantes à portée de main et progressez dans votre jardin au fil du temps.'
+            : 'Organize your plant world, keep your plants close at hand, and grow your garden over time.'
+        }}
+      </p>
+
+    </div>
+
+
+    <!-- Séparateur -->
+
+    <div
+      class="my-5 h-px w-full"
+      [ngStyle]="{
+        'background-color': themeService.BR3
+      }"
+    ></div>
+
+
+    <!-- Indication -->
+
+    <div
+      class="
+        flex
+        items-center
+        gap-2
+        text-xs
+        font-semibold
+        lg:text-sm
+      "
+      [ngStyle]="{
+        'color': themeService.TextPrincipal,
+        'opacity': '0.6'
+      }"
+    >
+
+      <span
+        class="
+          flex
+          h-7
+          w-7
+          shrink-0
+          items-center
+          justify-center
+          rounded-lg
+        "
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft1,
+          'color': themeService.Primary1
+        }"
+      >
+        <i class="fa-solid fa-leaf"></i>
+      </span>
+
+      <span>
+        {{
+          languageService.is('fr')
+            ? 'Votre univers végétal'
+            : 'Your plant world'
+        }}
+      </span>
+
+    </div>
+
+  </article>
+
+</div>
+
+
+<!-- ============================================================
+     MINI PROMESSE
+============================================================= -->
+
+<div
+  class="
+    jhow-reveal
+    mx-auto
+    mt-9
+    flex
+    w-full
+    items-center
+    justify-center
+    gap-3
+    text-center
+    text-xs
+    sm:mt-11
+    sm:text-sm
+  "
+  [ngStyle]="{
+    'color': themeService.TextPrincipal,
+    'opacity': '0.6',
+    'animation-delay': '0.65s'
+  }"
+>
+
+  <span
+    class="
+      h-1.5
+      w-1.5
+      shrink-0
+      rounded-full
+    "
+    [ngStyle]="{
+      'background-color': themeService.Primary1
+    }"
+  ></span>
+
+  <span>
+    {{
+      languageService.is('fr')
+        ? 'De la découverte aux conseils, Natureora vous accompagne pour mieux comprendre et prendre soin du monde végétal.'
+        : 'From discovery to advice, Natureora helps you better understand and care for the plant world.'
+    }}
+  </span>
+
+  <span
+    class="
+      h-1.5
+      w-1.5
+      shrink-0
+      rounded-full
+    "
+    [ngStyle]="{
+      'background-color': themeService.Primary1
+    }"
+  ></span>
+
+</div>
+
+
+<!-- ============================================================
+     INDICATEUR FINAL
+============================================================= -->
+
+<div
+  class="
+    jhow-reveal
+    mx-auto
+    mt-7
+    flex
+    items-center
+    justify-center
+    gap-2
+    text-xs
+    font-semibold
+    sm:text-sm
+  "
+  [ngStyle]="{
+    'color': themeService.Primary1,
+    'animation-delay': '0.72s'
+  }"
+>
+
+  <i class="fa-solid fa-arrow-right"></i>
+
+  <span>
+    {{
+      languageService.is('fr')
+        ? 'Explorer. Comprendre. Cultiver.'
+        : 'Explore. Learn. Grow.'
+    }}
+  </span>
+
+  <i class="fa-solid fa-arrow-left"></i>
+
+</div>
+```
 
   </div>
 
 </section>
-
 
 <!-- ============================================================
      🎬 ANIMATIONS
@@ -971,20 +981,36 @@
 
 
   .jhow-reveal {
+
     opacity: 0;
-    animation: jhowFadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    animation:
+      jhowFadeUp
+      0.75s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      forwards;
+
   }
 
 
   .jhow-card {
+
     opacity: 0;
-    animation: jhowCardIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    animation:
+      jhowCardIn
+      0.8s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      forwards;
+
   }
 
 
   .jhow-card:hover {
+
     box-shadow:
       0 20px 50px rgba(0, 0, 0, 0.08);
+
   }
 
 
@@ -992,9 +1018,11 @@
 
     .jhow-reveal,
     .jhow-card {
+
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
+
     }
 
   }
@@ -1003,7 +1031,9 @@
   @media (max-width: 767px) {
 
     .jhow-card {
+
       animation-duration: 0.65s;
+
     }
 
   }
