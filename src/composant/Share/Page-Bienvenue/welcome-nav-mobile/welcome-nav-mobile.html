@@ -1,0 +1,511 @@
+<!-- ============================================================
+     ARBORIA — MACOS FLOATING DOCK
+     Angular standalone • Tailwind CSS • ThemeService
+
+     • Dock premium inspiré de macOS
+     • Effet glass subtil, profondeur et reflets
+     • Icônes végétales personnalisées en SVG
+     • Thème clair / sombre conservé
+     • Méga-menus Fonctionnalités et Aide conservés
+     • Compatibilité avec les méthodes Angular existantes
+     • Navigation accessible au clavier
+     • Responsive mobile / tablette / desktop
+     • Respect de prefers-reduced-motion
+============================================================ -->
+
+<section
+  class="fixed inset-x-0 bottom-[max(12px,env(safe-area-inset-bottom))]
+         z-[999] flex justify-center px-2
+         pointer-events-none"
+  (click)="$event.stopPropagation()"
+>
+  <!-- ========================================================
+       DOCK PRINCIPAL
+  ========================================================= -->
+  <nav
+    aria-label="Navigation principale Arboria"
+    class="arboria-dock pointer-events-auto relative isolate
+           flex w-max max-w-full items-center justify-center
+           gap-1.5 overflow-visible rounded-[25px]
+           border p-2
+           sm:gap-2 sm:rounded-[29px] sm:p-2.5
+           transition-[background,border-color,box-shadow]
+           duration-300 motion-reduce:transition-none"
+    [ngStyle]="{
+      'background': themeService.isDarkMode
+        ? 'linear-gradient(180deg, rgba(49,67,55,.96) 0%, rgba(27,41,32,.97) 100%)'
+        : 'linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(239,247,234,.97) 100%)',
+      'border-color': themeService.isDarkMode
+        ? 'rgba(167,230,106,.22)'
+        : 'rgba(77,125,76,.18)',
+      'box-shadow': themeService.isDarkMode
+        ? '0 18px 45px rgba(0,0,0,.36), 0 5px 14px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.12)'
+        : '0 18px 42px rgba(34,76,45,.16), 0 4px 12px rgba(34,76,45,.07), inset 0 1px 0 rgba(255,255,255,.98)'
+    }"
+  >
+    <!-- Reflet intérieur -->
+    <span
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-[3px]
+             rounded-[21px] border"
+      [ngStyle]="{
+        'border-color': themeService.isDarkMode
+          ? 'rgba(255,255,255,.065)'
+          : 'rgba(255,255,255,.82)'
+      }"
+    ></span>
+
+    <!-- Ligne lumineuse supérieure -->
+    <span
+      aria-hidden="true"
+      class="pointer-events-none absolute left-1/2 top-0
+             h-px w-[58%] -translate-x-1/2 rounded-full"
+      [ngStyle]="{
+        'background': themeService.isDarkMode
+          ? 'linear-gradient(90deg,transparent,rgba(196,242,158,.8),transparent)'
+          : 'linear-gradient(90deg,transparent,rgba(91,151,83,.38),transparent)'
+      }"
+    ></span>
+
+    <!-- ======================================================
+         1. DÉCOUVRIR ARBORIA
+    ======================================================= -->
+    <a
+      href="#home"
+      aria-label="Découvrir Arboria"
+      title="Découvrir Arboria"
+      class="dock-item dock-item-home group relative z-[1]
+             flex h-[52px] w-[52px] shrink-0
+             items-center justify-center rounded-[17px]
+             border no-underline
+             transition-[transform,box-shadow,filter]
+             duration-200 ease-out
+             hover:-translate-y-1.5 hover:scale-105
+             hover:brightness-105
+             focus-visible:outline-none
+             focus-visible:ring-2 focus-visible:ring-green-400
+             focus-visible:ring-offset-2
+             active:scale-95
+             sm:h-[64px] sm:w-[64px] sm:rounded-[20px]
+             motion-reduce:transform-none
+             motion-reduce:transition-none"
+      [ngStyle]="{
+        'background': themeService.isDarkMode
+          ? 'linear-gradient(145deg,#E9FBD9 0%,#C5EBA5 48%,#A7D97D 100%)'
+          : 'linear-gradient(145deg,#FFFFFF 0%,#F0FBE6 48%,#DDF0CC 100%)',
+        'border-color': themeService.isDarkMode ? '#D0F2AD' : '#C6E1B0',
+        'color': '#245735',
+        'box-shadow': themeService.isDarkMode
+          ? '0 5px 12px rgba(0,0,0,.23), inset 0 1px 0 rgba(255,255,255,.95), inset 0 -2px 3px rgba(65,111,45,.10)'
+          : '0 5px 12px rgba(36,87,53,.13), inset 0 1px 0 #FFFFFF, inset 0 -2px 3px rgba(65,111,45,.07)'
+      }"
+      (click)="fermerMenus()"
+    >
+      <span
+        class="flex h-8 w-8 items-center justify-center
+               transition-transform duration-200
+               group-hover:scale-110 sm:h-10 sm:w-10
+               motion-reduce:transition-none"
+      >
+        <svg
+          viewBox="0 0 48 48"
+          fill="none"
+          class="h-full w-full"
+          aria-hidden="true"
+        >
+          <path
+            d="M24 42V19"
+            stroke="currentColor"
+            stroke-width="2.7"
+            stroke-linecap="round"
+          />
+          <path
+            d="M24 28C11 28 6 19 8 8C20 8 29 14 29 24"
+            fill="currentColor"
+          />
+          <path
+            d="M24 35C24 23 33 15 42 17C42 28 35 36 24 37"
+            fill="currentColor"
+            opacity=".7"
+          />
+          <path
+            d="M13 13L24 27M37 21L25 33"
+            stroke="#FFFFFF"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            opacity=".9"
+          />
+          <path
+            d="M16 42H32"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            opacity=".5"
+          />
+        </svg>
+      </span>
+
+      <!-- Infobulle -->
+      <span
+        role="tooltip"
+        class="dock-tooltip pointer-events-none absolute
+               bottom-[calc(100%+13px)] left-1/2 z-30
+               w-max max-w-[190px] -translate-x-1/2
+               translate-y-1 rounded-xl border px-3 py-2
+               text-xs font-semibold leading-tight
+               opacity-0 shadow-xl
+               transition-[opacity,transform] duration-200
+               group-hover:translate-y-0 group-hover:opacity-100
+               group-focus-visible:translate-y-0
+               group-focus-visible:opacity-100
+               motion-reduce:transition-none"
+        [ngStyle]="{
+          'background': themeService.isDarkMode ? '#26392D' : '#FFFFFF',
+          'color': themeService.TX0,
+          'border-color': themeService.BR2
+        }"
+      >
+        Découvrir Arboria
+      </span>
+
+      <!-- Indicateur actif -->
+      <span
+        aria-hidden="true"
+        class="absolute -bottom-[7px] left-1/2 h-[4px]
+               w-[4px] -translate-x-1/2 rounded-full
+               bg-current opacity-0 transition-opacity duration-200
+               group-hover:opacity-100
+               group-focus-visible:opacity-100"
+      ></span>
+    </a>
+
+    <!-- ======================================================
+         2. FONCTIONNALITÉS
+         Menu conservé : ressources
+         ID conservé : mega-fonctionnalites
+    ======================================================= -->
+    <div class="relative z-[1] flex shrink-0 items-center">
+      <button
+        type="button"
+        aria-label="Fonctionnalités"
+        title="Fonctionnalités"
+        aria-controls="mega-fonctionnalites"
+        aria-haspopup="true"
+        [attr.aria-expanded]="menuOuvert === 'ressources'"
+        class="dock-item group relative flex h-[52px] w-[52px]
+               shrink-0 items-center justify-center
+               rounded-[17px] border p-0
+               transition-[transform,box-shadow,filter]
+               duration-200 ease-out
+               hover:-translate-y-1.5 hover:scale-105
+               hover:brightness-105
+               focus-visible:outline-none
+               focus-visible:ring-2 focus-visible:ring-lime-400
+               focus-visible:ring-offset-2
+               active:scale-95
+               sm:h-[64px] sm:w-[64px] sm:rounded-[20px]
+               motion-reduce:transform-none
+               motion-reduce:transition-none"
+        [ngStyle]="{
+          'background': themeService.isDarkMode
+            ? 'linear-gradient(145deg,#D6F8A8 0%,#A8E66A 50%,#7CC84A 100%)'
+            : 'linear-gradient(145deg,#F0FFCF 0%,#C9F39A 50%,#9CDA6E 100%)',
+          'border-color': themeService.isDarkMode ? '#C7EF91' : '#B8DF8C',
+          'color': '#285A35',
+          'box-shadow': menuOuvert === 'ressources'
+            ? '0 8px 18px rgba(91,157,57,.32), inset 0 1px 0 rgba(255,255,255,.9)'
+            : '0 5px 12px rgba(36,87,53,.13), inset 0 1px 0 rgba(255,255,255,.8)'
+        }"
+        [class.-translate-y-1\.5]="menuOuvert === 'ressources'"
+        [class.scale-105]="menuOuvert === 'ressources'"
+        (mouseenter)="ouvrirMenuSurvol('ressources')"
+        (focus)="ouvrirMenuSurvol('ressources')"
+        (click)="toggleMegaMenu('ressources', $event)"
+      >
+        <span
+          class="flex h-8 w-8 items-center justify-center
+                 transition-transform duration-200
+                 group-hover:scale-110 sm:h-10 sm:w-10
+                 motion-reduce:transition-none"
+        >
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            class="h-full w-full"
+            aria-hidden="true"
+          >
+            <path
+              d="M27 5L11 26H22L19 43L37 19H25L27 5Z"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 8L10 12M38 30L41 32M37 7L35 11"
+              stroke="#FFFFFF"
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity=".9"
+            />
+          </svg>
+        </span>
+
+        <span
+          role="tooltip"
+          class="dock-tooltip pointer-events-none absolute
+                 bottom-[calc(100%+13px)] left-1/2 z-30
+                 w-max max-w-[190px] -translate-x-1/2
+                 translate-y-1 rounded-xl border px-3 py-2
+                 text-xs font-semibold leading-tight
+                 opacity-0 shadow-xl
+                 transition-[opacity,transform] duration-200
+                 group-hover:translate-y-0 group-hover:opacity-100
+                 group-focus-visible:translate-y-0
+                 group-focus-visible:opacity-100
+                 motion-reduce:transition-none"
+          [ngStyle]="{
+            'background': themeService.isDarkMode ? '#26392D' : '#FFFFFF',
+            'color': themeService.TX0,
+            'border-color': themeService.BR2
+          }"
+        >
+          Fonctionnalités
+        </span>
+
+        <span
+          aria-hidden="true"
+          class="absolute -bottom-[7px] left-1/2 h-[4px]
+                 w-[4px] -translate-x-1/2 rounded-full
+                 bg-current opacity-0 transition-opacity duration-200
+                 group-hover:opacity-100
+                 group-focus-visible:opacity-100"
+          [class.!opacity-100]="menuOuvert === 'ressources'"
+        ></span>
+      </button>
+    </div>
+
+    <!-- ======================================================
+         3. AIDE
+         Menu conservé : aide
+         ID conservé : mega-aide
+    ======================================================= -->
+    <div class="relative z-[1] flex shrink-0 items-center">
+      <button
+        type="button"
+        aria-label="Aide"
+        title="Aide"
+        aria-controls="mega-aide"
+        aria-haspopup="true"
+        [attr.aria-expanded]="menuOuvert === 'aide'"
+        class="dock-item group relative flex h-[52px] w-[52px]
+               shrink-0 items-center justify-center
+               rounded-[17px] border p-0
+               transition-[transform,box-shadow,filter]
+               duration-200 ease-out
+               hover:-translate-y-1.5 hover:scale-105
+               hover:brightness-105
+               focus-visible:outline-none
+               focus-visible:ring-2 focus-visible:ring-teal-400
+               focus-visible:ring-offset-2
+               active:scale-95
+               sm:h-[64px] sm:w-[64px] sm:rounded-[20px]
+               motion-reduce:transform-none
+               motion-reduce:transition-none"
+        [ngStyle]="{
+          'background': themeService.isDarkMode
+            ? 'linear-gradient(145deg,#D4FFF0 0%,#83E6C3 50%,#43C9A4 100%)'
+            : 'linear-gradient(145deg,#FFFFFF 0%,#DDFBED 50%,#B2EBD2 100%)',
+          'border-color': themeService.isDarkMode ? '#8DEAD0' : '#B6E8CF',
+          'color': '#155B49',
+          'box-shadow': menuOuvert === 'aide'
+            ? '0 8px 18px rgba(25,169,147,.28), inset 0 1px 0 rgba(255,255,255,.9)'
+            : '0 5px 12px rgba(36,87,53,.12), inset 0 1px 0 rgba(255,255,255,.85)'
+        }"
+        [class.-translate-y-1\.5]="menuOuvert === 'aide'"
+        [class.scale-105]="menuOuvert === 'aide'"
+        (mouseenter)="ouvrirMenuSurvol('aide')"
+        (focus)="ouvrirMenuSurvol('aide')"
+        (click)="toggleMegaMenu('aide', $event)"
+      >
+        <span
+          class="flex h-8 w-8 items-center justify-center
+                 transition-transform duration-200
+                 group-hover:scale-110 sm:h-10 sm:w-10
+                 motion-reduce:transition-none"
+        >
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            class="h-full w-full"
+            aria-hidden="true"
+          >
+            <circle
+              cx="24"
+              cy="24"
+              r="19"
+              stroke="currentColor"
+              stroke-width="3.5"
+            />
+            <path
+              d="M18.5 18.5C18.5 12.5 29.5 12.5 29.5 19C29.5 23 24 23 24 28"
+              stroke="currentColor"
+              stroke-width="3.8"
+              stroke-linecap="round"
+            />
+            <circle cx="24" cy="34" r="2.5" fill="currentColor" />
+            <path
+              d="M34 10L36 7M38 15L41 14"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              opacity=".55"
+            />
+          </svg>
+        </span>
+
+        <span
+          role="tooltip"
+          class="dock-tooltip pointer-events-none absolute
+                 bottom-[calc(100%+13px)] left-1/2 z-30
+                 w-max max-w-[190px] -translate-x-1/2
+                 translate-y-1 rounded-xl border px-3 py-2
+                 text-xs font-semibold leading-tight
+                 opacity-0 shadow-xl
+                 transition-[opacity,transform] duration-200
+                 group-hover:translate-y-0 group-hover:opacity-100
+                 group-focus-visible:translate-y-0
+                 group-focus-visible:opacity-100
+                 motion-reduce:transition-none"
+          [ngStyle]="{
+            'background': themeService.isDarkMode ? '#26392D' : '#FFFFFF',
+            'color': themeService.TX0,
+            'border-color': themeService.BR2
+          }"
+        >
+          Aide et ressources
+        </span>
+
+        <span
+          aria-hidden="true"
+          class="absolute -bottom-[7px] left-1/2 h-[4px]
+                 w-[4px] -translate-x-1/2 rounded-full
+                 bg-current opacity-0 transition-opacity duration-200
+                 group-hover:opacity-100
+                 group-focus-visible:opacity-100"
+          [class.!opacity-100]="menuOuvert === 'aide'"
+        ></span>
+      </button>
+    </div>
+
+    <!-- ======================================================
+         4. CONTACT
+    ======================================================= -->
+    <a
+      href="#contact"
+      aria-label="Contact"
+      title="Contact"
+      class="dock-item group relative z-[1]
+             flex h-[52px] w-[52px] shrink-0
+             items-center justify-center rounded-[17px]
+             border no-underline
+             transition-[transform,box-shadow,filter]
+             duration-200 ease-out
+             hover:-translate-y-1.5 hover:scale-105
+             hover:brightness-105
+             focus-visible:outline-none
+             focus-visible:ring-2 focus-visible:ring-amber-400
+             focus-visible:ring-offset-2
+             active:scale-95
+             sm:h-[64px] sm:w-[64px] sm:rounded-[20px]
+             motion-reduce:transform-none
+             motion-reduce:transition-none"
+      [ngStyle]="{
+        'background': themeService.isDarkMode
+          ? 'linear-gradient(145deg,#FFF0C9 0%,#FFD987 50%,#F2B84B 100%)'
+          : 'linear-gradient(145deg,#FFFFFF 0%,#FFF3D3 50%,#FFDE91 100%)',
+        'border-color': themeService.isDarkMode ? '#FFE0A0' : '#F0D69C',
+        'color': '#78501B',
+        'box-shadow': '0 5px 12px rgba(36,87,53,.12), inset 0 1px 0 rgba(255,255,255,.9)'
+      }"
+      (click)="fermerMenus()"
+    >
+      <span
+        class="flex h-8 w-8 items-center justify-center
+               transition-transform duration-200
+               group-hover:scale-110 sm:h-10 sm:w-10
+               motion-reduce:transition-none"
+      >
+        <svg
+          viewBox="0 0 48 48"
+          fill="none"
+          class="h-full w-full"
+          aria-hidden="true"
+        >
+          <rect
+            x="5"
+            y="10"
+            width="38"
+            height="28"
+            rx="7"
+            stroke="currentColor"
+            stroke-width="3"
+          />
+          <path
+            d="M8 14L24 27L40 14"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M8 34L19 24M40 34L29 24"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            opacity=".65"
+          />
+          <circle
+            cx="38"
+            cy="10"
+            r="3"
+            fill="#247A4B"
+            stroke="#FFFFFF"
+            stroke-width="1"
+          />
+        </svg>
+      </span>
+
+      <span
+        role="tooltip"
+        class="dock-tooltip pointer-events-none absolute
+               bottom-[calc(100%+13px)] left-1/2 z-30
+               w-max max-w-[190px] -translate-x-1/2
+               translate-y-1 rounded-xl border px-3 py-2
+               text-xs font-semibold leading-tight
+               opacity-0 shadow-xl
+               transition-[opacity,transform] duration-200
+               group-hover:translate-y-0 group-hover:opacity-100
+               group-focus-visible:translate-y-0
+               group-focus-visible:opacity-100
+               motion-reduce:transition-none"
+        [ngStyle]="{
+          'background': themeService.isDarkMode ? '#26392D' : '#FFFFFF',
+          'color': themeService.TX0,
+          'border-color': themeService.BR2
+        }"
+      >
+        Nous contacter
+      </span>
+
+      <span
+        aria-hidden="true"
+        class="absolute -bottom-[7px] left-1/2 h-[4px]
+               w-[4px] -translate-x-1/2 rounded-full
+               bg-current opacity-0 transition-opacity duration-200
+               group-hover:opacity-100
+               group-focus-visible:opacity-100"
+      ></span>
+    </a>
+  </nav>
+</section>

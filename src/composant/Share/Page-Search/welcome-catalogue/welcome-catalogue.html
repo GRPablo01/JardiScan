@@ -1,0 +1,155 @@
+<!-- ============================================================
+     ARBORIA — WELCOME RECHERCHE PREMIUM
+     Angular Standalone + Tailwind CSS
+
+     • Page dédiée à la recherche de plantes
+     • Aucun bouton
+     • Champ de recherche avec icône intégrée
+     • Suggestions de recherche visuelles
+     • Thème clair / sombre via variables CSS
+     • Traduction FR / EN via LanguageService
+     • Responsive mobile, tablette et desktop
+     • Aucun changement des méthodes existantes
+============================================================ -->
+
+<section
+  id="welcome-recherche"
+  class="relative isolate flex min-h-[auto] w-full flex-col
+         items-center justify-center overflow-hidden
+         p-10"
+  [style.backgroundColor]="'var(--BG1)'"
+  [style.color]="'var(--TX0)'"
+>
+
+  <!-- CONTENU PRINCIPAL -->
+  <div
+    class="relative mx-auto flex w-full max-w-6xl
+           min-w-0 flex-col items-center text-center"
+  >
+    <!-- SIGNATURE ARBORIA -->
+    <div
+      class="mb-8 inline-flex max-w-full items-center
+             justify-center gap-2.5 rounded-full
+             border px-3 py-2
+             shadow-sm backdrop-blur-xl
+             sm:mb-10 sm:gap-3 sm:px-4"
+      [style.backgroundColor]="'var(--BG3)'"
+      [style.borderColor]="'var(--BR1)'"
+      [style.boxShadow]="'var(--SHADOW)'"
+    >
+      <!-- Icône végétale -->
+      <span
+        class="flex h-8 w-8 shrink-0 items-center
+               justify-center rounded-full"
+        [style.backgroundColor]="'var(--PrimarySoft)'"
+      >
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+          [style.color]="'var(--Primary)'"
+        >
+          <path
+            d="M20 4C11 4 5 7.5 5 14c0 3.2 2.2 5 5 5 6.5 0 10-6 10-15Z"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M3 21c3-5 6.5-8 12-11"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+          />
+        </svg>
+      </span>
+
+      <span
+        class="text-[10px] font-bold uppercase
+               tracking-[0.22em] sm:text-[11px]"
+        [style.color]="'var(--TX1)'"
+      >
+        ARBORIA
+      </span>
+
+      <span
+        class="h-1 w-1 shrink-0 rounded-full"
+        [style.backgroundColor]="'var(--Primary)'"
+      ></span>
+
+      <span
+        class="text-[10px] font-medium sm:text-xs"
+        [style.color]="'var(--TX2)'"
+      >
+        {{
+          (languageService.language$ | async) === 'fr'
+            ? 'Recherche végétale'
+            : 'Plant search'
+        }}
+      </span>
+    </div>
+
+    <!-- SURTITRE -->
+    <p
+      class="mb-4 text-[10px] font-semibold uppercase
+             tracking-[0.24em]
+             sm:mb-5 sm:text-xs sm:tracking-[0.3em]"
+      [style.color]="'var(--Primary)'"
+    >
+      {{
+        (languageService.language$ | async) === 'fr'
+          ? 'LE MONDE VÉGÉTAL À PORTÉE DE RECHERCHE'
+          : 'THE PLANT WORLD AT YOUR FINGERTIPS'
+      }}
+    </p>
+
+    <!-- TITRE PRINCIPAL -->
+    <h1
+      class="w-full max-w-5xl text-balance
+             text-[clamp(2.25rem,7vw,5.75rem)]
+             font-semibold leading-[1.06]
+             tracking-[-0.055em]
+             sm:leading-[1.03]"
+      [style.color]="'var(--TX0)'"
+      style="font-family: var(--arboria-font-body)"
+    >
+      {{
+        (languageService.language$ | async) === 'fr'
+          ? 'Trouvez votre'
+          : 'Find your'
+      }}
+
+      <br class="hidden sm:block" />
+
+      <span
+        class="font-medium italic tracking-[-0.045em]"
+        [style.color]="'var(--Primary)'"
+        style="font-family: var(--arboria-font-display)"
+      >
+        {{
+          (languageService.language$ | async) === 'fr'
+            ? 'prochaine plante.'
+            : 'next plant.'
+        }}
+      </span>
+    </h1>
+
+    <!-- DESCRIPTION -->
+    <p
+      class="mt-5 w-full max-w-2xl px-1
+             text-sm font-normal leading-7
+             sm:mt-7 sm:px-4 sm:text-base sm:leading-8
+             lg:mt-8"
+      [style.color]="'var(--TX2)'"
+    >
+      {{
+        (languageService.language$ | async) === 'fr'
+          ? 'Explorez la richesse du monde végétal. Retrouvez vos plantes préférées, découvrez de nouvelles espèces et trouvez celles qui correspondent à votre environnement.'
+          : 'Explore the richness of the plant world. Find your favorite plants, discover new species and find the ones that suit your environment.'
+      }}
+    </p>
+    
+  </div>
+</section>

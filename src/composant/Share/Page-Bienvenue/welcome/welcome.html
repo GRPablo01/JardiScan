@@ -1,565 +1,394 @@
 <!-- ============================================================
-     🌿 NATUREORA — SECTION WELCOME RESPONSIVE
+     PAGE WELCOME — ARBORIA
+     Angular + Tailwind CSS
 
-     • FR / EN avec LanguageService
-     • ThemeService conservé
-     • Images gauche / droite conservées
-     • Responsive Desktop / Tablet / Mobile
-     • Espacement conservé
-     • Boutons et animations conservés
-     • Font Awesome
-     • UI / UX premium
-     • Aucun changement de logique Angular
-     ============================================================ -->
+     • Conservation du UI/UX original
+     • Suppression du positionnement fixed
+     • Mise en page responsive sans positionnement absolu
+     • Couleurs adaptatives selon le thème
+     • Thème dynamique clair / sombre via ThemeService
+     • Traduction française / anglaise via LanguageService
+     • Image de fond dynamique
+     • Overlay noir dégradé
+     • Contenu centré et responsive
+     • Boutons animés et accessibles
+     • Défilement naturel de la page
+     • Compatibilité avec Angular standalone
+============================================================ -->
 
-     <section
-     class="
-       relative
-       w-full
-       mt-0
-       2xl:mt-17
-       h-[472px]
-       sm:h-[461px]
-       lg:h-[526px]
-       xl:min-h-[calc(100dvh-80px)]
-       xl:h-[calc(100.7dvh-80px)]
-       overflow-hidden
-     "
-     [ngStyle]="{
-       'background-color': themeService.BG1,
-       'color': themeService.TextPrincipal
-     }"
-   >
-   
-     <!-- ==========================================================
-          🌿 IMAGE GAUCHE
-          ========================================================== -->
-   
-   <img
-    src="assets/BlocImageGauche.svg"
-    alt=""
-    aria-hidden="true"
+<section
+  class="
+    relative isolate
+    mx-auto
+    min-h-[calc(100vh-6.75rem)]
+    min-h-[calc(100dvh-6.75rem)]
+    w-full
+    overflow-hidden
+    p-3
+    transition-colors duration-500
+    motion-reduce:transition-none
+  "
+  [ngStyle]="{
+    'background-color': themeService.BG1,
+    'color': themeService.TX0
+  }"
+  [attr.lang]="languageService.currentLanguage"
+>
+  <!-- ==========================================================
+       CONTENEUR PRINCIPAL
+  =========================================================== -->
+
+  <div
     class="
-      absolute
-      bottom-[-3px]
-      left-[-18px]
-      sm:left-[-24px]
-      lg:left-[-850px]
-      xl:left-[-42px]
-      2xl:left-[-55px]
-      z-10
-      w-[45vw]
-      max-w-[320px]
-      sm:w-[45vw]
-      sm:max-w-[420px]
-      lg:w-[170vw]
-      lg:max-w-[1700px]
-      xl:w-[45vw]
-      xl:max-w-[630px]
-      2xl:w-[45vw]
-      2xl:max-w-[800px]
-      h-auto
-      object-contain
-      object-bottom
-      object-left
-      pointer-events-none
-      select-none
+      relative isolate
+      flex
+      min-h-[calc(100vh-8.25rem)]
+      min-h-[calc(100dvh-8.25rem)]
+      w-full
+      flex-col
+      overflow-hidden
+      rounded-2xl
+      sm:min-h-[calc(100vh-8.75rem)]
+      sm:min-h-[calc(100dvh-8.75rem)]
+      sm:rounded-3xl
+      lg:min-h-[calc(100vh-8.75rem)]
+      lg:min-h-[calc(100dvh-8.75rem)]
     "
-   />
-   
-     <!-- ==========================================================
-          🌿 IMAGE DROITE
-          ========================================================== -->
-   
-   <img
-    src="assets/BlocImageDroite.svg"
-    alt=""
-    aria-hidden="true"
-    class="
-      absolute
-      bottom-[-3px]
-      right-[-18px]
-      sm:right-[-24px]
-      lg:right-[-850px]
-      xl:right-[-42px]
-      2xl:right-[-55px]
-      z-10
-      w-[45vw]
-      max-w-[320px]
-      sm:w-[45vw]
-      sm:max-w-[420px]
-      lg:w-[170vw]
-      lg:max-w-[1700px]
-      xl:w-[45vw]
-      xl:max-w-[630px]
-      2xl:w-[45vw]
-      2xl:max-w-[800px]
-      h-auto
-      object-contain
-      object-bottom
-      object-right
-      pointer-events-none
-      select-none
-    "
-   />
-   
-     <!-- ==========================================================
-          🌿 NATUREORA — BADGE BIENVENUE
-          ========================================================== -->
-   
-     <div
-       [ngStyle]="{
-         'background': themeService.BG2,
-         'border': '1px solid ' + themeService.BR2
-       }"
-       class="
-         absolute
-         top-[14px]
-         sm:top-[18px]
-         lg:top-[22px]
-         xl:top-[28px]
-         2xl:top-[34px]
-         left-1/2
-         -translate-x-1/2
-         z-30
-         flex
-         items-center
-         justify-center
-         gap-2
-         2xl:gap-3
-         w-[calc(100%-28px)]
-         sm:w-auto
-         px-4
-         py-2
-         sm:px-5
-         sm:py-2.5
-         xl:px-6
-         xl:py-3
-         2xl:px-7
-         2xl:py-3.5
-         rounded-[20px]
-         2xl:rounded-[24px]
-         backdrop-blur-xl
-         shadow-lg
-       "
-     >
-   
-   <!-- Icône -->
-   
-   <i
-     [ngStyle]="{
-       'color': themeService.Primary1
-     }"
-     class="
-       fa-solid
-       fa-seedling
-       flex
-       items-center
-       justify-center
-       text-sm
-       sm:text-base
-       lg:text-lg
-       xl:text-xl
-       2xl:text-2xl
-     "
-     aria-hidden="true"
-   ></i>
-   
-   <!-- Texte -->
-   
-   <span
-     [ngStyle]="{
-       'color': themeService.TextPrincipal
-     }"
-     class="
-       text-sm
-       sm:text-base
-       lg:text-lg
-       xl:text-xl
-       2xl:text-2xl
-       font-bold
-       tracking-wide
-       whitespace-nowrap
-     "
-   >
-     {{
-       languageService.is('fr')
-         ? 'Bienvenue sur Natureora'
-         : 'Welcome to Natureora'
-     }}
-   </span>
-   
-   
-     </div>
-   
-     <!-- ==========================================================
-          🌿 NATUREORA — H1 + DESCRIPTION
-          ========================================================== -->
-   
-     <div
-       class="
-         absolute
-         top-[88px]
-         sm:top-[105px]
-         lg:top-[125px]
-         xl:top-[150px]
-         2xl:top-[180px]
-         left-1/2
-         -translate-x-1/2
-         z-20
-         w-full
-         px-4
-         sm:px-6
-         xl:px-8
-         2xl:px-12
-         text-center
-       "
-     >
-   
-   
-   <!-- ========================================================
-        H1
-        ========================================================= -->
-   
-   <h1
-     [ngStyle]="{
-       'color': themeService.TextPrincipal
-     }"
-     class="
-       text-3xl
-       sm:text-4xl
-       lg:text-4xl
-       xl:text-5xl
-       2xl:text-7xl
-       3xl:text-8xl
-       font-extrabold
-       tracking-tight
-       leading-tight
-     "
-   >
-     {{
-       languageService.is('fr')
-         ? 'Prenez soin de votre jardin'
-         : 'Take care of your garden'
-     }}
-   
-     <span
-       class="block"
-       [ngStyle]="{
-         'color': themeService.Primary1
-       }"
-     >
-       {{
-         languageService.is('fr')
-           ? 'en toute simplicité'
-           : 'with complete simplicity'
-       }}
-     </span>
-   </h1>
-   
-   <!-- ========================================================
-        DESCRIPTION
-        ========================================================= -->
-   
-   <p
-     [ngStyle]="{
-       'color': themeService.TextPrincipal
-     }"
-     class="
-       mt-5
-       sm:mt-6
-       lg:mt-7
-       xl:mt-8
-       2xl:mt-9
-       mx-auto
-       max-w-[650px]
-       xl:max-w-[760px]
-       2xl:max-w-[900px]
-       text-sm
-       sm:text-base
-       lg:text-lg
-       xl:text-xl
-       2xl:text-2xl
-       leading-relaxed
-       font-medium
-     "
-   >
-     {{
-       languageService.is('fr')
-         ? 'Découvrez les besoins de vos plantes, trouvez les conseils adaptés et entretenez votre jardin plus facilement.'
-         : 'Discover your plants’ needs, find the right advice, and take care of your garden more easily.'
-     }}
-   </p>
-  
-   
-     </div>
-   
-     <!-- ==========================================================
-          🌿 NATUREORA — DEUX BOUTONS
-          ========================================================== -->
-   
-     <div
-       class="
-         absolute
-         top-[285px]
-         sm:top-[315px]
-         lg:top-[350px]
-         xl:top-[415px]
-         2xl:top-[490px]
-         left-1/2
-         -translate-x-1/2
-         z-20
-         flex
-         flex-col
-         sm:flex-row
-         items-center
-         justify-center
-         gap-3
-         xl:gap-4
-         2xl:gap-5
-         w-full
-         px-4
-       "
-     >
-   
-   <!-- ========================================================
-        🌱 BOUTON COMMENCER
-        ========================================================= -->
-   
-   <button
-     type="button"
-     routerLink="/login"
-     [ngStyle]="{
-       'background': themeService.Primary1,
-       'color': themeService.TextOnPrimary,
-       'box-shadow': themeService.BoxShadowPrimary
-     }"
-     class="
-       group
-       relative
-       overflow-hidden
-       w-full
-       sm:w-auto
-       min-w-[180px]
-       xl:min-w-[210px]
-       2xl:min-w-[240px]
-       px-6
-       py-3
-       xl:px-7
-       xl:py-3.5
-       2xl:px-8
-       2xl:py-4
-       rounded-xl
-       2xl:rounded-2xl
-       font-bold
-       text-sm
-       sm:text-base
-       xl:text-lg
-       2xl:text-xl
-       transition-all
-       duration-500
-       ease-out
-       hover:-translate-y-1
-       hover:scale-[1.03]
-       hover:shadow-2xl
-       active:translate-y-0
-       active:scale-[0.97]
-     "
-   >
-   
-     <!-- Reflet -->
-   
-     <span
-       class="
-         absolute
-         inset-y-0
-         -left-full
-         w-1/2
-         skew-x-[-20deg]
-         bg-white/20
-         transition-all
-         duration-700
-         ease-out
-         group-hover:left-[130%]
-       "
-     ></span>
-   
-     <!-- Contenu -->
-   
-     <span
-       class="
-         relative
-         z-10
-         flex
-         items-center
-         justify-center
-         gap-2
-       "
-     >
-   
-       <i
-         class="
-           fa-solid
-           fa-seedling
-           transition-transform
-           duration-500
-           ease-out
-           group-hover:rotate-[-8deg]
-           group-hover:scale-110
-         "
-         aria-hidden="true"
-       ></i>
-   
-       <span
-         class="
-           transition-transform
-           duration-500
-           ease-out
-           group-hover:translate-x-0.5
-         "
-       >
-         {{
-           languageService.is('fr')
-             ? 'Commencer'
-             : 'Get started'
-         }}
-       </span>
-   
-     </span>
-   
-   </button>
-   
-   <!-- ========================================================
-        🧭 BOUTON DÉCOUVRIR
-        ========================================================= -->
-   
-   <button
-     type="button"
-     routerLink="/decouvrir"
-     [ngStyle]="{
-       'background': themeService.BG1,
-       'color': themeService.Primary1,
-       'border': '1px solid ' + themeService.BorderPrimary
-     }"
-     class="
-       group
-       relative
-       overflow-hidden
-       w-full
-       sm:w-auto
-       min-w-[180px]
-       xl:min-w-[210px]
-       2xl:min-w-[240px]
-       px-6
-       py-3
-       xl:px-7
-       xl:py-3.5
-       2xl:px-8
-       2xl:py-4
-       rounded-xl
-       2xl:rounded-2xl
-       font-bold
-       text-sm
-       sm:text-base
-       xl:text-lg
-       2xl:text-xl
-       backdrop-blur-xl
-       shadow-md
-       transition-all
-       duration-500
-       ease-out
-       hover:-translate-y-1
-       hover:scale-[1.03]
-       hover:shadow-xl
-       active:translate-y-0
-       active:scale-[0.97]
-     "
-   >
-   
-     <!-- Overlay -->
-   
-     <span
-       class="
-         absolute
-         inset-0
-         opacity-0
-         bg-white/10
-         transition-opacity
-         duration-500
-         group-hover:opacity-100
-       "
-     ></span>
-   
-     <!-- Reflet -->
-   
-     <span
-       class="
-         absolute
-         inset-y-0
-         -left-full
-         w-1/3
-         skew-x-[-20deg]
-         bg-white/10
-         transition-all
-         duration-700
-         ease-out
-         group-hover:left-[120%]
-       "
-     ></span>
-   
-     <!-- Contenu -->
-   
-     <span
-       class="
-         relative
-         z-10
-         flex
-         items-center
-         justify-center
-         gap-2
-       "
-     >
-   
-       <i
-         class="
-           fa-solid
-           fa-compass
-           transition-all
-           duration-500
-           ease-out
-           group-hover:rotate-12
-           group-hover:scale-110
-         "
-         aria-hidden="true"
-       ></i>
-   
-       <span
-         class="
-           transition-transform
-           duration-500
-           ease-out
-           group-hover:translate-x-0.5
-         "
-       >
-         {{
-           languageService.is('fr')
-             ? 'Découvrir'
-             : 'Discover'
-         }}
-       </span>
-   
-     </span>
-   
-   </button>
+  >
+    <!-- ========================================================
+         IMAGE DE FOND
+    ========================================================= -->
 
-   
-     </div>
-   
-   </section>
-   
-   <!-- ============================================================
-        🐛 DEBUG RESPONSIVE
-        ============================================================ -->
-   
-   <!-- <app-debug-responsive></app-debug-responsive> -->
-   
+    <img
+      [src]="themeService.ImageFondWelcome"
+      [alt]="
+        languageService.currentLanguage === 'fr'
+          ? 'Illustration de présentation d’Arboria'
+          : 'Arboria welcome illustration'
+      "
+      aria-hidden="true"
+      class="
+        pointer-events-none
+        absolute inset-0 z-0
+        h-full w-full
+        object-cover object-center
+      "
+      fetchpriority="high"
+      decoding="async"
+    />
+
+    <!-- ========================================================
+         OVERLAY NOIR DÉGRADÉ
+    ========================================================= -->
+
+    <div
+      aria-hidden="true"
+      class="
+        pointer-events-none
+        absolute inset-0 z-[1]
+        bg-gradient-to-b
+        from-black/20
+        via-black/45
+        to-black/75
+      "
+    ></div>
+
+    <!-- ========================================================
+         CONTENU PRINCIPAL
+         Aucun positionnement fixed ou absolute
+    ========================================================= -->
+
+    <div
+      class="
+        relative z-10
+        flex flex-1
+        flex-col
+        items-center justify-center
+        px-4 py-10
+        text-center
+        [overflow-wrap:anywhere]
+        sm:px-8 sm:py-14
+        md:px-12 md:py-16
+        lg:px-16 lg:py-20
+        xl:px-20
+      "
+    >
+      <!-- ======================================================
+           BADGE DE BIENVENUE
+      ======================================================= -->
+
+      <div
+        class="
+          mb-5
+          inline-flex max-w-full
+          items-center justify-center gap-2
+          rounded-full border
+          px-4 py-2
+          text-xs font-medium
+          shadow-sm backdrop-blur-md
+          transition-colors duration-300
+          sm:mb-6 sm:text-sm
+        "
+        [ngStyle]="{
+          'background-color': themeService.ANNOUNCEMENT,
+          'border-color': themeService.ANNOUNCEMENT_BORDER,
+          'color': themeService.ANNOUNCEMENT_TEXT
+        }"
+      >
+        <span
+          aria-hidden="true"
+          class="
+            h-2 w-2 shrink-0
+            animate-pulse rounded-full
+            motion-reduce:animate-none
+          "
+          [ngStyle]="{
+            'background-color': themeService.ANNOUNCEMENT_ACCENT,
+            'box-shadow':
+              '0 0 10px ' + themeService.ANNOUNCEMENT_ACCENT
+          }"
+        ></span>
+
+        <span>
+          {{
+            languageService.currentLanguage === 'fr'
+              ? 'Bienvenue dans Arboria'
+              : 'Welcome to Arboria'
+          }}
+        </span>
+      </div>
+
+      <!-- ======================================================
+           TITRE PRINCIPAL
+      ======================================================= -->
+
+      <h1
+        class="
+          mx-auto w-full max-w-4xl
+          text-3xl font-bold leading-tight
+          tracking-tight text-white
+          drop-shadow-lg
+          [text-wrap:balance]
+          sm:text-4xl
+          md:text-5xl
+          lg:text-6xl
+          xl:text-7xl
+        "
+      >
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Faites grandir votre passion pour les plantes'
+            : 'Grow your passion for plants'
+        }}
+      </h1>
+
+      <!-- ======================================================
+           DESCRIPTION
+      ======================================================= -->
+
+      <p
+        class="
+          mx-auto mt-5
+          w-full max-w-2xl
+          text-sm leading-relaxed
+          text-white/95
+          drop-shadow-md
+          [text-wrap:pretty]
+          sm:mt-6 sm:text-base
+          md:text-lg
+          lg:text-xl
+        "
+      >
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Découvrez de nouvelles plantes, apprenez à en prendre soin et créez votre propre collection au fil des saisons.'
+            : 'Discover new plants, learn how to care for them, and build your own collection throughout the seasons.'
+        }}
+      </p>
+
+      <!-- ======================================================
+     BOUTONS D'ACTION — ARBORIA
+======================================================= -->
+
+<div
+class="
+  mt-7
+  flex w-full max-w-md
+  flex-col items-stretch justify-center gap-3
+  sm:mt-8 sm:w-auto sm:max-w-none
+  sm:flex-row sm:items-center sm:gap-4
+"
+>
+<!-- BOUTON PRINCIPAL : CRÉER UN COMPTE -->
+
+<a
+  routerLink="/register"
+  class="
+    group
+    inline-flex min-h-12
+    items-center justify-center gap-2
+    rounded-full border
+    px-6 py-3
+    text-sm font-semibold
+    shadow-lg
+    transition-[transform,background-color,box-shadow]
+    duration-300 ease-out
+    hover:-translate-y-0.5
+    hover:shadow-xl
+    active:translate-y-0 active:scale-[0.98]
+    focus-visible:outline-none
+    focus-visible:ring-4
+    motion-reduce:transform-none
+    motion-reduce:transition-none
+    sm:px-8 sm:text-base
+    [-webkit-tap-highlight-color:transparent]
+  "
+  [ngStyle]="{
+    'background-color': themeService.BUTON1BG,
+    'border-color': themeService.BUTON1BG,
+    'color': themeService.BUTON1TEXT,
+    'box-shadow': '0 10px 25px ' + themeService.BUTON1SHADOW,
+    '--tw-ring-color': themeService.PrimarySoft
+  }"
+>
+  <span>
+    {{
+      languageService.currentLanguage === 'fr'
+        ? 'Créer un compte'
+        : 'Create an account'
+    }}
+  </span>
+
+  <i
+    class="
+      fa-solid fa-arrow-right
+      transition-transform duration-300
+      group-hover:translate-x-1
+      motion-reduce:transition-none
+    "
+    aria-hidden="true"
+  ></i>
+</a>
+
+<!-- BOUTON SECONDAIRE : DÉCOUVRIR ARBORIA -->
+
+<a
+  routerLink="/decouvrir"
+  class="
+    group
+    inline-flex min-h-12
+    items-center justify-center gap-2
+    rounded-full border
+    px-6 py-3
+    text-sm font-semibold
+    shadow-md backdrop-blur-md
+    transition-[transform,background-color,border-color]
+    duration-300 ease-out
+    hover:-translate-y-0.5
+    active:translate-y-0 active:scale-[0.98]
+    focus-visible:outline-none
+    focus-visible:ring-4
+    motion-reduce:transform-none
+    motion-reduce:transition-none
+    sm:px-8 sm:text-base
+    [-webkit-tap-highlight-color:transparent]
+  "
+  [ngStyle]="{
+    'background-color': themeService.BUTON2BG,
+    'border-color': themeService.BUTON2BORDER,
+    'color': themeService.TX0,
+    '--tw-ring-color': themeService.BR3
+  }"
+>
+  <i
+    class="
+      fa-regular fa-compass
+      transition-transform duration-300
+      group-hover:rotate-6
+      motion-reduce:transition-none
+    "
+    [ngStyle]="{
+      'color': themeService.BUTON1BG,
+    }"
+    aria-hidden="true"
+  ></i>
+
+  <span>
+    {{
+      languageService.currentLanguage === 'fr'
+        ? 'Découvrir Arboria'
+        : 'Discover Arboria'
+    }}
+  </span>
+</a>
+</div>
+
+      <!-- ======================================================
+           POINTS FORTS
+      ======================================================= -->
+
+      <div
+        class="
+          mt-7
+          flex w-full max-w-3xl
+          flex-wrap
+          items-center justify-center
+          gap-x-5 gap-y-3
+          text-xs text-white
+          drop-shadow-md
+          sm:mt-8 sm:gap-x-7 sm:text-sm
+        "
+      >
+        <!-- CONSEILS PERSONNALISÉS -->
+
+        <span
+          class="
+            inline-flex
+            items-center justify-center gap-2
+          "
+        >
+          <i
+            class="fa-solid fa-leaf shrink-0"
+            [ngStyle]="{
+              'color': themeService.Lime
+            }"
+            aria-hidden="true"
+          ></i>
+
+          <span>
+            {{
+              languageService.currentLanguage === 'fr'
+                ? 'Conseils personnalisés'
+                : 'Personalized care tips'
+            }}
+          </span>
+        </span>
+
+        <!-- COLLECTION VÉGÉTALE -->
+
+        <span
+          class="
+            inline-flex
+            items-center justify-center gap-2
+          "
+        >
+          <i
+            class="fa-solid fa-book-open shrink-0"
+            [ngStyle]="{
+              'color': themeService.Lime
+            }"
+            aria-hidden="true"
+          ></i>
+
+          <span>
+            {{
+              languageService.currentLanguage === 'fr'
+                ? 'Votre collection végétale'
+                : 'Your plant collection'
+            }}
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,604 @@
+<!-- ============================================================
+     ARBORIA — NAVIGATION DESKTOP PREMIUM
+     Angular standalone + Tailwind CSS
+     Compatible ThemeService / LanguageService / Angular Router
+     Palettes : Violet, Orange, Vert, Rose
+============================================================ -->
+
+<nav
+  class="arboria-desktop-navigation hidden min-w-0 w-full
+         items-center justify-center gap-1 overflow-x-auto
+         overscroll-x-contain px-2 py-2
+         min-[920px]:flex xl:gap-2"
+  [ngStyle]="{
+    '--nav-text': themeService.TX2,
+    '--nav-surface': themeService.BG1,
+    '--nav-focus': themeService.Primary
+  }"
+  [attr.aria-label]="
+    languageService.is('fr')
+      ? 'Navigation principale'
+      : 'Main navigation'
+  "
+>
+
+  <!-- RECHERCHE — VIOLET -->
+  <a
+    routerLink="/recherche"
+    class="arboria-nav-link nav-violet"
+    [attr.aria-label]="
+      languageService.is('fr')
+        ? 'Rechercher des plantes'
+        : 'Search plants'
+    "
+  >
+    <span class="nav-icon">
+      <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+    </span>
+
+    <span class="nav-label">
+      {{ languageService.is('fr') ? 'Recherche' : 'Search' }}
+    </span>
+
+    <span class="nav-underline" aria-hidden="true"></span>
+  </a>
+
+  <!-- MES FAVORIS — ORANGE -->
+  <a
+    routerLink="/jardidex"
+    class="arboria-nav-link nav-orange"
+    [attr.aria-label]="
+      languageService.is('fr')
+        ? 'Ouvrir mes favoris'
+        : 'Open my favorites'
+    "
+  >
+    <span class="nav-icon">
+      <i class="fa-solid fa-heart" aria-hidden="true"></i>
+    </span>
+
+    <span class="nav-label">
+      {{ languageService.is('fr') ? 'Mes favoris' : 'My Favorites' }}
+    </span>
+
+    <span class="nav-underline" aria-hidden="true"></span>
+  </a>
+
+  <!-- ASSISTANT — VERT -->
+  <a
+    routerLink="/assistant"
+    class="arboria-nav-link nav-green"
+    [attr.aria-label]="
+      languageService.is('fr')
+        ? 'Ouvrir l’assistant Arboria'
+        : 'Open the Arboria assistant'
+    "
+  >
+    <span class="nav-icon">
+      <i
+        class="fa-solid fa-wand-magic-sparkles"
+        aria-hidden="true"
+      ></i>
+    </span>
+
+    <span class="nav-label">
+      {{ languageService.is('fr') ? 'Assistant' : 'Assistant' }}
+    </span>
+
+    <span class="nav-underline" aria-hidden="true"></span>
+  </a>
+
+  <!-- DIAGNOSTIC — ROSE -->
+  <a
+    routerLink="/diagnostic"
+    class="arboria-nav-link nav-pink"
+    [attr.aria-label]="
+      languageService.is('fr')
+        ? 'Accéder au diagnostic des plantes'
+        : 'Open plant diagnostics'
+    "
+  >
+    <span class="nav-icon">
+      <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+    </span>
+
+    <span class="nav-label">
+      {{ languageService.is('fr') ? 'Diagnostic' : 'Diagnosis' }}
+    </span>
+
+    <span class="nav-underline" aria-hidden="true"></span>
+  </a>
+
+  <!-- SAISONS — VIOLET -->
+  <a
+    routerLink="/saison"
+    class="arboria-nav-link nav-violet"
+    [attr.aria-label]="
+      languageService.is('fr')
+        ? 'Découvrir les conseils saisonniers'
+        : 'Discover seasonal plant care tips'
+    "
+  >
+    <span class="nav-icon">
+      <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+    </span>
+
+    <span class="nav-label">
+      {{ languageService.is('fr') ? 'Saisons' : 'Seasons' }}
+    </span>
+
+    <span class="nav-underline" aria-hidden="true"></span>
+  </a>
+
+</nav>
+
+<style>
+  /* ============================================================
+   ARBORIA — NAVIGATION DESKTOP PREMIUM
+============================================================ */
+
+  .arboria-desktop-navigation {
+    position: relative;
+    isolation: isolate;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .arboria-desktop-navigation::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ------------------------------------------------------------
+   LIENS
+------------------------------------------------------------ */
+
+  .arboria-nav-link {
+    --nav-color: #9946D8;
+    --nav-border: #C18BEA;
+    --nav-text-color: #FFFFFF;
+    --nav-glow: rgb(153 70 216 / 16%);
+
+    position: relative;
+    isolation: isolate;
+
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    min-height: 42px;
+    padding: 0.65rem 0.85rem;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    color: var(--nav-text);
+    text-decoration: none;
+    white-space: nowrap;
+
+    font-size: 0.78rem;
+    font-weight: 550;
+    letter-spacing: 0.005em;
+
+    outline: none;
+    cursor: pointer;
+
+    transition:
+      color 220ms ease,
+      background-color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 250ms ease,
+      transform 220ms ease;
+  }
+
+  /* ------------------------------------------------------------
+   PALETTES PERSONNALISÉES
+------------------------------------------------------------ */
+
+  /* Violet — Catalogue et Saisons */
+  .arboria-nav-link.nav-violet {
+    --nav-color: #9946D8;
+    --nav-border: #C18BEA;
+    --nav-text-color: #FFFFFF;
+    --nav-glow: rgb(153 70 216 / 18%);
+  }
+
+  /* Orange — JardiDex */
+  .arboria-nav-link.nav-orange {
+    --nav-color: #F28C38;
+    --nav-border: #FFC078;
+    --nav-text-color: #FFFFFF;
+    --nav-glow: rgb(242 140 56 / 18%);
+  }
+
+  /* Vert — Assistant */
+  .arboria-nav-link.nav-green {
+    --nav-color: #159B72;
+    --nav-border: #78D8B5;
+    --nav-text-color: #FFFFFF;
+    --nav-glow: rgb(21 155 114 / 18%);
+  }
+
+  /* Rose — Diagnostic */
+  .arboria-nav-link.nav-pink {
+    --nav-color: #D946A8;
+    --nav-border: #F09DD6;
+    --nav-text-color: #FFFFFF;
+    --nav-glow: rgb(217 70 168 / 18%);
+  }
+
+  /* ------------------------------------------------------------
+   ICÔNES
+------------------------------------------------------------ */
+
+  .arboria-nav-link .nav-icon {
+    position: relative;
+    z-index: 1;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+
+    color: var(--nav-color);
+    font-size: 0.85rem;
+
+    transition:
+      color 220ms ease,
+      transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  /* ------------------------------------------------------------
+   TEXTE
+------------------------------------------------------------ */
+
+  .arboria-nav-link .nav-label {
+    position: relative;
+    z-index: 1;
+
+    transition:
+      color 220ms ease,
+      letter-spacing 220ms ease;
+  }
+
+  /* ------------------------------------------------------------
+   TRAIT ANIMÉ SOUS LE LIEN
+------------------------------------------------------------ */
+
+  .arboria-nav-link .nav-underline {
+    position: absolute;
+    z-index: 2;
+
+    right: 13px;
+    bottom: 5px;
+    left: 13px;
+
+    height: 2px;
+    border-radius: 999px;
+
+    background: linear-gradient(90deg,
+        var(--nav-color),
+        var(--nav-border));
+
+    transform: scaleX(0);
+    transform-origin: center;
+
+    opacity: 0;
+
+    transition:
+      transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 200ms ease;
+  }
+
+  /* ------------------------------------------------------------
+   EFFET HOVER
+------------------------------------------------------------ */
+
+  .arboria-nav-link:hover {
+    color: var(--nav-color);
+
+    background-color: var(--nav-glow);
+    border-color: var(--nav-border);
+
+    box-shadow:
+      0 4px 14px var(--nav-glow),
+      inset 0 1px 0 rgb(255 255 255 / 12%);
+
+    transform: translateY(-2px);
+  }
+
+  .arboria-nav-link:hover .nav-icon {
+    color: var(--nav-color);
+    transform: translateY(-1px) scale(1.08);
+  }
+
+  .arboria-nav-link:hover .nav-label {
+    color: var(--nav-color);
+  }
+
+  .arboria-nav-link:hover .nav-underline {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  /* ------------------------------------------------------------
+   PAGE ACTIVE
+   Le trait reste visible sur la route courante.
+------------------------------------------------------------ */
+
+  .arboria-nav-link.is-active {
+    color: var(--nav-color);
+
+    background-color: var(--nav-glow);
+    border-color: var(--nav-border);
+
+    font-weight: 700;
+
+    box-shadow:
+      inset 0 0 0 1px var(--nav-glow);
+  }
+
+  .arboria-nav-link.is-active .nav-icon,
+  .arboria-nav-link.is-active .nav-label {
+    color: var(--nav-color);
+  }
+
+  .arboria-nav-link.is-active .nav-underline {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  /* L'état actif reste stable pendant le survol. */
+  .arboria-nav-link.is-active:hover {
+    box-shadow:
+      0 4px 16px var(--nav-glow),
+      inset 0 0 0 1px var(--nav-border);
+  }
+
+  /* ------------------------------------------------------------
+   ACCESSIBILITÉ — NAVIGATION AU CLAVIER
+------------------------------------------------------------ */
+
+  .arboria-nav-link:focus-visible {
+    outline: 3px solid var(--nav-border);
+    outline-offset: 3px;
+
+    box-shadow:
+      0 0 0 5px var(--nav-glow);
+  }
+
+  .arboria-nav-link:focus-visible .nav-underline {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  /* ------------------------------------------------------------
+   MODE SOMBRE
+   Les couleurs des quatre palettes restent inchangées.
+------------------------------------------------------------ */
+
+  .dark-mode .arboria-nav-link {
+    background-color: transparent;
+  }
+
+  .dark-mode .arboria-nav-link:hover,
+  .dark-mode .arboria-nav-link.is-active {
+    background-color: var(--nav-glow);
+  }
+
+  /* ------------------------------------------------------------
+   RESPONSIVE
+------------------------------------------------------------ */
+
+  @media (min-width: 1200px) {
+    .arboria-nav-link {
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  /* ------------------------------------------------------------
+   RÉDUCTION DES ANIMATIONS
+------------------------------------------------------------ */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .arboria-nav-link,
+    .arboria-nav-link *,
+    .arboria-nav-link::before,
+    .arboria-nav-link::after {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>
+
+
+
+<!-- ============================================================
+     DOCK MOBILE / TABLETTE — ARBORIA
+     Recherche • Mes favoris • Assistant • Diagnostic
+     Responsive • Thème clair/sombre • FR/EN
+============================================================ -->
+
+<div
+  class="pointer-events-none fixed inset-x-0 bottom-0 z-50
+         flex justify-center px-2.5
+         pb-[max(10px,env(safe-area-inset-bottom))]
+         min-[920px]:hidden"
+>
+  <nav
+    class="pointer-events-auto relative isolate inline-flex
+           max-w-full items-end justify-center gap-1
+           rounded-[26px] border px-2 pb-2 pt-2
+           backdrop-blur-2xl backdrop-saturate-150
+           shadow-[0_14px_36px_rgba(0,0,0,0.22),0_2px_6px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.35)]
+           transition-[background-color,border-color,box-shadow]
+           duration-300 motion-reduce:transition-none
+           sm:gap-2 sm:rounded-[30px] sm:px-2.5 sm:pb-2.5 sm:pt-2.5"
+    [ngStyle]="{
+      'background': themeService.BG1,
+      'border-color': themeService.BR1
+    }"
+    [attr.aria-label]="
+      languageService.is('fr')
+        ? 'Navigation principale Arboria'
+        : 'Arboria main navigation'
+    "
+  >
+    <!-- REFLET DE VERRE -->
+    <span
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-x-5 top-0 -z-10 h-px
+             bg-gradient-to-r from-transparent via-white/60 to-transparent"
+    ></span>
+
+    <!-- ========================================================
+         ITEMS DU DOCK
+         Recherche • Mes favoris • Assistant • Diagnostic
+         Libellés FR/EN définis dans dock-items.ts
+    ========================================================= -->
+
+    @for (item of items; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [attr.aria-label]="
+          languageService.is('fr') ? item.fr : item.en
+        "
+        [attr.aria-current]="rla.isActive ? 'page' : null"
+        [ngStyle]="{
+          'outline-color': item.bg
+        }"
+        class="group relative flex min-h-[54px] min-w-[44px]
+               shrink-0 flex-col items-center justify-end gap-[3px]
+               rounded-[16px] px-px outline-none select-none
+               touch-manipulation
+               [-webkit-tap-highlight-color:transparent]
+               [transform-origin:center_bottom] will-change-transform
+               transition-transform duration-300
+               ease-[cubic-bezier(0.34,1.56,0.64,1)]
+               active:scale-90 active:duration-100
+               focus-visible:outline-2 focus-visible:outline-offset-4
+               motion-reduce:transition-none
+               sm:min-h-[62px] sm:min-w-[54px]
+               max-[359px]:min-w-[38px]
+               [@media(hover:hover)]:hover:z-[5]
+               [@media(hover:hover)]:hover:-translate-y-1
+               [@media(hover:hover)]:hover:scale-[1.18]
+               [@media(hover:hover)]:[a:hover+&]:scale-[1.08]
+               [@media(hover:hover)]:[&:has(+a:hover)]:scale-[1.08]
+               motion-reduce:hover:translate-y-0
+               motion-reduce:hover:scale-100"
+      >
+        <!-- INFO-BULLE -->
+        <span
+          aria-hidden="true"
+          class="pointer-events-none absolute bottom-[calc(100%+12px)]
+                 left-1/2 z-30 -translate-x-1/2 translate-y-1
+                 scale-[0.96] whitespace-nowrap rounded-[10px]
+                 border px-[9px] py-1.5 text-[11px] font-semibold
+                 leading-[1.35] opacity-0 shadow-lg backdrop-blur-lg
+                 transition-[opacity,transform] duration-150
+                 group-hover:translate-y-0 group-hover:scale-100
+                 group-hover:opacity-100
+                 group-focus-visible:translate-y-0
+                 group-focus-visible:scale-100
+                 group-focus-visible:opacity-100
+                 motion-reduce:transition-none"
+          [ngStyle]="{
+            'background-color':
+              'color-mix(in srgb, ' + themeService.BG3 + ' 94%, transparent)',
+            color: themeService.TX0,
+            border: '1px solid ' + themeService.BR1
+          }"
+        >
+          {{ languageService.is('fr') ? item.fr : item.en }}
+        </span>
+
+        <!-- ICÔNE -->
+        <span
+          class="relative flex h-10 w-10 shrink-0 items-center
+                 justify-center overflow-hidden rounded-[24%]
+                 border text-white
+                 shadow-[0_3px_8px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.35),inset_0_-2px_4px_rgba(0,0,0,0.12)]
+                 transition-[box-shadow,filter] duration-200
+                 group-hover:saturate-[1.15]
+                 group-hover:shadow-[0_10px_18px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.4)]
+                 min-[390px]:h-11 min-[390px]:w-11
+                 sm:h-12 sm:w-12
+                 max-[359px]:h-9 max-[359px]:w-9"
+          [ngStyle]="{
+            'background': item.bg,
+            'border-color': item.border,
+            color: item.text
+          }"
+          [class.ring-[1.5px]]="rla.isActive"
+          [class.ring-white/70]="rla.isActive"
+        >
+          <!-- REFLET -->
+          <span
+            aria-hidden="true"
+            class="pointer-events-none absolute inset-0
+                   bg-gradient-to-b from-white/35
+                   via-white/[0.07] via-40% to-transparent"
+          ></span>
+
+          <!-- ICÔNE SVG -->
+          <svg
+            class="relative z-[2] h-[22px] w-[22px]
+                   drop-shadow-[0_1px_1px_rgba(0,0,0,0.16)]
+                   min-[390px]:h-6 min-[390px]:w-6
+                   sm:h-[26px] sm:w-[26px]
+                   max-[359px]:h-5 max-[359px]:w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            @for (d of item.paths; track d) {
+              <path [attr.d]="d"></path>
+            }
+          </svg>
+        </span>
+
+        <!-- INDICATEUR DE PAGE ACTIVE -->
+        <span
+          aria-hidden="true"
+          class="h-1 w-1 shrink-0 scale-0 rounded-full opacity-0
+                 transition-[opacity,transform] duration-300
+                 ease-[cubic-bezier(0.34,1.56,0.64,1)]
+                 motion-reduce:transition-none"
+          [ngStyle]="{
+            'background-color': item.bg
+          }"
+          [class.!scale-100]="rla.isActive"
+          [class.!opacity-100]="rla.isActive"
+        ></span>
+      </a>
+    }
+
+    <!-- SÉPARATEUR -->
+    <span
+      aria-hidden="true"
+      class="mx-0.5 mb-[10px] h-[34px] w-px shrink-0
+             self-end rounded-full
+             sm:mx-1 sm:mb-[11px] sm:h-10"
+      [ngStyle]="{
+        'background-color':
+          'color-mix(in srgb, ' + themeService.BR2 + ' 85%, transparent)'
+      }"
+    ></span>
+
+    <!-- PROFIL / SAISON — COMPOSANT CONSERVÉ -->
+    <app-welcome-profile1></app-welcome-profile1>
+  </nav>
+</div>

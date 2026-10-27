@@ -1,384 +1,309 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
 
-import { RouterLink } from '@angular/router';
-
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Icon } from '../../../Public/icon/icon';
-
 import { ThemeService } from '../../../../../Backend/Services/theme.service';
-
-
-// ============================================================
-// 🌐 LANGUAGE SERVICE
-// ============================================================
-
-import {
-  LanguageService,
-  Language
-} from '../../../../../Backend/Services/language.service';
-import { LogoBienvenue } from '../logo-bienvenue/logo-bienvenue';
 import { Theme } from '../../Icon/theme/theme';
 import { Language2 } from '../../Icon/language/language';
-import { Aide } from '../../Icon/aide/aide';
-import { Contact } from '../../Icon/contact/contact';
-import { ActionsMobileTablette } from '../../../Public/actions-mobile-tablette/actions-mobile-tablette';
-import { NavWelcome } from '../nav-welcome/nav-welcome';
-import { BoutonBienvenue } from "../bouton-bienvenue/bouton-bienvenue";
-import { TailleEcran } from "../../../Public/taille-ecran/taille-ecran";
-import { ListeIcon } from '../../../Public/liste-icon/liste-icon';
+import { BlocAnnoce } from '../bloc-annoce/bloc-annoce';
 
+import { WelcomeNavComponent } from '../welcome-nav/welcome-nav';
+import { WelcomeActionsComponent } from '../welcome-actions/welcome-actions';
+import { WelcomeNavMobile } from '../welcome-nav-mobile/welcome-nav-mobile';
+import { WelcomeLogoComponent } from '../../Page-Header/welcome-logo/welcome-logo';
 
-
-// ============================================================
-// 🌿 TYPES DES TEXTES
-// ============================================================
-
-type TranslationKey =
-  | 'discover'
-  | 'discoverJardiScan'
-  | 'newProducts'
-  | 'plants'
-  | 'viewPlants'
-  | 'tips'
-  | 'viewTips';
-
-
-// ============================================================
-// 🌿 WELCOME HEADER — JARDISCAN
-// ============================================================
+type MenuType = 'how' | 'products' | null;
+type MenuActif = Exclude<MenuType, null>;
+type Langue = 'fr' | 'en';
 
 @Component({
   selector: 'app-header-bienvenue',
-
   standalone: true,
-
   imports: [
-    Icon,
-    RouterLink,
     CommonModule,
-    LogoBienvenue,
     Theme,
     Language2,
-    Aide,
-    Contact,
-    ActionsMobileTablette,
-    ListeIcon,
-    NavWelcome,
-    BoutonBienvenue,
-    TailleEcran
+    BlocAnnoce,
+    WelcomeLogoComponent,
+    WelcomeNavComponent,
+    WelcomeActionsComponent,
+    WelcomeNavMobile
 ],
-
   templateUrl: './header-bienvenue.html',
-
   styleUrl: './header-bienvenue.css',
 })
+export class HeaderBienvenue {
 
+  // =========================================================
+  // ÉTAT DU HEADER
+  // =========================================================
 
-export class HeaderBienvenue implements OnInit {
+  themeSombre = false;
+  annonceVisible = true;
 
-  // ==========================================================
-  // 👤 UTILISATEUR
-  // ==========================================================
+  menuOuvert: MenuType = null;
 
-  user: any = null;
+  menuMobileOuvert = false;
+  menuMobileSection: MenuType = null;
+  afficherBlocAnnonce = false;
 
+  // =========================================================
+  // LANGUE
+  // =========================================================
 
-  // ==========================================================
-  // 🌐 LANGUE
-  // ==========================================================
+  langueActuelle: Langue = 'fr';
 
-  /**
-   * Langue actuellement utilisée.
-   *
-   * On conserve le LanguageService comme source principale.
-   */
-  get currentLanguage(): Language {
-    return this.languageService.currentLanguage;
-  }
-
-
-  // ==========================================================
-  // 💉 CONSTRUCTEUR
-  // ==========================================================
+  // =========================================================
+  // CONSTRUCTEUR
+  // =========================================================
 
   constructor(
     public themeService: ThemeService,
+  ) {
+    this.initialiserTheme();
+    this.initialiserLangue();
+  }
 
-    // 🌐 Service de langue
-    public languageService: LanguageService
-  ) {}
+  // =========================================================
+  // COULEURS DE LA BARRE D'ANNONCE
+  // =========================================================
+
+  get ANNOUNCEMENT(): string {
+    return this.themeSombre ? '#1C3027' : '#244536';
+  }
+
+  get ANNOUNCEMENT_HOVER(): string {
+    return this.themeSombre ? '#2B4938' : '#315B45';
+  }
+
+  get ANNOUNCEMENT_TEXT(): string {
+    return '#F2F4F0';
+  }
+
+  get ANNOUNCEMENT_ACCENT(): string {
+    return '#C4D9B9';
+  }
+
+  get ANNOUNCEMENT_BORDER(): string {
+    return this.themeSombre ? '#344D3E' : '#3B604B';
+  }
 
 
-  // ==========================================================
-  // 🚀 INITIALISATION
-  // ==========================================================
+
+  private annonceTimeout?: ReturnType<typeof setTimeout>;
 
   ngOnInit(): void {
+    this.annonceTimeout = setTimeout(() => {
+      this.afficherBlocAnnonce = true;
+    }, 10_000);
+  }
 
-    // ========================================================
-    // 🔍 VÉRIFIER LE LOCALSTORAGE
-    // ========================================================
+  ngOnDestroy(): void {
+    if (this.annonceTimeout) {
+      clearTimeout(this.annonceTimeout);
+    }
+  }
+  
+  // =========================================================
+  // INITIALISATION DU THÈME
+  // =========================================================
 
-    const userLocalStorage =
-      localStorage.getItem('utilisateur');
-
-
-    // ========================================================
-    // 📦 AFFICHER LA VALEUR RÉCUPÉRÉE
-    // ========================================================
-
-    console.log(
-      '📦 Valeur récupérée depuis localStorage :',
-      userLocalStorage
-    );
-
-
-    // ========================================================
-    // ❌ AUCUN UTILISATEUR
-    // ========================================================
-
-    if (!userLocalStorage) {
-
-      console.warn(
-        '⚠️ Aucun utilisateur trouvé dans localStorage avec la clé "utilisateur".'
-      );
-
-      this.user = null;
-
+  private initialiserTheme(): void {
+    if (typeof window === 'undefined') {
       return;
     }
 
+    const themeEnregistre = localStorage.getItem('theme');
 
-    // ========================================================
-    // 🔄 CONVERSION JSON
-    // ========================================================
+    this.themeSombre = themeEnregistre === 'dark';
+  }
 
-    try {
+  // =========================================================
+  // INITIALISATION DE LA LANGUE
+  // =========================================================
 
-      this.user = JSON.parse(userLocalStorage);
+  private initialiserLangue(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
 
+    const langueEnregistree = localStorage.getItem(
+      'jardiscan_language'
+    );
 
-      // ======================================================
-      // 🔑 INFORMATIONS UTILISATEUR
-      // ======================================================
-
-      console.log(
-        '👤 Pseudo :',
-        this.user?.pseudo
-      );
-
-      console.log(
-        '👤 Key :',
-        this.user?.Key
-      );
-
-      console.log(
-        '📛 Nom :',
-        this.user?.nom
-      );
-
-      console.log(
-        '📝 Prénom :',
-        this.user?.prenom
-      );
-
-      console.log(
-        '📧 Email :',
-        this.user?.email
-      );
-
-      console.log(
-        '🎭 Rôle :',
-        this.user?.role
-      );
-
-      console.log(
-        '🖼️ Avatar :',
-        this.user?.avatar
-      );
-
-
-      // ======================================================
-      // 🌐 LANGUE ACTUELLE
-      // ======================================================
-
-      console.log(
-        '🌐 Langue JardiScan :',
-        this.languageService.currentLanguage
-      );
-
-    } catch (error) {
-
-      // ======================================================
-      // ❌ ERREUR JSON
-      // ======================================================
-
-      console.error(
-        '❌ Erreur lors du parsing JSON de l’utilisateur :',
-        error
-      );
-
-      console.error(
-        '📦 Valeur qui a provoqué l’erreur :',
-        userLocalStorage
-      );
-
-      this.user = null;
+    if (
+      langueEnregistree === 'fr' ||
+      langueEnregistree === 'en'
+    ) {
+      this.langueActuelle = langueEnregistree;
     }
   }
 
+  // =========================================================
+  // CHANGEMENT DE LANGUE
+  // =========================================================
 
-  // ==========================================================
-  // 👤 INITIALES UTILISATEUR
-  // ==========================================================
-
-  getUserInitials(): string {
-
-    if (!this.user) {
-      return '';
+  changerLangue(langue: Langue): void {
+    if (this.langueActuelle === langue) {
+      return;
     }
 
-    const prenom =
-      this.user?.prenom?.trim() || '';
+    this.langueActuelle = langue;
 
-    const nom =
-      this.user?.nom?.trim() || '';
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('jardiscan_language', langue);
+    }
 
-
-    const initialePrenom =
-      prenom
-        ? prenom.charAt(0).toUpperCase()
-        : '';
-
-
-    const initialeNom =
-      nom
-        ? nom.charAt(0).toUpperCase()
-        : '';
-
-
-    return initialePrenom + initialeNom;
+    /*
+     * Raccorde ici ton LanguageService existant.
+     *
+     * Exemple, si ton service expose setLanguage() :
+     * this.languageService.setLanguage(langue);
+     *
+     * Le service doit être injecté dans le constructeur.
+     */
   }
 
+  // =========================================================
+  // BARRE D'ANNONCE
+  // =========================================================
 
-  // ==========================================================
-  // 🌐 CHANGEMENT DE LANGUE
-  // ==========================================================
-
-  toggleLanguage(): void {
-    this.languageService.toggleLanguage();
+  fermerAnnonce(): void {
+    this.annonceVisible = false;
   }
 
+  // =========================================================
+  // NAVIGATION DESKTOP
+  // =========================================================
 
-  // ==========================================================
-  // 🇫🇷 VÉRIFIER FRANÇAIS
-  // ==========================================================
-
-  isFrench(): boolean {
-    return this.languageService.is('fr');
+  toggleMenu(menu: MenuActif): void {
+    this.menuOuvert = menu;
+    this.menuMobileOuvert = false;
+    this.menuMobileSection = null;
   }
 
+  ouvrirMenuSurvol(menu: MenuActif): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
 
-  // ==========================================================
-  // 🇬🇧 VÉRIFIER ANGLAIS
-  // ==========================================================
+    if (window.innerWidth < 1024 || this.menuMobileOuvert) {
+      return;
+    }
 
-  isEnglish(): boolean {
-    return this.languageService.is('en');
+    this.menuOuvert = menu;
+    this.menuMobileSection = null;
   }
 
+  fermerMenuSurvol(menu: MenuActif): void {
+    if (this.menuOuvert === menu) {
+      this.menuOuvert = null;
+    }
+  }
 
-  // ==========================================================
-  // 🌐 TRADUCTION DES TEXTES DU HEADER
-  // ==========================================================
+  // =========================================================
+  // NAVIGATION MOBILE / TABLETTE
+  // =========================================================
 
-  /**
-   * Cette fonction retourne automatiquement le texte
-   * correspondant à la langue sélectionnée.
-   *
-   * IMPORTANT :
-   * Le LanguageService reste la source de vérité.
-   *
-   * Exemple :
-   *
-   * translate('discover')
-   *
-   * FR → Découvrir
-   * EN → Discover
-   */
+  toggleMenuMobile(): void {
+    this.menuMobileOuvert = !this.menuMobileOuvert;
+    this.menuOuvert = null;
 
-  translate(key: TranslationKey): string {
+    if (!this.menuMobileOuvert) {
+      this.menuMobileSection = null;
+    }
+  }
 
-    const translations: Record<
-      Language,
-      Record<TranslationKey, string>
-    > = {
+  toggleSectionMobile(section: MenuActif): void {
+    this.menuMobileSection =
+      this.menuMobileSection === section ? null : section;
+  }
 
-      // ======================================================
-      // 🇫🇷 FRANÇAIS
-      // ======================================================
+  // =========================================================
+  // FERMETURE DES MENUS
+  // =========================================================
 
-      fr: {
+  fermerMenus(): void {
+    this.menuOuvert = null;
+    this.menuMobileOuvert = false;
+    this.menuMobileSection = null;
+  }
 
-        discover:
-          'Découvrir',
+  @HostListener('document:click', ['$event'])
+  fermerAuClicExterieur(event: MouseEvent): void {
+    const target = event.target;
 
-        discoverJardiScan:
-          'Découvrir JardiScan',
+    if (!(target instanceof Element)) {
+      return;
+    }
 
-        newProducts:
-          'Nouveautés JardiScan',
+    if (!target.closest('app-header-bienvenue')) {
+      this.fermerMenus();
+    }
+  }
 
-        plants:
-          'Plantes',
+  @HostListener('document:keydown.escape')
+  fermerAvecEscape(): void {
+    this.fermerMenus();
+  }
 
-        viewPlants:
-          'Voir les plantes',
+  // =========================================================
+  // REDIMENSIONNEMENT
+  // =========================================================
 
-        tips:
-          'Conseils',
+  @HostListener('window:resize')
+  gererRedimensionnement(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
 
-        viewTips:
-          'Voir les conseils'
-      },
+    if (window.innerWidth >= 1024) {
+      this.menuMobileOuvert = false;
+      this.menuMobileSection = null;
+    } else {
+      this.menuOuvert = null;
+    }
+  }
 
+  // =========================================================
+  // PROFIL UTILISATEUR
+  // =========================================================
 
-      // ======================================================
-      // 🇬🇧 ENGLISH
-      // ======================================================
+  ouvrirProfil(): void {
+    // À relier à ta logique de profil ou à ton Router existant.
+  }
 
-      en: {
+  gererClicExterieur(event: MouseEvent): void {
+    this.fermerAuClicExterieur(event);
+  }
 
-        discover:
-          'Discover',
+  // =========================================================
+  // CHANGEMENT DE THÈME
+  // =========================================================
 
-        discoverJardiScan:
-          'Discover JardiScan',
+  toggleTheme(): void {
+    this.themeSombre = !this.themeSombre;
 
-        newProducts:
-          'JardiScan News',
+    if (typeof window === 'undefined') {
+      return;
+    }
 
-        plants:
-          'Plants',
+    localStorage.setItem(
+      'theme',
+      this.themeSombre ? 'dark' : 'light'
+    );
 
-        viewPlants:
-          'View plants',
+    this.appliquerTheme();
+  }
 
-        tips:
-          'Tips',
+  private appliquerTheme(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
 
-        viewTips:
-          'View tips'
-      }
-    };
-
-
-    return translations[
-      this.languageService.currentLanguage
-    ][key];
+    document.documentElement.classList.toggle(
+      'dark',
+      this.themeSombre
+    );
   }
 }

@@ -1,19 +1,38 @@
 <!-- ============================================================
-     🌐 LANGUAGE TOGGLE — JARDISCAN
-     PREMIUM EMERALD GLASS
 
-     Responsive :
-     • Mobile       → Popup à droite
-     • Tablette     → Popup à droite
-     • Laptop       → Popup sous le bouton
-     • Desktop      → Popup sous le bouton
+🌐 LANGUAGE TOGGLE — ARBORIA
 
-     Animation :
-     • DROITE ➜ GAUCHE
-     • Light / Dark
-     • Glassmorphism
-     • 44 × 44
-     • Instant language switch
+MOBILE + TABLETTE UNIQUEMENT
+
+• 370px → 1239px
+
+• Bouton compact et stable
+• Bouton NON déplacé
+• Popup directement sous le bouton
+• Popup ancrée directement au bouton
+• Même comportement mobile / tablette
+• Aucun calcul vertical dépendant du viewport
+• Aucun margin-top responsive
+• DÉCALAGE VERTICAL DE LA POPUP : +30px
+• Décalage horizontal conservé : -40px
+• Popup adaptative à la largeur disponible
+• Aucun débordement horizontal volontaire
+• Touch target confortable sur mobile
+• Image drapeau + FR / EN + flèche
+• Popup : image + langue + code + état actif
+• Light / Dark
+• ThemeService conservé
+• LanguageService conservé
+• translate() conservé
+• togglePopup() conservé
+• selectLanguage() conservé
+• Aucun changement TypeScript nécessaire
+
+============================================================ -->
+
+
+<!-- ============================================================
+     🌐 LANGUAGE WRAPPER
 ============================================================= -->
 
 <div
@@ -21,342 +40,770 @@
     language-wrapper
     relative
     inline-flex
+    max-w-full
     shrink-0
   "
   (click)="$event.stopPropagation()"
 >
 
+
   <!-- ==========================================================
        🌐 LANGUAGE BUTTON
+       IMPORTANT :
+       Le bouton reste exactement à sa position.
+       Aucun décalage vertical n'est appliqué ici.
   =========================================================== -->
 
   <button
     type="button"
-
     [attr.aria-label]="translate('changeLanguage')"
-
     [title]="
       currentLanguage === 'fr'
         ? 'Langue'
         : 'Language'
     "
-
     [attr.aria-expanded]="isOpen"
-
     aria-haspopup="menu"
-
     class="
       language-button
       group
       relative
       flex
-      h-10
-      w-10
+      h-9
+      min-w-[76px]
+      max-w-full
       shrink-0
       items-center
       justify-center
-      overflow-hidden
+      gap-1.5
       rounded-full
+      px-2.5
       cursor-pointer
       select-none
-      transition-transform
+      overflow-hidden
+      transition-all
       duration-200
-      hover:scale-[1.04]
-      active:scale-95
+      hover:scale-[1.025]
+      active:scale-[0.97]
       focus:outline-none
       focus-visible:ring-2
-      focus-visible:ring-emerald-500/30
-      sm:h-11
-      sm:w-11
+      sm:h-10
+      sm:min-w-[82px]
+      sm:gap-2
+      sm:px-3
+      md:h-10
+      md:min-w-[86px]
+      lg:h-11
+      lg:min-w-[92px]
+      lg:px-3.5
     "
-
     [ngStyle]="{
-      'color': themeService.TextPrincipal
+      'background': themeService.BG2,
+      'border': '1px solid ' + themeService.BR2,
+      'color': themeService.TX0,
+      'box-shadow': '0 6px 18px ' + themeService.SHADOW
     }"
-
     (click)="togglePopup($event)"
   >
 
+
     <!-- ========================================================
-         🌐 LANGUAGE ICON
+         🌐 CURRENT LANGUAGE IMAGE
     ========================================================= -->
 
-    <i
-      aria-hidden="true"
-
+    <span
       class="
-        fa-solid
-        fa-language
-        relative
-        z-10
-        text-[16px]
-        transition-transform
-        duration-300
+        language-flag
+        flex
+        h-5
+        w-5
+        shrink-0
+        items-center
+        justify-center
+        overflow-hidden
+        rounded-full
+        transition-all
+        duration-200
         group-hover:scale-110
-        group-hover:-rotate-6
-        sm:text-[20px]
+        sm:h-6
+        sm:w-6
+        md:h-6
+        md:w-6
+        lg:h-7
+        lg:w-7
       "
-
       [ngStyle]="{
-        'color': themeService.TextPrincipal
+        'background':
+          isOpen
+            ? themeService.BG3
+            : themeService.BG4,
+        'border':
+          '1px solid ' + themeService.BR2
       }"
-    ></i>
+    >
+
+      <img
+        [src]="
+          languageService.is('fr')
+            ? 'assets/DrapeauFrance.png'
+            : 'assets/DrapeauAnglais.jpg'
+        "
+        [alt]="
+          languageService.is('fr')
+            ? 'Français'
+            : 'English'
+        "
+        class="
+          h-full
+          w-full
+          rounded-full
+          object-cover
+          transition-transform
+          duration-200
+        "
+      />
+
+    </span>
+
+
+    <!-- ========================================================
+         🏷️ CURRENT LANGUAGE
+    ========================================================= -->
+
+    <span
+      class="
+        language-code
+        min-w-0
+        shrink
+        text-[11px]
+        font-bold
+        uppercase
+        tracking-[0.04em]
+        sm:text-[12px]
+        md:text-[12px]
+        lg:text-[13px]
+      "
+      [ngStyle]="{
+        'color': themeService.TX0
+      }"
+    >
+      {{ languageService.is('fr') ? 'FR' : 'EN' }}
+    </span>
+
+
+    <!-- ========================================================
+         ⌄ ARROW
+    ========================================================= -->
+
+    <span
+      class="
+        flex
+        h-4
+        w-4
+        shrink-0
+        items-center
+        justify-center
+        transition-transform
+        duration-200
+        sm:h-5
+        sm:w-5
+      "
+      [class.rotate-180]="isOpen"
+      [ngStyle]="{
+        'color':
+          isOpen
+            ? themeService.ICON
+            : themeService.TX3
+      }"
+    >
+
+      <i
+        aria-hidden="true"
+        class="
+          fa-solid
+          fa-chevron-down
+          text-[8px]
+          transition-colors
+          duration-200
+          sm:text-[9px]
+          md:text-[10px]
+          lg:text-[11px]
+        "
+      ></i>
+
+    </span>
 
   </button>
 
 
   <!-- ==========================================================
-       🌐 LANGUAGE POPUP
+       🌐 POPUP ANCHOR
+
+       IMPORTANT :
+       • absolute
+       • top-full = position de référence juste sous le bouton
+       • right-0 = alignement horizontal conservé
+       • Aucun déplacement du bouton
+       • Aucun calcul vertical viewport
+       • Aucun margin-top responsive
+
+       ⬇️ DÉCALAGE VERTICAL +30PX
+
+       Le popup était précédemment séparé du bouton par `pt-2`.
+       On utilise maintenant `pt-[38px]`.
+
+       Pourquoi 38px ?
+       • 8px = ancien espacement `pt-2`
+       • +30px = nouveau décalage demandé
+       • Total = 38px
+
+       Le bouton reste donc inchangé.
+       Seule la popup descend de 30px supplémentaires.
   =========================================================== -->
 
   <div
     *ngIf="isOpen"
-
-    role="menu"
-
-    [attr.aria-label]="translate('chooseLanguage')"
-
     class="
-      language-popup
-      fixed
+      absolute
+      top-full
+      right-0
       z-[99999]
-      w-max
-      min-w-[180px]
-      flex
-      flex-col
-      rounded-2xl
-      p-1.5
-      overflow-hidden
-      backdrop-blur-3xl
-      backdrop-saturate-200
-      shadow-xl
-      origin-top-right
-      animate-[languagePopupRightToLeft_160ms_ease-out]
+
+      
+      pt-[108px]
+      mr-35
+     
+
+      pointer-events-none
     "
-
-    [ngStyle]="{
-      'top.px': popupTop,
-      'left.px': popupLeft,
-      'transform': popupTransform,
-      'background': themeService.BG1,
-      'border': '1px solid ' + themeService.BR2,
-      'box-shadow': themeService.BoxShadow
-    }"
-
-    (click)="$event.stopPropagation()"
   >
 
-    <!-- ========================================================
-         🇫🇷 FRANÇAIS
-    ========================================================= -->
-
-    <button
-      type="button"
-
-      role="menuitem"
-
-      class="
-        language-option
-        group
-        flex
-        w-full
-        items-center
-        gap-2.5
-        rounded-xl
-        px-3
-        py-2
-        text-left
-        cursor-pointer
-        select-none
-        transition-transform
-        duration-150
-        hover:scale-[1.015]
-        active:scale-[0.98]
-      "
-
-      [ngStyle]="{
-        'background':
-          languageService.is('fr')
-            ? (
-                themeService.isDarkMode
-                  ? 'rgba(52,211,153,0.12)'
-                  : 'rgba(16,185,129,0.09)'
-              )
-            : 'transparent',
-
-        'color':
-          themeService.isDarkMode
-            ? '#F0FDF4'
-            : '#17251B'
-      }"
-
-      (click)="selectLanguage('fr', $event)"
-    >
-
-      <!-- ======================================================
-           🇫🇷 DRAPEAU
-      ======================================================= -->
-
-      <span
-        class="
-          flex
-          h-7
-          w-7
-          shrink-0
-          items-center
-          justify-center
-          rounded-lg
-          bg-black/[0.04]
-          dark:bg-white/[0.06]
-          text-[17px]
-        "
-      >
-        🇫🇷
-      </span>
-
-
-      <!-- ======================================================
-           🏷️ NOM
-      ======================================================= -->
-
-      <span
-        class="
-          min-w-0
-          flex-1
-          text-[13px]
-          font-semibold
-          tracking-[-0.01em]
-        "
-      >
-        {{ translate('french') }}
-      </span>
-
-
-      <!-- ======================================================
-           ✅ LANGUE ACTIVE
-      ======================================================= -->
-
-      <i
-        *ngIf="languageService.is('fr')"
-
-        aria-hidden="true"
-
-        class="
-          fa-solid
-          fa-check
-          text-[11px]
-          text-emerald-500
-        "
-      ></i>
-
-    </button>
-
 
     <!-- ========================================================
-         🇬🇧 ENGLISH
+         🌐 LANGUAGE POPUP
+
+         • Sous le bouton
+         • Décalage horizontal : -40px
+         • Décalage vertical : +30px supplémentaire
+         • Largeur contrôlée
+         • Adaptative à l'écran
+         • Pas de w-screen
+         • Pas de position fixed
+         • Pas de calcul viewport
     ========================================================= -->
 
-    <button
-      type="button"
-
-      role="menuitem"
-
+    <div
+      role="menu"
+      [attr.aria-label]="translate('chooseLanguage')"
       class="
-        language-option
-        group
+        language-popup
+        pointer-events-auto
+        relative
+        z-[99999]
         flex
-        w-full
-        items-center
-        gap-2.5
-        rounded-xl
-        px-3
-        py-2
-        text-left
-        cursor-pointer
-        select-none
-        transition-transform
-        duration-150
-        hover:scale-[1.015]
-        active:scale-[0.98]
+        w-[220px]
+        max-w-[calc(100vw-16px)]
+        min-w-0
+        shrink-0
+        flex-col
+        overflow-hidden
+        rounded-2xl
+        p-1.5
+        backdrop-blur-3xl
+        backdrop-saturate-150
+        origin-top-right
+        animate-[languagePopupRightToLeft_160ms_ease-out]
+        -translate-x-[40px]
       "
-
       [ngStyle]="{
-        'background':
-          languageService.is('en')
-            ? (
-                themeService.isDarkMode
-                  ? 'rgba(52,211,153,0.12)'
-                  : 'rgba(16,185,129,0.09)'
-              )
-            : 'transparent',
-
-        'color':
-          themeService.isDarkMode
-            ? '#F0FDF4'
-            : '#17251B'
+        'background': themeService.BG2,
+        'border': '1px solid ' + themeService.BR2,
+        'box-shadow': '0 18px 45px ' + themeService.SHADOW,
+        'transform': 'translateX(-40px) ' + popupTransform
       }"
-
-      (click)="selectLanguage('en', $event)"
+      (click)="$event.stopPropagation()"
     >
 
+
       <!-- ======================================================
-           🇬🇧 DRAPEAU
+           🇫🇷 FRANÇAIS
       ======================================================= -->
 
-      <span
+      <button
+        type="button"
+        role="menuitem"
         class="
+          language-option
+          group
           flex
-          h-7
-          w-7
-          shrink-0
-          items-center
-          justify-center
-          rounded-lg
-          bg-black/[0.04]
-          dark:bg-white/[0.06]
-          text-[17px]
-        "
-      >
-        🇬🇧
-      </span>
-
-
-      <!-- ======================================================
-           🏷️ NOM
-      ======================================================= -->
-
-      <span
-        class="
           min-w-0
-          flex-1
-          text-[13px]
-          font-semibold
-          tracking-[-0.01em]
+          w-full
+          items-center
+          gap-2.5
+          rounded-xl
+          px-2.5
+          py-2.5
+          text-left
+          cursor-pointer
+          select-none
+          transition-all
+          duration-150
+          hover:scale-[1.01]
+          active:scale-[0.98]
+          sm:gap-3
+          sm:px-3
         "
+        [ngStyle]="{
+          'background':
+            languageService.is('fr')
+              ? themeService.BG4
+              : 'transparent',
+          'border':
+            languageService.is('fr')
+              ? '1px solid ' + themeService.BR3
+              : '1px solid transparent',
+          'color':
+            themeService.TX0
+        }"
+        (click)="selectLanguage('fr', $event)"
       >
-        {{ translate('english') }}
-      </span>
+
+        <!-- ==================================================
+             🇫🇷 FLAG
+        =================================================== -->
+
+        <span
+          class="
+            flex
+            h-8
+            w-8
+            shrink-0
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-lg
+            transition-all
+            duration-150
+            group-hover:scale-105
+            sm:h-9
+            sm:w-9
+          "
+          [ngStyle]="{
+            'background':
+              languageService.is('fr')
+                ? themeService.BG3
+                : themeService.BG4,
+            'border':
+              '1px solid ' + themeService.BR2
+          }"
+        >
+
+          <img
+            src="assets/DrapeauFrance.png"
+            alt="Français"
+            class="
+              h-full
+              w-full
+              rounded-lg
+              object-cover
+            "
+          />
+
+        </span>
+
+
+        <!-- ==================================================
+             🏷️ LANGUAGE NAME
+        =================================================== -->
+
+        <span
+          class="
+            min-w-0
+            flex-1
+            truncate
+            text-[12px]
+            font-semibold
+            tracking-[-0.01em]
+            sm:text-[13px]
+          "
+        >
+          {{ translate('french') }}
+        </span>
+
+
+        <!-- ==================================================
+             🇫🇷 CODE
+        =================================================== -->
+
+        <span
+          class="
+            shrink-0
+            text-[9px]
+            font-bold
+            uppercase
+            tracking-wider
+            sm:text-[10px]
+          "
+          [ngStyle]="{
+            'color': themeService.TX3
+          }"
+        >
+          FR
+        </span>
+
+
+        <!-- ==================================================
+             ✅ ACTIVE
+        =================================================== -->
+
+        <span
+          *ngIf="languageService.is('fr')"
+          class="
+            flex
+            h-5
+            w-5
+            shrink-0
+            items-center
+            justify-center
+            rounded-full
+          "
+          [ngStyle]="{
+            'background': themeService.BUTON1BG,
+            'color': themeService.BUTON1ICON
+          }"
+        >
+
+          <i
+            aria-hidden="true"
+            class="fa-solid fa-check text-[9px]"
+          ></i>
+
+        </span>
+
+      </button>
 
 
       <!-- ======================================================
-           ✅ LANGUE ACTIVE
+           🇬🇧 ENGLISH
       ======================================================= -->
 
-      <i
-        *ngIf="languageService.is('en')"
-
-        aria-hidden="true"
-
+      <button
+        type="button"
+        role="menuitem"
         class="
-          fa-solid
-          fa-check
-          text-[11px]
-          text-emerald-500
+          language-option
+          group
+          flex
+          min-w-0
+          w-full
+          items-center
+          gap-2.5
+          rounded-xl
+          px-2.5
+          py-2.5
+          text-left
+          cursor-pointer
+          select-none
+          transition-all
+          duration-150
+          hover:scale-[1.01]
+          active:scale-[0.98]
+          sm:gap-3
+          sm:px-3
         "
-      ></i>
+        [ngStyle]="{
+          'background':
+            languageService.is('en')
+              ? themeService.BG4
+              : 'transparent',
+          'border':
+            languageService.is('en')
+              ? '1px solid ' + themeService.BR3
+              : '1px solid transparent',
+          'color':
+            themeService.TX0
+        }"
+        (click)="selectLanguage('en', $event)"
+      >
 
-    </button>
+        <!-- ==================================================
+             🇬🇧 FLAG
+        =================================================== -->
+
+        <span
+          class="
+            flex
+            h-8
+            w-8
+            shrink-0
+            items-center
+            justify-center
+            overflow-hidden
+            rounded-lg
+            transition-all
+            duration-150
+            group-hover:scale-105
+            sm:h-9
+            sm:w-9
+          "
+          [ngStyle]="{
+            'background':
+              languageService.is('en')
+                ? themeService.BG3
+                : themeService.BG4,
+            'border':
+              '1px solid ' + themeService.BR2
+          }"
+        >
+
+          <img
+            src="assets/DrapeauAnglais.jpg"
+            alt="English"
+            class="
+              h-full
+              w-full
+              rounded-lg
+              object-cover
+            "
+          />
+
+        </span>
+
+
+        <!-- ==================================================
+             🏷️ LANGUAGE NAME
+        =================================================== -->
+
+        <span
+          class="
+            min-w-0
+            flex-1
+            truncate
+            text-[12px]
+            font-semibold
+            tracking-[-0.01em]
+            sm:text-[13px]
+          "
+        >
+          {{ translate('english') }}
+        </span>
+
+
+        <!-- ==================================================
+             🇬🇧 CODE
+        =================================================== -->
+
+        <span
+          class="
+            shrink-0
+            text-[9px]
+            font-bold
+            uppercase
+            tracking-wider
+            sm:text-[10px]
+          "
+          [ngStyle]="{
+            'color': themeService.TX3
+          }"
+        >
+          EN
+        </span>
+
+
+        <!-- ==================================================
+             ✅ ACTIVE
+        =================================================== -->
+
+        <span
+          *ngIf="languageService.is('en')"
+          class="
+            flex
+            h-5
+            w-5
+            shrink-0
+            items-center
+            justify-center
+            rounded-full
+          "
+          [ngStyle]="{
+            'background': themeService.BUTON1BG,
+            'color': themeService.BUTON1ICON
+          }"
+        >
+
+          <i
+            aria-hidden="true"
+            class="fa-solid fa-check text-[9px]"
+          ></i>
+
+        </span>
+
+      </button>
+
+
+      <!-- ======================================================
+           🌿 POPUP FOOTER SEPARATOR
+      ======================================================= -->
+
+      <div
+        class="
+          mx-2
+          mt-1.5
+          h-px
+          shrink-0
+        "
+        [ngStyle]="{
+          'background': themeService.BR2
+        }"
+      ></div>
+
+
+      <!-- ======================================================
+           🌿 POPUP FOOTER
+      ======================================================= -->
+
+      <div
+        class="
+          px-2
+          pb-1
+          pt-2
+          text-center
+          sm:pt-2.5
+        "
+        [ngStyle]="{
+          'color': themeService.TX3
+        }"
+      >
+
+        <span
+          class="
+            block
+            truncate
+            text-[9px]
+            tracking-wide
+            sm:text-[10px]
+          "
+        >
+          Arboria
+        </span>
+
+      </div>
+
+    </div>
 
   </div>
 
 </div>
+
+
+<!-- ============================================================
+     📱 MOBILE + TABLETTE UNIQUEMENT
+
+     370px → 1239px
+
+     Le composant est destiné à être utilisé uniquement
+     dans le bloc responsive mobile/tablette.
+
+     À partir de 1240px, le composant desktop doit être
+     utilisé à la place.
+
+============================================================= -->
+
+<style>
+
+  /* ------------------------------------------------------------
+     📱 MOBILE
+     ------------------------------------------------------------ */
+
+  @media (min-width: 370px) and (max-width: 639px) {
+
+    .language-wrapper {
+      position: relative;
+    }
+
+    .language-button {
+      position: relative;
+    }
+
+    .language-popup {
+      width: 220px;
+      max-width: calc(100vw - 16px);
+    }
+
+  }
+
+
+  /* ------------------------------------------------------------
+     📱 TABLETTE
+     ------------------------------------------------------------ */
+
+  @media (min-width: 640px) and (max-width: 1023px) {
+
+    .language-wrapper {
+      position: relative;
+    }
+
+    .language-button {
+      position: relative;
+    }
+
+    .language-popup {
+      width: 220px;
+      max-width: calc(100vw - 16px);
+    }
+
+  }
+
+
+  /* ------------------------------------------------------------
+     💻 PETITE TABLETTE / GRAND ÉCRAN TACTILE
+     Jusqu'à 1239px inclus
+     ------------------------------------------------------------ */
+
+  @media (min-width: 1024px) and (max-width: 1239px) {
+
+    .language-wrapper {
+      position: relative;
+    }
+
+    .language-button {
+      position: relative;
+    }
+
+    .language-popup {
+      width: 220px;
+      max-width: calc(100vw - 16px);
+    }
+
+  }
+
+
+  /* ------------------------------------------------------------
+     🚫 EN-DESSOUS DE 370PX
+     ------------------------------------------------------------ */
+
+  @media (max-width: 369px) {
+
+    .language-wrapper {
+      display: none;
+    }
+
+  }
+
+
+  /* ------------------------------------------------------------
+     🚫 À PARTIR DE 1240PX
+
+     Ce composant est réservé au mobile/tablette.
+     Le composant desktop prend le relais.
+     ------------------------------------------------------------ */
+
+  @media (min-width: 1240px) {
+
+    .language-wrapper {
+      display: none;
+    }
+
+  }
+
+</style>

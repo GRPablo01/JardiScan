@@ -1,668 +1,507 @@
+
 <!-- ============================================================
-     🌿 JARDISCAN — FOOTER COMPLET PREMIUM
-     
-     • Logo image
-     • Font Awesome
-     • ThemeService conservé
-     • LanguageService FR / EN
-     • RouterLink conservés
-     • Ancres conservées
-     • currentYear conservé
-     • Responsive Desktop / Tablet / Mobile
-     • UI / UX premium
+     ARBORIA — FOOTER PREMIUM GRAPHY-STYLE
+     Angular Standalone + Tailwind CSS + Font Awesome
+
+     • Palette officielle Arboria : ThemeService
+     • Mode clair / sombre dynamique
+     • Traductions françaises / anglaises
+     • Footer pleine largeur et responsive
+     • Conteneur premium avec bordure végétale subtile
+     • Logo et présentation à gauche
+     • Trois colonnes de navigation à droite
+     • Réseaux sociaux minimalistes
+     • Grand lettrage Arboria décoratif en arrière-plan
+     • Séparateur et barre légale inférieure
+     • RouterLink et currentYear conservés
      • Aucun changement de logique Angular
-============================================================ -->
-
-<footer
-  class="
-    w-full
-    border-t
-    px-10 py-10 pb-30
-  "
-  [ngStyle]="{
-    background: themeService.BackgroundFooter,
-    borderColor: themeService.Border1
-  }"
->
-  <div class="mx-auto w-full max-w-[1400px]">
-
-
-<!-- ========================================================
-     CONTENU PRINCIPAL
-========================================================= -->
-
-<div
-  class="
-    grid
-    gap-12
-    sm:grid-cols-2
-    lg:grid-cols-4
-    lg:gap-14
-  "
->
-
-  <!-- ======================================================
-       BRAND
-  ======================================================= -->
-
-  <div class="lg:col-span-2">
-
-    <!-- LOGO + NOM -->
-
-    <div class="flex items-center gap-4">
-
-      <!-- LOGO -->
-
-      <div
-        class="
-          flex
-          h-14 w-14
-          shrink-0
-          items-center justify-center
-          overflow-hidden
-          rounded-2xl
-          border
-          p-1.5
-          shadow-sm
-          transition-all
-          duration-300
-          hover:-translate-y-0.5
-          hover:scale-105
-        "
-        [ngStyle]="{
-          background: themeService.Background1,
-          borderColor: themeService.Border1
-        }"
-      >
-        <img
-          src="assets/Logo.svg"
-          alt="Logo JardiScan"
-          class="
-            h-full
-            w-full
-            object-contain
-          "
-        />
-      </div>
-
-      <!-- NOM -->
-
-      <div class="min-w-0">
-
-        <p
-          class="
-            text-lg
-            font-black
-            tracking-tight
-          "
-          [ngStyle]="{
-            color: themeService.TextPrincipal
-          }"
-        >
-          JardiScan
-        </p>
-
-        <p
-          class="
-            mt-0.5
-            text-xs
-            leading-5
-          "
-          [ngStyle]="{
-            color: themeService.TextMuted
-          }"
-        >
-          {{ languageService.is('fr')
-            ? 'Explorez le monde végétal.'
-            : 'Explore the plant world.' }}
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <!-- DESCRIPTION -->
-
-    <p
-      class="
-        mt-5
-        max-w-xl
-        text-sm
-        leading-7
-      "
-      [ngStyle]="{
-        color: themeService.TextSecondaire
-      }"
-    >
-      {{ languageService.is('fr')
-        ? "Une expérience numérique dédiée à la découverte, l'identification et la compréhension des plantes."
-        : 'A digital experience dedicated to discovering, identifying and understanding plants.' }}
-    </p>
-
-
-    <!-- PETITE SIGNATURE -->
-
-    <div
-      class="
-        mt-6
-        inline-flex
-        items-center
-        gap-2
-        rounded-full
-        border
-        px-3.5
-        py-2
-        text-xs
-        font-semibold
-      "
-      [ngStyle]="{
-        background: themeService.Background1,
-        borderColor: themeService.Border1,
-        color: themeService.TextMuted
-      }"
-    >
-      <i
-        class="fa-solid fa-seedling"
-        aria-hidden="true"
-      ></i>
-
-      <span>
-        {{ languageService.is('fr')
-          ? 'Cultivez votre curiosité'
-          : 'Grow your curiosity' }}
-      </span>
-    </div>
-
-  </div>
-
-
-  <!-- ======================================================
-       DÉCOUVRIR
-  ======================================================= -->
-
-  <div>
-
-    <h3
-      class="
-        text-sm
-        font-black
-        tracking-wide
-      "
-      [ngStyle]="{
-        color: themeService.TextPrincipal
-      }"
-    >
-      {{ languageService.is('fr') ? 'Découvrir' : 'Discover' }}
-    </h3>
-
-
-    <div class="mt-5 flex flex-col gap-3.5">
-
-      <!-- ACCUEIL -->
-
-      <a
-        href="#welcome"
-        class="
-          group
-          flex
-          items-center
-          gap-3
-          text-sm
-          transition-all
-          duration-200
-          hover:translate-x-1
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextSecondaire
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-house
-            w-4
-            text-center
-            text-xs
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr') ? 'Découvrir' : 'Discover' }}
-        </span>
-      </a>
-
-
-      <!-- NOUVEAUTÉ -->
-
-      <a
-        href="#univers"
-        class="
-          group
-          flex
-          items-center
-          gap-3
-          text-sm
-          transition-all
-          duration-200
-          hover:translate-x-1
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextSecondaire
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-wand-magic-sparkles
-            w-4
-            text-center
-            text-xs
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr') ? 'Nouveauté' : 'New' }}
-        </span>
-      </a>
-
-
-      <!-- FONCTIONNALITÉS -->
-
-      <a
-        href="#fonctionnalites"
-        class="
-          group
-          flex
-          items-center
-          gap-3
-          text-sm
-          transition-all
-          duration-200
-          hover:translate-x-1
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextSecondaire
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-gears
-            w-4
-            text-center
-            text-xs
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr')
-            ? 'Fonctionnalités'
-            : 'Features' }}
-        </span>
-      </a>
-
-
-      <!-- CONSEIL -->
-
-      <a
-        href="#parcours"
-        class="
-          group
-          flex
-          items-center
-          gap-3
-          text-sm
-          transition-all
-          duration-200
-          hover:translate-x-1
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextSecondaire
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-lightbulb
-            w-4
-            text-center
-            text-xs
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr') ? 'Conseil' : 'Advice' }}
-        </span>
-      </a>
-
-
-      <!-- PARAMÈTRES -->
-
-      <a
-        href="#roles"
-        class="
-          group
-          flex
-          items-center
-          gap-3
-          text-sm
-          transition-all
-          duration-200
-          hover:translate-x-1
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextSecondaire
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-sliders
-            w-4
-            text-center
-            text-xs
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr')
-            ? 'Paramètres'
-            : 'Settings' }}
-        </span>
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <!-- ======================================================
-       ACCÈS
-  ======================================================= -->
-
-  <div>
-
-    <h3
-      class="
-        text-sm
-        font-black
-        tracking-wide
-      "
-      [ngStyle]="{
-        color: themeService.TextPrincipal
-      }"
-    >
-      {{ languageService.is('fr') ? 'Accès' : 'Access' }}
-    </h3>
-
-
-    <div class="mt-5 flex flex-col gap-3.5">
-
-      <!-- CONNEXION -->
-
-      <a
-        routerLink="/login"
-        class="
-          group
-          flex
-          items-center
-          gap-3
-          text-sm
-          transition-all
-          duration-200
-          hover:translate-x-1
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextSecondaire
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-right-to-bracket
-            w-4
-            text-center
-            text-xs
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr')
-            ? 'Se connecter'
-            : 'Sign in' }}
-        </span>
-      </a>
-
-
-      <!-- INSCRIPTION -->
-
-      <a
-        routerLink="/register"
-        class="
-          group
-          flex
-          items-center
-          gap-3
-          text-sm
-          transition-all
-          duration-200
-          hover:translate-x-1
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextSecondaire
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-user-plus
-            w-4
-            text-center
-            text-xs
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr')
-            ? 'Créer un compte'
-            : 'Create an account' }}
-        </span>
-      </a>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ========================================================
-     SÉPARATION
-========================================================= -->
-
-<div
-  class="
-    mt-10
-    border-t
-    pt-6
-    sm:mt-12
-  "
-  [ngStyle]="{
-    borderColor: themeService.Border1
-  }"
->
-
-  <div
-    class="
-      flex
-      flex-col
-      gap-6
-      sm:flex-row
-      sm:items-center
-      sm:justify-between
-    "
-  >
-
-    <!-- ====================================================
-         COPYRIGHT
-    ===================================================== -->
-
-    <p
-      class="
-        text-xs
-        leading-5
-      "
-      [ngStyle]="{
-        color: themeService.TextMuted
-      }"
-    >
-      © {{ currentYear }} JardiScan.
-      {{ languageService.is('fr')
-        ? 'Tous droits réservés.'
-        : 'All rights reserved.' }}
-    </p>
-
-
-    <!-- ====================================================
-         LIENS LÉGAUX
-    ===================================================== -->
-
-    <div
-      class="
-        flex
-        flex-wrap
-        items-center
-        gap-x-6
-        gap-y-3
-      "
-    >
-
-      <!-- CONFIDENTIALITÉ -->
-
-      <a
-        routerLink="/privacy"
-        class="
-          inline-flex
-          items-center
-          gap-2
-          text-xs
-          transition-all
-          duration-200
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextMuted
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-shield-halved
-            text-[10px]
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr')
-            ? 'Confidentialité'
-            : 'Privacy' }}
-        </span>
-      </a>
-
-
-      <!-- MENTIONS LÉGALES -->
-
-      <a
-        routerLink="/legal"
-        class="
-          inline-flex
-          items-center
-          gap-2
-          text-xs
-          transition-all
-          duration-200
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextMuted
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-scale-balanced
-            text-[10px]
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr')
-            ? 'Mentions légales'
-            : 'Legal notice' }}
-        </span>
-      </a>
-
-
-      <!-- CONDITIONS -->
-
-      <a
-        routerLink="/terms"
-        class="
-          inline-flex
-          items-center
-          gap-2
-          text-xs
-          transition-all
-          duration-200
-          hover:opacity-70
-        "
-        [ngStyle]="{
-          color: themeService.TextMuted
-        }"
-      >
-        <i
-          class="
-            fa-solid
-            fa-file-contract
-            text-[10px]
-          "
-          aria-hidden="true"
-        ></i>
-
-        <span>
-          {{ languageService.is('fr')
-            ? 'Conditions'
-            : 'Terms' }}
-        </span>
-      </a>
-
-
-      
-
-    </div>
-
-  </div>
-
-</div>
-
-
-  </div>
-
-</footer>
+     ============================================================ -->
+
+     <footer
+     class="arboria-footer relative isolate w-full min-w-0 overflow-hidden pl-3 pt-3 pr-3 pb-30"
+     [ngStyle]="{
+       'background-color': themeService.BG1,
+       color: themeService.TX0
+     }"
+   >
+     <!-- FOND DÉCORATIF -->
+     <div
+       aria-hidden="true"
+       class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 flex select-none items-end justify-center overflow-hidden"
+     >
+       <span
+         class="translate-y-[24%] whitespace-nowrap text-[clamp(7rem,23vw,24rem)] font-bold leading-[0.8] tracking-[-0.09em] opacity-[0.045]"
+         [ngStyle]="{
+           color: themeService.Primary,
+           'font-family': 'Cormorant Garamond, serif'
+         }"
+       >
+         Arboria
+       </span>
+     </div>
+   
+     <!-- CONTENEUR PRINCIPAL -->
+     <div
+       class="relative mx-auto w-full min-w-0 rounded-[22px] border px-5 py-7 sm:rounded-[28px] sm:px-8 sm:py-9 md:px-10 md:py-10 lg:rounded-[32px] lg:px-12 lg:py-12 xl:px-16 2xl:px-20"
+       [ngStyle]="{
+         'background-color': themeService.BG1,
+         'border-color': themeService.BR1,
+         'box-shadow': '0 20px 70px ' + themeService.SHADOW
+       }"
+     >
+       <!-- ACCENT SUPÉRIEUR -->
+       <div
+         aria-hidden="true"
+         class="absolute left-6 right-6 top-0 h-[2px] rounded-full opacity-80 sm:left-8 sm:right-8 lg:left-12 lg:right-12"
+         [ngStyle]="{
+           background: 'linear-gradient(90deg, transparent, ' + themeService.Primary + ', ' + themeService.Secondary + ', transparent)'
+         }"
+       ></div>
+   
+       <!-- PARTIE SUPÉRIEURE -->
+       <div
+         class="grid w-full min-w-0 grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 sm:gap-y-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,0.85fr)_minmax(0,0.85fr)_minmax(0,0.85fr)] lg:gap-x-8 xl:grid-cols-[minmax(0,2.2fr)_minmax(0,0.7fr)_minmax(0,0.8fr)_minmax(0,0.8fr)] xl:gap-x-12 2xl:gap-x-16"
+       >
+         <!-- IDENTITÉ ARBORIA -->
+         <div class="flex min-w-0 flex-col items-start">
+           <!-- LOGO -->
+           <a
+             routerLink="/"
+             aria-label="Arboria — Accueil"
+             class="group inline-flex items-center gap-2.5 rounded-lg outline-none transition-opacity duration-200 hover:opacity-75 focus-visible:ring-2 focus-visible:ring-offset-4"
+             [ngStyle]="{
+               color: themeService.TX0,
+               '--tw-ring-color': themeService.Primary
+             }"
+           >
+             <img
+               src="assets/LogoArboria.svg"
+               alt=""
+               class="h-9 w-auto shrink-0 object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10"
+             />
+   
+             <span
+               class="text-[24px] font-semibold tracking-[-0.06em] sm:text-[27px]"
+               [ngStyle]="{
+                 'font-family': 'Cormorant Garamond, serif'
+               }"
+             >
+               Arboria<span [ngStyle]="{ color: themeService.Primary }">.</span>
+             </span>
+           </a>
+   
+           <!-- SIGNATURE -->
+           <div
+             class="mt-5 inline-flex items-center gap-2 rounded-full border px-3 py-1.5"
+             [ngStyle]="{
+               'background-color': themeService.PrimarySoft,
+               'border-color': themeService.BorderPrimary,
+               color: themeService.Primary
+             }"
+           >
+             <span
+               class="h-1.5 w-1.5 rounded-full"
+               [ngStyle]="{ 'background-color': themeService.Primary }"
+             ></span>
+   
+             <span class="text-[10px] font-semibold uppercase tracking-[0.16em]">
+               {{
+                 languageService.currentLanguage === 'en'
+                   ? 'Grow with nature'
+                   : 'Cultivez avec la nature'
+               }}
+             </span>
+           </div>
+   
+           <!-- DESCRIPTION -->
+           <p
+             class="mt-5 max-w-[400px] text-[13px] leading-[1.9] sm:text-[14px]"
+             [ngStyle]="{ color: themeService.TX1 }"
+           >
+             {{
+               languageService.currentLanguage === 'en'
+                 ? 'Discover plants, understand their needs and care for your garden with confidence. Arboria makes gardening simpler, more natural and more accessible.'
+                 : 'Découvrez les plantes, comprenez leurs besoins et prenez soin de votre jardin en toute confiance. Arboria rend le jardinage plus simple, plus naturel et plus accessible.'
+             }}
+           </p>
+   
+           <!-- RÉSEAUX SOCIAUX -->
+           <div class="mt-7 flex flex-wrap items-center gap-5">
+             <a
+               href="https://www.instagram.com/"
+               target="_blank"
+               rel="noopener noreferrer"
+               [attr.aria-label]="languageService.currentLanguage === 'en' ? 'Instagram — opens in a new tab' : 'Instagram — ouvre dans un nouvel onglet'"
+               class="inline-flex h-8 w-8 items-center justify-center rounded-lg transition-all duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+               [ngStyle]="{
+                 color: themeService.TX1,
+                 '--tw-ring-color': themeService.Primary
+               }"
+             >
+               <i class="fa-brands fa-instagram text-[19px]"></i>
+             </a>
+   
+             <a
+               href="https://www.facebook.com/"
+               target="_blank"
+               rel="noopener noreferrer"
+               [attr.aria-label]="languageService.currentLanguage === 'en' ? 'Facebook — opens in a new tab' : 'Facebook — ouvre dans un nouvel onglet'"
+               class="inline-flex h-8 w-8 items-center justify-center rounded-lg transition-all duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+               [ngStyle]="{
+                 color: themeService.TX1,
+                 '--tw-ring-color': themeService.Primary
+               }"
+             >
+               <i class="fa-brands fa-facebook-f text-[17px]"></i>
+             </a>
+   
+             <a
+               href="https://www.pinterest.com/"
+               target="_blank"
+               rel="noopener noreferrer"
+               [attr.aria-label]="languageService.currentLanguage === 'en' ? 'Pinterest — opens in a new tab' : 'Pinterest — ouvre dans un nouvel onglet'"
+               class="inline-flex h-8 w-8 items-center justify-center rounded-lg transition-all duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+               [ngStyle]="{
+                 color: themeService.TX1,
+                 '--tw-ring-color': themeService.Primary
+               }"
+             >
+               <i class="fa-brands fa-pinterest-p text-[18px]"></i>
+             </a>
+           </div>
+   
+           <!-- NOTE DE MARQUE -->
+           <p
+             class="mt-5 text-[11px] leading-relaxed"
+             [ngStyle]="{ color: themeService.TX2 }"
+           >
+             {{
+               languageService.currentLanguage === 'en'
+                 ? 'Made for people who love growing things.'
+                 : 'Pensé pour celles et ceux qui aiment faire pousser.'
+             }}
+           </p>
+         </div>
+   
+         <!-- COLONNE : PRODUIT -->
+         <nav
+           class="flex min-w-0 flex-col items-start"
+           [attr.aria-label]="languageService.currentLanguage === 'en' ? 'Product navigation' : 'Navigation produit'"
+         >
+           <h2
+             class="mb-5 flex items-center gap-2.5 text-[12px] font-bold uppercase tracking-[0.13em] sm:text-[13px]"
+             [ngStyle]="{ color: themeService.TX0 }"
+           >
+             <span
+               class="h-5 w-[3px] rounded-full"
+               [ngStyle]="{ 'background-color': themeService.Primary }"
+             ></span>
+   
+             {{ languageService.currentLanguage === 'en' ? 'Explore' : 'Découvrir' }}
+           </h2>
+   
+           <ul class="flex flex-col items-start gap-4">
+             <li>
+               <a
+                 routerLink="/fonctionnalites"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Features' : 'Fonctionnalités' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/recherche"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Plant search' : 'Recherche de plantes' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/diagnostic"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Plant diagnosis' : 'Diagnostic' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/saison"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Seasonal guide' : 'Guide saisonnier' }}
+               </a>
+             </li>
+           </ul>
+         </nav>
+   
+         <!-- COLONNE : RESSOURCES -->
+         <nav
+           class="flex min-w-0 flex-col items-start"
+           [attr.aria-label]="languageService.currentLanguage === 'en' ? 'Resources navigation' : 'Navigation ressources'"
+         >
+           <h2
+             class="mb-5 flex items-center gap-2.5 text-[12px] font-bold uppercase tracking-[0.13em] sm:text-[13px]"
+             [ngStyle]="{ color: themeService.TX0 }"
+           >
+             <span
+               class="h-5 w-[3px] rounded-full"
+               [ngStyle]="{ 'background-color': themeService.Secondary }"
+             ></span>
+   
+             {{ languageService.currentLanguage === 'en' ? 'Resources' : 'Ressources' }}
+           </h2>
+   
+           <ul class="flex flex-col items-start gap-4">
+             <li>
+               <a
+                 routerLink="/conseils"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Gardening tips' : 'Conseils jardin' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/aide"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Help center' : 'Centre d’aide' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/assistance"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Support' : 'Assistance' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/contact"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 Contact
+               </a>
+             </li>
+           </ul>
+         </nav>
+   
+         <!-- COLONNE : ARBORIA -->
+         <nav
+           class="flex min-w-0 flex-col items-start"
+           [attr.aria-label]="languageService.currentLanguage === 'en' ? 'Company navigation' : 'Navigation Arboria'"
+         >
+           <h2
+             class="mb-5 flex items-center gap-2.5 text-[12px] font-bold uppercase tracking-[0.13em] sm:text-[13px]"
+             [ngStyle]="{ color: themeService.TX0 }"
+           >
+             <span
+               class="h-5 w-[3px] rounded-full"
+               [ngStyle]="{ 'background-color': themeService.Lime }"
+             ></span>
+   
+             {{ languageService.currentLanguage === 'en' ? 'Arboria' : 'La marque' }}
+           </h2>
+   
+           <ul class="flex flex-col items-start gap-4">
+             <li>
+               <a
+                 routerLink="/a-propos"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'About us' : 'À propos' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/contact"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Get in touch' : 'Nous contacter' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/confidentialite"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Privacy' : 'Confidentialité' }}
+               </a>
+             </li>
+   
+             <li>
+               <a
+                 routerLink="/conditions"
+                 class="footer-link text-[13px] sm:text-[14px]"
+                 [ngStyle]="{ color: themeService.TX1 }"
+               >
+                 {{ languageService.currentLanguage === 'en' ? 'Terms of use' : 'Conditions d’utilisation' }}
+               </a>
+             </li>
+           </ul>
+         </nav>
+       </div>
+   
+       <!-- SÉPARATEUR -->
+       <div
+         class="my-8 h-px w-full sm:my-9 lg:my-10"
+         [ngStyle]="{
+           background: 'linear-gradient(90deg, ' + themeService.BR1 + ', ' + themeService.BR2 + ', ' + themeService.BR1 + ')'
+         }"
+       ></div>
+   
+       <!-- BARRE INFÉRIEURE -->
+       <div
+         class="flex w-full min-w-0 flex-col items-start justify-between gap-5 sm:flex-row sm:items-center sm:gap-6"
+       >
+         <!-- COPYRIGHT -->
+         <p
+           class="text-[11px] leading-relaxed sm:text-[12px]"
+           [ngStyle]="{ color: themeService.TX2 }"
+         >
+           <span [ngStyle]="{ color: themeService.TX0 }">© {{ currentYear }} Arboria.</span>
+   
+           {{
+             languageService.currentLanguage === 'en'
+               ? 'All rights reserved.'
+               : 'Tous droits réservés.'
+           }}
+         </p>
+   
+         <!-- LIENS LÉGAUX -->
+         <div class="flex min-w-0 flex-wrap items-center gap-x-5 gap-y-3 sm:gap-x-6">
+           <a
+             routerLink="/confidentialite"
+             class="footer-legal-link text-[11px] sm:text-[12px]"
+             [ngStyle]="{ color: themeService.TX2 }"
+           >
+             {{
+               languageService.currentLanguage === 'en'
+                 ? 'Privacy policy'
+                 : 'Politique de confidentialité'
+             }}
+           </a>
+   
+           <a
+             routerLink="/conditions"
+             class="footer-legal-link text-[11px] sm:text-[12px]"
+             [ngStyle]="{ color: themeService.TX2 }"
+           >
+             {{
+               languageService.currentLanguage === 'en'
+                 ? 'Terms of service'
+                 : 'Conditions d’utilisation'
+             }}
+           </a>
+   
+           <a
+             routerLink="/cookies"
+             class="footer-legal-link text-[11px] sm:text-[12px]"
+             [ngStyle]="{ color: themeService.TX2 }"
+           >
+             {{
+               languageService.currentLanguage === 'en'
+                 ? 'Cookie settings'
+                 : 'Gestion des cookies'
+             }}
+           </a>
+         </div>
+       </div>
+   
+       <!-- SIGNATURE FINALE -->
+       <div
+         class="mt-6 flex items-center justify-center gap-2 text-[10px] tracking-[0.08em] sm:mt-7"
+         [ngStyle]="{ color: themeService.TX3 }"
+       >
+         <i class="fa-solid fa-leaf text-[10px]" [ngStyle]="{ color: themeService.Primary }"></i>
+   
+         {{
+           languageService.currentLanguage === 'en'
+             ? 'A little greener, every day.'
+             : 'Un peu plus de vert, chaque jour.'
+         }}
+       </div>
+     </div>
+   </footer>
+   
+   <style>
+     .arboria-footer {
+       isolation: isolate;
+     }
+   
+     .footer-link {
+       position: relative;
+       display: inline-flex;
+       align-items: center;
+       max-width: 100%;
+       line-height: 1.65;
+       text-decoration: none;
+       text-underline-offset: 4px;
+       transition:
+         color 200ms ease,
+         opacity 200ms ease,
+         transform 200ms ease;
+     }
+   
+     .footer-link:hover {
+       color: var(--ar-primary) !important;
+       transform: translateX(3px);
+     }
+   
+     .footer-link:focus-visible,
+     .footer-legal-link:focus-visible {
+       outline: 2px solid var(--ar-primary);
+       outline-offset: 4px;
+       border-radius: 3px;
+     }
+   
+     .footer-legal-link {
+       text-decoration: underline;
+       text-decoration-color: transparent;
+       text-underline-offset: 4px;
+       transition:
+         color 200ms ease,
+         text-decoration-color 200ms ease;
+     }
+   
+     .footer-legal-link:hover {
+       color: var(--ar-primary) !important;
+       text-decoration-color: currentColor;
+     }
+   
+     @media (prefers-reduced-motion: reduce) {
+       .footer-link,
+       .footer-legal-link,
+       .arboria-footer img {
+         transition: none !important;
+       }
+   
+       .footer-link:hover,
+       .arboria-footer img:hover {
+         transform: none !important;
+       }
+     }
+   </style>
+   

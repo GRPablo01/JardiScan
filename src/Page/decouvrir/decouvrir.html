@@ -1,0 +1,1345 @@
+<!-- ============================================================
+     ARBORIA — PAGE « DÉCOUVRIR ARBORIA »
+     Refonte UI/UX inspirée de la capture Veris
+
+     Angular Standalone + Tailwind CSS + Font Awesome
+     • Design SaaS éditorial : fond clair, typographie nette
+     • Hero centré, décor botanique et aperçu de l'application
+     • Bandeau de confiance
+     • Grille éditoriale asymétrique
+     • Parcours interactif par étapes
+     • Fonctionnalités Arboria en cartes compactes
+     • Publics en grille
+     • Thème clair / sombre via ThemeService
+     • Traductions conservées via texte.*
+     • Responsive et pleine largeur
+     • Aucune caméra, aucun scanner, aucun abonnement
+============================================================ -->
+
+<main
+  class="arboria-page min-h-screen w-full overflow-x-clip transition-colors duration-300"
+  [ngStyle]="{
+    'background-color': themeService.BG1,
+    color: themeService.TX0
+  }"
+>
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+  <header
+    class="arboria-header sticky top-0 z-50 w-full border-b backdrop-blur-xl"
+    [ngStyle]="{
+      'background-color': themeService.BG1 + 'F2',
+      'border-color': themeService.BR1
+    }"
+  >
+    <div
+      class="mx-auto flex min-h-[70px] w-full max-w-[1600px] items-center justify-between gap-4 px-5 sm:px-8 lg:px-12"
+    >
+      <a
+        routerLink="/"
+        class="inline-flex shrink-0 items-center transition-opacity hover:opacity-75"
+        aria-label="Arboria — Accueil"
+      >
+        <img
+          [src]="themeService.ImageLogo"
+          alt="Arboria"
+          class="h-8 w-auto sm:h-9"
+        />
+      </a>
+
+      
+
+      <div class="flex shrink-0 items-center gap-2 sm:gap-3">
+        <button
+          type="button"
+          (click)="retourPagePrecedente()"
+          class="hidden min-h-10 items-center gap-2 rounded-xl px-3 text-xs font-semibold transition-colors hover:opacity-65 sm:inline-flex"
+          [ngStyle]="{ color: themeService.TX1 }"
+          [attr.aria-label]="texte.retour"
+        >
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          {{ texte.retour }}
+        </button>
+
+        <a
+          routerLink="/inscription"
+          class="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-[#174C35] px-4 py-2.5 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#247A4B] sm:px-5"
+        >
+          {{ texte.headerBouton }}
+          <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================
+       HERO — CENTRÉ, LÉGER ET PRODUIT
+  ========================================================== -->
+  <section
+    class="arboria-hero relative isolate w-full overflow-hidden"
+    [ngStyle]="{ 'background-color': themeService.BG1 }"
+  >
+    <!-- Décor -->
+    <div
+      class="arboria-orbit arboria-orbit-one pointer-events-none absolute left-1/2 top-[-190px] -z-10 h-[540px] w-[540px] -translate-x-1/2 rounded-full border"
+      [ngStyle]="{ 'border-color': themeService.BR1 + '90' }"
+    ></div>
+
+    <div
+      class="arboria-orbit arboria-orbit-two pointer-events-none absolute left-1/2 top-[-135px] -z-10 h-[650px] w-[650px] -translate-x-1/2 rounded-full border"
+      [ngStyle]="{ 'border-color': themeService.BR1 + '70' }"
+    ></div>
+
+    <div
+      class="pointer-events-none absolute left-[7%] top-28 -z-10 h-24 w-24 rounded-full bg-[#C8F169]/15 blur-3xl"
+    ></div>
+
+    <div
+      class="pointer-events-none absolute right-[8%] top-52 -z-10 h-32 w-32 rounded-full bg-[#19B8A5]/10 blur-3xl"
+    ></div>
+
+    <div class="mx-auto w-full max-w-[1600px] px-5 pb-0 pt-16 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
+      <div class="mx-auto max-w-4xl text-center">
+        <div
+          class="arboria-reveal mx-auto mb-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[11px] font-semibold sm:text-xs"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR1,
+            color: themeService.TX1
+          }"
+        >
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#78A85B] opacity-40"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-[#78A85B]"></span>
+          </span>
+          <i class="fa-solid fa-leaf text-[#4F8959]" aria-hidden="true"></i>
+          {{ texte.badge }}
+        </div>
+
+        <h1
+          class="arboria-reveal arboria-delay-1 mx-auto max-w-4xl text-[clamp(2.5rem,6.5vw,5.7rem)] font-semibold leading-[0.99] tracking-[-0.065em]"
+        >
+          {{ texte.heroTitre1 }}
+          <span class="arboria-heading-accent block">
+            {{ texte.heroTitre2 }}
+          </span>
+        </h1>
+
+        <p
+          class="arboria-reveal arboria-delay-2 mx-auto mt-6 max-w-2xl text-sm leading-7 sm:mt-7 sm:text-base sm:leading-8 lg:text-lg"
+          [ngStyle]="{ color: themeService.TX1 }"
+        >
+          {{ texte.heroDescription }}
+        </p>
+
+        <div class="arboria-reveal arboria-delay-3 mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+          <a
+            routerLink="/inscription"
+            class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl bg-[#174C35] px-6 py-3.5 text-xs font-bold text-white shadow-[0_8px_24px_rgba(23,76,53,0.18)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#247A4B] sm:text-sm"
+          >
+            {{ texte.heroBouton }}
+            <i class="fa-solid fa-arrow-right text-[11px]" aria-hidden="true"></i>
+          </a>
+
+          <a
+            href="#fonctionnement"
+            class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl border px-6 py-3.5 text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 sm:text-sm"
+            [ngStyle]="{
+              'background-color': themeService.BG1,
+              'border-color': themeService.BR1,
+              color: themeService.TX0
+            }"
+          >
+            <i class="fa-regular fa-circle-play" aria-hidden="true"></i>
+            {{ texte.heroSecondaire }}
+          </a>
+        </div>
+
+        <div class="arboria-reveal arboria-delay-3 mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 text-[11px] sm:text-xs">
+          <span class="inline-flex items-center gap-2" [ngStyle]="{ color: themeService.TX1 }">
+            <i class="fa-solid fa-check text-[#4F8959]" aria-hidden="true"></i>
+            {{ texte.avantage1 }}
+          </span>
+
+          <span class="inline-flex items-center gap-2" [ngStyle]="{ color: themeService.TX1 }">
+            <i class="fa-solid fa-check text-[#4F8959]" aria-hidden="true"></i>
+            {{ texte.avantage2 }}
+          </span>
+
+          <span class="inline-flex items-center gap-2" [ngStyle]="{ color: themeService.TX1 }">
+            <i class="fa-solid fa-check text-[#4F8959]" aria-hidden="true"></i>
+            {{ texte.avantage3 }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Aperçu visuel de l'application -->
+      <div class="arboria-reveal arboria-delay-3 relative mx-auto mt-12 max-w-5xl sm:mt-16 lg:mt-20">
+        <div
+          class="absolute -inset-3 -z-10 rounded-[2rem] opacity-60 blur-2xl"
+          style="background: radial-gradient(ellipse at center, rgba(120,168,91,.18), transparent 70%);"
+        ></div>
+
+        <div
+          class="arboria-product-window relative overflow-hidden rounded-t-[1.5rem] border shadow-[0_25px_90px_rgba(25,50,34,0.13)] sm:rounded-t-[1.8rem]"
+          [ngStyle]="{
+            'background-color': themeService.BG1,
+            'border-color': themeService.BR1
+          }"
+        >
+          <!-- Barre de fenêtre -->
+          <div
+            class="flex h-12 items-center justify-between border-b px-4 sm:h-14 sm:px-6"
+            [ngStyle]="{
+              'background-color': themeService.BG2,
+              'border-color': themeService.BR1
+            }"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-[#174C35] text-[10px] text-white">
+                <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+              </span>
+              <span class="text-xs font-bold tracking-tight">Arboria</span>
+            </div>
+
+            <div class="hidden items-center gap-1.5 sm:flex">
+              <span
+                class="h-1.5 w-1.5 rounded-full"
+                [ngStyle]="{ 'background-color': themeService.BR1 }"
+              ></span>
+              <span
+                class="h-1.5 w-1.5 rounded-full"
+                [ngStyle]="{ 'background-color': themeService.BR1 }"
+              ></span>
+              <span
+                class="h-1.5 w-1.5 rounded-full"
+                [ngStyle]="{ 'background-color': themeService.BR1 }"
+              ></span>
+            </div>
+
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[9px] font-semibold sm:text-[10px]"
+              [ngStyle]="{
+                'background-color': themeService.BG1,
+                'border-color': themeService.BR1,
+                color: themeService.TX1
+              }"
+            >
+              <i class="fa-solid fa-circle text-[5px] text-[#65A46B]" aria-hidden="true"></i>
+              {{ texte.bandeau1Titre }}
+            </span>
+          </div>
+
+          <div class="grid min-h-[300px] grid-cols-1 sm:min-h-[370px] md:grid-cols-[190px_1fr]">
+            <!-- Sidebar -->
+            <aside
+              class="hidden border-r p-4 md:block"
+              [ngStyle]="{
+                'background-color': themeService.BG2,
+                'border-color': themeService.BR1
+              }"
+            >
+              <p
+                class="mb-4 px-2 text-[9px] font-bold uppercase tracking-[0.15em]"
+                [ngStyle]="{ color: themeService.TX2 }"
+              >
+                Arboria
+              </p>
+
+              <div class="space-y-1.5">
+                <div class="flex items-center gap-2.5 rounded-lg bg-[#174C35] px-3 py-2.5 text-[10px] font-semibold text-white">
+                  <i class="fa-solid fa-house-chimney text-[10px]" aria-hidden="true"></i>
+                  {{ texte.introEyebrow }}
+                </div>
+
+                <div class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-[10px]" [ngStyle]="{ color: themeService.TX1 }">
+                  <i class="fa-solid fa-magnifying-glass w-3 text-center" aria-hidden="true"></i>
+                  {{ texte.fonction1Titre }}
+                </div>
+
+                <div class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-[10px]" [ngStyle]="{ color: themeService.TX1 }">
+                  <i class="fa-solid fa-book-open w-3 text-center" aria-hidden="true"></i>
+                  {{ texte.fonction2Titre }}
+                </div>
+
+                <div class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-[10px]" [ngStyle]="{ color: themeService.TX1 }">
+                  <i class="fa-solid fa-stethoscope w-3 text-center" aria-hidden="true"></i>
+                  {{ texte.fonction3Titre }}
+                </div>
+
+                <div class="flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-[10px]" [ngStyle]="{ color: themeService.TX1 }">
+                  <i class="fa-solid fa-seedling w-3 text-center" aria-hidden="true"></i>
+                  JardiDex
+                </div>
+              </div>
+
+              <div
+                class="mt-8 rounded-xl border p-3"
+                [ngStyle]="{
+                  'background-color': themeService.BG1,
+                  'border-color': themeService.BR1
+                }"
+              >
+                <div class="mb-2 flex items-center gap-2">
+                  <i class="fa-solid fa-sun text-xs text-[#C18B36]" aria-hidden="true"></i>
+                  <span class="text-[10px] font-semibold">{{ texte.fonction4Titre }}</span>
+                </div>
+                <p class="text-[9px] leading-4" [ngStyle]="{ color: themeService.TX2 }">
+                  {{ texte.fonction4Description }}
+                </p>
+              </div>
+            </aside>
+
+            <!-- Contenu de démonstration -->
+            <div class="min-w-0 p-4 sm:p-6 lg:p-8">
+              <div class="mb-5 flex flex-col justify-between gap-3 sm:mb-6 sm:flex-row sm:items-center">
+                <div>
+                  <p class="text-[10px] font-medium" [ngStyle]="{ color: themeService.TX2 }">
+                    Arboria / {{ texte.introEyebrow }}
+                  </p>
+                  <h2 class="mt-1.5 text-lg font-semibold tracking-tight sm:text-xl">
+                    {{ texte.heroTitre1 }}
+                  </h2>
+                </div>
+
+                <a
+                  routerLink="/inscription"
+                  class="inline-flex min-h-9 items-center justify-center gap-2 self-start rounded-lg bg-[#174C35] px-3.5 text-[10px] font-bold text-white transition-colors hover:bg-[#247A4B] sm:self-auto"
+                >
+                  <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                  {{ texte.heroBouton }}
+                </a>
+              </div>
+
+              <!-- Recherche illustrative -->
+              <div
+                class="flex items-center gap-3 rounded-xl border px-3.5 py-3 sm:px-4 sm:py-3.5"
+                [ngStyle]="{
+                  'background-color': themeService.BG2,
+                  'border-color': themeService.BR1
+                }"
+              >
+                <i class="fa-solid fa-magnifying-glass text-sm" [ngStyle]="{ color: themeService.TX2 }" aria-hidden="true"></i>
+                <span class="flex-1 text-[10px] sm:text-xs" [ngStyle]="{ color: themeService.TX2 }">
+                  {{ texte.fonction1Description }}
+                </span>
+                <span class="hidden rounded-md border px-2 py-1 text-[9px] sm:inline-block" [ngStyle]="{ 'border-color': themeService.BR1, color: themeService.TX2 }">
+                  <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+                </span>
+              </div>
+
+              <!-- Aperçus de plantes -->
+              <div class="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
+                <article
+                  class="group overflow-hidden rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                  [ngStyle]="{
+                    'background-color': themeService.BG1,
+                    'border-color': themeService.BR1
+                  }"
+                >
+                  <div class="relative h-24 overflow-hidden sm:h-32">
+                    <img
+                      src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=600&q=80"
+                      alt="Feuillage luxuriant"
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-lg bg-white/90 text-[#174C35] shadow-sm">
+                      <i class="fa-regular fa-bookmark text-[10px]" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div class="p-3">
+                    <p class="text-[10px] font-bold sm:text-xs">{{ texte.galerieImage2 }}</p>
+                    <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">
+                      {{ texte.fonction2Titre }}
+                    </p>
+                    <div class="mt-3 flex items-center gap-1.5">
+                      <span class="h-1.5 w-1.5 rounded-full bg-[#78A85B]"></span>
+                      <span class="text-[9px]" [ngStyle]="{ color: themeService.TX1 }">
+                        {{ texte.fonction4Titre }}
+                      </span>
+                    </div>
+                  </div>
+                </article>
+
+                <article
+                  class="group overflow-hidden rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                  [ngStyle]="{
+                    'background-color': themeService.BG1,
+                    'border-color': themeService.BR1
+                  }"
+                >
+                  <div class="relative h-24 overflow-hidden sm:h-32">
+                    <img
+                      src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=600&q=80"
+                      alt="Plante d'intérieur dans un pot"
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-lg bg-white/90 text-[#174C35] shadow-sm">
+                      <i class="fa-regular fa-bookmark text-[10px]" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div class="p-3">
+                    <p class="text-[10px] font-bold sm:text-xs">{{ texte.galerieImage3 }}</p>
+                    <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">
+                      {{ texte.fonction2Titre }}
+                    </p>
+                    <div class="mt-3 flex items-center gap-1.5">
+                      <span class="h-1.5 w-1.5 rounded-full bg-[#78A85B]"></span>
+                      <span class="text-[9px]" [ngStyle]="{ color: themeService.TX1 }">
+                        {{ texte.fonction6Titre }}
+                      </span>
+                    </div>
+                  </div>
+                </article>
+
+                <article
+                  class="group hidden overflow-hidden rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-md lg:block"
+                  [ngStyle]="{
+                    'background-color': themeService.BG1,
+                    'border-color': themeService.BR1
+                  }"
+                >
+                  <div class="relative h-32 overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1459156212016-c812468e2115?auto=format&fit=crop&w=600&q=80"
+                      alt="Jeunes pousses et feuillage"
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-lg bg-white/90 text-[#174C35] shadow-sm">
+                      <i class="fa-regular fa-bookmark text-[10px]" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div class="p-3">
+                    <p class="text-[10px] font-bold sm:text-xs">{{ texte.galerieImage1 }}</p>
+                    <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">
+                      {{ texte.fonction2Titre }}
+                    </p>
+                    <div class="mt-3 flex items-center gap-1.5">
+                      <span class="h-1.5 w-1.5 rounded-full bg-[#78A85B]"></span>
+                      <span class="text-[9px]" [ngStyle]="{ color: themeService.TX1 }">
+                        {{ texte.fonction6Titre }}
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <div
+                class="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border px-4 py-3"
+                [ngStyle]="{
+                  'background-color': themeService.BG2,
+                  'border-color': themeService.BR1
+                }"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-[#DCEBD3] text-[#174C35]">
+                    <i class="fa-solid fa-seedling text-[11px]" aria-hidden="true"></i>
+                  </span>
+                  <div>
+                    <p class="text-[10px] font-bold">{{ texte.fonction6Titre }}</p>
+                    <p class="mt-0.5 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">
+                      {{ texte.fonction6Description }}
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href="#fonctionnalites"
+                  class="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#4F8959] transition-all hover:gap-2.5"
+                >
+                  {{ texte.introLien }}
+                  <i class="fa-solid fa-arrow-right text-[9px]" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Petit élément flottant -->
+        <div
+          class="arboria-floating-card absolute -right-2 top-12 hidden max-w-[180px] rounded-2xl border p-3.5 shadow-xl sm:block lg:-right-10"
+          [ngStyle]="{
+            'background-color': themeService.BG1,
+            'border-color': themeService.BR1
+          }"
+        >
+          <div class="flex items-center gap-2.5">
+            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E2EFD9] text-[#174C35]">
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            </span>
+            <div>
+              <p class="text-[10px] font-bold">{{ texte.fonction3Titre }}</p>
+              <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">
+                {{ texte.fonction3Description }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="arboria-floating-card absolute -left-3 bottom-16 hidden max-w-[180px] rounded-2xl border p-3.5 shadow-xl sm:block lg:-left-10"
+          [ngStyle]="{
+            'background-color': themeService.BG1,
+            'border-color': themeService.BR1
+          }"
+        >
+          <div class="flex items-center gap-2.5">
+            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F7EBCB] text-[#956C24]">
+              <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+            </span>
+            <div>
+              <p class="text-[10px] font-bold">{{ texte.fonction2Titre }}</p>
+              <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">
+                {{ texte.fonction2Description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BANDEAU DE CONFIANCE
+  ========================================================== -->
+  <section
+    class="w-full border-y"
+    [ngStyle]="{
+      'background-color': themeService.BG2,
+      'border-color': themeService.BR1
+    }"
+  >
+    <div class="mx-auto w-full max-w-[1600px] px-5 py-7 sm:px-8 sm:py-9 lg:px-12">
+      <p
+        class="mb-5 text-center text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-xs"
+        [ngStyle]="{ color: themeService.TX2 }"
+      >
+        {{ texte.bandeau1Titre }}
+      </p>
+
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-4">
+        <div class="flex items-center justify-center gap-3 text-center">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DCEBD3] text-[#174C35]">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          </span>
+          <div class="text-left">
+            <p class="text-xs font-bold">{{ texte.bandeau1Titre }}</p>
+            <p class="mt-1 text-[10px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.bandeau1Description }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-3 text-center">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E8E3F8] text-[#7254B7]">
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+          </span>
+          <div class="text-left">
+            <p class="text-xs font-bold">{{ texte.bandeau2Titre }}</p>
+            <p class="mt-1 text-[10px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.bandeau2Description }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-3 text-center">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#D7F0EC] text-[#188B7E]">
+            <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+          </span>
+          <div class="text-left">
+            <p class="text-xs font-bold">{{ texte.bandeau3Titre }}</p>
+            <p class="mt-1 text-[10px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.bandeau3Description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SECTION ÉDITORIALE — POURQUOI ARBORIA
+  ========================================================== -->
+  <section class="w-full overflow-hidden">
+    <div class="mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-28">
+      <div class="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
+        <p
+          class="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] sm:text-xs"
+          [ngStyle]="{ color: themeService.Primary }"
+        >
+          {{ texte.introEyebrow }}
+        </p>
+
+        <h2 class="text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+          {{ texte.introTitre1 }}
+          <span class="arboria-heading-accent">{{ texte.introTitre2 }}</span>
+        </h2>
+
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-7 sm:text-base sm:leading-8" [ngStyle]="{ color: themeService.TX1 }">
+          {{ texte.introDescription1 }}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12 lg:gap-5">
+        <!-- Grande carte -->
+        <article
+          class="group relative isolate min-h-[360px] overflow-hidden rounded-[1.5rem] sm:min-h-[400px] lg:col-span-5 lg:row-span-2"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1483794344563-d27a8d18014e?auto=format&fit=crop&w=1200&q=85"
+            alt="Un ensemble de plantes vertes dans un jardin"
+            class="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-[#10271c]/90 via-[#10271c]/15 to-transparent"></div>
+
+          <div class="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-white/25 bg-white/15 text-white backdrop-blur-md">
+            <i class="fa-solid fa-seedling text-lg" aria-hidden="true"></i>
+          </div>
+
+          <div class="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-8">
+            <span class="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-[#C8F169]">
+              {{ texte.fonction6Titre }}
+            </span>
+            <h3 class="max-w-sm text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+              {{ texte.public1Titre }}
+            </h3>
+            <p class="mt-3 max-w-sm text-xs leading-6 text-white/80 sm:text-sm">
+              {{ texte.public1Description }}
+            </p>
+          </div>
+        </article>
+
+        <!-- Recherche -->
+        <article
+          class="group rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6 lg:col-span-4"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR1
+          }"
+        >
+          <div class="mb-6 flex items-start justify-between gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCEBD3] text-[#174C35]">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </span>
+            <span class="rounded-full border px-2.5 py-1 text-[9px] font-semibold" [ngStyle]="{ 'border-color': themeService.BR1, color: themeService.TX2 }">
+              01
+            </span>
+          </div>
+
+          <h3 class="text-base font-bold sm:text-lg">{{ texte.fonction1Titre }}</h3>
+          <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">
+            {{ texte.fonction1Description }}
+          </p>
+
+          <div class="mt-5 space-y-2">
+            <div class="flex items-center gap-2 rounded-lg border px-3 py-2" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+              <i class="fa-solid fa-magnifying-glass text-[10px] text-[#4F8959]" aria-hidden="true"></i>
+              <span class="text-[10px]" [ngStyle]="{ color: themeService.TX1 }">{{ texte.galerieImage2 }}</span>
+              <i class="fa-solid fa-arrow-right ml-auto text-[9px]" [ngStyle]="{ color: themeService.TX2 }" aria-hidden="true"></i>
+            </div>
+            <div class="flex items-center gap-2 rounded-lg border px-3 py-2" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+              <i class="fa-solid fa-leaf text-[10px] text-[#4F8959]" aria-hidden="true"></i>
+              <span class="text-[10px]" [ngStyle]="{ color: themeService.TX1 }">{{ texte.galerieImage3 }}</span>
+              <i class="fa-solid fa-arrow-right ml-auto text-[9px]" [ngStyle]="{ color: themeService.TX2 }" aria-hidden="true"></i>
+            </div>
+          </div>
+        </article>
+
+        <!-- Fiches -->
+        <article
+          class="group rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6 lg:col-span-3"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR1
+          }"
+        >
+          <div class="mb-6 flex items-start justify-between gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8E3F8] text-[#7254B7]">
+              <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+            </span>
+            <span class="rounded-full border px-2.5 py-1 text-[9px] font-semibold" [ngStyle]="{ 'border-color': themeService.BR1, color: themeService.TX2 }">
+              02
+            </span>
+          </div>
+
+          <h3 class="text-base font-bold sm:text-lg">{{ texte.fonction2Titre }}</h3>
+          <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">
+            {{ texte.fonction2Description }}
+          </p>
+
+          <div class="mt-5 flex items-center gap-3 rounded-xl border p-3" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+            <img
+              src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=160&q=80"
+              alt="Aperçu de feuille"
+              class="h-11 w-11 rounded-lg object-cover"
+              loading="lazy"
+            />
+            <div class="min-w-0">
+              <p class="truncate text-[10px] font-bold">{{ texte.galerieImage2 }}</p>
+              <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction2Titre }}</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Diagnostic -->
+        <article
+          class="group rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6 lg:col-span-4"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR1
+          }"
+        >
+          <div class="mb-6 flex items-start justify-between gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F8E9D6] text-[#A36C2C]">
+              <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+            </span>
+            <span class="rounded-full border px-2.5 py-1 text-[9px] font-semibold" [ngStyle]="{ 'border-color': themeService.BR1, color: themeService.TX2 }">
+              03
+            </span>
+          </div>
+
+          <h3 class="text-base font-bold sm:text-lg">{{ texte.fonction3Titre }}</h3>
+          <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">
+            {{ texte.fonction3Description }}
+          </p>
+
+          <div class="mt-5 rounded-xl border p-3.5" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+            <div class="flex items-center gap-2">
+              <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-[#F8E9D6] text-[#A36C2C]">
+                <i class="fa-solid fa-heart-pulse text-[10px]" aria-hidden="true"></i>
+              </span>
+              <span class="text-[10px] font-semibold">{{ texte.fonction3Titre }}</span>
+            </div>
+            <div class="mt-3 h-1.5 overflow-hidden rounded-full" [ngStyle]="{ 'background-color': themeService.BG3 }">
+              <div class="h-full w-3/4 rounded-full bg-[#C89A5A]"></div>
+            </div>
+            <p class="mt-2 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction3Description }}</p>
+          </div>
+        </article>
+
+        <!-- Conseils saisonniers -->
+        <article
+          class="group rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6 lg:col-span-3"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR1
+          }"
+        >
+          <div class="mb-6 flex items-start justify-between gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F7EBCB] text-[#956C24]">
+              <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+            </span>
+            <span class="rounded-full border px-2.5 py-1 text-[9px] font-semibold" [ngStyle]="{ 'border-color': themeService.BR1, color: themeService.TX2 }">
+              04
+            </span>
+          </div>
+
+          <h3 class="text-base font-bold sm:text-lg">{{ texte.fonction4Titre }}</h3>
+          <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">
+            {{ texte.fonction4Description }}
+          </p>
+
+          <div class="mt-5 flex items-center gap-2 rounded-xl border p-3" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+            <i class="fa-solid fa-sun text-lg text-[#C18B36]" aria-hidden="true"></i>
+            <div>
+              <p class="text-[10px] font-bold">{{ texte.fonction4Titre }}</p>
+              <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction4Description }}</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Assistant -->
+        <article
+          class="group rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6 lg:col-span-5"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR1
+          }"
+        >
+          <div class="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <div class="min-w-0 flex-1">
+              <div class="mb-5 flex items-start justify-between gap-3">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D7F0EC] text-[#188B7E]">
+                  <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                </span>
+                <span class="rounded-full border px-2.5 py-1 text-[9px] font-semibold" [ngStyle]="{ 'border-color': themeService.BR1, color: themeService.TX2 }">
+                  05
+                </span>
+              </div>
+              <h3 class="text-base font-bold sm:text-lg">{{ texte.fonction5Titre }}</h3>
+              <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">
+                {{ texte.fonction5Description }}
+              </p>
+            </div>
+
+            <div class="w-full rounded-xl border p-3.5 sm:max-w-[220px]" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+              <div class="mb-3 flex items-center gap-2">
+                <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-[#174C35] text-white">
+                  <i class="fa-solid fa-leaf text-[10px]" aria-hidden="true"></i>
+                </span>
+                <span class="text-[10px] font-bold">Arboria</span>
+                <span class="ml-auto h-1.5 w-1.5 rounded-full bg-[#65A46B]"></span>
+              </div>
+              <div class="mb-2 max-w-[90%] rounded-lg rounded-tl-sm p-2.5 text-[9px] leading-4" [ngStyle]="{ 'background-color': themeService.BG2, color: themeService.TX1 }">
+                {{ texte.fonction5Description }}
+              </div>
+              <div class="ml-auto max-w-[90%] rounded-lg rounded-tr-sm bg-[#174C35] p-2.5 text-[9px] leading-4 text-white">
+                {{ texte.fonction2Titre }}
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- JardiDex -->
+        <article
+          class="group rounded-[1.5rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6 lg:col-span-7"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR1
+          }"
+        >
+          <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
+            <div class="min-w-0 flex-1">
+              <div class="mb-5 flex items-start justify-between gap-3">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCEBD3] text-[#174C35]">
+                  <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                </span>
+                <span class="rounded-full border px-2.5 py-1 text-[9px] font-semibold" [ngStyle]="{ 'border-color': themeService.BR1, color: themeService.TX2 }">
+                  06
+                </span>
+              </div>
+              <h3 class="text-base font-bold sm:text-lg">{{ texte.fonction6Titre }}</h3>
+              <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">
+                {{ texte.fonction6Description }}
+              </p>
+            </div>
+
+            <div class="grid w-full grid-cols-3 gap-2 sm:max-w-[250px]">
+              <div class="overflow-hidden rounded-xl border p-1.5" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                <img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=200&q=75" alt="Feuillage" class="h-16 w-full rounded-lg object-cover sm:h-20" loading="lazy" />
+                <div class="px-1 pb-1 pt-2">
+                  <span class="block h-1 w-4/5 rounded-full" [ngStyle]="{ 'background-color': themeService.BR2 }"></span>
+                  <span class="mt-1.5 block h-1 w-2/3 rounded-full" [ngStyle]="{ 'background-color': themeService.BG3 }"></span>
+                </div>
+              </div>
+              <div class="mt-3 overflow-hidden rounded-xl border p-1.5" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=200&q=75" alt="Plante en pot" class="h-16 w-full rounded-lg object-cover sm:h-20" loading="lazy" />
+                <div class="px-1 pb-1 pt-2">
+                  <span class="block h-1 w-4/5 rounded-full" [ngStyle]="{ 'background-color': themeService.BR2 }"></span>
+                  <span class="mt-1.5 block h-1 w-2/3 rounded-full" [ngStyle]="{ 'background-color': themeService.BG3 }"></span>
+                </div>
+              </div>
+              <div class="overflow-hidden rounded-xl border p-1.5" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                <img src="https://images.unsplash.com/photo-1459156212016-c812468e2115?auto=format&fit=crop&w=200&q=75" alt="Jeunes pousses" class="h-16 w-full rounded-lg object-cover sm:h-20" loading="lazy" />
+                <div class="px-1 pb-1 pt-2">
+                  <span class="block h-1 w-4/5 rounded-full" [ngStyle]="{ 'background-color': themeService.BR2 }"></span>
+                  <span class="mt-1.5 block h-1 w-2/3 rounded-full" [ngStyle]="{ 'background-color': themeService.BG3 }"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PARCOURS INTERACTIF — STYLE PRODUIT SAAS
+  ========================================================== -->
+  <section
+    id="fonctionnement"
+    class="w-full scroll-mt-24 border-y"
+    [ngStyle]="{
+      'background-color': themeService.BG2,
+      'border-color': themeService.BR1
+    }"
+  >
+    <div class="mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-28">
+      <div class="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
+        <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] sm:text-xs" [ngStyle]="{ color: themeService.Primary }">
+          {{ texte.etapesEyebrow }}
+        </p>
+        <h2 class="text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+          {{ texte.etapesTitre }}
+        </h2>
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-7 sm:text-base sm:leading-8" [ngStyle]="{ color: themeService.TX1 }">
+          {{ texte.etapesDescription }}
+        </p>
+      </div>
+
+      <div
+        class="overflow-hidden rounded-[1.5rem] border p-3 shadow-[0_15px_55px_rgba(25,50,34,0.05)] sm:rounded-[2rem] sm:p-5 lg:p-7"
+        [ngStyle]="{
+          'background-color': themeService.BG1,
+          'border-color': themeService.BR1
+        }"
+      >
+        <!-- Onglets -->
+        <div class="grid grid-cols-3 border-b" [ngStyle]="{ 'border-color': themeService.BR1 }">
+          <a
+            href="#etape-recherche"
+            class="group border-b-2 px-2 pb-3 pt-2 text-center transition-colors sm:px-4 sm:pb-4"
+            style="border-color: #4F8959"
+          >
+            <span class="block text-[10px] font-bold sm:text-xs">{{ texte.etape1Titre }}</span>
+            <span class="mt-1 hidden text-[10px] sm:block" [ngStyle]="{ color: themeService.TX2 }">01</span>
+          </a>
+          <a
+            href="#etape-fiche"
+            class="border-b-2 border-transparent px-2 pb-3 pt-2 text-center transition-colors hover:border-[#4F8959] sm:px-4 sm:pb-4"
+          >
+            <span class="block text-[10px] font-bold sm:text-xs">{{ texte.etape2Titre }}</span>
+            <span class="mt-1 hidden text-[10px] sm:block" [ngStyle]="{ color: themeService.TX2 }">02</span>
+          </a>
+          <a
+            href="#etape-conseils"
+            class="border-b-2 border-transparent px-2 pb-3 pt-2 text-center transition-colors hover:border-[#4F8959] sm:px-4 sm:pb-4"
+          >
+            <span class="block text-[10px] font-bold sm:text-xs">{{ texte.etape3Titre }}</span>
+            <span class="mt-1 hidden text-[10px] sm:block" [ngStyle]="{ color: themeService.TX2 }">03</span>
+          </a>
+        </div>
+
+        <!-- Étape 1 -->
+        <article id="etape-recherche" class="grid scroll-mt-28 items-center gap-7 py-7 sm:py-9 lg:grid-cols-2 lg:gap-12 lg:py-12">
+          <div class="px-1 sm:px-4 lg:px-6">
+            <span class="mb-5 inline-flex rounded-full bg-[#DCEBD3] px-3 py-1.5 text-[10px] font-bold text-[#174C35]">
+              STEP 01
+            </span>
+            <h3 class="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+              {{ texte.etape1Titre }}
+            </h3>
+            <p class="mt-4 max-w-lg text-sm leading-7 sm:text-base sm:leading-8" [ngStyle]="{ color: themeService.TX1 }">
+              {{ texte.etape1Description }}
+            </p>
+            <a
+              routerLink="/inscription"
+              class="mt-6 inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#174C35] px-4 py-2.5 text-xs font-bold text-white transition-all hover:gap-3 hover:bg-[#247A4B]"
+            >
+              {{ texte.heroBouton }}
+              <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <div
+            class="relative min-h-[230px] overflow-hidden rounded-[1.25rem] p-4 sm:min-h-[290px] sm:p-6"
+            [ngStyle]="{ 'background-color': themeService.BG2 }"
+          >
+            <div class="absolute -right-8 -top-10 h-40 w-40 rounded-full bg-[#C8F169]/20 blur-3xl"></div>
+
+            <div class="relative mx-auto max-w-md">
+              <div class="mb-4 flex items-center justify-between">
+                <span class="text-[10px] font-bold">{{ texte.fonction1Titre }}</span>
+                <span class="text-[9px]" [ngStyle]="{ color: themeService.TX2 }">Arboria</span>
+              </div>
+
+              <div class="flex items-center gap-2 rounded-xl border px-3 py-3" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                <i class="fa-solid fa-magnifying-glass text-xs text-[#4F8959]" aria-hidden="true"></i>
+                <span class="flex-1 text-[10px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction1Description }}</span>
+                <i class="fa-solid fa-sliders text-[10px]" [ngStyle]="{ color: themeService.TX2 }" aria-hidden="true"></i>
+              </div>
+
+              <div class="mt-3 grid grid-cols-2 gap-3">
+                <div class="overflow-hidden rounded-xl border" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                  <img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=400&q=75" alt="Feuillage vert" class="h-24 w-full object-cover sm:h-32" loading="lazy" />
+                  <div class="p-3">
+                    <p class="text-[10px] font-bold">{{ texte.galerieImage2 }}</p>
+                    <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction2Titre }}</p>
+                  </div>
+                </div>
+                <div class="overflow-hidden rounded-xl border" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                  <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=400&q=75" alt="Plante en pot" class="h-24 w-full object-cover sm:h-32" loading="lazy" />
+                  <div class="p-3">
+                    <p class="text-[10px] font-bold">{{ texte.galerieImage3 }}</p>
+                    <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction2Titre }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="h-px w-full" [ngStyle]="{ 'background-color': themeService.BR1 }"></div>
+
+        <!-- Étape 2 -->
+        <article id="etape-fiche" class="grid scroll-mt-28 items-center gap-7 py-7 sm:py-9 lg:grid-cols-2 lg:gap-12 lg:py-12">
+          <div class="order-2 overflow-hidden rounded-[1.25rem] p-4 sm:p-6 lg:order-1" [ngStyle]="{ 'background-color': themeService.BG2 }">
+            <div class="mx-auto max-w-md overflow-hidden rounded-xl border shadow-sm" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+              <div class="relative h-36 sm:h-48">
+                <img src="https://images.unsplash.com/photo-1459156212016-c812468e2115?auto=format&fit=crop&w=900&q=80" alt="Plantes et jeunes pousses" class="h-full w-full object-cover" loading="lazy" />
+                <span class="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1.5 text-[9px] font-bold text-[#174C35]">
+                  {{ texte.fonction2Titre }}
+                </span>
+              </div>
+              <div class="p-4 sm:p-5">
+                <h4 class="text-sm font-bold">{{ texte.galerieImage1 }}</h4>
+                <p class="mt-2 text-[10px] leading-5" [ngStyle]="{ color: themeService.TX1 }">{{ texte.fonction2Description }}</p>
+                <div class="mt-4 grid grid-cols-3 gap-2">
+                  <div class="rounded-lg p-2 text-center" [ngStyle]="{ 'background-color': themeService.BG2 }">
+                    <i class="fa-solid fa-droplet text-xs text-[#4385F5]" aria-hidden="true"></i>
+                    <span class="mt-1 block text-[9px] font-semibold">{{ texte.fonction2Titre }}</span>
+                  </div>
+                  <div class="rounded-lg p-2 text-center" [ngStyle]="{ 'background-color': themeService.BG2 }">
+                    <i class="fa-solid fa-sun text-xs text-[#C18B36]" aria-hidden="true"></i>
+                    <span class="mt-1 block text-[9px] font-semibold">{{ texte.fonction4Titre }}</span>
+                  </div>
+                  <div class="rounded-lg p-2 text-center" [ngStyle]="{ 'background-color': themeService.BG2 }">
+                    <i class="fa-solid fa-seedling text-xs text-[#4F8959]" aria-hidden="true"></i>
+                    <span class="mt-1 block text-[9px] font-semibold">{{ texte.fonction6Titre }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-1 px-1 sm:px-4 lg:order-2 lg:px-6">
+            <span class="mb-5 inline-flex rounded-full bg-[#E8E3F8] px-3 py-1.5 text-[10px] font-bold text-[#7254B7]">
+              STEP 02
+            </span>
+            <h3 class="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+              {{ texte.etape2Titre }}
+            </h3>
+            <p class="mt-4 max-w-lg text-sm leading-7 sm:text-base sm:leading-8" [ngStyle]="{ color: themeService.TX1 }">
+              {{ texte.etape2Description }}
+            </p>
+            <a
+              href="#fonctionnalites"
+              class="mt-6 inline-flex items-center gap-2 text-xs font-bold text-[#4F8959] transition-all hover:gap-3"
+            >
+              {{ texte.introLien }}
+              <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
+            </a>
+          </div>
+        </article>
+
+        <div class="h-px w-full" [ngStyle]="{ 'background-color': themeService.BR1 }"></div>
+
+        <!-- Étape 3 -->
+        <article id="etape-conseils" class="grid scroll-mt-28 items-center gap-7 py-7 sm:py-9 lg:grid-cols-2 lg:gap-12 lg:py-12">
+          <div class="px-1 sm:px-4 lg:px-6">
+            <span class="mb-5 inline-flex rounded-full bg-[#D7F0EC] px-3 py-1.5 text-[10px] font-bold text-[#188B7E]">
+              STEP 03
+            </span>
+            <h3 class="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+              {{ texte.etape3Titre }}
+            </h3>
+            <p class="mt-4 max-w-lg text-sm leading-7 sm:text-base sm:leading-8" [ngStyle]="{ color: themeService.TX1 }">
+              {{ texte.etape3Description }}
+            </p>
+            <a
+              routerLink="/inscription"
+              class="mt-6 inline-flex min-h-10 items-center gap-2 rounded-lg bg-[#174C35] px-4 py-2.5 text-xs font-bold text-white transition-all hover:gap-3 hover:bg-[#247A4B]"
+            >
+              {{ texte.ctaBouton }}
+              <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <div class="relative min-h-[230px] overflow-hidden rounded-[1.25rem] p-4 sm:min-h-[290px] sm:p-6" [ngStyle]="{ 'background-color': themeService.BG2 }">
+            <div class="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-[#19B8A5]/10 blur-3xl"></div>
+
+            <div class="relative mx-auto max-w-md space-y-3">
+              <div class="rounded-xl border p-4" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#DCEBD3] text-[#174C35]">
+                    <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-[10px] font-bold">{{ texte.fonction4Titre }}</p>
+                    <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction4Description }}</p>
+                  </div>
+                  <i class="fa-solid fa-check text-xs text-[#4F8959]" aria-hidden="true"></i>
+                </div>
+              </div>
+
+              <div class="rounded-xl border p-4" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#D7F0EC] text-[#188B7E]">
+                    <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-[10px] font-bold">{{ texte.fonction5Titre }}</p>
+                    <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction5Description }}</p>
+                  </div>
+                  <i class="fa-solid fa-check text-xs text-[#4F8959]" aria-hidden="true"></i>
+                </div>
+              </div>
+
+              <div class="rounded-xl border p-4" [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }">
+                <div class="flex items-center gap-3">
+                  <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E8E3F8] text-[#7254B7]">
+                    <i class="fa-solid fa-bookmark" aria-hidden="true"></i>
+                  </span>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-[10px] font-bold">{{ texte.fonction6Titre }}</p>
+                    <p class="mt-1 text-[9px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.fonction6Description }}</p>
+                  </div>
+                  <i class="fa-solid fa-check text-xs text-[#4F8959]" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       GALERIE BOTANIQUE — BANDEAU VISUEL
+  ========================================================== -->
+  <section class="w-full">
+    <div class="mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-28">
+      <div class="mb-8 flex flex-col justify-between gap-4 sm:mb-10 sm:flex-row sm:items-end">
+        <div class="max-w-2xl">
+          <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] sm:text-xs" [ngStyle]="{ color: themeService.Primary }">
+            {{ texte.galerieEyebrow }}
+          </p>
+          <h2 class="text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+            {{ texte.galerieTitre }}
+          </h2>
+        </div>
+        <p class="max-w-md text-sm leading-7" [ngStyle]="{ color: themeService.TX1 }">
+          {{ texte.galerieDescription }}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <article class="group relative col-span-2 min-h-[250px] overflow-hidden rounded-[1.25rem] sm:min-h-[360px] lg:col-span-2">
+          <img
+            src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1200&q=85"
+            alt="Paysage naturel à la lumière du matin"
+            class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-5 text-white sm:p-7">
+            <span class="mb-2 block text-[9px] font-bold uppercase tracking-[0.2em] text-[#C8F169] sm:text-[10px]">{{ texte.galerie1Categorie }}</span>
+            <h3 class="text-lg font-semibold sm:text-2xl">{{ texte.galerieImage1 }}</h3>
+          </div>
+        </article>
+
+        <article class="group relative min-h-[250px] overflow-hidden rounded-[1.25rem] sm:min-h-[360px]">
+          <img
+            src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=800&q=85"
+            alt="Feuilles vertes et détails botaniques"
+            class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-5">
+            <span class="mb-2 block text-[9px] font-bold uppercase tracking-[0.15em] text-[#C8F169]">{{ texte.galerie2Categorie }}</span>
+            <h3 class="text-base font-semibold sm:text-lg">{{ texte.galerieImage2 }}</h3>
+          </div>
+        </article>
+
+        <article class="group relative min-h-[250px] overflow-hidden rounded-[1.25rem] sm:min-h-[360px]">
+          <img
+            src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=800&q=85"
+            alt="Collection de plantes en pots"
+            class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 text-white sm:p-5">
+            <span class="mb-2 block text-[9px] font-bold uppercase tracking-[0.15em] text-[#C8F169]">{{ texte.galerie3Categorie }}</span>
+            <h3 class="text-base font-semibold sm:text-lg">{{ texte.galerieImage3 }}</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       POUR QUI EST FAIT ARBORIA ?
+  ========================================================== -->
+  <section
+    id="pour-qui"
+    class="w-full scroll-mt-24 border-y"
+    [ngStyle]="{
+      'background-color': themeService.BG2,
+      'border-color': themeService.BR1
+    }"
+  >
+    <div class="mx-auto grid w-full max-w-[1600px] items-center gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-12 lg:py-28">
+      <div>
+        <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] sm:text-xs" [ngStyle]="{ color: themeService.Primary }">
+          {{ texte.publicEyebrow }}
+        </p>
+        <h2 class="text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+          {{ texte.publicTitre }}
+        </h2>
+        <p class="mt-5 text-sm leading-7 sm:text-base sm:leading-8" [ngStyle]="{ color: themeService.TX1 }">
+          {{ texte.publicDescription }}
+        </p>
+
+        <div class="mt-7 flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCEBD3] text-[#174C35]">
+            <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+          </span>
+          <div>
+            <p class="text-xs font-bold">{{ texte.bandeau3Titre }}</p>
+            <p class="mt-1 text-[10px]" [ngStyle]="{ color: themeService.TX2 }">{{ texte.bandeau3Description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+        <article
+          class="rounded-[1.25rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:p-6"
+          [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }"
+        >
+          <span class="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-[#DCEBD3] text-[#174C35]">
+            <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+          </span>
+          <h3 class="text-sm font-bold sm:text-base">{{ texte.public1Titre }}</h3>
+          <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">{{ texte.public1Description }}</p>
+        </article>
+
+        <article
+          class="rounded-[1.25rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:p-6"
+          [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }"
+        >
+          <span class="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8E3F8] text-[#7254B7]">
+            <i class="fa-solid fa-spa" aria-hidden="true"></i>
+          </span>
+          <h3 class="text-sm font-bold sm:text-base">{{ texte.public2Titre }}</h3>
+          <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">{{ texte.public2Description }}</p>
+        </article>
+
+        <article
+          class="rounded-[1.25rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:p-6"
+          [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }"
+        >
+          <span class="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-[#F7EBCB] text-[#956C24]">
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+          </span>
+          <h3 class="text-sm font-bold sm:text-base">{{ texte.public3Titre }}</h3>
+          <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">{{ texte.public3Description }}</p>
+        </article>
+
+        <article
+          class="rounded-[1.25rem] border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md sm:p-6"
+          [ngStyle]="{ 'background-color': themeService.BG1, 'border-color': themeService.BR1 }"
+        >
+          <span class="mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-[#D7F0EC] text-[#188B7E]">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+          </span>
+          <h3 class="text-sm font-bold sm:text-base">{{ texte.public4Titre }}</h3>
+          <p class="mt-2 text-xs leading-6 sm:text-sm" [ngStyle]="{ color: themeService.TX1 }">{{ texte.public4Description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PHILOSOPHIE
+  ========================================================== -->
+  <section class="relative isolate w-full overflow-hidden">
+    <img
+      src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=85"
+      alt="Forêt verdoyante traversée par la lumière"
+      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      loading="lazy"
+    />
+
+    <div class="absolute inset-0 -z-10 bg-[#10271c]/85"></div>
+
+    <div class="mx-auto w-full max-w-[1200px] px-5 py-20 text-center text-white sm:px-8 sm:py-24 lg:px-12 lg:py-32">
+      <div class="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm sm:h-14 sm:w-14">
+        <i class="fa-solid fa-earth-europe text-xl text-[#C8F169]" aria-hidden="true"></i>
+      </div>
+
+      <p class="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[#C8F169] sm:text-xs">
+        {{ texte.philoEyebrow }}
+      </p>
+
+      <h2 class="mx-auto max-w-4xl text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-6xl">
+        {{ texte.philoTitre1 }}
+        <span class="mt-2 block font-medium italic text-[#C8F169]">{{ texte.philoTitre2 }}</span>
+      </h2>
+
+      <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/80 sm:mt-7 sm:text-base sm:leading-8">
+        {{ texte.philoDescription }}
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA FINAL
+  ========================================================== -->
+  <section class="w-full">
+    <div class="mx-auto w-full max-w-[1600px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
+      <div class="arboria-cta relative isolate overflow-hidden rounded-[1.5rem] border px-5 py-12 text-center sm:rounded-[2rem] sm:px-10 sm:py-16 lg:px-20 lg:py-20">
+        <div class="absolute -right-10 -top-20 -z-10 h-64 w-64 rounded-full bg-[#C8F169]/15 blur-3xl"></div>
+        <div class="absolute -bottom-20 -left-10 -z-10 h-64 w-64 rounded-full bg-[#19B8A5]/10 blur-3xl"></div>
+
+        <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#174C35] text-white">
+          <i class="fa-solid fa-leaf text-xl text-[#C8F169]" aria-hidden="true"></i>
+        </div>
+
+        <h2 class="mx-auto max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+          {{ texte.ctaTitre }}
+        </h2>
+
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-7 sm:text-base sm:leading-8" [ngStyle]="{ color: themeService.TX1 }">
+          {{ texte.ctaDescription }}
+        </p>
+
+        <div class="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+          <a
+            routerLink="/inscription"
+            class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl bg-[#174C35] px-6 py-3.5 text-xs font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#247A4B] sm:text-sm"
+          >
+            {{ texte.ctaBouton }}
+            <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
+          </a>
+
+          <button
+            type="button"
+            (click)="retourPagePrecedente()"
+            class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl border px-6 py-3.5 text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 sm:text-sm"
+            [ngStyle]="{
+              'background-color': themeService.BG1,
+              'border-color': themeService.BR1,
+              color: themeService.TX0
+            }"
+          >
+            <i class="fa-solid fa-arrow-left text-[10px]" aria-hidden="true"></i>
+            {{ texte.retour }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer
+    class="w-full border-t"
+    [ngStyle]="{
+      'background-color': themeService.BG2,
+      'border-color': themeService.BR1
+    }"
+  >
+    <div class="mx-auto flex w-full max-w-[1600px] flex-col items-center justify-between gap-5 px-5 py-6 text-center sm:px-8 md:flex-row md:text-left lg:px-12">
+      <a routerLink="/" aria-label="Accueil Arboria" class="transition-opacity hover:opacity-70">
+        <img [src]="themeService.ImageLogo" alt="Arboria" class="h-8 w-auto" />
+      </a>
+
+      <p class="text-[10px] leading-6 sm:text-xs" [ngStyle]="{ color: themeService.TX2 }">
+        {{ texte.footer }}
+      </p>
+
+      <button
+        type="button"
+        (click)="retourPagePrecedente()"
+        class="inline-flex items-center gap-2 text-xs font-semibold transition-opacity hover:opacity-65"
+        [ngStyle]="{ color: themeService.Primary }"
+      >
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        {{ texte.retour }}
+      </button>
+    </div>
+  </footer>
+</main>

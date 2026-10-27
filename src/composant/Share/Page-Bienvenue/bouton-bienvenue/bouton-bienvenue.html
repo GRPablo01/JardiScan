@@ -1,9 +1,17 @@
 <!-- ============================================================
-
-     🌿 JARDISCAN — ACTIONS UTILISATEUR
+     🌿 NATUREORA — ACTIONS UTILISATEUR
 
      • Connexion
+       → Background fixe
+       → Bordure fixe
+       → Hover = bordure uniquement
+       → Aucun changement de background
+
      • Inscription
+       → Background fixe
+       → Hover = background uniquement
+       → Aucun changement de bordure
+
      • Sélecteur FR / EN
      • Mobile / tablette : icônes uniquement
      • Laptop / desktop : icônes + texte
@@ -18,7 +26,6 @@
      • Tailwind CSS
 
      RESPONSIVE :
-
      ─────────────────────────────────────────────────────────────
 
      < 1024px  → Icônes uniquement
@@ -26,255 +33,354 @@
 
      ============================================================ -->
 
-<div
-  class="
-    flex
-    items-center
-    justify-end
-    gap-2
-    sm:gap-2.5
-  "
-  role="group"
-  aria-label="Actions utilisateur"
->
-
-  <!-- ==========================================================
-       🔐 CONNEXION
-       ========================================================== -->
-
-  <a
-    routerLink="/login"
-    [attr.aria-label]="loginLabel"
-    [title]="loginTitle"
-    class="
-      group
-      relative
-      flex
-      h-11
-      min-w-11
-      items-center
-      justify-center
-      gap-2
-      overflow-hidden
-      rounded-xl
-      border
-      px-3
-      text-sm
-      font-bold
-      no-underline
-      outline-none
-      transition-all
-      duration-200
-      ease-out
-      hover:-translate-y-0.5
-      hover:bg-black/[0.04]
-      dark:hover:bg-white/[0.06]
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-      active:translate-y-0
-      active:scale-[0.98]
-      lg:px-4
-    "
-    [ngStyle]="{
-      'color': themeService.Primary1,
-      'border':'1px solid'+themeService.BorderPrimary
-    }"
-  >
-
-    <!-- Effet de fond au survol -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-0
-        -translate-x-full
-        bg-current
-        opacity-[0.04]
-        transition-transform
-        duration-300
-        ease-out
-        group-hover:translate-x-0
-      "
-      aria-hidden="true"
-    ></span>
-
-    <!-- Icône connexion -->
-    <svg
-      class="
-        relative
-        z-10
-        h-5
-        w-5
-        shrink-0
-        transition-transform
-        duration-200
-        ease-out
-        group-hover:translate-x-0.5
-      "
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      stroke-width="1.8"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"
-      />
-
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M10 17l5-5-5-5"
-      />
-
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M15 12H3"
-      />
-    </svg>
-
-    <!-- Texte connexion -->
-    <span
-      class="
-        relative
-        z-10
-        hidden
-        whitespace-nowrap
-        lg:inline
-      "
-    >
-      {{ loginText }}
-    </span>
-
-  </a>
-
-
-  <!-- ==========================================================
-       ✨ INSCRIPTION
-       ========================================================== -->
-
-  <a
-    routerLink="/register"
-    [attr.aria-label]="registerLabel"
-    [title]="registerTitle"
-    class="
-      group
-      relative
-      flex
-      h-11
-      min-w-11
-      items-center
-      justify-center
-      gap-2
-      overflow-hidden
-      rounded-xl
-      px-3
-      text-sm
-      font-black
-      no-underline
-      outline-none
-      shadow-lg
-      transition-all
-      duration-300
-      ease-out
-      hover:-translate-y-0.5
-      hover:shadow-xl
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-      active:translate-y-0
-      active:scale-[0.97]
-      lg:px-4
-    "
-    [ngStyle]="{
-      background: themeService.Primary1,
-      color:'#FFFFFF',
-    }"
-  >
-
-    <!-- Halo lumineux -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        -inset-10
-        rounded-full
-        bg-white/10
-        opacity-0
-        blur-2xl
-        transition-opacity
-        duration-300
-        group-hover:opacity-100
-      "
-      aria-hidden="true"
-    ></span>
-
-    <!-- Reflet animé -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-y-0
-        left-0
-        w-1/2
-        -translate-x-[140%]
-        skew-x-[-18deg]
-        bg-white/20
-        transition-transform
-        duration-500
-        ease-out
-        group-hover:translate-x-[280%]
-      "
-      aria-hidden="true"
-    ></span>
-
-    <!-- Icône + -->
-    <svg
-      class="
-        relative
-        z-10
-        h-5
-        w-5
-        shrink-0
-        transition-transform
-        duration-200
-        ease-out
-        group-hover:rotate-90
-      "
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      stroke-width="2"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M12 5v14"
-      />
-
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M5 12h14"
-      />
-    </svg>
-
-    <!-- Texte inscription -->
-    <span
-      class="
-        relative
-        z-10
-        hidden
-        whitespace-nowrap
-        lg:inline
-      "
-    >
-      {{ registerText }}
-    </span>
-
-  </a>
-
-</div>
+     <div
+     class="
+       flex
+       items-center
+       justify-end
+       gap-2
+       sm:gap-2.5
+     "
+     role="group"
+     aria-label="Actions utilisateur"
+   >
+   
+     <!-- ==========================================================
+          🔐 CONNEXION
+   
+          • Bouton borduré
+          • Background fixe
+          • Bordure fixe
+          • Hover = bordure uniquement
+          • Transition fluide
+          ========================================================== -->
+   
+     <a
+       routerLink="/login"
+       [attr.aria-label]="loginLabel"
+       [title]="loginTitle"
+       class="
+         group
+         relative
+         isolate
+         flex
+         h-11
+         min-w-11
+         items-center
+         justify-center
+         gap-2
+         overflow-hidden
+         rounded-xl
+         border
+         px-3
+         text-sm
+         font-bold
+         no-underline
+         outline-none
+         transition-all
+         duration-300
+         ease-[cubic-bezier(0.22,1,0.36,1)]
+         hover:-translate-y-0.5
+         focus-visible:ring-2
+         focus-visible:ring-offset-2
+         active:translate-y-0
+         active:scale-[0.98]
+         lg:px-4
+       "
+       [ngStyle]="{
+         'color': themeService.BUTON2TEXT,
+         'border-color': themeService.BUTON2BORDER,
+         'background': themeService.BUTON2BG,
+         'box-shadow': '0 4px 14px ' + themeService.SHADOW
+       }"
+     >
+   
+       <!-- ========================================================
+            🌿 BORDEURE PRINCIPALE
+            → La bordure reste toujours présente
+            → Le hover ajoute uniquement une bordure visuelle
+            ======================================================== -->
+   
+       <span
+         class="
+           pointer-events-none
+           absolute
+           inset-0
+           rounded-xl
+           border
+           opacity-0
+           transition-opacity
+           duration-300
+           ease-out
+           group-hover:opacity-100
+         "
+         [ngStyle]="{
+           'border-color': themeService.BUTON2HOVERBORDER
+         }"
+         aria-hidden="true"
+       ></span>
+   
+   
+       <!-- ========================================================
+            ✨ HALO INTERNE AU SURVOL
+            → Aucun changement de background
+            → Aucun déplacement de contenu
+            → Effet progressif
+            ======================================================== -->
+   
+       <span
+         class="
+           pointer-events-none
+           absolute
+           inset-0
+           rounded-xl
+           opacity-0
+           transition-opacity
+           duration-300
+           ease-out
+           group-hover:opacity-100
+         "
+         [ngStyle]="{
+           'box-shadow':
+             'inset 0 0 0 1px ' + themeService.BUTON2HOVERBORDER
+         }"
+         aria-hidden="true"
+       ></span>
+   
+   
+       <!-- ========================================================
+            🔐 ICÔNE CONNEXION
+            ======================================================== -->
+   
+       <svg
+         class="
+           relative
+           z-10
+           h-5
+           w-5
+           shrink-0
+           transition-transform
+           duration-300
+           ease-[cubic-bezier(0.22,1,0.36,1)]
+           group-hover:translate-x-0.5
+         "
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor"
+         stroke-width="1.8"
+         [ngStyle]="{
+           'color': themeService.BUTON2ICON
+         }"
+         aria-hidden="true"
+       >
+         <path
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"
+         />
+   
+         <path
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           d="M10 17l5-5-5-5"
+         />
+   
+         <path
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           d="M15 12H3"
+         />
+       </svg>
+   
+   
+       <!-- ========================================================
+            📝 TEXTE CONNEXION
+            ======================================================== -->
+   
+       <span
+         class="
+           relative
+           z-10
+           hidden
+           whitespace-nowrap
+           lg:inline
+         "
+         [ngStyle]="{
+           'color': themeService.BUTON2TEXT
+         }"
+       >
+         {{ loginText }}
+       </span>
+   
+     </a>
+   
+   
+     <!-- ==========================================================
+          ✨ INSCRIPTION
+   
+          • Background principal
+          • Hover = background uniquement
+          • Bordure ne change pas
+          • Transition fluide complète
+          ========================================================== -->
+   
+     <a
+       routerLink="/register"
+       [attr.aria-label]="registerLabel"
+       [title]="registerTitle"
+       class="
+         group
+         relative
+         isolate
+         flex
+         h-11
+         min-w-11
+         items-center
+         justify-center
+         gap-2
+         overflow-hidden
+         rounded-xl
+         border
+         px-3
+         text-sm
+         font-black
+         no-underline
+         outline-none
+         transition-all
+         duration-300
+         ease-[cubic-bezier(0.22,1,0.36,1)]
+         hover:-translate-y-0.5
+         focus-visible:ring-2
+         focus-visible:ring-offset-2
+         active:translate-y-0
+         active:scale-[0.97]
+         lg:px-4
+       "
+       [ngStyle]="{
+         'background': themeService.BUTON1BG,
+         'color': themeService.BUTON1TEXT,
+         'border-color': themeService.BUTON1BG,
+         'box-shadow': '0 8px 24px ' + themeService.BUTON1SHADOW
+       }"
+     >
+   
+       <!-- ========================================================
+            🌿 BACKGROUND HOVER
+   
+            → Le seul élément qui change réellement au hover
+            → Pas de modification de bordure
+            → Animation douce et progressive
+            ======================================================== -->
+   
+       <span
+         class="
+           pointer-events-none
+           absolute
+           inset-0
+           -z-10
+           rounded-xl
+           opacity-0
+           transition-opacity
+           duration-300
+           ease-out
+           group-hover:opacity-100
+         "
+         [ngStyle]="{
+           'background': themeService.BUTON1HOVER
+         }"
+         aria-hidden="true"
+       ></span>
+   
+   
+       <!-- ========================================================
+            ✨ LÉGER REFLET
+   
+            → Très subtil
+            → Suit le hover
+            → Ne modifie pas la couleur principale
+            ======================================================== -->
+   
+       <span
+         class="
+           pointer-events-none
+           absolute
+           inset-0
+           -z-10
+           rounded-xl
+           opacity-0
+           transition-opacity
+           duration-300
+           ease-out
+           group-hover:opacity-100
+         "
+         [ngStyle]="{
+           'background':
+             'linear-gradient(135deg, transparent 0%, ' +
+             themeService.BUTON1ICON +
+             '18 50%, transparent 100%)'
+         }"
+         aria-hidden="true"
+       ></span>
+   
+   
+       <!-- ========================================================
+            ➕ ICÔNE INSCRIPTION
+            ======================================================== -->
+   
+       <svg
+         class="
+           relative
+           z-10
+           h-5
+           w-5
+           shrink-0
+           transition-transform
+           duration-300
+           ease-[cubic-bezier(0.22,1,0.36,1)]
+           group-hover:rotate-90
+         "
+         fill="none"
+         viewBox="0 0 24 24"
+         stroke="currentColor"
+         stroke-width="2"
+         [ngStyle]="{
+           'color': themeService.BUTON1ICON
+         }"
+         aria-hidden="true"
+       >
+         <path
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           d="M12 5v14"
+         />
+   
+         <path
+           stroke-linecap="round"
+           stroke-linejoin="round"
+           d="M5 12h14"
+         />
+       </svg>
+   
+   
+       <!-- ========================================================
+            📝 TEXTE INSCRIPTION
+            ======================================================== -->
+   
+       <span
+         class="
+           relative
+           z-10
+           hidden
+           whitespace-nowrap
+           lg:inline
+         "
+         [ngStyle]="{
+           'color': themeService.BUTON1TEXT
+         }"
+       >
+         {{ registerText }}
+       </span>
+   
+     </a>
+   
+   </div>

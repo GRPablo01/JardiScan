@@ -1,0 +1,131 @@
+<!-- ============================================================
+     PAGE RESPONSIVE — ARBORIA
+     Angular standalone + Tailwind CSS
+
+     • Changement de thème dynamique sans rechargement
+     • Couleurs liées au ThemeService
+     • Transitions courtes de 200 ms
+     • Largeur intégrale, sans marges horizontales ajoutées
+     • Page principale à partir de 325px
+     • Écran alternatif sous 325px
+     • Défilement vertical naturel conservé
+     • Scrollbar masquée par le CSS existant
+     • Responsive mobile, tablette et desktop
+     • Composants et fonctionnalités conservés
+============================================================ -->
+
+<!-- ============================================================
+     PAGE PRINCIPALE : LARGEUR >= 325PX
+============================================================ -->
+
+<ng-container *ngIf="largeurCompatible; else pageNonCompatible">
+
+  <main class="actus-container relative flex min-h-screen min-h-[100dvh]
+           w-full min-w-0 flex-col
+           overflow-x-clip
+           m-0 p-0
+           transition-colors duration-200 ease-out" [ngStyle]="{
+      'background-color': themeService.BG1,
+      'color': themeService.TX0
+    }">
+
+    <!-- ======================================================
+         CONTENU PRINCIPAL : PLEINE LARGEUR
+    ======================================================= -->
+
+    <div class="relative z-10 flex w-full min-w-0 flex-1
+             flex-col m-0 p-0">
+
+      <!-- ====================================================
+           EN-TÊTE
+      ===================================================== -->
+
+      <app-header class="m-0 block w-full min-w-0 p-0"></app-header>
+
+      <!-- ====================================================
+           SECTION BIENVENUE
+      ===================================================== -->
+
+      <section class="relative m-0 block w-full min-w-0 p-0">
+        <app-welcome class="relative m-0 block w-full min-w-0 p-0"></app-welcome>
+      </section>
+
+      <!-- ====================================================
+           ESPACEMENT — 50 PX
+      ===================================================== -->
+
+      <div aria-hidden="true" class="block h-[50px] w-full shrink-0"></div>
+
+      <!-- ====================================================
+           SECTION POURQUOI ARBORIA
+      ===================================================== -->
+
+      <section class="relative m-0 block w-full min-w-0 p-0">
+        <app-pourquoi class="m-0 block w-full min-w-0 p-0"></app-pourquoi>
+      </section>
+
+      <!-- ====================================================
+           ESPACEMENT — 50 PX
+      ===================================================== -->
+
+      <div aria-hidden="true" class="block h-[50px] w-full shrink-0"></div>
+
+      <!-- ====================================================
+           BOT
+      ===================================================== -->
+
+      <section class="relative m-0 block w-full min-w-0 p-0">
+        <app-bot></app-bot>
+      </section>
+
+      <!-- ====================================================
+           ESPACEMENT — 50 PX
+      ===================================================== -->
+
+      <div aria-hidden="true" class="block h-[50px] w-full shrink-0"></div>
+
+
+      <section class="relative m-0 block w-full min-w-0 p-0">
+        <app-demande class="relative m-0 block w-full min-w-0 p-0"></app-demande>
+      </section>
+
+
+      <!-- ====================================================
+           ESPACEMENT — 50 PX
+      ===================================================== -->
+
+      <div aria-hidden="true" class="block h-[50px] w-full shrink-0"></div>
+
+      <!-- ====================================================
+           PIED DE PAGE — CONSERVÉ EN COMMENTAIRE
+      ===================================================== -->
+      <footer class="relative m-0 block w-full min-w-0 p-0">
+        <app-footer class="relative m-0 block w-full min-w-0 p-0"></app-footer>
+      </footer>
+
+
+    </div>
+  </main>
+
+</ng-container>
+
+<!-- ============================================================
+     PAGE ALTERNATIVE : LARGEUR < 325PX
+============================================================ -->
+
+<ng-template #pageNonCompatible>
+
+  <main class="actus-container relative flex min-h-screen min-h-[100dvh]
+           w-full min-w-0 flex-col
+           overflow-x-clip
+           m-0 p-0
+           transition-colors duration-200 ease-out" [ngStyle]="{
+      'background-color': themeService.BG1,
+      'color': themeService.TX0
+    }">
+
+    <app-no-compatible class="block w-full min-w-0 m-0 p-0"></app-no-compatible>
+
+  </main>
+
+</ng-template>

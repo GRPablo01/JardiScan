@@ -1,0 +1,34 @@
+/* ============================================================
+   NAVIGATION PRINCIPALE — ARBORIA
+   Hover identique sur les 4 liens
+   Thème clair / sombre via ThemeService
+============================================================ */
+
+.nav-link {
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+  
+  /* Même hover sur les liens et les boutons */
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    background-color: var(--ar-bg-2) !important;
+    color: var(--ar-primary) !important;
+    border-color: var(--ar-border-2) !important;
+  }
+  
+  /* Conserver l'apparence active des méga-menus */
+  .nav-link[aria-expanded='true'] {
+    background-color: var(--ar-bg-2) !important;
+    color: var(--ar-primary) !important;
+    border-color: var(--ar-border-2) !important;
+  }
+  
+  /* Focus clavier accessible */
+  .nav-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--ar-primary);
+  }

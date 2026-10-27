@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Barre } from '../barre/barre';
 import { ThemeService } from '../../../../../Backend/Services/theme.service';
 
 

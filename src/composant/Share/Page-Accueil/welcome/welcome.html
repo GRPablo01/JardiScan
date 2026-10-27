@@ -1,525 +1,279 @@
 <!-- ============================================================
-🌿 JARDISCAN — SECTION ACCUEIL
-• FR / EN via LanguageService
-• Light / Dark via ThemeService
-• Responsive mobile → 2xl
-• Images conservées
-• Structure conservée
+     ARBORIA — WELCOME HERO PREMIUM
+     Angular standalone + Tailwind CSS
+
+     • Couleurs réactives en temps réel via les variables CSS
+     • Thème clair / sombre sans rechargement
+     • Palette Forest Premium
+     • Responsive mobile, tablette et desktop
+     • Traduction FR / EN via LanguageService
+     • Boutons accessibles et adaptés au tactile
+     • Méthodes Angular existantes conservées
 ============================================================ -->
+
 <section
-  [ngStyle]="{
-    'background': themeService.Background1
-  }"
-  class="
-    relative
-    w-full
-    overflow-hidden
-    2xl:mt-17
-    px-10
-    py-10
-  "
+  class="arboria-welcome relative isolate flex min-h-[auto] w-full
+         items-start justify-center overflow-hidden
+         px-4 py-10
+         sm:px-6 sm:py-12
+         md:px-8 md:py-14
+         lg:px-10 lg:py-16
+         xl:px-12
+         2xl:px-16"
+  [style.backgroundColor]="'var(--BG1)'"
+  [style.color]="'var(--TX0)'"
 >
   <!-- ==========================================================
-       CONTENEUR PRINCIPAL
+       CONTENU CENTRAL
   =========================================================== -->
 
-  <div class="w-full">
-
+  <div
+    class="relative mx-auto flex w-full max-w-6xl min-w-0
+           flex-col items-center text-center"
+  >
     <!-- ========================================================
-         GRILLE ÉDITORIALE
-
-         MOBILE
-         → 1 colonne
-
-         TABLETTE
-         → 3 colonnes
-         → Image 1 / Bloc 2 / Image 3
-
-         LAPTOP / DESKTOP
-         → 12 colonnes
-         → 2 / 4 / 2 / 4
+         SIGNATURE DE MARQUE
     ========================================================= -->
 
     <div
-      class="
-        grid
-        grid-cols-1
-        gap-6
-
-        sm:grid-cols-3
-        sm:items-start
-        sm:gap-5
-
-        lg:grid-cols-12
-        lg:items-start
-        lg:gap-4
-
-        xl:gap-5
-        2xl:gap-7
-      "
+      class="mb-7 inline-flex max-w-full items-center justify-center
+             gap-2 rounded-full border px-3 py-2
+             shadow-sm backdrop-blur-xl
+             transition-colors duration-200 ease-out
+             sm:mb-8 sm:gap-2.5 sm:px-4"
+      [style.backgroundColor]="'var(--BG3)'"
+      [style.borderColor]="'var(--BR1)'"
+      [style.boxShadow]="'var(--SHADOW)'"
     >
+      <!-- Icône feuille -->
 
-      <!-- ======================================================
-           IMAGE 1
-
-           MOBILE
-           ❌ masquée
-
-           TABLETTE
-           ✅ affichée
-
-           LAPTOP / DESKTOP
-           ✅ 2 colonnes
-      ======================================================= -->
-
-      <div
-        class="
-          group
-          relative
-          hidden
-          sm:block
-          sm:col-span-1
-          lg:col-span-2
-        "
+      <span
+        class="flex h-7 w-7 shrink-0 items-center justify-center
+               rounded-full transition-colors duration-200"
+        [style.backgroundColor]="'var(--PrimarySoft)'"
       >
-        <div
-          class="
-            relative
-            overflow-hidden
-            rounded-[26px]
-            h-[400px]
-            sm:h-[500px]
-            lg:h-[500px]
-            xl:h-[570px]
-            2xl:h-[680px]
-          "
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+          [style.color]="'var(--Primary)'"
         >
-          <img
-            src="assets/ImageAccueil-1.png"
-            [alt]="
-              languageService.is('fr')
-                ? 'Illustration JardiScan'
-                : 'JardiScan illustration'
-            "
-            class="
-              h-full
-              w-full
-              object-cover
-              transition-transform
-              duration-700
-              ease-out
-              group-hover:scale-[1.04]
-            "
-          />
-        </div>
-      </div>
-
-
-      <!-- ======================================================
-           BLOC 2 — TEXTE + IMAGE 2
-
-           MOBILE
-           → texte
-           → image 2
-
-           TABLETTE
-           → même bloc au centre
-
-           LAPTOP / DESKTOP
-           → 4 colonnes
-      ======================================================= -->
-
-      <div
-        class="
-          flex
-          flex-col
-          sm:col-span-1
-          lg:col-span-4
-        "
-      >
-
-        <!-- ====================================================
-             TEXTE D'INTRODUCTION
-        ===================================================== -->
-
-        <div
-          class="
-            mb-5
-            px-1
-            sm:mb-6
-            lg:mb-6
-            xl:mb-7
-          "
-        >
-
-          <!-- PETIT TITRE -->
-
-          <p
-            [ngStyle]="{
-              'color': themeService.TextPrincipal
-            }"
-            class="
-              mb-2
-              text-[10px]
-              font-medium
-              uppercase
-              tracking-[0.18em]
-              sm:text-[11px]
-            "
-          >
-            {{
-              languageService.is('fr')
-                ? 'Bienvenue sur JardiScan'
-                : 'Welcome to JardiScan'
-            }}
-          </p>
-
-
-          <!-- TITRE PRINCIPAL -->
-
-          <h1
-            [ngStyle]="{
-              'color': themeService.TextPrincipal
-            }"
-            class="
-              text-3xl
-              font-semibold
-              leading-[1.05]
-              tracking-[-0.04em]
-
-              sm:text-3xl
-
-              lg:text-[2.35rem]
-
-              xl:text-5xl
-
-              2xl:text-6xl
-            "
-          >
-            {{
-              languageService.is('fr')
-                ? 'Identifiez vos plantes,'
-                : 'Identify your plants,'
-            }}
-
-            <br />
-
-            <span
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            >
-              {{
-                languageService.is('fr')
-                  ? 'découvrez leurs secrets.'
-                  : 'discover their secrets.'
-              }}
-            </span>
-          </h1>
-
-        </div>
-
-
-        <!-- ====================================================
-             IMAGE 2
-
-             MOBILE
-             → image principale
-
-             TABLETTE
-             → image centrale
-
-             DESKTOP
-             → image centrale
-        ===================================================== -->
-
-        <div
-          class="
-            group
-            relative
-            overflow-hidden
-            rounded-[28px]
-
-            h-[390px]
-
-            sm:h-[500px]
-
-            lg:h-[500px]
-
-            xl:h-[570px]
-
-            2xl:h-[660px]
-          "
-        >
-
-          <img
-            src="assets/ImageAccueil-2.png"
-            [alt]="
-              languageService.is('fr')
-                ? 'Illustration JardiScan'
-                : 'JardiScan illustration'
-            "
-            class="
-              h-full
-              w-full
-              object-cover
-              transition-transform
-              duration-700
-              ease-out
-              group-hover:scale-[1.035]
-            "
+          <path
+            d="M20 4C11 4 5 7.5 5 14c0 3.2 2.2 5 5 5 6.5 0 10-6 10-15Z"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           />
 
-
-          <!-- DÉGRADÉ -->
-
-          <div
-            class="
-              pointer-events-none
-              absolute
-              inset-0
-              bg-gradient-to-t
-              from-black/20
-              via-transparent
-              to-black/5
-            "
-          ></div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ======================================================
-           IMAGE 3
-
-           MOBILE
-           ❌ masquée
-
-           TABLETTE
-           ✅ affichée
-
-           LAPTOP / DESKTOP
-           ✅ 2 colonnes
-      ======================================================= -->
-
-      <div
-        class="
-          group
-          relative
-          hidden
-          sm:block
-          sm:col-span-1
-          lg:col-span-2
-        "
-      >
-
-        <div
-          class="
-            relative
-            overflow-hidden
-            rounded-[26px]
-
-            h-[400px]
-
-            sm:h-[500px]
-
-            lg:h-[500px]
-
-            xl:h-[570px]
-
-            2xl:h-[680px]
-          "
-        >
-
-          <img
-            src="assets/ImageAccueil-3.png"
-            [alt]="
-              languageService.is('fr')
-                ? 'Illustration JardiScan'
-                : 'JardiScan illustration'
-            "
-            class="
-              h-full
-              w-full
-              object-cover
-              transition-transform
-              duration-700
-              ease-out
-              group-hover:scale-[1.04]
-            "
+          <path
+            d="M3 21c3-5 6.5-8 12-11"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
           />
+        </svg>
+      </span>
 
-
-          <div
-            class="
-              pointer-events-none
-              absolute
-              inset-0
-              bg-gradient-to-b
-              from-black/5
-              via-transparent
-              to-black/10
-            "
-          ></div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ======================================================
-           BLOC 4 — IMAGE 4 + DESCRIPTION
-
-           MOBILE
-           ❌ masqué
-
-           TABLETTE
-           ❌ masqué
-
-           LAPTOP / DESKTOP
-           ✅ affiché
-      ======================================================= -->
-
-      <div
-        class="
-          hidden
-          lg:flex
-          lg:flex-col
-          lg:col-span-4
-        "
+      <span
+        class="text-[10px] font-semibold uppercase tracking-[0.18em]
+               transition-colors duration-200
+               sm:text-[11px] sm:tracking-[0.22em]"
+        [style.color]="'var(--TX1)'"
       >
+        ARBORIA
+      </span>
 
-        <!-- ====================================================
-             IMAGE 4
-        ===================================================== -->
+      <span
+        class="h-1 w-1 shrink-0 rounded-full"
+        [style.backgroundColor]="'var(--Primary)'"
+      ></span>
 
-        <div
-          class="
-            group
-            relative
-            overflow-hidden
-            rounded-[28px]
-
-            h-[500px]
-
-            xl:h-[570px]
-
-            2xl:h-[660px]
-          "
-        >
-
-          <img
-            src="assets/ImageAccueil-4.png"
-            [alt]="
-              languageService.is('fr')
-                ? 'Illustration JardiScan'
-                : 'JardiScan illustration'
-            "
-            class="
-              h-full
-              w-full
-              object-cover
-              transition-transform
-              duration-700
-              ease-out
-              group-hover:scale-[1.035]
-            "
-          />
-
-
-          <div
-            class="
-              pointer-events-none
-              absolute
-              inset-0
-              bg-gradient-to-t
-              from-black/15
-              via-transparent
-              to-transparent
-            "
-          ></div>
-
-        </div>
-
-
-        <!-- ====================================================
-             TEXTE SOUS IMAGE
-        ===================================================== -->
-
-        <div
-          class="
-            mt-4
-            px-1
-
-            sm:mt-5
-
-            lg:mt-5
-
-            xl:mt-6
-          "
-        >
-
-          <div
-            class="
-              flex
-              items-start
-              gap-3
-            "
-          >
-
-            <!-- INDICATEUR -->
-
-            <span
-              [ngStyle]="{
-                'background': themeService.Primary
-              }"
-              class="
-                mt-1.5
-                h-2
-                w-2
-                shrink-0
-                rounded-full
-              "
-            ></span>
-
-
-            <!-- DESCRIPTION -->
-
-            <p
-              [ngStyle]="{
-                'color': themeService.TextPrincipal
-              }"
-              class="
-                max-w-lg
-                text-[13px]
-                leading-5
-
-                sm:text-sm
-                sm:leading-6
-
-                lg:text-sm
-                lg:leading-6
-
-                xl:text-base
-                xl:leading-7
-              "
-            >
-              {{
-                languageService.is('fr')
-                  ? 'Une nouvelle façon de découvrir, comprendre et prendre soin de vos plantes simplement au quotidien.'
-                  : 'A new way to discover, understand and care for your plants every day.'
-              }}
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
+      <span
+        class="text-[10px] font-medium transition-colors duration-200
+               sm:text-xs"
+        [style.color]="'var(--TX2)'"
+      >
+        {{
+          (languageService.language$ | async) === 'fr'
+            ? "L'intelligence du végétal"
+            : 'Plant intelligence'
+        }}
+      </span>
     </div>
 
-  </div>
+    <!-- ========================================================
+         TITRE PRINCIPAL
+    ========================================================= -->
 
+    <h1
+      class="w-full max-w-5xl
+             text-[clamp(2.1rem,6.5vw,5.5rem)]
+             font-semibold leading-[1.08]
+             tracking-[-0.055em]
+             transition-colors duration-200 ease-out
+             sm:leading-[1.04]"
+      [style.color]="'var(--TX0)'"
+      style="font-family: var(--arboria-font-body)"
+    >
+      {{
+        (languageService.language$ | async) === 'fr'
+          ? 'Cultivez votre passion,'
+          : 'Grow your passion,'
+      }}
+
+      <br class="hidden sm:block" />
+
+      <span
+        class="font-medium italic tracking-[-0.045em]
+               transition-colors duration-200 ease-out"
+        [style.color]="'var(--Primary)'"
+        style="font-family: var(--arboria-font-display)"
+      >
+        {{
+          (languageService.language$ | async) === 'fr'
+            ? 'naturellement.'
+            : 'naturally.'
+        }}
+      </span>
+    </h1>
+
+    <!-- ========================================================
+         DESCRIPTION
+    ========================================================= -->
+
+    <p
+      class="mt-5 w-full max-w-xl
+             text-sm font-normal leading-7
+             transition-colors duration-200 ease-out
+             sm:mt-7 sm:text-base sm:leading-8
+             lg:mt-8"
+      [style.color]="'var(--TX2)'"
+    >
+      {{
+        (languageService.language$ | async) === 'fr'
+          ? 'Découvrez une nouvelle façon de prendre soin de vos plantes. Identifiez, comprenez et accompagnez votre jardin grâce à une expérience pensée pour le vivant.'
+          : 'Discover a new way to care for your plants. Identify, understand and nurture your garden with an experience designed around the natural world.'
+      }}
+    </p>
+
+    <!-- ========================================================
+         BOUTONS D'ACTION
+    ========================================================= -->
+
+    <div
+      class="mt-7 flex w-full max-w-md flex-col
+             items-stretch justify-center gap-3
+             sm:mt-9 sm:max-w-none sm:flex-row
+             sm:items-center sm:gap-4
+             lg:mt-10"
+    >
+      <!-- ACTION PRINCIPALE -->
+
+      <button
+        type="button"
+        class="group inline-flex min-h-12 w-full
+               items-center justify-center gap-3
+               rounded-2xl px-5 py-3.5
+               text-sm font-semibold
+               transition-[background-color,color,border-color,box-shadow,transform]
+               duration-200 ease-out
+               hover:-translate-y-0.5
+               focus-visible:outline-none
+               focus-visible:ring-2
+               focus-visible:ring-offset-2
+               active:translate-y-0
+               sm:w-auto sm:px-7"
+        [style.backgroundColor]="'var(--BUTON1BG)'"
+        [style.color]="'var(--BUTON1TEXT)'"
+        [style.boxShadow]="'0 8px 24px var(--SHADOW)'"
+        [style.--tw-ring-color]="'var(--Primary)'"
+        [style.--tw-ring-offset-color]="'var(--BG1)'"
+        (click)="onGetStarted()"
+      >
+        <span>
+          {{
+            (languageService.language$ | async) === 'fr'
+              ? 'Explorer le catalogue'
+              : 'Explore the catalogue'
+          }}
+        </span>
+
+        <svg
+          class="h-4 w-4 shrink-0
+                 transition-transform duration-200
+                 group-hover:translate-x-1"
+          viewBox="0 0 20 20"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M4 10h12m-5-5 5 5-5 5"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+      <!-- ACTION SECONDAIRE -->
+
+      <button
+        type="button"
+        class="inline-flex min-h-12 w-full
+               items-center justify-center gap-2
+               rounded-2xl border px-5 py-3.5
+               text-sm font-semibold
+               transition-[background-color,color,border-color,box-shadow,transform]
+               duration-200 ease-out
+               hover:-translate-y-0.5
+               focus-visible:outline-none
+               focus-visible:ring-2
+               focus-visible:ring-offset-2
+               active:translate-y-0
+               sm:w-auto sm:px-7"
+        [style.backgroundColor]="'var(--BUTON2BG)'"
+        [style.color]="'var(--BUTON2TEXT)'"
+        [style.borderColor]="'var(--BUTON2BORDER)'"
+        [style.--tw-ring-color]="'var(--Primary)'"
+        [style.--tw-ring-offset-color]="'var(--BG1)'"
+        (click)="onViewDemo()"
+      >
+        <!-- Icône information -->
+
+        <svg
+          class="h-4 w-4 shrink-0"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+          [style.color]="'var(--BUTON2ICON)'"
+        >
+          <circle
+            cx="12"
+            cy="12"
+            r="9"
+            stroke="currentColor"
+            stroke-width="1.7"
+          />
+
+          <path
+            d="M12 11v5m0-8h.01"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+          />
+        </svg>
+
+        <span>
+          {{
+            (languageService.language$ | async) === 'fr'
+              ? 'Comment ça marche ?'
+              : 'How does it work?'
+          }}
+        </span>
+      </button>
+    </div>
+  </div>
 </section>

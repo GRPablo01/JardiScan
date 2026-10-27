@@ -16,7 +16,7 @@
      • Aucun changement de logique Angular
      ============================================================ -->
 
-<section
+<!-- <section
   class="relative w-full overflow-hidden px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
   [ngStyle]="{
     'background': themeService.Background2,
@@ -26,7 +26,7 @@
 
   <!-- ============================================================
        CONTENU PRINCIPAL
-       ============================================================ -->
+       ============================================================ --
 
   <div
     class="relative z-10 flex w-full flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-14"
@@ -34,11 +34,11 @@
 
     <!-- ============================================================
          🌱 PARTIE GAUCHE — PRÉSENTATION
-         ============================================================ -->
+         ============================================================ --
 
     <div class="relative w-full max-w-2xl">
 
-      <!-- Badge -->
+      <!-- Badge --
       <div
         class="mb-4 inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-semibold backdrop-blur-xl sm:text-sm"
         [ngStyle]="{
@@ -64,7 +64,7 @@
         }}
       </div>
 
-      <!-- Titre -->
+      <!-- Titre --
       <h1
         class="mb-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
         [ngStyle]="{
@@ -78,7 +78,7 @@
         }}
       </h1>
 
-      <!-- Sous-titre -->
+      <!-- Sous-titre --
       <h2
         class="mb-4 max-w-2xl text-xl font-semibold leading-tight sm:text-2xl lg:text-3xl"
         [ngStyle]="{
@@ -100,7 +100,7 @@
         </span>
       </h2>
 
-      <!-- Description -->
+      <!-- Description --
       <p
         class="max-w-xl text-sm leading-7 sm:text-base"
         [ngStyle]="{
@@ -116,7 +116,7 @@
 
       <!-- ========================================================
            MINI STATISTIQUE
-           ======================================================== -->
+           ======================================================== --
 
       <div
         class="mt-6 rounded-2xl border p-4 backdrop-blur-xl sm:p-5"
@@ -187,7 +187,7 @@
 
         </div>
 
-        <!-- Barre décorative de progression -->
+        <!-- Barre décorative de progression --
         <div
           class="mt-4 h-2 overflow-hidden rounded-full"
           [ngStyle]="{
@@ -219,11 +219,11 @@
 
       <!-- ========================================================
            LÉGENDE DES ÉTATS
-           ======================================================== -->
+           ======================================================== --
 
       <div class="mt-5 flex flex-wrap gap-3">
 
-        <!-- Identifiée -->
+        <!-- Identifiée --
         <div
           class="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-medium"
           [ngStyle]="{
@@ -251,7 +251,7 @@
 
         </div>
 
-        <!-- À identifier -->
+        <!-- À identifier --
         <div
           class="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-medium"
           [ngStyle]="{
@@ -287,13 +287,13 @@
 
     <!-- ============================================================
          🌿 PARTIE DROITE — APERÇU VISUEL
-         ============================================================ -->
+         ============================================================ --
 
     <div
       class="relative z-10 flex w-full max-w-xl items-center justify-center"
     >
 
-      <!-- Décoration arrière -->
+      <!-- Décoration arrière --
       <div
         class="pointer-events-none absolute h-64 w-64 rounded-full blur-3xl opacity-20"
         [ngStyle]="{
@@ -303,7 +303,7 @@
 
       <!-- ========================================================
            GRILLE DES CARTES
-           ======================================================== -->
+           ======================================================== --
 
       <div
         class="relative grid w-full max-w-[500px] grid-cols-2 gap-4 sm:gap-5"
@@ -311,7 +311,7 @@
 
         <!-- ======================================================
              🌻 PLANTE IDENTIFIÉE
-             ====================================================== -->
+             ====================================================== --
 
         <div
           class="group relative overflow-hidden rounded-[1.75rem] border shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
@@ -321,7 +321,7 @@
           }"
         >
 
-          <!-- Image -->
+          <!-- Image --
           <div class="relative aspect-[4/5] w-full overflow-hidden">
 
             <img
@@ -334,12 +334,12 @@
               class="h-full w-full object-cover transition duration-700 group-hover:scale-110"
             />
 
-            <!-- Voile -->
+            <!-- Voile --
             <div
               class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/60 to-transparent"
             ></div>
 
-            <!-- Badge -->
+            <!-- Badge --
             <div
               class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[10px] font-bold shadow-lg backdrop-blur-md sm:left-4 sm:top-4 sm:text-xs"
               [ngStyle]="{
@@ -356,7 +356,7 @@
               }}
             </div>
 
-            <!-- Texte sur image -->
+            <!-- Texte sur image --
             <div
               class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4"
             >
@@ -385,7 +385,7 @@
 
           </div>
 
-          <!-- Informations -->
+          <!-- Informations --
           <div class="p-3.5 sm:p-4">
 
             <div class="mb-1 flex items-center justify-between gap-2">
@@ -435,7 +435,7 @@
 
         <!-- ======================================================
              🌹 PLANTE NON IDENTIFIÉE
-             ====================================================== -->
+             ====================================================== --
 
         <div
           class="group relative overflow-hidden rounded-[1.75rem] border shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
@@ -445,7 +445,7 @@
           }"
         >
 
-          <!-- Image -->
+          <!-- Image --
           <div class="relative aspect-[4/5] w-full overflow-hidden">
 
             <img
@@ -458,10 +458,10 @@
               class="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-110"
             />
 
-            <!-- Voile -->
+            <!-- Voile --
             <div class="absolute inset-0 bg-black/25"></div>
 
-            <!-- Question centrale -->
+            <!-- Question centrale --
             <div
               class="absolute inset-0 flex items-center justify-center"
             >
@@ -479,7 +479,7 @@
 
             </div>
 
-            <!-- Badge -->
+            <!-- Badge --
             <div
               class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-[10px] font-bold backdrop-blur-md sm:left-4 sm:top-4 sm:text-xs"
               [ngStyle]="{
@@ -499,7 +499,7 @@
 
             </div>
 
-            <!-- Texte sur image -->
+            <!-- Texte sur image --
             <div
               class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4"
             >
@@ -528,7 +528,7 @@
 
           </div>
 
-          <!-- Informations -->
+          <!-- Informations --
           <div class="p-3.5 sm:p-4">
 
             <div class="mb-1 flex items-center justify-between gap-2">
@@ -584,7 +584,7 @@
 
   <!-- ============================================================
        🌱 MESSAGE BAS DE SECTION
-       ============================================================ -->
+       ============================================================ --
 
   <div
     class="relative z-10 mt-8 flex flex-col items-center justify-center gap-2 text-center sm:mt-10"
@@ -627,4 +627,4 @@
 
   </div>
 
-</section>
+</section> -->

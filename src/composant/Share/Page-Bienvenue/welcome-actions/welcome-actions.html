@@ -1,0 +1,197 @@
+
+<!-- ============================================================
+     ACTIONS UTILISATEUR — ARBORIA
+     Angular standalone + Tailwind CSS
+
+     • Connexion : texte + ligne animée au survol
+     • Inscription : bouton vert principal
+     • Thème clair / sombre via ThemeService
+     • Sélecteur de langue conservé
+     • Langue et thème masqués sous 502px
+     • Responsive et accessible
+============================================================ -->
+
+<div
+  class="welcome-user-actions ml-auto flex shrink-0 items-center
+         justify-end gap-1.5 sm:gap-2"
+  [ngStyle]="{
+    '--auth-text': themeService.TX0,
+    '--auth-primary': themeService.BUTON1BG,
+    '--auth-primary-hover': themeService.BUTON1HOVER,
+    '--auth-primary-text': themeService.BUTON1TEXT,
+    '--auth-primary-shadow': themeService.BUTON1SHADOW,
+    '--auth-line': themeService.Primary,
+    '--auth-focus': themeService.Primary,
+    '--auth-theme': themeService.isDarkMode ? 'dark' : 'light'
+  }"
+  [attr.aria-label]="
+    langueActuelle === 'fr'
+      ? 'Actions utilisateur'
+      : 'User actions'
+  "
+>
+  <!-- ========================================================
+       CHANGEMENT DE LANGUE
+       Masqué en dessous de 502px
+  ========================================================= -->
+
+  <div class="welcome-action-language hidden min-[502px]:block shrink-0">
+    <app-welcome-language></app-welcome-language>
+  </div>
+
+  <!-- ========================================================
+       CHANGEMENT DE THÈME
+       Masqué en dessous de 502px
+  ========================================================= -->
+
+  <div
+    class="welcome-action-theme hidden min-[502px]:flex shrink-0
+           items-center justify-center"
+  >
+    <app-theme></app-theme>
+  </div>
+
+  <!-- ============================================================
+     ARBORIA — ACTIONS UTILISATEUR
+     Angular standalone + Tailwind CSS
+     • LanguageService : FR / EN
+     • Connexion : texte + ligne animée au survol
+     • Inscription : bouton vert principal
+     • Responsive : icônes seules sous 390px
+     • Accessibilité clavier
+     • Compatible avec fermerMenus()
+============================================================ -->
+
+<!-- ==================== CONNEXION ==================== -->
+
+<a
+routerLink="/login"
+class="auth-login group relative inline-flex h-9 shrink-0
+       items-center justify-center gap-1.5
+       px-2.5 text-sm font-semibold
+       transition-colors duration-200 ease-out
+       sm:h-10 sm:px-3.5
+       min-[390px]:gap-2
+       focus-visible:outline-none
+       focus-visible:ring-2
+       focus-visible:ring-[var(--auth-focus)]
+       focus-visible:ring-offset-2
+       focus-visible:ring-offset-[var(--ar-bg-1)]"
+[attr.aria-label]="
+  languageService.currentLanguage === 'fr'
+    ? 'Se connecter'
+    : 'Log in'
+"
+(click)="fermerMenus()"
+>
+<!-- Icône de connexion -->
+<svg
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.7"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="h-[18px] w-[18px] shrink-0"
+  aria-hidden="true"
+>
+  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+  <path d="m10 17 5-5-5-5" />
+  <path d="M15 12H3" />
+</svg>
+
+<!-- Libellé traduit -->
+<span class="hidden min-[390px]:inline">
+  {{
+    languageService.currentLanguage === 'fr'
+      ? 'Connexion'
+      : 'Log in'
+  }}
+</span>
+
+<!-- Ligne animée de gauche à droite -->
+<span
+  class="auth-login-underline pointer-events-none absolute
+         bottom-[3px] left-2.5 right-2.5 h-[2px]
+         origin-left scale-x-0 rounded-full
+         transition-transform duration-300 ease-out
+         group-hover:scale-x-100
+         group-focus-visible:scale-x-100
+         sm:left-3.5 sm:right-3.5"
+  aria-hidden="true"
+></span>
+</a>
+
+<!-- ==================== INSCRIPTION ==================== -->
+
+<a
+routerLink="/register"
+class="auth-register group relative inline-flex h-9 shrink-0
+       items-center justify-center gap-1.5
+       overflow-hidden rounded-xl px-2.5
+       text-sm font-semibold
+       transition-[background-color,box-shadow,transform]
+       duration-200 ease-out
+       hover:-translate-y-0.5
+       active:translate-y-0 active:scale-[0.98]
+       sm:h-10 sm:px-3.5
+       min-[390px]:gap-2
+       focus-visible:outline-none
+       focus-visible:ring-2
+       focus-visible:ring-[var(--auth-focus)]
+       focus-visible:ring-offset-2
+       focus-visible:ring-offset-[var(--ar-bg-1)]"
+[attr.aria-label]="
+  languageService.currentLanguage === 'fr'
+    ? 'Créer un compte'
+    : 'Create an account'
+"
+[ngStyle]="{
+  'background-color': 'var(--auth-primary)',
+  'color': 'var(--auth-primary-text)',
+  'box-shadow': inscriptionSurvol
+    ? '0 5px 14px var(--auth-primary-shadow)'
+    : '0 3px 10px var(--auth-primary-shadow)'
+}"
+(mouseenter)="inscriptionSurvol = true"
+(mouseleave)="inscriptionSurvol = false"
+(focus)="inscriptionSurvol = true"
+(blur)="inscriptionSurvol = false"
+(click)="fermerMenus()"
+>
+<!-- Éclat discret au survol -->
+<span
+  class="auth-register-shine pointer-events-none absolute inset-0
+         -translate-x-full skew-x-[-20deg]
+         bg-white/15 transition-transform duration-500
+         group-hover:translate-x-full"
+  aria-hidden="true"
+></span>
+
+<!-- Icône d'inscription -->
+<svg
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.9"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="relative z-10 h-[18px] w-[18px] shrink-0
+         transition-transform duration-200
+         group-hover:rotate-90"
+  aria-hidden="true"
+>
+  <path d="M12 5v14" />
+  <path d="M5 12h14" />
+</svg>
+
+<!-- Libellé traduit -->
+<span class="relative z-10 hidden min-[390px]:inline">
+  {{
+    languageService.currentLanguage === 'fr'
+      ? 'Inscription'
+      : 'Sign up'
+  }}
+</span>
+</a>
+</div>

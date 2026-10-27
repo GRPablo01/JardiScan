@@ -1,1103 +1,752 @@
 <!-- ============================================================
-     🌿 JARDISCAN — FOOTER ESPACE UTILISATEUR
+     ARBORIA — FOOTER PREMIUM • FLUID HOVER EDITION
+     Angular Standalone + Tailwind CSS + Font Awesome
+     ThemeService / LanguageService / Angular Router conservés
+     Transitions fluides • Micro-interactions • Thème clair/sombre
+     Responsive • Accessible • Reduced motion
+============================================================ -->
 
-     VERSION FR / EN :
-
-     • Destiné aux utilisateurs connectés
-     • Aucun lien Connexion / Inscription
-     • Vrai logo JardiScan
-     • Nom + prénom depuis localStorage
-     • ThemeService 100 %
-     • LanguageService
-     • Light / Dark
-     • Premium Nature Design
-     • Glassmorphism
-     • Responsive mobile → 2xl
-     • 4 colonnes desktop
-     • Angular standalone
-     • RouterLink
-     • Font Awesome
-     • Tailwind CSS
-     ============================================================ -->
 <footer
-  class="relative w-full overflow-hidden"
+  class="relative isolate w-full min-w-0 overflow-hidden px-3 pb-8 pt-3 text-[var(--ar-text)] sm:px-4 sm:pb-30"
   [ngStyle]="{
-    'background-color': themeService.BackgroundFooter,
-    'color': themeService.TextPrincipal
+    'background-color': themeService.BG1,
+    color: themeService.TX0,
+    '--ar-primary': themeService.Primary,
+    '--ar-border': themeService.BorderPrimary,
+    '--ar-surface': themeService.BG1,
+    '--ar-text': themeService.TX0
   }"
+  [attr.lang]="languageService.currentLanguage === 'en' ? 'en' : 'fr'"
 >
-
-  <!-- ==========================================================
-       CONTENU PRINCIPAL
-       ========================================================== -->
+  <!-- =========================================================
+       FOND DÉCORATIF
+  ========================================================== -->
 
   <div
-    class="
-      relative
-      mx-auto
-      w-full
-      px-5
-      py-12
-      sm:px-8
-      sm:py-14
-      lg:px-10
-      lg:py-16
-      xl:px-14
-      2xl:px-20
-    "
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 flex select-none items-end justify-center overflow-hidden"
   >
-
-    <!-- ========================================================
-         GRILLE PRINCIPALE
-         ======================================================== -->
-
-    <div
-      class="
-        grid
-        w-full
-        grid-cols-1
-        gap-10
-        sm:grid-cols-2
-        lg:grid-cols-4
-        lg:gap-8
-        xl:gap-12
-      "
-    >
-
-      <!-- ======================================================
-           01 — IDENTITÉ JARDISCAN + UTILISATEUR
-           ====================================================== -->
-
-      <div class="flex flex-col">
-
-        <!-- ====================================================
-             LOGO JARDISCAN
-             ==================================================== -->
-
-        <a
-          routerLink="/accueil"
-          [attr.aria-label]="
-            languageService.is('fr')
-              ? 'JardiScan - Accueil'
-              : 'JardiScan - Home'
-          "
-          class="
-            group
-            mb-5
-            inline-flex
-            w-fit
-            items-center
-            gap-3
-          "
-        >
-
-          <!-- VRAI LOGO -->
-          <div
-            class="
-              flex
-              h-12
-              w-12
-              shrink-0
-              items-center
-              justify-center
-              overflow-hidden
-              rounded-2xl
-              border
-              p-2
-              backdrop-blur-xl
-              transition-all
-              duration-300
-              group-hover:-translate-y-0.5
-            "
-            [ngStyle]="{
-              'background-color': themeService.PrimarySoft,
-              'border-color': themeService.GlassBorder,
-              'box-shadow': themeService.BoxShadowSmall
-            }"
-          >
-            <img
-              src="assets/Logo.svg"
-              [alt]="
-                languageService.is('fr')
-                  ? 'Logo JardiScan'
-                  : 'JardiScan logo'
-              "
-              class="
-                h-full
-                w-full
-                object-contain
-                transition-transform
-                duration-300
-                group-hover:scale-105
-              "
-            />
-          </div>
-
-          <!-- NOM -->
-          <div class="flex flex-col">
-
-            <span
-              class="
-                text-xl
-                font-bold
-                tracking-tight
-              "
-              [ngStyle]="{
-                'color': themeService.TextPrincipal
-              }"
-            >
-              JardiScan
-            </span>
-
-            <span
-              class="
-                text-xs
-                font-medium
-              "
-              [ngStyle]="{
-                'color': themeService.TextMuted
-              }"
-            >
-              {{
-                languageService.is('fr')
-                  ? 'Votre compagnon botanique'
-                  : 'Your botanical companion'
-              }}
-            </span>
-
-          </div>
-
-        </a>
-
-
-        <!-- ====================================================
-             DESCRIPTION
-             ==================================================== -->
-
-        <p
-          class="
-            max-w-sm
-            text-sm
-            leading-6
-          "
-          [ngStyle]="{
-            'color': themeService.TextSecondaire
-          }"
-        >
-          {{
-            languageService.is('fr')
-              ? 'Identifiez vos plantes, retrouvez vos découvertes et gérez votre collection botanique directement depuis votre espace JardiScan.'
-              : 'Identify your plants, revisit your discoveries and manage your botanical collection directly from your JardiScan space.'
-          }}
-        </p>
-
-
-        <!-- ====================================================
-             CARTE UTILISATEUR CONNECTÉ
-             ==================================================== -->
-
-        <div
-          class="
-            mt-6
-            flex
-            w-fit
-            max-w-full
-            items-center
-            gap-3
-            rounded-2xl
-            border
-            px-3
-            py-3
-            backdrop-blur-xl
-          "
-          [ngStyle]="{
-            'background-color': themeService.GlassBackground,
-            'border-color': themeService.GlassBorder,
-            'box-shadow': themeService.BoxShadowSmall
-          }"
-        >
-
-          <!-- AVATAR / INITIALES -->
-          <div
-            class="
-              flex
-              h-10
-              w-10
-              shrink-0
-              items-center
-              justify-center
-              rounded-xl
-              text-xs
-              font-bold
-            "
-            [ngStyle]="{
-              'background-color': themeService.PrimarySoft,
-              'color': themeService.Primary,
-              'border-color': themeService.GlassBorder
-            }"
-          >
-            {{ userInitials }}
-          </div>
-
-          <!-- INFORMATIONS USER -->
-          <div class="min-w-0">
-
-            <p
-              class="
-                truncate
-                text-sm
-                font-semibold
-              "
-              [ngStyle]="{
-                'color': themeService.TextPrincipal
-              }"
-            >
-              {{ fullName }}
-            </p>
-
-            <div class="mt-0.5 flex items-center gap-2">
-
-              <span
-                class="
-                  h-1.5
-                  w-1.5
-                  shrink-0
-                  animate-pulse
-                  rounded-full
-                "
-                [ngStyle]="{
-                  'background-color': themeService.Primary
-                }"
-              ></span>
-
-              <span
-                class="text-xs"
-                [ngStyle]="{
-                  'color': themeService.TextMuted
-                }"
-              >
-                {{
-                  languageService.is('fr')
-                    ? 'Compte connecté'
-                    : 'Connected account'
-                }}
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- ======================================================
-           02 — MON ESPACE
-           ====================================================== -->
-
-      <div>
-
-        <h3
-          class="
-            mb-5
-            text-sm
-            font-bold
-            uppercase
-            tracking-wider
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal
-          }"
-        >
-          {{
-            languageService.is('fr')
-              ? 'Mon espace'
-              : 'My space'
-          }}
-        </h3>
-
-        <nav class="flex flex-col gap-3">
-
-          <!-- Accueil -->
-          <a
-            routerLink="/accueil"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-house
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Accueil'
-                  : 'Home'
-              }}
-            </span>
-          </a>
-
-
-          <!-- Scanner -->
-          <a
-            routerLink="/scan"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-camera
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Scanner une plante'
-                  : 'Scan a plant'
-              }}
-            </span>
-          </a>
-
-
-          <!-- Favoris -->
-          <a
-            routerLink="/favoris"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-heart
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Mes favoris'
-                  : 'My favorites'
-              }}
-            </span>
-          </a>
-
-
-          <!-- Profil -->
-          <a
-            routerLink="/profil"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-user
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Mon profil'
-                  : 'My profile'
-              }}
-            </span>
-          </a>
-
-        </nav>
-
-      </div>
-
-
-      <!-- ======================================================
-           03 — JARDISCAN
-           ====================================================== -->
-
-      <div>
-
-        <h3
-          class="
-            mb-5
-            text-sm
-            font-bold
-            uppercase
-            tracking-wider
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal
-          }"
-        >
-          JardiScan
-        </h3>
-
-        <nav class="flex flex-col gap-3">
-
-          <!-- Découvrir -->
-          <a
-            routerLink="/welcome"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-leaf
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Découvrir JardiScan'
-                  : 'Discover JardiScan'
-              }}
-            </span>
-          </a>
-
-
-          <!-- Contributeur -->
-          <a
-            routerLink="/welcome/roles"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-seedling
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Devenir contributeur'
-                  : 'Become a contributor'
-              }}
-            </span>
-          </a>
-
-
-          <!-- Aide -->
-          <a
-            routerLink="/welcome/faq"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-circle-question
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Centre d’aide'
-                  : 'Help center'
-              }}
-            </span>
-          </a>
-
-
-          <!-- Comment ça marche -->
-          <a
-            routerLink="/welcome/comment-ca-marche"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-circle-play
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Comment ça marche'
-                  : 'How it works'
-              }}
-            </span>
-          </a>
-
-
-          <!-- Contact -->
-          <a
-            href="mailto:contact@jardiscan.fr"
-            class="
-              group
-              flex
-              items-center
-              gap-3
-              text-sm
-              transition-all
-              duration-200
-              hover:translate-x-1
-            "
-            [ngStyle]="{
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i
-              class="
-                fa-solid
-                fa-envelope
-                w-4
-                text-xs
-              "
-              [ngStyle]="{
-                'color': themeService.Primary
-              }"
-            ></i>
-
-            <span>
-              {{
-                languageService.is('fr')
-                  ? 'Nous contacter'
-                  : 'Contact us'
-              }}
-            </span>
-          </a>
-
-        </nav>
-
-      </div>
-
-
-      <!-- ======================================================
-           04 — RESTONS CONNECTÉS
-           ====================================================== -->
-
-      <div>
-
-        <h3
-          class="
-            mb-5
-            text-sm
-            font-bold
-            uppercase
-            tracking-wider
-          "
-          [ngStyle]="{
-            'color': themeService.TextPrincipal
-          }"
-        >
-          {{
-            languageService.is('fr')
-              ? 'Restons connectés'
-              : 'Stay connected'
-          }}
-        </h3>
-
-
-        <p
-          class="
-            mb-5
-            text-sm
-            leading-6
-          "
-          [ngStyle]="{
-            'color': themeService.TextSecondaire
-          }"
-        >
-          {{
-            languageService.is('fr')
-              ? 'Une question, une suggestion ou une envie de contribuer ? L’équipe JardiScan est là pour vous aider.'
-              : 'A question, a suggestion or a desire to contribute? The JardiScan team is here to help.'
-          }}
-        </p>
-
-
-        <!-- ====================================================
-             CARTE CONTACT
-             ==================================================== -->
-
-        <div
-          class="
-            rounded-2xl
-            border
-            p-4
-            backdrop-blur-xl
-            transition-all
-            duration-300
-          "
-          [ngStyle]="{
-            'background-color': themeService.GlassBackground,
-            'border-color': themeService.GlassBorder,
-            'box-shadow': themeService.BoxShadowSmall
-          }"
-        >
-
-          <div
-            class="
-              flex
-              items-start
-              gap-3
-            "
-          >
-
-            <!-- Icône -->
-            <div
-              class="
-                flex
-                h-10
-                w-10
-                shrink-0
-                items-center
-                justify-center
-                rounded-xl
-              "
-              [ngStyle]="{
-                'background-color': themeService.PrimarySoft,
-                'color': themeService.Primary
-              }"
-            >
-              <i class="fa-solid fa-envelope"></i>
-            </div>
-
-
-            <!-- Texte -->
-            <div class="min-w-0">
-
-              <p
-                class="
-                  text-xs
-                  font-medium
-                "
-                [ngStyle]="{
-                  'color': themeService.TextMuted
-                }"
-              >
-                {{
-                  languageService.is('fr')
-                    ? 'Une question ?'
-                    : 'Have a question?'
-                }}
-              </p>
-
-              <a
-                href="mailto:contact@jardiscan.fr"
-                class="
-                  mt-1
-                  block
-                  truncate
-                  text-sm
-                  font-semibold
-                  transition-colors
-                  duration-200
-                "
-                [ngStyle]="{
-                  'color': themeService.TextPrincipal
-                }"
-              >
-                contact@jardiscan.fr
-              </a>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- ====================================================
-             RÉSEAUX SOCIAUX
-             ==================================================== -->
-
-        <div
-          class="
-            mt-5
-            flex
-            items-center
-            gap-2
-          "
-        >
-
-          <!-- Facebook -->
-          <a
-            href="#"
-            aria-label="Facebook"
-            class="
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-xl
-              border
-              transition-all
-              duration-300
-              hover:-translate-y-0.5
-            "
-            [ngStyle]="{
-              'background-color': themeService.GlassBackground,
-              'border-color': themeService.GlassBorder,
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i class="fa-brands fa-facebook-f"></i>
-          </a>
-
-
-          <!-- Instagram -->
-          <a
-            href="#"
-            aria-label="Instagram"
-            class="
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-xl
-              border
-              transition-all
-              duration-300
-              hover:-translate-y-0.5
-            "
-            [ngStyle]="{
-              'background-color': themeService.GlassBackground,
-              'border-color': themeService.GlassBorder,
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-
-
-          <!-- GitHub -->
-          <a
-            href="#"
-            aria-label="GitHub"
-            class="
-              flex
-              h-10
-              w-10
-              items-center
-              justify-center
-              rounded-xl
-              border
-              transition-all
-              duration-300
-              hover:-translate-y-0.5
-            "
-            [ngStyle]="{
-              'background-color': themeService.GlassBackground,
-              'border-color': themeService.GlassBorder,
-              'color': themeService.TextSecondaire
-            }"
-          >
-            <i class="fa-brands fa-github"></i>
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ========================================================
-         SÉPARATEUR
-         ======================================================== -->
-
-    <div
-      class="
-        my-10
-        h-px
-        w-full
-      "
+    <span
+      class="translate-y-[24%] whitespace-nowrap text-[clamp(7rem,23vw,24rem)] font-bold leading-[0.8] tracking-[-0.09em] opacity-[0.045]"
       [ngStyle]="{
-        'background-color': themeService.Border1
+        color: themeService.Primary,
+        'font-family': 'Cormorant Garamond, serif'
+      }"
+    >
+      Arboria
+    </span>
+  </div>
+
+  <!-- =========================================================
+       PANNEAU PRINCIPAL
+  ========================================================== -->
+
+  <div
+    class="group/footer relative mx-auto w-full min-w-0 rounded-[22px] border px-5 py-7 shadow-[0_20px_70px_var(--footer-shadow)] transition-[border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:rounded-[28px] sm:px-8 sm:py-9 md:px-10 md:py-10 lg:rounded-[32px] lg:px-12 lg:py-12 xl:px-16 2xl:px-20 motion-reduce:transition-none"
+    [ngStyle]="{
+      'background-color': themeService.BG1,
+      'border-color': themeService.BR1,
+      '--footer-shadow': themeService.SHADOW
+    }"
+  >
+    <!-- Accent supérieur animé -->
+
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute left-6 right-6 top-0 h-[2px] origin-center scale-x-75 rounded-full opacity-50 transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/footer:scale-x-100 group-hover/footer:opacity-100 sm:left-8 sm:right-8 lg:left-12 lg:right-12 motion-reduce:transition-none"
+      [ngStyle]="{
+        background: 'linear-gradient(90deg, transparent, ' +
+          themeService.Primary + ', ' +
+          themeService.Secondary + ', transparent)'
       }"
     ></div>
 
-
-    <!-- ========================================================
-         BARRE INFÉRIEURE
-         ======================================================== -->
+    <!-- =======================================================
+         GRILLE PRINCIPALE
+    ======================================================== -->
 
     <div
-      class="
-        flex
-        flex-col
-        gap-5
-        md:flex-row
-        md:items-center
-        md:justify-between
-      "
+      class="grid w-full min-w-0 grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 sm:gap-y-12 lg:grid-cols-[minmax(0,2fr)_minmax(0,0.85fr)_minmax(0,0.85fr)_minmax(0,0.85fr)] lg:gap-x-8 xl:grid-cols-[minmax(0,2.2fr)_minmax(0,0.7fr)_minmax(0,0.8fr)_minmax(0,0.8fr)] xl:gap-x-12 2xl:gap-x-16"
     >
+      <!-- =====================================================
+           IDENTITÉ ARBORIA
+      ====================================================== -->
 
-      <!-- ======================================================
-           COPYRIGHT
-           ====================================================== -->
+      <div class="flex min-w-0 flex-col items-start">
+        <!-- Logo -->
 
-      <div
-        class="
-          flex
-          flex-col
-          gap-1
-        "
-      >
-
-        <p
-          class="text-sm"
-          [ngStyle]="{
-            'color': themeService.TextSecondaire
-          }"
+        <a
+          routerLink="/"
+          [attr.aria-label]="languageService.currentLanguage === 'en'
+            ? 'Arboria — Home'
+            : 'Arboria — Accueil'"
+          class="group/brand inline-flex items-center gap-2.5 rounded-xl text-[var(--ar-text)] no-underline outline-none transition-[color,opacity] duration-300 ease-out hover:text-[var(--ar-primary)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--ar-primary)] motion-reduce:transition-none"
         >
-          © {{ currentYear }} JardiScan.
-          {{
-            languageService.is('fr')
-              ? 'Tous droits réservés.'
-              : 'All rights reserved.'
-          }}
-        </p>
+          <span
+            class="inline-flex shrink-0 items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/brand:scale-[1.06] motion-reduce:transition-none"
+          >
+            <img
+              src="assets/LogoArboria.svg"
+              alt=""
+              class="h-9 w-auto object-contain"
+            />
+          </span>
 
-        <p
-          class="text-xs"
-          [ngStyle]="{
-            'color': themeService.TextMuted
-          }"
-        >
-          {{
-            languageService.is('fr')
-              ? 'Fait avec'
-              : 'Made with'
-          }}
-
-          <i
-            class="
-              fa-solid
-              fa-leaf
-              mx-1
-            "
+          <span
+            class="text-[24px] font-semibold tracking-[-0.06em] sm:text-[27px]"
             [ngStyle]="{
-              'color': themeService.Primary
+              'font-family': 'Cormorant Garamond, serif'
             }"
-          ></i>
+          >
+            Arboria<span [ngStyle]="{ color: themeService.Primary }">.</span>
+          </span>
+        </a>
 
+        <!-- Signature -->
+
+        <div
+          class="mt-5 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 transition-[background-color,border-color,color] duration-300 ease-out"
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            'border-color': themeService.BorderPrimary,
+            color: themeService.Primary
+          }"
+        >
+          <span
+            aria-hidden="true"
+            class="h-1.5 w-1.5 rounded-full transition-transform duration-300 ease-out hover:scale-125"
+            [ngStyle]="{
+              'background-color': themeService.Primary
+            }"
+          ></span>
+
+          <span class="text-[10px] font-semibold uppercase tracking-[0.16em]">
+            {{
+              languageService.currentLanguage === 'en'
+                ? 'Grow with nature'
+                : 'Cultivez avec la nature'
+            }}
+          </span>
+        </div>
+
+        <!-- Description -->
+
+        <p
+          class="mt-5 max-w-[400px] text-[13px] leading-[1.9] sm:text-[14px]"
+          [ngStyle]="{ color: themeService.TX1 }"
+        >
           {{
-            languageService.is('fr')
-              ? 'pour les amoureux des plantes.'
-              : 'for plant lovers.'
+            languageService.currentLanguage === 'en'
+              ? 'Discover plants, understand their needs and care for your garden with confidence. Arboria makes gardening simpler, more natural and more accessible.'
+              : 'Découvrez les plantes, comprenez leurs besoins et prenez soin de votre jardin en toute confiance. Arboria rend le jardinage plus simple, plus naturel et plus accessible.'
           }}
         </p>
 
+        <!-- Réseaux sociaux -->
+
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <!-- Instagram -->
+
+          <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="languageService.currentLanguage === 'en'
+              ? 'Instagram — opens in a new tab'
+              : 'Instagram — ouvre dans un nouvel onglet'"
+            class="group/social inline-flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[11px] border border-transparent text-base text-[var(--social-color)] outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[var(--social-border)] hover:bg-[var(--social-glow)] hover:shadow-[0_5px_16px_var(--social-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--social-border)] motion-reduce:transform-none motion-reduce:transition-none"
+            [ngStyle]="{
+              '--social-color': '#D946A8',
+              '--social-border': '#F09DD6',
+              '--social-glow': 'rgb(217 70 168 / 18%)'
+            }"
+          >
+            <i
+              class="fa-brands fa-instagram transition-transform duration-300 ease-out group-hover/social:scale-110 motion-reduce:transition-none"
+              aria-hidden="true"
+            ></i>
+          </a>
+
+          <!-- Facebook -->
+
+          <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="languageService.currentLanguage === 'en'
+              ? 'Facebook — opens in a new tab'
+              : 'Facebook — ouvre dans un nouvel onglet'"
+            class="group/social inline-flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[11px] border border-transparent text-base text-[var(--social-color)] outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[var(--social-border)] hover:bg-[var(--social-glow)] hover:shadow-[0_5px_16px_var(--social-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--social-border)] motion-reduce:transform-none motion-reduce:transition-none"
+            [ngStyle]="{
+              '--social-color': '#9946D8',
+              '--social-border': '#C18BEA',
+              '--social-glow': 'rgb(153 70 216 / 18%)'
+            }"
+          >
+            <i
+              class="fa-brands fa-facebook-f transition-transform duration-300 ease-out group-hover/social:scale-110 motion-reduce:transition-none"
+              aria-hidden="true"
+            ></i>
+          </a>
+
+          <!-- Pinterest -->
+
+          <a
+            href="https://www.pinterest.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="languageService.currentLanguage === 'en'
+              ? 'Pinterest — opens in a new tab'
+              : 'Pinterest — ouvre dans un nouvel onglet'"
+            class="group/social inline-flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[11px] border border-transparent text-base text-[var(--social-color)] outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[var(--social-border)] hover:bg-[var(--social-glow)] hover:shadow-[0_5px_16px_var(--social-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--social-border)] motion-reduce:transform-none motion-reduce:transition-none"
+            [ngStyle]="{
+              '--social-color': '#F28C38',
+              '--social-border': '#FFC078',
+              '--social-glow': 'rgb(242 140 56 / 18%)'
+            }"
+          >
+            <i
+              class="fa-brands fa-pinterest-p transition-transform duration-300 ease-out group-hover/social:scale-110 motion-reduce:transition-none"
+              aria-hidden="true"
+            ></i>
+          </a>
+        </div>
+
+        <!-- Signature de marque -->
+
+        <p
+          class="mt-5 text-[11px] leading-relaxed"
+          [ngStyle]="{ color: themeService.TX2 }"
+        >
+          {{
+            languageService.currentLanguage === 'en'
+              ? 'Made for people who love growing things.'
+              : 'Pensé pour celles et ceux qui aiment faire pousser.'
+          }}
+        </p>
       </div>
 
+      <!-- =====================================================
+           COLONNE 1 — DÉCOUVRIR
+      ====================================================== -->
 
-      <!-- ======================================================
-           LIENS LÉGAUX
-           ====================================================== -->
-
-      <div
-        class="
-          flex
-          flex-wrap
-          items-center
-          gap-x-5
-          gap-y-2
-        "
+      <nav
+        class="flex min-w-0 flex-col items-start"
+        [attr.aria-label]="languageService.currentLanguage === 'en'
+          ? 'Product navigation'
+          : 'Navigation produit'"
       >
-
-        <a
-          href="#"
-          class="
-            text-xs
-            transition-colors
-            duration-200
-          "
-          [ngStyle]="{
-            'color': themeService.TextMuted
-          }"
+        <h2
+          class="group/heading mb-5 inline-flex items-center gap-2.5 text-xs font-extrabold uppercase leading-6 tracking-[0.13em] text-[var(--ar-text)]"
+          [ngStyle]="{ '--heading-color': '#9946D8' }"
         >
+          <span
+            aria-hidden="true"
+            class="inline-block h-5 w-[3px] shrink-0 rounded-full bg-[var(--heading-color)] transition-[height,opacity] duration-300 ease-out group-hover/heading:h-6 group-hover/heading:opacity-80 motion-reduce:transition-none"
+          ></span>
+
           {{
-            languageService.is('fr')
-              ? 'Politique de confidentialité'
-              : 'Privacy policy'
+            languageService.currentLanguage === 'en'
+              ? 'Explore'
+              : 'Découvrir'
           }}
-        </a>
+        </h2>
 
+        <ul class="flex flex-col items-start gap-1.5">
+          <li>
+            <a
+              routerLink="/fonctionnalites"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#9946D8',
+                '--link-border': '#C18BEA',
+                '--link-glow': 'rgb(153 70 216 / 12%)'
+              }"
+            >
+              <span
+                class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none"
+              >
+                <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+              </span>
 
-        <a
-          href="#"
-          class="
-            text-xs
-            transition-colors
-            duration-200
-          "
-          [ngStyle]="{
-            'color': themeService.TextMuted
-          }"
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Features'
+                    : 'Fonctionnalités'
+                }}
+              </span>
+
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"
+              ></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/recherche"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#9946D8',
+                '--link-border': '#C18BEA',
+                '--link-glow': 'rgb(153 70 216 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Plant search'
+                    : 'Recherche de plantes'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/diagnostic"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#D946A8',
+                '--link-border': '#F09DD6',
+                '--link-glow': 'rgb(217 70 168 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-solid fa-stethoscope" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Plant diagnosis'
+                    : 'Diagnostic'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/saison"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#9946D8',
+                '--link-border': '#C18BEA',
+                '--link-glow': 'rgb(153 70 216 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Seasonal guide'
+                    : 'Guide saisonnier'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- =====================================================
+           COLONNE 2 — RESSOURCES
+      ====================================================== -->
+
+      <nav
+        class="flex min-w-0 flex-col items-start"
+        [attr.aria-label]="languageService.currentLanguage === 'en'
+          ? 'Resources navigation'
+          : 'Navigation ressources'"
+      >
+        <h2
+          class="group/heading mb-5 inline-flex items-center gap-2.5 text-xs font-extrabold uppercase leading-6 tracking-[0.13em] text-[var(--ar-text)]"
+          [ngStyle]="{ '--heading-color': '#F28C38' }"
         >
+          <span aria-hidden="true" class="inline-block h-5 w-[3px] shrink-0 rounded-full bg-[var(--heading-color)] transition-[height,opacity] duration-300 ease-out group-hover/heading:h-6 group-hover/heading:opacity-80 motion-reduce:transition-none"></span>
+
           {{
-            languageService.is('fr')
-              ? 'Conditions d’utilisation'
-              : 'Terms of use'
+            languageService.currentLanguage === 'en'
+              ? 'Resources'
+              : 'Ressources'
           }}
-        </a>
+        </h2>
 
+        <ul class="flex flex-col items-start gap-1.5">
+          <li>
+            <a
+              routerLink="/conseils"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#F28C38',
+                '--link-border': '#FFC078',
+                '--link-glow': 'rgb(242 140 56 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+              </span>
 
-        <a
-          href="#"
-          class="
-            text-xs
-            transition-colors
-            duration-200
-          "
-          [ngStyle]="{
-            'color': themeService.TextMuted
-          }"
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Gardening tips'
+                    : 'Conseils jardin'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/aide"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#159B72',
+                '--link-border': '#78D8B5',
+                '--link-glow': 'rgb(21 155 114 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Help center'
+                    : 'Centre d’aide'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/assistance"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#159B72',
+                '--link-border': '#78D8B5',
+                '--link-glow': 'rgb(21 155 114 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-solid fa-headset" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Support'
+                    : 'Assistance'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/contact"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#F28C38',
+                '--link-border': '#FFC078',
+                '--link-glow': 'rgb(242 140 56 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Contact'
+                    : 'Contact'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- =====================================================
+           COLONNE 3 — LA MARQUE
+      ====================================================== -->
+
+      <nav
+        class="flex min-w-0 flex-col items-start"
+        [attr.aria-label]="languageService.currentLanguage === 'en'
+          ? 'Company navigation'
+          : 'Navigation Arboria'"
+      >
+        <h2
+          class="group/heading mb-5 inline-flex items-center gap-2.5 text-xs font-extrabold uppercase leading-6 tracking-[0.13em] text-[var(--ar-text)]"
+          [ngStyle]="{ '--heading-color': '#D946A8' }"
         >
+          <span aria-hidden="true" class="inline-block h-5 w-[3px] shrink-0 rounded-full bg-[var(--heading-color)] transition-[height,opacity] duration-300 ease-out group-hover/heading:h-6 group-hover/heading:opacity-80 motion-reduce:transition-none"></span>
+
           {{
-            languageService.is('fr')
-              ? 'Mentions légales'
-              : 'Legal notice'
+            languageService.currentLanguage === 'en'
+              ? 'The brand'
+              : 'La marque'
           }}
-        </a>
+        </h2>
 
-      </div>
+        <ul class="flex flex-col items-start gap-1.5">
+          <li>
+            <a
+              routerLink="/a-propos"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#D946A8',
+                '--link-border': '#F09DD6',
+                '--link-glow': 'rgb(217 70 168 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-regular fa-heart" aria-hidden="true"></i>
+              </span>
 
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'About us'
+                    : 'À propos'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/contact"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#D946A8',
+                '--link-border': '#F09DD6',
+                '--link-glow': 'rgb(217 70 168 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-regular fa-paper-plane" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Get in touch'
+                    : 'Nous contacter'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/confidentialite"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#9946D8',
+                '--link-border': '#C18BEA',
+                '--link-glow': 'rgb(153 70 216 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Privacy'
+                    : 'Confidentialité'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              routerLink="/conditions"
+              class="group/link relative isolate inline-flex min-h-9 max-w-full items-center gap-2.5 overflow-hidden rounded-[10px] border border-transparent px-[10px] py-2 text-[13px] font-medium leading-[1.65] text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_4px_12px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-sm xl:px-3"
+              [ngStyle]="{
+                '--link-color': '#F28C38',
+                '--link-border': '#FFC078',
+                '--link-glow': 'rgb(242 140 56 / 12%)'
+              }"
+            >
+              <span class="relative z-[1] inline-flex h-[19px] w-[17px] shrink-0 items-center justify-center text-[13px] text-[var(--link-color)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-110 motion-reduce:transition-none">
+                <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+              </span>
+
+              <span class="relative z-[1] min-w-0 break-words transition-[letter-spacing] duration-300 ease-out group-hover/link:tracking-[0.01em]">
+                {{
+                  languageService.currentLanguage === 'en'
+                    ? 'Terms of use'
+                    : 'Conditions d’utilisation'
+                }}
+              </span>
+
+              <span aria-hidden="true" class="pointer-events-none absolute bottom-1 left-[10px] right-[10px] z-[2] h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/link:scale-x-100 group-hover/link:opacity-100 group-focus-visible/link:scale-x-100 group-focus-visible/link:opacity-100 motion-reduce:transition-none"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
 
-  </div>
+    <!-- =======================================================
+         SÉPARATEUR
+    ======================================================== -->
 
+    <div
+      aria-hidden="true"
+      class="my-8 h-px w-full origin-center transition-opacity duration-500 ease-out group-hover/footer:opacity-80 sm:my-9 lg:my-10"
+      [ngStyle]="{
+        background: 'linear-gradient(90deg, ' +
+          themeService.BR1 + ', ' +
+          themeService.BR2 + ', ' +
+          themeService.BR1 + ')'
+      }"
+    ></div>
+
+    <!-- =======================================================
+         BARRE INFÉRIEURE
+    ======================================================== -->
+
+    <div
+      class="flex w-full min-w-0 flex-col items-start justify-between gap-5 sm:flex-row sm:items-center sm:gap-6"
+    >
+      <!-- Copyright -->
+
+      <p
+        class="text-[11px] leading-relaxed sm:text-xs"
+        [ngStyle]="{ color: themeService.TX2 }"
+      >
+        <span [ngStyle]="{ color: themeService.TX0 }">
+          © {{ currentYear }} Arboria.
+        </span>
+
+        {{
+          languageService.currentLanguage === 'en'
+            ? 'All rights reserved.'
+            : 'Tous droits réservés.'
+        }}
+      </p>
+
+      <!-- Informations légales -->
+
+      <nav
+        class="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-2 sm:gap-x-3"
+        [attr.aria-label]="languageService.currentLanguage === 'en'
+          ? 'Legal information'
+          : 'Informations légales'"
+      >
+        <a
+          routerLink="/confidentialite"
+          class="group/legal relative isolate inline-flex min-h-8 max-w-full items-center justify-center overflow-hidden rounded-lg border border-transparent px-[9px] py-1.5 text-[11px] font-medium leading-6 text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_3px_10px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-xs"
+          [ngStyle]="{
+            '--link-color': '#9946D8',
+            '--link-border': '#C18BEA',
+            '--link-glow': 'rgb(153 70 216 / 10%)'
+          }"
+        >
+          {{
+            languageService.currentLanguage === 'en'
+              ? 'Privacy policy'
+              : 'Politique de confidentialité'
+          }}
+
+          <span aria-hidden="true" class="pointer-events-none absolute bottom-[3px] left-2 right-2 h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/legal:scale-x-100 group-hover/legal:opacity-100 group-focus-visible/legal:scale-x-100 group-focus-visible/legal:opacity-100 motion-reduce:transition-none"></span>
+        </a>
+
+        <a
+          routerLink="/conditions"
+          class="group/legal relative isolate inline-flex min-h-8 max-w-full items-center justify-center overflow-hidden rounded-lg border border-transparent px-[9px] py-1.5 text-[11px] font-medium leading-6 text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_3px_10px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-xs"
+          [ngStyle]="{
+            '--link-color': '#F28C38',
+            '--link-border': '#FFC078',
+            '--link-glow': 'rgb(242 140 56 / 10%)'
+          }"
+        >
+          {{
+            languageService.currentLanguage === 'en'
+              ? 'Terms of service'
+              : 'Conditions d’utilisation'
+          }}
+
+          <span aria-hidden="true" class="pointer-events-none absolute bottom-[3px] left-2 right-2 h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/legal:scale-x-100 group-hover/legal:opacity-100 group-focus-visible/legal:scale-x-100 group-focus-visible/legal:opacity-100 motion-reduce:transition-none"></span>
+        </a>
+
+        <a
+          routerLink="/cookies"
+          class="group/legal relative isolate inline-flex min-h-8 max-w-full items-center justify-center overflow-hidden rounded-lg border border-transparent px-[9px] py-1.5 text-[11px] font-medium leading-6 text-[var(--ar-text)] no-underline outline-none transition-[transform,color,background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[var(--link-border)] hover:bg-[var(--link-glow)] hover:text-[var(--link-color)] hover:shadow-[0_3px_10px_var(--link-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--link-border)] motion-reduce:transform-none motion-reduce:transition-none sm:text-xs"
+          [ngStyle]="{
+            '--link-color': '#159B72',
+            '--link-border': '#78D8B5',
+            '--link-glow': 'rgb(21 155 114 / 10%)'
+          }"
+        >
+          {{
+            languageService.currentLanguage === 'en'
+              ? 'Cookie settings'
+              : 'Gestion des cookies'
+          }}
+
+          <span aria-hidden="true" class="pointer-events-none absolute bottom-[3px] left-2 right-2 h-0.5 origin-left scale-x-0 rounded-full bg-gradient-to-r from-[var(--link-color)] to-[var(--link-border)] opacity-0 transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/legal:scale-x-100 group-hover/legal:opacity-100 group-focus-visible/legal:scale-x-100 group-focus-visible/legal:opacity-100 motion-reduce:transition-none"></span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- =======================================================
+         SIGNATURE FINALE
+    ======================================================== -->
+
+    <div
+      class="mt-6 flex items-center justify-center gap-2 text-center text-[10px] tracking-[0.08em] sm:mt-7"
+      [ngStyle]="{ color: themeService.TX3 }"
+    >
+      <i
+        class="fa-solid fa-leaf text-[10px] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/footer:rotate-[-12deg] group-hover/footer:scale-110 motion-reduce:transition-none"
+        [ngStyle]="{ color: themeService.Primary }"
+        aria-hidden="true"
+      ></i>
+
+      {{
+        languageService.currentLanguage === 'en'
+          ? 'A little greener, every day.'
+          : 'Un peu plus de vert, chaque jour.'
+      }}
+    </div>
+  </div>
 </footer>

@@ -1,1876 +1,1248 @@
 <!-- ============================================================
-🌿 JARDISCAN — NAVIGATION PUBLIQUE DESKTOP / GRAND LAPTOP
+🌿 NATUREORA — SIDEBAR DESKTOP / LAPTOP
 
-• Visible à partir de 1293px
-• 🌐 FR / EN via LanguageService
+• ≥ 1024px
+• Sidebar fixe
+• 260px
+• UI premium / naturel / minimal
+• Icônes Font Awesome
+• Labels visibles
 • ThemeService conservé
-• RouterLinkActive conservé
-• Accessibilité conservée
-• Hover fluide et homogène
-• État actif indépendant pour chaque lien
-• Animation douce sans déplacement du conteneur
-• Liens :
-  → Découvrir
-  → Nouveauté
-  → Conseil
-  → Paramètre
-  → Fonctionnalité
+• Navigation dynamique par rôle
+• Menu / Général / Rôle
+• Hover large et renforcé
+• État actif renforcé
+• Séparateurs subtils
+• Footer premium
+• Aucun changement de logique Angular
 ============================================================ -->
 
-<nav
-  class="
-    hidden
-    min-[1293px]:flex
-    items-center
-    justify-center
-    gap-0.5
-    rounded-2xl
-    px-1
-    py-1
-    backdrop-blur-2xl
-    backdrop-saturate-150
-  "
-  [ngStyle]="{
-    color: themeService.TextPrincipal
-  }"
-  aria-label="Navigation publique JardiScan"
+<aside
+class="
+  hidden
+  lg:flex
+  fixed
+  left-5
+  top-20
+  xl:top-24
+  2xl:top-24
+  bottom-4
+  z-50
+  w-[260px]
+  flex-col
+  overflow-hidden
+  rounded-[1.75rem]
+  border
+"
+[ngStyle]="{
+  'background-color': themeService.BG2,
+  'border-color': themeService.BR2,
+  'color': themeService.TX0,
+  'box-shadow':
+    '0 20px 55px rgba(15,23,42,0.07), 0 5px 18px rgba(15,23,42,0.035)'
+}"
+aria-label="Navigation principale"
 >
 
-  <!-- ==========================================================
-  🌿 DÉCOUVRIR
-  =========================================================== -->
-
-  <a
-    routerLink="/decouvrir"
-    routerLinkActive="nav-active"
-    #discoverActive="routerLinkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="discoverActive.isActive ? 'page' : null"
-    [attr.aria-label]="
-      languageService.currentLanguage === 'fr'
-        ? 'Découvrir JardiScan'
-        : 'Discover JardiScan'
-    "
-    [attr.title]="
-      languageService.currentLanguage === 'fr'
-        ? 'Découvrir JardiScan'
-        : 'Discover JardiScan'
-    "
-    class="
-      group
-      relative
-      flex
-      h-10
-      items-center
-      gap-1.5
-      overflow-hidden
-      rounded-xl
-      px-2.5
-      outline-none
-      transition-colors
-      duration-300
-      ease-[cubic-bezier(0.22,1,0.36,1)]
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-    "
-    [ngStyle]="{
-      color: discoverActive.isActive
-        ? themeService.BG3
-        : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.BG3,
-      '--tw-ring-offset-color': themeService.BG3
-    }"
-  >
-
-    <!-- Fond hover / actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-0
-        rounded-xl
-        opacity-0
-        scale-[0.94]
-        transition-[opacity,transform]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-100
-        group-hover:opacity-100
-      "
-      [class.opacity-100]="discoverActive.isActive"
-      [class.scale-100]="discoverActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.BG3
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Légère lumière interne -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-px
-        rounded-[11px]
-        opacity-0
-        transition-opacity
-        duration-300
-        ease-out
-        group-hover:opacity-100
-      "
-      [ngStyle]="{
-        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Icône -->
-    <i
-      class="
-        fa-solid
-        fa-leaf
-        relative
-        z-10
-        text-[15px]
-        transition-transform
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-[1.08]
-        group-hover:-rotate-2
-      "
-      [class.scale-[1.08]]="discoverActive.isActive"
-      aria-hidden="true"
-    ></i>
-
-    <!-- Texte -->
-    <span
-      class="
-        relative
-        z-10
-        whitespace-nowrap
-        text-[13px]
-        font-semibold
-        transition-[transform,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:translate-x-0.5
-      "
-    >
-      {{
-        languageService.currentLanguage === 'fr'
-          ? 'Découvrir'
-          : 'Discover'
-      }}
-    </span>
-
-    <!-- Indicateur actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        bottom-1
-        left-1/2
-        h-0.5
-        w-0
-        -translate-x-1/2
-        rounded-full
-        transition-[width,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-      "
-      [class.w-6]="discoverActive.isActive"
-      [class.opacity-0]="!discoverActive.isActive"
-      [class.opacity-100]="discoverActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.Primary
-      }"
-      aria-hidden="true"
-    ></span>
-
-  </a>
-
-
-  <!-- ==========================================================
-  ✨ NOUVEAUTÉ
-  =========================================================== -->
-
-  <a
-    routerLink="/nouveaute"
-    routerLinkActive="nav-active"
-    #nouveauteActive="routerLinkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="nouveauteActive.isActive ? 'page' : null"
-    [attr.aria-label]="
-      languageService.currentLanguage === 'fr'
-        ? 'Découvrir les nouveautés de JardiScan'
-        : 'Discover JardiScan news'
-    "
-    [attr.title]="
-      languageService.currentLanguage === 'fr'
-        ? 'Nouveauté'
-        : 'News'
-    "
-    class="
-      group
-      relative
-      flex
-      h-10
-      items-center
-      gap-1.5
-      overflow-hidden
-      rounded-xl
-      px-2.5
-      outline-none
-      transition-colors
-      duration-300
-      ease-[cubic-bezier(0.22,1,0.36,1)]
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-    "
-    [ngStyle]="{
-      color: nouveauteActive.isActive
-        ? themeService.BG3
-        : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.BG3,
-      '--tw-ring-offset-color': themeService.BG3
-    }"
-  >
-
-    <!-- Fond hover / actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-0
-        rounded-xl
-        opacity-0
-        scale-[0.94]
-        transition-[opacity,transform]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-100
-        group-hover:opacity-100
-      "
-      [class.opacity-100]="nouveauteActive.isActive"
-      [class.scale-100]="nouveauteActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.BG3
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Lumière interne -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-px
-        rounded-[11px]
-        opacity-0
-        transition-opacity
-        duration-300
-        ease-out
-        group-hover:opacity-100
-      "
-      [ngStyle]="{
-        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Icône -->
-    <i
-      class="
-        fa-solid
-        fa-wand-magic-sparkles
-        relative
-        z-10
-        text-[15px]
-        transition-transform
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-[1.08]
-        group-hover:-rotate-2
-      "
-      [class.scale-[1.08]]="nouveauteActive.isActive"
-      aria-hidden="true"
-    ></i>
-
-    <!-- Texte -->
-    <span
-      class="
-        relative
-        z-10
-        whitespace-nowrap
-        text-[13px]
-        font-semibold
-        transition-[transform,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:translate-x-0.5
-      "
-    >
-      {{
-        languageService.currentLanguage === 'fr'
-          ? 'Nouveauté'
-          : 'News'
-      }}
-    </span>
-
-    <!-- Indicateur actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        bottom-1
-        left-1/2
-        h-0.5
-        w-0
-        -translate-x-1/2
-        rounded-full
-        transition-[width,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-      "
-      [class.w-6]="nouveauteActive.isActive"
-      [class.opacity-0]="!nouveauteActive.isActive"
-      [class.opacity-100]="nouveauteActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.Primary1
-      }"
-      aria-hidden="true"
-    ></span>
-
-  </a>
-
-
-  <!-- ==========================================================
-  💡 CONSEIL
-  =========================================================== -->
-
-  <a
-    routerLink="/conseil"
-    routerLinkActive="nav-active"
-    #conseilActive="routerLinkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="conseilActive.isActive ? 'page' : null"
-    [attr.aria-label]="
-      languageService.currentLanguage === 'fr'
-        ? 'Consulter les conseils JardiScan'
-        : 'View JardiScan tips'
-    "
-    [attr.title]="
-      languageService.currentLanguage === 'fr'
-        ? 'Conseil'
-        : 'Tips'
-    "
-    class="
-      group
-      relative
-      flex
-      h-10
-      items-center
-      gap-1.5
-      overflow-hidden
-      rounded-xl
-      px-2.5
-      outline-none
-      transition-colors
-      duration-300
-      ease-[cubic-bezier(0.22,1,0.36,1)]
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-    "
-    [ngStyle]="{
-      color: conseilActive.isActive
-        ? themeService.BG3
-        : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.BG3,
-      '--tw-ring-offset-color': themeService.BG3
-    }"
-  >
-
-    <!-- Fond hover / actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-0
-        rounded-xl
-        opacity-0
-        scale-[0.94]
-        transition-[opacity,transform]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-100
-        group-hover:opacity-100
-      "
-      [class.opacity-100]="conseilActive.isActive"
-      [class.scale-100]="conseilActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.BG3
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Lumière interne -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-px
-        rounded-[11px]
-        opacity-0
-        transition-opacity
-        duration-300
-        ease-out
-        group-hover:opacity-100
-      "
-      [ngStyle]="{
-        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Icône -->
-    <i
-      class="
-        fa-solid
-        fa-lightbulb
-        relative
-        z-10
-        text-[15px]
-        transition-transform
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-[1.08]
-        group-hover:-rotate-2
-      "
-      [class.scale-[1.08]]="conseilActive.isActive"
-      aria-hidden="true"
-    ></i>
-
-    <!-- Texte -->
-    <span
-      class="
-        relative
-        z-10
-        whitespace-nowrap
-        text-[13px]
-        font-semibold
-        transition-[transform,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:translate-x-0.5
-      "
-    >
-      {{
-        languageService.currentLanguage === 'fr'
-          ? 'Conseil'
-          : 'Tips'
-      }}
-    </span>
-
-    <!-- Indicateur actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        bottom-1
-        left-1/2
-        h-0.5
-        w-0
-        -translate-x-1/2
-        rounded-full
-        transition-[width,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-      "
-      [class.w-6]="conseilActive.isActive"
-      [class.opacity-0]="!conseilActive.isActive"
-      [class.opacity-100]="conseilActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.Primary
-      }"
-      aria-hidden="true"
-    ></span>
-
-  </a>
-
-
-  <!-- ==========================================================
-  ⚙️ PARAMÈTRE
-  =========================================================== -->
-
-  <a
-    routerLink="/parametre"
-    routerLinkActive="nav-active"
-    #parametreActive="routerLinkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="parametreActive.isActive ? 'page' : null"
-    [attr.aria-label]="
-      languageService.currentLanguage === 'fr'
-        ? 'Accéder aux paramètres de JardiScan'
-        : 'Access JardiScan settings'
-    "
-    [attr.title]="
-      languageService.currentLanguage === 'fr'
-        ? 'Paramètre'
-        : 'Settings'
-    "
-    class="
-      group
-      relative
-      flex
-      h-10
-      items-center
-      gap-1.5
-      overflow-hidden
-      rounded-xl
-      px-2.5
-      outline-none
-      transition-colors
-      duration-300
-      ease-[cubic-bezier(0.22,1,0.36,1)]
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-    "
-    [ngStyle]="{
-      color: parametreActive.isActive
-        ? themeService.BG3
-        : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.BG3,
-      '--tw-ring-offset-color': themeService.BG3
-    }"
-  >
-
-    <!-- Fond hover / actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-0
-        rounded-xl
-        opacity-0
-        scale-[0.94]
-        transition-[opacity,transform]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-100
-        group-hover:opacity-100
-      "
-      [class.opacity-100]="parametreActive.isActive"
-      [class.scale-100]="parametreActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.BG3
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Lumière interne -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-px
-        rounded-[11px]
-        opacity-0
-        transition-opacity
-        duration-300
-        ease-out
-        group-hover:opacity-100
-      "
-      [ngStyle]="{
-        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Icône -->
-    <i
-      class="
-        fa-solid
-        fa-sliders
-        relative
-        z-10
-        text-[15px]
-        transition-transform
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-[1.08]
-        group-hover:-rotate-2
-      "
-      [class.scale-[1.08]]="parametreActive.isActive"
-      aria-hidden="true"
-    ></i>
-
-    <!-- Texte -->
-    <span
-      class="
-        relative
-        z-10
-        whitespace-nowrap
-        text-[13px]
-        font-semibold
-        transition-[transform,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:translate-x-0.5
-      "
-    >
-      {{
-        languageService.currentLanguage === 'fr'
-          ? 'Paramètre'
-          : 'Settings'
-      }}
-    </span>
-
-    <!-- Indicateur actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        bottom-1
-        left-1/2
-        h-0.5
-        w-0
-        -translate-x-1/2
-        rounded-full
-        transition-[width,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-      "
-      [class.w-6]="parametreActive.isActive"
-      [class.opacity-0]="!parametreActive.isActive"
-      [class.opacity-100]="parametreActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.Primary
-      }"
-      aria-hidden="true"
-    ></span>
-
-  </a>
-
-
-  <!-- ==========================================================
-  ✨ FONCTIONNALITÉ
-  =========================================================== -->
-
-  <a
-    routerLink="/fonctionnalites"
-    routerLinkActive="nav-active"
-    #fonctionnaliteActive="routerLinkActive"
-    [routerLinkActiveOptions]="{ exact: true }"
-    [attr.aria-current]="fonctionnaliteActive.isActive ? 'page' : null"
-    [attr.aria-label]="
-      languageService.currentLanguage === 'fr'
-        ? 'Découvrir les fonctionnalités de JardiScan'
-        : 'Discover JardiScan features'
-    "
-    [attr.title]="
-      languageService.currentLanguage === 'fr'
-        ? 'Fonctionnalité'
-        : 'Feature'
-    "
-    class="
-      group
-      relative
-      flex
-      h-10
-      items-center
-      gap-1.5
-      overflow-hidden
-      rounded-xl
-      px-2.5
-      outline-none
-      transition-colors
-      duration-300
-      ease-[cubic-bezier(0.22,1,0.36,1)]
-      focus-visible:ring-2
-      focus-visible:ring-offset-2
-    "
-    [ngStyle]="{
-      color: fonctionnaliteActive.isActive
-        ? themeService.BG3
-        : themeService.TextSecondaire,
-      '--tw-ring-color': themeService.BG3,
-      '--tw-ring-offset-color': themeService.BG3
-    }"
-  >
-
-    <!-- Fond hover / actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-0
-        rounded-xl
-        opacity-0
-        scale-[0.94]
-        transition-[opacity,transform]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-100
-        group-hover:opacity-100
-      "
-      [class.opacity-100]="fonctionnaliteActive.isActive"
-      [class.scale-100]="fonctionnaliteActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.BG3
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Lumière interne -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        inset-px
-        rounded-[11px]
-        opacity-0
-        transition-opacity
-        duration-300
-        ease-out
-        group-hover:opacity-100
-      "
-      [ngStyle]="{
-        'box-shadow': 'inset 0 1px 0 rgba(255,255,255,0.12)'
-      }"
-      aria-hidden="true"
-    ></span>
-
-    <!-- Icône -->
-    <i
-      class="
-        fa-solid
-        fa-gears
-        relative
-        z-10
-        text-[15px]
-        transition-transform
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:scale-[1.08]
-        group-hover:-rotate-2
-      "
-      [class.scale-[1.08]]="fonctionnaliteActive.isActive"
-      aria-hidden="true"
-    ></i>
-
-    <!-- Texte -->
-    <span
-      class="
-        relative
-        z-10
-        whitespace-nowrap
-        text-[13px]
-        font-semibold
-        transition-[transform,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        group-hover:translate-x-0.5
-      "
-    >
-      {{
-        languageService.currentLanguage === 'fr'
-          ? 'Fonctionnalité'
-          : 'Feature'
-      }}
-    </span>
-
-    <!-- Indicateur actif -->
-    <span
-      class="
-        pointer-events-none
-        absolute
-        bottom-1
-        left-1/2
-        h-0.5
-        w-0
-        -translate-x-1/2
-        rounded-full
-        transition-[width,opacity]
-        duration-300
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-      "
-      [class.w-6]="fonctionnaliteActive.isActive"
-      [class.opacity-0]="!fonctionnaliteActive.isActive"
-      [class.opacity-100]="fonctionnaliteActive.isActive"
-      [ngStyle]="{
-        'background-color': themeService.Primary
-      }"
-      aria-hidden="true"
-    ></span>
-
-  </a>
-
-</nav>
-
-
-
-
-
-<!-- ============================================================
-
-🌿 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
-
-• Visible de 390px à 1292px
-• Dock style macOS
-• Nom du lien dans une pop-up au hover
-• Pop-up au-dessus de l’icône
-• Nom toujours visible si actif
-• FR / EN via LanguageService
-• ThemeService conservé
-• RouterLinkActive conservé
-• Responsive
-• Safe-area iOS
-
-============================================================ -->
+<!-- ==========================================================
+    CONTENU PRINCIPAL
+    ========================================================== -->
 
 <div
   class="
-    fixed
-    inset-x-0
-    bottom-0
-    z-[100]
-    hidden
-    min-[390px]:block
-    min-[1293px]:hidden
-    px-3
-    pb-[calc(0.65rem+env(safe-area-inset-bottom))]
-    pt-3
-    sm:px-5
-    sm:pb-[calc(0.8rem+env(safe-area-inset-bottom))]
-    sm:pt-4
-    md:px-8
-    md:pb-[calc(0.9rem+env(safe-area-inset-bottom))]
-    md:pt-5
-    pointer-events-none
+    flex
+    min-h-0
+    flex-1
+    flex-col
+    overflow-y-auto
+    overflow-x-hidden
+    px-4
+    pt-5
+    pb-4
+    scroll-smooth
+    [scrollbar-width:none]
+    [-ms-overflow-style:none]
+    [&::-webkit-scrollbar]:hidden
   "
-  [ngStyle]="{
-    background:
-      'linear-gradient(to top, ' +
-      themeService.BG1 +
-      ' 0%, transparent 100%)'
-  }"
 >
 
-  <!-- ==========================================================
-       🍎 DOCK macOS
-  =========================================================== -->
+  <!-- ========================================================
+      EN-TÊTE SIDEBAR
+      ======================================================== -->
 
-  <nav
+  <div
     class="
-      pointer-events-auto
-      relative
-      mx-auto
+      mb-5
       flex
       items-center
-      justify-center
-      gap-1.5
-      w-fit
-      max-w-[calc(100vw-24px)]
-      min-h-[68px]
-      rounded-[24px]
-      border
+      justify-between
       px-2
-      py-2
-      backdrop-blur-3xl
-      backdrop-saturate-200
-      shadow-2xl
-      sm:gap-2
-      sm:min-h-[72px]
-      sm:rounded-[26px]
-      sm:px-2.5
-      sm:py-2.5
-      md:gap-2.5
-      md:min-h-[76px]
-      md:rounded-[28px]
-      md:px-3
-      md:py-3
     "
-    [ngStyle]="{
-      'background-color': themeService.BG2,
-      'background-image':
-        'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))',
-      'border-color': themeService.BR2,
-      'box-shadow':
-        '0 20px 50px rgba(0,0,0,0.28), 0 4px 14px rgba(0,0,0,0.18)',
-      'color': themeService.TextPrincipal
-    }"
-    aria-label="Navigation publique JardiScan"
   >
 
-    <!-- ========================================================
-         🌿 DÉCOUVRIR
-    ========================================================= -->
+    <!-- IDENTITÉ NATUREORA -->
 
-    <a
-      routerLink="/welcome"
-      routerLinkActive="is-active"
-      #discoverMobileActive="routerLinkActive"
-      [routerLinkActiveOptions]="{ exact: true }"
-      [attr.aria-current]="
-        discoverMobileActive.isActive ? 'page' : null
-      "
-      [attr.aria-label]="
-        languageService.currentLanguage === 'fr'
-          ? 'Découvrir JardiScan'
-          : 'Discover JardiScan'
-      "
-      [attr.title]="
-        languageService.currentLanguage === 'fr'
-          ? 'Découvrir'
-          : 'Discover'
-      "
+    <div
       class="
-        group
-        relative
         flex
+        min-w-0
         items-center
-        justify-center
-        shrink-0
-        h-[52px]
-        w-[52px]
-        rounded-[19px]
-        border
-        outline-none
-        transition-all
-        duration-300
-        ease-out
-        hover:-translate-y-1
-        hover:scale-105
-        active:translate-y-0
-        active:scale-95
-        focus-visible:ring-2
-        focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
-        md:h-[58px]
-        md:w-[58px]
-        md:rounded-[21px]
+        gap-3
       "
-      [class.border-transparent]="discoverMobileActive.isActive"
-      [ngStyle]="{
-        'background':
-          discoverMobileActive.isActive
-            ? 'linear-gradient(135deg, ' +
-              themeService.Primary1 +
-              ', ' +
-              themeService.PrimarySoft1 +
-              ')'
-            : 'rgba(255,255,255,0.045)',
-        'border-color':
-          discoverMobileActive.isActive
-            ? 'transparent'
-            : themeService.BR2,
-        'color':
-          discoverMobileActive.isActive
-            ? themeService.TextPrincipal
-            : themeService.TextSecondaire,
-        'box-shadow':
-          discoverMobileActive.isActive
-            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
-            : 'none',
-        '--tw-ring-color': themeService.Primary1,
-        '--tw-ring-offset-color': themeService.BG1
-      }"
     >
 
-      <!-- POP-UP -->
+      <!-- LOGO -->
 
-      <span
+      <div
         class="
-          pointer-events-none
-          absolute
-          left-1/2
-          bottom-[calc(100%+12px)]
-          z-[200]
-          -translate-x-1/2
-          translate-y-2
-          scale-95
-          whitespace-nowrap
-          rounded-xl
-          border
-          px-3
-          py-2
-          text-[10px]
-          font-extrabold
-          uppercase
-          tracking-[0.7px]
-          opacity-0
-          shadow-2xl
-          backdrop-blur-2xl
-          transition-all
-          duration-200
-          ease-out
-          group-hover:translate-y-0
-          group-hover:scale-100
-          group-hover:opacity-100
-          sm:text-[11px]
-          sm:px-3.5
-          sm:py-2
-          md:text-xs
-          md:px-4
-          md:py-2.5
+          flex
+          h-10
+          w-10
+          shrink-0
+          items-center
+          justify-center
+          rounded-[0.85rem]
+          shadow-sm
         "
-        [class.translate-y-0]="discoverMobileActive.isActive"
-        [class.scale-100]="discoverMobileActive.isActive"
-        [class.opacity-100]="discoverMobileActive.isActive"
         [ngStyle]="{
-          'background-color': themeService.BG2,
-          'border-color': themeService.BR2,
-          'color': themeService.TextPrincipal,
-          'box-shadow':
-            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
+          'background-color': themeService.BUTON1BG
         }"
-        aria-hidden="true"
       >
-        {{
-          languageService.currentLanguage === 'fr'
-            ? 'Découvrir'
-            : 'Discover'
-        }}
-
-        <span
+        <i
           class="
-            absolute
-            left-1/2
-            top-full
-            -translate-x-1/2
-            h-0
-            w-0
-            border-l-[6px]
-            border-r-[6px]
-            border-t-[6px]
-            border-l-transparent
-            border-r-transparent
+            fa-solid
+            fa-leaf
+            text-[15px]
           "
           [ngStyle]="{
-            'border-top-color': themeService.BG2
+            'color': themeService.BG1
           }"
-        ></span>
-      </span>
+          aria-hidden="true"
+        ></i>
+      </div>
 
-      <!-- Glow -->
+      <!-- NOM -->
 
-      <span
-        class="
-          pointer-events-none
-          absolute
-          inset-[-12px]
-          rounded-full
-          blur-2xl
-          opacity-0
-          transition-all
-          duration-500
-          group-hover:opacity-60
-        "
-        [ngStyle]="{
-          'background-color': themeService.PrimarySoft1
-        }"
-        aria-hidden="true"
-      ></span>
+      <div class="min-w-0">
 
-      <!-- Icône -->
+        <p
+          class="
+            truncate
+            text-[0.98rem]
+            font-bold
+            tracking-[-0.025em]
+          "
+          [ngStyle]="{
+            'color': themeService.TX0
+          }"
+        >
+          Natureora
+        </p>
 
+        <p
+          class="
+            mt-0.5
+            truncate
+            text-[0.62rem]
+            font-medium
+          "
+          [ngStyle]="{
+            'color': themeService.TX2
+          }"
+        >
+          Jardin & conseils
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- BOUTON VISUEL -->
+
+    <span
+      class="
+        flex
+        h-7
+        w-7
+        shrink-0
+        items-center
+        justify-center
+        rounded-lg
+        border
+        transition-all
+        duration-200
+      "
+      [ngStyle]="{
+        'background-color': themeService.BG3,
+        'border-color': themeService.BR2,
+        'color': themeService.TX2
+      }"
+      aria-hidden="true"
+    >
       <i
         class="
           fa-solid
-          fa-leaf
-          relative
-          z-10
-          shrink-0
-          text-[21px]
-          transition-transform
-          duration-300
-          group-hover:scale-110
-          group-active:scale-90
-          sm:text-[22px]
-          md:text-[23px]
+          fa-angles-left
+          text-[9px]
         "
-        aria-hidden="true"
       ></i>
+    </span>
 
-    </a>
+  </div>
 
 
-    <!-- ========================================================
-         ✨ NOUVEAUTÉ
-    ========================================================= -->
+  <!-- ========================================================
+      SÉPARATEUR
+      ======================================================== -->
 
-    <a
-      routerLink="nouveaute"
-      routerLinkActive="is-active"
-      #nouveauteMobileActive="routerLinkActive"
-      [attr.aria-current]="
-        nouveauteMobileActive.isActive ? 'page' : null
+  <div
+    class="
+      mb-5
+      h-px
+      w-full
+      shrink-0
+    "
+    [ngStyle]="{
+      'background-color': themeService.BR2
+    }"
+    aria-hidden="true"
+  ></div>
+
+
+  <!-- ========================================================
+      MENU
+      ======================================================== -->
+
+  <section class="shrink-0">
+
+    <!-- TITRE -->
+
+    <p
+      class="
+        mb-2.5
+        px-3
+        text-[0.64rem]
+        font-bold
+        uppercase
+        tracking-[0.13em]
       "
-      [attr.aria-label]="
-        languageService.currentLanguage === 'fr'
-          ? 'Découvrir les nouveautés de JardiScan'
-          : 'Discover JardiScan news'
-      "
-      [attr.title]="
-        languageService.currentLanguage === 'fr'
-          ? 'Nouveauté'
-          : 'News'
-      "
+      [ngStyle]="{
+        'color': themeService.TX2
+      }"
+    >
+      Menu
+    </p>
+
+
+    <!-- ======================================================
+        LIENS MENU
+        ====================================================== -->
+
+    <button
+      *ngFor="let item of menuLinks"
+      type="button"
       class="
         group
         relative
+        mb-1
         flex
-        items-center
-        justify-center
-        shrink-0
         h-[52px]
-        w-[52px]
-        rounded-[18px]
+        w-full
+        items-center
+        gap-3
+        rounded-[1rem]
         border
+        px-3
+        text-left
         outline-none
+        cursor-pointer
         transition-all
-        duration-300
+        duration-200
         ease-out
-        hover:-translate-y-1
-        hover:scale-105
-        active:translate-y-0
-        active:scale-95
+        hover:shadow-sm
+        active:scale-[0.985]
         focus-visible:ring-2
         focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
-        md:h-[58px]
-        md:w-[58px]
-        md:rounded-[21px]
       "
-      [class.border-transparent]="nouveauteMobileActive.isActive"
       [ngStyle]="{
-        'background':
-          discoverMobileActive.isActive
-            ? 'linear-gradient(135deg, ' +
-              themeService.Primary1 +
-              ', ' +
-              themeService.PrimarySoft1 +
-              ')'
-            : 'rgba(255,255,255,0.045)',
+        'background-color':
+          pageActive === item.page
+            ? themeService.Primary
+            : 'transparent',
+
         'border-color':
-          discoverMobileActive.isActive
-            ? 'transparent'
-            : themeService.BR2,
+          pageActive === item.page
+            ? themeService.Primary
+            : 'transparent',
+
         'color':
-          discoverMobileActive.isActive
-            ? themeService.TextPrincipal
-            : themeService.TextSecondaire,
-        'box-shadow':
-          discoverMobileActive.isActive
-            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
-            : 'none',
-        '--tw-ring-color': themeService.Primary1,
-        '--tw-ring-offset-color': themeService.BG1
+          pageActive === item.page
+            ? themeService.BG1
+            : themeService.TX1,
+
+        '--tw-ring-color':
+          themeService.Primary,
+
+        '--tw-ring-offset-color':
+          themeService.BG2
       }"
+      (mouseenter)="
+        pageActive !== item.page
+          ? null
+          : null
+      "
+      (click)="selectionnerPage(item.page)"
+      [attr.aria-current]="
+        pageActive === item.page
+          ? 'page'
+          : null
+      "
+      [attr.aria-label]="item.label"
     >
 
-      <!-- POP-UP -->
+      <!-- ====================================================
+          HOVER / ACTIF — COUCHE VISUELLE
+          ==================================================== -->
 
       <span
         class="
           pointer-events-none
           absolute
-          left-1/2
-          bottom-[calc(100%+12px)]
-          z-[200]
-          -translate-x-1/2
-          translate-y-2
-          scale-95
-          whitespace-nowrap
-          rounded-xl
+          inset-0
+          rounded-[1rem]
           border
-          px-3
-          py-2
-          text-[10px]
-          font-extrabold
-          uppercase
-          tracking-[0.7px]
           opacity-0
-          shadow-2xl
-          backdrop-blur-2xl
           transition-all
           duration-200
-          ease-out
-          group-hover:translate-y-0
-          group-hover:scale-100
           group-hover:opacity-100
-          sm:text-[11px]
-          sm:px-3.5
-          sm:py-2
-          md:text-xs
-          md:px-4
-          md:py-2.5
-        "
-        [class.translate-y-0]="nouveauteMobileActive.isActive"
-        [class.scale-100]="nouveauteMobileActive.isActive"
-        [class.opacity-100]="nouveauteMobileActive.isActive"
-        [ngStyle]="{
-          'background-color': themeService.BG2,
-          'border-color': themeService.BR2,
-          'color': themeService.TextPrincipal,
-          'box-shadow':
-            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
-        }"
-        aria-hidden="true"
-      >
-        {{
-          languageService.currentLanguage === 'fr'
-            ? 'Nouveauté'
-            : 'News'
-        }}
-
-        <span
-          class="
-            absolute
-            left-1/2
-            top-full
-            -translate-x-1/2
-            h-0
-            w-0
-            border-l-[6px]
-            border-r-[6px]
-            border-t-[6px]
-            border-l-transparent
-            border-r-transparent
-          "
-          [ngStyle]="{
-            'border-top-color': themeService.BG2
-          }"
-        ></span>
-      </span>
-
-      <!-- Glow -->
-
-      <span
-        class="
-          pointer-events-none
-          absolute
-          inset-[-12px]
-          rounded-full
-          blur-2xl
-          opacity-0
-          transition-all
-          duration-500
-          group-hover:opacity-60
         "
         [ngStyle]="{
-          'background-color': themeService.PrimarySoft1
+          'background-color':
+            pageActive === item.page
+              ? 'transparent'
+              : themeService.BG3,
+
+          'border-color':
+            pageActive === item.page
+              ? 'transparent'
+              : themeService.BR2
         }"
         aria-hidden="true"
       ></span>
 
-      <!-- Icône -->
 
-      <i
-        class="
-          fa-solid
-          fa-wand-magic-sparkles
-          relative
-          z-10
-          shrink-0
-          text-[20px]
-          transition-transform
-          duration-300
-          group-hover:scale-110
-          group-active:scale-90
-          sm:text-[21px]
-          md:text-[22px]
-        "
-        aria-hidden="true"
-      ></i>
-
-    </a>
-
-
-    <!-- ========================================================
-         💡 CONSEIL
-    ========================================================= -->
-
-    <a
-      routerLink="/conseil"
-      routerLinkActive="is-active"
-      #conseilMobileActive="routerLinkActive"
-      [attr.aria-current]="
-        conseilMobileActive.isActive ? 'page' : null
-      "
-      [attr.aria-label]="
-        languageService.currentLanguage === 'fr'
-          ? 'Consulter les conseils JardiScan'
-          : 'View JardiScan tips'
-      "
-      [attr.title]="
-        languageService.currentLanguage === 'fr'
-          ? 'Conseil'
-          : 'Tips'
-      "
-      class="
-        group
-        relative
-        flex
-        items-center
-        justify-center
-        shrink-0
-        h-[52px]
-        w-[52px]
-        rounded-[18px]
-        border
-        outline-none
-        transition-all
-        duration-300
-        ease-out
-        hover:-translate-y-1
-        hover:scale-105
-        active:translate-y-0
-        active:scale-95
-        focus-visible:ring-2
-        focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
-        md:h-[58px]
-        md:w-[58px]
-        md:rounded-[21px]
-      "
-      [class.border-transparent]="conseilMobileActive.isActive"
-      [ngStyle]="{
-        'background':
-          discoverMobileActive.isActive
-            ? 'linear-gradient(135deg, ' +
-              themeService.Primary1 +
-              ', ' +
-              themeService.PrimarySoft1 +
-              ')'
-            : 'rgba(255,255,255,0.045)',
-        'border-color':
-          discoverMobileActive.isActive
-            ? 'transparent'
-            : themeService.BR2,
-        'color':
-          discoverMobileActive.isActive
-            ? themeService.TextPrincipal
-            : themeService.TextSecondaire,
-        'box-shadow':
-          discoverMobileActive.isActive
-            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
-            : 'none',
-        '--tw-ring-color': themeService.Primary1,
-        '--tw-ring-offset-color': themeService.BG1
-      }"
-    >
-
-      <!-- POP-UP -->
+      <!-- ====================================================
+          INDICATEUR ACTIF
+          ==================================================== -->
 
       <span
         class="
           pointer-events-none
           absolute
-          left-1/2
-          bottom-[calc(100%+12px)]
-          z-[200]
-          -translate-x-1/2
-          translate-y-2
-          scale-95
-          whitespace-nowrap
-          rounded-xl
-          border
-          px-3
-          py-2
-          text-[10px]
-          font-extrabold
-          uppercase
-          tracking-[0.7px]
-          opacity-0
-          shadow-2xl
-          backdrop-blur-2xl
+          left-0
+          top-1/2
+          h-7
+          w-[3px]
+          -translate-y-1/2
+          rounded-r-full
           transition-all
           duration-200
-          ease-out
-          group-hover:translate-y-0
-          group-hover:scale-100
-          group-hover:opacity-100
-          sm:text-[11px]
-          sm:px-3.5
-          sm:py-2
-          md:text-xs
-          md:px-4
-          md:py-2.5
         "
-        [class.translate-y-0]="conseilMobileActive.isActive"
-        [class.scale-100]="conseilMobileActive.isActive"
-        [class.opacity-100]="conseilMobileActive.isActive"
+        [class.opacity-100]="pageActive === item.page"
+        [class.opacity-0]="pageActive !== item.page"
         [ngStyle]="{
-          'background-color': themeService.BG2,
-          'border-color': themeService.BR2,
-          'color': themeService.TextPrincipal,
-          'box-shadow':
-            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
-        }"
-        aria-hidden="true"
-      >
-        {{
-          languageService.currentLanguage === 'fr'
-            ? 'Conseil'
-            : 'Tips'
-        }}
-
-        <span
-          class="
-            absolute
-            left-1/2
-            top-full
-            -translate-x-1/2
-            h-0
-            w-0
-            border-l-[6px]
-            border-r-[6px]
-            border-t-[6px]
-            border-l-transparent
-            border-r-transparent
-          "
-          [ngStyle]="{
-            'border-top-color': themeService.BG2
-          }"
-        ></span>
-      </span>
-
-      <!-- Glow -->
-
-      <span
-        class="
-          pointer-events-none
-          absolute
-          inset-[-12px]
-          rounded-full
-          blur-2xl
-          opacity-0
-          transition-all
-          duration-500
-          group-hover:opacity-60
-        "
-        [ngStyle]="{
-          'background-color': themeService.PrimarySoft1
+          'background-color': themeService.BG1
         }"
         aria-hidden="true"
       ></span>
 
-      <!-- Icône -->
 
-      <i
-        class="
-          fa-solid
-          fa-lightbulb
-          relative
-          z-10
-          shrink-0
-          text-[21px]
-          transition-transform
-          duration-300
-          group-hover:scale-110
-          group-active:scale-90
-          sm:text-[22px]
-          md:text-[23px]
-        "
-        aria-hidden="true"
-      ></i>
-
-    </a>
-
-
-    <!-- ========================================================
-         ⚙️ PARAMÈTRE
-    ========================================================= -->
-
-    <a
-      routerLink="parametre"
-      routerLinkActive="is-active"
-      #parametreMobileActive="routerLinkActive"
-      [attr.aria-current]="
-        parametreMobileActive.isActive ? 'page' : null
-      "
-      [attr.aria-label]="
-        languageService.currentLanguage === 'fr'
-          ? 'Accéder aux paramètres de JardiScan'
-          : 'Access JardiScan settings'
-      "
-      [attr.title]="
-        languageService.currentLanguage === 'fr'
-          ? 'Paramètre'
-          : 'Settings'
-      "
-      class="
-        group
-        relative
-        flex
-        items-center
-        justify-center
-        shrink-0
-        h-[52px]
-        w-[52px]
-        rounded-[18px]
-        border
-        outline-none
-        transition-all
-        duration-300
-        ease-out
-        hover:-translate-y-1
-        hover:scale-105
-        active:translate-y-0
-        active:scale-95
-        focus-visible:ring-2
-        focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
-        md:h-[58px]
-        md:w-[58px]
-        md:rounded-[21px]
-      "
-      [class.border-transparent]="parametreMobileActive.isActive"
-      [ngStyle]="{
-        'background':
-          discoverMobileActive.isActive
-            ? 'linear-gradient(135deg, ' +
-              themeService.Primary1 +
-              ', ' +
-              themeService.PrimarySoft1 +
-              ')'
-            : 'rgba(255,255,255,0.045)',
-        'border-color':
-          discoverMobileActive.isActive
-            ? 'transparent'
-            : themeService.BR2,
-        'color':
-          discoverMobileActive.isActive
-            ? themeService.TextPrincipal
-            : themeService.TextSecondaire,
-        'box-shadow':
-          discoverMobileActive.isActive
-            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
-            : 'none',
-        '--tw-ring-color': themeService.Primary1,
-        '--tw-ring-offset-color': themeService.BG1
-      }"
-    >
-
-      <!-- POP-UP -->
+      <!-- ====================================================
+          CONTENU DU LIEN
+          ==================================================== -->
 
       <span
         class="
-          pointer-events-none
-          absolute
-          left-1/2
-          bottom-[calc(100%+12px)]
-          z-[200]
-          -translate-x-1/2
-          translate-y-2
-          scale-95
-          whitespace-nowrap
-          rounded-xl
-          border
-          px-3
-          py-2
-          text-[10px]
-          font-extrabold
-          uppercase
-          tracking-[0.7px]
-          opacity-0
-          shadow-2xl
-          backdrop-blur-2xl
-          transition-all
-          duration-200
-          ease-out
-          group-hover:translate-y-0
-          group-hover:scale-100
-          group-hover:opacity-100
-          sm:text-[11px]
-          sm:px-3.5
-          sm:py-2
-          md:text-xs
-          md:px-4
-          md:py-2.5
+          relative
+          z-10
+          flex
+          w-full
+          min-w-0
+          items-center
+          gap-3
         "
-        [class.translate-y-0]="parametreMobileActive.isActive"
-        [class.scale-100]="parametreMobileActive.isActive"
-        [class.opacity-100]="parametreMobileActive.isActive"
-        [ngStyle]="{
-          'background-color': themeService.BG2,
-          'border-color': themeService.BR2,
-          'color': themeService.TextPrincipal,
-          'box-shadow':
-            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
-        }"
-        aria-hidden="true"
       >
-        {{
-          languageService.currentLanguage === 'fr'
-            ? 'Paramètre'
-            : 'Settings'
-        }}
+
+        <!-- ICÔNE -->
 
         <span
           class="
-            absolute
-            left-1/2
-            top-full
-            -translate-x-1/2
-            h-0
-            w-0
-            border-l-[6px]
-            border-r-[6px]
-            border-t-[6px]
-            border-l-transparent
-            border-r-transparent
+            flex
+            h-8
+            w-8
+            shrink-0
+            items-center
+            justify-center
+            rounded-[0.7rem]
+            transition-all
+            duration-200
+            group-hover:scale-[1.04]
           "
           [ngStyle]="{
-            'border-top-color': themeService.BG2
+            'background-color':
+              pageActive === item.page
+                ? 'rgba(255,255,255,0.14)'
+                : themeService.BG3,
+
+            'color':
+              pageActive === item.page
+                ? themeService.BG1
+                : themeService.ICON
           }"
-        ></span>
+        >
+          <i
+            [class]="item.icon"
+            class="
+              text-[13px]
+              transition-transform
+              duration-200
+            "
+            [class.scale-105]="pageActive === item.page"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+
+        <!-- LABEL -->
+
+        <span
+          class="
+            min-w-0
+            flex-1
+            truncate
+            text-[0.89rem]
+            font-medium
+            tracking-[-0.012em]
+            transition-colors
+            duration-200
+          "
+          [ngStyle]="{
+            'color':
+              pageActive === item.page
+                ? themeService.BG1
+                : themeService.TX1
+          }"
+        >
+          {{ item.label }}
+        </span>
+
+
+        <!-- FLÈCHE ACTIVE -->
+
+        <span
+          *ngIf="pageActive === item.page"
+          class="
+            flex
+            h-6
+            w-6
+            shrink-0
+            items-center
+            justify-center
+            rounded-full
+            transition-transform
+            duration-200
+            group-hover:translate-x-[2px]
+          "
+          [ngStyle]="{
+            'background-color': 'rgba(255,255,255,0.12)'
+          }"
+          aria-hidden="true"
+        >
+          <i
+            class="
+              fa-solid
+              fa-arrow-right
+              text-[9px]
+            "
+            [ngStyle]="{
+              'color': themeService.BG1
+            }"
+          ></i>
+        </span>
+
       </span>
 
-      <!-- Glow -->
+    </button>
+
+  </section>
+
+
+  <!-- ========================================================
+      SÉPARATEUR
+      ======================================================== -->
+
+  <div
+    class="
+      my-5
+      h-px
+      w-full
+      shrink-0
+    "
+    [ngStyle]="{
+      'background-color': themeService.BR2
+    }"
+    aria-hidden="true"
+  ></div>
+
+
+  <!-- ========================================================
+      GÉNÉRAL
+      ======================================================== -->
+
+  <section class="shrink-0">
+
+    <!-- TITRE -->
+
+    <p
+      class="
+        mb-2.5
+        px-3
+        text-[0.64rem]
+        font-bold
+        uppercase
+        tracking-[0.13em]
+      "
+      [ngStyle]="{
+        'color': themeService.TX2
+      }"
+    >
+      Général
+    </p>
+
+
+    <!-- ======================================================
+        LIENS GÉNÉRAUX
+        ====================================================== -->
+
+    <button
+      *ngFor="let item of generalLinks"
+      type="button"
+      class="
+        group
+        relative
+        mb-1
+        flex
+        h-[52px]
+        w-full
+        items-center
+        gap-3
+        rounded-[1rem]
+        border
+        px-3
+        text-left
+        outline-none
+        cursor-pointer
+        transition-all
+        duration-200
+        ease-out
+        hover:shadow-sm
+        active:scale-[0.985]
+        focus-visible:ring-2
+        focus-visible:ring-offset-2
+      "
+      [ngStyle]="{
+        'background-color':
+          pageActive === item.page
+            ? themeService.Primary
+            : 'transparent',
+
+        'border-color':
+          pageActive === item.page
+            ? themeService.Primary
+            : 'transparent',
+
+        'color':
+          pageActive === item.page
+            ? themeService.BG1
+            : themeService.TX1,
+
+        '--tw-ring-color':
+          themeService.Primary,
+
+        '--tw-ring-offset-color':
+          themeService.BG2
+      }"
+      (click)="selectionnerPage(item.page)"
+      [attr.aria-current]="
+        pageActive === item.page
+          ? 'page'
+          : null
+      "
+      [attr.aria-label]="item.label"
+    >
+
+      <!-- COUCHE HOVER -->
 
       <span
         class="
           pointer-events-none
           absolute
-          inset-[-12px]
-          rounded-full
-          blur-2xl
+          inset-0
+          rounded-[1rem]
+          border
           opacity-0
           transition-all
-          duration-500
-          group-hover:opacity-60
+          duration-200
+          group-hover:opacity-100
         "
         [ngStyle]="{
-          'background-color': themeService.PrimarySoft1
+          'background-color':
+            pageActive === item.page
+              ? 'transparent'
+              : themeService.BG3,
+
+          'border-color':
+            pageActive === item.page
+              ? 'transparent'
+              : themeService.BR2
         }"
         aria-hidden="true"
       ></span>
 
-      <!-- Icône -->
 
-      <i
-        class="
-          fa-solid
-          fa-sliders
-          relative
-          z-10
-          shrink-0
-          text-[20px]
-          transition-transform
-          duration-300
-          group-hover:scale-110
-          group-active:scale-90
-          sm:text-[21px]
-          md:text-[22px]
-        "
-        aria-hidden="true"
-      ></i>
-
-    </a>
-
-
-    <!-- ========================================================
-         ✨ FONCTIONNALITÉ
-    ========================================================= -->
-
-    <a
-      routerLink="fonctionnalites"
-      routerLinkActive="is-active"
-      #fonctionnaliteMobileActive="routerLinkActive"
-      [attr.aria-current]="
-        fonctionnaliteMobileActive.isActive ? 'page' : null
-      "
-      [attr.aria-label]="
-        languageService.currentLanguage === 'fr'
-          ? 'Découvrir les fonctionnalités de JardiScan'
-          : 'Discover JardiScan features'
-      "
-      [attr.title]="
-        languageService.currentLanguage === 'fr'
-          ? 'Fonctionnalité'
-          : 'Feature'
-      "
-      class="
-        group
-        relative
-        flex
-        items-center
-        justify-center
-        shrink-0
-        h-[52px]
-        w-[52px]
-        rounded-[18px]
-        border
-        outline-none
-        transition-all
-        duration-300
-        ease-out
-        hover:-translate-y-1
-        hover:scale-105
-        active:translate-y-0
-        active:scale-95
-        focus-visible:ring-2
-        focus-visible:ring-offset-2
-        sm:h-[56px]
-        sm:w-[56px]
-        sm:rounded-[20px]
-        md:h-[58px]
-        md:w-[58px]
-        md:rounded-[21px]
-      "
-      [class.border-transparent]="fonctionnaliteMobileActive.isActive"
-      [ngStyle]="{
-        'background':
-          discoverMobileActive.isActive
-            ? 'linear-gradient(135deg, ' +
-              themeService.Primary1 +
-              ', ' +
-              themeService.PrimarySoft1 +
-              ')'
-            : 'rgba(255,255,255,0.045)',
-        'border-color':
-          discoverMobileActive.isActive
-            ? 'transparent'
-            : themeService.BR2,
-        'color':
-          discoverMobileActive.isActive
-            ? themeService.TextPrincipal
-            : themeService.TextSecondaire,
-        'box-shadow':
-          discoverMobileActive.isActive
-            ? '0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.14)'
-            : 'none',
-        '--tw-ring-color': themeService.Primary1,
-        '--tw-ring-offset-color': themeService.BG1
-      }"
-    >
-
-      <!-- POP-UP -->
+      <!-- INDICATEUR -->
 
       <span
         class="
           pointer-events-none
           absolute
-          left-1/2
-          bottom-[calc(100%+12px)]
-          z-[200]
-          -translate-x-1/2
-          translate-y-2
-          scale-95
-          whitespace-nowrap
-          rounded-xl
-          border
-          px-3
-          py-2
-          text-[10px]
-          font-extrabold
-          uppercase
-          tracking-[0.7px]
-          opacity-0
-          shadow-2xl
-          backdrop-blur-2xl
+          left-0
+          top-1/2
+          h-7
+          w-[3px]
+          -translate-y-1/2
+          rounded-r-full
           transition-all
           duration-200
-          ease-out
-          group-hover:translate-y-0
-          group-hover:scale-100
-          group-hover:opacity-100
-          sm:text-[11px]
-          sm:px-3.5
-          sm:py-2
-          md:text-xs
-          md:px-4
-          md:py-2.5
         "
-        [class.translate-y-0]="fonctionnaliteMobileActive.isActive"
-        [class.scale-100]="fonctionnaliteMobileActive.isActive"
-        [class.opacity-100]="fonctionnaliteMobileActive.isActive"
+        [class.opacity-100]="pageActive === item.page"
+        [class.opacity-0]="pageActive !== item.page"
         [ngStyle]="{
-          'background-color': themeService.BG2,
-          'border-color': themeService.BR2,
-          'color': themeService.TextPrincipal,
-          'box-shadow':
-            '0 12px 30px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.10)'
-        }"
-        aria-hidden="true"
-      >
-        {{
-          languageService.currentLanguage === 'fr'
-            ? 'Fonctionnalité'
-            : 'Feature'
-        }}
-
-        <span
-          class="
-            absolute
-            left-1/2
-            top-full
-            -translate-x-1/2
-            h-0
-            w-0
-            border-l-[6px]
-            border-r-[6px]
-            border-t-[6px]
-            border-l-transparent
-            border-r-transparent
-          "
-          [ngStyle]="{
-            'border-top-color': themeService.BG2
-          }"
-        ></span>
-      </span>
-
-      <!-- Glow -->
-
-      <span
-        class="
-          pointer-events-none
-          absolute
-          inset-[-12px]
-          rounded-full
-          blur-2xl
-          opacity-0
-          transition-all
-          duration-500
-          group-hover:opacity-60
-        "
-        [ngStyle]="{
-          'background-color': themeService.PrimarySoft1
+          'background-color': themeService.BG1
         }"
         aria-hidden="true"
       ></span>
 
-      <!-- Icône -->
 
-      <i
+      <!-- CONTENU -->
+
+      <span
         class="
-          fa-solid fa-gears
           relative
           z-10
-          shrink-0
-          text-[20px]
-          transition-transform
-          duration-300
-          group-hover:scale-110
-          group-active:scale-90
-          sm:text-[21px]
-          md:text-[22px]
+          flex
+          w-full
+          min-w-0
+          items-center
+          gap-3
         "
-        aria-hidden="true"
-      ></i>
+      >
 
-    </a>
+        <!-- ICÔNE -->
 
-  </nav>
+        <span
+          class="
+            flex
+            h-8
+            w-8
+            shrink-0
+            items-center
+            justify-center
+            rounded-[0.7rem]
+            transition-all
+            duration-200
+            group-hover:scale-[1.04]
+          "
+          [ngStyle]="{
+            'background-color':
+              pageActive === item.page
+                ? 'rgba(255,255,255,0.14)'
+                : themeService.BG3,
+
+            'color':
+              pageActive === item.page
+                ? themeService.BG1
+                : themeService.ICON
+          }"
+        >
+          <i
+            [class]="item.icon"
+            class="
+              text-[13px]
+              transition-transform
+              duration-200
+            "
+            [class.scale-105]="pageActive === item.page"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+
+        <!-- LABEL -->
+
+        <span
+          class="
+            min-w-0
+            flex-1
+            truncate
+            text-[0.89rem]
+            font-medium
+            tracking-[-0.012em]
+          "
+          [ngStyle]="{
+            'color':
+              pageActive === item.page
+                ? themeService.BG1
+                : themeService.TX1
+          }"
+        >
+          {{ item.label }}
+        </span>
+
+
+        <!-- FLÈCHE -->
+
+        <span
+          *ngIf="pageActive === item.page"
+          class="
+            flex
+            h-6
+            w-6
+            shrink-0
+            items-center
+            justify-center
+            rounded-full
+          "
+          [ngStyle]="{
+            'background-color': 'rgba(255,255,255,0.12)'
+          }"
+          aria-hidden="true"
+        >
+          <i
+            class="
+              fa-solid
+              fa-arrow-right
+              text-[9px]
+            "
+            [ngStyle]="{
+              'color': themeService.BG1
+            }"
+          ></i>
+        </span>
+
+      </span>
+
+    </button>
+
+  </section>
+
+
+  <!-- ========================================================
+      SECTION RÔLE
+      ======================================================== -->
+
+  <ng-container *ngIf="roleLinks.length > 0">
+
+    <!-- SÉPARATEUR -->
+
+    <div
+      class="
+        my-5
+        h-px
+        w-full
+        shrink-0
+      "
+      [ngStyle]="{
+        'background-color': themeService.BR2
+      }"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- ======================================================
+        RÔLE
+        ====================================================== -->
+
+    <section class="shrink-0">
+
+      <!-- HEADER RÔLE -->
+
+      <div
+        class="
+          mb-2.5
+          flex
+          items-center
+          justify-between
+          px-3
+        "
+      >
+
+        <p
+          class="
+            text-[0.64rem]
+            font-bold
+            uppercase
+            tracking-[0.13em]
+          "
+          [ngStyle]="{
+            'color': themeService.TX2
+          }"
+        >
+          {{ roleLabel }}
+        </p>
+
+
+        <!-- BADGE RÔLE -->
+
+        <span
+          class="
+            rounded-full
+            border
+            px-2
+            py-1
+            text-[0.5rem]
+            font-bold
+            uppercase
+            tracking-[0.08em]
+          "
+          [ngStyle]="{
+            'background-color': themeService.BG3,
+            'border-color': themeService.BR2,
+            'color': themeService.Primary
+          }"
+        >
+          {{ role || 'VISITEUR' }}
+        </span>
+
+      </div>
+
+
+      <!-- ====================================================
+          LIENS RÔLE
+          ==================================================== -->
+
+      <button
+        *ngFor="let item of roleLinks"
+        type="button"
+        class="
+          group
+          relative
+          mb-1
+          flex
+          h-[52px]
+          w-full
+          items-center
+          gap-3
+          rounded-[1rem]
+          border
+          px-3
+          text-left
+          outline-none
+          cursor-pointer
+          transition-all
+          duration-200
+          ease-out
+          hover:shadow-sm
+          active:scale-[0.985]
+          focus-visible:ring-2
+          focus-visible:ring-offset-2
+        "
+        [ngStyle]="{
+          'background-color':
+            pageActive === item.page
+              ? themeService.Primary
+              : 'transparent',
+
+          'border-color':
+            pageActive === item.page
+              ? themeService.Primary
+              : 'transparent',
+
+          'color':
+            pageActive === item.page
+              ? themeService.BG1
+              : themeService.TX1,
+
+          '--tw-ring-color':
+            themeService.Primary,
+
+          '--tw-ring-offset-color':
+            themeService.BG2
+        }"
+        (click)="selectionnerPage(item.page)"
+        [attr.aria-current]="
+          pageActive === item.page
+            ? 'page'
+            : null
+        "
+        [attr.aria-label]="item.label"
+      >
+
+        <!-- COUCHE HOVER -->
+
+        <span
+          class="
+            pointer-events-none
+            absolute
+            inset-0
+            rounded-[1rem]
+            border
+            opacity-0
+            transition-all
+            duration-200
+            group-hover:opacity-100
+          "
+          [ngStyle]="{
+            'background-color':
+              pageActive === item.page
+                ? 'transparent'
+                : themeService.BG3,
+
+            'border-color':
+              pageActive === item.page
+                ? 'transparent'
+                : themeService.BR2
+          }"
+          aria-hidden="true"
+        ></span>
+
+
+        <!-- INDICATEUR -->
+
+        <span
+          class="
+            pointer-events-none
+            absolute
+            left-0
+            top-1/2
+            h-7
+            w-[3px]
+            -translate-y-1/2
+            rounded-r-full
+            transition-all
+            duration-200
+          "
+          [class.opacity-100]="pageActive === item.page"
+          [class.opacity-0]="pageActive !== item.page"
+          [ngStyle]="{
+            'background-color': themeService.BG1
+          }"
+          aria-hidden="true"
+        ></span>
+
+
+        <!-- CONTENU -->
+
+        <span
+          class="
+            relative
+            z-10
+            flex
+            w-full
+            min-w-0
+            items-center
+            gap-3
+          "
+        >
+
+          <!-- ICÔNE -->
+
+          <span
+            class="
+              flex
+              h-8
+              w-8
+              shrink-0
+              items-center
+              justify-center
+              rounded-[0.7rem]
+              transition-all
+              duration-200
+              group-hover:scale-[1.04]
+            "
+            [ngStyle]="{
+              'background-color':
+                pageActive === item.page
+                  ? 'rgba(255,255,255,0.14)'
+                  : themeService.BG3,
+
+              'color':
+                pageActive === item.page
+                  ? themeService.BG1
+                  : themeService.ICON
+            }"
+          >
+            <i
+              [class]="item.icon"
+              class="
+                text-[13px]
+                transition-transform
+                duration-200
+              "
+              [class.scale-105]="pageActive === item.page"
+              aria-hidden="true"
+            ></i>
+          </span>
+
+
+          <!-- LABEL -->
+
+          <span
+            class="
+              min-w-0
+              flex-1
+              truncate
+              text-[0.89rem]
+              font-medium
+              tracking-[-0.012em]
+            "
+            [ngStyle]="{
+              'color':
+                pageActive === item.page
+                  ? themeService.BG1
+                  : themeService.TX1
+            }"
+          >
+            {{ item.label }}
+          </span>
+
+
+          <!-- FLÈCHE ACTIVE -->
+
+          <span
+            *ngIf="pageActive === item.page"
+            class="
+              flex
+              h-6
+              w-6
+              shrink-0
+              items-center
+              justify-center
+              rounded-full
+            "
+            [ngStyle]="{
+              'background-color': 'rgba(255,255,255,0.12)'
+            }"
+            aria-hidden="true"
+          >
+            <i
+              class="
+                fa-solid
+                fa-arrow-right
+                text-[9px]
+              "
+              [ngStyle]="{
+                'color': themeService.BG1
+              }"
+            ></i>
+          </span>
+
+        </span>
+
+      </button>
+
+    </section>
+
+  </ng-container>
 
 </div>
+
+
+<!-- ==========================================================
+    FOOTER — CARTE NATUREORA
+    ========================================================== -->
+
+<div
+  class="
+    shrink-0
+    px-4
+    pb-4
+    pt-2
+  "
+>
+
+  <div
+    class="
+      group
+      relative
+      overflow-hidden
+      rounded-[1.35rem]
+      border
+      p-4
+      transition-all
+      duration-300
+      hover:-translate-y-[1px]
+    "
+    [ngStyle]="{
+      'background-color': themeService.BG3,
+      'border-color': themeService.BR2,
+      'box-shadow': '0 8px 25px rgba(15,23,42,0.045)'
+    }"
+  >
+
+    <!-- DÉCORATION -->
+
+    <div
+      class="
+        pointer-events-none
+        absolute
+        -right-10
+        -top-10
+        h-28
+        w-28
+        rounded-full
+        border
+        opacity-40
+        transition-transform
+        duration-700
+        group-hover:scale-110
+      "
+      [ngStyle]="{
+        'border-color': themeService.Primary
+      }"
+      aria-hidden="true"
+    ></div>
+
+
+    <div
+      class="
+        pointer-events-none
+        absolute
+        -bottom-12
+        -left-10
+        h-28
+        w-28
+        rounded-full
+        border
+        opacity-20
+      "
+      [ngStyle]="{
+        'border-color': themeService.Primary
+      }"
+      aria-hidden="true"
+    ></div>
+
+
+    <!-- ICÔNE -->
+
+    <div
+      class="
+        relative
+        mb-3
+        flex
+        h-9
+        w-9
+        items-center
+        justify-center
+        rounded-[0.75rem]
+      "
+      [ngStyle]="{
+        'background-color': themeService.PrimarySoft,
+        'color': themeService.Primary
+      }"
+    >
+      <i
+        class="
+          fa-solid
+          fa-seedling
+          text-[14px]
+        "
+        aria-hidden="true"
+      ></i>
+    </div>
+
+
+    <!-- TITRE -->
+
+    <h3
+      class="
+        relative
+        text-[0.9rem]
+        font-semibold
+        leading-[1.25]
+        tracking-[-0.02em]
+      "
+      [ngStyle]="{
+        'color': themeService.TX0
+      }"
+    >
+      Votre jardin,<br />
+      toujours avec vous
+    </h3>
+
+
+    <!-- DESCRIPTION -->
+
+    <p
+      class="
+        relative
+        mt-2
+        text-[0.63rem]
+        leading-[1.5]
+      "
+      [ngStyle]="{
+        'color': themeService.TX2
+      }"
+    >
+      Retrouvez vos conseils Natureora
+      partout avec vous.
+    </p>
+
+
+    <!-- BADGE -->
+
+    <div
+      class="
+        relative
+        mt-3
+        inline-flex
+        items-center
+        gap-1.5
+        rounded-full
+        border
+        px-2.5
+        py-1
+        text-[0.55rem]
+        font-semibold
+        uppercase
+        tracking-[0.08em]
+      "
+      [ngStyle]="{
+        'background-color': themeService.BG2,
+        'border-color': themeService.BR2,
+        'color': themeService.Primary
+      }"
+    >
+
+      <span
+        class="
+          h-1.5
+          w-1.5
+          rounded-full
+        "
+        [ngStyle]="{
+          'background-color': themeService.Primary
+        }"
+        aria-hidden="true"
+      ></span>
+
+      {{ role || 'VISITEUR' }}
+
+    </div>
+
+  </div>
+
+</div>
+
+</aside>

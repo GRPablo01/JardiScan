@@ -90,6 +90,10 @@ export class Contact implements OnInit, OnDestroy {
 
   currentLanguage: 'fr' | 'en' = 'fr';
 
+  languageButtonHover = false;
+  contactCenterHover = false
+  contactProblemHover = false
+  contactSuggestionHover = false
 
   // ============================================================
   // 🔄 SUBSCRIPTION LANGUE

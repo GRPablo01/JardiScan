@@ -5,11 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ThemeService } from '../../../Backend/Services/theme.service';
 import { Header } from '../../composant/Public/header/header';
-import { Welcome } from '../../composant/Share/Page-Accueil/welcome/welcome';
-import { BotAssistant } from '../../composant/Public/bot-assistant/bot-assistant';
-import { Bot } from '../../composant/Share/Page-Accueil/bot/bot';
-import { WidgetScan } from '../../composant/Share/Page-Accueil/widget-scan/widget-scan';
-import { MaCollection } from '../../composant/Share/Page-Accueil/ma-collection/ma-collection';
 import { Footer } from '../../composant/Public/footer/footer';
 import { WidgetSaison } from '../../composant/Share/Page-Saison/widget-saison/widget-saison';
 

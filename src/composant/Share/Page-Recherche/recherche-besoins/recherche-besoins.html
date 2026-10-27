@@ -1,0 +1,520 @@
+<!-- ============================================================
+     ARBORIA — SECTION 04 : RECHERCHE SELON VOS BESOINS
+     Angular Standalone + Tailwind CSS + Font Awesome
+     • Présentation des différents critères de recherche
+     • Thème clair / sombre
+     • Responsive desktop, tablette et mobile
+     • Recherche végétale sans scan ni caméra
+============================================================ -->
+
+<section
+  class="relative w-full overflow-hidden px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-28"
+  [ngStyle]="{
+    'background-color': themeSombre ? '#1D2C24' : '#F2F5EE',
+    color: themeSombre ? '#F4F8F1' : '#203128'
+  }"
+>
+  <!-- Décorations -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full blur-3xl"
+    [ngStyle]="{
+      'background-color': themeSombre
+        ? 'rgba(98,214,191,0.06)'
+        : 'rgba(40,118,83,0.07)'
+    }"
+  ></div>
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -right-32 bottom-0 h-80 w-80 rounded-full blur-3xl"
+    [ngStyle]="{
+      'background-color': themeSombre
+        ? 'rgba(196,237,138,0.06)'
+        : 'rgba(210,242,154,0.18)'
+    }"
+  ></div>
+
+  <div class="relative mx-auto w-full max-w-[1440px]">
+
+    <!-- En-tête -->
+    <div class="mx-auto mb-14 max-w-3xl text-center sm:mb-16">
+      <div
+        class="mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2"
+        [ngStyle]="{
+          'background-color': themeSombre ? '#25372D' : '#E8EEE4',
+          'border-color': themeSombre ? '#3B5946' : '#CFDDC8',
+          color: themeSombre ? '#C4ED8A' : '#287653'
+        }"
+      >
+        <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+        <span class="text-xs font-bold uppercase tracking-[0.18em]">
+          Une recherche qui vous ressemble
+        </span>
+      </div>
+
+      <h2
+        class="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl"
+        [ngStyle]="{
+          color: themeSombre ? '#F4F8F1' : '#203128'
+        }"
+      >
+        Trouvez les plantes qui
+        <span
+          class="mt-2 block"
+          [ngStyle]="{
+            color: themeSombre ? '#C4ED8A' : '#287653'
+          }"
+        >
+          vous correspondent.
+        </span>
+      </h2>
+
+      <p
+        class="mx-auto mt-6 max-w-2xl text-base leading-7 sm:text-lg sm:leading-8"
+        [ngStyle]="{
+          color: themeSombre ? '#B1C4B2' : '#657B69'
+        }"
+      >
+        Vous avez déjà une plante en tête ou vous cherchez de l'inspiration ?
+        Explorez les possibilités et concentrez-vous sur les plantes qui
+        répondent à vos envies.
+      </p>
+    </div>
+
+    <!-- Cartes de critères -->
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+
+      <!-- Carte 1 -->
+      <article
+        class="group relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 transition duration-300 hover:-translate-y-1 sm:p-7"
+        [ngStyle]="{
+          'background-color': themeSombre ? '#17231D' : '#FFFFFF',
+          'border-color': themeSombre ? '#30483A' : '#DFE8D9',
+          'box-shadow': themeSombre
+            ? '0 12px 36px rgba(0,0,0,0.10)'
+            : '0 12px 36px rgba(32,49,40,0.04)'
+        }"
+      >
+        <div class="mb-8 flex items-start justify-between">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-2xl"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#25372D' : '#E8EEE4',
+              color: themeSombre ? '#C4ED8A' : '#287653'
+            }"
+          >
+            <i class="fa-solid fa-magnifying-glass text-xl" aria-hidden="true"></i>
+          </div>
+
+          <span
+            class="text-xs font-bold tracking-[0.15em]"
+            [ngStyle]="{
+              color: themeSombre ? '#71936D' : '#9FBA94'
+            }"
+          >
+            01
+          </span>
+        </div>
+
+        <h3
+          class="text-xl font-semibold"
+          [ngStyle]="{
+            color: themeSombre ? '#F4F8F1' : '#203128'
+          }"
+        >
+          Un nom précis
+        </h3>
+
+        <p
+          class="mt-3 flex-1 text-sm leading-7"
+          [ngStyle]="{
+            color: themeSombre ? '#B1C4B2' : '#657B69'
+          }"
+        >
+          Vous connaissez déjà la plante recherchée ? Saisissez son nom
+          pour retrouver les informations disponibles dans son catalogue.
+        </p>
+
+        <div
+          class="mt-7 rounded-2xl border px-4 py-3"
+          [ngStyle]="{
+            'background-color': themeSombre ? '#1D2C24' : '#F2F5EE',
+            'border-color': themeSombre ? '#30483A' : '#DFE8D9'
+          }"
+        >
+          <div class="flex items-center gap-3">
+            <i
+              class="fa-solid fa-magnifying-glass text-sm"
+              [ngStyle]="{
+                color: themeSombre ? '#62D6BF' : '#188E7B'
+              }"
+              aria-hidden="true"
+            ></i>
+            <span
+              class="text-sm"
+              [ngStyle]="{
+                color: themeSombre ? '#91A993' : '#829584'
+              }"
+            >
+              Nom de la plante
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Carte 2 -->
+      <article
+        class="group relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 transition duration-300 hover:-translate-y-1 sm:p-7"
+        [ngStyle]="{
+          'background-color': themeSombre ? '#17231D' : '#FFFFFF',
+          'border-color': themeSombre ? '#30483A' : '#DFE8D9',
+          'box-shadow': themeSombre
+            ? '0 12px 36px rgba(0,0,0,0.10)'
+            : '0 12px 36px rgba(32,49,40,0.04)'
+        }"
+      >
+        <div class="mb-8 flex items-start justify-between">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-2xl"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#25372D' : '#E8EEE4',
+              color: themeSombre ? '#62D6BF' : '#188E7B'
+            }"
+          >
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+          </div>
+
+          <span
+            class="text-xs font-bold tracking-[0.15em]"
+            [ngStyle]="{
+              color: themeSombre ? '#71936D' : '#9FBA94'
+            }"
+          >
+            02
+          </span>
+        </div>
+
+        <h3
+          class="text-xl font-semibold"
+          [ngStyle]="{
+            color: themeSombre ? '#F4F8F1' : '#203128'
+          }"
+        >
+          Votre environnement
+        </h3>
+
+        <p
+          class="mt-3 flex-1 text-sm leading-7"
+          [ngStyle]="{
+            color: themeSombre ? '#B1C4B2' : '#657B69'
+          }"
+        >
+          Orientez vos découvertes selon l'endroit où vous souhaitez
+          cultiver vos plantes : à l'intérieur ou dans votre jardin.
+        </p>
+
+        <div class="mt-7 grid grid-cols-2 gap-2">
+          <div
+            class="rounded-2xl border px-3 py-3 text-center"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#1D2C24' : '#F2F5EE',
+              'border-color': themeSombre ? '#30483A' : '#DFE8D9'
+            }"
+          >
+            <i
+              class="fa-solid fa-couch mb-2 block"
+              [ngStyle]="{
+                color: themeSombre ? '#C4ED8A' : '#287653'
+              }"
+              aria-hidden="true"
+            ></i>
+            <span
+              class="text-xs font-medium"
+              [ngStyle]="{
+                color: themeSombre ? '#B1C4B2' : '#465A4B'
+              }"
+            >
+              Intérieur
+            </span>
+          </div>
+
+          <div
+            class="rounded-2xl border px-3 py-3 text-center"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#1D2C24' : '#F2F5EE',
+              'border-color': themeSombre ? '#30483A' : '#DFE8D9'
+            }"
+          >
+            <i
+              class="fa-solid fa-tree mb-2 block"
+              [ngStyle]="{
+                color: themeSombre ? '#62D6BF' : '#188E7B'
+              }"
+              aria-hidden="true"
+            ></i>
+            <span
+              class="text-xs font-medium"
+              [ngStyle]="{
+                color: themeSombre ? '#B1C4B2' : '#465A4B'
+              }"
+            >
+              Extérieur
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Carte 3 -->
+      <article
+        class="group relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 transition duration-300 hover:-translate-y-1 sm:p-7"
+        [ngStyle]="{
+          'background-color': themeSombre ? '#17231D' : '#FFFFFF',
+          'border-color': themeSombre ? '#30483A' : '#DFE8D9',
+          'box-shadow': themeSombre
+            ? '0 12px 36px rgba(0,0,0,0.10)'
+            : '0 12px 36px rgba(32,49,40,0.04)'
+        }"
+      >
+        <div class="mb-8 flex items-start justify-between">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-2xl"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#25372D' : '#E8EEE4',
+              color: themeSombre ? '#C4ED8A' : '#287653'
+            }"
+          >
+            <i class="fa-solid fa-seedling text-xl" aria-hidden="true"></i>
+          </div>
+
+          <span
+            class="text-xs font-bold tracking-[0.15em]"
+            [ngStyle]="{
+              color: themeSombre ? '#71936D' : '#9FBA94'
+            }"
+          >
+            03
+          </span>
+        </div>
+
+        <h3
+          class="text-xl font-semibold"
+          [ngStyle]="{
+            color: themeSombre ? '#F4F8F1' : '#203128'
+          }"
+        >
+          Vos envies
+        </h3>
+
+        <p
+          class="mt-3 flex-1 text-sm leading-7"
+          [ngStyle]="{
+            color: themeSombre ? '#B1C4B2' : '#657B69'
+          }"
+        >
+          Laissez-vous guider par vos centres d'intérêt et découvrez
+          différentes familles de plantes au fil de votre exploration.
+        </p>
+
+        <div
+          class="mt-7 flex flex-wrap gap-2"
+        >
+          <span
+            class="rounded-full border px-3 py-2 text-xs font-medium"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#1D2C24' : '#F2F5EE',
+              'border-color': themeSombre ? '#30483A' : '#DFE8D9',
+              color: themeSombre ? '#C4ED8A' : '#287653'
+            }"
+          >
+            Feuillage
+          </span>
+
+          <span
+            class="rounded-full border px-3 py-2 text-xs font-medium"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#1D2C24' : '#F2F5EE',
+              'border-color': themeSombre ? '#30483A' : '#DFE8D9',
+              color: themeSombre ? '#62D6BF' : '#188E7B'
+            }"
+          >
+            Floraison
+          </span>
+
+          <span
+            class="rounded-full border px-3 py-2 text-xs font-medium"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#1D2C24' : '#F2F5EE',
+              'border-color': themeSombre ? '#30483A' : '#DFE8D9',
+              color: themeSombre ? '#B1C4B2' : '#465A4B'
+            }"
+          >
+            Aromatiques
+          </span>
+        </div>
+      </article>
+
+      <!-- Carte 4 -->
+      <article
+        class="group relative flex h-full flex-col overflow-hidden rounded-3xl border p-6 transition duration-300 hover:-translate-y-1 sm:p-7"
+        [ngStyle]="{
+          'background-color': themeSombre ? '#17231D' : '#FFFFFF',
+          'border-color': themeSombre ? '#30483A' : '#DFE8D9',
+          'box-shadow': themeSombre
+            ? '0 12px 36px rgba(0,0,0,0.10)'
+            : '0 12px 36px rgba(32,49,40,0.04)'
+        }"
+      >
+        <div class="mb-8 flex items-start justify-between">
+          <div
+            class="flex h-14 w-14 items-center justify-center rounded-2xl"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#25372D' : '#E8EEE4',
+              color: themeSombre ? '#62D6BF' : '#188E7B'
+            }"
+          >
+            <i class="fa-solid fa-book-open text-xl" aria-hidden="true"></i>
+          </div>
+
+          <span
+            class="text-xs font-bold tracking-[0.15em]"
+            [ngStyle]="{
+              color: themeSombre ? '#71936D' : '#9FBA94'
+            }"
+          >
+            04
+          </span>
+        </div>
+
+        <h3
+          class="text-xl font-semibold"
+          [ngStyle]="{
+            color: themeSombre ? '#F4F8F1' : '#203128'
+          }"
+        >
+          Les informations utiles
+        </h3>
+
+        <p
+          class="mt-3 flex-1 text-sm leading-7"
+          [ngStyle]="{
+            color: themeSombre ? '#B1C4B2' : '#657B69'
+          }"
+        >
+          Consultez les fiches disponibles pour en apprendre davantage
+          sur les caractéristiques et les besoins des plantes.
+        </p>
+
+        <div
+          class="mt-7 flex items-center gap-3 rounded-2xl border p-3"
+          [ngStyle]="{
+            'background-color': themeSombre ? '#1D2C24' : '#F2F5EE',
+            'border-color': themeSombre ? '#30483A' : '#DFE8D9'
+          }"
+        >
+          <i
+            class="fa-solid fa-circle-check text-lg"
+            [ngStyle]="{
+              color: themeSombre ? '#C4ED8A' : '#287653'
+            }"
+            aria-hidden="true"
+          ></i>
+
+          <span
+            class="text-xs font-medium leading-5"
+            [ngStyle]="{
+              color: themeSombre ? '#B1C4B2' : '#465A4B'
+            }"
+          >
+            Des informations pour mieux prendre soin de vos plantes.
+          </span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Conclusion -->
+    <div
+      class="mt-10 flex flex-col items-start justify-between gap-5 rounded-3xl border p-6 sm:mt-12 sm:flex-row sm:items-center sm:p-8"
+      [ngStyle]="{
+        'background-color': themeSombre ? '#17231D' : '#FFFFFF',
+        'border-color': themeSombre ? '#30483A' : '#DFE8D9'
+      }"
+    >
+      <div class="flex items-start gap-4">
+        <div
+          class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
+          [ngStyle]="{
+            'background-color': themeSombre ? '#25372D' : '#E8EEE4',
+            color: themeSombre ? '#C4ED8A' : '#287653'
+          }"
+        >
+          <i class="fa-solid fa-compass text-lg" aria-hidden="true"></i>
+        </div>
+
+        <div>
+          <h3
+            class="text-lg font-semibold"
+            [ngStyle]="{
+              color: themeSombre ? '#F4F8F1' : '#203128'
+            }"
+          >
+            À vous de choisir votre prochaine découverte.
+          </h3>
+
+          <p
+            class="mt-2 max-w-2xl text-sm leading-6"
+            [ngStyle]="{
+              color: themeSombre ? '#B1C4B2' : '#657B69'
+            }"
+          >
+            La recherche vous aide à explorer le catalogue. Les critères
+            présentés ici sont des pistes de découverte, pas des filtres
+            interactifs supplémentaires.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="inline-flex shrink-0 items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold"
+        [ngStyle]="{
+          'background-color': themeSombre ? '#C4ED8A' : '#287653',
+          color: themeSombre ? '#203128' : '#FFFFFF'
+        }"
+      >
+        <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+        <span>Explorez à votre rythme</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<style>
+    /* ============================================================
+   ARBORIA — SECTION 04 : RECHERCHE SELON VOS BESOINS
+============================================================ */
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host *,
+  :host *::before,
+  :host *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>

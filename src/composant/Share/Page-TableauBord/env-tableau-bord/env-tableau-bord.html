@@ -1,0 +1,85 @@
+<!-- ENVIRONNEMENT -->
+<section class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+    <article
+      class="relative overflow-hidden rounded-[1.5rem] border p-5 sm:p-7"
+      [style.backgroundColor]="'var(--BG3)'"
+      [style.borderColor]="'var(--BR1)'"
+      [style.boxShadow]="'var(--SHADOW)'"
+    >
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.18em]" [style.color]="'var(--Primary)'">Conditions ambiantes</p>
+          <h2 class="mt-2 text-xl font-semibold">Température moyenne</h2>
+          <p class="mt-2 text-sm leading-6" [style.color]="'var(--TX2)'">
+            Une vue d'ensemble des températures renseignées pour vos plantes.
+          </p>
+        </div>
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl" [style.backgroundColor]="'var(--PrimarySoft)'" [style.color]="'var(--Primary)'">
+          <i class="fa-solid fa-temperature-half text-xl"></i>
+        </span>
+      </div>
+
+      <div class="mt-8 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-4xl font-semibold tracking-tight tabular-nums sm:text-5xl">
+            {{ averageTemperature !== null ? (averageTemperature | number:'1.0-1') : '—' }}<span class="text-xl">°C</span>
+          </p>
+          <p class="mt-2 text-xs" [style.color]="'var(--TX2)'">Moyenne des données disponibles</p>
+        </div>
+        <div class="hidden items-end gap-1 sm:flex" aria-hidden="true">
+          <span class="h-5 w-2 rounded-full opacity-40" [style.backgroundColor]="'var(--Primary)'"></span>
+          <span class="h-8 w-2 rounded-full opacity-60" [style.backgroundColor]="'var(--Primary)'"></span>
+          <span class="h-6 w-2 rounded-full opacity-50" [style.backgroundColor]="'var(--Primary)'"></span>
+          <span class="h-11 w-2 rounded-full" [style.backgroundColor]="'var(--Primary)'"></span>
+          <span class="h-7 w-2 rounded-full opacity-60" [style.backgroundColor]="'var(--Primary)'"></span>
+          <span class="h-9 w-2 rounded-full opacity-75" [style.backgroundColor]="'var(--Primary)'"></span>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-xl border p-4" [style.backgroundColor]="'var(--BG1)'" [style.borderColor]="'var(--BR1)'">
+        <p class="text-xs leading-6" [style.color]="'var(--TX2)'">
+          Les températures adaptées varient selon les espèces. Comparez les valeurs
+          à leurs besoins spécifiques plutôt que de rechercher une température unique.
+        </p>
+      </div>
+    </article>
+
+    <article
+      class="relative overflow-hidden rounded-[1.5rem] border p-5 sm:p-7"
+      [style.backgroundColor]="'var(--BG3)'"
+      [style.borderColor]="'var(--BR1)'"
+      [style.boxShadow]="'var(--SHADOW)'"
+    >
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.18em]" [style.color]="'var(--Primary)'">Équilibre hydrique</p>
+          <h2 class="mt-2 text-xl font-semibold">Humidité moyenne</h2>
+          <p class="mt-2 text-sm leading-6" [style.color]="'var(--TX2)'">
+            Un repère pour suivre les conditions d'humidité renseignées.
+          </p>
+        </div>
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl" [style.backgroundColor]="'var(--PrimarySoft)'" [style.color]="'var(--Primary)'">
+          <i class="fa-solid fa-droplet text-xl"></i>
+        </span>
+      </div>
+
+      <div class="mt-8 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-4xl font-semibold tracking-tight tabular-nums sm:text-5xl">
+            {{ averageHumidity !== null ? (averageHumidity | number:'1.0-0') : '—' }}<span class="text-xl">%</span>
+          </p>
+          <p class="mt-2 text-xs" [style.color]="'var(--TX2)'">Moyenne des données disponibles</p>
+        </div>
+        <div class="flex h-14 w-14 items-center justify-center rounded-full border-4" [style.borderColor]="'var(--Primary)'">
+          <i class="fa-solid fa-droplet text-xl" [style.color]="'var(--Primary)'"></i>
+        </div>
+      </div>
+
+      <div class="mt-6 rounded-xl border p-4" [style.backgroundColor]="'var(--BG1)'" [style.borderColor]="'var(--BR1)'">
+        <p class="text-xs leading-6" [style.color]="'var(--TX2)'">
+          L'humidité ambiante et celle du substrat sont différentes. Vérifiez
+          les besoins de chaque plante avant d'ajuster l'arrosage.
+        </p>
+      </div>
+    </article>
+</section>

@@ -1,0 +1,97 @@
+/* ============================================================
+   GUIDES FIGMA
+   ============================================================ */
+
+.guides-figma {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  /*
+   * Les guides sont purement visuels.
+   * Ils ne doivent jamais empêcher les clics
+   * sur les éléments situés derrière.
+   */
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   GUIDE COMMUN
+   ============================================================ */
+
+.guide {
+  position: absolute;
+
+  /*
+   * Les guides occupent toute la hauteur
+   * du conteneur parent.
+   */
+  top: 0;
+  bottom: 0;
+
+  /*
+   * Aucun clic ne doit être intercepté.
+   */
+  pointer-events: none;
+
+  /*
+   * Rouge façon guides Figma.
+   */
+  background: #ff0000;
+}
+
+
+/* ============================================================
+   GUIDE GAUCHE
+   ============================================================
+
+   30px exactement depuis le bord gauche.
+   ============================================================ */
+
+.guide-left {
+  width: 40px;
+
+  opacity: 0.30;
+
+  transform: translateX(-50%);
+}
+
+
+/* ============================================================
+   GUIDE DROITE
+   ============================================================
+
+   30px exactement depuis le bord droit.
+   ============================================================ */
+
+   .guide-right {
+    right: 0px;
+  
+    width: 40px;
+  
+    opacity: 0.30;
+  
+    transform: translateX(50%);
+  }
+
+
+/* ============================================================
+   GUIDE CENTRE
+   ============================================================
+
+   Toujours exactement au centre du conteneur.
+   ============================================================ */
+
+.guide-center {
+  left: 50%;
+
+  width: 3px;
+
+  opacity: 0.40;
+
+  transform: translateX(-50%);
+}
+
+

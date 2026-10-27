@@ -51,7 +51,7 @@ if (!fs.existsSync(plantsUploadPath)) {
     recursive: true
   });
 
-  
+
 }
 
 if (!fs.existsSync(usersUploadPath)) {
@@ -59,9 +59,18 @@ if (!fs.existsSync(usersUploadPath)) {
     recursive: true
   });
 
-  
+
 }
 
+
+
+console.log('📁 Dossier réel des avatars :', usersUploadPath);
+console.log(
+  '🖼️ Avatar recherché présent :',
+  fs.existsSync(
+    path.join(usersUploadPath, '1792480024233-646872273.png')
+  )
+);
 // ==========================================
 // 📸 Fichiers statiques — Uploads plantes
 // ==========================================
@@ -226,6 +235,11 @@ const resetPasswordRoutes =
 const rappelRoutes =
   require('./Backend/Routes/rappel.routes');
 
+const AssistantRoutes =
+  require('./Backend/Routes/Assistant.Routes');
+
+
+
 // ==========================================
 // 👤 API utilisateurs
 // ==========================================
@@ -265,6 +279,8 @@ app.use(
   rappelRoutes
 );
 
+app.use('/api/assistant', AssistantRoutes);
+
 // ==========================================
 // 🌱 API plantes
 // ==========================================
@@ -287,10 +303,5 @@ app.use(
 app.listen(
   PORT,
   () => {
-
-    
-
-    
-
   }
 );

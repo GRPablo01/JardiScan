@@ -23,6 +23,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.2.14",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
     "@angular/core": "^20.3.0",
@@ -32,6 +33,7 @@
     "@angular/router": "^20.3.0",
     "@angular/ssr": "^20.3.6",
     "@tailwindcss/postcss": "^4.3.3",
+    "axios": "^1.21.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

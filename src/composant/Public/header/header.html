@@ -1,289 +1,181 @@
+
 <!-- ============================================================
+     ARBORIA — HEADER PREMIUM MODULAIRE
+     Angular Standalone + Tailwind CSS + Font Awesome
 
-🌿 JARDISCAN — HEADER COMPLET FIXED
-
-• Header fixed
-• Reste visible pendant tout le scroll
-• Toute la largeur disponible
-• Marge permanente à gauche et à droite
-• Logo jamais collé à la bordure
-• app-liste-icon directement à côté du logo
-• Navigation desktop centrée exactement dans l'écran
-• app-bouton-bienvenue jamais collé à la bordure
-• Navigation mobile / tablette conservée
-• Bouton bienvenue conservé
-• ThemeService conservé
-• Angular 20 Standalone
-• Tailwind CSS
-• Responsive
-• Aucun composant supprimé
-• Aucun composant déplacé hors de sa logique actuelle
-
+     • Hauteur fixe : 76px sur tous les écrans
+     • Groupe gauche : Logo + Navigation desktop
+     • Groupe droit : Actions
+     • Marges horizontales : 20px
+     • Palette dynamique via ThemeService
+     • Mode clair / sombre
+     • Navigation desktop à partir de 920px
+     • Navigation mobile / tablette sous 920px
+     • Tailwind CSS pour la mise en page
+     • Composants Angular et routes existants conservés
 ============================================================ -->
 
-<header class="
-    fixed
-    top-0
-    left-0
-    z-50
-    w-full
-    border-b
-    backdrop-blur-2xl
-  " [ngStyle]="{
-    'background': themeService.BG1,
+<header
+  class="arboria-header sticky top-0 z-50 w-full h-[76px] shrink-0 overflow-visible border-b backdrop-blur-xl"
+  [ngStyle]="{
+    'height': '76px',
+    'min-height': '76px',
+    'max-height': '76px',
+    'background-color': themeService.BG1,
     'border-color': themeService.BR1,
-    'box-shadow': themeService.BoxShadowSmall
-  }">
-
-  <!-- ==========================================================
-  🌿 CONTENEUR PRINCIPAL
-
-  • Toute la largeur
-  • Marge gauche permanente
-  • Marge droite permanente
-  • Logo à gauche
-  • Liste-icons juste à côté
-  • Navigation centrée
-  • Bouton bienvenue à droite
-  =========================================================== -->
-
-  <div class="
-      relative
-      flex
-      min-h-[72px]
-      w-full
-      items-center
-      px-3
-      sm:px-4
-      md:px-5
-      lg:px-6
-      xl:px-8
-      2xl:px-10
-    ">
-
+    'color': themeService.TX0,
+    'box-shadow': '0 4px 24px ' + themeService.SHADOW,
+    'font-family': themeService.FONT_BODY
+  }"
+>
+  <nav
+    class="mx-auto flex h-[76px] min-h-[76px] max-h-[76px] w-full max-w-[1600px] items-center justify-between gap-2 overflow-visible px-5 lg:gap-4"
+    [attr.aria-label]="
+      languageService.is('fr')
+        ? 'Navigation principale'
+        : 'Main navigation'
+    "
+  >
 
     <!-- ========================================================
-🌿 ZONE GAUCHE
+         GROUPE GAUCHE : LOGO + NAVIGATION DESKTOP
+    ========================================================= -->
 
-• Toujours à gauche
-• Mais jamais collée à la bordure
-• Logo
-• Nom JardiScan
-• app-liste-icon juste à côté
-========================================================= -->
+    <div
+      class="flex h-full min-w-0 flex-1 items-center gap-2 lg:gap-5 xl:gap-8"
+      [ngStyle]="{
+        'color': themeService.TX0
+      }"
+    >
 
-    <div class="
-    flex
-    shrink-0
-    items-center
-    gap-2
-    sm:gap-3
-  ">
+      <!-- LOGO ARBORIA -->
 
-      <!-- ======================================================
-  🌿 LOGO JARDISCAN
-  ======================================================= -->
-
-      <a routerLink="/accueil" aria-label="JardiScan - Accueil de présentation" class="
-      group
-      flex
-      shrink-0
-      items-center
-      gap-2.5
-      rounded-2xl
-      outline-none
-      transition-all
-      duration-300
-    ">
-
-        <!-- ==================================================
-    🖼️ CONTENEUR DU LOGO
-    =================================================== -->
-
-        <div class="
-        relative
-        flex
-        h-10
-        w-10
-        shrink-0
-        items-center
-        justify-center
-        overflow-hidden
-        rounded-2xl
-        transition-all
-        duration-300
-        group-hover:scale-105
-        group-active:scale-95
-        sm:h-11
-        sm:w-11
-        lg:h-12
-        lg:w-12
-      ">
-
-          <!-- =================================================
-      🖼️ LOGO
-      ================================================== -->
-
-          <img src="assets/Logo.svg" alt="Logo JardiScan" class="
-          relative
-          z-10
-          h-full
-          w-full
-          object-contain
-          p-1
-        " />
-
-          <!-- =================================================
-      ✨ EFFET LUMINEUX
-      ================================================== -->
-
-          <span aria-hidden="true" class="
-          pointer-events-none
-          absolute
-          inset-0
-          z-20
-          -translate-x-full
-          skew-x-[-20deg]
-          bg-white/20
-          transition-transform
-          duration-500
-          group-hover:translate-x-[150%]
-        "></span>
-
-        </div>
-
-        <!-- ==================================================
-    🌿 NOM DE L'APPLICATION
-    =================================================== -->
-
-        <div class="
-        hidden
-        min-w-0
-        flex-col
-        leading-none
-        sm:flex
-      ">
-
-          <p class="
-          truncate
-          text-lg
-          font-black
-          tracking-tight
-          sm:text-xl
-        " [ngStyle]="{
-          'color': themeService.TextPrincipal
-        }">
-            Natureora
-          </p>
-
-          <span class="
-          mt-1
-          truncate
-          text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.18em]
-        " [ngStyle]="{
-          'color': themeService.TextTertiaire
-        }">
-            Conseil intelligent
-          </span>
-
-        </div>
-
-      </a>
+      <div
+        class="flex h-full shrink-0 items-center"
+        [ngStyle]="{
+          'color': themeService.TX0
+        }"
+      >
+        <app-welcome-logo></app-welcome-logo>
+      </div>
 
       <!-- ======================================================
-  🌿 LISTE DES ICÔNES
+           NAVIGATION DESKTOP
+           Visible à partir de 920px inclus
+      ======================================================= -->
 
-  • Directement à côté du logo
-  • Reste dans le header
-  • Aucun changement du composant
-  ======================================================= -->
-
-      <div class="
-      flex
-      shrink-0
-      items-center
-    ">
-        <app-liste-icon></app-liste-icon>
+      <div
+        class="hidden h-full min-w-0 items-center min-[920px]:flex"
+        [ngStyle]="{
+          'color': themeService.TX1
+        }"
+      >
+        <app-welcome-nav></app-welcome-nav>
       </div>
 
     </div>
 
     <!-- ========================================================
-🖥️ NAVIGATION DESKTOP
+         GROUPE DROIT : ACTIONS
+         Recherche • Thème • Notifications • Profil • Menu mobile
+    ========================================================= -->
 
-• À partir de 1293px
-• Centrée exactement à 50% de l'écran
-• Indépendante du logo
-• Indépendante du bouton bienvenue
-• Ne touche jamais directement les bords
-========================================================= -->
-
-    <div class="
-    absolute
-    left-1/2
-    top-1/2
-    hidden
-    -translate-x-1/2
-    -translate-y-1/2
-    min-[1293px]:block
-  ">
-
-      <!-- ====================================================
-  🌿 NAVIGATION PUBLIQUE
-  ===================================================== -->
-
-      <app-nav></app-nav>
-
+    <div
+      class="ml-auto flex h-full shrink-0 items-center justify-end"
+      [ngStyle]="{
+        'color': themeService.TX0
+      }"
+    >
+      <app-welcome-action></app-welcome-action>
     </div>
 
-    <!-- ========================================================
-👤 BOUTON BIENVENUE
-
-• Toujours à droite
-• Marge intérieure du header
-• Jamais collé à la bordure
-• Indépendant de la navigation
-========================================================= -->
-
-    <div class="
-    ml-auto
-    flex
-    shrink-0
-    items-center
-  ">
-      <app-profil></app-profil>
-    </div>
-
-
-  </div>
-
+  </nav>
 </header>
 
 <!-- ============================================================
-
-📱 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
-
-• En dehors de la balise header
-• De 390px à 1292px
-• Masquée sous 390px
-• Masquée à partir de 1293px
-• app-nav-welcome conservé
-• app-liste-icon reste dans le header
-• Header désormais FIXED
-
+     NAVIGATION MOBILE / TABLETTE
+     Visible uniquement sous 920px
 ============================================================ -->
 
-<div class="
-    hidden
-    w-full
-    min-[390px]:block
-    min-[1293px]:hidden
-    pt-[72px]
-  ">
+<section
+  class="block min-[920px]:hidden"
+  [attr.aria-label]="
+    languageService.is('fr')
+      ? 'Navigation mobile et tablette'
+      : 'Mobile and tablet navigation'
+  "
+>
+  <app-welcome-nav></app-welcome-nav>
+</section>
 
-  <app-nav></app-nav>
+<!-- ============================================================
+     ANIMATIONS ET TRANSITIONS
+     La hauteur du header reste indépendante des animations.
+============================================================ -->
 
-</div>
+<style>
+  .arboria-header {
+    box-sizing: border-box;
+    isolation: isolate;
+
+    height: 76px;
+    min-height: 76px;
+    max-height: 76px;
+
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+
+    transition:
+      background-color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      color 220ms ease;
+  }
+
+  .arboria-header,
+  .arboria-header * {
+    box-sizing: border-box;
+  }
+
+  .arboria-header > nav {
+    height: 76px;
+    min-height: 76px;
+    max-height: 76px;
+  }
+
+  .arboria-header a,
+  .arboria-header button,
+  .arboria-header input,
+  .arboria-header select,
+  .arboria-header textarea {
+    font-family: var(--arboria-font-body, inherit);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .arboria-header a,
+  .arboria-header button {
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      opacity 180ms ease;
+  }
+
+  @media (max-width: 639px) {
+    .arboria-header {
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .arboria-header,
+    .arboria-header * {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>

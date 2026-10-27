@@ -1,0 +1,448 @@
+<!-- ============================================================
+     ARBORIA — PRESENTATION PREMIUM
+     Angular standalone + Tailwind CSS
+     Font Awesome — Light / Dark via ThemeService
+     API existante conservée : content, language, openRequest()
+============================================================ -->
+
+<section
+  class="arboria-request relative isolate w-full min-w-0 overflow-hidden
+         bg-[var(--BG1)] px-[18px] py-8 text-[var(--TX0)]
+         transition-colors duration-200
+         sm:px-7 sm:py-12
+         lg:px-[5vw] lg:py-[72px]"
+  [attr.lang]="language"
+>
+  <div class="relative z-10 mx-auto w-full max-w-[1440px]">
+
+    <!-- ========================================================
+         HERO
+    ========================================================= -->
+    <header
+      class="grid min-h-[410px] grid-cols-1 items-center
+             gap-10 pb-12 pt-2
+             lg:grid-cols-[minmax(0,1.05fr)_minmax(300px,0.95fr)]
+             lg:gap-12 lg:pb-[68px]"
+    >
+
+      <!-- CONTENU ÉDITORIAL -->
+      <div class="min-w-0 max-w-[690px]">
+
+        <!-- Eyebrow -->
+        <div
+          class="mb-6 inline-flex items-center gap-2.5
+                 text-[11px] font-bold uppercase tracking-[0.15em]
+                 text-[var(--Primary)]"
+        >
+          <span
+            aria-hidden="true"
+            class="grid size-5 shrink-0 place-items-center
+                   rounded-full bg-[var(--PrimarySoft)]"
+          >
+            <i
+              class="fa-solid fa-leaf text-[10px]"
+              aria-hidden="true"
+            ></i>
+          </span>
+
+          <span>{{ content.eyebrow }}</span>
+        </div>
+
+        <!-- Titre principal -->
+        <h1
+          class="m-0 max-w-[760px]
+                 text-[clamp(40px,5.1vw,70px)]
+                 font-semibold leading-[1.08]
+                 tracking-[-0.055em]"
+          style="font-family: var(--arboria-font-display)"
+        >
+          {{ content.titleStart }}
+
+          <span class="text-[var(--Primary)]">
+            {{ content.titleAccent }}
+          </span>
+
+          <br />
+
+          {{ content.titleEnd }}
+        </h1>
+
+        <!-- Description -->
+        <p
+          class="mt-6 max-w-[550px]
+                 text-[clamp(14px,1.2vw,16px)]
+                 leading-[1.9] text-[var(--TX2)]"
+          style="font-family: var(--arboria-font-body)"
+        >
+          {{ content.description }}
+        </p>
+
+        <!-- Actions -->
+        <div class="mt-8 flex flex-wrap gap-3">
+
+          <!-- Action principale : API conservée -->
+          <button
+            type="button"
+            class="group inline-flex min-h-[49px]
+                   items-center justify-center gap-[18px]
+                   rounded-[var(--arboria-radius-md)]
+                   border border-transparent
+                   bg-[var(--BUTON1BG)]
+                   px-5 text-[13px] font-semibold
+                   text-[var(--BUTON1TEXT)]
+                   shadow-[0_8px_20px_var(--BUTON1SHADOW)]
+                   transition-all duration-200
+                   hover:-translate-y-0.5
+                   hover:bg-[var(--BUTON1HOVER)]
+                   hover:shadow-[0_12px_24px_var(--BUTON1SHADOW)]
+                   focus-visible:outline
+                   focus-visible:outline-2
+                   focus-visible:outline-offset-4
+                   focus-visible:outline-[var(--Primary)]"
+            (click)="openRequest()"
+          >
+            <span>{{ content.primary }}</span>
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square
+                     text-[12px] transition-transform duration-200
+                     group-hover:translate-x-0.5
+                     group-hover:-translate-y-0.5"
+              aria-hidden="true"
+            ></i>
+          </button>
+
+          <!-- Action secondaire -->
+          <a
+            href="#request-options"
+            class="group inline-flex min-h-[49px]
+                   items-center justify-center gap-3
+                   rounded-[var(--arboria-radius-md)]
+                   border border-[var(--BR2)]
+                   bg-[var(--BG3)] px-5
+                   text-[13px] font-semibold
+                   text-[var(--TX1)]
+                   transition-all duration-200
+                   hover:-translate-y-0.5
+                   hover:border-[var(--BR3)]
+                   hover:bg-[var(--BG4)]
+                   focus-visible:outline
+                   focus-visible:outline-2
+                   focus-visible:outline-offset-4
+                   focus-visible:outline-[var(--Primary)]"
+          >
+            <span>{{ content.secondary }}</span>
+
+            <i
+              class="fa-solid fa-arrow-down
+                     text-[11px] transition-transform duration-200
+                     group-hover:translate-y-0.5"
+              aria-hidden="true"
+            ></i>
+          </a>
+
+        </div>
+
+        <!-- Note facultative déjà fournie par le contenu -->
+        <div
+          class="mt-6 flex items-start gap-2.5
+                 text-xs leading-6 text-[var(--TX3)]"
+        >
+          <i
+            class="fa-solid fa-circle-check mt-1 shrink-0
+                   text-[var(--Primary)]"
+            aria-hidden="true"
+          ></i>
+
+          <span>{{ content.note }}</span>
+        </div>
+
+      </div>
+
+      <!-- ======================================================
+           ILLUSTRATION ARBORIA
+      ======================================================= -->
+      <div
+        aria-hidden="true"
+        class="relative grid min-h-[310px] place-items-center
+               overflow-hidden rounded-[var(--arboria-radius-2xl)]
+               border border-[var(--BR1)]
+               bg-[var(--BG2)]
+               sm:min-h-[370px]
+               sm:rounded-[var(--arboria-radius-3xl)]"
+        style="
+          background-image:
+            radial-gradient(
+              ellipse at 50% 45%,
+              var(--PrimarySoft),
+              transparent 62%
+            ),
+            linear-gradient(
+              145deg,
+              var(--BG2),
+              var(--BG1)
+            );
+        "
+      >
+
+        <!-- Grille décorative -->
+        <div
+          class="pointer-events-none absolute inset-0 opacity-[0.16]
+                 [background-image:linear-gradient(var(--BR2)_1px,transparent_1px),linear-gradient(90deg,var(--BR2)_1px,transparent_1px)]
+                 [background-size:34px_34px]"
+        ></div>
+
+        <!-- Halo central -->
+        <div
+          class="absolute size-[190px] rounded-full
+                 bg-[var(--PrimarySoft)] opacity-40 blur-3xl
+                 sm:size-[240px]"
+        ></div>
+
+        <!-- Anneau intérieur -->
+        <div
+          class="absolute size-[210px] rounded-full
+                 border border-[var(--BR3)] opacity-60
+                 sm:size-[270px]"
+        ></div>
+
+        <!-- Anneau extérieur -->
+        <div
+          class="absolute size-[280px] rounded-full
+                 border border-dashed border-[var(--BR3)]
+                 opacity-70
+                 sm:size-[350px]"
+        ></div>
+
+        <!-- Carte arrière -->
+        <div
+          class="absolute left-[4%] top-[25px] z-[3]
+                 w-[125px] -rotate-6
+                 rounded-[var(--arboria-radius-lg)]
+                 border border-[var(--BR2)]
+                 bg-[var(--BG3)] p-3
+                 shadow-[var(--arboria-shadow-lg)]
+                 transition-transform duration-300
+                 sm:left-[7%] sm:top-9 sm:w-[150px]
+                 sm:p-[15px]
+                 hover:rotate-[-3deg]"
+        >
+          <!-- Barre de titre -->
+          <div class="flex items-center justify-between gap-2">
+            <span
+              class="text-[8px] font-extrabold
+                     uppercase tracking-[0.12em]
+                     text-[var(--TX2)]"
+            >
+              Workspace
+            </span>
+
+            <i
+              class="fa-solid fa-ellipsis text-[10px]
+                     text-[var(--TX3)]"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <!-- Lignes décoratives -->
+          <div
+            class="mt-3 h-[5px] w-4/5 rounded-full
+                   bg-[var(--BR2)]"
+          ></div>
+
+          <div
+            class="mt-2.5 h-[5px] w-1/2 rounded-full
+                   bg-[var(--BR3)]"
+          ></div>
+
+          <!-- Icône de projet -->
+          <div
+            class="mt-[18px] grid size-[29px] place-items-center
+                   rounded-[var(--arboria-radius-sm)]
+                   bg-[var(--PrimarySoft)]
+                   text-[var(--Primary)]"
+          >
+            <i
+              class="fa-solid fa-seedling text-xs"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <!-- Statut -->
+          <div
+            class="mt-3 flex items-center gap-1.5
+                   text-[8px] font-semibold
+                   text-[var(--TX2)]"
+          >
+            <span
+              class="size-1.5 rounded-full
+                     bg-[var(--Accent)]"
+            ></span>
+
+            Active
+          </div>
+        </div>
+
+        <!-- Symbole central -->
+        <div
+          class="relative z-[2] grid size-[120px]
+                 place-items-center rounded-full
+                 border border-white/20
+                 bg-gradient-to-br
+                 from-[var(--arboria-green)]
+                 to-[var(--arboria-forest)]
+                 shadow-[0_20px_55px_var(--SHADOW)]
+                 sm:size-[142px]"
+        >
+          <!-- Cercle intérieur -->
+          <div
+            class="grid size-[90px] place-items-center
+                   rounded-full border border-white/25
+                   sm:size-[106px]"
+          >
+            <span
+              class="flex items-center justify-center
+                     text-[48px] font-medium
+                     tracking-[-0.09em] text-white
+                     sm:text-[57px]"
+              style="font-family: var(--arboria-font-display)"
+            >
+              a.
+            </span>
+          </div>
+
+          <!-- Insigne supérieur -->
+          <span
+            class="absolute -right-1 top-1
+                   grid size-[34px] place-items-center
+                   rounded-full border border-[var(--BR1)]
+                   bg-[var(--BG3)]
+                   text-[var(--Primary)]
+                   shadow-[var(--arboria-shadow-md)]"
+          >
+            <i
+              class="fa-solid fa-sparkles text-[13px]"
+              aria-hidden="true"
+            ></i>
+          </span>
+
+          <!-- Insigne inférieur -->
+          <span
+            class="absolute -bottom-1 left-0
+                   grid size-[34px] place-items-center
+                   rounded-full border border-[var(--BR1)]
+                   bg-[var(--BG3)]
+                   text-[var(--Accent)]
+                   shadow-[var(--arboria-shadow-md)]"
+          >
+            <i
+              class="fa-solid fa-leaf text-[13px]"
+              aria-hidden="true"
+            ></i>
+          </span>
+        </div>
+
+        <!-- Carte avant -->
+        <div
+          class="absolute bottom-6 right-[4%] z-[3]
+                 w-[125px] rotate-[5deg]
+                 rounded-[var(--arboria-radius-lg)]
+                 border border-[var(--BR2)]
+                 bg-[var(--BG3)] p-3
+                 shadow-[var(--arboria-shadow-lg)]
+                 transition-transform duration-300
+                 sm:bottom-9 sm:right-[5%]
+                 sm:w-[150px] sm:p-[15px]
+                 hover:rotate-[2deg]"
+        >
+          <!-- En-tête -->
+          <div
+            class="flex items-center justify-between gap-2
+                   text-[8px] font-extrabold
+                   tracking-[0.12em]
+                   text-[var(--Primary)]"
+          >
+            <span class="flex items-center gap-1.5">
+              <i
+                class="fa-solid fa-leaf text-[9px]"
+                aria-hidden="true"
+              ></i>
+
+              ARBORIA
+            </span>
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square
+                     text-[8px] text-[var(--TX3)]"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <!-- Lignes décoratives -->
+          <div
+            class="mt-[13px] h-[9px] w-[85%]
+                   rounded-md bg-[var(--PrimarySoft)]"
+          ></div>
+
+          <div
+            class="mt-2 h-[6px] w-full rounded-md
+                   bg-[var(--BR1)]"
+          ></div>
+
+          <div
+            class="mt-2 h-[6px] w-3/5 rounded-md
+                   bg-[var(--BR2)]"
+          ></div>
+
+          <!-- Pied de carte -->
+          <div
+            class="mt-[18px] flex items-center
+                   justify-between gap-2
+                   text-[9px] font-extrabold
+                   text-[var(--Primary)]"
+          >
+            <span class="flex items-center gap-1.5">
+              <i
+                class="fa-solid fa-circle-check"
+                aria-hidden="true"
+              ></i>
+
+              IDEA
+            </span>
+
+            <i
+              class="fa-solid fa-arrow-trend-up"
+              aria-hidden="true"
+            ></i>
+          </div>
+        </div>
+
+        <!-- Éléments flottants -->
+        <i
+          class="fa-solid fa-sparkles absolute
+                 right-[14%] top-[24%] z-[4]
+                 text-xl text-[var(--Accent)]"
+          aria-hidden="true"
+        ></i>
+
+        <i
+          class="fa-solid fa-leaf absolute
+                 bottom-[20%] left-[12%] z-[4]
+                 text-2xl text-[var(--Primary)]"
+          aria-hidden="true"
+        ></i>
+
+        <!-- Point lumineux -->
+        <span
+          class="absolute left-1/2 top-[12%] z-[1]
+                 size-1.5 -translate-x-1/2
+                 rounded-full bg-[var(--Accent)]
+                 opacity-80"
+        ></span>
+
+      </div>
+
+    </header>
+
+  </div>
+</section>

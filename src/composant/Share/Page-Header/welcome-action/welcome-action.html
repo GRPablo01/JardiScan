@@ -1,0 +1,68 @@
+<!-- ARBORIA — ACTIONS DU HEADER -->
+
+<div
+  class="arboria-header-actions ml-auto flex shrink-0 items-center
+         gap-1 sm:gap-1.5 lg:ml-0 xl:gap-2"
+>
+  <!-- Thème -->
+  <app-welcome-theme-toggle />
+
+  <!-- Langue -->
+  <app-welcome-language
+    [langueActuelle]="langueActuelle"
+    (langueChangee)="changerLangue($event)"
+  />
+
+  <!-- Notifications -->
+  <app-welcome-notifications
+    [nombreNotifications]="nombreNotifications"
+  />
+
+  <!-- Séparateur -->
+  <div
+    class="mx-1 hidden h-7 w-px sm:block"
+    [ngStyle]="{
+      'background-color': 'var(--action-border)'
+    }"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Profil : visible uniquement au-dessus de 920px -->
+  <div class="hidden min-[920px]:block">
+    <app-welcome-profile />
+  </div>
+
+</div>
+
+
+<style>
+  :host {
+  display: block;
+  min-width: 0;
+}
+
+.arboria-header-actions {
+  min-width: 0;
+}
+
+.arboria-header-actions * {
+  box-sizing: border-box;
+}
+
+@media (max-width: 359px) {
+  .arboria-header-actions {
+    gap: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arboria-header-actions *,
+  .arboria-header-actions *::before,
+  .arboria-header-actions *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>

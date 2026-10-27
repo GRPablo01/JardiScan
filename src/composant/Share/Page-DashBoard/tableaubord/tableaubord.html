@@ -1,0 +1,727 @@
+
+<!-- ============================================================
+     ARBORIA — BOTANICAL DASHBOARD MULTICOLOR PRO
+     Angular Standalone • Tailwind CSS • Font Awesome
+     ThemeService • Mode clair / sombre • Design tokens
+     Widgets personnalisables • Pastilles macOS
+     Responsive • Accessibilité • Animations
+============================================================ -->
+
+<section
+  class="arboria-dashboard relative isolate min-h-[calc(100dvh-70px)] w-full overflow-x-clip transition-colors duration-300"
+  [style.backgroundColor]="themeService.BG1"
+  [style.color]="themeService.TX0"
+  [style.fontFamily]="themeService.FONT_BODY"
+  aria-label="Tableau de bord Arboria"
+>
+  <!-- PROGRESSION -->
+  <div
+    class="fixed left-0 right-0 top-0 z-[120] h-1"
+    [style.backgroundColor]="themeService.BR1"
+    role="progressbar"
+    aria-label="Progression du défilement"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-valuenow]="scrollProgress"
+  >
+    <div
+      class="h-full transition-[width] duration-150"
+      [style.width.%]="scrollProgress"
+      [style.backgroundColor]="themeService.Primary"
+    ></div>
+  </div>
+
+  <main
+    class="mx-auto w-full max-w-[1800px] px-4 pb-10 pt-7 sm:px-6 lg:px-8 xl:px-10"
+    (scroll)="updateScrollProgress($event)"
+    tabindex="0"
+    aria-label="Contenu du tableau de bord"
+  >
+    <div class="flex flex-col gap-8">
+
+      <!-- EN-TÊTE -->
+      <app-header-tableau-bord></app-header-tableau-bord>
+
+      <!-- BANDEAU PRINCIPAL -->
+      <app-bandeau-tableau-bord></app-bandeau-tableau-bord>
+
+      <!-- ======================================================
+           PERSONNALISATION
+      ======================================================= -->
+      <section
+        class="group relative overflow-hidden rounded-[2rem] border p-5 transition-all duration-300 sm:p-7 lg:p-8"
+        [style.backgroundColor]="themeService.BG2"
+        [style.borderColor]="themeService.BR1"
+        [style.boxShadow]="'var(--arboria-shadow-md)'"
+        aria-labelledby="dashboard-custom-title"
+      >
+        <!-- Accent multicolore -->
+        <div class="absolute inset-x-0 top-0 flex h-1.5 overflow-hidden">
+          <span class="h-full flex-1" [style.backgroundColor]="themeService.Emerald"></span>
+          <span class="h-full flex-1" [style.backgroundColor]="themeService.Cyan"></span>
+          <span class="h-full flex-1" [style.backgroundColor]="themeService.Blue"></span>
+          <span class="h-full flex-1" [style.backgroundColor]="themeService.Purple"></span>
+          <span class="h-full flex-1" [style.backgroundColor]="themeService.Pink"></span>
+          <span class="h-full flex-1" [style.backgroundColor]="themeService.Orange"></span>
+        </div>
+
+        <div class="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-3">
+              <span
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
+                [style.backgroundColor]="themeService.PrimarySoft"
+                [style.color]="themeService.Primary"
+              >
+                <i class="fa-solid fa-sliders text-lg" aria-hidden="true"></i>
+              </span>
+
+              <div>
+                <p
+                  class="text-xs font-bold uppercase tracking-[0.18em]"
+                  [style.color]="themeService.Secondary"
+                >
+                  Espace personnel
+                </p>
+                <p class="mt-1 text-sm" [style.color]="themeService.TX2">
+                  Votre jardin, votre organisation
+                </p>
+              </div>
+            </div>
+
+            <h1
+              id="dashboard-custom-title"
+              class="mt-5 text-3xl font-bold tracking-tight sm:text-4xl"
+              [style.color]="themeService.TX0"
+              [style.letterSpacing]="themeService.LETTER_SPACING_TIGHT"
+            >
+              Mon tableau de bord
+            </h1>
+
+            <p
+              class="mt-3 max-w-2xl text-sm leading-7 sm:text-base"
+              [style.color]="themeService.TX2"
+            >
+              Personnalisez votre espace botanique. Affichez les informations,
+              outils et raccourcis qui vous sont utiles au quotidien.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <div
+              class="rounded-2xl border px-4 py-3"
+              [style.backgroundColor]="themeService.BG1"
+              [style.borderColor]="themeService.BR1"
+            >
+              <p
+                class="text-xs font-medium"
+                [style.color]="themeService.TX2"
+              >
+                Widgets visibles
+              </p>
+              <p
+                class="mt-1 text-2xl font-bold"
+                [style.color]="themeService.Primary"
+              >
+                {{ nombreWidgetsActifs }}
+                <span
+                  class="text-sm font-medium"
+                  [style.color]="themeService.TX3"
+                >
+                  / {{ widgetsDisponibles.length }}
+                </span>
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              [style.backgroundColor]="themeService.BUTON2BG"
+              [style.color]="themeService.BUTON2TEXT"
+              [style.borderColor]="themeService.BUTON2BORDER"
+              [style.--tw-ring-color]="themeService.Accent"
+              (click)="restaurerWidgets()"
+            >
+              <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+              Tout afficher
+            </button>
+          </div>
+        </div>
+
+        <!-- SÉPARATEUR -->
+        <div
+          class="my-7 h-px w-full"
+          [style.backgroundColor]="themeService.BR1"
+        ></div>
+
+        <!-- SÉLECTEUR DE WIDGETS -->
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2
+                class="text-base font-bold sm:text-lg"
+                [style.color]="themeService.TX0"
+              >
+                Personnaliser mes widgets
+              </h2>
+              <p
+                class="mt-1 text-sm"
+                [style.color]="themeService.TX2"
+              >
+                Activez ou désactivez les éléments de votre espace.
+              </p>
+            </div>
+
+            <span
+              class="inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold"
+              [style.backgroundColor]="themeService.BADGEABG"
+              [style.borderColor]="themeService.BADGEABORDER"
+              [style.color]="themeService.BADGEATEXT"
+            >
+              <i class="fa-solid fa-check-circle" aria-hidden="true"></i>
+              Préférences personnalisables
+            </span>
+          </div>
+
+          <div
+            class="flex flex-wrap gap-2.5"
+            role="group"
+            aria-label="Afficher ou masquer les widgets"
+          >
+            @for (widget of widgetsDisponibles; track widget.id) {
+              <button
+                type="button"
+                class="inline-flex min-h-11 items-center gap-2.5 rounded-full border px-4 py-2.5 text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                [style.backgroundColor]="widgetsVisibles[widget.id] ? themeService.BG1 : 'transparent'"
+                [style.borderColor]="widgetsVisibles[widget.id] ? widget.couleur : themeService.BR2"
+                [style.color]="widgetsVisibles[widget.id] ? themeService.TX0 : themeService.TX2"
+                [style.--tw-ring-color]="widget.couleur"
+                [style.boxShadow]="widgetsVisibles[widget.id] ? 'var(--arboria-shadow-sm)' : 'none'"
+                [attr.aria-pressed]="!!widgetsVisibles[widget.id]"
+                [attr.aria-label]="(widgetsVisibles[widget.id] ? 'Masquer ' : 'Afficher ') + widget.label"
+                (click)="basculerWidget(widget.id)"
+              >
+                <span
+                  class="h-2.5 w-2.5 shrink-0 rounded-full transition-opacity duration-200"
+                  [style.backgroundColor]="widget.couleur"
+                  [style.opacity]="widgetsVisibles[widget.id] ? '1' : '0.35'"
+                  aria-hidden="true"
+                ></span>
+
+                <span>{{ widget.label }}</span>
+
+                <span
+                  class="ml-1 flex h-5 w-5 items-center justify-center rounded-full text-[10px]"
+                  [style.backgroundColor]="widgetsVisibles[widget.id] ? widget.couleur : themeService.BG3"
+                  [style.color]="widgetsVisibles[widget.id] ? '#FFFFFF' : themeService.TX3"
+                >
+                  <i
+                    class="fa-solid"
+                    [class.fa-check]="widgetsVisibles[widget.id]"
+                    [class.fa-plus]="!widgetsVisibles[widget.id]"
+                    aria-hidden="true"
+                  ></i>
+                </span>
+              </button>
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================
+           GRILLE DES WIDGETS
+      ======================================================= -->
+      <div class="grid grid-cols-1 items-start gap-6 md:grid-cols-2 2xl:grid-cols-4">
+
+        <!-- ====================================================
+             STATISTIQUES
+        ===================================================== -->
+        @if (widgetsVisibles['statistiques']) {
+          <section
+            class="col-span-1 min-w-0 md:col-span-2 2xl:col-span-4"
+            aria-labelledby="stats-title"
+          >
+            <div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <div class="mb-2 flex items-center gap-2">
+                  <span
+                    class="h-2 w-2 rounded-full"
+                    [style.backgroundColor]="themeService.Emerald"
+                  ></span>
+                  <p
+                    class="text-xs font-bold uppercase tracking-[0.18em]"
+                    [style.color]="themeService.Secondary"
+                  >
+                    Vue d'ensemble
+                  </p>
+                </div>
+
+                <h2
+                  id="stats-title"
+                  class="text-2xl font-bold tracking-tight sm:text-3xl"
+                  [style.color]="themeService.TX0"
+                >
+                  Votre jardin en chiffres
+                </h2>
+
+                <p
+                  class="mt-2 text-sm"
+                  [style.color]="themeService.TX2"
+                >
+                  Les indicateurs essentiels de votre espace botanique.
+                </p>
+              </div>
+
+              <span
+                class="rounded-full border px-3 py-1.5 text-xs font-bold"
+                [style.backgroundColor]="themeService.BG2"
+                [style.borderColor]="themeService.BR1"
+                [style.color]="themeService.TX2"
+              >
+                01 / STATISTIQUES
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-4">
+
+              <!-- COLLECTION -->
+              <article
+                class="group relative min-w-0 overflow-hidden rounded-3xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6"
+                [style.backgroundColor]="themeService.BG2"
+                [style.borderColor]="themeService.BR1"
+                [style.--stat-accent]="themeService.Emerald"
+              >
+                <div
+                  class="absolute inset-x-0 top-0 h-1"
+                  [style.backgroundColor]="themeService.Emerald"
+                ></div>
+
+                <div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0">
+                    <p class="text-sm font-medium" [style.color]="themeService.TX2">
+                      Ma collection
+                    </p>
+                    <p class="mt-4 text-3xl font-bold" [style.color]="themeService.TX0">—</p>
+                    <p class="mt-2 text-xs" [style.color]="themeService.TX3">
+                      Plantes enregistrées
+                    </p>
+                  </div>
+
+                  <span
+                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                    [style.backgroundColor]="themeService.SuccessSoft"
+                    [style.color]="themeService.Success"
+                  >
+                    <i class="fa-solid fa-leaf text-xl" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div class="mt-6 h-1.5 overflow-hidden rounded-full" [style.backgroundColor]="themeService.BR1">
+                  <div
+                    class="h-full w-2/3 rounded-full transition-all duration-500"
+                    [style.backgroundColor]="themeService.Emerald"
+                  ></div>
+                </div>
+              </article>
+
+              <!-- FAVORIS -->
+              <article
+                class="group relative min-w-0 overflow-hidden rounded-3xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6"
+                [style.backgroundColor]="themeService.BG2"
+                [style.borderColor]="themeService.BR1"
+              >
+                <div class="absolute inset-x-0 top-0 h-1" [style.backgroundColor]="themeService.Pink"></div>
+
+                <div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0">
+                    <p class="text-sm font-medium" [style.color]="themeService.TX2">Mes favoris</p>
+                    <p class="mt-4 text-3xl font-bold" [style.color]="themeService.TX0">—</p>
+                    <p class="mt-2 text-xs" [style.color]="themeService.TX3">Plantes favorites</p>
+                  </div>
+
+                  <span
+                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                    [style.backgroundColor]="themeService.ErrorSoft"
+                    [style.color]="themeService.Error"
+                  >
+                    <i class="fa-solid fa-heart text-xl" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div class="mt-6 h-1.5 overflow-hidden rounded-full" [style.backgroundColor]="themeService.BR1">
+                  <div class="h-full w-1/2 rounded-full transition-all duration-500" [style.backgroundColor]="themeService.Pink"></div>
+                </div>
+              </article>
+
+              <!-- SAISON -->
+              <article
+                class="group relative min-w-0 overflow-hidden rounded-3xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6"
+                [style.backgroundColor]="themeService.BG2"
+                [style.borderColor]="themeService.BR1"
+              >
+                <div class="absolute inset-x-0 top-0 h-1" [style.backgroundColor]="themeService.Orange"></div>
+
+                <div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0">
+                    <p class="text-sm font-medium" [style.color]="themeService.TX2">Saison actuelle</p>
+                    <p class="mt-4 text-2xl font-bold" [style.color]="themeService.TX0">Automne</p>
+                    <p class="mt-2 text-xs" [style.color]="themeService.TX3">Rythme du jardin</p>
+                  </div>
+
+                  <span
+                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                    [style.backgroundColor]="themeService.WarningSoft"
+                    [style.color]="themeService.Warning"
+                  >
+                    <i class="fa-solid fa-cloud-sun text-xl" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div class="mt-6 h-1.5 overflow-hidden rounded-full" [style.backgroundColor]="themeService.BR1">
+                  <div class="h-full w-3/4 rounded-full transition-all duration-500" [style.backgroundColor]="themeService.Orange"></div>
+                </div>
+              </article>
+
+              <!-- CONSEILS -->
+              <article
+                class="group relative min-w-0 overflow-hidden rounded-3xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-6"
+                [style.backgroundColor]="themeService.BG2"
+                [style.borderColor]="themeService.BR1"
+              >
+                <div class="absolute inset-x-0 top-0 h-1" [style.backgroundColor]="themeService.Purple"></div>
+
+                <div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0">
+                    <p class="text-sm font-medium" [style.color]="themeService.TX2">Conseils botaniques</p>
+                    <p class="mt-4 text-3xl font-bold" [style.color]="themeService.TX0">—</p>
+                    <p class="mt-2 text-xs" [style.color]="themeService.TX3">À découvrir</p>
+                  </div>
+
+                  <span
+                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                    [style.backgroundColor]="themeService.InfoSoft"
+                    [style.color]="themeService.Info"
+                  >
+                    <i class="fa-solid fa-lightbulb text-xl" aria-hidden="true"></i>
+                  </span>
+                </div>
+
+                <div class="mt-6 h-1.5 overflow-hidden rounded-full" [style.backgroundColor]="themeService.BR1">
+                  <div class="h-full w-4/5 rounded-full transition-all duration-500" [style.backgroundColor]="themeService.Purple"></div>
+                </div>
+              </article>
+
+            </div>
+          </section>
+        }
+
+        <!-- ====================================================
+             ENVIRONNEMENT
+        ===================================================== -->
+        @if (widgetsVisibles['environnement']) {
+          <section
+            class="col-span-1 min-w-0 md:col-span-2 2xl:col-span-4"
+            aria-label="Environnement du jardin"
+          >
+            <app-env-tableau-bord></app-env-tableau-bord>
+          </section>
+        }
+
+        <!-- ====================================================
+             COLLECTION
+        ===================================================== -->
+        @if (widgetsVisibles['collection']) {
+          <section
+            class="col-span-1 min-w-0 md:col-span-2 2xl:col-span-4"
+            aria-label="Collection de plantes"
+          >
+            <app-collection-tableau-bord></app-collection-tableau-bord>
+          </section>
+        }
+
+        <!-- ====================================================
+             CONSEILS
+        ===================================================== -->
+        @if (widgetsVisibles['conseils']) {
+          <section
+            class="col-span-1 min-w-0 md:col-span-2 2xl:col-span-4"
+            aria-label="Conseils botaniques"
+          >
+            <app-conseils-tableau-bord></app-conseils-tableau-bord>
+          </section>
+        }
+
+        <!-- ====================================================
+             RECHERCHE
+        ===================================================== -->
+        @if (widgetsVisibles['recherche']) {
+          <a
+            routerLink="/recherche"
+            class="group relative flex min-w-0 flex-col overflow-hidden rounded-3xl border p-5 no-underline transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:p-6"
+            [style.backgroundColor]="themeService.BG2"
+            [style.borderColor]="themeService.BR1"
+            [style.--tw-ring-color]="themeService.Emerald"
+          >
+            <div class="absolute inset-x-0 top-0 h-1 transition-all duration-300 group-hover:h-1.5" [style.backgroundColor]="themeService.Emerald"></div>
+
+            <div class="flex items-start justify-between gap-4">
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                [style.backgroundColor]="themeService.SuccessSoft"
+                [style.color]="themeService.Success"
+              >
+                <i class="fa-solid fa-magnifying-glass text-lg" aria-hidden="true"></i>
+              </span>
+
+              <span
+                class="flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                [style.backgroundColor]="themeService.BG3"
+                [style.color]="themeService.Emerald"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <p class="mt-6 text-xs font-bold uppercase tracking-[0.16em]" [style.color]="themeService.Emerald">
+              Explorer
+            </p>
+
+            <h3 class="mt-2 text-xl font-bold" [style.color]="themeService.TX0">
+              Découvrir les plantes
+            </h3>
+
+            <p class="mt-2 flex-1 text-sm leading-7" [style.color]="themeService.TX2">
+              Rechercher des plantes et découvrir leurs caractéristiques botaniques.
+            </p>
+
+            <div class="mt-5 flex items-center gap-2 text-sm font-semibold" [style.color]="themeService.Emerald">
+              Explorer le catalogue
+              <i class="fa-solid fa-arrow-right transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true"></i>
+            </div>
+          </a>
+        }
+
+        <!-- ====================================================
+             MES PLANTES
+        ===================================================== -->
+        @if (widgetsVisibles['mes-plantes']) {
+          <a
+            routerLink="/mes-plantes"
+            class="group relative flex min-w-0 flex-col overflow-hidden rounded-3xl border p-5 no-underline transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:p-6"
+            [style.backgroundColor]="themeService.BG2"
+            [style.borderColor]="themeService.BR1"
+            [style.--tw-ring-color]="themeService.Teal"
+          >
+            <div class="absolute inset-x-0 top-0 h-1 transition-all duration-300 group-hover:h-1.5" [style.backgroundColor]="themeService.Teal"></div>
+
+            <div class="flex items-start justify-between gap-4">
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                [style.backgroundColor]="themeService.AccentSoft"
+                [style.color]="themeService.Accent"
+              >
+                <i class="fa-solid fa-seedling text-lg" aria-hidden="true"></i>
+              </span>
+
+              <span
+                class="flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                [style.backgroundColor]="themeService.BG3"
+                [style.color]="themeService.Teal"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <p class="mt-6 text-xs font-bold uppercase tracking-[0.16em]" [style.color]="themeService.Teal">
+              Organiser
+            </p>
+
+            <h3 class="mt-2 text-xl font-bold" [style.color]="themeService.TX0">
+              Mes plantes
+            </h3>
+
+            <p class="mt-2 flex-1 text-sm leading-7" [style.color]="themeService.TX2">
+              Retrouvez et organisez facilement les plantes de votre collection.
+            </p>
+
+            <div class="mt-5 flex items-center gap-2 text-sm font-semibold" [style.color]="themeService.Teal">
+              Voir ma collection
+              <i class="fa-solid fa-arrow-right transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true"></i>
+            </div>
+          </a>
+        }
+
+        <!-- ====================================================
+             SAISON
+        ===================================================== -->
+        @if (widgetsVisibles['saison']) {
+          <a
+            routerLink="/saison"
+            class="group relative flex min-w-0 flex-col overflow-hidden rounded-3xl border p-5 no-underline transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:p-6"
+            [style.backgroundColor]="themeService.BG2"
+            [style.borderColor]="themeService.BR1"
+            [style.--tw-ring-color]="themeService.Orange"
+          >
+            <div class="absolute inset-x-0 top-0 h-1 transition-all duration-300 group-hover:h-1.5" [style.backgroundColor]="themeService.Orange"></div>
+
+            <div class="flex items-start justify-between gap-4">
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                [style.backgroundColor]="themeService.WarningSoft"
+                [style.color]="themeService.Warning"
+              >
+                <i class="fa-solid fa-calendar-days text-lg" aria-hidden="true"></i>
+              </span>
+
+              <span
+                class="flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                [style.backgroundColor]="themeService.BG3"
+                [style.color]="themeService.Orange"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <p class="mt-6 text-xs font-bold uppercase tracking-[0.16em]" [style.color]="themeService.Orange">
+              Planifier
+            </p>
+
+            <h3 class="mt-2 text-xl font-bold" [style.color]="themeService.TX0">
+              Calendrier saisonnier
+            </h3>
+
+            <p class="mt-2 flex-1 text-sm leading-7" [style.color]="themeService.TX2">
+              Découvrez les activités et les gestes adaptés à la saison.
+            </p>
+
+            <div class="mt-5 flex items-center gap-2 text-sm font-semibold" [style.color]="themeService.Orange">
+              Préparer la saison
+              <i class="fa-solid fa-arrow-right transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true"></i>
+            </div>
+          </a>
+        }
+
+        <!-- ====================================================
+             ASSISTANT
+        ===================================================== -->
+        @if (widgetsVisibles['assistant']) {
+          <a
+            routerLink="/assistant"
+            class="group relative flex min-w-0 flex-col overflow-hidden rounded-3xl border p-5 no-underline transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:p-6"
+            [style.backgroundColor]="themeService.BG2"
+            [style.borderColor]="themeService.BR1"
+            [style.--tw-ring-color]="themeService.Blue"
+          >
+            <div class="absolute inset-x-0 top-0 h-1 transition-all duration-300 group-hover:h-1.5" [style.backgroundColor]="themeService.Blue"></div>
+
+            <div class="flex items-start justify-between gap-4">
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                [style.backgroundColor]="themeService.InfoSoft"
+                [style.color]="themeService.Info"
+              >
+                <i class="fa-solid fa-comments text-lg" aria-hidden="true"></i>
+              </span>
+
+              <span
+                class="flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                [style.backgroundColor]="themeService.BG3"
+                [style.color]="themeService.Blue"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <p class="mt-6 text-xs font-bold uppercase tracking-[0.16em]" [style.color]="themeService.Blue">
+              Accompagnement
+            </p>
+
+            <h3 class="mt-2 text-xl font-bold" [style.color]="themeService.TX0">
+              Assistant botanique
+            </h3>
+
+            <p class="mt-2 flex-1 text-sm leading-7" [style.color]="themeService.TX2">
+              Obtenez des conseils pour comprendre et entretenir vos plantes.
+            </p>
+
+            <div class="mt-5 flex items-center gap-2 text-sm font-semibold" [style.color]="themeService.Blue">
+              Poser une question
+              <i class="fa-solid fa-arrow-right transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true"></i>
+            </div>
+          </a>
+        }
+
+        <!-- ====================================================
+             DIAGNOSTIC GUIDÉ
+        ===================================================== -->
+        @if (widgetsVisibles['diagnostic']) {
+          <a
+            routerLink="/diagnostic"
+            class="group relative flex min-w-0 flex-col overflow-hidden rounded-3xl border p-5 no-underline transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:p-6"
+            [style.backgroundColor]="themeService.BG2"
+            [style.borderColor]="themeService.BR1"
+            [style.--tw-ring-color]="themeService.Coral"
+          >
+            <div class="absolute inset-x-0 top-0 h-1 transition-all duration-300 group-hover:h-1.5" [style.backgroundColor]="themeService.Coral"></div>
+
+            <div class="flex items-start justify-between gap-4">
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:scale-110"
+                [style.backgroundColor]="themeService.ErrorSoft"
+                [style.color]="themeService.Error"
+              >
+                <i class="fa-solid fa-stethoscope text-lg" aria-hidden="true"></i>
+              </span>
+
+              <span
+                class="flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                [style.backgroundColor]="themeService.BG3"
+                [style.color]="themeService.Coral"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square text-sm" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <p class="mt-6 text-xs font-bold uppercase tracking-[0.16em]" [style.color]="themeService.Coral">
+              Entretien
+            </p>
+
+            <h3 class="mt-2 text-xl font-bold" [style.color]="themeService.TX0">
+              Diagnostic guidé
+            </h3>
+
+            <p class="mt-2 flex-1 text-sm leading-7" [style.color]="themeService.TX2">
+              Suivez un parcours de questions pour mieux comprendre un problème végétal.
+            </p>
+
+            <div class="mt-5 flex items-center gap-2 text-sm font-semibold" [style.color]="themeService.Coral">
+              Commencer le diagnostic
+              <i class="fa-solid fa-arrow-right transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true"></i>
+            </div>
+          </a>
+        }
+
+      </div>
+
+      <!-- ======================================================
+           PIED DE PAGE
+      ======================================================= -->
+      <footer
+        class="flex flex-col gap-3 border-t pt-6 text-xs sm:flex-row sm:items-center sm:justify-between"
+        [style.borderColor]="themeService.BR1"
+        [style.color]="themeService.TX3"
+      >
+        <p class="flex items-center gap-2">
+          <i class="fa-solid fa-leaf" [style.color]="themeService.Emerald" aria-hidden="true"></i>
+          <span>Arboria · Votre espace botanique personnel</span>
+        </p>
+
+        <p class="flex items-center gap-2">
+          <i class="fa-solid fa-seedling" [style.color]="themeService.Teal" aria-hidden="true"></i>
+          <span>Un jardin se cultive un jour à la fois.</span>
+        </p>
+      </footer>
+
+    </div>
+  </main>
+</section>

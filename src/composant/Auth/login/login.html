@@ -1,785 +1,666 @@
+<!-- ============================================================
+     ARBORIA — PAGE CONNEXION PREMIUM
+     Angular Standalone + Tailwind CSS + Font Awesome
+
+     • Palette centralisée : fonds et bordures Arboria
+     • Thème clair et sombre via ThemeService
+     • Panneau immersif : 42 % / formulaire : 58 %
+     • Responsive mobile, tablette et ordinateur
+     • Logique Angular, validations et traductions conservées
+     • Connexion, accès invité et notifications conservés
+     • Aucune erreur affichée directement dans le formulaire
+     • Notifications flottantes en haut, centrées horizontalement
+     • Accessibilité, focus clavier et animations conservés
+============================================================ -->
 
 <section
-  class="relative min-h-screen w-full overflow-hidden"
-  [style.background-color]="themeService.BG1"
+  class="arboria-login flex min-h-screen w-full flex-col gap-3 overflow-x-hidden p-3
+         lg:h-screen lg:flex-row lg:overflow-hidden"
+  [ngStyle]="{
+    'background': themeService.BG1
+  }"
 >
-
   <!-- ============================================================
-       DÉCOR GAUCHE
-       ============================================================ -->
+       PANNEAU IMMERSIF — 42 %
+  ============================================================= -->
 
   <div
-    class="pointer-events-none absolute inset-y-0 left-0 z-0 hidden w-1/2 overflow-visible lg:block"
-    aria-hidden="true"
+    class="arboria-hero relative isolate flex min-h-[420px] w-full flex-col
+           justify-between overflow-hidden rounded-[24px] p-7 text-white
+           sm:min-h-[500px] sm:p-10
+           lg:min-h-0 lg:w-[42%] lg:flex-none lg:rounded-[28px] lg:p-10
+           xl:p-12"
+    [ngStyle]="{
+      'background-color': '#173F32'
+    }"
   >
+    <!-- Image de fond -->
     <img
-      src="assets/ImageRegisterLoginGauche.svg"
-      alt=""
-      class="absolute left-[-18vw] top-1/2 h-[120vh] w-[72vw] max-w-none -translate-y-1/2 object-cover object-left xl:left-[-14vw] xl:w-[68vw]"
+      [src]="themeService.ImageFondWelcome"
+      alt="Arrière-plan immersif aux nuances lumineuses"
+      class="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+      loading="eager"
     />
-  </div>
 
-  <!-- ============================================================
-       DÉCOR DROITE
-       ============================================================ -->
-
-  <div
-    class="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-1/2 overflow-visible lg:block"
-    aria-hidden="true"
-  >
-    <img
-      src="assets/mageRegisterLoginDroite.svg"
-      alt=""
-      class="absolute right-[-18vw] top-1/2 h-[120vh] w-[72vw] max-w-none -translate-y-1/2 object-cover object-right xl:right-[-14vw] xl:w-[68vw]"
-    />
-  </div>
-
-  
-
-  
-
-  <!-- ============================================================
-       BOUTON RETOUR
-       ============================================================ -->
-
-  <a
-    routerLink="/"
-    class="group fixed left-3 top-3 z-30 flex h-11 items-center gap-2 rounded-2xl border px-3.5 text-sm font-semibold backdrop-blur-xl transition-all duration-200 hover:-translate-x-0.5 hover:opacity-85 active:scale-95 sm:left-5 sm:top-5 sm:h-12 sm:px-4"
-    [ngStyle]="{'background':themeService.BG2,'border':'1px solid' + themeService.BR2}"
-    [attr.aria-label]="languageService.is('fr') ? 'Retour' : 'Back'"
-  >
-    <!-- FLÈCHE -->
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:-translate-x-0.5 sm:h-5 sm:w-5"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M19 12H5"
-      />
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="m12 19-7-7 7-7"
-      />
-    </svg>
-
-    <span>
-      {{ languageService.is('fr') ? 'Retour' : 'Back' }}
-    </span>
-  </a>
-
-  <!-- ============================================================
-       CONTENU PRINCIPAL
-       ============================================================ -->
-
-  <main
-    class="relative z-20 flex min-h-screen w-full items-center justify-center px-3 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
-  >
-
-    <!-- ==========================================================
-         CARTE LOGIN
-         ========================================================== -->
-
+    <!-- Voile de contraste -->
     <div
-      class="w-full max-w-[500px] overflow-hidden rounded-[1.75rem] border p-5 backdrop-blur-2xl sm:rounded-[2rem] sm:p-7 md:p-8 lg:p-9"
-      [ngStyle]="{'background':themeService.BG2,'border':'1px solid' + themeService.BR2,'box-shadow':themeService.BoxShadowLarge}"
+      class="absolute inset-0 -z-10 bg-gradient-to-b
+             from-[#10251E]/40 via-[#10251E]/15 to-[#10251E]/90"
+    ></div>
+
+    <!-- Logo -->
+    <a
+      routerLink="/"
+      aria-label="Retour à l'accueil Arboria"
+      class="relative z-10 inline-flex w-fit items-center gap-2.5
+             transition-opacity hover:opacity-80"
     >
+      <img
+        src="assets/ImageLogoSombre.svg"
+        alt="Arboria"
+        class="h-8 w-auto brightness-0 invert sm:h-9"
+      />
+    </a>
 
-      <!-- ========================================================
-           HEADER
-           ======================================================== -->
-
-      <header class="mb-6 text-center sm:mb-7">
-
-        <!-- LOGO -->
-
-        <div
-          class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[18px] p-2.5 shadow-sm sm:mb-5 sm:h-16 sm:w-16 sm:rounded-[20px]"
+    <!-- Contenu principal -->
+    <div class="relative z-10 mt-16 lg:mt-8">
+      <!-- Sur-titre -->
+      <div class="mb-8 flex items-center gap-4">
+        <span
+          class="text-[10px] font-semibold uppercase tracking-[0.22em]
+                 text-white/85 sm:text-xs"
         >
-          <img
-            src="assets/Logo.svg"
-            alt="JardiScan"
-            class="h-full w-full object-contain"
-          />
-        </div>
+          Cultivez votre univers
+        </span>
 
-        <!-- TITRE -->
-
-        <h1
-          class="text-[1.75rem] font-bold leading-tight tracking-tight sm:text-3xl md:text-4xl"
-          [style.color]="themeService.TextPrincipal"
-        >
-          {{ t('welcome') }}
-        </h1>
-
-        <p
-          class="mx-auto mt-2 max-w-md text-sm leading-5 sm:text-base sm:leading-6"
-          [style.color]="themeService.TextSecondaire"
-        >
-          {{ t('subtitle') }}
-        </p>
-
-      </header>
-
-      <!-- ========================================================
-           MESSAGE SUCCÈS
-           ======================================================== -->
-
-      <div
-        *ngIf="successMessage"
-        class="mb-5 flex items-start gap-3 rounded-2xl border px-3.5 py-3 sm:px-4"
-        [style.background-color]="themeService.PrimarySoft"
-        [style.border-color]="themeService.BorderPrimary"
-      >
-        <div
-          class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
-          [style.background-color]="themeService.Primary"
-          [style.color]="themeService.TextOnPrimary"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            class="h-3 w-3"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m5 12 4 4L19 6"
-            />
-          </svg>
-        </div>
-
-        <p
-          class="min-w-0 text-sm font-medium leading-5"
-          [style.color]="themeService.Primary"
-        >
-          {{ successMessage }}
-        </p>
+        <span class="h-px w-10 bg-[#D2F29A]/80 sm:w-16"></span>
       </div>
 
-      <!-- ========================================================
-           MESSAGE ERREUR
-           ======================================================== -->
-
+      <!-- Badge -->
       <div
-        *ngIf="errorMessage"
-        class="mb-5 flex items-start gap-3 rounded-2xl border px-3.5 py-3 sm:px-4"
-        [style.background-color]="themeService.ErrorSoft"
-        [style.border-color]="themeService.ErrorBorder"
-        role="alert"
+        class="mb-5 inline-flex items-center gap-2 rounded-full
+               border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-md"
       >
-        <div
-          class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold"
-          [style.background-color]="themeService.Error"
-          [style.color]="themeService.TextOnPrimary"
-        >
-          !
-        </div>
+        <span class="h-1.5 w-1.5 rounded-full bg-[#D2F29A]"></span>
 
-        <p
-          class="min-w-0 text-sm font-medium leading-5"
-          [style.color]="themeService.Error"
+        <span
+          class="text-[9px] font-medium uppercase tracking-[0.15em]
+                 text-white/90 sm:text-[10px]"
         >
-          {{ errorMessage }}
-        </p>
+          Votre espace nature
+        </span>
       </div>
 
-      <!-- ========================================================
-           FORMULAIRE
-           ======================================================== -->
-
-      <form
-        class="space-y-5"
-        (ngSubmit)="connecter()"
-        novalidate
+      <!-- Titre -->
+      <h2
+        class="font-serif text-5xl font-normal leading-[0.98]
+               tracking-[-0.045em] sm:text-6xl xl:text-7xl"
       >
+        Faites grandir
+        <br />
+        votre passion
+        <br />
+        <span class="italic text-[#D2F29A]">du végétal.</span>
+      </h2>
 
-        <!-- ======================================================
-             INTRODUCTION
-             ====================================================== -->
+      <!-- Description -->
+      <p
+        class="mt-6 max-w-md text-xs leading-6 text-white/75
+               sm:text-sm sm:leading-7"
+      >
+        Retrouvez vos plantes, accédez à leurs conseils d'entretien et
+        cultivez votre jardin à votre rythme. Votre aventure végétale
+        commence ici.
+      </p>
 
-        <div class="mb-1">
-
-          <h2
-            class="text-xl font-bold sm:text-[1.35rem]"
-            [style.color]="themeService.TextPrincipal"
-          >
-            {{ t('login') }}
-          </h2>
-
-          <p
-            class="mt-1 text-sm leading-5"
-            [style.color]="themeService.TextSecondaire"
-          >
-            {{
-              languageService.is('fr')
-                ? 'Entrez vos identifiants pour continuer.'
-                : 'Enter your credentials to continue.'
-            }}
-          </p>
-
+      <!-- Atouts -->
+      <div
+        class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 xl:gap-x-6"
+      >
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-leaf text-xs text-[#D2F29A]"></i>
+          <span class="text-[10px] text-white/85 sm:text-xs">
+            Vos plantes
+          </span>
         </div>
 
-        <!-- ======================================================
-             EMAIL
-             ====================================================== -->
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-book-open text-xs text-[#D2F29A]"></i>
+          <span class="text-[10px] text-white/85 sm:text-xs">
+            Vos conseils
+          </span>
+        </div>
 
-        <div>
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-seedling text-xs text-[#D2F29A]"></i>
+          <span class="text-[10px] text-white/85 sm:text-xs">
+            Votre collection
+          </span>
+        </div>
+      </div>
+    </div>
 
-          <label
-            for="email"
-            class="mb-2 block text-sm font-semibold"
-            [style.color]="themeService.TextPrincipal"
+    <!-- Bas du panneau -->
+    <div
+      class="relative z-10 mt-10 flex items-center justify-between gap-4
+             border-t border-white/20 pt-5"
+    >
+      <span class="text-[9px] tracking-wide text-white/60 sm:text-[10px]">
+        Arboria — La nature, à votre rythme.
+      </span>
+
+      <i class="fa-solid fa-seedling text-sm text-[#D2F29A]"></i>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PANNEAU FORMULAIRE — 58 %
+  ============================================================= -->
+
+  <div
+    class="arboria-form-panel relative flex min-h-[620px] w-full flex-1
+           flex-col overflow-hidden rounded-[24px] px-6 py-7
+           sm:px-10 sm:py-9
+           lg:min-h-0 lg:w-[58%] lg:flex-none lg:rounded-[28px]
+           lg:px-10 lg:py-7 xl:px-14"
+    [ngStyle]="{
+      'background': themeService.BG1
+    }"
+  >
+    <!-- En-tête -->
+    <div class="flex shrink-0 items-center justify-between gap-4">
+      <app-welcome-logo></app-welcome-logo>
+
+      <a
+        routerLink="/aide"
+        class="inline-flex items-center gap-1.5 text-[10px]
+               transition sm:text-xs"
+        [ngStyle]="{
+          'color': (themeService.isDarkMode$ | async) ? '#B1BEB2' : '#5E6B60'
+        }"
+      >
+        <i class="fa-regular fa-circle-question"></i>
+        <span>Besoin d'aide ?</span>
+      </a>
+    </div>
+
+    <!-- Zone centrale -->
+    <div
+      class="flex flex-1 items-center justify-center py-8
+             sm:py-10 lg:min-h-0 lg:overflow-y-auto lg:py-5"
+    >
+      <div class="w-full max-w-[420px]">
+
+        <!-- Introduction -->
+        <div class="mb-7 sm:mb-8">
+          <div
+            class="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl"
+            [ngStyle]="{
+              'background-color': (themeService.isDarkMode$ | async) ? '#1B3326' : '#EAF4E9',
+              'color': (themeService.isDarkMode$ | async) ? '#8BC99A' : '#287653'
+            }"
           >
-            {{ t('email') }}
-          </label>
-
-          <div class="relative">
-
-            <!-- ICÔNE EMAIL -->
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-4"
-              [style.color]="themeService.TextSecondaire"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 7.5 12 13l9-5.5"
-              />
-
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.5 19.5h15A1.5 1.5 0 0 0 21 18V6a1.5 1.5 0 0 0-1.5-1.5h-15A1.5 1.5 0 0 0 3 6v12a1.5 1.5 0 0 0 1.5 1.5Z"
-              />
-            </svg>
-
-            <!-- INPUT -->
-
-            <input
-              id="email"
-              type="email"
-              name="email"
-              autocomplete="email"
-              [placeholder]="t('emailPlaceholder')"
-              [(ngModel)]="email"
-              required
-              [disabled]="isLoading || guestLoading"
-              class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-4 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
-              [style.background-color]="themeService.BG3"
-              [style.border-color]="
-                isEmailInvalid()
-                  ? themeService.ErrorBorder
-                  : themeService.BR2
-              "
-              [style.color]="themeService.TextPrincipal"
-              [style.caret-color]="themeService.Primary"
-              [style.--tw-ring-color]="themeService.PrimarySoft"
-            />
-
+            <i class="fa-solid fa-seedling text-base"></i>
           </div>
 
-          <!-- ERREUR EMAIL -->
-
           <p
-            *ngIf="submitted && email && !isValidEmailForTemplate()"
-            class="mt-1.5 px-1 text-xs leading-4"
-            [style.color]="themeService.Error"
+            class="mb-2 text-[9px] font-semibold uppercase tracking-[0.22em]
+                   sm:text-[10px]"
+            [ngStyle]="{
+              'color': (themeService.isDarkMode$ | async) ? '#8BC99A' : '#287653'
+            }"
           >
-            {{ t('emailInvalid') }}
+            Heureux de vous retrouver
           </p>
 
-          <p
-            *ngIf="submitted && !email"
-            class="mt-1.5 px-1 text-xs leading-4"
-            [style.color]="themeService.Error"
+          <h1
+            class="font-serif text-[36px] font-medium leading-[1.05]
+                   tracking-[-1.4px] sm:text-[42px]"
+            [ngStyle]="{
+              'color': (themeService.isDarkMode$ | async) ? '#EDF3EC' : '#17231D'
+            }"
           >
-            {{ t('emailRequired') }}
-          </p>
+            Bon retour.
+          </h1>
 
+          <p
+            class="mt-3 max-w-[340px] text-xs leading-6 sm:text-[13px]"
+            [ngStyle]="{
+              'color': (themeService.isDarkMode$ | async) ? '#B1BEB2' : '#5E6B60'
+            }"
+          >
+            Connectez-vous à votre espace Arboria et retrouvez tout votre
+            univers végétal.
+          </p>
         </div>
 
-        <!-- ======================================================
-             MOT DE PASSE
-             ====================================================== -->
-
-        <div>
-
-          <div class="mb-2 flex items-center justify-between gap-3">
-
+        <!-- Formulaire de connexion -->
+        <form
+          class="space-y-4 sm:space-y-5"
+          (ngSubmit)="connecter()"
+          #loginForm="ngForm"
+          novalidate
+        >
+          <!-- E-mail -->
+          <div>
             <label
-              for="password"
-              class="block text-sm font-semibold"
-              [style.color]="themeService.TextPrincipal"
+              for="login-email"
+              class="mb-2 block text-[11px] font-medium"
+              [ngStyle]="{
+                'color': (themeService.isDarkMode$ | async) ? '#DCE6DC' : '#26342B'
+              }"
             >
-              {{ t('password') }}
+              Adresse e-mail
             </label>
 
-            <a
-              routerLink="/change-password"
-              class="shrink-0 text-xs font-semibold transition-opacity hover:opacity-70"
-              [style.color]="themeService.Primary1"
-            >
-              {{ t('forgotPassword') }}
-            </a>
+            <div class="group relative">
+              <i
+                class="fa-regular fa-envelope absolute left-3.5 top-1/2
+                       -translate-y-1/2 text-xs transition-colors
+                       group-focus-within:text-[#8BC99A]"
+                [ngStyle]="{
+                  'color': (themeService.isDarkMode$ | async) ? '#89988B' : '#7C877C'
+                }"
+              ></i>
 
+              <input
+                id="login-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                [placeholder]="t('emailPlaceholder')"
+                [(ngModel)]="email"
+                #emailInput="ngModel"
+                required
+                email
+                class="arboria-input h-12 w-full rounded-xl border pl-10 pr-4
+                       text-xs outline-none transition
+                       placeholder:opacity-60
+                       focus:ring-4 focus:ring-[#287653]/10"
+                [ngStyle]="{
+                  'background-color': (themeService.isDarkMode$ | async) ? '#141E17' : '#FFFFFF',
+                  'border-color': (themeService.isDarkMode$ | async) ? '#344238' : '#D6DDD2',
+                  'color': (themeService.isDarkMode$ | async) ? '#EDF3EC' : '#17231D',
+                  '--tw-ring-color': (themeService.isDarkMode$ | async) ? '#8BC99A' : '#287653'
+                }"
+              />
+            </div>
           </div>
 
-          <div class="relative">
-
-            <!-- ICÔNE PASSWORD -->
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              class="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-4"
-              [style.color]="themeService.TextSecondaire"
-              aria-hidden="true"
-            >
-              <rect
-                width="16"
-                height="11"
-                x="4"
-                y="10"
-                rx="2"
-              />
-
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8 10V7a4 4 0 0 1 8 0v3"
-              />
-            </svg>
-
-            <!-- INPUT PASSWORD -->
-
-            <input
-              id="password"
-              [type]="showPassword ? 'text' : 'password'"
-              name="password"
-              autocomplete="current-password"
-              [placeholder]="t('passwordPlaceholder')"
-              [(ngModel)]="password"
-              required
-              [disabled]="isLoading || guestLoading"
-              class="min-h-[52px] w-full rounded-2xl border py-3.5 pl-11 pr-14 text-sm outline-none transition-all duration-200 placeholder:opacity-60 focus:ring-4 disabled:cursor-not-allowed disabled:opacity-60 sm:pl-12"
-              [style.background-color]="themeService.BG3"
-              [style.border-color]="
-                isPasswordInvalid()
-                  ? themeService.ErrorBorder
-                  : themeService.BR2
-              "
-              [style.color]="themeService.TextPrincipal"
-              [style.caret-color]="themeService.Primary"
-              [style.--tw-ring-color]="themeService.PrimarySoft"
-            />
-
-            <!-- AFFICHER / MASQUER -->
-
-            <button
-              type="button"
-              (click)="togglePassword()"
-              [disabled]="isLoading || guestLoading"
-              class="absolute right-1.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl transition-opacity hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-40"
-              [style.color]="themeService.TextSecondaire"
-              [attr.aria-label]="
-                showPassword
-                  ? (languageService.is('fr')
-                    ? 'Masquer le mot de passe'
-                    : 'Hide password')
-                  : (languageService.is('fr')
-                    ? 'Afficher le mot de passe'
-                    : 'Show password')
-              "
-            >
-
-              <!-- OEIL -->
-
-              <svg
-                *ngIf="!showPassword"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                class="h-5 w-5"
+          <!-- Mot de passe -->
+          <div>
+            <div class="mb-2 flex items-center justify-between gap-3">
+              <label
+                for="login-password"
+                class="block text-[11px] font-medium"
+                [ngStyle]="{
+                  'color': (themeService.isDarkMode$ | async) ? '#DCE6DC' : '#26342B'
+                }"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6-9.75-6-9.75-6Z"
-                />
+                Mot de passe
+              </label>
 
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="2.5"
-                />
-              </svg>
-
-              <!-- OEIL BARRÉ -->
-
-              <svg
-                *ngIf="showPassword"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                class="h-5 w-5"
+              <a
+                routerLink="/mot-de-passe-oublie"
+                class="text-[10px] font-medium transition hover:underline"
+                [ngStyle]="{
+                  'color': (themeService.isDarkMode$ | async) ? '#8BC99A' : '#287653'
+                }"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m3 3 18 18"
-                />
-
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M10.58 10.58a2 2 0 0 0 2.83 2.83"
-                />
-
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M9.88 5.1A10.8 10.8 0 0 1 12 4.88c6.25 0 9.75 7.12 9.75 7.12a18.3 18.3 0 0 1-3.04 3.91M6.61 6.61C3.96 8.33 2.25 12 2.25 12s3.5 7.12 9.75 7.12c1.54 0 2.91-.36 4.1-.91"
-                />
-              </svg>
-
-            </button>
-
-          </div>
-
-          <!-- ====================================================
-               FORCE MOT DE PASSE
-               ==================================================== -->
-
-          <div
-            *ngIf="password"
-            class="mt-2.5"
-          >
-
-            <div class="flex gap-1.5">
-
-              <span
-                *ngFor="let item of [1, 2, 3, 4, 5]"
-                class="h-1 flex-1 rounded-full transition-all duration-300"
-                [style.background-color]="
-                  item <= getPasswordStrength()
-                    ? themeService.Primary
-                    : themeService.BorderSoft
-                "
-              ></span>
-
+                Mot de passe oublié ?
+              </a>
             </div>
 
-            <p
-              class="mt-1.5 text-[11px] leading-4"
-              [style.color]="themeService.TextSecondaire"
-            >
-              {{ getPasswordStrengthLabel() }}
+            <div class="group relative">
+              <i
+                class="fa-solid fa-lock absolute left-3.5 top-1/2
+                       -translate-y-1/2 text-[11px] transition-colors
+                       group-focus-within:text-[#8BC99A]"
+                [ngStyle]="{
+                  'color': (themeService.isDarkMode$ | async) ? '#89988B' : '#7C877C'
+                }"
+              ></i>
 
-              <span *ngIf="password.length < 6">
-                ·
-                {{
-                  languageService.is('fr')
-                    ? '6 caractères minimum'
-                    : '6 characters minimum'
-                }}
-              </span>
-            </p>
+              <input
+                id="login-password"
+                name="password"
+                [type]="showPassword ? 'text' : 'password'"
+                autocomplete="current-password"
+                [placeholder]="t('passwordPlaceholder')"
+                [(ngModel)]="password"
+                #passwordInput="ngModel"
+                required
+                minlength="6"
+                class="arboria-input h-12 w-full rounded-xl border pl-10 pr-11
+                       text-xs outline-none transition
+                       placeholder:opacity-60 focus:ring-4
+                       focus:ring-[#287653]/10"
+                [ngStyle]="{
+                  'background-color': (themeService.isDarkMode$ | async) ? '#141E17' : '#FFFFFF',
+                  'border-color': (themeService.isDarkMode$ | async) ? '#344238' : '#D6DDD2',
+                  'color': (themeService.isDarkMode$ | async) ? '#EDF3EC' : '#17231D'
+                }"
+              />
 
+              <button
+                type="button"
+                (click)="togglePassword()"
+                [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'"
+                [attr.aria-pressed]="showPassword"
+                class="absolute inset-y-0 right-3.5 flex items-center
+                       transition hover:text-[#8BC99A]
+                       focus-visible:outline-none focus-visible:ring-2
+                       focus-visible:ring-[#287653]"
+                [ngStyle]="{
+                  'color': (themeService.isDarkMode$ | async) ? '#89988B' : '#7C877C'
+                }"
+              >
+                <i
+                  [class]="showPassword ? 'fa-regular fa-eye-slash text-xs' : 'fa-regular fa-eye text-xs'"
+                ></i>
+              </button>
+            </div>
           </div>
 
+          
+
+          <!--
+            Les erreurs ne sont plus affichées dans le formulaire.
+            Elles sont exclusivement présentées dans la notification flottante.
+          -->
+
+          <!-- Bouton de connexion -->
+          <button
+            type="submit"
+            [disabled]="isLoading || guestLoading"
+            class="group flex h-12 w-full items-center justify-center gap-2
+                   rounded-xl px-4 text-xs font-semibold
+                   shadow-[0_5px_14px_rgba(23,63,50,0.12)]
+                   transition duration-200
+                   hover:shadow-[0_8px_20px_rgba(23,63,50,0.18)]
+                   active:scale-[0.99] disabled:cursor-not-allowed
+                   disabled:opacity-60 focus-visible:outline-none
+                   focus-visible:ring-4 focus-visible:ring-[#287653]/25"
+            [ngStyle]="{
+              'background-color': (themeService.isDarkMode$ | async) ? '#8BC99A' : '#173F32',
+              'color': (themeService.isDarkMode$ | async) ? '#10251E' : '#FFFFFF'
+            }"
+          >
+            <ng-container *ngIf="!isLoading; else chargementConnexion">
+              <span>{{ t('connect') }}</span>
+
+              <i
+                class="fa-solid fa-arrow-right text-[10px]
+                       transition-transform group-hover:translate-x-1"
+              ></i>
+            </ng-container>
+
+            <ng-template #chargementConnexion>
+              <i class="fa-solid fa-circle-notch animate-spin"></i>
+              <span>{{ t('connecting') }}</span>
+            </ng-template>
+          </button>
+
+          <!-- Bloc de confiance -->
+          <div
+            class="flex items-start gap-3 rounded-xl border px-4 py-3.5"
+            [ngStyle]="{
+              'background-color': (themeService.isDarkMode$ | async) ? '#202D24' : '#EDF1E9',
+              'border-color': (themeService.isDarkMode$ | async) ? '#3A4A3E' : '#D6DED2'
+            }"
+          >
+            <div
+              class="flex h-9 w-9 shrink-0 items-center justify-center
+                     rounded-lg"
+              [ngStyle]="{
+                'background-color': (themeService.isDarkMode$ | async) ? '#1B3326' : '#E5EBE1',
+                'color': (themeService.isDarkMode$ | async) ? '#8BC99A' : '#287653'
+              }"
+            >
+              <i class="fa-solid fa-shield-halved text-sm"></i>
+            </div>
+
+            <div class="min-w-0 flex-1">
+              <p
+                class="text-[11px] font-semibold"
+                [ngStyle]="{
+                  'color': (themeService.isDarkMode$ | async) ? '#EDF3EC' : '#26342B'
+                }"
+              >
+                Votre espace, en toute sérénité
+              </p>
+
+              <p
+                class="mt-1 text-[10px] leading-5"
+                [ngStyle]="{
+                  'color': (themeService.isDarkMode$ | async) ? '#B1BEB2' : '#5E6B60'
+                }"
+              >
+                Retrouvez votre collection et vos conseils personnalisés
+                depuis votre compte Arboria.
+              </p>
+            </div>
+          </div>
+        </form>
+
+        <!-- Inscription -->
+        <div class="mt-7 text-center sm:mt-8">
+          <p
+            class="text-[11px]"
+            [ngStyle]="{
+              'color': (themeService.isDarkMode$ | async) ? '#89988B' : '#7C877C'
+            }"
+          >
+            {{ t('noAccount') }}
+
+            <a
+              routerLink="/register"
+              class="ml-1 font-semibold transition hover:underline"
+              [ngStyle]="{
+                'color': (themeService.isDarkMode$ | async) ? '#8BC99A' : '#287653'
+              }"
+            >
+              {{ t('register') }}
+            </a>
+          </p>
         </div>
 
-        <!-- ======================================================
-             CONNEXION
-             ====================================================== -->
-
-        <button
-          type="submit"
-          [disabled]="isLoading || guestLoading"
-          class="flex min-h-[52px] w-full items-center justify-center text-white gap-2 rounded-2xl px-5 py-3.5 text-sm font-bold transition-all duration-200 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98]"
-          [style.background-color]="themeService.Primary1"
-          
-        >
-
-          <!-- LOADER -->
-
-          <span
-            *ngIf="isLoading"
-            class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
-          ></span>
-
-          <!-- ICON -->
-
-          <svg
-            *ngIf="!isLoading"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="h-5 w-5"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15 3h4.5A1.5 1.5 0 0 1 21 4.5v15a1.5 1.5 0 0 1-1.5 1.5H15"
-            />
-
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10 17l5-5-5-5"
-            />
-
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15 12H3"
-            />
-          </svg>
-
-          <span>
-            {{ isLoading ? t('connecting') : t('connect') }}
-          </span>
-
-        </button>
-
-      </form>
-
-      <!-- ========================================================
-           SÉPARATEUR
-           ======================================================== -->
-
-      <div class="my-5 flex items-center gap-3 sm:my-6">
-
+        <!-- Confidentialité -->
         <div
-          class="h-px flex-1"
-          [style.background-color]="themeService.BorderSoft"
-        ></div>
-
-        <span
-          class="text-[10px] font-semibold uppercase tracking-wider sm:text-[11px]"
-          [style.color]="themeService.TextSecondaire"
+          class="mt-6 flex items-center justify-center gap-2 text-center
+                 text-[9px]"
+          [ngStyle]="{
+            'color': (themeService.isDarkMode$ | async) ? '#89988B' : '#7C877C'
+          }"
         >
-          {{ languageService.is('fr') ? 'ou' : 'or' }}
-        </span>
-
-        <div
-          class="h-px flex-1"
-          [style.background-color]="themeService.BorderSoft"
-        ></div>
-
+          <i class="fa-solid fa-lock text-[9px]"></i>
+          <span>Connexion sécurisée à votre espace personnel</span>
+        </div>
       </div>
-
-      <!-- ========================================================
-           MODE INVITÉ
-           ======================================================== -->
-
-      <button
-        type="button"
-        (click)="continuerCommeInvite()"
-        [disabled]="isLoading || guestLoading"
-        class="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl px-5 py-3.5 text-sm font-semibold transition-all duration-200 hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
-        [ngStyle]="{'background':themeService.BG3,'border':'1px solid'+themeService.BR3}"
-      >
-
-        <!-- LOADER -->
-
-        <span
-          *ngIf="guestLoading"
-          class="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
-        ></span>
-
-        <!-- ICON -->
-
-        <svg
-          *ngIf="!guestLoading"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          class="h-5 w-5"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-          />
-
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M4.5 20.25a7.5 7.5 0 0 1 15 0"
-          />
-        </svg>
-
-        <span>
-          {{
-            guestLoading
-              ? t('guestLoading')
-              : t('guest')
-          }}
-        </span>
-
-      </button>
-
-      <!-- ========================================================
-           INSCRIPTION
-           ======================================================== -->
-
-      <div
-        class="mt-6 border-t pt-5 text-center sm:mt-7 sm:pt-6"
-        [style.border-color]="themeService.BorderSoft"
-      >
-
-        <p
-          class="text-sm leading-5"
-          [style.color]="themeService.TextSecondaire"
-        >
-          {{ t('noAccount') }}
-
-          <a
-            routerLink="/register"
-            class="ml-1 cursor-pointer rounded-xl px-2.5 py-1.5 font-bold transition-all duration-200"
-            [ngStyle]="{
-              color: themeService.Primary1,
-              background: registerHover
-                ? (themeService.Primary1 + '14')
-                : 'transparent'
-            }"
-            (mouseenter)="registerHover = true"
-            (mouseleave)="registerHover = false"
-          >
-            {{ t('register') }}
-          </a>
-        </p>
-
-      </div>
-
     </div>
 
-  </main>
+    <!-- Pied de page -->
+    <div
+      class="flex shrink-0 flex-wrap items-center justify-center gap-x-4
+             gap-y-2 border-t pt-4 text-[9px]
+             sm:justify-between"
+      [ngStyle]="{
+        'border-color': (themeService.isDarkMode$ | async) ? '#304037' : '#E3E7DF',
+        'color': (themeService.isDarkMode$ | async) ? '#89988B' : '#7C877C'
+      }"
+    >
+      <span>© {{ anneeActuelle }} Arboria</span>
 
-  <!-- ============================================================
-       TOAST NOTIFICATION
-       ============================================================ -->
+      <div class="flex items-center gap-4">
+        <a
+          routerLink="/confidentialite"
+          class="transition hover:text-[#8BC99A]"
+        >
+          Confidentialité
+        </a>
+
+        <a
+          routerLink="/conditions"
+          class="transition hover:text-[#8BC99A]"
+        >
+          Conditions
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARBORIA — NOTIFICATION FLOTTANTE PREMIUM
+     • Position fixe en haut, centrée horizontalement
+     • Succès : fond vert doux + bordure vert foncé
+     • Erreur : fond rouge doux + bordure rouge foncé
+     • Compatible thème clair et sombre
+     • Responsive mobile, tablette et ordinateur
+     • Icônes Font Awesome
+     • Accessibilité et animations conservées
+============================================================ -->
+
+<div
+  *ngIf="showNotification"
+  class="arboria-notification fixed left-1/2 top-5 z-[100]
+         flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2
+         items-start gap-3 rounded-2xl border p-4
+         shadow-[0_15px_50px_rgba(20,40,25,0.15)]
+         animate-[arboriaNotificationIn_250ms_ease-out_both]"
+  [ngStyle]="{
+    'background-color': notificationType === 'success'
+      ? ((themeService.isDarkMode$ | async) ? '#193B29' : '#E5F5E8')
+      : ((themeService.isDarkMode$ | async) ? '#482323' : '#FDE8E7'),
+
+    'border-color': notificationType === 'success'
+      ? ((themeService.isDarkMode$ | async) ? '#2F7548' : '#287643')
+      : ((themeService.isDarkMode$ | async) ? '#943F3F' : '#B83232')
+  }"
+  [attr.role]="notificationType === 'success' ? 'status' : 'alert'"
+  aria-live="polite"
+>
+  <!-- ==========================================================
+       ICÔNE — SUCCÈS / ERREUR
+  =========================================================== -->
 
   <div
-    *ngIf="showNotification"
-    class="fixed left-1/2 top-4 z-[999999] w-full max-w-[calc(100vw-1.5rem)] -translate-x-1/2 px-0.5 animate-toast sm:top-5 sm:max-w-[520px]"
-    role="status"
-    aria-live="polite"
+    class="flex h-10 w-10 shrink-0 items-center justify-center
+           rounded-xl border"
+    [ngStyle]="{
+      'background-color': notificationType === 'success'
+        ? ((themeService.isDarkMode$ | async) ? '#214B32' : '#D0EBD5')
+        : ((themeService.isDarkMode$ | async) ? '#602D2D' : '#FAD3D0'),
+
+      'border-color': notificationType === 'success'
+        ? ((themeService.isDarkMode$ | async) ? '#397C50' : '#A7D3B0')
+        : ((themeService.isDarkMode$ | async) ? '#874040' : '#F0B4B0'),
+
+      'color': notificationType === 'success'
+        ? ((themeService.isDarkMode$ | async) ? '#A5E6B5' : '#216438')
+        : ((themeService.isDarkMode$ | async) ? '#FFB1AA' : '#B42323')
+    }"
+    aria-hidden="true"
   >
+    <i
+      [class]="notificationType === 'success'
+        ? 'fa-solid fa-check'
+        : 'fa-solid fa-circle-exclamation'"
+      class="text-base"
+    ></i>
+  </div>
 
-    <div
-      class="relative flex min-h-[64px] items-center gap-3 overflow-hidden rounded-2xl border px-4 py-3 text-white shadow-2xl backdrop-blur-xl sm:gap-4 sm:px-5"
-      [style.background]="
-        notificationType === 'success'
-          ? themeService.Success
-          : themeService.Error
-      "
-      [style.border-color]="
-        notificationType === 'success'
-          ? themeService.SuccessBorder
-          : themeService.ErrorBorder
-      "
+  <!-- ==========================================================
+       CONTENU DE LA NOTIFICATION
+  =========================================================== -->
+
+  <div class="min-w-0 flex-1 pt-0.5">
+
+    <!-- Titre -->
+    <p
+      class="text-sm font-bold tracking-[-0.02em]"
+      [ngStyle]="{
+        'color': notificationType === 'success'
+          ? ((themeService.isDarkMode$ | async) ? '#D9F7E0' : '#174D2B')
+          : ((themeService.isDarkMode$ | async) ? '#FFD9D5' : '#8F2525')
+      }"
     >
+      {{
+        notificationType === 'success'
+          ? 'Arboria — Validation réussie'
+          : 'Arboria — Une erreur est survenue'
+      }}
+    </p>
 
-      <!-- ICON -->
-
-      <div
-        class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-white/15 sm:h-10 sm:w-10"
-      >
-
-        <i
-          *ngIf="notificationType === 'success'"
-          class="fa-solid fa-circle-check"
-        ></i>
-
-        <i
-          *ngIf="notificationType === 'error'"
-          class="fa-solid fa-circle-exclamation"
-        ></i>
-
-      </div>
-
-      <!-- TEXT -->
-
-      <div class="min-w-0 flex-1">
-
-        <p class="text-xs font-black tracking-wide">
-          {{
-            notificationType === 'success'
-              ? (languageService.is('fr')
-                ? 'Succès'
-                : 'Success')
-              : (languageService.is('fr')
-                ? 'Erreur'
-                : 'Error')
-          }}
-        </p>
-
-        <p class="truncate text-xs opacity-90">
-          {{ notificationMessage }}
-        </p>
-
-      </div>
-
-      <!-- CLOSE -->
-
-      <button
-        type="button"
-        (click)="closeNotification()"
-        class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 hover:bg-white/10"
-        [attr.aria-label]="
-          languageService.is('fr')
-            ? 'Fermer la notification'
-            : 'Close notification'
-        "
-      >
-        <i class="fa-solid fa-xmark text-xs"></i>
-      </button>
-
-      <!-- SHINE -->
-
-      <div
-        class="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl"
-      >
-        <div
-          class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine"
-        ></div>
-      </div>
-
-    </div>
+    <!-- Message -->
+    <p
+      class="mt-1 text-xs leading-5"
+      [ngStyle]="{
+        'color': notificationType === 'success'
+          ? ((themeService.isDarkMode$ | async) ? '#B8DCC1' : '#326743')
+          : ((themeService.isDarkMode$ | async) ? '#E9B8B4' : '#A13A35')
+      }"
+    >
+      {{ notificationMessage }}
+    </p>
 
   </div>
 
-</section>
+  <!-- ==========================================================
+       BOUTON DE FERMETURE
+  =========================================================== -->
+
+  <button
+    type="button"
+    (click)="closeNotification()"
+    aria-label="Fermer la notification"
+    class="flex h-8 w-8 shrink-0 items-center justify-center
+           rounded-lg transition-all duration-200
+           hover:scale-105 active:scale-95
+           focus-visible:outline-none focus-visible:ring-2
+           focus-visible:ring-offset-2"
+    [ngStyle]="{
+      'color': notificationType === 'success'
+        ? ((themeService.isDarkMode$ | async) ? '#9FCBAA' : '#39734A')
+        : ((themeService.isDarkMode$ | async) ? '#E8A8A3' : '#A43A35'),
+
+      '--tw-ring-color': notificationType === 'success'
+        ? '#287643'
+        : '#B83232',
+
+      'background-color': 'transparent'
+    }"
+  >
+    <i class="fa-solid fa-xmark text-sm" aria-hidden="true"></i>
+  </button>
+
+</div>
+
+
+<style>
+  /* ============================================================
+   ARBORIA — ANIMATION DE LA NOTIFICATION FLOTTANTE
+============================================================ */
+
+@keyframes arboriaNotificationIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.arboria-notification {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arboria-notification {
+    animation: none !important;
+  }
+}
+</style>

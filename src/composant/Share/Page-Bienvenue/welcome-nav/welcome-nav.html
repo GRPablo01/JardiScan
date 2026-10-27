@@ -1,0 +1,1318 @@
+<!-- ============================================================
+     NAVIGATION PRINCIPALE — ARBORIA
+     Angular standalone + Tailwind CSS
+     Thème clair / sombre via ThemeService
+
+     • Hover identique sur les 4 liens
+     • Fond BG2 et texte Primary au survol
+     • Même effet au focus clavier
+     • Boutons actifs visuellement cohérents
+     • Méga-menus existants conservés
+============================================================ -->
+<section class="relative z-40 w-full">
+
+  <nav
+    aria-label="Navigation principale"
+    class="mx-auto hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex xl:ml-5"
+  >
+
+    <!-- DÉCOUVRIR ARBORIA -->
+
+    <a
+    href="/decouvrir"
+    (click)="fermerMenus()"
+    class="nav-link inline-flex min-h-[42px] shrink-0 items-center justify-center rounded-[10px] border border-transparent px-3 text-sm font-semibold whitespace-nowrap no-underline transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+    [ngStyle]="{
+      color: themeService.TX0,
+      '--tw-ring-color': themeService.Primary,
+      '--tw-ring-offset-color': themeService.BG1
+    }"
+    >
+    {{
+      languageService.currentLanguage === 'fr'
+        ? 'Découvrir Arboria'
+        : 'Discover Arboria'
+    }}
+    </a>
+
+
+    
+    <!-- FONCTIONNALITÉS -->
+    <div class="relative shrink-0">
+
+      <button
+        type="button"
+        class="nav-link inline-flex min-h-[42px] items-center justify-center gap-2 rounded-[10px] border px-3 text-sm font-semibold whitespace-nowrap transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        [ngStyle]="{
+          color: menuOuvert === 'ressources'
+            ? themeService.Primary
+            : themeService.TX0,
+          backgroundColor: menuOuvert === 'ressources'
+            ? themeService.BG2
+            : 'transparent',
+          borderColor: menuOuvert === 'ressources'
+            ? themeService.BR2
+            : 'transparent',
+          '--tw-ring-color': themeService.Primary,
+          '--tw-ring-offset-color': themeService.BG1
+        }"
+        [attr.aria-expanded]="menuOuvert === 'ressources'"
+        aria-controls="mega-fonctionnalites"
+        aria-haspopup="true"
+        (mouseenter)="ouvrirMenuSurvol('ressources')"
+        (focus)="ouvrirMenuSurvol('ressources')"
+        (click)="toggleMegaMenu('ressources', $event)"
+      >
+        <span>
+          {{
+            languageService.currentLanguage === 'fr'
+              ? 'Fonctionnalités'
+              : 'Features'
+          }}
+        </span>
+
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          class="h-4 w-4 shrink-0 transition-transform duration-200"
+          [class.rotate-180]="menuOuvert === 'ressources'"
+          aria-hidden="true"
+        >
+          <path
+            d="m5 7.5 5 5 5-5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+    </div>
+
+
+    
+    <!-- AIDE -->
+    <div class="relative shrink-0">
+
+      <button
+        type="button"
+        class="nav-link inline-flex min-h-[42px] items-center justify-center gap-2 rounded-[10px] border px-3 text-sm font-semibold whitespace-nowrap transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        [ngStyle]="{
+          color: menuOuvert === 'aide'
+            ? themeService.Primary
+            : themeService.TX0,
+          backgroundColor: menuOuvert === 'aide'
+            ? themeService.BG2
+            : 'transparent',
+          borderColor: menuOuvert === 'aide'
+            ? themeService.BR2
+            : 'transparent',
+          '--tw-ring-color': themeService.Primary,
+          '--tw-ring-offset-color': themeService.BG1
+        }"
+        [attr.aria-expanded]="menuOuvert === 'aide'"
+        aria-controls="mega-aide"
+        aria-haspopup="true"
+        (mouseenter)="ouvrirMenuSurvol('aide')"
+        (focus)="ouvrirMenuSurvol('aide')"
+        (click)="toggleMegaMenu('aide', $event)"
+      >
+        <span>
+          {{
+            languageService.currentLanguage === 'fr'
+              ? 'Aide'
+              : 'Help'
+          }}
+        </span>
+
+        <svg
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          class="h-4 w-4 shrink-0 transition-transform duration-200"
+          [class.rotate-180]="menuOuvert === 'aide'"
+          aria-hidden="true"
+        >
+          <path
+            d="m5 7.5 5 5 5-5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+    </div>
+
+
+    
+    <!-- CONTACT -->
+    <a
+    href="#contact"
+    (click)="fermerMenus()"
+    class="nav-link inline-flex min-h-[42px] shrink-0 items-center justify-center rounded-[10px] border border-transparent px-3 text-sm font-semibold whitespace-nowrap no-underline transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+    [ngStyle]="{
+      color: themeService.TX0,
+      '--tw-ring-color': themeService.Primary,
+      '--tw-ring-offset-color': themeService.BG1
+    }"
+    >
+    {{
+      languageService.currentLanguage === 'fr'
+        ? 'Contact'
+        : 'Contact us'
+    }}
+    </a>
+
+
+  </nav>
+
+</section>
+
+
+<!-- ============================================================
+     MÉGA-MENU — FONCTIONNALITÉS
+     ARBORIA
+     Angular standalone + Tailwind CSS
+     Thème clair / sombre
+
+     • Identifiant : mega-fonctionnalites
+     • Condition : menuOuvert === 'ressources'
+============================================================ -->
+
+<!-- ============================================================
+     MÉGA-MENU FONCTIONNALITÉS — ARBORIA
+     Angular standalone + Tailwind CSS
+     • Thème clair / sombre via ThemeService
+     • Couleurs de fond centralisées : BG1 à BG5
+     • Navigation et événements conservés
+============================================================ -->
+
+<section
+  *ngIf="menuOuvert === 'ressources'"
+  id="mega-fonctionnalites"
+  class="mega-menu absolute left-0 right-0 top-full z-[110]
+         border-t shadow-xl
+         transition-colors duration-200"
+  [ngStyle]="{
+    'background-color': themeSombre ? themeService.BG1 : themeService.BG1,
+    'color': themeSombre ? '#F2F4F0' : '#34443D',
+    'border-color': themeSombre ? '#394740' : themeService.BG3
+  }"
+  aria-label="Découvrir les fonctionnalités d'Arboria"
+  (mouseenter)="ouvrirMenuSurvol('ressources')"
+  (keydown.escape)="fermerMenus()"
+>
+
+  
+
+<div class="mx-auto max-w-[1600px] px-4 py-3 sm:px-6 sm:py-4 lg:px-7 lg:py-4 min-[1440px]:px-10 min-[1440px]:py-6 min-[1600px]:px-12 min-[1600px]:py-7">
+
+  <!-- EN-TÊTE -->
+
+  <div class="mb-5">
+    <p
+      class="mb-1 text-[11px] font-bold uppercase tracking-[0.18em]"
+      [ngStyle]="{
+        color: themeSombre ? '#A9C3A8' : '#5F7D63'
+      }"
+    >
+      {{ languageService.currentLanguage === 'fr' ? 'Explorez Arboria' : 'Explore Arboria' }}
+    </p>
+
+    <h2 class="text-lg font-bold tracking-tight sm:text-xl">
+      {{ languageService.currentLanguage === 'fr' ? 'Tout pour prendre soin de votre jardin' : 'Everything you need to care for your garden' }}
+    </h2>
+
+    <p
+      class="mt-1 max-w-2xl text-sm leading-6"
+      [ngStyle]="{
+        color: themeSombre ? '#AAB8B0' : '#697970'
+      }"
+    >
+      {{ languageService.currentLanguage === 'fr'
+        ? 'Recherchez vos plantes, obtenez des conseils, comprenez leurs besoins et accompagnez votre jardin au fil des saisons.'
+        : 'Search for plants, get advice, understand their needs and care for your garden throughout the seasons.' }}
+    </p>
+  </div>
+
+  <!-- COLONNES -->
+
+  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+
+    <!-- COLONNE 1 — DÉCOUVRIR LES PLANTES -->
+
+    <div class="mega-column min-w-0">
+      <h3
+        class="mb-3 text-xs font-bold uppercase tracking-[0.14em]"
+        [ngStyle]="{
+          color: themeSombre ? '#87958D' : '#697970'
+        }"
+      >
+        {{ languageService.currentLanguage === 'fr' ? 'Découvrir les plantes' : 'Discover plants' }}
+      </h3>
+
+      <div class="space-y-2">
+
+        <!-- RECHERCHE DE PLANTES -->
+
+        <a
+          href="/recherche"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#C8E6C9' : '#356B45',
+              background: themeSombre ? '#304C3A' : '#DCEEDD'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="m16 16 4 4M11 8v6M8 11h6"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Recherche de plantes' : 'Plant search' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Trouvez les plantes adaptées à votre jardin.'
+                : 'Find plants suited to your garden.' }}
+            </span>
+          </span>
+        </a>
+
+        <!-- FICHES VÉGÉTALES -->
+
+        <a
+          href="#qr-code"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#BDE7E0' : '#26796C',
+              background: themeSombre ? '#294943' : '#D9F0E9'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <path d="M14 14h3v3h-3zM20 14v2M17 20h4M20 18v3"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Fiches par QR code' : 'QR code plant guides' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Consultez une fiche grâce au QR code d’une plante.'
+                : 'Access a plant guide using its QR code.' }}
+            </span>
+          </span>
+        </a>
+
+        <!-- COLLECTION VÉGÉTALE -->
+
+        <a
+          href="#jardidex"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#C8E6C9' : '#356B45',
+              background: themeSombre ? '#304C3A' : '#DCEEDD'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 21s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11Z"/>
+              <path d="M12 8v7M8.5 11.5h7"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Ma collection végétale' : 'My plant collection' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Retrouvez vos plantes et votre collection personnelle.'
+                : 'Keep track of your plants and personal collection.' }}
+            </span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- COLONNE 2 — CONSEILS ET DIAGNOSTIC -->
+
+    <div class="mega-column min-w-0">
+      <h3
+        class="mb-3 text-xs font-bold uppercase tracking-[0.14em]"
+        [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }"
+      >
+        {{ languageService.currentLanguage === 'fr' ? 'Conseils et diagnostic' : 'Advice and diagnosis' }}
+      </h3>
+
+      <div class="space-y-2">
+
+        <a
+          href="#assistant"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#C8D2FF' : '#5558A8',
+              background: themeSombre ? '#343C61' : '#E4E5FA'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3a9 9 0 0 0-9 9v3a3 3 0 0 0 3 3h1v-7H6"/>
+              <path d="M12 3a9 9 0 0 1 9 9v3a3 3 0 0 1-3 3h-1v-7h1"/>
+              <path d="M9 20h6"/>
+              <path d="M9 14h.01M15 14h.01"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Assistant botanique' : 'Botanical assistant' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Posez vos questions et obtenez des conseils pratiques.'
+                : 'Ask questions and get practical gardening advice.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#diagnostic"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#C8D2FF' : '#5558A8',
+              background: themeSombre ? '#343C61' : '#E4E5FA'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3 4 7v5c0 5 3.4 8 8 9 4.6-1 8-4 8-9V7l-8-4Z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Diagnostic guidé' : 'Guided diagnosis' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Identifiez les difficultés grâce à des questions ciblées.'
+                : 'Understand plant problems through targeted questions.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#conseils-entretien"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#BDE7E0' : '#26796C',
+              background: themeSombre ? '#294943' : '#D9F0E9'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 21V11"/>
+              <path d="M12 14C5 14 4 8 4 5c5 0 8 2 8 9Z"/>
+              <path d="M12 11c0-5 3-8 8-8 0 5-2 9-8 9"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Conseils d’entretien' : 'Plant care tips' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Apprenez à arroser, tailler et entretenir vos plantes.'
+                : 'Learn how to water, prune and care for your plants.' }}
+            </span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- COLONNE 3 — ORGANISER SON JARDIN -->
+
+    <div class="mega-column min-w-0">
+      <h3
+        class="mb-3 text-xs font-bold uppercase tracking-[0.14em]"
+        [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }"
+      >
+        {{ languageService.currentLanguage === 'fr' ? 'Organiser son jardin' : 'Organize your garden' }}
+      </h3>
+
+      <div class="space-y-2">
+
+        <a
+          href="#documents-saisonniers"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#F0D1A4' : '#96652D',
+              background: themeSombre ? '#4A3D2E' : '#F4E6CF'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/>
+              <path d="M14 3v5h5M8 13h8M8 17h8"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Documents saisonniers' : 'Seasonal guides' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Retrouvez les guides adaptés à chaque saison.'
+                : 'Find guides tailored to each season.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#calendrier-jardin"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#C8E6C9' : '#356B45',
+              background: themeSombre ? '#304C3A' : '#DCEEDD'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="16" rx="2"/>
+              <path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h6"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Calendrier du jardin' : 'Garden calendar' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Planifiez les semis, les plantations et les travaux.'
+                : 'Plan sowing, planting and garden tasks.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#favoris"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#E8C4E1' : '#914F83',
+              background: themeSombre ? '#493448' : '#F0DDEC'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Mes favoris' : 'My favorites' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Retrouvez facilement vos plantes et conseils préférés.'
+                : 'Quickly find your favorite plants and advice.' }}
+            </span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- COLONNE 4 — ACCÈS RAPIDES -->
+
+    <div class="mega-column min-w-0">
+      <h3
+        class="mb-3 text-xs font-bold uppercase tracking-[0.14em]"
+        [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }"
+      >
+        {{ languageService.currentLanguage === 'fr' ? 'Accès rapides' : 'Quick access' }}
+      </h3>
+
+      <div
+        class="rounded-2xl border p-4 transition-colors duration-200"
+        [ngClass]="themeSombre
+          ? 'border-[#394740] bg-[#26332E]'
+          : 'border-[#E3E3D8] bg-[#FAFAF5]'"
+      >
+        <span
+          class="mb-3 flex h-12 w-12 items-center justify-center rounded-xl"
+          [ngStyle]="{
+            color: themeSombre ? '#C8E6C9' : '#356B45',
+            background: themeSombre ? '#304C3A' : '#DCEEDD'
+          }"
+        >
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 21V12"/>
+            <path d="M12 15C6 15 4 10 4 6c5 0 8 3 8 9Z"/>
+            <path d="M12 11c0-5 3-8 8-8 0 5-2 9-8 9Z"/>
+          </svg>
+        </span>
+
+        <h3 class="text-sm font-bold">
+          {{ languageService.currentLanguage === 'fr' ? 'Votre jardin, à votre rythme' : 'Your garden, at your own pace' }}
+        </h3>
+
+        <p
+          class="mt-2 text-xs leading-5"
+          [ngStyle]="{ color: themeSombre ? '#AAB8B0' : '#697970' }"
+        >
+          {{ languageService.currentLanguage === 'fr'
+            ? 'Explorez les plantes, obtenez des conseils et organisez votre jardin avec les outils Arboria.'
+            : 'Explore plants, get advice and organize your garden with Arboria tools.' }}
+        </p>
+
+        <a
+          href="#fonctionnalites"
+          class="mt-4 inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white no-underline transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          [ngStyle]="{
+            color: '#FFFFFF',
+            background: themeSombre ? '#5F7D63' : '#496B4E',
+            '--tw-ring-color': themeSombre ? '#A9C3A8' : '#5F7D63',
+            '--tw-ring-offset-color': themeSombre ? '#26332E' : '#FAFAF5'
+          }"
+          (click)="fermerMenus()"
+        >
+          <span>
+            {{ languageService.currentLanguage === 'fr' ? 'Découvrir les fonctionnalités' : 'Discover features' }}
+          </span>
+          <svg viewBox="0 0 24 24" class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14m-6-6 6 6-6 6"/>
+          </svg>
+        </a>
+      </div>
+
+      <a
+        href="#help"
+        class="mega-item group mt-3 flex items-center gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+        [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+        (click)="fermerMenus()"
+      >
+        <span
+          class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+          [ngStyle]="{
+            color: themeSombre ? '#E8C4E1' : '#914F83',
+            background: themeSombre ? '#493448' : '#F0DDEC'
+          }"
+        >
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M9.5 9a2.5 2.5 0 1 1 4.2 2c-1.1.8-1.7 1.3-1.7 3"/>
+            <path d="M12 17h.01"/>
+          </svg>
+        </span>
+
+        <span class="text-sm font-semibold">
+          {{ languageService.currentLanguage === 'fr' ? 'Centre d’aide' : 'Help center' }}
+        </span>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- PIED DU MÉGA-MENU -->
+
+  <div
+    class="mt-6 flex flex-col gap-3 border-t pt-4 sm:flex-row sm:items-center sm:justify-between"
+    [ngStyle]="{
+      'border-color': themeSombre ? '#394740' : '#E3E3D8'
+    }"
+  >
+    <div class="flex items-start gap-2">
+      <svg
+        class="mt-0.5 h-4 w-4 shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        [ngStyle]="{ color: themeSombre ? '#A9C3A8' : '#5F7D63' }"
+        aria-hidden="true"
+      >
+        <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/>
+        <path d="M12 8v4M12 16h.01"/>
+      </svg>
+
+      <p
+        class="text-xs leading-5"
+        [ngStyle]="{ color: themeSombre ? '#AAB8B0' : '#697970' }"
+      >
+        {{ languageService.currentLanguage === 'fr'
+          ? 'Arboria vous accompagne avec des fiches végétales, des conseils pratiques et des outils pour votre jardin.'
+          : 'Arboria supports you with plant guides, practical advice and tools for your garden.' }}
+      </p>
+    </div>
+
+    <a
+      href="#help"
+      class="inline-flex shrink-0 items-center gap-2 text-xs font-semibold no-underline transition-colors hover:underline"
+      [ngStyle]="{ color: themeSombre ? '#A9C3A8' : '#5F7D63' }"
+      (click)="fermerMenus()"
+    >
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M9.5 9a2.5 2.5 0 1 1 4.2 2c-1.1.8-1.7 1.3-1.7 3"/>
+        <path d="M12 17h.01"/>
+      </svg>
+
+      {{ languageService.currentLanguage === 'fr' ? 'Centre d’aide' : 'Help center' }}
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+
+</div>
+
+</section>
+
+
+
+<!-- ============================================================
+     MÉGA-MENU AIDE — ARBORIA
+     Angular standalone + Tailwind CSS
+     • Thème clair / sombre via ThemeService
+     • Couleurs de fond centralisées : BG1 à BG5
+     • Navigation et événements conservés
+============================================================ -->
+
+<section
+  *ngIf="menuOuvert === 'aide'"
+  id="mega-aide"
+  class="mega-menu absolute left-0 right-0 top-full z-[110]
+         border-t shadow-xl
+         transition-colors duration-200"
+  [ngStyle]="{
+    'background-color': themeService.BG1,
+    'color': themeSombre ? '#F2F4F0' : '#34443D',
+    'border-color': themeSombre ? '#394740' : themeService.BG3
+  }"
+  aria-label="Centre d'aide Arboria"
+  (mouseenter)="ouvrirMenuSurvol('aide')"
+  (keydown.escape)="fermerMenus()"
+>
+
+<div class="mx-auto max-w-[1600px] px-4 py-3 sm:px-6 sm:py-4 lg:px-7 lg:py-4 min-[1440px]:px-10 min-[1440px]:py-6 min-[1600px]:px-12 min-[1600px]:py-7">
+
+  <!-- EN-TÊTE -->
+
+  <div class="mb-6">
+    <p
+      class="mb-1 text-[11px] font-bold uppercase tracking-[0.18em]"
+      [ngStyle]="{ color: themeSombre ? '#A9C3A8' : '#5F7D63' }"
+    >
+      {{ languageService.currentLanguage === 'fr' ? "Centre d'aide Arboria" : 'Arboria Help Center' }}
+    </p>
+
+    <h2 class="text-lg font-bold tracking-tight sm:text-xl">
+      {{ languageService.currentLanguage === 'fr' ? 'Comment pouvons-nous vous aider ?' : 'How can we help you?' }}
+    </h2>
+
+    <p
+      class="mt-1 max-w-2xl text-sm leading-6"
+      [ngStyle]="{ color: themeSombre ? '#AAB8B0' : '#697970' }"
+    >
+      {{ languageService.currentLanguage === 'fr'
+        ? "Retrouvez les guides, les conseils et les informations nécessaires pour profiter pleinement d'Arboria."
+        : 'Find the guides, advice and information you need to make the most of Arboria.' }}
+    </p>
+  </div>
+
+  <!-- COLONNES -->
+
+  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+
+    <!-- COLONNE 1 — BIEN DÉMARRER -->
+
+    <div class="mega-column min-w-0">
+      <h3
+        class="mb-3 text-xs font-bold uppercase tracking-[0.14em]"
+        [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }"
+      >
+        {{ languageService.currentLanguage === 'fr' ? 'Bien démarrer' : 'Getting started' }}
+      </h3>
+
+      <div class="space-y-2">
+
+        <a
+          href="#comment-ca-marche"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#C8E6C9' : '#356B45',
+              background: themeSombre ? '#304C3A' : '#DCEEDD'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M9 12h6M12 9v6"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Découvrir Arboria' : 'Discover Arboria' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? "Comprenez le fonctionnement de l'application."
+                : 'Learn how the application works.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#compte"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#BDE7E0' : '#26796C',
+              background: themeSombre ? '#294943' : '#D9F0E9'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 21v-2a8 8 0 0 1 16 0v2"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Mon compte' : 'My account' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Retrouvez les informations liées à votre compte.'
+                : 'Find information related to your account.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#fonctionnalites"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#F0D1A4' : '#96652D',
+              background: themeSombre ? '#4A3D2E' : '#F4E6CF'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Navigation' : 'Navigation' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Repérez facilement les différentes rubriques.'
+                : 'Easily find your way around the different sections.' }}
+            </span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- COLONNE 2 — PLANTES ET JARDIN -->
+
+    <div class="mega-column min-w-0">
+      <h3
+        class="mb-3 text-xs font-bold uppercase tracking-[0.14em]"
+        [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }"
+      >
+        {{ languageService.currentLanguage === 'fr' ? 'Plantes et jardin' : 'Plants and garden' }}
+      </h3>
+
+      <div class="space-y-2">
+
+        <a
+          href="#plantes"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#C8D2FF' : '#5558A8',
+              background: themeSombre ? '#343C61' : '#E4E5FA'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="10.5" cy="10.5" r="6.5"/>
+              <path d="m15.5 15.5 5 5"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Rechercher une plante' : 'Search for a plant' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Apprenez à trouver les plantes dans le catalogue.'
+                : 'Learn how to find plants in the catalog.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#conseils"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#C8E6C9' : '#356B45',
+              background: themeSombre ? '#304C3A' : '#DCEEDD'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 21V12"/>
+              <path d="M12 15C6 15 4 10 4 6c5 0 8 3 8 9Z"/>
+              <path d="M12 11c0-5 3-8 8-8 0 5-2 9-8 9Z"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Conseils de jardinage' : 'Gardening tips' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? "Retrouvez les bonnes pratiques d'entretien."
+                : 'Discover best practices for plant care.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#diagnostic"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#F3B5B5' : '#B44747',
+              background: themeSombre ? '#503436' : '#F8E0DF'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/>
+              <path d="M12 8v4"/>
+              <path d="M12 16h.01"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Comprendre un problème' : 'Understand a problem' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Retrouvez les ressources de diagnostic végétal.'
+                : 'Find resources to help diagnose plant problems.' }}
+            </span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- COLONNE 3 — GUIDES ET APPRENTISSAGE -->
+
+    <div class="mega-column min-w-0">
+      <h3
+        class="mb-3 text-xs font-bold uppercase tracking-[0.14em]"
+        [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }"
+      >
+        {{ languageService.currentLanguage === 'fr' ? 'Guides et apprentissage' : 'Guides and learning' }}
+      </h3>
+
+      <div class="space-y-2">
+
+        <a
+          href="#guides"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#BDE7E0' : '#26796C',
+              background: themeSombre ? '#294943' : '#D9F0E9'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 3h9l4 4v14H6z"/>
+              <path d="M14 3v5h5M9 13h7M9 17h7"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Guides pratiques' : 'Practical guides' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Consultez les explications étape par étape.'
+                : 'Follow step-by-step explanations.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#faq"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#E8C4E1' : '#914F83',
+              background: themeSombre ? '#493448' : '#F0DDEC'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M9.5 9a2.6 2.6 0 1 1 4.2 2.1c-1.2.9-1.7 1.3-1.7 2.9"/>
+              <path d="M12 17h.01"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Questions fréquentes' : 'Frequently asked questions' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Trouvez rapidement les réponses à vos questions.'
+                : 'Quickly find answers to your questions.' }}
+            </span>
+          </span>
+        </a>
+
+        <a
+          href="#collection"
+          class="mega-item group flex items-start gap-3 rounded-xl p-3 no-underline transition-all duration-200 hover:translate-x-0.5"
+          [ngClass]="themeSombre ? 'hover:bg-[#26332E]' : 'hover:bg-[#F4F3EC]'"
+          (click)="fermerMenus()"
+        >
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#F0D1A4' : '#96652D',
+              background: themeSombre ? '#4A3D2E' : '#F4E6CF'
+            }"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="8" height="8" rx="2"/>
+              <rect x="13" y="3" width="8" height="8" rx="2"/>
+              <rect x="3" y="13" width="8" height="8" rx="2"/>
+              <rect x="13" y="13" width="8" height="8" rx="2"/>
+            </svg>
+          </span>
+
+          <span class="min-w-0">
+            <span class="block text-sm font-semibold">
+              {{ languageService.currentLanguage === 'fr' ? 'Ma collection végétale' : 'My plant collection' }}
+            </span>
+            <span class="mt-1 block text-xs leading-5" [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }">
+              {{ languageService.currentLanguage === 'fr'
+                ? 'Découvrez comment organiser vos plantes favorites.'
+                : 'Learn how to organize your favorite plants.' }}
+            </span>
+          </span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- COLONNE 4 — ACCÈS RAPIDES -->
+
+    <div class="mega-column min-w-0">
+      <h3
+        class="mb-3 text-xs font-bold uppercase tracking-[0.14em]"
+        [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }"
+      >
+        {{ languageService.currentLanguage === 'fr' ? 'Accès rapides' : 'Quick access' }}
+      </h3>
+
+      <div
+        class="rounded-2xl border p-4 transition-colors duration-200"
+        [ngClass]="themeSombre
+          ? 'border-[#394740] bg-[#26332E]'
+          : 'border-[#E3E3D8] bg-[#FAFAF5]'"
+      >
+        <!-- ICÔNE AIDE -->
+
+        <span
+          class="mb-3 flex h-12 w-12 items-center justify-center rounded-xl"
+          [ngStyle]="{
+            color: themeSombre ? '#C8E6C9' : '#356B45',
+            background: themeSombre ? '#304C3A' : '#DCEEDD'
+          }"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 5"/>
+            <path d="M12 17h.01"/>
+          </svg>
+        </span>
+
+        <h3 class="text-sm font-bold">
+          {{ languageService.currentLanguage === 'fr' ? "Besoin d'un coup de main ?" : 'Need a hand?' }}
+        </h3>
+
+        <p
+          class="mt-2 text-xs leading-5"
+          [ngStyle]="{
+            color: themeSombre ? '#AAB8B0' : '#697970'
+          }"
+        >
+          {{ languageService.currentLanguage === 'fr'
+            ? 'Accédez aux ressources essentielles pour trouver rapidement votre chemin dans Arboria.'
+            : 'Access essential resources to quickly find your way around Arboria.' }}
+        </p>
+
+        <!-- BOUTON CENTRE D'AIDE -->
+
+        <a
+          href="#help"
+          class="mt-4 inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white no-underline transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          [ngStyle]="{
+            color: '#FFFFFF',
+            background: themeSombre ? '#5F7D63' : '#496B4E',
+            '--tw-ring-color': themeSombre ? '#A9C3A8' : '#5F7D63',
+            '--tw-ring-offset-color': themeSombre ? '#26332E' : '#FAFAF5'
+          }"
+          (click)="fermerMenus()"
+        >
+          <span>
+            {{ languageService.currentLanguage === 'fr' ? "Ouvrir le centre d'aide" : 'Open the help center' }}
+          </span>
+
+          <svg
+            viewBox="0 0 24 24"
+            class="h-4 w-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14m-6-6 6 6-6 6"/>
+          </svg>
+        </a>
+
+        <!-- BLOC NOUS CONTACTER -->
+
+        <a
+          href="#contact"
+          class="group mt-3 flex items-center gap-3 rounded-xl border p-3 no-underline transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          [ngClass]="themeSombre
+            ? 'border-[#394740] bg-[#1F2925] hover:bg-[#2D3B35]'
+            : 'border-[#D6D7CA] bg-white hover:bg-[#F4F3EC]'"
+          [ngStyle]="{
+            '--tw-ring-color': themeSombre ? '#A9C3A8' : '#5F7D63',
+            '--tw-ring-offset-color': themeSombre ? '#1F2925' : '#FFFFFF'
+          }"
+          (click)="fermerMenus()"
+        >
+          <!-- ICÔNE CONTACT -->
+
+          <span
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
+            [ngStyle]="{
+              color: themeSombre ? '#E8C4E1' : '#914F83',
+              background: themeSombre ? '#493448' : '#F0DDEC'
+            }"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="m3 7 9 6 9-6"/>
+            </svg>
+          </span>
+
+          <!-- TEXTE CONTACT -->
+
+          <span class="min-w-0 flex-1">
+            <span
+              class="block text-sm font-semibold"
+              [ngStyle]="{
+                color: themeSombre ? '#E5ECE7' : '#34443D'
+              }"
+            >
+              {{ languageService.currentLanguage === 'fr' ? 'Nous contacter' : 'Contact us' }}
+            </span>
+
+            <span
+              class="mt-1 block text-xs leading-5"
+              [ngStyle]="{
+                color: themeSombre ? '#87958D' : '#697970'
+              }"
+            >
+              {{ languageService.currentLanguage === 'fr'
+                ? "Une question ? Contactez l'équipe Arboria."
+                : 'Have a question? Contact the Arboria team.' }}
+            </span>
+          </span>
+
+          <!-- FLÈCHE -->
+
+          <svg
+            viewBox="0 0 24 24"
+            class="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            [ngStyle]="{
+              color: themeSombre ? '#A9C3A8' : '#496B4E'
+            }"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14m-6-6 6 6-6 6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PIED DU MÉGA-MENU -->
+
+  <div
+    class="mt-6 flex flex-col gap-2 border-t pt-4 sm:flex-row sm:items-center sm:justify-between"
+    [ngClass]="themeSombre ? 'border-[#394740]' : 'border-[#E3E3D8]'"
+  >
+    <p
+      class="text-xs leading-5"
+      [ngStyle]="{ color: themeSombre ? '#87958D' : '#697970' }"
+    >
+      {{ languageService.currentLanguage === 'fr'
+        ? 'Arboria vous accompagne pour mieux comprendre et entretenir votre jardin.'
+        : 'Arboria helps you better understand and care for your garden.' }}
+    </p>
+
+    <a
+      href="#faq"
+      class="inline-flex w-fit items-center gap-2 text-xs font-semibold no-underline transition-colors duration-200 hover:underline"
+      [ngStyle]="{ color: themeSombre ? '#A9C3A8' : '#496B4E' }"
+      (click)="fermerMenus()"
+    >
+      {{ languageService.currentLanguage === 'fr'
+        ? 'Consulter les questions fréquentes'
+        : 'Browse frequently asked questions' }}
+
+      <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14m-6-6 6 6-6 6"/>
+      </svg>
+    </a>
+  </div>
+
+</div>
+
+</section>

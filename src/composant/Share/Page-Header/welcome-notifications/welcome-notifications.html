@@ -1,0 +1,304 @@
+<!-- ============================================================
+     ARBORIA — MENU NOTIFICATIONS PREMIUM
+     Angular Standalone + Tailwind CSS + Font Awesome
+
+     • Hover identique à la navigation Arboria
+     • Fond BG3 et texte Primary au survol
+     • Couleurs dynamiques via ThemeService
+     • Badge de notifications dynamique conservé
+     • Menu déroulant animé
+     • Navigation clavier accessible
+     • Thèmes clair et sombre conservés
+============================================================ -->
+
+<div
+  class="arboria-dropdown group relative"
+  [ngStyle]="{
+    '--action-hover-bg': themeService.BG3,
+    '--action-hover-text': themeService.Primary,
+    '--button-focus': themeService.Primary,
+    '--panel-hover': themeService.BG3,
+    '--panel-hover-text': themeService.Primary,
+    '--panel-focus': themeService.Primary
+  }"
+>
+  <!-- Bouton notifications -->
+
+  <button
+    type="button"
+    class="arboria-action-button relative flex h-10 w-10 shrink-0
+           items-center justify-center rounded-xl border border-transparent
+           transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-4"
+    [ngStyle]="{
+      color: themeService.TX2
+    }"
+    aria-label="Notifications"
+    aria-haspopup="true"
+  >
+    <i
+      class="fa-regular fa-bell text-[16px] transition-transform duration-300
+             group-hover:rotate-[-8deg]"
+      aria-hidden="true"
+    ></i>
+
+    <!-- Badge dynamique -->
+
+    <span
+      *ngIf="nombreNotifications > 0"
+      class="absolute right-[7px] top-[7px] flex h-[15px] min-w-[15px]
+             items-center justify-center rounded-full border-2 px-0.5
+             text-[8px] font-bold leading-none"
+      [ngStyle]="{
+        'background-color': themeService.Error,
+        'border-color': themeService.BG1,
+        color: themeService.TX5
+      }"
+      aria-live="polite"
+    >
+      {{ nombreNotifications > 9 ? '9+' : nombreNotifications }}
+    </span>
+  </button>
+
+  <!-- Panneau déroulant -->
+
+  <div
+    class="arboria-dropdown-panel invisible absolute right-0 top-full
+           z-50 w-[min(290px,calc(100vw-24px))] translate-y-2 pt-2
+           opacity-0 transition-all duration-200
+           group-hover:visible group-hover:translate-y-0
+           group-hover:opacity-100
+           group-focus-within:visible
+           group-focus-within:translate-y-0
+           group-focus-within:opacity-100"
+  >
+    <div
+      class="overflow-hidden rounded-2xl border shadow-xl"
+      [ngStyle]="{
+        'background-color': themeService.BG1,
+        'border-color': themeService.BR1,
+        'box-shadow': '0 16px 48px ' + themeService.SHADOW,
+        color: themeService.TX0
+      }"
+    >
+      <!-- En-tête -->
+
+      <div
+        class="flex items-center justify-between border-b px-4 py-3.5"
+        [ngStyle]="{
+          'border-color': themeService.BR1
+        }"
+      >
+        <div class="min-w-0">
+          <p
+            class="text-[13px] font-semibold"
+            [ngStyle]="{
+              color: themeService.TX0
+            }"
+          >
+            Notifications
+          </p>
+
+          <p
+            class="mt-0.5 text-[10px]"
+            [ngStyle]="{
+              color: themeService.TX3
+            }"
+          >
+            Votre jardin en un coup d'œil
+          </p>
+        </div>
+
+        <span
+          class="flex h-8 w-8 shrink-0 items-center justify-center
+                 rounded-xl"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            color: themeService.Primary
+          }"
+        >
+          <i
+            class="fa-regular fa-bell text-[13px]"
+            aria-hidden="true"
+          ></i>
+        </span>
+      </div>
+
+      <!-- État vide -->
+
+      <div class="px-4 py-5 text-center">
+        <span
+          class="mx-auto flex h-10 w-10 items-center justify-center
+                 rounded-full transition-transform duration-200
+                 hover:scale-105"
+          [ngStyle]="{
+            'background-color': themeService.BG2,
+            color: themeService.Primary
+          }"
+        >
+          <i
+            class="fa-solid fa-seedling text-[16px]"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <p
+          class="mt-3 text-[12px] font-medium"
+          [ngStyle]="{
+            color: themeService.TX1
+          }"
+        >
+          Tout pousse tranquillement
+        </p>
+
+        <p
+          class="mt-1 text-[11px] leading-5"
+          [ngStyle]="{
+            color: themeService.TX3
+          }"
+        >
+          Vous retrouverez ici les informations importantes pour vos plantes.
+        </p>
+      </div>
+
+      <!-- Lien vers les conseils saisonniers -->
+
+      <a
+        routerLink="/saison"
+        class="arboria-panel-link flex items-center justify-center gap-2
+               border-t px-4 py-3 text-[11px] font-semibold
+               transition-all duration-200
+               focus-visible:outline-none focus-visible:ring-2
+               focus-visible:ring-inset"
+        [ngStyle]="{
+          'border-color': themeService.BR1,
+          color: themeService.Primary
+        }"
+      >
+        <i
+          class="fa-solid fa-calendar-days transition-transform duration-200
+                 group-hover:scale-105"
+          aria-hidden="true"
+        ></i>
+
+        <span>Voir les conseils de saison</span>
+
+        <i
+          class="fa-solid fa-arrow-right arboria-panel-arrow text-[10px]"
+          aria-hidden="true"
+        ></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ARBORIA — STYLES DU MENU NOTIFICATIONS
+     Hover harmonisé avec arboria-nav-link
+============================================================ -->
+
+<style>
+  :host {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .arboria-dropdown {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Bouton notifications */
+
+  .arboria-action-button {
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease,
+      transform 200ms ease;
+  }
+
+  .arboria-action-button:hover {
+    color: var(--action-hover-text, inherit);
+    background-color: var(--action-hover-bg, transparent);
+  }
+
+  .arboria-action-button:active {
+    transform: scale(0.96);
+  }
+
+  .arboria-action-button:focus-visible {
+    --tw-ring-color: var(--button-focus, #287653);
+
+    box-shadow:
+      0 0 0 4px
+      color-mix(
+        in srgb,
+        var(--button-focus, #287653) 15%,
+        transparent
+      );
+  }
+
+  /* Panneau déroulant */
+
+  .arboria-dropdown-panel {
+    transform-origin: top right;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  /* Liens du panneau : même hover que la navigation */
+
+  .arboria-panel-link {
+    color: var(--panel-hover-text, inherit);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .arboria-panel-link:hover {
+    background-color: var(--panel-hover, transparent);
+    color: var(--panel-hover-text, inherit);
+  }
+
+  .arboria-panel-link:focus-visible {
+    --tw-ring-color: var(--panel-focus, #287653);
+
+    box-shadow:
+      inset 0 0 0 2px
+      color-mix(
+        in srgb,
+        var(--panel-focus, #287653) 35%,
+        transparent
+      );
+  }
+
+  /* Flèche animée au survol */
+
+  .arboria-panel-arrow {
+    opacity: 0.65;
+    transform: translateX(0);
+    transition:
+      transform 200ms ease,
+      opacity 200ms ease;
+  }
+
+  .arboria-panel-link:hover .arboria-panel-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  /* Accessibilité : animations réduites */
+
+  @media (prefers-reduced-motion: reduce) {
+    .arboria-action-button,
+    .arboria-action-button *,
+    .arboria-dropdown-panel,
+    .arboria-panel-link,
+    .arboria-panel-arrow {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

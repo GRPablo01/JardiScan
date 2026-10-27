@@ -1,0 +1,545 @@
+<!-- ============================================================
+     ARBORIA — PRESENTATION PREMIUM
+     Angular standalone + Tailwind CSS
+
+     • Couleurs réactives via ThemeService
+     • Thème clair / sombre sans rechargement
+     • Transitions de couleurs courtes et fluides
+     • LanguageService : français / anglais
+     • Image principale à gauche
+     • Contenu éditorial au centre
+     • Image secondaire flottante sur desktop
+     • Responsive mobile, tablette et desktop
+     • Animations discrètes et accessibles
+     • Images, textes et fonctionnalités conservés
+============================================================ -->
+
+<section
+  class="arboria-presentation relative isolate w-full overflow-hidden
+         p-3 transition-colors duration-200 ease-out
+         sm:p-4 lg:p-5"
+  [ngStyle]="{
+    'background-color': themeService.BG1,
+    'color': themeService.TX0
+  }"
+>
+  <!-- ==========================================================
+       CONTENEUR PRINCIPAL
+  =========================================================== -->
+
+  <div
+    class="relative mx-auto grid w-full max-w-[1800px]
+           grid-cols-1 items-stretch gap-5
+           transition-colors duration-200 ease-out
+           sm:gap-6
+           lg:grid-cols-[minmax(220px,0.78fr)_minmax(0,1.45fr)]
+           lg:gap-7
+           xl:grid-cols-[minmax(250px,0.85fr)_minmax(0,1.5fr)]
+           xl:gap-9
+           2xl:grid-cols-[minmax(280px,0.9fr)_minmax(0,1.55fr)]
+           2xl:gap-10"
+  >
+    <!-- ========================================================
+         IMAGE PRINCIPALE — GAUCHE
+    ========================================================= -->
+
+    <div
+      class="group relative isolate min-h-[260px] w-full min-w-0
+             overflow-hidden rounded-[24px] border
+             transition-[background-color,border-color,box-shadow]
+             duration-200 ease-out
+             sm:min-h-[340px]
+             md:min-h-[420px]
+             lg:min-h-[600px]
+             xl:min-h-[660px]
+             2xl:min-h-[720px]"
+      [ngStyle]="{
+        'background-color': themeService.BG3,
+        'border-color': themeService.BR1,
+        'box-shadow': 'var(--SHADOW)'
+      }"
+    >
+      <!-- Image principale originale -->
+
+      <img
+        [src]="themeService.ImageFondWelcome"
+        [alt]="
+          languageService.currentLanguage === 'fr'
+            ? 'Présentation de l’univers végétal Arboria'
+            : 'Discover the Arboria plant world'
+        "
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover object-center
+               transition-transform duration-1000 ease-out
+               motion-safe:group-hover:scale-[1.045]"
+      />
+
+      <!-- Voile de profondeur -->
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0"
+        style="background: linear-gradient(
+          to top,
+          rgba(23,35,29,0.72),
+          rgba(23,35,29,0.12) 45%,
+          rgba(23,35,29,0.04)
+        )"
+      ></div>
+
+      <!-- Halo décoratif -->
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute -right-16 -top-16
+               h-48 w-48 rounded-full blur-3xl
+               transition-transform duration-700
+               motion-safe:group-hover:scale-125"
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft
+        }"
+      ></div>
+
+      <!-- Signature ARBORIA -->
+
+      <div
+        class="absolute left-3 top-3 inline-flex
+               max-w-[calc(100%-1.5rem)] items-center gap-2
+               rounded-full border px-3 py-2 shadow-sm
+               backdrop-blur-xl
+               transition-[background-color,color,border-color,box-shadow]
+               duration-200 ease-out
+               sm:left-5 sm:top-5 sm:gap-2.5 sm:px-4"
+        [ngStyle]="{
+          'background-color': themeService.BG1,
+          'border-color': themeService.BR1,
+          'color': themeService.TX0
+        }"
+      >
+        <span
+          class="flex h-7 w-7 shrink-0 items-center justify-center
+                 rounded-full transition-colors duration-200"
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            'color': themeService.Primary
+          }"
+        >
+          <i
+            class="fa-solid fa-leaf text-sm"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span
+          class="text-[10px] font-semibold uppercase
+                 tracking-[0.18em] sm:text-[11px]"
+          [ngStyle]="{
+            'color': themeService.TX1
+          }"
+        >
+          ARBORIA
+        </span>
+
+        <span
+          class="h-1 w-1 shrink-0 rounded-full"
+          [ngStyle]="{
+            'background-color': themeService.Primary
+          }"
+        ></span>
+
+        <span
+          class="text-[10px] font-medium sm:text-xs"
+          [ngStyle]="{
+            'color': themeService.TX2
+          }"
+        >
+          {{
+            languageService.currentLanguage === 'fr'
+              ? 'Notre univers'
+              : 'Our world'
+          }}
+        </span>
+      </div>
+
+      <!-- Signature inférieure -->
+
+      <div
+        class="absolute bottom-3 left-3 right-3
+               flex items-center gap-3 rounded-2xl border p-3
+               backdrop-blur-xl
+               transition-[background-color,color,border-color,box-shadow]
+               duration-200 ease-out
+               sm:bottom-5 sm:left-5 sm:right-5 sm:p-4"
+        [ngStyle]="{
+          'background-color': themeService.BG1,
+          'border-color': themeService.BR1,
+          'color': themeService.TX0
+        }"
+      >
+        <span
+          class="flex h-10 w-10 shrink-0 items-center
+                 justify-center rounded-xl
+                 transition-colors duration-200"
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            'color': themeService.Primary
+          }"
+        >
+          <i
+            class="fa-solid fa-seedling text-base"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <div class="min-w-0">
+          <p
+            class="text-sm font-semibold tracking-[-0.02em]
+                   sm:text-base"
+            [ngStyle]="{
+              'color': themeService.TX0
+            }"
+            style="font-family: var(--arboria-font-body)"
+          >
+            {{
+              languageService.currentLanguage === 'fr'
+                ? 'La nature au quotidien'
+                : 'Nature in everyday life'
+            }}
+          </p>
+
+          <p
+            class="mt-0.5 text-xs leading-5"
+            [ngStyle]="{
+              'color': themeService.TX2
+            }"
+          >
+            {{
+              languageService.currentLanguage === 'fr'
+                ? 'Chaque plante a son histoire.'
+                : 'Every plant has a story.'
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         CONTENU ÉDITORIAL — CENTRE
+    ========================================================= -->
+
+    <div
+      class="relative flex min-w-0 flex-col justify-center
+             py-3 transition-colors duration-200 ease-out
+             sm:px-1 sm:py-5
+             lg:py-8 lg:pr-0
+             xl:py-10
+             2xl:py-12"
+    >
+      <!-- Surtitre -->
+
+      <div class="mb-5 flex items-center gap-3 sm:mb-6">
+        <span
+          class="h-px w-8 shrink-0 sm:w-10"
+          [ngStyle]="{
+            'background-color': themeService.Coral
+          }"
+        ></span>
+
+        <span
+          class="text-[10px] font-bold uppercase tracking-[0.18em]
+                 sm:text-[11px] sm:tracking-[0.22em]"
+          [ngStyle]="{
+            'color': themeService.Coral
+          }"
+        >
+          {{
+            languageService.currentLanguage === 'fr'
+              ? 'Qui sommes-nous ?'
+              : 'Who are we?'
+          }}
+        </span>
+      </div>
+
+      <!-- Titre principal -->
+
+      <h2
+        class="w-full max-w-4xl
+               text-[clamp(2.1rem,4.5vw,4.2rem)]
+               font-semibold leading-[1.1] tracking-[-0.055em]
+               transition-colors duration-200 ease-out
+               sm:leading-[1.06]
+               lg:text-[clamp(2.2rem,3vw,3.35rem)]
+               xl:text-[clamp(2.5rem,3.1vw,3.8rem)]
+               2xl:text-[58px]"
+        [ngStyle]="{
+          'color': themeService.TX0
+        }"
+        style="font-family: var(--arboria-font-body)"
+      >
+        <ng-container
+          *ngIf="
+            languageService.currentLanguage === 'fr';
+            else englishTitle
+          "
+        >
+          Cultivez votre passion,
+          <br class="hidden sm:block" />
+          prenez soin de vos plantes
+          <br class="hidden sm:block" />
+
+          <span
+            class="inline-block font-medium italic tracking-[-0.045em]
+                   transition-colors duration-200 ease-out"
+            [ngStyle]="{
+              'color': themeService.Primary
+            }"
+            style="font-family: var(--arboria-font-display)"
+          >
+            avec Arboria.
+          </span>
+        </ng-container>
+
+        <ng-template #englishTitle>
+          Grow your passion,
+          <br class="hidden sm:block" />
+          take care of your plants
+          <br class="hidden sm:block" />
+
+          <span
+            class="inline-block font-medium italic tracking-[-0.045em]
+                   transition-colors duration-200 ease-out"
+            [ngStyle]="{
+              'color': themeService.Primary
+            }"
+            style="font-family: var(--arboria-font-display)"
+          >
+            with Arboria.
+          </span>
+        </ng-template>
+      </h2>
+
+      <!-- Description principale -->
+
+      <p
+        class="mt-5 w-full max-w-2xl text-sm font-normal
+               leading-7 transition-colors duration-200 ease-out
+               sm:mt-6 sm:text-base sm:leading-8
+               xl:mt-7"
+        [ngStyle]="{
+          'color': themeService.TX2
+        }"
+        style="font-family: var(--arboria-font-body)"
+      >
+        {{
+          languageService.currentLanguage === 'fr'
+            ? 'Arboria vous accompagne au quotidien pour comprendre vos plantes, entretenir votre jardin et trouver les conseils adaptés à chaque besoin. Explorez notre collection végétale et découvrez une nouvelle façon de prendre soin de la nature.'
+            : 'Arboria is here to help you understand your plants, care for your garden and find advice tailored to your needs. Explore our plant collection and discover a new way to care for nature.'
+        }}
+      </p>
+
+      <!-- Séparateur -->
+
+      <div
+        aria-hidden="true"
+        class="mt-7 h-px w-full max-w-[560px]
+               sm:mt-8 lg:mt-9"
+        [ngStyle]="{
+          'background': 'linear-gradient(to right, '
+            + themeService.BR2 + ', transparent)'
+        }"
+      ></div>
+
+      <!-- Paragraphe éditorial -->
+
+      <div class="mt-6 w-full max-w-[600px] sm:mt-7 xl:mt-8">
+        <p
+          class="text-sm font-normal leading-7
+                 transition-colors duration-200 ease-out
+                 sm:text-base sm:leading-8"
+          [ngStyle]="{
+            'color': themeService.TX2
+          }"
+          style="font-family: var(--arboria-font-body)"
+        >
+          {{
+            languageService.currentLanguage === 'fr'
+              ? 'Parce que chaque plante est unique, Arboria vous aide à mieux comprendre ses besoins, à adopter les bons gestes et à créer un environnement où la nature peut s’épanouir. Que vous soyez débutant ou passionné, avancez à votre rythme et faites grandir votre savoir-faire, une feuille après l’autre.'
+              : 'Because every plant is unique, Arboria helps you better understand its needs, develop the right habits and create an environment where nature can thrive. Whether you are a beginner or a passionate plant lover, grow your knowledge at your own pace, one leaf at a time.'
+          }}
+        </p>
+
+        <!-- Accent décoratif -->
+
+        <div
+          aria-hidden="true"
+          class="mt-5 flex items-center gap-2"
+        >
+          <span
+            class="h-1.5 w-8 rounded-full"
+            [ngStyle]="{
+              'background-color': themeService.Primary
+            }"
+          ></span>
+
+          <span
+            class="h-1.5 w-1.5 rounded-full"
+            [ngStyle]="{
+              'background-color': themeService.Coral
+            }"
+          ></span>
+
+          <span
+            class="h-px w-10"
+            [ngStyle]="{
+              'background-color': themeService.BR2
+            }"
+          ></span>
+        </div>
+      </div>
+
+      <!-- Signature inférieure -->
+
+      <div
+        class="mt-7 inline-flex w-fit max-w-full items-center
+               gap-2.5 rounded-full border px-3.5 py-2.5
+               transition-[background-color,color,border-color]
+               duration-200 ease-out
+               sm:mt-8 sm:px-4"
+        [ngStyle]="{
+          'background-color': themeService.BG3,
+          'border-color': themeService.BR1,
+          'color': themeService.TX1
+        }"
+      >
+        <span
+          class="flex h-6 w-6 shrink-0 items-center
+                 justify-center rounded-full
+                 transition-colors duration-200"
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            'color': themeService.Primary
+          }"
+        >
+          <i
+            class="fa-solid fa-check text-[10px]"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span class="text-[11px] font-medium leading-5 sm:text-xs">
+          {{
+            languageService.currentLanguage === 'fr'
+              ? 'Une expérience pensée pour le vivant'
+              : 'An experience designed around nature'
+          }}
+        </span>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         IMAGE SECONDAIRE — DROITE
+         Colonne mobile, carte flottante sur desktop
+    ========================================================= -->
+
+    <div
+      class="group relative isolate min-h-[250px] w-full min-w-0
+             overflow-hidden rounded-[24px] border
+             transition-[background-color,border-color,box-shadow]
+             duration-200 ease-out
+             sm:min-h-[330px]
+             md:min-h-[400px]
+             lg:absolute lg:bottom-0 lg:right-0
+             lg:h-[330px] lg:min-h-0 lg:w-[185px]
+             xl:h-[400px] xl:w-[230px]
+             2xl:h-[450px] 2xl:w-[270px]"
+      [ngStyle]="{
+        'background-color': themeService.BG3,
+        'border-color': themeService.BR1,
+        'box-shadow': 'var(--SHADOW)'
+      }"
+    >
+      <!-- Image secondaire originale -->
+
+      <img
+        src="assets/ImageAccueil-2.png"
+        [alt]="
+          languageService.currentLanguage === 'fr'
+            ? 'Un jardin verdoyant entretenu avec soin'
+            : 'A lush garden carefully maintained'
+        "
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover object-center
+               transition-transform duration-1000 ease-out
+               motion-safe:group-hover:scale-[1.06]"
+      />
+
+      <!-- Dégradé inférieur -->
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0"
+        style="background: linear-gradient(
+          to top,
+          rgba(23,35,29,0.78),
+          rgba(23,35,29,0.16) 48%,
+          transparent
+        )"
+      ></div>
+
+      <!-- Halo décoratif -->
+
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute -right-10 -top-10
+               h-32 w-32 rounded-full blur-2xl"
+        [ngStyle]="{
+          'background-color': themeService.PrimarySoft
+        }"
+      ></div>
+
+      <!-- Signature visuelle -->
+
+      <div
+        class="absolute bottom-3 left-3 right-3 flex items-center
+               gap-2.5 rounded-2xl border p-3 backdrop-blur-xl
+               transition-[background-color,color,border-color]
+               duration-200 ease-out
+               sm:bottom-5 sm:left-4 sm:right-4 sm:p-3.5"
+        [ngStyle]="{
+          'background-color': themeService.BG1,
+          'border-color': themeService.BR1,
+          'color': themeService.TX0
+        }"
+      >
+        <span
+          class="flex h-9 w-9 shrink-0 items-center
+                 justify-center rounded-xl
+                 transition-colors duration-200"
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            'color': themeService.Primary
+          }"
+        >
+          <i
+            class="fa-solid fa-seedling text-sm"
+            aria-hidden="true"
+          ></i>
+        </span>
+
+        <span
+          class="min-w-0 text-[10px] font-semibold leading-4 sm:text-xs"
+          style="font-family: var(--arboria-font-body)"
+        >
+          {{
+            languageService.currentLanguage === 'fr'
+              ? 'Cultiver naturellement'
+              : 'Grow naturally'
+          }}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

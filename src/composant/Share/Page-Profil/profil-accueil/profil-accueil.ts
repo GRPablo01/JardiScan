@@ -1397,7 +1397,7 @@ export class ProfilAccueil
     switch (type) {
 
       case 'arrosage':
-        return this.themeService.Leaf;
+        return this.themeService.Info;
 
       case 'exposition':
         return '#f59e0b';

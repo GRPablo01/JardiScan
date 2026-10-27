@@ -1,0 +1,84 @@
+<!-- ============================================================
+     🌐 LANGUAGE — RESPONSIVE
+     
+     • 370px → 1239px : Mobile + Tablette
+     • 1240px → ∞    : Laptop + Desktop
+     
+     • Un seul composant visible à la fois
+     • Aucun chevauchement
+     • Aucun changement dans les composants Angular
+     • Compatible responsive
+     ============================================================ -->
+
+<!-- ============================================================
+     📱 MOBILE + TABLETTE
+     370px → 1239px
+     ============================================================ -->
+
+     <div class="language-mobile-tablet">
+        <app-language></app-language>
+      </div>
+      
+      <!-- ============================================================
+           💻 LAPTOP + DESKTOP
+           1240px → ∞
+           ============================================================ -->
+      
+      <div class="language-laptop-desktop">
+        <app-language-desktop></app-language-desktop>
+      </div>
+      
+      <!-- ============================================================
+           🎨 RESPONSIVE
+           ============================================================ -->
+      
+      <style>
+        /* ------------------------------------------------------------
+           📱 MOBILE + TABLETTE
+           370px → 1239px
+           ------------------------------------------------------------ */
+        .language-mobile-tablet {
+          display: block;
+        }
+      
+        /* ------------------------------------------------------------
+           💻 LAPTOP + DESKTOP
+           1240px → ∞
+           ------------------------------------------------------------ */
+        .language-laptop-desktop {
+          display: none;
+        }
+      
+      
+        /* ------------------------------------------------------------
+           💻 À PARTIR DE 1240px
+           Laptop + Desktop
+           ------------------------------------------------------------ */
+        @media (min-width: 1240px) {
+      
+          .language-mobile-tablet {
+            display: none;
+          }
+      
+          .language-laptop-desktop {
+            display: block;
+          }
+        }
+      
+      
+        /* ------------------------------------------------------------
+           🚫 En dessous de 370px
+           Aucun composant affiché
+           ------------------------------------------------------------ */
+        @media (max-width: 369px) {
+      
+          .language-mobile-tablet {
+            display: none;
+          }
+      
+          .language-laptop-desktop {
+            display: none;
+          }
+        }
+      </style>
+      

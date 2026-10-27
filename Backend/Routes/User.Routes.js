@@ -22,25 +22,32 @@ const {
 // 📁 CONFIGURATION UPLOAD AVATAR
 // =====================================================
 
-const storage = multer.diskStorage({
+const path = require('path');
+const fs = require('fs');
 
+const usersUploadPath = path.resolve(
+  __dirname,
+  '../../uploads/users'
+);
+
+// Création du dossier si nécessaire
+if (!fs.existsSync(usersUploadPath)) {
+  fs.mkdirSync(usersUploadPath, { recursive: true });
+}
+
+const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/users');
+    cb(null, usersUploadPath);
   },
 
   filename: (req, file, cb) => {
-
-    const extension = file.originalname
-      .split('.')
-      .pop()
-      .toLowerCase();
+    const extension = path.extname(file.originalname).toLowerCase();
 
     const nomFichier =
-      `${Date.now()}-${Math.round(Math.random() * 1E9)}.${extension}`;
+      `${Date.now()}-${Math.round(Math.random() * 1E9)}${extension}`;
 
     cb(null, nomFichier);
   }
-
 });
 
 

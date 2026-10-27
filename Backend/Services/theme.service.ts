@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -5,39 +6,147 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ThemeService {
-
   // ============================================================
-  // 🌿 JARDISCAN — PREMIUM NATURE DESIGN SYSTEM
-  //
-  // • Light / Dark
-  // • Primary
-  // • Secondary
-  // • Accent
-  // • Backgrounds
-  // • Surfaces / Cards
-  // • Borders
-  // • Textes
-  // • États
-  // • Overlays
-  // • Ombres
-  // • Image Welcome
-  // • Compatible Tailwind / Angular
+  // ARBORIA — DESIGN SYSTEM PREMIUM
+  // Palette botanique vive • Mode clair / sombre
+  // Angular standalone • Tailwind CSS • CSS Variables
+  // API publique conservée • Compatibilité avec les composants
   // ============================================================
 
+  private readonly darkMode = new BehaviorSubject<boolean>(false);
+
+  readonly isDarkMode$ = this.darkMode.asObservable();
+  readonly themeChange$ = this.darkMode.asObservable();
 
   // ============================================================
-  // 🌗 DARK MODE STATE
+  // IDENTITÉ VISUELLE — ARBORIA
   // ============================================================
 
-  private darkMode = new BehaviorSubject<boolean>(false);
+  readonly Forest = '#173F32';
+  readonly Green = '#287653';
+  readonly GreenHover = '#216447';
+  readonly GreenActive = '#194F38';
 
-  isDarkMode$ = this.darkMode.asObservable();
+  readonly Lime = '#D2F29A';
+  readonly Teal = '#36BFA6';
+  readonly Blue = '#739AF5';
+  readonly Coral = '#F28B73';
+  readonly Yellow = '#F2C96D';
 
-  themeChange$ = this.darkMode.asObservable();
+  readonly White = '#FFFFFF';
+  readonly Black = '#17231D';
 
+  // Couleurs complémentaires plus vives.
+  readonly Purple = '#9946D8';
+  readonly Orange = '#F28C38';
+  readonly Pink = '#D946A8';
+  readonly Emerald = '#159B72';
+  readonly Cyan = '#36C9E0';
+  readonly Red = '#E65353';
 
   // ============================================================
-  // 🌿 PRIMARY
+  // TYPOGRAPHIE
+  // ============================================================
+
+  readonly FONT_DISPLAY = "'Cormorant Garamond', Georgia, serif";
+  readonly FONT_BODY = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+  readonly FONT_MONO = "'SFMono-Regular', Consolas, monospace";
+
+  readonly FONT_SIZE_XS = '0.75rem';
+  readonly FONT_SIZE_SM = '0.875rem';
+  readonly FONT_SIZE_BASE = '1rem';
+  readonly FONT_SIZE_LG = '1.125rem';
+  readonly FONT_SIZE_XL = '1.25rem';
+  readonly FONT_SIZE_2XL = '1.5rem';
+  readonly FONT_SIZE_3XL = '1.875rem';
+  readonly FONT_SIZE_4XL = '2.25rem';
+  readonly FONT_SIZE_5XL = '3rem';
+  readonly FONT_SIZE_6XL = '3.75rem';
+
+  readonly LINE_HEIGHT_TIGHT = 1.15;
+  readonly LINE_HEIGHT_HEADING = 1.25;
+  readonly LINE_HEIGHT_BODY = 1.65;
+  readonly LINE_HEIGHT_RELAXED = 1.8;
+
+  readonly FONT_WEIGHT_REGULAR = 400;
+  readonly FONT_WEIGHT_MEDIUM = 500;
+  readonly FONT_WEIGHT_SEMIBOLD = 600;
+  readonly FONT_WEIGHT_BOLD = 700;
+
+  readonly LETTER_SPACING_TIGHT = '-0.04em';
+  readonly LETTER_SPACING_NORMAL = '0';
+  readonly LETTER_SPACING_WIDE = '0.06em';
+
+  // ============================================================
+  // ESPACEMENTS
+  // ============================================================
+
+  readonly SPACE_1 = '0.25rem';
+  readonly SPACE_2 = '0.5rem';
+  readonly SPACE_3 = '0.75rem';
+  readonly SPACE_4 = '1rem';
+  readonly SPACE_5 = '1.25rem';
+  readonly SPACE_6 = '1.5rem';
+  readonly SPACE_8 = '2rem';
+  readonly SPACE_10 = '2.5rem';
+  readonly SPACE_12 = '3rem';
+  readonly SPACE_16 = '4rem';
+  readonly SPACE_20 = '5rem';
+  readonly SPACE_24 = '6rem';
+
+  // ============================================================
+  // RAYONS
+  // ============================================================
+
+  readonly RADIUS_SM = '0.5rem';
+  readonly RADIUS_MD = '0.75rem';
+  readonly RADIUS_LG = '1rem';
+  readonly RADIUS_XL = '1.25rem';
+  readonly RADIUS_2XL = '1.75rem';
+  readonly RADIUS_3XL = '2rem';
+  readonly RADIUS_FULL = '9999px';
+
+  // ============================================================
+  // ANIMATIONS
+  // ============================================================
+
+  readonly TRANSITION_FAST = '150ms ease';
+  readonly TRANSITION_BASE = '220ms ease';
+  readonly TRANSITION_SMOOTH = '300ms cubic-bezier(0.2, 0.65, 0.3, 1)';
+  readonly TRANSITION_ENTER = '400ms cubic-bezier(0.16, 1, 0.3, 1)';
+
+  // ============================================================
+  // MISE EN PAGE
+  // ============================================================
+
+  readonly CONTENT_MAX_WIDTH = '1280px';
+  readonly CONTENT_READING_WIDTH = '760px';
+  readonly HEADER_HEIGHT = '76px';
+  readonly MOBILE_HEADER_HEIGHT = '64px';
+
+  // ============================================================
+  // OMBRES
+  // ============================================================
+
+  readonly SHADOW_SM = '0 1px 2px rgba(23, 35, 29, 0.05)';
+  readonly SHADOW_MD = '0 4px 16px rgba(23, 35, 29, 0.08)';
+  readonly SHADOW_LG = '0 12px 32px rgba(23, 35, 29, 0.12)';
+  readonly SHADOW_XL = '0 24px 60px rgba(23, 35, 29, 0.16)';
+
+  // ============================================================
+  // BLOC D'ANNONCE
+  // ============================================================
+
+  ANNOUNCEMENT = '';
+  ANNOUNCEMENT_HOVER = '';
+  ANNOUNCEMENT_TEXT = '';
+  ANNOUNCEMENT_TEXT_MUTED = '';
+  ANNOUNCEMENT_ACCENT = '';
+  ANNOUNCEMENT_ICON_BG = '';
+  ANNOUNCEMENT_BORDER = '';
+
+  // ============================================================
+  // PRIMARY
   // ============================================================
 
   Primary = '';
@@ -45,12 +154,10 @@ export class ThemeService {
   PrimaryActive = '';
   PrimarySoft = '';
   PrimarySoftHover = '';
-
   BorderPrimary = '';
 
-
   // ============================================================
-  // 🎨 SECONDARY
+  // SECONDARY & ACCENT
   // ============================================================
 
   Secondary = '';
@@ -60,15 +167,21 @@ export class ThemeService {
   Accent = '';
   AccentSoft = '';
 
+  // ============================================================
+  // BACKGROUNDS — 5 NIVEAUX
+  // Clair : BG1 #FFFFFF → BG5 progressivement plus sombre.
+  // Sombre : BG1 #202220 → BG5 progressivement plus clair.
+  // ============================================================
 
-  // ============================================================
-  // 🖥️ BACKGROUNDS
-  // ============================================================
   BG1 = '';
   BG2 = '';
   BG3 = '';
   BG4 = '';
   BG5 = '';
+
+  // ============================================================
+  // BORDURES — 5 NIVEAUX
+  // ============================================================
 
   BR1 = '';
   BR2 = '';
@@ -76,73 +189,117 @@ export class ThemeService {
   BR4 = '';
   BR5 = '';
 
-
-  Primary1 = '';
-  PrimaryHover1 = '';
-  PrimaryActive1 = '';
-  PrimarySoft1 = '';
-  PrimaryText1 = '';
-  PrimaryBorder1 = '';
-
-
-
-  Background1 = '';
-  Background2 = '';
-  Background3 = '';
-  Background4 = '';
-
-  BackgroundHero = '';
-  BackgroundSection = '';
-  BackgroundFooter = '';
-
-
   // ============================================================
-  // 🪟 SURFACES / CARDS
+  // TEXTES — 6 NIVEAUX
   // ============================================================
 
-  Surface1 = '';
-  Surface2 = '';
-  Surface3 = '';
-  Surface4 = '';
-
-  Card = '';
-  CardHover = '';
-  CardActive = '';
-
-  Backgroundcards = '';
-  BackgroundcardsHover = '';
-
+  TX0 = '';
+  TX1 = '';
+  TX2 = '';
+  TX3 = '';
+  TX4 = '';
+  TX5 = '';
 
   // ============================================================
-  // ▫️ BORDERS
+  // COULEURS DE NAVIGATION
   // ============================================================
 
-  Border1 = '';
-  Border2 = '';
-  Border3 = '';
-  Border4 = '';
+  BGV = '';
+  BRV = '';
+  TXV = '';
 
-  BorderSoft = '';
-  BorderStrong = '';
+  BGO = '';
+  BRO = '';
+  TXO = '';
 
+  BGG = '';
+  BRG = '';
+  TXG = '';
 
-  // ============================================================
-  // ✍️ TEXT
-  // ============================================================
-
-  TextPrincipal = '';
-  TextSecondaire = '';
-  TextTertiaire = '';
-
-  TextMuted = '';
-  TextDisabled = '';
-
-  TextOnPrimary = '';
-  TextOnSecondary = '';
-
+  BGR = '';
+  BRR = '';
+  TXR = '';
 
   // ============================================================
-  // ✅ SUCCESS
+  // ÉLÉMENTS GÉNÉRAUX
+  // ============================================================
+
+  IB = '';
+  ICON = '';
+  SHADOW = '';
+
+  // ============================================================
+  // LABELS
+  // ============================================================
+
+  LABELBG = '';
+  LABELBORDER = '';
+  LABELICON = '';
+  LABELTEXT = '';
+  LABELPLACEHOLDER = '';
+
+  // ============================================================
+  // BADGE A — PRINCIPAL
+  // ============================================================
+
+  BADGEABG = '';
+  BADGEABORDER = '';
+  BADGEAICON = '';
+  BADGEATEXT = '';
+
+  // ============================================================
+  // BADGE E — NEUTRE
+  // ============================================================
+
+  BADGEEBG = '';
+  BADGEEBORDER = '';
+  BADGEEICON = '';
+  BADGEETEXT = '';
+
+  // ============================================================
+  // BADGE T — SECONDAIRE
+  // ============================================================
+
+  BADGETBG = '';
+  BADGETBORDER = '';
+  BADGETICON = '';
+  BADGETTEXT = '';
+
+  // ============================================================
+  // RECHERCHE
+  // ============================================================
+
+  SEARCHBG = '';
+  SEARCHBORDER = '';
+  SEARCHICON = '';
+  SEARCHTEXT = '';
+  SEARCHPLACEHOLDER = '';
+  SEARCHFOCUS = '';
+
+  // ============================================================
+  // BOUTON 1 — ACTION PRINCIPALE
+  // ============================================================
+
+  BUTON1BG = '';
+  BUTON1HOVER = '';
+  BUTON1ICON = '';
+  BUTON1TEXT = '';
+  BUTON1PLACEHOLDER = '';
+  BUTON1SHADOW = '';
+
+  // ============================================================
+  // BOUTON 2 — ACTION SECONDAIRE
+  // ============================================================
+
+  BUTON2BG = '';
+  BUTON2HOVER = '';
+  BUTON2BORDER = '';
+  BUTON2ICON = '';
+  BUTON2TEXT = '';
+  BUTON2HOVERBORDER = '';
+
+  // ============================================================
+  // SUCCESS
   // ============================================================
 
   Success = '';
@@ -150,9 +307,8 @@ export class ThemeService {
   SuccessSoft = '';
   SuccessBorder = '';
 
-
   // ============================================================
-  // ⚠️ WARNING
+  // WARNING
   // ============================================================
 
   Warning = '';
@@ -160,9 +316,8 @@ export class ThemeService {
   WarningSoft = '';
   WarningBorder = '';
 
-
   // ============================================================
-  // ❌ ERROR
+  // ERROR
   // ============================================================
 
   Error = '';
@@ -170,9 +325,8 @@ export class ThemeService {
   ErrorSoft = '';
   ErrorBorder = '';
 
-
   // ============================================================
-  // ℹ️ INFO
+  // INFO
   // ============================================================
 
   Info = '';
@@ -180,631 +334,768 @@ export class ThemeService {
   InfoSoft = '';
   InfoBorder = '';
 
-
   // ============================================================
-  // 🌱 NATURE COLORS
-  // ============================================================
-
-  Nature = '';
-  NatureSoft = '';
-
-  Leaf = '';
-  LeafSoft = '';
-
-  Plant = '';
-  PlantSoft = '';
-
-
-  // ============================================================
-  // 🌑 OVERLAYS
+  // IMAGES — CHEMINS PUBLICS CONSERVÉS
   // ============================================================
 
-  Overlay = '';
-  OverlayLight = '';
-  OverlayDark = '';
-
-  GlassBackground = '';
-  GlassBorder = '';
-
+  ImageFondWelcome = '';
+  ImageLogo = '';
 
   // ============================================================
-  // 🌑 BOX SHADOW
-  // ============================================================
-
-  BoxShadow = '';
-  BoxShadowSmall = '';
-  BoxShadowMedium = '';
-  BoxShadowLarge = '';
-
-  BoxShadowPrimary = '';
-
-
-  // ============================================================
-  // 🖼️ IMAGE WELCOME
-  // ============================================================
-
-  ImageFondWelcome: string = '';
-
-
-  // ============================================================
-  // 🚀 CONSTRUCTOR
+  // CONSTRUCTEUR
   // ============================================================
 
   constructor() {
+    const storedTheme = this.getStoredTheme();
 
-    const storedTheme = localStorage.getItem('theme');
+    const prefersDark =
+      typeof window !== 'undefined'
+        ? window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false
+        : false;
 
-    let isDark: boolean;
-
-    if (storedTheme === 'dark') {
-
-      isDark = true;
-
-    } else if (storedTheme === 'light') {
-
-      isDark = false;
-
-    } else {
-
-      isDark =
-        window
-          .matchMedia?.('(prefers-color-scheme: dark)')
-          ?.matches ?? false;
-    }
+    const isDark =
+      storedTheme === 'dark'
+        ? true
+        : storedTheme === 'light'
+          ? false
+          : prefersDark;
 
     this.darkMode.next(isDark);
-
     this.applyTheme(isDark);
   }
 
+  // ============================================================
+  // STOCKAGE DU THÈME
+  // ============================================================
+
+  private getStoredTheme(): string | null {
+    try {
+      if (typeof localStorage === 'undefined') {
+        return null;
+      }
+
+      const value = localStorage.getItem('theme');
+
+      return value === 'light' || value === 'dark' ? value : null;
+    } catch {
+      return null;
+    }
+  }
+
+  private storeTheme(theme: 'light' | 'dark'): void {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('theme', theme);
+      }
+    } catch {
+      // Le thème reste fonctionnel sans stockage local.
+    }
+  }
 
   // ============================================================
-  // 🌗 TOGGLE THEME
+  // COMMANDES DU THÈME
   // ============================================================
 
   toggleTheme(): void {
-
-    const newMode = !this.darkMode.value;
-
-    this.darkMode.next(newMode);
-
-    localStorage.setItem(
-      'theme',
-      newMode ? 'dark' : 'light'
-    );
-
-    this.applyTheme(newMode);
+    this.setTheme(!this.darkMode.value);
   }
 
+  setLightMode(): void {
+    this.setTheme(false);
+  }
+
+  setDarkMode(): void {
+    this.setTheme(true);
+  }
+
+  private setTheme(isDark: boolean): void {
+    this.darkMode.next(isDark);
+    this.storeTheme(isDark ? 'dark' : 'light');
+    this.applyTheme(isDark);
+  }
+
+  resetTheme(): void {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem('theme');
+      }
+    } catch {
+      // Le thème reste fonctionnel sans stockage local.
+    }
+
+    const systemPrefersDark =
+      typeof window !== 'undefined'
+        ? window.matchMedia?.('(prefers-color-scheme: dark)')?.matches ?? false
+        : false;
+
+    this.darkMode.next(systemPrefersDark);
+    this.applyTheme(systemPrefersDark);
+  }
 
   // ============================================================
-  // 🎨 APPLY THEME
+  // APPLICATION DU THÈME
   // ============================================================
 
   applyTheme(isDark: boolean): void {
+    if (typeof document !== 'undefined') {
+      const html = document.documentElement;
 
-    const html = document.documentElement;
-
-    if (isDark) {
-
-      html.classList.add('dark');
-
-    } else {
-
-      html.classList.remove('dark');
+      html.classList.toggle('dark', isDark);
+      html.dataset['theme'] = isDark ? 'dark' : 'light';
+      html.style.colorScheme = isDark ? 'dark' : 'light';
     }
 
     this.setThemeColors(isDark);
+    this.applyDesignTokens();
   }
 
+  // ============================================================
+  // VARIABLES CSS — DESIGN TOKENS
+  // ============================================================
+
+  private applyDesignTokens(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    const root = document.documentElement;
+
+    const tokens: Record<string, string | number> = {
+      '--arboria-font-display': this.FONT_DISPLAY,
+      '--arboria-font-body': this.FONT_BODY,
+      '--arboria-font-mono': this.FONT_MONO,
+
+      '--arboria-text-xs': this.FONT_SIZE_XS,
+      '--arboria-text-sm': this.FONT_SIZE_SM,
+      '--arboria-text-base': this.FONT_SIZE_BASE,
+      '--arboria-text-lg': this.FONT_SIZE_LG,
+      '--arboria-text-xl': this.FONT_SIZE_XL,
+      '--arboria-text-2xl': this.FONT_SIZE_2XL,
+      '--arboria-text-3xl': this.FONT_SIZE_3XL,
+      '--arboria-text-4xl': this.FONT_SIZE_4XL,
+      '--arboria-text-5xl': this.FONT_SIZE_5XL,
+      '--arboria-text-6xl': this.FONT_SIZE_6XL,
+
+      '--arboria-leading-tight': this.LINE_HEIGHT_TIGHT,
+      '--arboria-leading-heading': this.LINE_HEIGHT_HEADING,
+      '--arboria-leading-body': this.LINE_HEIGHT_BODY,
+      '--arboria-leading-relaxed': this.LINE_HEIGHT_RELAXED,
+
+      '--arboria-weight-regular': this.FONT_WEIGHT_REGULAR,
+      '--arboria-weight-medium': this.FONT_WEIGHT_MEDIUM,
+      '--arboria-weight-semibold': this.FONT_WEIGHT_SEMIBOLD,
+      '--arboria-weight-bold': this.FONT_WEIGHT_BOLD,
+
+      '--arboria-tracking-tight': this.LETTER_SPACING_TIGHT,
+      '--arboria-tracking-normal': this.LETTER_SPACING_NORMAL,
+      '--arboria-tracking-wide': this.LETTER_SPACING_WIDE,
+
+      '--arboria-space-1': this.SPACE_1,
+      '--arboria-space-2': this.SPACE_2,
+      '--arboria-space-3': this.SPACE_3,
+      '--arboria-space-4': this.SPACE_4,
+      '--arboria-space-5': this.SPACE_5,
+      '--arboria-space-6': this.SPACE_6,
+      '--arboria-space-8': this.SPACE_8,
+      '--arboria-space-10': this.SPACE_10,
+      '--arboria-space-12': this.SPACE_12,
+      '--arboria-space-16': this.SPACE_16,
+      '--arboria-space-20': this.SPACE_20,
+      '--arboria-space-24': this.SPACE_24,
+
+      '--arboria-radius-sm': this.RADIUS_SM,
+      '--arboria-radius-md': this.RADIUS_MD,
+      '--arboria-radius-lg': this.RADIUS_LG,
+      '--arboria-radius-xl': this.RADIUS_XL,
+      '--arboria-radius-2xl': this.RADIUS_2XL,
+      '--arboria-radius-3xl': this.RADIUS_3XL,
+      '--arboria-radius-full': this.RADIUS_FULL,
+
+      '--arboria-transition-fast': this.TRANSITION_FAST,
+      '--arboria-transition-base': this.TRANSITION_BASE,
+      '--arboria-transition-smooth': this.TRANSITION_SMOOTH,
+      '--arboria-transition-enter': this.TRANSITION_ENTER,
+
+      '--arboria-content-max': this.CONTENT_MAX_WIDTH,
+      '--arboria-content-reading': this.CONTENT_READING_WIDTH,
+      '--arboria-header-height': this.HEADER_HEIGHT,
+      '--arboria-mobile-header-height': this.MOBILE_HEADER_HEIGHT,
+
+      '--arboria-shadow-sm': this.SHADOW_SM,
+      '--arboria-shadow-md': this.SHADOW_MD,
+      '--arboria-shadow-lg': this.SHADOW_LG,
+      '--arboria-shadow-xl': this.SHADOW_XL
+    };
+
+    Object.entries(tokens).forEach(([property, value]) => {
+      root.style.setProperty(property, String(value));
+    });
+
+    const colorTokens: Record<string, string> = {
+      '--arboria-forest': this.Forest,
+      '--arboria-green': this.Green,
+      '--arboria-green-hover': this.GreenHover,
+      '--arboria-green-active': this.GreenActive,
+      '--arboria-lime': this.Lime,
+      '--arboria-teal': this.Teal,
+      '--arboria-blue': this.Blue,
+      '--arboria-coral': this.Coral,
+      '--arboria-yellow': this.Yellow,
+      '--arboria-purple': this.Purple,
+      '--arboria-orange': this.Orange,
+      '--arboria-pink': this.Pink,
+      '--arboria-emerald': this.Emerald,
+      '--arboria-cyan': this.Cyan,
+      '--arboria-red': this.Red,
+
+      '--BG1': this.BG1,
+      '--BG2': this.BG2,
+      '--BG3': this.BG3,
+      '--BG4': this.BG4,
+      '--BG5': this.BG5,
+
+      '--BR1': this.BR1,
+      '--BR2': this.BR2,
+      '--BR3': this.BR3,
+      '--BR4': this.BR4,
+      '--BR5': this.BR5,
+
+      '--TX0': this.TX0,
+      '--TX1': this.TX1,
+      '--TX2': this.TX2,
+      '--TX3': this.TX3,
+      '--TX4': this.TX4,
+      '--TX5': this.TX5,
+
+      '--Primary': this.Primary,
+      '--PrimaryHover': this.PrimaryHover,
+      '--PrimaryActive': this.PrimaryActive,
+      '--PrimarySoft': this.PrimarySoft,
+      '--PrimarySoftHover': this.PrimarySoftHover,
+      '--BorderPrimary': this.BorderPrimary,
+
+      '--Secondary': this.Secondary,
+      '--SecondaryHover': this.SecondaryHover,
+      '--SecondarySoft': this.SecondarySoft,
+      '--Accent': this.Accent,
+      '--AccentSoft': this.AccentSoft,
+
+      '--BGV': this.BGV,
+      '--BRV': this.BRV,
+      '--TXV': this.TXV,
+      '--BGO': this.BGO,
+      '--BRO': this.BRO,
+      '--TXO': this.TXO,
+      '--BGG': this.BGG,
+      '--BRG': this.BRG,
+      '--TXG': this.TXG,
+      '--BGR': this.BGR,
+      '--BRR': this.BRR,
+      '--TXR': this.TXR,
+
+      '--IB': this.IB,
+      '--ICON': this.ICON,
+      '--SHADOW': this.SHADOW,
+
+      '--ANNOUNCEMENT': this.ANNOUNCEMENT,
+      '--ANNOUNCEMENT-HOVER': this.ANNOUNCEMENT_HOVER,
+      '--ANNOUNCEMENT-TEXT': this.ANNOUNCEMENT_TEXT,
+      '--ANNOUNCEMENT-TEXT-MUTED': this.ANNOUNCEMENT_TEXT_MUTED,
+      '--ANNOUNCEMENT-ACCENT': this.ANNOUNCEMENT_ACCENT,
+      '--ANNOUNCEMENT-ICON-BG': this.ANNOUNCEMENT_ICON_BG,
+      '--ANNOUNCEMENT-BORDER': this.ANNOUNCEMENT_BORDER,
+
+      '--LABELBG': this.LABELBG,
+      '--LABELBORDER': this.LABELBORDER,
+      '--LABELICON': this.LABELICON,
+      '--LABELTEXT': this.LABELTEXT,
+      '--LABELPLACEHOLDER': this.LABELPLACEHOLDER,
+
+      '--BADGEABG': this.BADGEABG,
+      '--BADGEABORDER': this.BADGEABORDER,
+      '--BADGEAICON': this.BADGEAICON,
+      '--BADGEATEXT': this.BADGEATEXT,
+
+      '--BADGEEBG': this.BADGEEBG,
+      '--BADGEEBORDER': this.BADGEEBORDER,
+      '--BADGEEICON': this.BADGEEICON,
+      '--BADGEETEXT': this.BADGEETEXT,
+
+      '--BADGETBG': this.BADGETBG,
+      '--BADGETBORDER': this.BADGETBORDER,
+      '--BADGETICON': this.BADGETICON,
+      '--BADGETTEXT': this.BADGETTEXT,
+
+      '--SEARCHBG': this.SEARCHBG,
+      '--SEARCHBORDER': this.SEARCHBORDER,
+      '--SEARCHICON': this.SEARCHICON,
+      '--SEARCHTEXT': this.SEARCHTEXT,
+      '--SEARCHPLACEHOLDER': this.SEARCHPLACEHOLDER,
+      '--SEARCHFOCUS': this.SEARCHFOCUS,
+
+      '--BUTON1BG': this.BUTON1BG,
+      '--BUTON1HOVER': this.BUTON1HOVER,
+      '--BUTON1ICON': this.BUTON1ICON,
+      '--BUTON1TEXT': this.BUTON1TEXT,
+      '--BUTON1PLACEHOLDER': this.BUTON1PLACEHOLDER,
+      '--BUTON1SHADOW': this.BUTON1SHADOW,
+
+      '--BUTON2BG': this.BUTON2BG,
+      '--BUTON2HOVER': this.BUTON2HOVER,
+      '--BUTON2BORDER': this.BUTON2BORDER,
+      '--BUTON2ICON': this.BUTON2ICON,
+      '--BUTON2TEXT': this.BUTON2TEXT,
+      '--BUTON2HOVERBORDER': this.BUTON2HOVERBORDER,
+
+      '--Success': this.Success,
+      '--SuccessHover': this.SuccessHover,
+      '--SuccessSoft': this.SuccessSoft,
+      '--SuccessBorder': this.SuccessBorder,
+
+      '--Warning': this.Warning,
+      '--WarningHover': this.WarningHover,
+      '--WarningSoft': this.WarningSoft,
+      '--WarningBorder': this.WarningBorder,
+
+      '--Error': this.Error,
+      '--ErrorHover': this.ErrorHover,
+      '--ErrorSoft': this.ErrorSoft,
+      '--ErrorBorder': this.ErrorBorder,
+
+      '--Info': this.Info,
+      '--InfoHover': this.InfoHover,
+      '--InfoSoft': this.InfoSoft,
+      '--InfoBorder': this.InfoBorder
+    };
+
+    Object.entries(colorTokens).forEach(([property, value]) => {
+      root.style.setProperty(property, value);
+    });
+
+    root.style.setProperty('--arboria-bg', this.BG1);
+    root.style.setProperty('--arboria-surface', this.BG3);
+    root.style.setProperty('--arboria-surface-secondary', this.BG2);
+    root.style.setProperty('--arboria-text', this.TX0);
+    root.style.setProperty('--arboria-text-muted', this.TX2);
+    root.style.setProperty('--arboria-border', this.BR1);
+    root.style.setProperty('--arboria-primary', this.Primary);
+  }
 
   // ============================================================
-  // 🎨 SET THEME COLORS
+  // PALETTES — CLAIR / SOMBRE
   // ============================================================
 
   setThemeColors(isDark: boolean): void {
-
-    // ==========================================================
-    // 🌙 DARK MODE
-    // ==========================================================
-
     if (isDark) {
-
-      this.BG1 = '#2C302B';
-      this.BG2 = '#30332E';
-      this.BG3 = '#3A3D37';
-      this.BG4 = '#3E403A';
-      this.BG5 = '#464841';
-
-      this.BR1 = '#3A3D37';
-      this.BR2 = '#3F423B';
-      this.BR3 = '#454841';
-      this.BR4 = '#4E524B';
-      this.BR5 = '#5A5F56';
-
-
-      this.Primary1       = '#6FBF8F';
-      this.PrimaryHover1  = '#82D2A0';
-      this.PrimaryActive1 = '#5EAA7B';
-      this.PrimarySoft1   = '#244535';
-      this.PrimaryText1   = '#10251A';
-      this.PrimaryBorder1 = '#4F9B70';
-
-      // --------------------------------------------------------
-      // ✅ SUCCESS
-      // --------------------------------------------------------
-      this.Success = '#22C55E';
-      this.SuccessHover = '#16A34A';
-      this.SuccessSoft = 'rgba(34, 197, 94, 0.12)';
-      this.SuccessBorder = '#15803D';
-
-      // --------------------------------------------------------
-      // ❌ ERROR
-      // --------------------------------------------------------
-      this.Error = '#EF4444';
-      this.ErrorHover = '#DC2626';
-      this.ErrorSoft = 'rgba(239, 68, 68, 0.12)';
-      this.ErrorBorder = '#B91C1C';
-
-
-
-
-
-
-
-
-
-
-      // --------------------------------------------------------
-      // 🌿 PRIMARY
-      // --------------------------------------------------------
-
-      this.Primary = '#22C55E';
-      this.PrimaryHover = '#16A34A';
-      this.PrimaryActive = '#15803D';
-      this.PrimarySoft = 'rgba(34, 197, 94, 0.14)';
-      this.PrimarySoftHover = 'rgba(34, 197, 94, 0.22)';
-
-      this.BorderPrimary = '#16A34A';
-
-
-      // --------------------------------------------------------
-      // 🎨 SECONDARY
-      // --------------------------------------------------------
-
-      this.Secondary = '#86EFAC';
-      this.SecondaryHover = '#4ADE80';
-      this.SecondarySoft = 'rgba(134, 239, 172, 0.12)';
-
-      this.Accent = '#A3E635';
-      this.AccentSoft = 'rgba(163, 230, 53, 0.12)';
-
-
-      // --------------------------------------------------------
-      // 🖥️ BACKGROUNDS
-      // --------------------------------------------------------
-
-      this.Background1 = '#18181B';
-      this.Background2 = '#202023';
-      this.Background3 = '#27272A';
-      this.Background4 = '#2F2F33';
-
-      this.BackgroundHero = '#18181B';
-      this.BackgroundSection = '#202023';
-      this.BackgroundFooter = '#141416';
-
-
-      // --------------------------------------------------------
-      // 🪟 SURFACES
-      // --------------------------------------------------------
-
-      this.Surface1 = '#202023';
-      this.Surface2 = '#27272A';
-      this.Surface3 = '#2F2F33';
-      this.Surface4 = '#37373C';
-
-      this.Card = '#202023';
-      this.CardHover = '#27272A';
-      this.CardActive = '#2F2F33';
-
-      this.Backgroundcards = '#202023';
-      this.BackgroundcardsHover = '#27272A';
-
-
-      // --------------------------------------------------------
-      // ▫️ BORDERS
-      // --------------------------------------------------------
-
-      this.Border1 = '#1C2026';
-      this.Border2 = '#252A31';
-      this.Border3 = '#30363E';
-      this.Border4 = '#3A414A';
-
-      this.BorderSoft = '#252A31';
-      this.BorderStrong = '#3A414A';
-
-
-      // --------------------------------------------------------
-      // ✍️ TEXT
-      // --------------------------------------------------------
-
-      this.TextPrincipal = '#F8FAFC';
-      this.TextSecondaire = '#A7AFBA';
-      this.TextTertiaire = '#7D8794';
-
-      this.TextMuted = '#626B78';
-      this.TextDisabled = '#454C56';
-
-      this.TextOnPrimary = '#052E16';
-      this.TextOnSecondary = '#052E16';
-
-
-      // --------------------------------------------------------
-      // ✅ SUCCESS
-      // --------------------------------------------------------
-
-      this.Success = '#22C55E';
-      this.SuccessHover = '#16A34A';
-      this.SuccessSoft = 'rgba(34, 197, 94, 0.12)';
-      this.SuccessBorder = '#15803D';
-
-
-      // --------------------------------------------------------
-      // ⚠️ WARNING
-      // --------------------------------------------------------
-
-      this.Warning = '#F59E0B';
-      this.WarningHover = '#D97706';
-      this.WarningSoft = 'rgba(245, 158, 11, 0.12)';
-      this.WarningBorder = '#B45309';
-
-
-      // --------------------------------------------------------
-      // ❌ ERROR
-      // --------------------------------------------------------
-
-      this.Error = '#EF4444';
-      this.ErrorHover = '#DC2626';
-      this.ErrorSoft = 'rgba(239, 68, 68, 0.12)';
-      this.ErrorBorder = '#B91C1C';
-
-
-      // --------------------------------------------------------
-      // ℹ️ INFO
-      // --------------------------------------------------------
-
-      this.Info = '#38BDF8';
-      this.InfoHover = '#0EA5E9';
-      this.InfoSoft = 'rgba(56, 189, 248, 0.12)';
-      this.InfoBorder = '#0284C7';
-
-
-      // --------------------------------------------------------
-      // 🌱 NATURE
-      // --------------------------------------------------------
-
-      this.Nature = '#22C55E';
-      this.NatureSoft = 'rgba(34, 197, 94, 0.12)';
-
-      this.Leaf = '#4ADE80';
-      this.LeafSoft = 'rgba(74, 222, 128, 0.12)';
-
-      this.Plant = '#86EFAC';
-      this.PlantSoft = 'rgba(134, 239, 172, 0.12)';
-
-
-      // --------------------------------------------------------
-      // 🌑 OVERLAYS
-      // --------------------------------------------------------
-
-      this.Overlay = 'rgba(0, 0, 0, 0.45)';
-      this.OverlayLight = 'rgba(0, 0, 0, 0.25)';
-      this.OverlayDark = 'rgba(0, 0, 0, 0.70)';
-
-      this.GlassBackground = 'rgba(32, 32, 35, 0.82)';
-      this.GlassBorder = 'rgba(255, 255, 255, 0.08)';
-
-
-      // --------------------------------------------------------
-      // 🌑 SHADOWS
-      // --------------------------------------------------------
-
-      this.BoxShadow =
-        '0 8px 20px rgba(0, 0, 0, 0.35)';
-
-      this.BoxShadowSmall =
-        '0 4px 12px rgba(0, 0, 0, 0.25)';
-
-      this.BoxShadowMedium =
-        '0 12px 30px rgba(0, 0, 0, 0.35)';
-
-      this.BoxShadowLarge =
-        '0 25px 60px rgba(0, 0, 0, 0.45)';
-
-      this.BoxShadowPrimary =
-        '0 12px 30px rgba(34, 197, 94, 0.18)';
-
-
-      // --------------------------------------------------------
-      // 🖼️ IMAGE
-      // --------------------------------------------------------
-
-      this.ImageFondWelcome =
-        'assets/ImageFondWelcomeNuit.png';
+      // ==========================================================
+      // MODE SOMBRE
+      // BG1 part de #202220.
+      // Chaque niveau est plus clair que le précédent.
+      // ==========================================================
+
+      this.BG1 = '#202220';
+      this.BG2 = '#242623';
+      this.BG3 = '#272A26';
+      this.BG4 = '#2B2F2A';
+      this.BG5 = '#2E312D';
+
+      this.BR1 = '#292C29';
+      this.BR2 = '#303430';
+      this.BR3 = '#393E39';
+      this.BR4 = '#454B45';
+      this.BR5 = '#525952';
+
+      this.TX0 = '#FFFFFF';
+      this.TX1 = '#E8EBE6';
+      this.TX2 = '#D1D6CE';
+      this.TX3 = '#B8C0B5';
+      this.TX4 = '#9EA89A';
+      this.TX5 = '#202220';
+
+
+      // ----------------------------------------------------------
+      // NAVIGATION MULTICOLORE
+      // ----------------------------------------------------------
+
+      this.BGV = '#9946D8';
+      this.BRV = '#C18BEA';
+      this.TXV = '#FFFFFF';
+
+      this.BGO = '#F28C38';
+      this.BRO = '#FFC078';
+      this.TXO = '#202220';
+
+      this.BGG = '#159B72';
+      this.BRG = '#78D8B5';
+      this.TXG = '#FFFFFF';
+
+      this.BGR = '#D946A8';
+      this.BRR = '#F09DD6';
+      this.TXR = '#FFFFFF';
+
+      // ----------------------------------------------------------
+      // PRIMARY
+      // ----------------------------------------------------------
+
+      this.Primary = '#D2F29A';
+      this.PrimaryHover = '#E1FFB0';
+      this.PrimaryActive = '#B8E778';
+      this.PrimarySoft = '#343F30';
+      this.PrimarySoftHover = '#414D3A';
+      this.BorderPrimary = '#91B968';
+
+      // ----------------------------------------------------------
+      // SECONDARY & ACCENT
+      // ----------------------------------------------------------
+
+      this.Secondary = '#C3CEC1';
+      this.SecondaryHover = '#E3EAE1';
+      this.SecondarySoft = '#303730';
+
+      this.Accent = '#36D6B5';
+      this.AccentSoft = '#253E36';
+
+      // ----------------------------------------------------------
+      // GÉNÉRAL
+      // ----------------------------------------------------------
+
+      this.IB = '#303430';
+      this.ICON = '#D2E2D0';
+      this.SHADOW = 'rgba(0, 0, 0, 0.30)';
+
+      // ----------------------------------------------------------
+      // LABELS
+      // ----------------------------------------------------------
+
+      this.LABELBG = '#303430';
+      this.LABELBORDER = '#4A514A';
+      this.LABELICON = '#8DE6D0';
+      this.LABELTEXT = '#F5F8F3';
+      this.LABELPLACEHOLDER = '#A4B2A2';
+
+      // ----------------------------------------------------------
+      // BADGE A — PRINCIPAL
+      // ----------------------------------------------------------
+
+      this.BADGEABG = '#354630';
+      this.BADGEABORDER = '#607C4C';
+      this.BADGEAICON = '#D2F29A';
+      this.BADGEATEXT = '#F1FBDD';
+
+      // ----------------------------------------------------------
+      // BADGE E — NEUTRE
+      // ----------------------------------------------------------
+
+      this.BADGEEBG = '#343834';
+      this.BADGEEBORDER = '#4A514A';
+      this.BADGEEICON = '#C3CEC1';
+      this.BADGEETEXT = '#E3EAE1';
+
+      // ----------------------------------------------------------
+      // BADGE T — SECONDAIRE
+      // ----------------------------------------------------------
+
+      this.BADGETBG = '#293E3A';
+      this.BADGETBORDER = '#3E7065';
+      this.BADGETICON = '#54E0C2';
+      this.BADGETTEXT = '#D7FFF5';
+
+      // ----------------------------------------------------------
+      // SEARCH
+      // ----------------------------------------------------------
+
+      this.SEARCHBG = '#303430';
+      this.SEARCHBORDER = '#505950';
+      this.SEARCHICON = '#9EE8D6';
+      this.SEARCHTEXT = '#F5F8F3';
+      this.SEARCHPLACEHOLDER = '#A4B2A2';
+      this.SEARCHFOCUS = 'rgba(54, 214, 181, 0.15)';
+
+      // ----------------------------------------------------------
+      // BUTTON 1
+      // ----------------------------------------------------------
+
+      this.BUTON1BG = '#D2F29A';
+      this.BUTON1HOVER = '#E1FFB0';
+      this.BUTON1ICON = '#202820';
+      this.BUTON1TEXT = '#202820';
+      this.BUTON1PLACEHOLDER = '#61764E';
+      this.BUTON1SHADOW = 'rgba(0, 0, 0, 0.25)';
+
+      // ----------------------------------------------------------
+      // BUTTON 2
+      // ----------------------------------------------------------
+
+      this.BUTON2BG = '#343834';
+      this.BUTON2HOVER = '#454B45';
+      this.BUTON2BORDER = '#505950';
+      this.BUTON2ICON = '#E3EAE1';
+      this.BUTON2TEXT = '#F5F8F3';
+      this.BUTON2HOVERBORDER = '#7C897B';
+
+      // ----------------------------------------------------------
+      // SUCCESS
+      // ----------------------------------------------------------
+
+      this.Success = '#70E39A';
+      this.SuccessHover = '#98F1B6';
+      this.SuccessSoft = '#263D2E';
+      this.SuccessBorder = '#43865A';
+
+      // ----------------------------------------------------------
+      // WARNING
+      // ----------------------------------------------------------
+
+      this.Warning = '#FFD166';
+      this.WarningHover = '#FFE29A';
+      this.WarningSoft = '#443923';
+      this.WarningBorder = '#947541';
+
+      // ----------------------------------------------------------
+      // ERROR
+      // ----------------------------------------------------------
+
+      this.Error = '#FF827A';
+      this.ErrorHover = '#FFA49D';
+      this.ErrorSoft = '#462B2B';
+      this.ErrorBorder = '#9A5350';
+
+      // ----------------------------------------------------------
+      // INFO
+      // ----------------------------------------------------------
+
+      this.Info = '#86B6FF';
+      this.InfoHover = '#B1D0FF';
+      this.InfoSoft = '#29374B';
+      this.InfoBorder = '#5279AE';
+
+      // ----------------------------------------------------------
+      // IMAGES
+      // ----------------------------------------------------------
+
+      this.ImageFondWelcome = 'assets/ImageFondWelcomeNuit.png';
+      this.ImageLogo = 'assets/ImageLogoSombre.svg';
+
+      // ----------------------------------------------------------
+      // BLOC D'ANNONCE
+      // ----------------------------------------------------------
+
+      this.ANNOUNCEMENT = '#303430';
+      this.ANNOUNCEMENT_HOVER = '#393E39';
+      this.ANNOUNCEMENT_TEXT = '#F5F8F3';
+      this.ANNOUNCEMENT_TEXT_MUTED = '#C3CEC1';
+      this.ANNOUNCEMENT_ACCENT = '#D2F29A';
+      this.ANNOUNCEMENT_ICON_BG = '#414D3A';
+      this.ANNOUNCEMENT_BORDER = '#505950';
 
       return;
     }
 
-
-    this.BG1 = '#F3F1E8';
-    this.BG2 = '#E8E6DC';
-    this.BG3 = '#DEDCD2';
-    this.BG4 = '#D4D2C8';
-    this.BG5 = '#CAC8BE';
-
-   
-    this.BR1 = '#DAD7C9';
-    this.BR2 = '#CFCBB9';
-    this.BR3 = '#DAD7C9';
-    this.BR4 = '#C8C5B5';
-    this.BR5 = '#B6B4AA';
-
-
-    this.Primary1 = '#2F6B4F';
-    this.PrimaryHover1 = '#397A5B';
-    this.PrimaryActive1 = '#285B44';
-    this.PrimarySoft1 = '#DCE9DF';
-    this.PrimaryText1 = '#FFFFFF';
-    this.PrimaryBorder1 = '#24563F';
-    
-
-    // ----------------------------------------------------------
-    // ✅ SUCCESS
-    // ----------------------------------------------------------
-
-    this.Success = '#16A34A';
-    this.SuccessHover = '#15803D';
-    this.SuccessSoft = 'rgba(22, 163, 74, 0.10)';
-    this.SuccessBorder = '#15803D';
-
-
-    // ----------------------------------------------------------
-    // ⚠️ WARNING
-    // ----------------------------------------------------------
-
-    this.Warning = '#D97706';
-    this.WarningHover = '#B45309';
-    this.WarningSoft = 'rgba(217, 119, 6, 0.10)';
-    this.WarningBorder = '#B45309';
-
-
-    // ----------------------------------------------------------
-    // ❌ ERROR
-    // ----------------------------------------------------------
-
-    this.Error = '#DC2626';
-    this.ErrorHover = '#B91C1C';
-    this.ErrorSoft = 'rgba(220, 38, 38, 0.10)';
-    this.ErrorBorder = '#B91C1C';
-
-
-
-
-
     // ==========================================================
-    // ☀️ LIGHT MODE
-    // ==========================================================
+// MODE CLAIR
+// BG1 part de #FFFFFF.
+// Chaque niveau devient progressivement plus sombre.
+// ==========================================================
 
+this.BG1 = '#FFFFFF';
+this.BG2 = '#F5F7F3';
+this.BG3 = '#EBEFE9';
+this.BG4 = '#DEE5DA';
+this.BG5 = '#CED9C9';
+
+this.BR1 = '#E1E8DE';
+this.BR2 = '#CDD9C9';
+this.BR3 = '#B3C5AE';
+this.BR4 = '#92AA8C';
+this.BR5 = '#718B6D';
+
+this.TX0 = '#1D3025';
+this.TX1 = '#304A38';
+this.TX2 = '#4D6853';
+this.TX3 = '#6B846E';
+this.TX4 = '#829681';
+this.TX5 = '#FFFFFF';
     // ----------------------------------------------------------
-    // 🌿 PRIMARY
-    // ----------------------------------------------------------
-
-    this.Primary = '#16A34A';
-    this.PrimaryHover = '#15803D';
-    this.PrimaryActive = '#166534';
-    this.PrimarySoft = 'rgba(22, 163, 74, 0.10)';
-    this.PrimarySoftHover = 'rgba(22, 163, 74, 0.16)';
-
-    this.BorderPrimary = '#15803D';
-
-
-    // ----------------------------------------------------------
-    // 🎨 SECONDARY
-    // ----------------------------------------------------------
-
-    this.Secondary = '#166534';
-    this.SecondaryHover = '#14532D';
-    this.SecondarySoft = 'rgba(22, 101, 52, 0.08)';
-
-    this.Accent = '#65A30D';
-    this.AccentSoft = 'rgba(101, 163, 13, 0.10)';
-
-
-    // ----------------------------------------------------------
-    // 🖥️ BACKGROUNDS
+    // NAVIGATION MULTICOLORE
     // ----------------------------------------------------------
 
-    this.Background1 = '#F8FAFC';
-    this.Background2 = '#EEF2F6';
-    this.Background3 = '#E4E9EF';
-    this.Background4 = '#D9E0E8';
+    this.BGV = '#9946D8';
+    this.BRV = '#C18BEA';
+    this.TXV = '#FFFFFF';
 
-    this.BackgroundHero = '#F8FAFC';
-    this.BackgroundSection = '#EEF2F6';
-    this.BackgroundFooter = '#F1F5F9';
+    this.BGO = '#F28C38';
+    this.BRO = '#FFC078';
+    this.TXO = '#FFFFFF';
 
+    this.BGG = '#159B72';
+    this.BRG = '#78D8B5';
+    this.TXG = '#FFFFFF';
 
-    // ----------------------------------------------------------
-    // 🪟 SURFACES
-    // ----------------------------------------------------------
-
-    this.Surface1 = '#FFFFFF';
-    this.Surface2 = '#F8FAFC';
-    this.Surface3 = '#F1F5F9';
-    this.Surface4 = '#E2E8F0';
-
-    this.Card = '#FFFFFF';
-    this.CardHover = '#F8FAFC';
-    this.CardActive = '#F1F5F9';
-
-    this.Backgroundcards = '#FFFFFF';
-    this.BackgroundcardsHover = '#F8FAFC';
-
+    this.BGR = '#D946A8';
+    this.BRR = '#F09DD6';
+    this.TXR = '#FFFFFF';
 
     // ----------------------------------------------------------
-    // ▫️ BORDERS
+    // PRIMARY
     // ----------------------------------------------------------
 
-    this.Border1 = '#E5E7EB';
-    this.Border2 = '#E2E8F0';
-    this.Border3 = '#CBD5E1';
-    this.Border4 = '#C7CED8';
-
-    this.BorderSoft = '#E5E7EB';
-    this.BorderStrong = '#CBD5E1';
-
+    this.Primary = '#216447';
+    this.PrimaryHover = '#194F38';
+    this.PrimaryActive = '#143F2D';
+    this.PrimarySoft = '#E1F2E6';
+    this.PrimarySoftHover = '#D0EBDD';
+    this.BorderPrimary = '#9FC8AA';
 
     // ----------------------------------------------------------
-    // ✍️ TEXT
+    // SECONDARY & ACCENT
     // ----------------------------------------------------------
 
-    this.TextPrincipal = '#111827';
-    this.TextSecondaire = '#64748B';
-    this.TextTertiaire = '#94A3B8';
+    this.Secondary = '#4D6853';
+    this.SecondaryHover = '#304A38';
+    this.SecondarySoft = '#E8EEE5';
 
-    this.TextMuted = '#94A3B8';
-    this.TextDisabled = '#CBD5E1';
-
-    this.TextOnPrimary = '#FFFFFF';
-    this.TextOnSecondary = '#FFFFFF';
-
-
-    
+    this.Accent = '#159B72';
+    this.AccentSoft = '#DDF7ED';
 
     // ----------------------------------------------------------
-    // ℹ️ INFO
+    // GÉNÉRAL
     // ----------------------------------------------------------
 
-    this.Info = '#0284C7';
-    this.InfoHover = '#0369A1';
-    this.InfoSoft = 'rgba(2, 132, 199, 0.10)';
-    this.InfoBorder = '#0369A1';
-
+    this.IB = '#FFFFFF';
+    this.ICON = '#287653';
+    this.SHADOW = 'rgba(29, 48, 37, 0.09)';
 
     // ----------------------------------------------------------
-    // 🌱 NATURE
+    // LABELS
     // ----------------------------------------------------------
 
-    this.Nature = '#16A34A';
-    this.NatureSoft = 'rgba(22, 163, 74, 0.10)';
-
-    this.Leaf = '#22C55E';
-    this.LeafSoft = 'rgba(34, 197, 94, 0.10)';
-
-    this.Plant = '#4ADE80';
-    this.PlantSoft = 'rgba(74, 222, 128, 0.10)';
-
+    this.LABELBG = '#FFFFFF';
+    this.LABELBORDER = '#D6E2D2';
+    this.LABELICON = '#159B72';
+    this.LABELTEXT = '#1D3025';
+    this.LABELPLACEHOLDER = '#829681';
 
     // ----------------------------------------------------------
-    // 🌑 OVERLAYS
+    // BADGE A — PRINCIPAL
     // ----------------------------------------------------------
 
-    this.Overlay = 'rgba(15, 23, 42, 0.28)';
-    this.OverlayLight = 'rgba(15, 23, 42, 0.12)';
-    this.OverlayDark = 'rgba(15, 23, 42, 0.55)';
-
-    this.GlassBackground = 'rgba(255, 255, 255, 0.84)';
-    this.GlassBorder = 'rgba(15, 23, 42, 0.08)';
-
+    this.BADGEABG = '#DDF5E2';
+    this.BADGEABORDER = '#B7E1C1';
+    this.BADGEAICON = '#159B72';
+    this.BADGEATEXT = '#185438';
 
     // ----------------------------------------------------------
-    // ☀️ SHADOWS
+    // BADGE E — NEUTRE
     // ----------------------------------------------------------
 
-    this.BoxShadow =
-      '0 8px 20px rgba(0, 0, 0, 0.18)';
-
-    this.BoxShadowSmall =
-      '0 4px 12px rgba(0, 0, 0, 0.10)';
-
-    this.BoxShadowMedium =
-      '0 12px 30px rgba(0, 0, 0, 0.12)';
-
-    this.BoxShadowLarge =
-      '0 25px 60px rgba(0, 0, 0, 0.15)';
-
-    this.BoxShadowPrimary =
-      '0 12px 30px rgba(22, 163, 74, 0.18)';
-
+    this.BADGEEBG = '#EBEFE9';
+    this.BADGEEBORDER = '#D3DDD0';
+    this.BADGEEICON = '#6B846E';
+    this.BADGEETEXT = '#405745';
 
     // ----------------------------------------------------------
-    // 🖼️ IMAGE
+    // BADGE T — SECONDAIRE
     // ----------------------------------------------------------
 
-    this.ImageFondWelcome =
-      'assets/ImageFondWelcomeClair.png';
+    this.BADGETBG = '#DDF5F1';
+    this.BADGETBORDER = '#B8E8DE';
+    this.BADGETICON = '#078D9D';
+    this.BADGETTEXT = '#17626B';
+
+    // ----------------------------------------------------------
+    // SEARCH
+    // ----------------------------------------------------------
+
+    this.SEARCHBG = '#FFFFFF';
+    this.SEARCHBORDER = '#C9D8C5';
+    this.SEARCHICON = '#287653';
+    this.SEARCHTEXT = '#1D3025';
+    this.SEARCHPLACEHOLDER = '#829681';
+    this.SEARCHFOCUS = 'rgba(21, 155, 114, 0.12)';
+
+    // ----------------------------------------------------------
+    // BUTTON 1
+    // ----------------------------------------------------------
+
+    this.BUTON1BG = '#216447';
+    this.BUTON1HOVER = '#194F38';
+    this.BUTON1ICON = '#FFFFFF';
+    this.BUTON1TEXT = '#FFFFFF';
+    this.BUTON1PLACEHOLDER = '#D6E2D2';
+    this.BUTON1SHADOW = 'rgba(33, 100, 71, 0.20)';
+
+    // ----------------------------------------------------------
+    // BUTTON 2
+    // ----------------------------------------------------------
+
+    this.BUTON2BG = '#FFFFFF';
+    this.BUTON2HOVER = '#F0F5ED';
+    this.BUTON2BORDER = '#CDDCC8';
+    this.BUTON2ICON = '#304A38';
+    this.BUTON2TEXT = '#304A38';
+    this.BUTON2HOVERBORDER = '#9FB99B';
+
+    // ----------------------------------------------------------
+    // SUCCESS
+    // ----------------------------------------------------------
+
+    this.Success = '#087D4D';
+    this.SuccessHover = '#06643D';
+    this.SuccessSoft = '#DDF5E5';
+    this.SuccessBorder = '#A8DDB9';
+
+    // ----------------------------------------------------------
+    // WARNING
+    // ----------------------------------------------------------
+
+    this.Warning = '#946000';
+    this.WarningHover = '#744A00';
+    this.WarningSoft = '#FFF2CE';
+    this.WarningBorder = '#F0D38A';
+
+    // ----------------------------------------------------------
+    // ERROR
+    // ----------------------------------------------------------
+
+    this.Error = '#C73545';
+    this.ErrorHover = '#A52635';
+    this.ErrorSoft = '#FFE8EA';
+    this.ErrorBorder = '#F4BBC1';
+
+    // ----------------------------------------------------------
+    // INFO
+    // ----------------------------------------------------------
+
+    this.Info = '#285CC4';
+    this.InfoHover = '#1F489C';
+    this.InfoSoft = '#E6EEFF';
+    this.InfoBorder = '#B8CCFA';
+
+    // ----------------------------------------------------------
+    // IMAGES — CHEMINS CONSERVÉS
+    // ----------------------------------------------------------
+
+    this.ImageFondWelcome = 'assets/ImageFondWelcomeClair.png';
+    this.ImageLogo = 'assets/ImageLogoClair.svg';
+
+    // ----------------------------------------------------------
+    // BLOC D'ANNONCE
+    // ----------------------------------------------------------
+
+    this.ANNOUNCEMENT = '#173F32';
+    this.ANNOUNCEMENT_HOVER = '#245541';
+    this.ANNOUNCEMENT_TEXT = '#F6FAF5';
+    this.ANNOUNCEMENT_TEXT_MUTED = '#D5E5D9';
+    this.ANNOUNCEMENT_ACCENT = '#D2F29A';
+    this.ANNOUNCEMENT_ICON_BG = '#2B5944';
+    this.ANNOUNCEMENT_BORDER = '#426C54';
   }
 
-
   // ============================================================
-  // 🌗 GETTER
+  // GETTER — COMPATIBILITÉ AVEC LES COMPOSANTS EXISTANTS
   // ============================================================
 
   get isDarkMode(): boolean {
-
     return this.darkMode.value;
-  }
-
-
-  // ============================================================
-  // ☀️ SET LIGHT MODE
-  // ============================================================
-
-  setLightMode(): void {
-
-    this.darkMode.next(false);
-
-    localStorage.setItem(
-      'theme',
-      'light'
-    );
-
-    this.applyTheme(false);
-  }
-
-
-  // ============================================================
-  // 🌙 SET DARK MODE
-  // ============================================================
-
-  setDarkMode(): void {
-
-    this.darkMode.next(true);
-
-    localStorage.setItem(
-      'theme',
-      'dark'
-    );
-
-    this.applyTheme(true);
-  }
-
-
-  // ============================================================
-  // 🔄 RESET THEME
-  // ============================================================
-
-  resetTheme(): void {
-
-    localStorage.removeItem('theme');
-
-    const systemPrefersDark =
-      window
-        .matchMedia?.('(prefers-color-scheme: dark)')
-        ?.matches ?? false;
-
-    this.darkMode.next(systemPrefersDark);
-
-    this.applyTheme(systemPrefersDark);
   }
 }

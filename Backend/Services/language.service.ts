@@ -1,67 +1,133 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+// ============================================================
+// 🌐 ARBORIA — LANGUAGE SERVICE
+// ============================================================
+//
+// • Langues prises en charge : FR / EN
+// • Synchronisation via BehaviorSubject
+// • Persistance dans localStorage
+// • API compatible avec les composants existants
+// • Indépendant du ThemeService
+// ============================================================
+
+import {
+  Injectable
+} from '@angular/core';
+
+import {
+  BehaviorSubject
+} from 'rxjs';
+
+// ============================================================
+// 🌍 LANGUAGE TYPE
+// ============================================================
 
 export type Language = 'fr' | 'en';
+
+// ============================================================
+// 🌐 SERVICE
+// ============================================================
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LanguageService {
+
+  // ==========================================================
+  // 💾 STORAGE
+  // ==========================================================
 
   private readonly STORAGE_KEY = 'jardiscan_language';
 
   private readonly defaultLanguage: Language = 'fr';
 
-  private languageSubject = new BehaviorSubject<Language>(
-    this.getStoredLanguage()
-  );
+  // ==========================================================
+  // 🌐 INITIAL LANGUAGE
+  // ==========================================================
 
-  readonly language$ = this.languageSubject.asObservable();
+  private readonly languageSubject =
+    new BehaviorSubject<Language>(
+      this.getStoredLanguage()
+    );
+
+  // Observable utilisé par les composants.
+  readonly language$ =
+    this.languageSubject.asObservable();
+
+  // ==========================================================
+  // 🧩 CONSTRUCTOR
+  // ==========================================================
 
   constructor() {}
 
-  /**
-   * 🌐 Langue actuelle
-   */
+  // ==========================================================
+  // 🌐 CURRENT LANGUAGE
+  // ==========================================================
+
   get currentLanguage(): Language {
+
     return this.languageSubject.value;
   }
 
-  /**
-   * 🇫🇷 / 🇬🇧 Changer la langue
-   */
+  // ==========================================================
+  // 🇫🇷 / 🇬🇧 SET LANGUAGE
+  // ==========================================================
+
   setLanguage(language: Language): void {
 
+    // Protection contre les valeurs non prises en charge.
+    if (language !== 'fr' && language !== 'en') {
+      return;
+    }
+
+    // Évite une émission inutile si la langue est identique.
     if (this.currentLanguage === language) {
       return;
     }
 
-    localStorage.setItem(this.STORAGE_KEY, language);
+    // Mise à jour de la préférence enregistrée.
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(
+          this.STORAGE_KEY,
+          language
+        );
+      }
+    } catch {
+      // Le changement reste possible si le stockage est bloqué.
+    }
 
+    // Notification immédiate de tous les abonnés.
     this.languageSubject.next(language);
   }
 
-  /**
-   * 🔄 Basculer entre les langues
-   */
+  // ==========================================================
+  // 🔄 TOGGLE LANGUAGE
+  // ==========================================================
+
   toggleLanguage(): void {
 
     const nextLanguage: Language =
-      this.currentLanguage === 'fr' ? 'en' : 'fr';
+      this.currentLanguage === 'fr'
+        ? 'en'
+        : 'fr';
 
     this.setLanguage(nextLanguage);
   }
 
-  /**
-   * 🔎 Vérifier la langue
-   */
+  // ==========================================================
+  // 🔎 CHECK LANGUAGE
+  // ==========================================================
+
   is(language: Language): boolean {
+
     return this.currentLanguage === language;
   }
 
-  /**
-   * 🏷️ Nom de la langue
-   */
+  // ==========================================================
+  // 🏷️ LANGUAGE NAME
+  // ==========================================================
+
   getLanguageName(language: Language): string {
 
     return language === 'fr'
@@ -69,9 +135,10 @@ export class LanguageService {
       : 'English';
   }
 
-  /**
-   * 🏳️ Drapeau
-   */
+  // ==========================================================
+  // 🚩 LANGUAGE FLAG
+  // ==========================================================
+
   getLanguageFlag(language: Language): string {
 
     return language === 'fr'
@@ -79,15 +146,24 @@ export class LanguageService {
       : '🇬🇧';
   }
 
-  /**
-   * 💾 Récupérer la langue sauvegardée
-   */
+  // ==========================================================
+  // 💾 READ SAVED LANGUAGE
+  // ==========================================================
+
   private getStoredLanguage(): Language {
 
-    const stored = localStorage.getItem(this.STORAGE_KEY);
+    try {
+      if (typeof localStorage !== 'undefined') {
 
-    if (stored === 'fr' || stored === 'en') {
-      return stored;
+        const stored =
+          localStorage.getItem(this.STORAGE_KEY);
+
+        if (stored === 'fr' || stored === 'en') {
+          return stored;
+        }
+      }
+    } catch {
+      // Utilise la langue par défaut si le stockage est inaccessible.
     }
 
     return this.defaultLanguage;

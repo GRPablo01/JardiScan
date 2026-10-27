@@ -6,8 +6,8 @@
      <section
      class="min-h-screen w-full px-10 py-10 2xl:mt-20 transition-colors duration-300"
      [ngStyle]="{
-       'background-color': themeService.Background1,
-       color: themeService.TextPrincipal
+       'background-color': themeService.BG1,
+       color: themeService.TX0
      }"
    >
      <div class="mx-auto flex w-full max-w-6xl flex-col gap-6">
@@ -16,9 +16,9 @@
             01 — ACCUEIL
             ======================================================== -->
    
-       <ng-container *ngIf="!diagnosticDemarre && !diagnosticTermine">
+       <!-- <ng-container *ngIf="!diagnosticDemarre && !diagnosticTermine">
    
-         <!-- HERO -->
+         <!-- HERO --
          <section
            class="overflow-hidden rounded-[2rem] border shadow-sm transition-colors duration-300"
            [ngStyle]="{
@@ -29,10 +29,10 @@
          >
            <div class="grid lg:grid-cols-[1.08fr_.92fr]">
    
-             <!-- CONTENU -->
+             <!-- CONTENU --
              <div class="p-7 sm:p-10 lg:p-12">
    
-               <!-- BADGE -->
+               <!-- BADGE --
                <div
                  class="mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-2"
                  [ngStyle]="{
@@ -58,7 +58,7 @@
                  </span>
                </div>
    
-               <!-- TITRE -->
+               <!-- TITRE --
                <h1
                  class="max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl lg:leading-[1.08]"
                  [ngStyle]="{ color: themeService.TextPrincipal }"
@@ -75,7 +75,7 @@
                  automatiquement les prochaines questions selon tes réponses.
                </p>
    
-               <!-- INFORMATIONS -->
+               <!-- INFORMATIONS --
                <div class="mt-7 flex flex-wrap gap-3">
    
                  <div
@@ -131,7 +131,7 @@
    
                </div>
    
-               <!-- CTA -->
+               <!-- CTA --
                <button
                  type="button"
                  (click)="demarrerDiagnostic()"
@@ -157,7 +157,7 @@
                  <i class="fa-solid fa-arrow-right text-xs"></i>
                </button>
    
-               <!-- INFO -->
+               <!-- INFO --
                <div class="mt-5 flex items-start gap-2">
                  <i
                    class="fa-solid fa-circle-info mt-0.5 text-xs"
@@ -175,7 +175,7 @@
    
              </div>
    
-             <!-- VISUEL -->
+             <!-- VISUEL --
              <div
                class="relative hidden min-h-[520px] overflow-hidden lg:flex"
                [ngStyle]="{
@@ -229,7 +229,7 @@
    
                  </div>
    
-                 <!-- ILLUSTRATION -->
+                 <!-- ILLUSTRATION --
                  <div class="flex flex-1 items-center justify-center">
    
                    <div class="relative">
@@ -259,7 +259,7 @@
                        </div>
                      </div>
    
-                     <!-- BADGE ANALYSE -->
+                     <!-- BADGE ANALYSE --
                      <div
                        class="absolute -right-4 top-8 flex items-center gap-2 rounded-2xl border px-4 py-3 shadow-sm"
                        [ngStyle]="{
@@ -295,7 +295,7 @@
                        </div>
                      </div>
    
-                     <!-- BADGE PARCOURS -->
+                     <!-- BADGE PARCOURS --
                      <div
                        class="absolute -bottom-3 -left-6 flex items-center gap-2 rounded-2xl border px-4 py-3 shadow-sm"
                        [ngStyle]="{
@@ -334,7 +334,7 @@
                    </div>
                  </div>
    
-                 <!-- MESSAGE -->
+                 <!-- MESSAGE --
                  <div
                    class="rounded-2xl border p-4"
                    [ngStyle]="{
@@ -382,7 +382,7 @@
    
          <!-- ======================================================
               COMMENT ÇA FONCTIONNE
-              ====================================================== -->
+              ====================================================== --
    
          <section
            class="rounded-[2rem] border p-6 shadow-sm sm:p-8"
@@ -420,7 +420,7 @@
              class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4"
            >
    
-             <!-- 01 -->
+             <!-- 01 --
              <div
                class="rounded-2xl p-5"
                [ngStyle]="{
@@ -462,7 +462,7 @@
                </p>
              </div>
    
-             <!-- 02 -->
+             <!-- 02 --
              <div
                class="rounded-2xl p-5"
                [ngStyle]="{
@@ -504,7 +504,7 @@
                </p>
              </div>
    
-             <!-- 03 -->
+             <!-- 03 --
              <div
                class="rounded-2xl p-5"
                [ngStyle]="{
@@ -546,7 +546,7 @@
                </p>
              </div>
    
-             <!-- 04 -->
+             <!-- 04 --
              <div
                class="rounded-2xl p-5"
                [ngStyle]="{
@@ -593,7 +593,7 @@
    
          <!-- ======================================================
               PRINCIPAUX ÉLÉMENTS
-              ====================================================== -->
+              ====================================================== --
    
          <section
            class="rounded-[2rem] border p-6 shadow-sm sm:p-8"
@@ -637,7 +637,7 @@
              class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
            >
    
-             <!-- SYMPTÔMES -->
+             <!-- SYMPTÔMES --
              <div
                class="group rounded-2xl border p-5 transition"
                [ngStyle]="{
@@ -671,7 +671,7 @@
                </p>
              </div>
    
-             <!-- PARASITES -->
+             <!-- PARASITES --
              <div
                class="group rounded-2xl border p-5 transition"
                [ngStyle]="{
@@ -705,7 +705,7 @@
                </p>
              </div>
    
-             <!-- EAU -->
+             <!-- EAU --
              <div
                class="group rounded-2xl border p-5 transition"
                [ngStyle]="{
@@ -738,8 +738,8 @@
                  l'humidité du substrat.
                </p>
              </div>
-   
-             <!-- LUMIÈRE -->
+  
+             <!-- LUMIÈRE --
              <div
                class="group rounded-2xl border p-5 transition"
                [ngStyle]="{
@@ -773,7 +773,7 @@
                </p>
              </div>
    
-             <!-- SOL -->
+             <!-- SOL --
              <div
                class="group rounded-2xl border p-5 transition"
                [ngStyle]="{
@@ -807,7 +807,7 @@
                </p>
              </div>
    
-             <!-- ENTRETIEN -->
+             <!-- ENTRETIEN --
              <div
                class="group rounded-2xl border p-5 transition"
                [ngStyle]="{
@@ -846,7 +846,7 @@
    
          <!-- ======================================================
               PARCOURS INTELLIGENT
-              ====================================================== -->
+              ====================================================== --
    
          <section
            class="overflow-hidden rounded-[2rem] border shadow-sm"
@@ -1076,7 +1076,7 @@
    
          <!-- ======================================================
               INFORMATIONS À PRÉPARER
-              ====================================================== -->
+              ====================================================== --
    
          <section
            class="rounded-[2rem] border p-6 shadow-sm sm:p-8"
@@ -1211,7 +1211,7 @@
            </div>
          </section>
    
-         <!-- AVERTISSEMENT -->
+         <!-- AVERTISSEMENT --
          <section
            class="rounded-2xl border p-5"
            [ngStyle]="{
@@ -1253,7 +1253,7 @@
            </div>
          </section>
    
-         <!-- CTA FINAL -->
+         <!-- CTA FINAL --
          <section
            class="overflow-hidden rounded-[2rem] border shadow-sm"
            [ngStyle]="{
@@ -1316,16 +1316,16 @@
            </div>
          </section>
    
-       </ng-container>
+       </ng-container> -->
    
    
        <!-- ========================================================
             02 — DIAGNOSTIC EN COURS
             ======================================================== -->
    
-       <ng-container *ngIf="diagnosticDemarre && !diagnosticTermine">
+       <!-- <ng-container *ngIf="diagnosticDemarre && !diagnosticTermine">
    
-         <!-- HEADER -->
+         <!-- HEADER --
          <header
            class="overflow-hidden rounded-[2rem] border shadow-sm"
            [ngStyle]="{
@@ -1436,7 +1436,7 @@
    
              </div>
    
-             <!-- INDICATEURS -->
+             <!-- INDICATEURS --
              <div class="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
    
                <div
@@ -1558,7 +1558,7 @@
            </div>
          </header>
    
-         <!-- PROGRESSION -->
+         <!-- PROGRESSION --
          <section
            class="rounded-[1.5rem] border p-4 shadow-sm sm:p-5"
            [ngStyle]="{
@@ -1656,7 +1656,7 @@
            </div>
          </section>
    
-         <!-- QUESTION -->
+         <!-- QUESTION --
          <main
            *ngIf="question"
            class="overflow-hidden rounded-[2rem] border shadow-sm"
@@ -1667,7 +1667,7 @@
            }"
          >
    
-           <!-- HEADER QUESTION -->
+           <!-- HEADER QUESTION --
            <div
              class="border-b p-6 sm:p-8 lg:p-9"
              [ngStyle]="{
@@ -1736,7 +1736,7 @@
              </div>
            </div>
    
-           <!-- CHOIX -->
+           <!-- CHOIX --
            <div
              *ngIf="question.type === 'choice'"
              class="p-5 sm:p-8 lg:p-9"
@@ -1867,7 +1867,7 @@
              </div>
            </div>
    
-           <!-- TEXTE LIBRE -->
+           <!-- TEXTE LIBRE --
            <div
              *ngIf="question.type === 'text'"
              class="p-5 sm:p-8 lg:p-9"
@@ -1957,7 +1957,7 @@
              </div>
            </div>
    
-           <!-- NAVIGATION -->
+           <!-- NAVIGATION --
            <div
              class="border-t p-5 sm:p-6"
              [ngStyle]="{
@@ -2033,7 +2033,7 @@
            </div>
          </main>
    
-         <!-- CONSEILS -->
+         <!-- CONSEILS --
          <section>
    
            <div class="mb-3 flex items-center gap-2 px-1">
@@ -2069,7 +2069,7 @@
    
            <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
    
-             <!-- CONSEIL 01 -->
+             <!-- CONSEIL 01 --
              <div
                class="rounded-2xl border p-5 shadow-sm transition"
                [ngStyle]="{
@@ -2117,7 +2117,7 @@
    
              </div>
    
-             <!-- CONSEIL 02 -->
+             <!-- CONSEIL 02 --
              <div
                class="rounded-2xl border p-5 shadow-sm transition"
                [ngStyle]="{
@@ -2165,7 +2165,7 @@
    
              </div>
    
-             <!-- CONSEIL 03 -->
+             <!-- CONSEIL 03 --
              <div
                class="rounded-2xl border p-5 shadow-sm transition"
                [ngStyle]="{
@@ -2216,7 +2216,7 @@
            </div>
          </section>
    
-         <!-- INFORMATION -->
+         <!-- INFORMATION --
          <section
            class="rounded-2xl border p-4 sm:p-5"
            [ngStyle]="{
@@ -2258,16 +2258,16 @@
            </div>
          </section>
    
-       </ng-container>
+       </ng-container> -->
    
    
        <!-- ========================================================
             03 — RÉSULTAT
             ======================================================== -->
    
-       <ng-container *ngIf="diagnosticTermine">
+       <!-- <ng-container *ngIf="diagnosticTermine">
    
-         <!-- RÉSULTAT PRINCIPAL -->
+         <!-- RÉSULTAT PRINCIPAL --
          <section
            class="overflow-hidden rounded-[2rem] border shadow-sm"
            [ngStyle]="{
@@ -2277,7 +2277,7 @@
            }"
          >
    
-           <!-- HEADER -->
+           <!-- HEADER --
            <div
              class="border-b p-6 sm:p-8"
              [ngStyle]="{
@@ -2371,7 +2371,7 @@
              </div>
            </div>
    
-           <!-- CONFIANCE -->
+           <!-- CONFIANCE --
            <div
              class="border-b p-5 sm:p-6"
              [ngStyle]="{
@@ -2462,7 +2462,7 @@
    
            </div>
    
-           <!-- CAUSES -->
+           <!-- CAUSES --
            <div class="p-6 sm:p-8">
    
              <div class="flex items-start gap-3">
@@ -2533,7 +2533,7 @@
            </div>
          </section>
    
-         <!-- CONSEILS -->
+         <!-- CONSEILS --
          <section
            class="rounded-[2rem] border p-6 shadow-sm sm:p-8"
            [ngStyle]="{
@@ -2605,7 +2605,7 @@
            </div>
          </section>
    
-         <!-- PLAN D'ACTION -->
+         <!-- PLAN D'ACTION --
          <section
            *ngIf="resultat.actions.length"
            class="rounded-[2rem] border p-6 shadow-sm sm:p-8"
@@ -2680,7 +2680,7 @@
            </div>
          </section>
    
-         <!-- SURVEILLANCE -->
+         <!-- SURVEILLANCE --
          <section
            *ngIf="resultat.surveillance.length"
            class="rounded-[2rem] border p-6 sm:p-7"
@@ -2739,7 +2739,7 @@
            </div>
          </section>
    
-         <!-- RÉSUMÉ -->
+         <!-- RÉSUMÉ --
          <section
            class="overflow-hidden rounded-[2rem] border shadow-sm"
            [ngStyle]="{
@@ -2839,7 +2839,7 @@
            </div>
          </section>
    
-         <!-- ACTIONS FINALES -->
+         <!-- ACTIONS FINALES --
          <section
            class="rounded-[2rem] border p-5 shadow-sm sm:p-6"
            [ngStyle]="{
@@ -2869,7 +2869,7 @@
    
            <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
    
-             <!-- NOUVEAU -->
+             <!-- NOUVEAU --
              <button
                type="button"
                (click)="recommencer()"
@@ -2888,7 +2888,7 @@
                <span>Nouveau diagnostic</span>
              </button>
    
-             <!-- APPROFONDIR -->
+             <!-- APPROFONDIR --
              <button
                type="button"
                (click)="approfondir()"
@@ -2906,7 +2906,7 @@
                <span>Approfondir</span>
              </button>
    
-             <!-- BOT -->
+             <!-- BOT --
              <button
                type="button"
                (click)="demanderAuBot()"
@@ -2927,7 +2927,7 @@
            </div>
          </section>
    
-         <!-- AVERTISSEMENT FINAL -->
+         <!-- AVERTISSEMENT FINAL --
          <section
            class="rounded-2xl border p-4"
            [ngStyle]="{
@@ -2960,7 +2960,7 @@
            </div>
          </section>
    
-       </ng-container>
+       </ng-container> -->
    
      </div>
    
@@ -2969,7 +2969,7 @@
           04 — CHARGEMENT
           ======================================================== -->
    
-     <div
+     <!-- <div
        *ngIf="chargement"
        class="fixed inset-0 z-50 flex items-center justify-center p-5 backdrop-blur-sm"
        [ngStyle]="{
@@ -3024,6 +3024,6 @@
          </div>
    
        </div>
-     </div>
+     </div> -->
    
    </section>

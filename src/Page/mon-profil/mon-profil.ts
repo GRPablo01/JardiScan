@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ThemeService } from '../../../Backend/Services/theme.service';
 import { Header } from '../../composant/Public/header/header';
 import { Footer } from '../../composant/Public/footer/footer';
-import { Dash } from '../../composant/Share/Page-Profil/dash/dash';
+
 
 
 
@@ -19,7 +19,6 @@ import { Dash } from '../../composant/Share/Page-Profil/dash/dash';
     FormsModule,
     Header,
     Footer,
-    Dash
 ],
   templateUrl: './mon-profil.html',
   styleUrls: ['./mon-profil.css'],

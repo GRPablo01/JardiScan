@@ -1,0 +1,354 @@
+
+<section
+  class="relative isolate w-full overflow-hidden transition-colors duration-300"
+  [ngClass]="themeSombre
+    ? 'bg-[#151E19] text-[#F0F3EB]'
+    : 'bg-[#F7F8F2] text-[#193A2B]'"
+>
+  
+  <!-- Conteneur pleine largeur -->
+  <div class="relative z-10 mx-auto w-full max-w-[1600px] px-[clamp(22px,5.2vw,84px)] pb-6 pt-6 max-[480px]:px-[17px] max-[480px]:pt-[18px]">
+
+    <!-- Contenu principal -->
+    <div
+      class="grid grid-cols-[minmax(0,1.03fr)_minmax(0,0.97fr)] items-center gap-[clamp(42px,7vw,112px)] py-[clamp(58px,8vw,116px)] max-[1100px]:gap-[38px] max-[760px]:grid-cols-1 max-[760px]:gap-12 max-[760px]:py-[57px_48px] max-[480px]:gap-[42px] max-[480px]:py-[48px_0]"
+    >
+
+      <!-- Colonne gauche -->
+      <div class="min-w-0 animate-[heroRise_700ms_ease_both]">
+
+        <!-- Surtitre -->
+        <div
+          class="mb-[25px] flex items-center gap-3 text-[10px] font-extrabold tracking-[0.2em] max-[480px]:mb-[21px] max-[480px]:text-[9px] max-[480px]:tracking-[0.15em]"
+          [ngClass]="themeSombre ? 'text-[#C8F169]' : 'text-[#286746]'"
+        >
+          <span
+            class="h-px w-[31px] shrink-0"
+            [ngClass]="themeSombre ? 'bg-[#C8F169]' : 'bg-[#286746]'"
+          ></span>
+          <span>{{ textes.label }}</span>
+        </div>
+
+        <!-- Titre -->
+        <h1
+          class="m-0 max-w-[680px] font-serif text-[clamp(55px,6.2vw,94px)] font-medium leading-[0.99] tracking-[-0.055em] max-[1100px]:text-[clamp(54px,6.5vw,76px)] max-[760px]:max-w-[600px] max-[760px]:text-[clamp(58px,11vw,82px)] max-[480px]:text-[clamp(49px,12vw,64px)] max-[350px]:text-[47px]"
+        >
+          {{ textes.titre1 }}
+
+          <span
+            class="mt-2 block font-medium italic"
+            [ngClass]="themeSombre ? 'text-[#C8F169]' : 'text-[#286746]'"
+          >
+            {{ textes.titre2 }}
+          </span>
+        </h1>
+
+        <!-- Description -->
+        <p
+          class="mb-[30px] mt-[27px] max-w-[500px] text-[clamp(14px,1.1vw,16px)] leading-[1.9] max-[760px]:max-w-[550px] max-[480px]:mb-[25px] max-[480px]:mt-[22px] max-[480px]:text-[13px] max-[480px]:leading-[1.8]"
+          [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+        >
+          {{ textes.description }}
+        </p>
+
+        <!-- Barre de recherche -->
+        <form
+          role="search"
+          class="flex min-h-[72px] w-full max-w-[590px] items-center gap-3 rounded-[17px] border p-[9px] shadow-[0_12px_45px_rgba(22,51,33,0.055)] transition-all duration-200 focus-within:ring-4 max-[760px]:max-w-none max-[480px]:flex-wrap max-[480px]:gap-[7px] max-[480px]:rounded-[14px]"
+          [ngClass]="themeSombre
+            ? 'border-white/10 bg-[#1F2B23] focus-within:border-[#C8F169] focus-within:ring-[#C8F169]/10'
+            : 'border-[#274D35]/[0.13] bg-white/95 focus-within:border-[#286746] focus-within:ring-[#286746]/10'"
+          (submit)="$event.preventDefault(); lancerRecherche()"
+        >
+          <i
+            class="fa-solid fa-magnifying-glass ml-3 shrink-0 text-[15px] max-[480px]:ml-[6px]"
+            [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+            aria-hidden="true"
+          ></i>
+
+          <input
+            id="recherche-plantes-input"
+            type="search"
+            name="recherche"
+            [(ngModel)]="recherche"
+            [placeholder]="textes.placeholder"
+            [attr.aria-label]="textes.placeholder"
+            autocomplete="off"
+            class="h-12 min-w-0 flex-1 border-0 bg-transparent p-0 text-[13px] outline-none ring-0 placeholder:opacity-80 focus:border-0 focus:outline-none focus:ring-0 max-[480px]:h-[42px] max-[480px]:text-xs"
+            [ngClass]="themeSombre
+              ? 'text-[#F0F3EB] placeholder:text-[#A8B7AA]'
+              : 'text-[#193A2B] placeholder:text-[#65766A]'"
+          />
+
+          <button
+            type="submit"
+            class="inline-flex min-h-[49px] shrink-0 items-center justify-center gap-3 rounded-[11px] px-[19px] text-xs font-bold transition-all duration-200 hover:-translate-y-px max-[480px]:min-h-[46px] max-[480px]:w-full"
+            [ngClass]="themeSombre
+              ? 'bg-[#C8F169] text-[#17251B] hover:bg-[#D8FF8B]'
+              : 'bg-[#286746] text-white hover:bg-[#1D5237]'"
+          >
+            <span>{{ textes.bouton }}</span>
+            <i
+              class="fa-solid fa-arrow-right transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            ></i>
+          </button>
+        </form>
+
+        <!-- Indication sous la recherche -->
+        <p
+          class="mt-[14px] flex items-center gap-2 text-[11px] max-[480px]:items-start max-[480px]:text-[10px] max-[480px]:leading-relaxed"
+          [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+        >
+          <i
+            class="fa-solid fa-wand-magic-sparkles shrink-0"
+            [ngClass]="themeSombre ? 'text-[#C8F169]' : 'text-[#286746]'"
+            aria-hidden="true"
+          ></i>
+          {{ textes.note }}
+        </p>
+
+        <!-- Bénéfices -->
+        <div
+          class="mt-[38px] flex flex-wrap items-center gap-[14px] max-[1100px]:gap-[10px] max-[760px]:gap-y-[13px] max-[480px]:mt-7 max-[480px]:grid max-[480px]:grid-cols-1 max-[480px]:gap-[13px]"
+        >
+          <div
+            class="inline-flex items-center gap-2 text-[10px] leading-normal max-[1100px]:text-[9px] max-[480px]:text-[10px]"
+            [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+          >
+            <i
+              class="fa-solid fa-leaf text-xs"
+              [ngClass]="themeSombre ? 'text-[#C8F169]' : 'text-[#286746]'"
+              aria-hidden="true"
+            ></i>
+            <span>{{ textes.etiquette1 }}</span>
+          </div>
+
+          <span
+            aria-hidden="true"
+            class="h-[17px] w-px max-[480px]:hidden"
+            [ngClass]="themeSombre ? 'bg-white/10' : 'bg-[#274D35]/[0.13]'"
+          ></span>
+
+          <div
+            class="inline-flex items-center gap-2 text-[10px] leading-normal max-[1100px]:text-[9px] max-[480px]:text-[10px]"
+            [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+          >
+            <i
+              class="fa-solid fa-seedling text-xs"
+              [ngClass]="themeSombre ? 'text-[#C8F169]' : 'text-[#286746]'"
+              aria-hidden="true"
+            ></i>
+            <span>{{ textes.etiquette2 }}</span>
+          </div>
+
+          <span
+            aria-hidden="true"
+            class="h-[17px] w-px max-[480px]:hidden"
+            [ngClass]="themeSombre ? 'bg-white/10' : 'bg-[#274D35]/[0.13]'"
+          ></span>
+
+          <div
+            class="inline-flex items-center gap-2 text-[10px] leading-normal max-[1100px]:text-[9px] max-[480px]:text-[10px]"
+            [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+          >
+            <i
+              class="fa-solid fa-heart text-xs"
+              [ngClass]="themeSombre ? 'text-[#C8F169]' : 'text-[#286746]'"
+              aria-hidden="true"
+            ></i>
+            <span>{{ textes.etiquette3 }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne droite : visuel botanique -->
+      <div
+        class="relative w-full max-w-[570px] min-w-0 justify-self-end animate-[heroVisualEnter_900ms_100ms_ease_both] max-[760px]:mx-auto max-[760px]:mr-[15px] max-[760px]:w-[calc(100%-15px)] max-[760px]:max-w-[560px]"
+      >
+
+        <!-- Image principale -->
+        <div
+          class="relative h-[clamp(380px,42vw,590px)] w-full overflow-hidden rounded-t-[48%] rounded-b-[15px] bg-[#DCE6D6] max-[760px]:h-[clamp(390px,95vw,560px)] max-[480px]:h-[410px] max-[480px]:rounded-t-[46%] max-[480px]:rounded-b-[13px]"
+        >
+          <img
+            src="assets/ImageAccueil-2.png"
+            alt="Feuillage luxuriant illustrant l'univers végétal d'Arboria"
+            fetchpriority="high"
+            class="h-full w-full object-cover object-center transition-transform duration-[900ms] ease-out hover:scale-[1.035]"
+          />
+
+          <!-- Dégradé -->
+          <div
+            aria-hidden="true"
+            class="absolute inset-0 bg-gradient-to-t from-[#0D2317]/70 via-[#0D2317]/[0.04] via-45% to-transparent"
+          ></div>
+
+          <!-- Légende -->
+          <div class="absolute bottom-[26px] left-[25px] right-[25px] flex flex-col gap-[10px] text-white">
+            <span class="text-[9px] font-bold tracking-[0.18em]">
+              ARBORIA BOTANICAL JOURNAL
+            </span>
+
+            <span class="max-w-[290px] font-serif text-[clamp(26px,3vw,38px)] italic leading-[1.1]">
+              Reconnectez-vous au vivant.
+            </span>
+          </div>
+        </div>
+
+        <!-- Carte plante flottante -->
+        <div
+          class="absolute -right-[35px] bottom-[65px] w-[min(315px,77%)] animate-[heroCardFloat_5s_ease-in-out_infinite] rounded-[17px] border p-[19px] shadow-[0_20px_65px_rgba(11,31,19,0.16)] backdrop-blur-2xl max-[1100px]:-right-3 max-[760px]:-right-[15px] max-[760px]:bottom-[35px] max-[480px]:-right-2 max-[480px]:bottom-[22px] max-[480px]:w-[min(285px,88%)] max-[480px]:p-[14px] max-[350px]:w-[92%]"
+          [ngClass]="themeSombre
+            ? 'border-white/10 bg-[#1F2B23]/95 text-[#F0F3EB]'
+            : 'border-[#274D35]/[0.13] bg-white/[0.94] text-[#193A2B]'"
+        >
+
+          <div
+            class="flex items-center justify-between gap-2 border-b pb-[15px]"
+            [ngClass]="themeSombre ? 'border-white/10' : 'border-[#274D35]/[0.13]'"
+          >
+            <span
+              class="inline-flex items-center gap-[7px] text-[8px] font-extrabold tracking-[0.09em]"
+              [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+            >
+              <span
+                class="h-[6px] w-[6px] rounded-full"
+                [ngClass]="themeSombre ? 'bg-[#C8F169]' : 'bg-[#286746]'"
+              ></span>
+              {{ textes.indication }}
+            </span>
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square text-[11px]"
+              [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <!-- Informations plante -->
+          <div class="flex items-center gap-[13px] py-[17px]">
+            <div
+              class="grid h-[62px] w-14 shrink-0 place-items-center rounded-[10px] text-[25px] max-[480px]:h-[56px]"
+              [ngClass]="themeSombre
+                ? 'bg-[#C8F169]/10 text-[#C8F169]'
+                : 'bg-[#286746]/10 text-[#286746]'"
+            >
+              <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+            </div>
+
+            <div class="min-w-0">
+              <span
+                class="mb-[5px] block text-[10px]"
+                [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+              >
+                {{ textes.categorie }}
+              </span>
+
+              <h2 class="m-0 font-serif text-[22px] font-semibold leading-[1.05] max-[350px]:text-[19px]">
+                {{ textes.plante }}
+              </h2>
+
+              <span
+                class="mt-[5px] block text-[10px] italic"
+                [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+              >
+                Monstera deliciosa
+              </span>
+            </div>
+          </div>
+
+          <!-- Détails -->
+          <div class="grid grid-cols-2 gap-2">
+            <div
+              class="flex min-w-0 items-center gap-[7px] rounded-lg px-2 py-[10px] text-[9px] max-[350px]:text-[8px]"
+              [ngClass]="themeSombre ? 'bg-white/[0.04] text-[#A8B7AA]' : 'bg-[#193A2B]/[0.04] text-[#65766A]'"
+            >
+              <i
+                class="fa-regular fa-sun shrink-0"
+                [ngClass]="themeSombre ? 'text-[#C8F169]' : 'text-[#286746]'"
+                aria-hidden="true"
+              ></i>
+              <span>{{ textes.lumiere }}</span>
+            </div>
+
+            <div
+              class="flex min-w-0 items-center gap-[7px] rounded-lg px-2 py-[10px] text-[9px] max-[350px]:text-[8px]"
+              [ngClass]="themeSombre ? 'bg-white/[0.04] text-[#A8B7AA]' : 'bg-[#193A2B]/[0.04] text-[#65766A]'"
+            >
+              <i
+                class="fa-solid fa-droplet shrink-0"
+                [ngClass]="themeSombre ? 'text-[#C8F169]' : 'text-[#286746]'"
+                aria-hidden="true"
+              ></i>
+              <span>{{ textes.entretien }}</span>
+            </div>
+          </div>
+
+          <!-- Bas de carte -->
+          <div
+            class="mt-[14px] flex items-center justify-between gap-2 border-t pt-[13px] text-[11px] font-bold"
+            [ngClass]="themeSombre
+              ? 'border-white/10 text-[#C8F169]'
+              : 'border-[#274D35]/[0.13] text-[#286746]'"
+          >
+            <span>{{ textes.explorer }}</span>
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </div>
+        </div>
+
+        <!-- Note flottante -->
+        <div
+          class="absolute -left-[45px] top-[70px] flex items-center gap-[11px] rounded-[13px] border px-[15px] py-3 shadow-[0_12px_35px_rgba(11,31,19,0.09)] max-[1100px]:-left-[15px] max-[760px]:left-[-15px] max-[760px]:top-[38px] max-[480px]:-left-2 max-[480px]:top-[25px] max-[480px]:gap-2 max-[480px]:px-[11px] max-[480px]:py-[9px]"
+          [ngClass]="themeSombre
+            ? 'border-white/10 bg-[#1F2B23]/95 text-[#F0F3EB]'
+            : 'border-[#274D35]/[0.13] bg-white/[0.94] text-[#193A2B]'"
+        >
+          <span
+            class="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] max-[480px]:h-[30px] max-[480px]:w-[30px]"
+            [ngClass]="themeSombre
+              ? 'bg-[#C8F169]/10 text-[#C8F169]'
+              : 'bg-[#286746]/10 text-[#286746]'"
+          >
+            <i class="fa-solid fa-spa" aria-hidden="true"></i>
+          </span>
+
+          <span>
+            <strong class="block text-[10px] font-bold max-[480px]:text-[9px]">
+              Nature · Savoir · Partage
+            </strong>
+
+            <small
+              class="mt-1 block text-[9px] max-[480px]:text-[8px]"
+              [ngClass]="themeSombre ? 'text-[#A8B7AA]' : 'text-[#65766A]'"
+            >
+              Le plaisir de découvrir
+            </small>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signature inférieure -->
+    <div
+      class="flex items-center justify-between gap-4 border-t pt-5 text-[8px] font-bold tracking-[0.14em] max-[480px]:items-start max-[480px]:text-[7px] max-[480px]:tracking-[0.08em]"
+      [ngClass]="themeSombre ? 'border-white/10 text-[#A8B7AA]' : 'border-[#274D35]/[0.13] text-[#65766A]'"
+    >
+      <span>PRENEZ LE TEMPS DE CULTIVER VOTRE CURIOSITÉ</span>
+
+      <span class="inline-flex shrink-0 items-center gap-[9px] whitespace-nowrap max-[480px]:gap-[6px] max-[480px]:text-[7px] max-[350px]:hidden">
+        <span
+          class="relative block h-[27px] w-[17px] rounded-xl border"
+          [ngClass]="themeSombre ? 'border-[#A8B7AA]' : 'border-[#65766A]'"
+        >
+          <span
+            class="absolute left-[7px] top-[5px] h-[5px] w-0.5 animate-[heroScroll_1.5s_ease-in-out_infinite] rounded-sm"
+            [ngClass]="themeSombre ? 'bg-[#C8F169]' : 'bg-[#286746]'"
+          ></span>
+        </span>
+
+        SCROLL TO EXPLORE
+      </span>
+    </div>
+  </div>
+</section>

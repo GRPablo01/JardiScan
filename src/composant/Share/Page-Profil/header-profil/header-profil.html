@@ -1,6 +1,17 @@
+
+<style>
+  header input::placeholder {
+    color: var(--placeholder-color);
+    opacity: 1;
+  }
+</style>
+
 <!-- ============================================================
-HEADER JARDISCAN
+
+HEADER NATUREORA
+
 ============================================================ -->
+
 <header class="
              left-[292px]
              right-4
@@ -9,14 +20,13 @@ HEADER JARDISCAN
              z-40
              h-[82px]
              rounded-[1.65rem]
-
              px-5
-            
            " [ngStyle]="{
-            'background-color': themeService.Background2,
-            'border-color': themeService.Border2,
-            'box-shadow': themeService.BoxShadowSmall
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR2,
+            'box-shadow': themeService.SHADOW
         }">
+
   <div class="
       flex
       h-full
@@ -33,18 +43,15 @@ HEADER JARDISCAN
           h-[52px]
           w-[375px]
           items-center
-
           rounded-full
           border
-
           px-4
-
           transition-all
           duration-200
       " [ngStyle]="{
-          'background-color': themeService.Surface1,
-          'border-color': themeService.BorderSoft,
-          'box-shadow': themeService.BoxShadowSmall
+          'background-color': themeService.BG1,
+          'border-color': themeService.BR1,
+          'box-shadow': themeService.SHADOW
       }">
 
       <!-- Icône recherche -->
@@ -54,11 +61,12 @@ HEADER JARDISCAN
               w-[23px]
               shrink-0
           " fill="none" stroke="currentColor" stroke-width="1.6" [ngStyle]="{
-              'color': themeService.TextPrincipal
+              'color': themeService.TX0
           }">
-        <circle cx="11" cy="11" r="7.5"></circle>
 
+        <circle cx="11" cy="11" r="7.5"></circle>
         <path d="M16.5 16.5L21 21" stroke-linecap="round"></path>
+
       </svg>
 
       <!-- Champ -->
@@ -67,17 +75,14 @@ HEADER JARDISCAN
               ml-3
               w-full
               bg-transparent
-
               text-[0.82rem]
               font-normal
-
               outline-none
-
               transition-colors
               duration-200
           " [ngStyle]="{
-              'color': themeService.TextPrincipal,
-              '--placeholder-color': themeService.TextMuted
+              'color': themeService.TX0,
+              '--placeholder-color': themeService.TX2
           }" />
 
       <!-- Raccourci clavier -->
@@ -86,21 +91,18 @@ HEADER JARDISCAN
               flex
               h-7
               min-w-[43px]
-
               items-center
               justify-center
               gap-0.5
-
               rounded-[0.45rem]
-
               px-2
-
               text-[0.72rem]
               font-medium
           " [ngStyle]="{
-              'background-color': themeService.Background3,
-              'color': themeService.TextSecondaire
+              'background-color': themeService.BG3,
+              'color': themeService.TX1
           }">
+
         <span class="text-[0.9rem]">
           ⌘
         </span>
@@ -108,9 +110,11 @@ HEADER JARDISCAN
         <span>
           F
         </span>
+
       </div>
 
     </div>
+
 
 
     <!-- ========================================================
@@ -133,28 +137,28 @@ HEADER JARDISCAN
               w-[52px]
               items-center
               justify-center
-
               rounded-full
               border
-
               transition-all
               duration-200
-
               hover:-translate-y-0.5
           " [ngStyle]="{
-              'background-color': themeService.Surface1,
-              'border-color': themeService.BorderSoft,
-              'color': themeService.TextPrincipal,
-              'box-shadow': themeService.BoxShadowSmall
+              'background-color': themeService.BG1,
+              'border-color': themeService.BR1,
+              'color': themeService.TX0,
+              'box-shadow': themeService.SHADOW
           }" aria-label="Messages">
 
         <svg viewBox="0 0 24 24" class="h-[21px] w-[21px]" fill="none" stroke="currentColor" stroke-width="1.6">
+
           <rect x="3.5" y="5" width="17" height="14" rx="4"></rect>
 
           <path d="M6.5 8L12 12L17.5 8" stroke-linecap="round" stroke-linejoin="round"></path>
+
         </svg>
 
       </button>
+
 
 
       <!-- ====================================================
@@ -168,27 +172,26 @@ HEADER JARDISCAN
               w-[52px]
               items-center
               justify-center
-
               rounded-full
               border
-
               transition-all
               duration-200
-
               hover:-translate-y-0.5
           " [ngStyle]="{
-              'background-color': themeService.Surface1,
-              'border-color': themeService.BorderSoft,
-              'color': themeService.TextPrincipal,
-              'box-shadow': themeService.BoxShadowSmall
+              'background-color': themeService.BG1,
+              'border-color': themeService.BR1,
+              'color': themeService.TX0,
+              'box-shadow': themeService.SHADOW
           }" aria-label="Notifications">
 
         <svg viewBox="0 0 24 24" class="h-[21px] w-[21px]" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path d="M18 9.5C18 6.2 15.8 4 12 4C8.2 4 6 6.2 6 9.5V13L4.5 16H19.5L18 13V9.5Z" stroke-linejoin="round">
-          </path>
+
+          <path d="M18 9.5C18 6.2 15.8 4 12 4C8.2 4 6 6.2 6 9.5V13L4.5 16H19.5L18 13V9.5Z" stroke-linejoin="round"></path>
 
           <path d="M10 19C10.5 20 11.2 20.5 12 20.5C12.8 20.5 13.5 20 14 19" stroke-linecap="round"></path>
+
         </svg>
+
 
 
         <!-- Badge -->
@@ -197,19 +200,17 @@ HEADER JARDISCAN
                   absolute
                   right-[11px]
                   top-[10px]
-
                   h-[7px]
                   w-[7px]
-
                   rounded-full
-
                   border
               " [ngStyle]="{
                   'background-color': themeService.Primary,
-                  'border-color': themeService.Surface1
+                  'border-color': themeService.BG1
               }"></span>
 
       </button>
+
 
 
       <!-- ====================================================
@@ -218,21 +219,15 @@ HEADER JARDISCAN
 
       <button type="button" class="
               ml-2
-
               flex
               items-center
               gap-3
-
               rounded-full
-
               px-1
               py-1
-
               text-left
-
               transition-all
               duration-200
-
               hover:-translate-y-0.5
           " [ngStyle]="{
               'background-color': 'transparent'
@@ -247,20 +242,16 @@ HEADER JARDISCAN
                   h-[56px]
                   w-[56px]
                   shrink-0
-
                   items-center
                   justify-center
-
                   overflow-hidden
                   rounded-full
-
                   border
-
                   transition-all
                   duration-300
               " [ngStyle]="{
-                  'background-color': themeService.PrimarySoft,
-                  'border-color': themeService.BorderPrimary
+                  'background-color': themeService.BG3,
+                  'border-color': themeService.BR3
               }">
 
           <!-- Avatar image -->
@@ -279,10 +270,13 @@ HEADER JARDISCAN
                   " [ngStyle]="{
                       'color': themeService.Primary
                   }">
+
             {{ initials || 'IN' }}
+
           </span>
 
         </div>
+
 
 
         <!-- ==================================================
@@ -292,10 +286,8 @@ HEADER JARDISCAN
         <div class="
                   hidden
                   min-w-[155px]
-
                   flex-col
                   justify-center
-
                   lg:flex
               ">
 
@@ -307,11 +299,14 @@ HEADER JARDISCAN
                       leading-tight
                       tracking-[-0.02em]
                   " [ngStyle]="{
-                      'color': themeService.TextPrincipal
+                      'color': themeService.TX0
                   }">
+
             {{ prenom || 'Utilisateur' }}
             {{ nom || '' }}
+
           </span>
+
 
 
           <!-- Email -->
@@ -322,9 +317,11 @@ HEADER JARDISCAN
                       font-normal
                       leading-tight
                   " [ngStyle]="{
-                      'color': themeService.TextMuted
+                      'color': themeService.TX2
                   }">
+
             {{ email || 'utilisateur@email.com' }}
+
           </span>
 
         </div>
@@ -334,4 +331,5 @@ HEADER JARDISCAN
     </div>
 
   </div>
+
 </header>

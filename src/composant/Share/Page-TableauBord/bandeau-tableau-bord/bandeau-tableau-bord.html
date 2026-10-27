@@ -1,0 +1,104 @@
+<!-- ============================================================
+     ARBORIA — BANDEAU DU TABLEAU DE BORD
+     Angular Standalone • Tailwind CSS • Font Awesome
+     Pleine largeur • Responsive • Thème clair / sombre
+============================================================ -->
+
+<section
+  class="block w-full min-w-0 max-w-none"
+  [ngStyle]="{
+    'background-color': themeService.BG2,
+    color: themeService.TX1
+  }"
+  aria-label="Bandeau du tableau de bord"
+>
+  <div
+    class="flex w-full min-w-0 flex-col gap-4 rounded-2xl border p-4 sm:p-5 lg:p-6"
+    [ngStyle]="{
+      'background-color': themeService.BG3,
+      'border-color': themeService.BR1,
+      'box-shadow': themeService.SHADOW_SM
+    }"
+  >
+
+    <!-- EN-TÊTE DU BANDEAU -->
+    <div class="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+      <div class="flex min-w-0 items-center gap-3">
+        <div
+          class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+          [ngStyle]="{
+            'background-color': themeService.PrimarySoft,
+            color: themeService.Primary
+          }"
+        >
+          <i class="fa-solid fa-leaf text-lg" aria-hidden="true"></i>
+        </div>
+
+        <div class="min-w-0">
+          <p
+            class="text-xs font-bold uppercase tracking-[0.18em]"
+            [ngStyle]="{ color: themeService.Accent }"
+          >
+            ESPACE PERSONNEL
+          </p>
+
+          <h2
+            class="mt-1 break-words text-lg font-bold sm:text-xl"
+            [ngStyle]="{
+              color: themeService.TX0,
+              'font-family': themeService.FONT_DISPLAY
+            }"
+          >
+            Votre espace Arboria
+          </h2>
+        </div>
+      </div>
+
+      <!-- INDICATEUR -->
+      <div
+        class="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold"
+        [ngStyle]="{
+          'background-color': themeService.BG2,
+          'border-color': themeService.BR1,
+          color: themeService.TX2
+        }"
+      >
+        <span
+          class="h-2 w-2 rounded-full"
+          [ngStyle]="{ 'background-color': themeService.Success }"
+          aria-hidden="true"
+        ></span>
+
+        Votre jardin, en un coup d’œil
+      </div>
+
+    </div>
+
+    <!-- SÉPARATEUR -->
+    <div
+      class="h-px w-full"
+      [ngStyle]="{ 'background-color': themeService.BR1 }"
+      aria-hidden="true"
+    ></div>
+
+    <!-- MESSAGE PRINCIPAL -->
+    <div class="flex w-full min-w-0 flex-col gap-2">
+      <h3
+        class="text-base font-semibold sm:text-lg"
+        [ngStyle]="{ color: themeService.TX0 }"
+      >
+        Bienvenue dans votre tableau de bord
+      </h3>
+
+      <p
+        class="text-sm leading-7 sm:text-base"
+        [ngStyle]="{ color: themeService.TX2 }"
+      >
+        Retrouvez vos plantes, suivez votre collection et accédez
+        facilement aux conseils pour prendre soin de votre espace végétal.
+      </p>
+    </div>
+
+  </div>
+</section>

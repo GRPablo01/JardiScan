@@ -1,34 +1,36 @@
 import { Routes } from '@angular/router';
-import { Bienvenue } from '../Page/bienvenue/bienvenue';
-import { ScanerPlante } from '../Page/scaner-plante/scaner-plante';
-import { MyPlants } from '../Page/my-plants/my-plants';
-import { Paramettre } from '../Page/paramettre/paramettre';
-import { CentreAide } from '../Page/centre-aide/centre-aide';
-import { Connexion } from '../Page/connexion/connexion';
-import { Inscription } from '../Page/inscription/inscription';
-import { Accueil } from '../Page/accueil/accueil';
-import { ChangePassword } from '../Page/change-password/change-password';
-import { Scan } from '../Page/scan/scan';
-import { MonProfil } from '../Page/mon-profil/mon-profil';
+import { Connexion } from '../Page/Auth/connexion/connexion';
+import { Inscription } from '../Page/Auth/inscription/inscription';
+import { Accueil } from '../Page/Share/accueil/accueil';
+import { Rechercher } from '../Page/Share/rechercher/rechercher';
+import { DashBoard } from '../Page/Share/dash-board/dash-board';
 import { Diagnostiquer } from '../Page/diagnostiquer/diagnostiquer';
-import { Saison } from '../Page/saison/saison';
-import { Rechercher } from '../Page/rechercher/rechercher';
+import { Assistant } from '../Page/Share/assistant/assistant';
 
 
 
 export const routes: Routes = [
-    { path: '', component: Bienvenue },
-    { path: 'scannerplante', component: ScanerPlante },
-    { path: 'myplants', component: MyPlants},
-    { path: 'centreaide', component: CentreAide},
-    { path: 'parametres', component: Paramettre},
+    { path: '', component: Connexion },
+    { path: 'accueil', component: Accueil},
     { path: 'login', component: Connexion},
     { path: 'register', component: Inscription},
-    { path: 'accueil', component: Accueil},
-    { path: 'change-password', component: ChangePassword },
-    { path: 'scan', component: Scan },
-    { path: 'profil', component: MonProfil },
+    { path: 'recherche', component: Rechercher},
+    { path: 'dashboard', component: DashBoard},
     { path: 'diagnostic', component: Diagnostiquer },
-    { path: 'saison', component: Saison},
-    { path: 'search', component: Rechercher},
+    { path: 'assistant', component: Assistant },
+    
+    // { path: 'scannerplante', component: ScanerPlante },
+    // { path: 'myplants', component: MyPlants},
+    // { path: 'centreaide', component: CentreAide},
+    // { path: 'parametres', component: Paramettre},
+    
+    
+    // { path: 'change-password', component: ChangePassword },
+    // { path: 'scan', component: Scan },
+    // { path: 'profil', component: MonProfil },
+    // { path: 'diagnostic', component: Diagnostiquer },
+    // { path: 'saison', component: Saison},
+    // { path: 'search', component: Rechercher},
+    // { path: 'decouvrir', component: Decouvrir},
+    // { path: 'recherche', component: WidgetSearch},
 ];

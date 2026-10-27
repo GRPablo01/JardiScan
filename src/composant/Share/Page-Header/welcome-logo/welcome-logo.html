@@ -1,0 +1,76 @@
+
+<!-- ============================================================
+🌿 ARBORIA — LOGO PREMIUM
+• Identité végétale minimaliste
+• Logo SVG conservé
+• Navigation vers l'accueil
+• Fermeture des menus conservée
+• Responsive
+============================================================ -->
+
+<a
+  routerLink="/accueil"
+  aria-label="Arboria — Accueil"
+  (click)="fermerMenus()"
+  class="
+    group
+    inline-flex min-w-0 shrink-0
+    items-center gap-[7px]
+    select-none no-underline
+    outline-none
+    focus-visible:rounded-xl
+    focus-visible:ring-2
+    focus-visible:ring-[#6F8F72]
+    focus-visible:ring-offset-4
+    focus-visible:ring-offset-white
+  "
+>
+  <!-- LOGO SVG -->
+  <span
+    class="
+      relative
+      flex h-10 w-10 shrink-0
+      items-center justify-center
+      rounded-[13px]
+      transition-transform duration-300
+      ease-[cubic-bezier(0.22,1,0.36,1)]
+      motion-safe:group-hover:scale-[1.045]
+      motion-safe:group-active:scale-[0.97]
+      sm:h-[42px] sm:w-[42px]
+    "
+  >
+    <img
+      [src]="themeService.ImageLogo"
+      alt=""
+      aria-hidden="true"
+      draggable="false"
+      class="
+        block h-full w-full
+        object-contain
+        transition-opacity duration-300
+        group-hover:opacity-90
+      "
+    />
+  </span>
+
+ 
+<!-- NOM DE MARQUE -->
+<span
+[ngStyle]="{
+  color: themeService.TX0
+}"
+class="
+  block min-w-0 whitespace-nowrap
+  text-[21px]
+  font-semibold
+  leading-none
+  tracking-[-0.055em]
+  antialiased
+  transition-colors duration-300
+  sm:text-[23px]
+"
+>
+rboria
+</span>
+
+</a>

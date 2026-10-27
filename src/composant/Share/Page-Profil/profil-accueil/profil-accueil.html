@@ -1,51 +1,98 @@
 <!-- ============================================================
-🌿 PAGE ACCUEIL — JARDISCAN
+🌿 NATUREORA — PAGE ACCUEIL
+• Nouveau Design System
+• Light / Dark
+• BG1 → BG5
+• BR1 → BR5
+• TX0 → TX5
+• Boutons BUTON1 / BUTON2
+• États Success / Warning / Error / Info
+• Responsive
+• Sans scan / caméra / identification
 ============================================================ -->
 
-<div class="w-full">
+<div
+    class="w-full min-h-screen"
+    [ngStyle]="{
+        'background-color': themeService.BG1,
+        'color': themeService.TX0
+    }"
+>
 
     <!-- ========================================================
-    🌿 HEADER
+    🌿 EN-TÊTE
     ======================================================== -->
 
-    <div class="mb-8 flex flex-col gap-2">
+    <section class="mb-8">
 
-        <h1
-            class="text-3xl font-bold tracking-tight md:text-4xl"
-            [ngStyle]="{
-                'color': themeService.TextPrincipal
-            }"
-        >
-            Bonjour {{ prenomUtilisateur }} {{ nomUtilisateur }}
-        </h1>
+        <div class="flex flex-col gap-2">
 
-        <p
-            class="text-base md:text-lg"
-            [ngStyle]="{
-                'color': themeService.TextSecondaire
-            }"
-        >
-            Qu’est-ce qu’on fait aujourd’hui ?
-        </p>
+            <div class="flex items-center gap-3">
 
-    </div>
+                <div
+                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl"
+                    [ngStyle]="{
+                        'background-color': themeService.BUTON1BG,
+                        'color': themeService.BUTON1ICON,
+                        'box-shadow': '0 8px 22px ' + themeService.BUTON1SHADOW
+                    }"
+                >
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div class="min-w-0">
+
+                    <p
+                        class="text-xs font-semibold uppercase tracking-[0.18em]"
+                        [ngStyle]="{
+                            'color': themeService.ICON
+                        }"
+                    >
+                        Natureora
+                    </p>
+
+                    <h1
+                        class="mt-1 text-3xl font-bold tracking-tight md:text-4xl"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
+                        Bonjour {{ prenomUtilisateur }} {{ nomUtilisateur }}
+                    </h1>
+
+                </div>
+
+            </div>
+
+            <p
+                class="max-w-2xl text-base leading-7 md:text-lg"
+                [ngStyle]="{
+                    'color': themeService.TX1
+                }"
+            >
+                Qu’est-ce qu’on fait aujourd’hui ?
+            </p>
+
+        </div>
+
+    </section>
 
 
     <!-- ========================================================
-    🌱 ACTIONS RAPIDES
+    🌱 ACTIONS PRINCIPALES
     ======================================================== -->
 
-    <div class="mb-6 grid grid-cols-1 gap-5 lg:grid-cols-3">
+    <section class="mb-6 grid grid-cols-1 gap-5 lg:grid-cols-3">
 
         <!-- ====================================================
-        📷 IDENTIFIER
+        🔎 RECHERCHER
         ==================================================== -->
 
         <div
             class="
                 group
                 relative
-                min-h-[210px]
+                min-h-[230px]
                 overflow-hidden
                 rounded-[28px]
                 border
@@ -55,10 +102,9 @@
                 hover:-translate-y-1
             "
             [ngStyle]="{
-                'background-color': themeService.Background2,
-                'border-color': themeService.Border2,
-                'color': themeService.TextPrincipal,
-                'box-shadow': '0 10px 30px rgba(0,0,0,0.06)'
+                'background-color': themeService.BG2,
+                'border-color': themeService.BR2,
+                'box-shadow': '0 12px 32px ' + themeService.SHADOW
             }"
         >
 
@@ -69,23 +115,29 @@
                     <p
                         class="text-xs font-semibold uppercase tracking-[0.16em]"
                         [ngStyle]="{
-                            'color': themeService.Leaf
+                            'color': themeService.ICON
                         }"
                     >
-                        Identifier une plante
+                        Découvrir
                     </p>
 
-                    <h3 class="mt-4 text-2xl font-semibold">
-                        Quelle plante avez-vous ?
-                    </h3>
+                    <h2
+                        class="mt-4 text-2xl font-semibold tracking-tight"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
+                        Quelle plante recherchez-vous ?
+                    </h2>
 
                     <p
                         class="mt-2 text-sm leading-6"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX1
                         }"
                     >
-                        Prenez une photo et laissez JardiScan identifier votre plante.
+                        Retrouvez facilement une plante et découvrez
+                        les conseils Natureora pour mieux l'entretenir.
                     </p>
 
                 </div>
@@ -101,11 +153,11 @@
                         rounded-full
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Primary,
-                        'color': '#ffffff'
+                        'background-color': themeService.BUTON1BG,
+                        'color': themeService.BUTON1ICON
                     }"
                 >
-                    <i class="fa-solid fa-camera"></i>
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
 
             </div>
@@ -114,7 +166,7 @@
 
                 <button
                     type="button"
-                    routerLink="/scan"
+                    routerLink="/recherche"
                     class="
                         inline-flex
                         items-center
@@ -126,15 +178,16 @@
                         font-semibold
                         transition-all
                         duration-300
-                        hover:scale-[1.02]
+                        hover:-translate-y-0.5
+                        active:scale-95
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Primary,
-                        'color': '#ffffff'
+                        'background-color': themeService.BUTON1BG,
+                        'color': themeService.BUTON1TEXT,
+                        'box-shadow': '0 8px 22px ' + themeService.BUTON1SHADOW
                     }"
                 >
-                    Scanner une plante
-
+                    Rechercher une plante
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
 
@@ -144,14 +197,14 @@
 
 
         <!-- ====================================================
-        🌱 JARDIDEX
+        🌱 JARDIN
         ==================================================== -->
 
         <div
             class="
                 group
                 relative
-                min-h-[210px]
+                min-h-[230px]
                 overflow-hidden
                 rounded-[28px]
                 border
@@ -161,10 +214,9 @@
                 hover:-translate-y-1
             "
             [ngStyle]="{
-                'background-color': themeService.Background2,
-                'border-color': themeService.Border2,
-                'color': themeService.TextPrincipal,
-                'box-shadow': '0 10px 30px rgba(0,0,0,0.06)'
+                'background-color': themeService.BG2,
+                'border-color': themeService.BR2,
+                'box-shadow': '0 12px 32px ' + themeService.SHADOW
             }"
         >
 
@@ -175,21 +227,26 @@
                     <p
                         class="text-xs font-semibold uppercase tracking-[0.16em]"
                         [ngStyle]="{
-                            'color': themeService.Leaf
+                            'color': themeService.ICON
                         }"
                     >
                         Mon jardin
                     </p>
 
-                    <h3 class="mt-4 text-2xl font-semibold">
+                    <h2
+                        class="mt-4 text-2xl font-semibold tracking-tight"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
                         {{ nombrePlantes }}
                         plante{{ nombrePlantes > 1 ? 's' : '' }}
-                    </h3>
+                    </h2>
 
                     <p
                         class="mt-2 text-sm leading-6"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX1
                         }"
                     >
                         {{
@@ -215,9 +272,9 @@
                         border
                     "
                     [ngStyle]="{
-                        'border-color': themeService.Border2,
-                        'color': themeService.Leaf,
-                        'background-color': themeService.Background1
+                        'border-color': themeService.BR3,
+                        'color': themeService.ICON,
+                        'background-color': themeService.BG3
                     }"
                 >
                     <i class="fa-solid fa-seedling"></i>
@@ -231,7 +288,7 @@
 
                     <span
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX2
                         }"
                     >
                         Collection
@@ -240,7 +297,7 @@
                     <span
                         class="font-semibold"
                         [ngStyle]="{
-                            'color': themeService.Leaf
+                            'color': themeService.ICON
                         }"
                     >
                         {{ nombrePlantes }}
@@ -252,13 +309,13 @@
                 <div
                     class="h-2 overflow-hidden rounded-full"
                     [ngStyle]="{
-                        'background-color': themeService.Border2
+                        'background-color': themeService.BR2
                     }"
                 >
                     <div
                         class="h-full rounded-full transition-all duration-500"
                         [ngStyle]="{
-                            'background-color': themeService.Leaf,
+                            'background-color': themeService.ICON,
                             'width': nombrePlantes > 0 ? '100%' : '0%'
                         }"
                     ></div>
@@ -276,7 +333,7 @@
         <div
             class="
                 relative
-                min-h-[210px]
+                min-h-[230px]
                 overflow-hidden
                 rounded-[28px]
                 p-6
@@ -285,9 +342,9 @@
                 hover:-translate-y-1
             "
             [ngStyle]="{
-                'background-color': themeService.Primary,
-                'color': '#ffffff',
-                'box-shadow': '0 12px 32px rgba(0,0,0,0.12)'
+                'background-color': themeService.BG4,
+                'color': themeService.TX0,
+                'box-shadow': '0 14px 36px ' + themeService.SHADOW
             }"
         >
 
@@ -295,13 +352,23 @@
 
                 <div class="min-w-0">
 
-                    <p class="text-xs font-semibold uppercase tracking-[0.16em] opacity-80">
+                    <p
+                        class="text-xs font-semibold uppercase tracking-[0.16em]"
+                        [ngStyle]="{
+                            'color': themeService.TX2
+                        }"
+                    >
                         Conseil du jour
                     </p>
 
-                    <h3 class="mt-4 text-2xl font-semibold">
+                    <h2
+                        class="mt-4 text-2xl font-semibold"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
                         {{ conseilDuJour.titre }}
-                    </h3>
+                    </h2>
 
                 </div>
 
@@ -314,10 +381,10 @@
                         items-center
                         justify-center
                         rounded-full
-                        bg-white/95
                     "
                     [ngStyle]="{
-                        'color': themeService.Primary
+                        'background-color': themeService.BG1,
+                        'color': themeService.ICON
                     }"
                 >
                     <i class="fa-solid fa-lightbulb"></i>
@@ -325,13 +392,29 @@
 
             </div>
 
-            <p class="mt-5 text-sm leading-6 opacity-90">
+            <p
+                class="mt-5 text-sm leading-6"
+                [ngStyle]="{
+                    'color': themeService.TX1
+                }"
+            >
                 {{ conseilDuJour.description }}
             </p>
 
             <button
                 type="button"
-                class="mt-5 text-xs font-semibold underline underline-offset-4"
+                class="
+                    mt-5
+                    text-xs
+                    font-semibold
+                    underline
+                    underline-offset-4
+                    transition-opacity
+                    hover:opacity-70
+                "
+                [ngStyle]="{
+                    'color': themeService.ICON
+                }"
                 (click)="changerConseil()"
             >
                 Autre conseil
@@ -339,15 +422,14 @@
 
         </div>
 
-    </div>
-
+    </section>
 
 
     <!-- ========================================================
-        📊 ÉTAT DU JARDIN — PLEINE LARGEUR
-        ======================================================== -->
-    
-    <div
+    📊 ÉTAT DU JARDIN
+    ======================================================== -->
+
+    <section
         class="
             mb-6
             w-full
@@ -360,17 +442,15 @@
             sm:p-7
         "
         [ngStyle]="{
-            'background-color': themeService.Background2,
-            'border-color': themeService.Border2,
-            'color': themeService.TextPrincipal,
-            'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR2,
+            'color': themeService.TX0,
+            'box-shadow': '0 10px 28px ' + themeService.SHADOW
         }"
     >
-    
-        <!-- ====================================================
-            HEADER
-            ==================================================== -->
-    
+
+        <!-- HEADER -->
+
         <div
             class="
                 mb-7
@@ -382,26 +462,29 @@
                 sm:justify-between
             "
         >
-    
+
             <div>
-    
-                <h2 class="text-xl font-semibold">
+
+                <h2
+                    class="text-xl font-semibold"
+                    [ngStyle]="{
+                        'color': themeService.TX0
+                    }"
+                >
                     État du jardin
                 </h2>
-    
+
                 <p
                     class="mt-1 text-sm"
                     [ngStyle]="{
-                        'color': themeService.TextSecondaire
+                        'color': themeService.TX1
                     }"
                 >
                     Un aperçu rapide de votre jardin
                 </p>
-    
+
             </div>
-    
-            <!-- STATUT -->
-    
+
             <div
                 class="
                     flex
@@ -414,36 +497,34 @@
                     py-2
                 "
                 [ngStyle]="{
-                    'border-color': themeService.Border2,
-                    'background-color': themeService.Background1
+                    'border-color': themeService.BR2,
+                    'background-color': themeService.BG1
                 }"
             >
-    
+
                 <span
                     class="h-2 w-2 animate-pulse rounded-full"
                     [ngStyle]="{
-                        'background-color': themeService.Leaf
+                        'background-color': themeService.Success
                     }"
                 ></span>
-    
+
                 <span
                     class="text-xs font-medium"
                     [ngStyle]="{
-                        'color': themeService.TextSecondaire
+                        'color': themeService.TX1
                     }"
                 >
                     Jardin actif
                 </span>
-    
+
             </div>
-    
+
         </div>
-    
-    
-        <!-- ====================================================
-            STATISTIQUES — PLEINE LARGEUR
-            ==================================================== -->
-    
+
+
+        <!-- STATISTIQUES -->
+
         <div
             class="
                 grid
@@ -453,11 +534,9 @@
                 lg:grid-cols-3
             "
         >
-    
-            <!-- ==================================================
-                🌿 MES PLANTES
-                ================================================== -->
-    
+
+            <!-- MES PLANTES -->
+
             <div
                 class="
                     rounded-[22px]
@@ -468,30 +547,35 @@
                     hover:-translate-y-1
                 "
                 [ngStyle]="{
-                    'background-color': themeService.Background1,
-                    'border-color': themeService.Border2
+                    'background-color': themeService.BG1,
+                    'border-color': themeService.BR2
                 }"
             >
-    
+
                 <div class="flex items-start justify-between">
-    
+
                     <div>
-    
+
                         <p
                             class="text-sm"
                             [ngStyle]="{
-                                'color': themeService.TextSecondaire
+                                'color': themeService.TX1
                             }"
                         >
                             Mes plantes
                         </p>
-    
-                        <p class="mt-2 text-3xl font-semibold">
+
+                        <p
+                            class="mt-2 text-3xl font-semibold"
+                            [ngStyle]="{
+                                'color': themeService.TX0
+                            }"
+                        >
                             {{ nombrePlantes }}
                         </p>
-    
+
                     </div>
-    
+
                     <div
                         class="
                             flex
@@ -502,54 +586,48 @@
                             rounded-2xl
                         "
                         [ngStyle]="{
-                            'background-color': themeService.GlassBackground,
-                            'color': themeService.Leaf
+                            'background-color': themeService.BG3,
+                            'color': themeService.ICON
                         }"
                     >
-    
                         <i class="fa-solid fa-leaf"></i>
-    
                     </div>
-    
+
                 </div>
-    
+
                 <div class="mt-5">
-    
+
                     <div
                         class="h-1.5 overflow-hidden rounded-full"
                         [ngStyle]="{
-                            'background-color': themeService.Border2
+                            'background-color': themeService.BR2
                         }"
                     >
-    
                         <div
                             class="h-full rounded-full transition-all duration-500"
                             [ngStyle]="{
                                 'width': nombrePlantes > 0 ? '100%' : '0%',
-                                'background-color': themeService.Leaf
+                                'background-color': themeService.ICON
                             }"
                         ></div>
-    
                     </div>
-    
+
                     <p
                         class="mt-2 text-xs"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX2
                         }"
                     >
                         Collection suivie
                     </p>
-    
+
                 </div>
-    
+
             </div>
-    
-    
-            <!-- ==================================================
-                🔔 RAPPELS
-                ================================================== -->
-    
+
+
+            <!-- RAPPELS -->
+
             <div
                 class="
                     rounded-[22px]
@@ -560,30 +638,35 @@
                     hover:-translate-y-1
                 "
                 [ngStyle]="{
-                    'background-color': themeService.Background1,
-                    'border-color': themeService.Border2
+                    'background-color': themeService.BG1,
+                    'border-color': themeService.BR2
                 }"
             >
-    
+
                 <div class="flex items-start justify-between">
-    
+
                     <div>
-    
+
                         <p
                             class="text-sm"
                             [ngStyle]="{
-                                'color': themeService.TextSecondaire
+                                'color': themeService.TX1
                             }"
                         >
                             Rappels
                         </p>
-    
-                        <p class="mt-2 text-3xl font-semibold">
+
+                        <p
+                            class="mt-2 text-3xl font-semibold"
+                            [ngStyle]="{
+                                'color': themeService.TX0
+                            }"
+                        >
                             {{ nombreRappels }}
                         </p>
-    
+
                     </div>
-    
+
                     <div
                         class="
                             flex
@@ -594,33 +677,31 @@
                             rounded-2xl
                         "
                         [ngStyle]="{
-                            'background-color': themeService.GlassBackground,
-                            'color': themeService.Primary
+                            'background-color': themeService.BG3,
+                            'color': themeService.ICON
                         }"
                     >
-    
                         <i class="fa-solid fa-bell"></i>
-    
                     </div>
-    
+
                 </div>
-    
+
                 <div class="mt-5 flex items-center gap-2">
-    
+
                     <span
                         class="h-2 w-2 rounded-full"
                         [ngStyle]="{
                             'background-color':
                                 nombreRappels > 0
-                                    ? themeService.Primary
-                                    : themeService.Leaf
+                                    ? themeService.Warning
+                                    : themeService.Success
                         }"
                     ></span>
-    
+
                     <span
                         class="text-xs"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX1
                         }"
                     >
                         {{
@@ -629,16 +710,14 @@
                                 : 'Aucun rappel à surveiller'
                         }}
                     </span>
-    
+
                 </div>
-    
+
             </div>
-    
-    
-            <!-- ==================================================
-                🌱 ACTIVITÉ DU JARDIN
-                ================================================== -->
-    
+
+
+            <!-- ACTIVITÉ -->
+
             <div
                 class="
                     rounded-[22px]
@@ -649,26 +728,29 @@
                     hover:-translate-y-1
                 "
                 [ngStyle]="{
-                    'background-color': themeService.Background1,
-                    'border-color': themeService.Border2
+                    'background-color': themeService.BG1,
+                    'border-color': themeService.BR2
                 }"
             >
-    
+
                 <div class="flex items-start justify-between">
-    
+
                     <div>
-    
+
                         <p
                             class="text-sm"
                             [ngStyle]="{
-                                'color': themeService.TextSecondaire
+                                'color': themeService.TX1
                             }"
                         >
                             Activité du jardin
                         </p>
-    
+
                         <p
                             class="mt-2 text-2xl font-semibold"
+                            [ngStyle]="{
+                                'color': themeService.TX0
+                            }"
                         >
                             {{
                                 nombrePlantes > 0
@@ -676,9 +758,9 @@
                                     : 'À démarrer'
                             }}
                         </p>
-    
+
                     </div>
-    
+
                     <div
                         class="
                             flex
@@ -689,54 +771,46 @@
                             rounded-2xl
                         "
                         [ngStyle]="{
-                            'background-color': themeService.GlassBackground,
-                            'color': themeService.Leaf
+                            'background-color': themeService.BG3,
+                            'color': themeService.ICON
                         }"
                     >
-    
                         <i class="fa-solid fa-seedling"></i>
-    
                     </div>
-    
+
                 </div>
-    
-                <div class="mt-5">
-    
-                    <div class="flex items-center gap-2">
-    
-                        <span
-                            class="h-2 w-2 rounded-full"
-                            [ngStyle]="{
-                                'background-color': themeService.Leaf
-                            }"
-                        ></span>
-    
-                        <span
-                            class="text-xs"
-                            [ngStyle]="{
-                                'color': themeService.TextSecondaire
-                            }"
-                        >
-                            {{
-                                nombrePlantes > 0
-                                    ? 'Votre collection est active'
-                                    : 'Ajoutez votre première plante'
-                            }}
-                        </span>
-    
-                    </div>
-    
+
+                <div class="mt-5 flex items-center gap-2">
+
+                    <span
+                        class="h-2 w-2 rounded-full"
+                        [ngStyle]="{
+                            'background-color': themeService.Success
+                        }"
+                    ></span>
+
+                    <span
+                        class="text-xs"
+                        [ngStyle]="{
+                            'color': themeService.TX1
+                        }"
+                    >
+                        {{
+                            nombrePlantes > 0
+                                ? 'Votre collection est active'
+                                : 'Ajoutez votre première plante'
+                        }}
+                    </span>
+
                 </div>
-    
+
             </div>
-    
+
         </div>
-    
-    
-        <!-- ====================================================
-            MESSAGE / ACTION
-            ==================================================== -->
-    
+
+
+        <!-- MESSAGE / ACTION -->
+
         <div
             class="
                 mt-5
@@ -751,13 +825,13 @@
                 sm:justify-between
             "
             [ngStyle]="{
-                'background-color': themeService.GlassBackground,
-                'border-color': themeService.Border2
+                'background-color': themeService.BG3,
+                'border-color': themeService.BR2
             }"
         >
-    
+
             <div class="flex items-center gap-3">
-    
+
                 <div
                     class="
                         flex
@@ -769,49 +843,45 @@
                         rounded-full
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Primary,
-                        'color': '#ffffff'
+                        'background-color': themeService.BUTON1BG,
+                        'color': themeService.BUTON1ICON
                     }"
                 >
-    
                     <i class="fa-solid fa-seedling text-sm"></i>
-    
                 </div>
-    
+
                 <div>
-    
-                    <p class="text-sm font-medium">
-    
+
+                    <p
+                        class="text-sm font-medium"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
                         {{
                             nombrePlantes > 0
                                 ? 'Votre jardin évolue bien'
                                 : 'Commencez votre jardin'
                         }}
-    
                     </p>
-    
+
                     <p
                         class="mt-0.5 text-xs"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX2
                         }"
                     >
-    
                         {{
                             nombrePlantes > 0
                                 ? 'Continuez à suivre régulièrement vos plantes.'
                                 : 'Ajoutez votre première plante pour commencer votre collection.'
                         }}
-    
                     </p>
-    
+
                 </div>
-    
+
             </div>
-    
-    
-            <!-- ACTION -->
-    
+
             <button
                 type="button"
                 routerLink="/mes-plantes"
@@ -831,28 +901,32 @@
                     hover:-translate-y-0.5
                 "
                 [ngStyle]="{
-                    'border-color': themeService.Border2,
-                    'color': themeService.TextPrincipal
+                    'background-color': themeService.BUTON2BG,
+                    'border-color': themeService.BUTON2BORDER,
+                    'color': themeService.BUTON2TEXT
                 }"
             >
-    
                 Voir mes plantes
-    
                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
-    
             </button>
-    
+
         </div>
-    
-    </div>
-        
+
+    </section>
 
 
     <!-- ========================================================
     🔔 + 🌱 DEUXIÈME LIGNE
     ======================================================== -->
 
-    <div class="grid grid-cols-1 gap-6 xl:grid-cols-12">
+    <section
+        class="
+            grid
+            grid-cols-1
+            gap-6
+            xl:grid-cols-12
+        "
+    >
 
         <!-- ====================================================
         🔔 RAPPELS
@@ -867,10 +941,10 @@
                 xl:col-span-6
             "
             [ngStyle]="{
-                'background-color': themeService.Background2,
-                'border-color': themeService.Border2,
-                'color': themeService.TextPrincipal,
-                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+                'background-color': themeService.BG2,
+                'border-color': themeService.BR2,
+                'color': themeService.TX0,
+                'box-shadow': '0 10px 28px ' + themeService.SHADOW
             }"
         >
 
@@ -882,7 +956,12 @@
 
                     <div class="flex items-center gap-2">
 
-                        <h2 class="text-xl font-semibold">
+                        <h2
+                            class="text-xl font-semibold"
+                            [ngStyle]="{
+                                'color': themeService.TX0
+                            }"
+                        >
                             Rappels
                         </h2>
 
@@ -900,8 +979,9 @@
                                 font-bold
                             "
                             [ngStyle]="{
-                                'background-color': themeService.Leaf + '18',
-                                'color': themeService.Leaf
+                                'background-color': themeService.SuccessSoft,
+                                'color': themeService.ICON,
+                                'border': '1px solid ' + themeService.BR2
                             }"
                         >
                             {{ nombreRappels }}
@@ -912,14 +992,13 @@
                     <p
                         class="mt-1 text-sm"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX1
                         }"
                     >
                         Vos rappels
                     </p>
 
                 </div>
-
 
                 <div class="flex shrink-0 items-center gap-2">
 
@@ -940,18 +1019,17 @@
                             active:scale-95
                         "
                         [ngStyle]="{
-                            'background-color': themeService.Primary,
-                            'color': '#ffffff'
+                            'background-color': themeService.BUTON1BG,
+                            'color': themeService.BUTON1TEXT,
+                            'box-shadow': '0 8px 20px ' + themeService.BUTON1SHADOW
                         }"
                         (click)="ouvrirPopupRappel()"
                     >
-
                         <i class="fa-solid fa-plus text-xs"></i>
 
                         <span class="hidden sm:inline">
                             Créer
                         </span>
-
                     </button>
 
                     <div
@@ -965,8 +1043,8 @@
                             rounded-full
                         "
                         [ngStyle]="{
-                            'background-color': themeService.Leaf + '18',
-                            'color': themeService.Leaf
+                            'background-color': themeService.BG3,
+                            'color': themeService.ICON
                         }"
                     >
                         <i class="fa-regular fa-bell text-lg"></i>
@@ -1002,14 +1080,19 @@
                         rounded-full
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Leaf + '18',
-                        'color': themeService.Leaf
+                        'background-color': themeService.SuccessSoft,
+                        'color': themeService.ICON
                     }"
                 >
                     <i class="fa-solid fa-circle-notch fa-spin text-lg"></i>
                 </div>
 
-                <p class="text-sm font-medium">
+                <p
+                    class="text-sm font-medium"
+                    [ngStyle]="{
+                        'color': themeService.TX0
+                    }"
+                >
                     Chargement de vos rappels...
                 </p>
 
@@ -1041,32 +1124,38 @@
                         rounded-full
                     "
                     [ngStyle]="{
-                        'background-color': '#f59e0b18',
-                        'color': '#f59e0b'
+                        'background-color': themeService.ErrorSoft,
+                        'color': themeService.Error
                     }"
                 >
                     <i class="fa-solid fa-triangle-exclamation text-lg"></i>
                 </div>
 
-                <p class="font-medium">
+                <p
+                    class="font-medium"
+                    [ngStyle]="{
+                        'color': themeService.TX0
+                    }"
+                >
                     Impossible de charger les rappels
                 </p>
 
                 <p
                     class="mt-1 max-w-[320px] text-sm"
                     [ngStyle]="{
-                        'color': themeService.TextSecondaire
+                        'color': themeService.TX1
                     }"
                 >
-                    Une erreur est survenue lors de la récupération de vos rappels.
+                    Une erreur est survenue lors de la récupération
+                    de vos rappels.
                 </p>
 
                 <button
                     type="button"
                     class="mt-4 rounded-full px-5 py-2 text-sm font-semibold"
                     [ngStyle]="{
-                        'background-color': themeService.Primary,
-                        'color': '#ffffff'
+                        'background-color': themeService.BUTON1BG,
+                        'color': themeService.BUTON1TEXT
                     }"
                     (click)="rechargerRappels()"
                 >
@@ -1106,21 +1195,26 @@
                         rounded-full
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Leaf + '18',
-                        'color': themeService.Leaf
+                        'background-color': themeService.SuccessSoft,
+                        'color': themeService.Success
                     }"
                 >
                     <i class="fa-solid fa-check text-xl"></i>
                 </div>
 
-                <p class="font-semibold">
+                <p
+                    class="font-semibold"
+                    [ngStyle]="{
+                        'color': themeService.TX0
+                    }"
+                >
                     Aucun rappel
                 </p>
 
                 <p
                     class="mt-1 max-w-[300px] text-sm leading-6"
                     [ngStyle]="{
-                        'color': themeService.TextSecondaire
+                        'color': themeService.TX1
                     }"
                 >
                     Vous n'avez actuellement aucun rappel à afficher.
@@ -1158,16 +1252,16 @@
                     "
                     [ngStyle]="{
                         'background-color': rappel.termine
-                            ? themeService.Background1 + 'B8'
-                            : themeService.Background1,
+                            ? themeService.BG3
+                            : themeService.BG1,
 
                         'border-color':
                             rappel.termine &&
                             rappelReouvertureId === getRappelId(rappel)
-                                ? themeService.Leaf
+                                ? themeService.ICON
                                 : rappel.termine
-                                    ? '#D1D5DB'
-                                    : themeService.Border2,
+                                    ? themeService.BR3
+                                    : themeService.BR2,
 
                         'opacity': rappel.termine ? '0.68' : '1'
                     }"
@@ -1187,20 +1281,18 @@
                         "
                         [ngStyle]="{
                             'background-color': rappel.termine
-                                ? '#9CA3AF18'
+                                ? themeService.BG4
                                 : getRappelColor(rappel.type) + '18',
 
                             'color': rappel.termine
-                                ? '#9CA3AF'
+                                ? themeService.TX2
                                 : getRappelColor(rappel.type)
                         }"
                     >
-
                         <i
                             class="fa-solid"
                             [ngClass]="getRappelIcon(rappel.type)"
                         ></i>
-
                     </div>
 
 
@@ -1212,8 +1304,8 @@
                             class="truncate font-medium"
                             [ngStyle]="{
                                 'color': rappel.termine
-                                    ? '#9CA3AF'
-                                    : themeService.TextPrincipal,
+                                    ? themeService.TX2
+                                    : themeService.TX0,
 
                                 'text-decoration': rappel.termine
                                     ? 'line-through'
@@ -1237,8 +1329,8 @@
                             "
                             [ngStyle]="{
                                 'color': rappel.termine
-                                    ? '#9CA3AF'
-                                    : themeService.TextSecondaire
+                                    ? themeService.TX2
+                                    : themeService.TX1
                             }"
                         >
 
@@ -1246,8 +1338,8 @@
                                 class="fa-solid fa-user text-[9px]"
                                 [ngStyle]="{
                                     'color': rappel.termine
-                                        ? '#9CA3AF'
-                                        : themeService.Leaf
+                                        ? themeService.TX2
+                                        : themeService.ICON
                                 }"
                             ></i>
 
@@ -1265,8 +1357,8 @@
                             class="mt-1 truncate text-sm"
                             [ngStyle]="{
                                 'color': rappel.termine
-                                    ? '#9CA3AF'
-                                    : themeService.TextSecondaire
+                                    ? themeService.TX2
+                                    : themeService.TX1
                             }"
                         >
                             {{ rappel.description }}
@@ -1277,11 +1369,17 @@
 
                         <div
                             *ngIf="getNomPlante(rappel)"
-                            class="mt-1.5 flex items-center gap-1.5 text-xs"
+                            class="
+                                mt-1.5
+                                flex
+                                items-center
+                                gap-1.5
+                                text-xs
+                            "
                             [ngStyle]="{
                                 'color': rappel.termine
-                                    ? '#9CA3AF'
-                                    : themeService.TextSecondaire
+                                    ? themeService.TX2
+                                    : themeService.TX1
                             }"
                         >
 
@@ -1289,8 +1387,8 @@
                                 class="fa-solid fa-seedling text-[10px]"
                                 [ngStyle]="{
                                     'color': rappel.termine
-                                        ? '#9CA3AF'
-                                        : themeService.Leaf
+                                        ? themeService.TX2
+                                        : themeService.ICON
                                 }"
                             ></i>
 
@@ -1301,9 +1399,7 @@
                         </div>
 
 
-                        <!-- ==================================================
-                        ⏳ COMPTE À REBOURS
-                        ================================================== -->
+                        <!-- COMPTE À REBOURS -->
 
                         <div
                             *ngIf="
@@ -1326,13 +1422,13 @@
                             [ngStyle]="{
                                 'background-color':
                                     compteReboursSecondes <= 60
-                                        ? '#ef444418'
-                                        : themeService.Leaf + '18',
+                                        ? themeService.ErrorSoft
+                                        : themeService.SuccessSoft,
 
                                 'color':
                                     compteReboursSecondes <= 60
-                                        ? '#ef4444'
-                                        : themeService.Leaf
+                                        ? themeService.Error
+                                        : themeService.ICON
                             }"
                         >
 
@@ -1347,8 +1443,8 @@
                                 [ngStyle]="{
                                     'color':
                                         compteReboursSecondes <= 60
-                                            ? '#ef4444'
-                                            : themeService.TextSecondaire
+                                            ? themeService.Error
+                                            : themeService.TX1
                                 }"
                             >
                                 pour revenir en arrière
@@ -1367,7 +1463,7 @@
                             "
                             class="mt-2 text-xs font-medium"
                             [ngStyle]="{
-                                'color': '#ef4444'
+                                'color': themeService.Error
                             }"
                         >
                             Le délai est terminé.
@@ -1401,8 +1497,8 @@
                                 active:scale-95
                             "
                             [ngStyle]="{
-                                'background-color': '#9CA3AF18',
-                                'color': '#6B7280'
+                                'background-color': themeService.BG4,
+                                'color': themeService.TX2
                             }"
                             title="Rouvrir le rappel"
                             aria-label="Rouvrir le rappel"
@@ -1431,15 +1527,15 @@
                             [disabled]="rappel.termine"
                             [ngStyle]="{
                                 'background-color': rappel.termine
-                                    ? '#22c55e'
-                                    : themeService.Leaf + '18',
+                                    ? themeService.Success
+                                    : themeService.SuccessSoft,
 
                                 'color': rappel.termine
-                                    ? '#ffffff'
-                                    : themeService.Leaf,
+                                    ? '#FFFFFF'
+                                    : themeService.Success,
 
                                 'box-shadow': rappel.termine
-                                    ? '0 6px 18px rgba(34,197,94,0.30)'
+                                    ? '0 6px 18px rgba(34,197,94,0.24)'
                                     : 'none',
 
                                 'cursor': rappel.termine
@@ -1488,11 +1584,11 @@
                         transition-all
                         duration-300
                         hover:-translate-y-0.5
-                        hover:shadow-lg
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Primary,
-                        'color': '#ffffff'
+                        'background-color': themeService.BUTON1BG,
+                        'color': themeService.BUTON1TEXT,
+                        'box-shadow': '0 8px 20px ' + themeService.BUTON1SHADOW
                     }"
                 >
                     <i class="fa-solid fa-lightbulb mr-2"></i>
@@ -1517,23 +1613,28 @@
                 xl:col-span-6
             "
             [ngStyle]="{
-                'background-color': themeService.Background2,
-                'border-color': themeService.Border2,
-                'color': themeService.TextPrincipal,
-                'box-shadow': '0 8px 25px rgba(0,0,0,0.05)'
+                'background-color': themeService.BG2,
+                'border-color': themeService.BR2,
+                'color': themeService.TX0,
+                'box-shadow': '0 10px 28px ' + themeService.SHADOW
             }"
         >
 
             <div class="mb-6">
 
-                <h2 class="text-xl font-semibold">
+                <h2
+                    class="text-xl font-semibold"
+                    [ngStyle]="{
+                        'color': themeService.TX0
+                    }"
+                >
                     Votre jardin
                 </h2>
 
                 <p
                     class="mt-1 text-sm"
                     [ngStyle]="{
-                        'color': themeService.TextSecondaire
+                        'color': themeService.TX1
                     }"
                 >
                     Retrouvez les informations importantes de votre jardin.
@@ -1544,19 +1645,29 @@
 
             <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
 
+                <!-- PLANTES -->
+
                 <div
                     class="rounded-[22px] border p-5"
                     [ngStyle]="{
-                        'background-color': themeService.Background1,
-                        'border-color': themeService.Border2
+                        'background-color': themeService.BG1,
+                        'border-color': themeService.BR2
                     }"
                 >
 
                     <div
-                        class="mb-4 flex h-10 w-10 items-center justify-center rounded-full"
+                        class="
+                            mb-4
+                            flex
+                            h-10
+                            w-10
+                            items-center
+                            justify-center
+                            rounded-full
+                        "
                         [ngStyle]="{
-                            'background-color': themeService.Leaf + '18',
-                            'color': themeService.Leaf
+                            'background-color': themeService.SuccessSoft,
+                            'color': themeService.ICON
                         }"
                     >
                         <i class="fa-solid fa-seedling"></i>
@@ -1565,32 +1676,47 @@
                     <p
                         class="text-xs"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX1
                         }"
                     >
                         Plantes enregistrées
                     </p>
 
-                    <p class="mt-1 text-2xl font-semibold">
+                    <p
+                        class="mt-1 text-2xl font-semibold"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
                         {{ nombrePlantes }}
                     </p>
 
                 </div>
 
 
+                <!-- RAPPELS -->
+
                 <div
                     class="rounded-[22px] border p-5"
                     [ngStyle]="{
-                        'background-color': themeService.Background1,
-                        'border-color': themeService.Border2
+                        'background-color': themeService.BG1,
+                        'border-color': themeService.BR2
                     }"
                 >
 
                     <div
-                        class="mb-4 flex h-10 w-10 items-center justify-center rounded-full"
+                        class="
+                            mb-4
+                            flex
+                            h-10
+                            w-10
+                            items-center
+                            justify-center
+                            rounded-full
+                        "
                         [ngStyle]="{
-                            'background-color': themeService.Primary + '18',
-                            'color': themeService.Primary
+                            'background-color': themeService.WarningSoft,
+                            'color': themeService.Warning
                         }"
                     >
                         <i class="fa-solid fa-bell"></i>
@@ -1599,13 +1725,18 @@
                     <p
                         class="text-xs"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX1
                         }"
                     >
                         Rappels
                     </p>
 
-                    <p class="mt-1 text-2xl font-semibold">
+                    <p
+                        class="mt-1 text-2xl font-semibold"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
                         {{ nombreRappels }}
                     </p>
 
@@ -1631,19 +1762,18 @@
                     hover:-translate-y-0.5
                 "
                 [ngStyle]="{
-                    'border-color': themeService.Border2,
-                    'color': themeService.TextPrincipal,
-                    'background-color': themeService.Background1
+                    'border-color': themeService.BUTON2BORDER,
+                    'color': themeService.BUTON2TEXT,
+                    'background-color': themeService.BUTON2BG
                 }"
             >
                 Ouvrir mon jardin
-
                 <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
             </button>
 
         </div>
 
-    </div>
+    </section>
 
 </div>
 
@@ -1673,7 +1803,7 @@
     <div
         class="absolute inset-0 backdrop-blur-md"
         [ngStyle]="{
-            'background-color': 'rgba(0,0,0,0.45)'
+            'background-color': 'rgba(0,0,0,0.48)'
         }"
     ></div>
 
@@ -1695,9 +1825,9 @@
             sm:p-7
         "
         [ngStyle]="{
-            'background-color': themeService.Background2,
-            'border-color': themeService.Border2,
-            'color': themeService.TextPrincipal,
+            'background-color': themeService.BG2,
+            'border-color': themeService.BR2,
+            'color': themeService.TX0,
             'box-shadow': '0 25px 80px rgba(0,0,0,0.20)'
         }"
         (click)="$event.stopPropagation()"
@@ -1720,8 +1850,8 @@
                         rounded-full
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Leaf + '18',
-                        'color': themeService.Leaf
+                        'background-color': themeService.WarningSoft,
+                        'color': themeService.Warning
                     }"
                 >
                     <i class="fa-solid fa-bell"></i>
@@ -1729,14 +1859,19 @@
 
                 <div>
 
-                    <h3 class="text-xl font-semibold">
+                    <h3
+                        class="text-xl font-semibold"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
                         Créer un rappel
                     </h3>
 
                     <p
                         class="mt-1 text-sm"
                         [ngStyle]="{
-                            'color': themeService.TextSecondaire
+                            'color': themeService.TX1
                         }"
                     >
                         Ajoutez une nouvelle tâche à vos rappels.
@@ -1756,10 +1891,12 @@
                     items-center
                     justify-center
                     rounded-full
+                    transition-all
+                    hover:scale-105
                 "
                 [ngStyle]="{
-                    'background-color': themeService.Background1,
-                    'color': themeService.TextSecondaire
+                    'background-color': themeService.BG3,
+                    'color': themeService.TX1
                 }"
                 (click)="fermerPopupRappel()"
                 aria-label="Fermer"
@@ -1781,7 +1918,12 @@
 
             <div>
 
-                <label class="mb-2 block text-sm font-semibold">
+                <label
+                    class="mb-2 block text-sm font-semibold"
+                    [ngStyle]="{
+                        'color': themeService.TX0
+                    }"
+                >
                     Titre
                 </label>
 
@@ -1800,11 +1942,12 @@
                         py-3
                         text-sm
                         outline-none
+                        transition-all
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Background1,
-                        'border-color': themeService.Border2,
-                        'color': themeService.TextPrincipal
+                        'background-color': themeService.BG1,
+                        'border-color': themeService.BR2,
+                        'color': themeService.TX0
                     }"
                 />
 
@@ -1815,7 +1958,12 @@
 
             <div>
 
-                <label class="mb-2 block text-sm font-semibold">
+                <label
+                    class="mb-2 block text-sm font-semibold"
+                    [ngStyle]="{
+                        'color': themeService.TX0
+                    }"
+                >
                     Description
                 </label>
 
@@ -1836,9 +1984,9 @@
                         outline-none
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Background1,
-                        'border-color': themeService.Border2,
-                        'color': themeService.TextPrincipal
+                        'background-color': themeService.BG1,
+                        'border-color': themeService.BR2,
+                        'color': themeService.TX0
                     }"
                 ></textarea>
 
@@ -1851,7 +1999,12 @@
 
                 <div>
 
-                    <label class="mb-2 block text-sm font-semibold">
+                    <label
+                        class="mb-2 block text-sm font-semibold"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
                         Type
                     </label>
 
@@ -1868,9 +2021,9 @@
                             outline-none
                         "
                         [ngStyle]="{
-                            'background-color': themeService.Background1,
-                            'border-color': themeService.Border2,
-                            'color': themeService.TextPrincipal
+                            'background-color': themeService.BG1,
+                            'border-color': themeService.BR2,
+                            'color': themeService.TX0
                         }"
                     >
                         <option value="arrosage">Arrosage</option>
@@ -1888,7 +2041,12 @@
 
                 <div>
 
-                    <label class="mb-2 block text-sm font-semibold">
+                    <label
+                        class="mb-2 block text-sm font-semibold"
+                        [ngStyle]="{
+                            'color': themeService.TX0
+                        }"
+                    >
                         Date
                     </label>
 
@@ -1907,9 +2065,9 @@
                             outline-none
                         "
                         [ngStyle]="{
-                            'background-color': themeService.Background1,
-                            'border-color': themeService.Border2,
-                            'color': themeService.TextPrincipal
+                            'background-color': themeService.BG1,
+                            'border-color': themeService.BR2,
+                            'color': themeService.TX0
                         }"
                     />
 
@@ -1922,7 +2080,12 @@
 
             <div>
 
-                <label class="mb-2 block text-sm font-semibold">
+                <label
+                    class="mb-2 block text-sm font-semibold"
+                    [ngStyle]="{
+                        'color': themeService.TX0
+                    }"
+                >
                     Répétition
                 </label>
 
@@ -1939,9 +2102,9 @@
                         outline-none
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Background1,
-                        'border-color': themeService.Border2,
-                        'color': themeService.TextPrincipal
+                        'background-color': themeService.BG1,
+                        'border-color': themeService.BR2,
+                        'color': themeService.TX0
                     }"
                 >
                     <option value="unique">Une seule fois</option>
@@ -1959,13 +2122,12 @@
                 *ngIf="creationRappelErreur"
                 class="rounded-2xl border px-4 py-3 text-sm"
                 [ngStyle]="{
-                    'background-color': '#ef444418',
-                    'border-color': '#ef444440',
-                    'color': '#ef4444'
+                    'background-color': themeService.ErrorSoft,
+                    'border-color': themeService.ErrorBorder,
+                    'color': themeService.Error
                 }"
             >
                 <i class="fa-solid fa-triangle-exclamation mr-2"></i>
-
                 {{ creationRappelErreur }}
             </div>
 
@@ -1985,11 +2147,11 @@
 
                 <button
                     type="button"
-                    class="rounded-full px-5 py-3 text-sm font-semibold"
+                    class="rounded-full border px-5 py-3 text-sm font-semibold transition-all hover:-translate-y-0.5"
                     [ngStyle]="{
-                        'background-color': themeService.Background1,
-                        'color': themeService.TextSecondaire,
-                        'border': '1px solid ' + themeService.Border2
+                        'background-color': themeService.BUTON2BG,
+                        'color': themeService.BUTON2TEXT,
+                        'border-color': themeService.BUTON2BORDER
                     }"
                     (click)="fermerPopupRappel()"
                 >
@@ -2005,12 +2167,15 @@
                         py-3
                         text-sm
                         font-semibold
+                        transition-all
+                        hover:-translate-y-0.5
                         disabled:cursor-not-allowed
                         disabled:opacity-60
                     "
                     [ngStyle]="{
-                        'background-color': themeService.Primary,
-                        'color': '#ffffff'
+                        'background-color': themeService.BUTON1BG,
+                        'color': themeService.BUTON1TEXT,
+                        'box-shadow': '0 8px 20px ' + themeService.BUTON1SHADOW
                     }"
                 >
 

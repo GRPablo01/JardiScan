@@ -1,0 +1,226 @@
+<div class="arboria-dropdown group relative">
+  <button
+    type="button"
+    class="arboria-action-button flex h-10 shrink-0 items-center
+           justify-center gap-1.5 rounded-xl px-2 transition-all
+           duration-200 focus-visible:outline-none focus-visible:ring-4
+           sm:gap-2 sm:px-2.5"
+    [ngStyle]="{
+      color: themeService.TX2,
+      '--button-focus': themeService.Primary
+    }"
+    [attr.aria-label]="
+      languageService.is('fr')
+        ? 'Choisir la langue'
+        : 'Choose language'
+    "
+    aria-haspopup="true"
+    [attr.title]="
+      languageService.is('fr')
+        ? 'Choisir la langue'
+        : 'Choose language'
+    "
+  >
+    <img
+      *ngIf="langueActuelle === 'fr'; else drapeauAnglais"
+      src="assets/DrapeauFrance.png"
+      alt=""
+      class="h-[18px] w-6 shrink-0 rounded-[3px] object-cover"
+      aria-hidden="true"
+    />
+
+    <ng-template #drapeauAnglais>
+      <svg
+        viewBox="0 0 60 30"
+        class="h-[18px] w-6 shrink-0 rounded-[3px]"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <rect width="60" height="30" fill="#012169" />
+        <path
+          d="M0 0 L60 30 M60 0 L0 30"
+          stroke="#FFFFFF"
+          stroke-width="6"
+        />
+        <path
+          d="M0 0 L60 30 M60 0 L0 30"
+          stroke="#C8102E"
+          stroke-width="2.5"
+        />
+        <path
+          d="M30 0 V30 M0 15 H60"
+          stroke="#FFFFFF"
+          stroke-width="10"
+        />
+        <path
+          d="M30 0 V30 M0 15 H60"
+          stroke="#C8102E"
+          stroke-width="5.5"
+        />
+      </svg>
+    </ng-template>
+
+    <span class="text-[10px] font-semibold uppercase tracking-wide">
+      {{ langueActuelle }}
+    </span>
+
+    <i
+      class="fa-solid fa-chevron-down text-[9px] transition-transform
+             duration-200 group-hover:rotate-180"
+      [ngStyle]="{ color: themeService.TX3 }"
+      aria-hidden="true"
+    ></i>
+  </button>
+
+  <div
+    class="arboria-dropdown-panel invisible absolute right-0 top-full
+           z-50 w-[190px] translate-y-2 pt-2 opacity-0
+           transition-all duration-200 group-hover:visible
+           group-hover:translate-y-0 group-hover:opacity-100
+           group-focus-within:visible group-focus-within:translate-y-0
+           group-focus-within:opacity-100"
+  >
+    <div
+      class="overflow-hidden rounded-2xl border p-1.5 shadow-xl"
+      [ngStyle]="{
+        'background-color': themeService.BG1,
+        'border-color': themeService.BR1,
+        'box-shadow': '0 16px 48px ' + themeService.SHADOW,
+        color: themeService.TX0
+      }"
+      role="group"
+      [attr.aria-label]="
+        languageService.is('fr')
+          ? 'Langue de l’application'
+          : 'Application language'
+      "
+    >
+      <!-- Français -->
+      <button
+        type="button"
+        (click)="changerLangue('fr')"
+        class="arboria-language-option flex w-full items-center gap-3
+               rounded-xl px-3 py-3 text-left text-[12px]
+               transition-colors focus-visible:outline-none
+               focus-visible:ring-2 focus-visible:ring-inset"
+        [class.arboria-language-active]="langueActuelle === 'fr'"
+        [attr.aria-pressed]="langueActuelle === 'fr'"
+      >
+        <img
+          src="assets/DrapeauFrance.png"
+          alt=""
+          class="h-[18px] w-6 shrink-0 rounded-[3px] object-cover"
+          aria-hidden="true"
+        />
+
+        <span class="min-w-0 flex-1">
+          <span class="block font-semibold">Français</span>
+
+          <span
+            class="mt-0.5 block text-[10px]"
+            [ngStyle]="{ color: themeService.TX3 }"
+          >
+            France
+          </span>
+        </span>
+
+        <i
+          *ngIf="langueActuelle === 'fr'"
+          class="fa-solid fa-check text-[11px]"
+          [ngStyle]="{ color: themeService.Primary }"
+          aria-hidden="true"
+        ></i>
+      </button>
+
+      <!-- English -->
+      <button
+        type="button"
+        (click)="changerLangue('en')"
+        class="arboria-language-option flex w-full items-center gap-3
+               rounded-xl px-3 py-3 text-left text-[12px]
+               transition-colors focus-visible:outline-none
+               focus-visible:ring-2 focus-visible:ring-inset"
+        [class.arboria-language-active]="langueActuelle === 'en'"
+        [attr.aria-pressed]="langueActuelle === 'en'"
+      >
+        <svg
+          viewBox="0 0 60 30"
+          class="h-[18px] w-6 shrink-0 rounded-[3px]"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <rect width="60" height="30" fill="#012169" />
+          <path
+            d="M0 0 L60 30 M60 0 L0 30"
+            stroke="#FFFFFF"
+            stroke-width="6"
+          />
+          <path
+            d="M0 0 L60 30 M60 0 L0 30"
+            stroke="#C8102E"
+            stroke-width="2.5"
+          />
+          <path
+            d="M30 0 V30 M0 15 H60"
+            stroke="#FFFFFF"
+            stroke-width="10"
+          />
+          <path
+            d="M30 0 V30 M0 15 H60"
+            stroke="#C8102E"
+            stroke-width="5.5"
+          />
+        </svg>
+
+        <span class="min-w-0 flex-1">
+          <span class="block font-semibold">English</span>
+
+          <span
+            class="mt-0.5 block text-[10px]"
+            [ngStyle]="{ color: themeService.TX3 }"
+          >
+            United Kingdom
+          </span>
+        </span>
+
+        <i
+          *ngIf="langueActuelle === 'en'"
+          class="fa-solid fa-check text-[11px]"
+          [ngStyle]="{ color: themeService.Primary }"
+          aria-hidden="true"
+        ></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  :host {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .arboria-dropdown {
+    position: relative;
+  }
+
+  .arboria-dropdown-panel {
+    transform-origin: top right;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  .arboria-language-option {
+    color: var(--TX1, #354c3c);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .arboria-language-option:hover,
+  .arboria-language-option.arboria-language-active {
+    background-color: var(--BG3, #eaf2e8);
+  }
+
+  .arboria-language-option:focus-visible {
+    --tw-ring-color: var(--Primary, #287653);
+  }
+</style>

@@ -1,0 +1,937 @@
+<!-- ============================================================
+     ARBORIA — SECTION 03 : EXPLOREZ LE CATALOGUE
+     Angular Standalone + Tailwind CSS + Font Awesome
+
+     • Identité visuelle synchronisée avec ThemeService
+     • Mode clair / sombre
+     • Responsive desktop, tablette et mobile
+     • Catalogue illustratif de plantes
+     • Recherche par nom présentée visuellement
+     • Aucune caméra ni fonction de scan
+     • Conservation de la structure et des fonctionnalités existantes
+============================================================ -->
+
+<section
+  class="arboria-catalogue relative isolate w-full overflow-hidden px-5 py-20 transition-colors duration-300 sm:px-8 sm:py-24 lg:px-12 lg:py-28"
+  [ngStyle]="{
+    'background-color': themeSombre ? '#17221C' : '#F7F8F3',
+    color: themeSombre ? '#F4F7F1' : '#1B2920'
+  }"
+>
+  <!-- =========================================================
+       DÉCORATIONS D'ARRIÈRE-PLAN
+  ========================================================== -->
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -right-32 -top-24 h-80 w-80 rounded-full blur-3xl"
+    [ngStyle]="{
+      'background-color': themeSombre
+        ? 'rgba(54, 191, 166, 0.09)'
+        : 'rgba(36, 122, 75, 0.08)'
+    }"
+  ></div>
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full blur-3xl"
+    [ngStyle]="{
+      'background-color': themeSombre
+        ? 'rgba(200, 241, 105, 0.07)'
+        : 'rgba(200, 241, 105, 0.18)'
+    }"
+  ></div>
+
+  <div class="relative mx-auto w-full max-w-[1440px]">
+
+    <!-- =======================================================
+         EN-TÊTE
+    ======================================================== -->
+
+    <header class="mx-auto mb-14 max-w-3xl text-center sm:mb-16 lg:mb-20">
+
+      <div
+        class="mb-6 inline-flex items-center gap-2.5 rounded-full border px-4 py-2.5"
+        [ngStyle]="{
+          'background-color': themeSombre ? '#26362C' : '#DDF5E3',
+          'border-color': themeSombre ? '#506751' : '#C0E4C4',
+          color: themeSombre ? '#C8F169' : '#247A4B'
+        }"
+      >
+        <i class="fa-solid fa-leaf text-sm" aria-hidden="true"></i>
+
+        <span class="text-[11px] font-bold uppercase tracking-[0.18em] sm:text-xs">
+          Un monde végétal à explorer
+        </span>
+      </div>
+
+      <h2
+        class="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl xl:text-[3.5rem]"
+        [ngStyle]="{
+          color: themeSombre ? '#F4F7F1' : '#1B2920'
+        }"
+      >
+        Toute la richesse du végétal,
+
+        <span
+          class="mt-2 block"
+          [ngStyle]="{
+            color: themeSombre ? '#C8F169' : '#247A4B'
+          }"
+        >
+          à portée de recherche.
+        </span>
+      </h2>
+
+      <p
+        class="mx-auto mt-6 max-w-2xl text-base leading-7 sm:text-lg sm:leading-8"
+        [ngStyle]="{
+          color: themeSombre ? '#B7C5B9' : '#657168'
+        }"
+      >
+        Explorez les plantes disponibles dans Arboria, découvrez leurs
+        particularités et trouvez celles qui correspondent à vos envies,
+        à votre jardin et à votre quotidien.
+      </p>
+
+      <!-- Indicateurs visuels -->
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+
+        <div class="flex items-center gap-2">
+          <i
+            class="fa-solid fa-magnifying-glass text-sm"
+            [ngStyle]="{
+              color: themeSombre ? '#36BFA6' : '#168F7D'
+            }"
+            aria-hidden="true"
+          ></i>
+
+          <span
+            class="text-xs font-medium sm:text-sm"
+            [ngStyle]="{
+              color: themeSombre ? '#D5E0D6' : '#46564A'
+            }"
+          >
+            Recherche par nom
+          </span>
+        </div>
+
+        <span
+          aria-hidden="true"
+          class="hidden h-1 w-1 rounded-full sm:block"
+          [ngStyle]="{
+            'background-color': themeSombre ? '#506751' : '#B9C9B1'
+          }"
+        ></span>
+
+        <div class="flex items-center gap-2">
+          <i
+            class="fa-solid fa-book-open text-sm"
+            [ngStyle]="{
+              color: themeSombre ? '#C8F169' : '#247A4B'
+            }"
+            aria-hidden="true"
+          ></i>
+
+          <span
+            class="text-xs font-medium sm:text-sm"
+            [ngStyle]="{
+              color: themeSombre ? '#D5E0D6' : '#46564A'
+            }"
+          >
+            Fiches végétales
+          </span>
+        </div>
+
+        <span
+          aria-hidden="true"
+          class="hidden h-1 w-1 rounded-full sm:block"
+          [ngStyle]="{
+            'background-color': themeSombre ? '#506751' : '#B9C9B1'
+          }"
+        ></span>
+
+        <div class="flex items-center gap-2">
+          <i
+            class="fa-solid fa-seedling text-sm"
+            [ngStyle]="{
+              color: themeSombre ? '#36BFA6' : '#168F7D'
+            }"
+            aria-hidden="true"
+          ></i>
+
+          <span
+            class="text-xs font-medium sm:text-sm"
+            [ngStyle]="{
+              color: themeSombre ? '#D5E0D6' : '#46564A'
+            }"
+          >
+            Découverte libre
+          </span>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- =======================================================
+         CONTENU PRINCIPAL
+    ======================================================== -->
+
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
+
+      <!-- =====================================================
+           COLONNE GAUCHE — CONTENU ÉDITORIAL
+      ====================================================== -->
+
+      <div class="order-2 min-w-0 lg:order-1">
+
+        <div class="mb-9">
+
+          <div
+            class="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em]"
+            [ngStyle]="{
+              color: themeSombre ? '#36BFA6' : '#168F7D'
+            }"
+          >
+            <span
+              class="h-px w-7"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#36BFA6' : '#168F7D'
+              }"
+            ></span>
+
+            Votre prochaine découverte
+          </div>
+
+          <h3
+            class="max-w-xl text-2xl font-semibold leading-snug tracking-tight sm:text-3xl lg:text-[2.15rem]"
+            [ngStyle]="{
+              color: themeSombre ? '#F4F7F1' : '#1B2920'
+            }"
+          >
+            Chaque plante a son histoire.
+            <span
+              class="block"
+              [ngStyle]="{
+                color: themeSombre ? '#C8F169' : '#247A4B'
+              }"
+            >
+              Découvrez la sienne.
+            </span>
+          </h3>
+
+          <p
+            class="mt-5 max-w-xl text-sm leading-7 sm:text-base sm:leading-8"
+            [ngStyle]="{
+              color: themeSombre ? '#B7C5B9' : '#657168'
+            }"
+          >
+            Parcourez le catalogue à votre rythme. Que vous cherchiez
+            une plante précise ou que vous souhaitiez découvrir de
+            nouvelles espèces, Arboria vous aide à trouver les
+            informations utiles pour faire votre choix.
+          </p>
+        </div>
+
+        <!-- AVANTAGE 01 -->
+
+        <div class="group flex items-start gap-4">
+
+          <div
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border transition duration-300 group-hover:-translate-y-0.5"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#26362C' : '#DDF5E3',
+              'border-color': themeSombre ? '#405544' : '#C0E4C4',
+              color: themeSombre ? '#C8F169' : '#247A4B'
+            }"
+          >
+            <i
+              class="fa-solid fa-magnifying-glass text-lg"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <div class="min-w-0 flex-1 pb-5">
+
+            <h4
+              class="text-base font-semibold sm:text-lg"
+              [ngStyle]="{
+                color: themeSombre ? '#F4F7F1' : '#1B2920'
+              }"
+            >
+              Trouvez une plante par son nom
+            </h4>
+
+            <p
+              class="mt-2 text-sm leading-6"
+              [ngStyle]="{
+                color: themeSombre ? '#9AA99C' : '#657168'
+              }"
+            >
+              Saisissez le nom d'une plante pour accéder rapidement
+              aux informations correspondantes.
+            </p>
+          </div>
+        </div>
+
+        <!-- AVANTAGE 02 -->
+
+        <div class="group flex items-start gap-4">
+
+          <div
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border transition duration-300 group-hover:-translate-y-0.5"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#1E3935' : '#DDF5EF',
+              'border-color': themeSombre ? '#31675B' : '#B8E6DB',
+              color: themeSombre ? '#36BFA6' : '#168F7D'
+            }"
+          >
+            <i
+              class="fa-solid fa-book-open text-lg"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <div class="min-w-0 flex-1 pb-5">
+
+            <h4
+              class="text-base font-semibold sm:text-lg"
+              [ngStyle]="{
+                color: themeSombre ? '#F4F7F1' : '#1B2920'
+              }"
+            >
+              Apprenez à connaître chaque espèce
+            </h4>
+
+            <p
+              class="mt-2 text-sm leading-6"
+              [ngStyle]="{
+                color: themeSombre ? '#9AA99C' : '#657168'
+              }"
+            >
+              Consultez les fiches disponibles pour mieux comprendre
+              les caractéristiques et les besoins des plantes.
+            </p>
+          </div>
+        </div>
+
+        <!-- AVANTAGE 03 -->
+
+        <div class="group flex items-start gap-4">
+
+          <div
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border transition duration-300 group-hover:-translate-y-0.5"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#26362C' : '#DDF5E3',
+              'border-color': themeSombre ? '#405544' : '#C0E4C4',
+              color: themeSombre ? '#C8F169' : '#247A4B'
+            }"
+          >
+            <i
+              class="fa-solid fa-seedling text-lg"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <div class="min-w-0 flex-1">
+
+            <h4
+              class="text-base font-semibold sm:text-lg"
+              [ngStyle]="{
+                color: themeSombre ? '#F4F7F1' : '#1B2920'
+              }"
+            >
+              Choisissez selon vos besoins
+            </h4>
+
+            <p
+              class="mt-2 text-sm leading-6"
+              [ngStyle]="{
+                color: themeSombre ? '#9AA99C' : '#657168'
+              }"
+            >
+              Explorez les possibilités et découvrez les plantes
+              adaptées à vos envies et à votre espace.
+            </p>
+          </div>
+        </div>
+
+        <!-- NOTE INFORMATIVE -->
+
+        <div
+          class="mt-9 flex items-start gap-3 rounded-2xl border p-4 sm:p-5"
+          [ngStyle]="{
+            'background-color': themeSombre ? '#1E2B23' : '#EEF1E8',
+            'border-color': themeSombre ? '#35473A' : '#E0E5DA'
+          }"
+        >
+          <div
+            class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#26362C' : '#DDF5E3',
+              color: themeSombre ? '#36BFA6' : '#168F7D'
+            }"
+          >
+            <i
+              class="fa-solid fa-circle-info"
+              aria-hidden="true"
+            ></i>
+          </div>
+
+          <div class="min-w-0 flex-1">
+
+            <h4
+              class="text-sm font-semibold"
+              [ngStyle]="{
+                color: themeSombre ? '#F4F7F1' : '#1B2920'
+              }"
+            >
+              Une exploration simple et accessible
+            </h4>
+
+            <p
+              class="mt-1 text-sm leading-6"
+              [ngStyle]="{
+                color: themeSombre ? '#B7C5B9' : '#46564A'
+              }"
+            >
+              Pas besoin de scanner une plante : recherchez directement
+              son nom et explorez les informations disponibles dans Arboria.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           COLONNE DROITE — APERÇU DU CATALOGUE
+      ====================================================== -->
+
+      <div class="order-1 min-w-0 lg:order-2">
+
+        <div
+          class="relative overflow-hidden rounded-[2rem] border p-5 shadow-2xl transition-colors duration-300 sm:p-7 lg:p-8"
+          [ngStyle]="{
+            'background-color': themeSombre ? '#1E2B23' : '#FFFFFF',
+            'border-color': themeSombre ? '#35473A' : '#E0E5DA',
+            'box-shadow': themeSombre
+              ? '0 28px 90px rgba(0, 0, 0, 0.22)'
+              : '0 28px 90px rgba(27, 41, 32, 0.08)'
+          }"
+        >
+
+          <!-- Décoration intérieure -->
+
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full blur-3xl"
+            [ngStyle]="{
+              'background-color': themeSombre
+                ? 'rgba(200, 241, 105, 0.06)'
+                : 'rgba(200, 241, 105, 0.14)'
+            }"
+          ></div>
+
+          <!-- EN-TÊTE DU CATALOGUE -->
+
+          <div class="relative mb-7 flex items-center justify-between gap-4">
+
+            <div class="min-w-0">
+
+              <div
+                class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.17em] sm:text-xs"
+                [ngStyle]="{
+                  color: themeSombre ? '#9AA99C' : '#7D897F'
+                }"
+              >
+                <span
+                  class="h-2 w-2 rounded-full"
+                  [ngStyle]="{
+                    'background-color': themeSombre ? '#C8F169' : '#247A4B'
+                  }"
+                ></span>
+
+                Catalogue Arboria
+              </div>
+
+              <h3
+                class="mt-2 text-xl font-semibold tracking-tight sm:text-2xl"
+                [ngStyle]="{
+                  color: themeSombre ? '#F4F7F1' : '#1B2920'
+                }"
+              >
+                Explorez les plantes
+              </h3>
+
+              <p
+                class="mt-1 text-xs sm:text-sm"
+                [ngStyle]="{
+                  color: themeSombre ? '#9AA99C' : '#7D897F'
+                }"
+              >
+                La nature, à portée de recherche.
+              </p>
+            </div>
+
+            <div
+              class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border sm:h-14 sm:w-14"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#26362C' : '#DDF5E3',
+                'border-color': themeSombre ? '#405544' : '#C0E4C4',
+                color: themeSombre ? '#C8F169' : '#247A4B'
+              }"
+            >
+              <i
+                class="fa-solid fa-leaf text-xl sm:text-2xl"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </div>
+
+          <!-- RECHERCHE ILLUSTRATIVE -->
+
+          <div
+            class="flex min-w-0 items-center gap-3 rounded-2xl border px-4 py-4 transition-colors duration-300"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#1B2921' : '#F7F8F3',
+              'border-color': themeSombre ? '#405544' : '#D5DED0'
+            }"
+          >
+            <i
+              class="fa-solid fa-magnifying-glass shrink-0"
+              [ngStyle]="{
+                color: themeSombre ? '#36BFA6' : '#247A4B'
+              }"
+              aria-hidden="true"
+            ></i>
+
+            <span
+              class="min-w-0 flex-1 truncate text-sm"
+              [ngStyle]="{
+                color: themeSombre ? '#8C9D90' : '#89938A'
+              }"
+            >
+              Rechercher une plante...
+            </span>
+
+            <span
+              class="hidden shrink-0 rounded-lg border px-2.5 py-1 text-[11px] font-medium sm:inline-block"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#26362C' : '#EEF1E8',
+                'border-color': themeSombre ? '#35473A' : '#E0E5DA',
+                color: themeSombre ? '#B7C5B9' : '#657168'
+              }"
+            >
+              Par nom
+            </span>
+          </div>
+
+          <!-- TITRE DE LA GRILLE -->
+
+          <div class="mb-4 mt-8 flex items-center justify-between gap-3">
+
+            <div>
+              <h4
+                class="text-sm font-semibold sm:text-base"
+                [ngStyle]="{
+                  color: themeSombre ? '#F4F7F1' : '#1B2920'
+                }"
+              >
+                Explorez par univers
+              </h4>
+
+              <p
+                class="mt-1 text-xs"
+                [ngStyle]="{
+                  color: themeSombre ? '#9AA99C' : '#7D897F'
+                }"
+              >
+                Quelques inspirations végétales
+              </p>
+            </div>
+
+            <div
+              class="flex h-8 w-8 items-center justify-center rounded-xl"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#26362C' : '#EEF1E8',
+                color: themeSombre ? '#C8F169' : '#247A4B'
+              }"
+            >
+              <i
+                class="fa-solid fa-grip"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </div>
+
+          <!-- =================================================
+               GRILLE DES CATÉGORIES
+          ================================================== -->
+
+          <div class="grid grid-cols-2 gap-3 sm:gap-4">
+
+            <!-- CARTE 01 : INTÉRIEUR -->
+
+            <article
+              class="group min-w-0 rounded-2xl border p-4 transition duration-300 hover:-translate-y-1"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#26362C' : '#EEF1E8',
+                'border-color': themeSombre ? '#35473A' : '#E0E5DA'
+              }"
+            >
+              <div
+                class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14"
+                [ngStyle]="{
+                  'background-color': themeSombre ? '#304237' : '#DDF5E3',
+                  'border-color': themeSombre ? '#405544' : '#C0E4C4',
+                  'color': themeSombre ? '#C8F169' : '#247A4B',
+                }"
+              >
+                <i
+                  class="fa-solid fa-spa text-2xl sm:text-3xl"
+                  aria-hidden="true"
+                ></i>
+              </div>
+
+              <h5
+                class="text-sm font-semibold leading-snug sm:text-base"
+                [ngStyle]="{
+                  color: themeSombre ? '#F4F7F1' : '#1B2920'
+                }"
+              >
+                Plantes d'intérieur
+              </h5>
+
+              <p
+                class="mt-2 text-xs leading-5"
+                [ngStyle]="{
+                  color: themeSombre ? '#9AA99C' : '#657168'
+                }"
+              >
+                Une touche de nature dans votre maison.
+              </p>
+
+              <div
+                class="mt-4 flex items-center gap-2 text-xs font-semibold transition-transform duration-300 group-hover:translate-x-1"
+                [ngStyle]="{
+                  color: themeSombre ? '#C8F169' : '#247A4B'
+                }"
+              >
+                <span>À découvrir</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </div>
+            </article>
+
+            <!-- CARTE 02 : JARDIN -->
+
+            <article
+              class="group min-w-0 rounded-2xl border p-4 transition duration-300 hover:-translate-y-1"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#26362C' : '#EEF1E8',
+                'border-color': themeSombre ? '#35473A' : '#E0E5DA'
+              }"
+            >
+              <div
+                class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14"
+                [ngStyle]="{
+                  'background-color': themeSombre ? '#304237' : '#DDF5E3',
+                  'border-color': themeSombre ? '#405544' : '#C0E4C4',
+                  'color': themeSombre ? '#36BFA6' : '#168F7D'
+                }"
+              >
+                <i
+                  class="fa-solid fa-tree text-2xl sm:text-3xl"
+                  aria-hidden="true"
+                ></i>
+              </div>
+
+              <h5
+                class="text-sm font-semibold leading-snug sm:text-base"
+                [ngStyle]="{
+                  color: themeSombre ? '#F4F7F1' : '#1B2920'
+                }"
+              >
+                Plantes de jardin
+              </h5>
+
+              <p
+                class="mt-2 text-xs leading-5"
+                [ngStyle]="{
+                  color: themeSombre ? '#9AA99C' : '#657168'
+                }"
+              >
+                Imaginez un extérieur vivant et accueillant.
+              </p>
+
+              <div
+                class="mt-4 flex items-center gap-2 text-xs font-semibold transition-transform duration-300 group-hover:translate-x-1"
+                [ngStyle]="{
+                  color: themeSombre ? '#36BFA6' : '#168F7D'
+                }"
+              >
+                <span>À découvrir</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </div>
+            </article>
+
+            <!-- CARTE 03 : AROMATIQUES -->
+
+            <article
+              class="group min-w-0 rounded-2xl border p-4 transition duration-300 hover:-translate-y-1"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#26362C' : '#EEF1E8',
+                'border-color': themeSombre ? '#35473A' : '#E0E5DA'
+              }"
+            >
+              <div
+                class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14"
+                [ngStyle]="{
+                  'background-color': themeSombre ? '#304237' : '#DDF5E3',
+                  'border-color': themeSombre ? '#405544' : '#C0E4C4',
+                  'color': themeSombre ? '#C8F169' : '#247A4B'
+                }"
+              >
+                <i
+                  class="fa-solid fa-seedling text-2xl sm:text-3xl"
+                  aria-hidden="true"
+                ></i>
+              </div>
+
+              <h5
+                class="text-sm font-semibold leading-snug sm:text-base"
+                [ngStyle]="{
+                  color: themeSombre ? '#F4F7F1' : '#1B2920'
+                }"
+              >
+                Plantes aromatiques
+              </h5>
+
+              <p
+                class="mt-2 text-xs leading-5"
+                [ngStyle]="{
+                  color: themeSombre ? '#9AA99C' : '#657168'
+                }"
+              >
+                Cultivez des saveurs au quotidien.
+              </p>
+
+              <div
+                class="mt-4 flex items-center gap-2 text-xs font-semibold transition-transform duration-300 group-hover:translate-x-1"
+                [ngStyle]="{
+                  color: themeSombre ? '#C8F169' : '#247A4B'
+                }"
+              >
+                <span>À découvrir</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </div>
+            </article>
+
+            <!-- CARTE 04 : DÉCOUVERTES -->
+
+            <article
+              class="group min-w-0 rounded-2xl border p-4 transition duration-300 hover:-translate-y-1"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#26362C' : '#EEF1E8',
+                'border-color': themeSombre ? '#35473A' : '#E0E5DA'
+              }"
+            >
+              <div
+                class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14"
+                [ngStyle]="{
+                  'background-color': themeSombre ? '#1E3935' : '#DDF5EF',
+                  'border-color': themeSombre ? '#31675B' : '#B8E6DB',
+                  'color': themeSombre ? '#36BFA6' : '#168F7D'
+                }"
+              >
+                <i
+                  class="fa-solid fa-compass text-2xl sm:text-3xl"
+                  aria-hidden="true"
+                ></i>
+              </div>
+
+              <h5
+                class="text-sm font-semibold leading-snug sm:text-base"
+                [ngStyle]="{
+                  color: themeSombre ? '#F4F7F1' : '#1B2920'
+                }"
+              >
+                Nouvelles découvertes
+              </h5>
+
+              <p
+                class="mt-2 text-xs leading-5"
+                [ngStyle]="{
+                  color: themeSombre ? '#9AA99C' : '#657168'
+                }"
+              >
+                Élargissez votre connaissance du végétal.
+              </p>
+
+              <div
+                class="mt-4 flex items-center gap-2 text-xs font-semibold transition-transform duration-300 group-hover:translate-x-1"
+                [ngStyle]="{
+                  color: themeSombre ? '#36BFA6' : '#168F7D'
+                }"
+              >
+                <span>À découvrir</span>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- =================================================
+               BANDEAU INFÉRIEUR
+          ================================================== -->
+
+          <div
+            class="mt-6 flex items-start gap-3 rounded-2xl border p-4 sm:items-center"
+            [ngStyle]="{
+              'background-color': themeSombre ? '#1B2921' : '#F7F8F3',
+              'border-color': themeSombre ? '#35473A' : '#E0E5DA'
+            }"
+          >
+            <div
+              class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+              [ngStyle]="{
+                'background-color': themeSombre ? '#304237' : '#DDF5E3',
+                color: themeSombre ? '#C8F169' : '#247A4B'
+              }"
+            >
+              <i
+                class="fa-solid fa-compass text-lg"
+                aria-hidden="true"
+              ></i>
+            </div>
+
+            <div class="min-w-0 flex-1">
+
+              <p
+                class="text-sm font-semibold"
+                [ngStyle]="{
+                  color: themeSombre ? '#F4F7F1' : '#1B2920'
+                }"
+              >
+                Votre curiosité guide la découverte
+              </p>
+
+              <p
+                class="mt-1 text-xs leading-5"
+                [ngStyle]="{
+                  color: themeSombre ? '#9AA99C' : '#657168'
+                }"
+              >
+                Un catalogue à parcourir selon vos envies, sans détour.
+              </p>
+            </div>
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square mt-1 shrink-0 text-sm"
+              [ngStyle]="{
+                color: themeSombre ? '#36BFA6' : '#247A4B'
+              }"
+              aria-hidden="true"
+            ></i>
+          </div>
+        </div>
+
+        <!-- SIGNATURE -->
+
+        <div
+          class="mx-auto mt-6 flex flex-wrap items-center justify-center gap-2 text-xs sm:gap-3 sm:text-sm"
+          [ngStyle]="{
+            color: themeSombre ? '#9AA99C' : '#7D897F'
+          }"
+        >
+          <i
+            class="fa-solid fa-leaf"
+            [ngStyle]="{
+              color: themeSombre ? '#C8F169' : '#247A4B'
+            }"
+            aria-hidden="true"
+          ></i>
+
+          <span>Explorez.</span>
+          <span>Apprenez.</span>
+          <span>Prenez soin.</span>
+
+          <i
+            class="fa-solid fa-leaf"
+            [ngStyle]="{
+              color: themeSombre ? '#36BFA6' : '#168F7D'
+            }"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<style>
+  /* ============================================================
+   ARBORIA — SECTION 03 : EXPLOREZ LE CATALOGUE
+   Angular Standalone + Tailwind CSS
+   Compatibilité thème clair / sombre
+============================================================ */
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  overflow: clip;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: border-box;
+}
+
+.arboria-catalogue {
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.arboria-catalogue article {
+  overflow-wrap: anywhere;
+}
+
+.arboria-catalogue h2,
+.arboria-catalogue h3,
+.arboria-catalogue h4,
+.arboria-catalogue h5,
+.arboria-catalogue p {
+  margin-bottom: 0;
+}
+
+.arboria-catalogue i {
+  line-height: 1;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .arboria-catalogue article:hover {
+    border-color: var(--ar-primary-border, #A9D0AE);
+  }
+}
+
+@media (max-width: 639px) {
+  .arboria-catalogue {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host *,
+  :host *::before,
+  :host *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>

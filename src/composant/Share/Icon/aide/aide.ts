@@ -92,6 +92,9 @@ export class Aide implements OnInit, OnDestroy {
   popupTransform = '';
 
 
+  languageButtonHover = false;
+
+
   // ============================================================
   // 📍 PAGE ACTUELLE
   // ============================================================

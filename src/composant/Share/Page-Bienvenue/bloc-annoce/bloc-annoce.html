@@ -1,0 +1,457 @@
+
+<!-- ============================================================
+     ARBORIA — BARRE D'ANNONCE PREMIUM
+     Angular standalone · Responsive · Thème clair/sombre · FR/EN
+============================================================ -->
+
+<section
+  *ngIf="annonceVisible"
+  class="announcement-bar"
+  [ngStyle]="{
+    '--announcement-bg': ANNOUNCEMENT,
+    '--announcement-text': ANNOUNCEMENT_TEXT,
+    '--announcement-hover': ANNOUNCEMENT_HOVER,
+    '--announcement-border': ANNOUNCEMENT_BORDER,
+    '--announcement-accent': ANNOUNCEMENT_ACCENT
+  }"
+  role="region"
+  [attr.aria-label]="
+    langueActuelle === 'fr' ? 'Annonce' : 'Announcement'
+  "
+>
+  <div class="announcement-content">
+
+    <span class="announcement-badge">
+      <span class="announcement-status" aria-hidden="true"></span>
+      {{
+        langueActuelle === 'fr'
+          ? 'NOUVEAU'
+          : 'NEW'
+      }}
+    </span>
+
+    <p class="announcement-message">
+      {{
+        langueActuelle === 'fr'
+          ? 'Découvrez Arboria, votre compagnon pour un jardin en pleine santé.'
+          : 'Discover Arboria, your companion for a healthier garden.'
+      }}
+    </p>
+
+    <a
+      class="announcement-link"
+      href="#fonctionnalites"
+      (click)="fermerMenus()"
+    >
+      <span>
+        {{
+          langueActuelle === 'fr'
+            ? 'Découvrir'
+            : 'Discover'
+        }}
+      </span>
+
+      <i
+        class="fa-solid fa-arrow-right"
+        aria-hidden="true"
+      ></i>
+    </a>
+
+  </div>
+
+  <button
+    type="button"
+    class="announcement-close"
+    (click)="fermerAnnonce()"
+    [attr.aria-label]="
+      langueActuelle === 'fr'
+        ? 'Fermer l’annonce'
+        : 'Close announcement'
+    "
+    [attr.title]="
+      langueActuelle === 'fr' ? 'Fermer' : 'Close'
+    "
+  >
+    <i
+      class="fa-solid fa-xmark"
+      aria-hidden="true"
+    ></i>
+  </button>
+</section>
+
+
+<style>
+
+/* ============================================================
+   ARBORIA — BARRE D'ANNONCE PREMIUM
+   Responsive · Accessible · Thème clair/sombre
+============================================================ */
+
+:host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   CONTENEUR PRINCIPAL
+============================================================ */
+
+.announcement-bar {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+
+  padding: 8px 44px;
+
+  overflow: hidden;
+
+  color: var(--announcement-text, #f2f4f0);
+  background: var(--announcement-bg, #244536);
+
+  border: 1px solid var(--announcement-border, #3b604b);
+
+
+  animation: announcement-appear 420ms
+    cubic-bezier(0.2, 0.75, 0.25, 1) both;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Reflet décoratif subtil */
+
+.announcement-bar::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+
+  content: "";
+
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.035) 45%,
+    rgba(255, 255, 255, 0.075) 50%,
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+/* ============================================================
+   CONTENU
+============================================================ */
+
+.announcement-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  min-width: 0;
+  max-width: 100%;
+
+  column-gap: 12px;
+  row-gap: 5px;
+
+  text-align: center;
+}
+
+/* Badge */
+
+.announcement-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+
+  gap: 6px;
+
+  padding: 4px 8px;
+
+  color: var(--announcement-accent, #c4d9b9);
+  background: rgba(255, 255, 255, 0.075);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  white-space: nowrap;
+}
+
+.announcement-status {
+  display: block;
+
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
+  background: var(--announcement-accent, #c4d9b9);
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 3px rgba(196, 217, 185, 0.1);
+}
+
+/* Message */
+
+.announcement-message {
+  min-width: 0;
+  margin: 0;
+
+  color: var(--announcement-text, #f2f4f0);
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+}
+
+/* Lien */
+
+.announcement-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+
+  gap: 7px;
+
+  padding: 3px 0;
+
+  color: var(--announcement-accent, #c4d9b9);
+  background: transparent;
+
+  border: 0;
+  border-bottom: 1px solid
+    rgba(196, 217, 185, 0.55);
+  border-radius: 0;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.announcement-link i {
+  font-size: 10px;
+
+  transition: transform 180ms ease;
+}
+
+.announcement-link:hover {
+  color: var(--announcement-text, #f2f4f0);
+  border-color: currentColor;
+}
+
+.announcement-link:hover i {
+  transform: translateX(3px);
+}
+
+.announcement-link:active {
+  opacity: 0.75;
+}
+
+/* ============================================================
+   BOUTON DE FERMETURE
+============================================================ */
+
+.announcement-close {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 27px;
+  height: 27px;
+
+  padding: 0;
+
+  transform: translateY(-50%);
+
+  color: var(--announcement-text, #f2f4f0);
+  background: transparent;
+
+  border: 1px solid transparent;
+  border-radius: 7px;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.announcement-close:hover {
+  background: var(--announcement-hover, #315b45);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.announcement-close:active {
+  opacity: 0.7;
+}
+
+/* ============================================================
+   ACCESSIBILITÉ
+============================================================ */
+
+.announcement-link:focus-visible,
+.announcement-close:focus-visible {
+  outline: 2px solid var(--announcement-accent, #c4d9b9);
+  outline-offset: 3px;
+}
+
+@keyframes announcement-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   TABLETTES
+============================================================ */
+
+@media (max-width: 768px) {
+  .announcement-bar {
+    min-height: 44px;
+    padding: 8px 38px 8px 12px;
+    border-radius: 10px;
+  }
+
+  .announcement-content {
+    column-gap: 9px;
+  }
+
+  .announcement-message {
+    font-size: 11px;
+  }
+
+  .announcement-close {
+    right: 6px;
+  }
+}
+
+/* ============================================================
+   MOBILES
+============================================================ */
+
+@media (max-width: 480px) {
+  .announcement-bar {
+    min-height: 42px;
+    padding: 8px 34px 8px 9px;
+    border-radius: 9px;
+  }
+
+  .announcement-content {
+    column-gap: 7px;
+    row-gap: 4px;
+  }
+
+  .announcement-badge {
+    gap: 5px;
+    padding: 4px 6px;
+    font-size: 8px;
+  }
+
+  .announcement-status {
+    width: 5px;
+    height: 5px;
+    flex-basis: 5px;
+  }
+
+  .announcement-message {
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .announcement-link {
+    gap: 5px;
+    font-size: 10px;
+  }
+
+  .announcement-link i {
+    font-size: 9px;
+  }
+
+  .announcement-close {
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}
+
+/* Écrans très étroits */
+
+@media (max-width: 350px) {
+  .announcement-content {
+    column-gap: 6px;
+  }
+
+  .announcement-message {
+    font-size: 9px;
+  }
+
+  .announcement-link {
+    font-size: 9px;
+  }
+}
+
+/* ============================================================
+   ANIMATIONS RÉDUITES
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-bar {
+    animation: none;
+  }
+
+  .announcement-link,
+  .announcement-link i,
+  .announcement-close {
+    transition: none;
+  }
+}
+
+</style>

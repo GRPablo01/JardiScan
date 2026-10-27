@@ -1,0 +1,110 @@
+<!-- ============================================================
+     ARBORIA — BOUTON DE THÈME PREMIUM
+     Angular Standalone + Tailwind CSS + Font Awesome
+
+     • Hover identique à la navigation Arboria
+     • Fond BG3 et texte Primary au survol
+     • Couleurs dynamiques via ThemeService
+     • Icône animée
+     • Focus clavier accessible
+     • Thèmes clair et sombre conservés
+============================================================ -->
+
+<button
+  type="button"
+  (click)="themeService.toggleTheme()"
+  class="arboria-action-button group/theme flex h-10 w-10 shrink-0
+         items-center justify-center rounded-xl border border-transparent
+         transition-all duration-200
+         focus-visible:outline-none focus-visible:ring-4"
+  [attr.aria-label]="
+    (themeService.isDarkMode$ | async)
+      ? 'Activer le thème clair'
+      : 'Activer le thème sombre'
+  "
+  [attr.title]="
+    (themeService.isDarkMode$ | async)
+      ? 'Passer au thème clair'
+      : 'Passer au thème sombre'
+  "
+  [ngStyle]="{
+    color: themeService.TX2,
+    '--action-hover-bg': themeService.BG3,
+    '--action-hover-text': themeService.Primary,
+    '--button-focus': themeService.Primary
+  }"
+>
+  <i
+    class="fa-solid text-[16px] transition-transform duration-300
+           group-hover/theme:rotate-12"
+    [ngClass]="
+      (themeService.isDarkMode$ | async) ? 'fa-sun' : 'fa-moon'
+    "
+    [ngStyle]="{
+      color: (themeService.isDarkMode$ | async)
+        ? themeService.TX2
+        : 'inherit'
+    }"
+    aria-hidden="true"
+  ></i>
+</button>
+
+<!-- ============================================================
+     ARBORIA — STYLES DU BOUTON DE THÈME
+     Hover harmonisé avec arboria-nav-link
+============================================================ -->
+
+<style>
+  :host {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .arboria-action-button {
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease,
+      transform 200ms ease;
+  }
+
+  /* Même comportement que les liens de navigation */
+
+  .arboria-action-button:hover {
+    color: var(--action-hover-text, inherit);
+    background-color: var(--action-hover-bg, transparent);
+  }
+
+  /* Léger retour visuel au clic */
+
+  .arboria-action-button:active {
+    transform: scale(0.96);
+  }
+
+  /* Focus clavier accessible */
+
+  .arboria-action-button:focus-visible {
+    --tw-ring-color: var(--button-focus, #287653);
+
+    box-shadow:
+      0 0 0 4px
+      color-mix(
+        in srgb,
+        var(--button-focus, #287653) 15%,
+        transparent
+      );
+  }
+
+  /* Respect des préférences d'accessibilité */
+
+  @media (prefers-reduced-motion: reduce) {
+    .arboria-action-button,
+    .arboria-action-button i {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>

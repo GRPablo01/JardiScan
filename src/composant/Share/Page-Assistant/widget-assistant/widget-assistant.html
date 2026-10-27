@@ -1,0 +1,737 @@
+<!-- ============================================================
+     ARBORIA — ASSISTANT IA
+     Angular standalone • Tailwind CSS • Historique MongoDB
+     Affichage progressif des réponses • Mode clair / sombre
+     Compatible avec les événements SSE du backend
+============================================================ -->
+
+<section
+  class="arboria-assistant fixed inset-0 z-40 flex h-[100dvh] min-h-0 w-full overflow-hidden border transition-colors duration-300"
+  [style.backgroundColor]="'var(--BG1)'"
+  [style.borderColor]="'var(--BR1)'"
+  [style.color]="'var(--TX0)'"
+  [style.fontFamily]="'var(--arboria-font-body)'"
+>
+  <!-- SIDEBAR -->
+  <aside
+    class="relative z-30 flex h-full min-h-0 w-[248px] shrink-0 flex-col overflow-hidden border-r transition-colors duration-300 max-md:w-[210px] max-sm:w-[68px]"
+    [style.backgroundColor]="'var(--BG2)'"
+    [style.borderColor]="'var(--BR1)'"
+    aria-label="Navigation de l'assistant"
+  >
+    <!-- LOGO -->
+    <div
+      class="flex h-[70px] min-h-[70px] shrink-0 items-center justify-between gap-3 border-b px-4 max-sm:justify-center max-sm:px-2"
+      [style.borderColor]="'var(--BR1)'"
+    >
+      <a
+        routerLink="/assistant"
+        class="flex min-w-0 items-center gap-2.5 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-[var(--Primary)]"
+        aria-label="Accueil Arboria"
+      >
+        <span
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+          [style.backgroundColor]="'var(--Primary)'"
+          [style.color]="'#FFFFFF'"
+        >
+          <i class="fa-solid fa-leaf text-lg"></i>
+        </span>
+
+        <span
+          class="truncate text-lg font-bold tracking-tight max-sm:hidden"
+          [style.color]="'var(--TX0)'"
+        >
+          Arboria
+        </span>
+      </a>
+
+      <button
+        type="button"
+        class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition hover:opacity-70 max-sm:hidden"
+        [style.color]="'var(--TX2)'"
+        aria-label="Nouvelle conversation"
+        title="Nouvelle conversation"
+        (click)="nouvelleConversation()"
+      >
+        <i class="fa-regular fa-square-plus text-lg"></i>
+      </button>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="shrink-0 space-y-1 px-3 pb-4 pt-4 max-sm:px-2">
+      <p
+        class="mb-2 px-2 text-[10px] font-bold uppercase tracking-[0.16em] max-sm:hidden"
+        [style.color]="'var(--TX3)'"
+      >
+        Assistant
+      </p>
+
+      <button
+        type="button"
+        class="flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-left text-sm font-semibold transition hover:opacity-85 max-sm:justify-center max-sm:px-0"
+        [style.backgroundColor]="'var(--Primary)'"
+        [style.borderColor]="'var(--Primary)'"
+        [style.color]="'#FFFFFF'"
+        (click)="nouvelleConversation()"
+        title="Nouvelle conversation"
+      >
+        <i class="fa-solid fa-pen-to-square w-4 shrink-0 text-center"></i>
+        <span class="truncate max-sm:hidden">Nouvelle discussion</span>
+        <i class="fa-solid fa-plus ml-auto text-xs max-sm:hidden"></i>
+      </button>
+
+      <button
+        type="button"
+        class="flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 text-left text-sm transition hover:border-[var(--BR2)] max-sm:justify-center max-sm:px-0"
+        [style.color]="'var(--TX1)'"
+        (click)="rechercherConversation()"
+        [attr.aria-expanded]="rechercheOuverte"
+        title="Rechercher dans les conversations"
+      >
+        <i class="fa-solid fa-magnifying-glass w-4 shrink-0 text-center"></i>
+        <span class="truncate max-sm:hidden">Rechercher</span>
+        <i class="fa-solid fa-chevron-down ml-auto text-[10px] max-sm:hidden"></i>
+      </button>
+
+      @if (rechercheOuverte) {
+        <div class="px-1 pt-1 max-sm:hidden">
+          <input
+            type="search"
+            [(ngModel)]="termeRecherche"
+            placeholder="Rechercher..."
+            aria-label="Rechercher une conversation"
+            class="w-full rounded-lg border px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[var(--Primary)]"
+            [style.backgroundColor]="'var(--BG1)'"
+            [style.borderColor]="'var(--BR2)'"
+            [style.color]="'var(--TX0)'"
+          />
+
+          <button
+            type="button"
+            class="mt-1 w-full rounded-lg px-2 py-1.5 text-left text-xs transition hover:opacity-70"
+            [style.color]="'var(--TX3)'"
+            (click)="fermerRecherche()"
+          >
+            Fermer la recherche
+          </button>
+        </div>
+      }
+
+      <button
+        type="button"
+        class="flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 text-left text-sm transition hover:border-[var(--BR2)] max-sm:justify-center max-sm:px-0"
+        [style.color]="'var(--TX1)'"
+        (click)="ouvrirDecouverte()"
+        title="Découvrir Arboria"
+      >
+        <i class="fa-regular fa-compass w-4 shrink-0 text-center"></i>
+        <span class="truncate max-sm:hidden">Découvrir</span>
+      </button>
+    </div>
+
+    <div
+      class="mx-4 shrink-0 border-t max-sm:mx-2"
+      [style.borderColor]="'var(--BR1)'"
+    ></div>
+
+    <!-- HISTORIQUE -->
+    <div class="flex min-h-0 flex-1 flex-col overflow-hidden px-3 py-4 max-sm:px-2">
+      <div
+        class="mb-3 flex shrink-0 items-center justify-between gap-2 px-2 max-sm:justify-center max-sm:px-0"
+      >
+        <p
+          class="text-[10px] font-bold uppercase tracking-[0.16em] max-sm:hidden"
+          [style.color]="'var(--TX3)'"
+        >
+          Historique
+        </p>
+
+        <span
+          class="rounded-md px-1.5 py-0.5 text-[10px] font-semibold max-sm:hidden"
+          [style.backgroundColor]="'var(--PrimarySoft)'"
+          [style.color]="'var(--Primary)'"
+        >
+          {{ conversations.length }}
+        </span>
+
+        <i
+          class="fa-regular fa-clock hidden text-sm max-sm:block"
+          [style.color]="'var(--TX3)'"
+          aria-hidden="true"
+        ></i>
+      </div>
+
+      <div class="min-h-0 flex-1 space-y-1 overflow-x-hidden overflow-y-auto overscroll-contain pr-1">
+        @if (chargementHistorique && conversations.length === 0) {
+          <div class="px-2 py-4 text-center max-sm:hidden">
+            <i
+              class="fa-solid fa-circle-notch animate-spin text-lg"
+              [style.color]="'var(--Primary)'"
+            ></i>
+            <p class="mt-2 text-xs" [style.color]="'var(--TX3)'">
+              Chargement de l'historique...
+            </p>
+          </div>
+        } @else if (conversationsFiltrees.length > 0) {
+          @if (conversationsAujourdhui.length > 0) {
+            <p
+              class="px-2 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-wider max-sm:hidden"
+              [style.color]="'var(--TX3)'"
+            >
+              Aujourd'hui
+            </p>
+
+            @for (conversation of conversationsAujourdhui; track conversation.id) {
+              <ng-container
+                *ngTemplateOutlet="itemConversation; context: { $implicit: conversation }"
+              ></ng-container>
+            }
+          }
+
+          @if (conversationsHier.length > 0) {
+            <p
+              class="px-2 pb-1 pt-3 text-[10px] font-semibold uppercase tracking-wider max-sm:hidden"
+              [style.color]="'var(--TX3)'"
+            >
+              Hier
+            </p>
+
+            @for (conversation of conversationsHier; track conversation.id) {
+              <ng-container
+                *ngTemplateOutlet="itemConversation; context: { $implicit: conversation }"
+              ></ng-container>
+            }
+          }
+
+          @if (conversationsPrecedentes.length > 0) {
+            <p
+              class="px-2 pb-1 pt-3 text-[10px] font-semibold uppercase tracking-wider max-sm:hidden"
+              [style.color]="'var(--TX3)'"
+            >
+              Précédentes
+            </p>
+
+            @for (conversation of conversationsPrecedentes; track conversation.id) {
+              <ng-container
+                *ngTemplateOutlet="itemConversation; context: { $implicit: conversation }"
+              ></ng-container>
+            }
+          }
+        } @else {
+          <div class="px-2 py-4 text-center max-sm:hidden">
+            <i
+              class="fa-regular fa-comments mb-2 text-xl"
+              [style.color]="'var(--TX3)'"
+              aria-hidden="true"
+            ></i>
+
+            <p class="text-xs leading-5" [style.color]="'var(--TX3)'">
+              @if (termeRecherche.trim()) {
+                Aucune conversation trouvée.
+              } @else {
+                Vos conversations apparaîtront ici.
+              }
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- TEMPLATE CONVERSATION -->
+    <ng-template #itemConversation let-conversation>
+      <div class="group relative">
+        <button
+          type="button"
+          class="flex w-full min-w-0 items-center gap-2 rounded-lg border border-transparent px-2.5 py-2 text-left text-xs transition hover:border-[var(--BR2)] max-sm:justify-center max-sm:px-0"
+          [style.backgroundColor]="conversationActiveId === conversation.id ? 'var(--PrimarySoft)' : 'transparent'"
+          [style.color]="conversationActiveId === conversation.id ? 'var(--Primary)' : 'var(--TX1)'"
+          [attr.aria-current]="conversationActiveId === conversation.id ? 'page' : null"
+          [title]="conversation.titre"
+          [disabled]="chargementConversation"
+          (click)="chargerConversation(conversation.id)"
+        >
+          <i class="fa-regular fa-message shrink-0 text-xs" aria-hidden="true"></i>
+
+          <span class="min-w-0 flex-1 truncate max-sm:hidden">
+            {{ conversation.titre }}
+          </span>
+
+          @if (conversationActiveId === conversation.id) {
+            <span
+              class="h-1.5 w-1.5 shrink-0 rounded-full max-sm:hidden"
+              [style.backgroundColor]="'var(--Primary)'"
+            ></span>
+          }
+        </button>
+      </div>
+    </ng-template>
+
+    <!-- BAS DE SIDEBAR -->
+    <div
+      class="shrink-0 space-y-1 border-t px-3 py-3 max-sm:px-2"
+      [style.borderColor]="'var(--BR1)'"
+    >
+      <button
+        type="button"
+        class="flex w-full items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 text-left text-sm transition hover:border-[var(--BR2)] max-sm:justify-center max-sm:px-0"
+        [style.color]="'var(--TX1)'"
+        (click)="ouvrirParametres()"
+        title="Paramètres"
+      >
+        <i class="fa-solid fa-gear w-4 shrink-0 text-center"></i>
+        <span class="max-sm:hidden">Paramètres</span>
+      </button>
+
+      <a
+        routerLink="/aide"
+        class="flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 text-sm transition hover:border-[var(--BR2)] max-sm:justify-center max-sm:px-0"
+        [style.color]="'var(--TX1)'"
+        title="Centre d'aide"
+      >
+        <i class="fa-regular fa-circle-question w-4 shrink-0 text-center"></i>
+        <span class="max-sm:hidden">Centre d'aide</span>
+      </a>
+
+      <div
+        class="mt-2 flex items-center gap-2.5 rounded-xl border p-2 max-sm:justify-center max-sm:border-transparent max-sm:p-0"
+        [style.backgroundColor]="'var(--BG1)'"
+        [style.borderColor]="'var(--BR1)'"
+      >
+        <span
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold"
+          [style.backgroundColor]="'var(--PrimarySoft)'"
+          [style.color]="'var(--Primary)'"
+        >
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+        </span>
+
+        <div class="min-w-0 flex-1 max-sm:hidden">
+          <p class="truncate text-xs font-semibold" [style.color]="'var(--TX0)'">
+            Mon espace
+          </p>
+          <p class="truncate text-[10px]" [style.color]="'var(--TX3)'">
+            Arboria
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg transition hover:opacity-70 max-sm:hidden"
+          [style.color]="'var(--TX3)'"
+          aria-label="Ouvrir les paramètres du profil"
+          (click)="ouvrirParametres()"
+        >
+          <i class="fa-solid fa-ellipsis"></i>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ZONE PRINCIPALE -->
+  <div class="relative flex h-full min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+    <!-- EN-TÊTE -->
+    <header
+      class="flex h-[70px] min-h-[70px] shrink-0 items-center justify-between gap-3 border-b px-4 sm:px-7"
+      [style.backgroundColor]="'var(--BG1)'"
+      [style.borderColor]="'var(--BR1)'"
+    >
+      <div class="min-w-0">
+        <p class="truncate text-sm font-semibold" [style.color]="'var(--TX0)'">
+          @if (conversationActive; as conversation) {
+            {{ conversation.titre }}
+          } @else {
+            Assistant Arboria
+          }
+        </p>
+
+        <p class="mt-0.5 truncate text-[11px]" [style.color]="'var(--TX3)'">
+          @if (conversationActive) {
+            {{ conversation?.messages?.length }} message(s)
+          } @else {
+            Votre compagnon botanique
+          }
+        </p>
+      </div>
+
+      <button
+        type="button"
+        class="flex shrink-0 items-center gap-2 rounded-xl border px-3 py-2 text-xs font-semibold transition hover:opacity-75"
+        [style.backgroundColor]="'var(--BG2)'"
+        [style.borderColor]="'var(--BR1)'"
+        [style.color]="'var(--TX1)'"
+        (click)="nouvelleConversation()"
+      >
+        <i class="fa-solid fa-plus"></i>
+        <span class="hidden sm:inline">Nouvelle discussion</span>
+      </button>
+    </header>
+
+    <!-- MESSAGES -->
+    <main
+      #messagesContainer
+      class="flex min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto overscroll-contain px-4 py-5 sm:px-7 sm:py-7 lg:px-10"
+      [style.backgroundColor]="'var(--BG1)'"
+    >
+      <!-- ACCUEIL -->
+      @if (afficherAccueil) {
+        <div class="mx-auto flex w-full max-w-[900px] flex-1 flex-col justify-center py-3 sm:py-5">
+          <div class="mb-6 flex flex-col items-center text-center sm:mb-8">
+            <div
+              class="mb-5 flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full border shadow-lg sm:mb-6 sm:h-[86px] sm:w-[86px]"
+              [style.background]="'radial-gradient(circle at 30% 24%, #F4FFD9 0%, #D2F29A 17%, #36BFA6 43%, #287653 70%, #173F32 100%)'"
+              [style.borderColor]="'var(--BR2)'"
+              [style.boxShadow]="'0 12px 32px var(--SHADOW)'"
+            >
+              <i class="fa-solid fa-leaf text-2xl text-white"></i>
+            </div>
+
+            <div
+              class="mb-2 flex items-center gap-2 rounded-full border px-3 py-1.5"
+              [style.backgroundColor]="'var(--BADGEABG)'"
+              [style.borderColor]="'var(--BADGEABORDER)'"
+            >
+              <span
+                class="h-1.5 w-1.5 rounded-full"
+                [style.backgroundColor]="'var(--Success)'"
+              ></span>
+
+              <p
+                class="text-[10px] font-bold uppercase tracking-[0.18em] sm:text-xs"
+                [style.color]="'var(--BADGEATEXT)'"
+              >
+                Votre compagnon botanique
+              </p>
+            </div>
+
+            <h1
+              class="mt-3 text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-[44px]"
+              [style.color]="'var(--TX0)'"
+              [style.letterSpacing]="'var(--arboria-tracking-tight)'"
+            >
+              Bonjour, que souhaitez-vous
+              <span class="mt-1 block bg-gradient-to-r from-[#287653] via-[#159B72] to-[#36BFA6] bg-clip-text text-transparent">
+                découvrir aujourd'hui ?
+              </span>
+            </h1>
+
+            <p
+              class="mx-auto mt-4 max-w-[570px] text-sm leading-6 sm:text-base"
+              [style.color]="'var(--TX2)'"
+            >
+              Posez vos questions sur les plantes, obtenez des conseils de jardinage
+              et faites grandir vos connaissances avec Arboria.
+            </p>
+          </div>
+        </div>
+      }
+
+      <!-- CHARGEMENT DE CONVERSATION -->
+      @if (chargementConversation) {
+        <div class="flex flex-1 items-center justify-center">
+          <div class="text-center">
+            <i class="fa-solid fa-circle-notch animate-spin text-2xl" [style.color]="'var(--Primary)'"></i>
+            <p class="mt-3 text-sm" [style.color]="'var(--TX2)'">
+              Chargement de la conversation...
+            </p>
+          </div>
+        </div>
+      }
+
+      <!-- CONVERSATION -->
+      @if (conversationActive && !chargementConversation) {
+        <div class="mx-auto flex w-full max-w-[850px] flex-col gap-6">
+          @if (messagesActifs.length === 0) {
+            <div
+              class="rounded-2xl border p-5 text-center text-sm"
+              [style.backgroundColor]="'var(--BG2)'"
+              [style.borderColor]="'var(--BR1)'"
+              [style.color]="'var(--TX2)'"
+            >
+              Cette conversation ne contient aucun message.
+            </div>
+          }
+
+          @for (item of messagesActifs; track $index) {
+            <article
+              class="flex w-full gap-3"
+              [class.flex-row-reverse]="item.role === 'user'"
+              [attr.data-role]="item.role"
+            >
+              @if (item.role === 'assistant') {
+                <div
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+                  [style.backgroundColor]="'var(--Primary)'"
+                  [style.color]="'#FFFFFF'"
+                >
+                  <i class="fa-solid fa-leaf text-sm"></i>
+                </div>
+              }
+
+              <div
+                class="flex min-w-0 max-w-[88%] flex-col gap-1.5 sm:max-w-[82%]"
+                [class.items-end]="item.role === 'user'"
+                [class.items-start]="item.role === 'assistant'"
+              >
+                <div
+                  class="flex items-center gap-2 px-1"
+                  [class.flex-row-reverse]="item.role === 'user'"
+                >
+                  <span class="text-xs font-semibold" [style.color]="'var(--TX1)'">
+                    {{ item.role === 'user' ? 'Vous' : 'Arboria' }}
+                  </span>
+
+                  <span class="text-[10px]" [style.color]="'var(--TX3)'">
+                    {{ formaterHeure(item.date) }}
+                  </span>
+                </div>
+
+                <div
+                  class="whitespace-pre-wrap break-words rounded-2xl border px-4 py-3 text-sm leading-7 sm:px-5"
+                  [style.backgroundColor]="item.role === 'user' ? 'var(--PrimarySoft)' : 'var(--BG2)'"
+                  [style.borderColor]="item.role === 'user' ? 'var(--Primary)' : 'var(--BR1)'"
+                  [style.color]="'var(--TX0)'"
+                  [class.rounded-tr-md]="item.role === 'user'"
+                  [class.rounded-tl-md]="item.role === 'assistant'"
+                >
+                  @if (item.contenu) {
+                    {{ item.contenu }}
+                  } @else if (chargement && item.role === 'assistant') {
+                    <span class="inline-flex items-center gap-2" [style.color]="'var(--TX3)'">
+                      <span class="h-1.5 w-1.5 animate-pulse rounded-full" [style.backgroundColor]="'var(--Primary)'"></span>
+                      Génération de la réponse...
+                    </span>
+                  }
+                  @if (chargement && item.role === 'assistant' && item.contenu) {
+                    <span class="ml-1 inline-block h-4 w-1 animate-pulse rounded-full align-middle" [style.backgroundColor]="'var(--Primary)'"></span>
+                  }
+                </div>
+              </div>
+
+              @if (item.role === 'user') {
+                <div
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl"
+                  [style.backgroundColor]="'var(--BG3)'"
+                  [style.color]="'var(--TX1)'"
+                >
+                  <i class="fa-solid fa-user text-sm"></i>
+                </div>
+              }
+            </article>
+          }
+        </div>
+      }
+
+      <!-- ERREUR -->
+      @if (erreurMessage) {
+        <div
+          class="mx-auto mt-4 flex w-full max-w-[850px] items-start gap-3 rounded-xl border p-4"
+          [style.backgroundColor]="'var(--BG2)'"
+          [style.borderColor]="'var(--Error, #E65353)'"
+          role="alert"
+        >
+          <i class="fa-solid fa-circle-exclamation mt-0.5" [style.color]="'var(--Error, #E65353)'"></i>
+
+          <div class="min-w-0 flex-1">
+            <p class="text-sm font-semibold" [style.color]="'var(--TX0)'">
+              Une erreur est survenue
+            </p>
+            <p class="mt-1 break-words text-xs leading-5" [style.color]="'var(--TX2)'">
+              {{ erreurMessage }}
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg hover:opacity-70"
+            [style.color]="'var(--TX3)'"
+            aria-label="Fermer le message d'erreur"
+            (click)="erreurMessage = ''"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      }
+    </main>
+
+    <!-- COMPOSITEUR -->
+    <footer
+      class="shrink-0 border-t px-4 pb-3 pt-3 sm:px-7 sm:pb-5 sm:pt-4 lg:px-10"
+      [style.backgroundColor]="'var(--BG1)'"
+      [style.borderColor]="'var(--BR1)'"
+    >
+      <div class="mx-auto w-full max-w-[850px]">
+        @if (fichierSelectionne) {
+          <div
+            class="mb-3 flex min-w-0 items-center gap-3 rounded-xl border px-3 py-2.5"
+            [style.backgroundColor]="'var(--BG2)'"
+            [style.borderColor]="'var(--BR1)'"
+          >
+            <i class="fa-solid fa-paperclip shrink-0" [style.color]="'var(--Primary)'"></i>
+
+            <span class="min-w-0 flex-1 truncate text-xs" [style.color]="'var(--TX1)'">
+              {{ fichierSelectionne.name }}
+            </span>
+
+            <button
+              type="button"
+              class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg hover:opacity-70"
+              [style.color]="'var(--TX3)'"
+              aria-label="Retirer le fichier"
+              (click)="retirerPieceJointe()"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        }
+
+        <div
+          class="w-full rounded-2xl border p-3 transition duration-200 focus-within:ring-2 focus-within:ring-[var(--SEARCHFOCUS)] sm:rounded-[22px] sm:p-4"
+          [style.backgroundColor]="'var(--SEARCHBG)'"
+          [style.borderColor]="'var(--SEARCHBORDER)'"
+          [style.boxShadow]="'0 8px 30px var(--SHADOW)'"
+        >
+          <label for="assistant-message" class="sr-only">
+            Votre question pour Arboria
+          </label>
+
+          <div class="flex min-h-[58px] gap-3 sm:min-h-[70px]">
+            <div
+              class="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+              [style.backgroundColor]="'var(--PrimarySoft)'"
+              [style.color]="'var(--Primary)'"
+              aria-hidden="true"
+            >
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+
+            <textarea
+              id="assistant-message"
+              [(ngModel)]="message"
+              (keydown)="gererClavier($event)"
+              rows="2"
+              placeholder="Posez une question sur vos plantes..."
+              class="min-h-[58px] w-full resize-y border-0 bg-transparent py-1 text-sm leading-6 outline-none focus:ring-0 sm:min-h-[70px] sm:text-[15px]"
+              [style.color]="'var(--SEARCHTEXT)'"
+              [style.fontFamily]="'var(--arboria-font-body)'"
+              [style.caretColor]="'var(--Primary)'"
+              [disabled]="chargement || chargementConversation"
+            ></textarea>
+          </div>
+
+          <div
+            class="mt-3 flex flex-wrap items-center justify-between gap-3 border-t pt-3 sm:pt-4"
+            [style.borderColor]="'var(--BR1)'"
+          >
+            <div class="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                (click)="ouvrirPieceJointe()"
+                class="inline-flex items-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-semibold transition hover:opacity-75 sm:text-sm"
+                [style.backgroundColor]="'var(--BUTON2BG)'"
+                [style.borderColor]="'var(--BUTON2BORDER)'"
+                [style.color]="'var(--BUTON2TEXT)'"
+              >
+                <i class="fa-solid fa-paperclip" [style.color]="'var(--BUTON2ICON)'"></i>
+                Joindre
+              </button>
+
+              <div class="relative">
+                <button
+                  type="button"
+                  (click)="basculerStyles()"
+                  [attr.aria-expanded]="stylesOuverts"
+                  class="inline-flex items-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-semibold transition hover:opacity-75 sm:text-sm"
+                  [style.backgroundColor]="'var(--BUTON2BG)'"
+                  [style.borderColor]="'var(--BUTON2BORDER)'"
+                  [style.color]="'var(--BUTON2TEXT)'"
+                >
+                  <i class="fa-solid fa-sliders" [style.color]="'var(--Accent)'"></i>
+                  <span>{{ styleSelectionne }}</span>
+                  <i class="fa-solid fa-chevron-down text-[10px]" [style.color]="'var(--TX3)'"></i>
+                </button>
+
+                @if (stylesOuverts) {
+                  <div
+                    class="absolute bottom-full left-0 z-50 mb-2 w-52 overflow-hidden rounded-xl border p-1.5 shadow-xl"
+                    [style.backgroundColor]="'var(--BG2)'"
+                    [style.borderColor]="'var(--BR2)'"
+                    [style.boxShadow]="'0 12px 32px var(--SHADOW)'"
+                  >
+                    @for (style of stylesDisponibles; track style) {
+                      <button
+                        type="button"
+                        (click)="selectionnerStyle(style)"
+                        class="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition hover:opacity-75"
+                        [style.backgroundColor]="styleSelectionne === style ? 'var(--PrimarySoft)' : 'transparent'"
+                        [style.color]="styleSelectionne === style ? 'var(--Primary)' : 'var(--TX1)'"
+                        [class.font-semibold]="styleSelectionne === style"
+                      >
+                        <span>{{ style }}</span>
+                        @if (styleSelectionne === style) {
+                          <i class="fa-solid fa-check text-xs"></i>
+                        }
+                      </button>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="ml-auto flex items-center gap-3">
+              <label class="flex cursor-pointer items-center gap-2 text-xs font-medium" [style.color]="'var(--TX2)'">
+                <span class="hidden sm:inline">Réponses détaillées</span>
+                <span class="sm:hidden">Détaillées</span>
+
+                <button
+                  type="button"
+                  role="switch"
+                  [attr.aria-checked]="reponsesDetaillees"
+                  aria-label="Réponses détaillées"
+                  (click)="reponsesDetaillees = !reponsesDetaillees"
+                  class="relative h-5 w-9 shrink-0 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--Primary)] focus:ring-offset-2"
+                  [style.backgroundColor]="reponsesDetaillees ? 'var(--Primary)' : 'var(--BR3)'"
+                >
+                  <span
+                    class="absolute top-0.5 h-4 w-4 rounded-full bg-white shadow-sm transition-all"
+                    [class.left-4]="reponsesDetaillees"
+                    [class.left-0.5]="!reponsesDetaillees"
+                  ></span>
+                </button>
+              </label>
+
+              <button
+                type="button"
+                (click)="envoyerMessage()"
+                [disabled]="!message.trim() || chargement || chargementConversation"
+                aria-label="Envoyer le message"
+                class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition hover:opacity-85 focus:outline-none focus:ring-2 focus:ring-[var(--Primary)] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-35"
+                [style.backgroundColor]="'var(--BUTON1BG)'"
+                [style.color]="'var(--BUTON1TEXT)'"
+                [style.boxShadow]="'0 4px 12px var(--BUTON1SHADOW)'"
+              >
+                @if (chargement) {
+                  <i class="fa-solid fa-circle-notch animate-spin"></i>
+                } @else {
+                  <i class="fa-solid fa-arrow-up"></i>
+                }
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p class="mt-3 text-center text-[10px] leading-5 sm:text-[11px]" [style.color]="'var(--TX3)'">
+          Arboria peut se tromper. Vérifiez les informations importantes concernant vos plantes.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- SÉLECTION DE FICHIER -->
+  <input
+    #fichierInput
+    type="file"
+    class="hidden"
+    accept="image/*,.pdf,.txt,.doc,.docx"
+    (change)="traiterPieceJointe($event)"
+  />
+</section>

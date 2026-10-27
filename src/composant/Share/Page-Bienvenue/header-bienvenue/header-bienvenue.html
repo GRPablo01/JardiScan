@@ -1,305 +1,163 @@
+<!-- BLOC D'ANNONCE — ARBORIA
+<app-bloc-annoce
+  *ngIf="afficherBlocAnnonce">
+</app-bloc-annoce> -->
+
+
 <!-- ============================================================
+     HEADER — ARBORIA
+     Angular standalone + Tailwind CSS
 
-🌿 JARDISCAN — HEADER COMPLET FIXED
-
-• Header fixed
-• Reste visible pendant tout le scroll
-• Toute la largeur disponible
-• Marge permanente à gauche et à droite
-• Logo jamais collé à la bordure
-• app-liste-icon directement à côté du logo
-• Navigation desktop centrée exactement dans l'écran
-• app-bouton-bienvenue jamais collé à la bordure
-• Navigation mobile / tablette conservée
-• Bouton bienvenue conservé
-• ThemeService conservé
-• Angular 20 Standalone
-• Tailwind CSS
-• Responsive
-• Aucun composant supprimé
-• Aucun composant déplacé hors de sa logique actuelle
-
-============================================================ -->
+     • Logo toujours à gauche
+     • Navigation affichée à partir de 1062px
+     • Actions toujours à droite
+     • Thème clair / sombre conservé
+     • Composants Angular existants conservés
+     • Responsive desktop / tablette / mobile
+============================================================ --
 
 <header
-  class="
-    fixed
-    top-0
-    left-0
-    z-50
-    w-full
-    border-b
-    backdrop-blur-2xl
-  "
-  [ngStyle]="{
-    'background': themeService.BG1,
-    'border-color': themeService.BR2,
-    'box-shadow': themeService.BoxShadowSmall
-  }"
+  class="site-header relative z-[100] w-full font-sans transition-colors duration-300"
+  (keydown.escape)="fermerMenus()"
 >
-
-  <!-- ==========================================================
-  🌿 CONTENEUR PRINCIPAL
-
-  • Toute la largeur
-  • Marge gauche permanente
-  • Marge droite permanente
-  • Logo à gauche
-  • Liste-icons juste à côté
-  • Navigation centrée
-  • Bouton bienvenue à droite
-  =========================================================== -->
-
+  <!-- ========================================================
+       NAVIGATION PRINCIPALE
+  ========================================================= --
   <div
-    class="
-      relative
-      flex
-      min-h-[72px]
-      w-full
-      items-center
-      px-3
-      sm:px-4
-      md:px-5
-      lg:px-6
-      xl:px-8
-      2xl:px-10
-    "
+    class="header-navigation relative w-full transition-colors duration-300"
+    (mouseleave)="fermerMenus()"
+    [ngStyle]="{
+      'background': themeService.BG1,
+      'border-bottom': '1px solid ' + themeService.BR1
+    }"
   >
-
-
-<!-- ========================================================
-🌿 ZONE GAUCHE
-
-• Toujours à gauche
-• Mais jamais collée à la bordure
-• Logo
-• Nom JardiScan
-• app-liste-icon juste à côté
-========================================================= -->
-
-<div
-  class="
-    flex
-    shrink-0
-    items-center
-    gap-2
-    sm:gap-3
-  "
->
-
-  <!-- ======================================================
-  🌿 LOGO JARDISCAN
-  ======================================================= -->
-
-  <a
-    routerLink="/"
-    aria-label="JardiScan - Accueil de présentation"
-    class="
-      group
-      flex
-      shrink-0
-      items-center
-      gap-2.5
-      rounded-2xl
-      outline-none
-      transition-all
-      duration-300
-    "
-  >
-
-    <!-- ==================================================
-    🖼️ CONTENEUR DU LOGO
-    =================================================== -->
-
+    <!-- ======================================================
+         BARRE PRINCIPALE
+    ======================================================= --
     <div
-      class="
-        relative
-        flex
-        h-10
-        w-10
-        shrink-0
-        items-center
-        justify-center
-        overflow-hidden
-        rounded-2xl
-        transition-all
-        duration-300
-        group-hover:scale-105
-        group-active:scale-95
-        sm:h-11
-        sm:w-11
-        lg:h-12
-        lg:w-12
-      "
-      
+      class="mx-auto flex min-h-[64px] w-full max-w-[1600px]
+             items-center gap-3 px-3
+             sm:min-h-[68px] sm:gap-4 sm:px-6
+             lg:gap-6 lg:px-9
+             xl:gap-8 xl:px-12"
     >
-
-      <!-- =================================================
-      🖼️ LOGO
-      ================================================== -->
-
-      <img
-        src="assets/Logo.svg"
-        alt="Logo JardiScan"
-        class="
-          relative
-          z-10
-          h-full
-          w-full
-          object-contain
-          p-1
-        "
-      />
-    </div>
-
-    <!-- ==================================================
-    🌿 NOM DE L'APPLICATION
-    =================================================== -->
-
-    <div
-      class="
-        hidden
-        min-w-0
-        flex-col
-        leading-none
-        sm:flex
-      "
-    >
-
-      <p
-        class="
-          truncate
-          text-lg
-          font-black
-          tracking-tight
-          sm:text-xl
-        "
-        [ngStyle]="{
-          'color': themeService.TextPrincipal
-        }"
+      <!-- ====================================================
+           GAUCHE : LOGO + NAVIGATION
+      ===================================================== --
+      <div
+        class="flex min-w-0 flex-1 items-center gap-3
+               sm:gap-4 lg:gap-6"
       >
-        JardiScan
-      </p>
+        <!-- LOGO : toujours visible --
+        <div class="flex shrink-0 items-center">
+          <app-welcome-logo></app-welcome-logo>
+        </div>
 
-      <span
-        class="
-          mt-1
-          truncate
-          text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.18em]
-        "
-        [ngStyle]="{
-          'color': themeService.TextTertiaire
-        }"
-      >
-        Jardin intelligent
-      </span>
+        <!-- NAVIGATION : visible à partir de 1062px --
+        <div class="hidden min-[1062px]:flex min-w-0 flex-1 items-center">
+          <app-welcome-nav></app-welcome-nav>
+        </div>
+      </div>
 
+      <!-- ====================================================
+           DROITE : ACTIONS
+      ===================================================== --
+      <div class="ml-auto flex shrink-0 items-center justify-end">
+        <app-welcome-actions></app-welcome-actions>
+      </div>
     </div>
-
-  </a>
-
-  <!-- ======================================================
-  🌿 LISTE DES ICÔNES
-
-  • Directement à côté du logo
-  • Reste dans le header
-  • Aucun changement du composant
-  ======================================================= -->
-
-  <div
-    class="
-      flex
-      shrink-0
-      items-center
-    "
-  >
-    <app-liste-icon></app-liste-icon>
   </div>
-
-</div>
-
-<!-- ========================================================
-🖥️ NAVIGATION DESKTOP
-
-• À partir de 1293px
-• Centrée exactement à 50% de l'écran
-• Indépendante du logo
-• Indépendante du bouton bienvenue
-• Ne touche jamais directement les bords
-========================================================= -->
-
-<div
-  class="
-    absolute
-    left-1/2
-    top-1/2
-    hidden
-    -translate-x-1/2
-    -translate-y-1/2
-    min-[1293px]:block
-  "
->
-
-  <!-- ====================================================
-  🌿 NAVIGATION PUBLIQUE
-  ===================================================== -->
-
-  <app-nav-welcome></app-nav-welcome>
-
-</div>
-
-<!-- ========================================================
-👤 BOUTON BIENVENUE
-
-• Toujours à droite
-• Marge intérieure du header
-• Jamais collé à la bordure
-• Indépendant de la navigation
-========================================================= -->
-
-<div
-  class="
-    ml-auto
-    flex
-    shrink-0
-    items-center
-  "
->
-  <app-bouton-bienvenue></app-bouton-bienvenue>
-</div>
-
-
-  </div>
-
 </header>
 
+
+
+
 <!-- ============================================================
+     NAVIGATION MOBILE — ARBORIA
+     Visible en dessous de 1062px
+     Masquée à partir de 1062px
+============================================================ --
 
-📱 JARDISCAN — NAVIGATION MOBILE / TABLETTE / PETIT LAPTOP
-
-• En dehors de la balise header
-• De 390px à 1292px
-• Masquée sous 390px
-• Masquée à partir de 1293px
-• app-nav-welcome conservé
-• app-liste-icon reste dans le header
-• Header désormais FIXED
-
-============================================================ -->
-
-<div
-  class="
-    hidden
-    w-full
-    min-[390px]:block
-    min-[1293px]:hidden
-    pt-[72px]
-  "
->
-
-<app-nav-welcome></app-nav-welcome>
-
+<div class="block min-[0px]:min-[1062px]:hidden">
+  <app-welcome-nav-mobile></app-welcome-nav-mobile>
 </div>
+
+
+
+
+<style>
+
+  /* ============================================================
+     BLOC D'ANNONCE — ANIMATIONS
+  ============================================================ */
+  
+  .announcement-bar {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    animation: announcement-enter 320ms ease-out both;
+  }
+  
+  .announcement-background {
+    transition: background 300ms ease;
+  }
+  
+  .announcement-icon {
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+  }
+  
+  .announcement-link {
+    text-decoration: none;
+  }
+  
+  .announcement-close:hover {
+    background-color: var(--close-hover-bg);
+    color: var(--close-hover-color) !important;
+  }
+  
+  .announcement-close:focus-visible {
+    outline: 2px solid var(--close-focus);
+    outline-offset: 2px;
+  }
+  
+  @keyframes announcement-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Petits écrans */
+  @media (max-width: 380px) {
+    .announcement-bar {
+      padding-right: 2.5rem;
+      padding-left: 2.5rem;
+    }
+  
+    .announcement-bar p {
+      column-gap: 4px;
+      font-size: 10px;
+    }
+  
+    .announcement-icon {
+      width: 21px;
+      height: 21px;
+    }
+  }
+  
+  /* Accessibilité : animations réduites */
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-bar,
+    .announcement-bar *,
+    .announcement-bar *::before,
+    .announcement-bar *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  
+</style>-->

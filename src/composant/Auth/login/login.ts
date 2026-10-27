@@ -1,112 +1,56 @@
-import { CommonModule } from '@angular/common';
+// login.ts
 
+import { CommonModule } from '@angular/common';
 import {
   HttpClient,
   HttpErrorResponse
 } from '@angular/common/http';
-
 import {
   Component,
+  OnDestroy,
   inject
 } from '@angular/core';
-
 import { FormsModule } from '@angular/forms';
-
 import {
   Router,
   RouterLink
 } from '@angular/router';
 
 import { ThemeService } from '../../../../Backend/Services/theme.service';
-
 import {
   LanguageService,
   Language
 } from '../../../../Backend/Services/language.service';
+import { WelcomeLogoComponent } from '../../Share/Page-Header/welcome-logo/welcome-logo';
+
 
 // ============================================================
-// 👤 UTILISATEUR LOGIN
+// UTILISATEUR
 // ============================================================
 
 interface LoginUser {
-  // ==========================================================
-  // IDENTIFICATION
-  // ==========================================================
-
   _id?: string;
   key?: string;
-
-  // ==========================================================
-  // RÉINITIALISATION MOT DE PASSE
-  // ==========================================================
-
   resetPasswordKey?: string | null;
   resetPasswordExpire?: string | null;
-
-
-
-  // ==========================================================
-  // INFORMATIONS UTILISATEUR
-  // ==========================================================
-
   pseudo?: string;
   nom?: string;
   prenom?: string;
   email?: string;
-
-  // ==========================================================
-  // AUTHENTIFICATION
-  // ==========================================================
-
   motDePasse?: string;
-
-  // ==========================================================
-  // PROFIL
-  // ==========================================================
-
   avatar?: string;
   bannerColor?: string;
-
-  // ==========================================================
-  // RÔLE
-  // ==========================================================
-
   role?: string;
-
-  // ==========================================================
-  // ÉTAT DU COMPTE
-  // ==========================================================
-
   estActif?: boolean;
-
-  // ==========================================================
-  // JARDIDEX
-  // ==========================================================
-
   jardiDex?: unknown[];
-
-  // ==========================================================
-  // DATES
-  // ==========================================================
-
   createdAt?: string;
   updatedAt?: string;
-
-  // ==========================================================
-  // MONGOOSE
-  // ==========================================================
-
   __v?: number;
-
-  // ==========================================================
-  // AUTRES DONNÉES ÉVENTUELLEMENT RENVOYÉES
-  // ==========================================================
-
   [key: string]: unknown;
 }
 
 // ============================================================
-// 📡 RÉPONSE LOGIN
+// RÉPONSE API
 // ============================================================
 
 interface LoginResponse {
@@ -114,15 +58,14 @@ interface LoginResponse {
   token?: string;
   user?: LoginUser;
   utilisateur?: LoginUser;
-
   [key: string]: unknown;
 }
 
 // ============================================================
-// 💾 SESSION JARDISCAN
+// SESSION ARBORIA
 // ============================================================
 
-interface JardiScanSession {
+interface ArboriaSession {
   isLoggedIn: boolean;
   mode: 'user' | 'guest';
   token: string | null;
@@ -131,766 +74,410 @@ interface JardiScanSession {
   response?: Record<string, unknown>;
 }
 
-// ============================================================
-// 🔔 TYPE NOTIFICATION
-// ============================================================
-
 type NotificationType = 'success' | 'error';
 
 // ============================================================
-// 🔐 COMPONENT LOGIN
+// COMPOSANT CONNEXION ARBORIA
 // ============================================================
 
 @Component({
   selector: 'app-login',
-
   standalone: true,
-
   imports: [
     CommonModule,
     FormsModule,
-    RouterLink
-  ],
-
+    RouterLink,
+    WelcomeLogoComponent
+],
   templateUrl: './login.html',
-
   styleUrl: './login.css'
 })
-export class Login {
+export class Login implements OnDestroy {
 
   // ==========================================================
   // SERVICES
   // ==========================================================
 
-  registerHover = false;
+  public readonly themeService = inject(ThemeService);
+  public readonly languageService = inject(LanguageService);
 
-  public readonly themeService =
-    inject(ThemeService);
-
-  public readonly languageService =
-    inject(LanguageService);
-
-  private readonly http =
-    inject(HttpClient);
-
-  private readonly router =
-    inject(Router);
+  private readonly http = inject(HttpClient);
+  private readonly router = inject(Router);
 
   // ==========================================================
-  // 🌐 API
+  // API
   // ==========================================================
 
-  private readonly API_URL =
-    'http://localhost:3000/api/users';
-
-  private readonly LOGIN_URL =
-    `${this.API_URL}/login`;
+  private readonly API_URL = 'http://localhost:3000/api/users';
+  private readonly LOGIN_URL = `${this.API_URL}/login`;
 
   // ==========================================================
-  // 💾 CLÉS LOCALSTORAGE
+  // STOCKAGE
   // ==========================================================
 
-  private readonly SESSION_STORAGE_KEY =
-    'jardiscan_session';
-
-  private readonly USER_STORAGE_KEY =
-    'user';
-
-  private readonly UTILISATEUR_STORAGE_KEY =
-    'utilisateur';
-
-  private readonly TOKEN_STORAGE_KEY =
-    'token';
-
-  private readonly MODE_STORAGE_KEY =
-    'mode';
+  private readonly SESSION_STORAGE_KEY = 'jardiscan_session';
+  private readonly USER_STORAGE_KEY = 'user';
+  private readonly UTILISATEUR_STORAGE_KEY = 'utilisateur';
+  private readonly TOKEN_STORAGE_KEY = 'token';
+  private readonly MODE_STORAGE_KEY = 'mode';
 
   // ==========================================================
-  // 📝 FORMULAIRE
+  // FORMULAIRE
   // ==========================================================
 
   email = '';
-
   password = '';
+  rememberMe = false;
 
   // ==========================================================
-  // 🔄 ÉTAT
+  // ÉTATS
   // ==========================================================
 
   isLoading = false;
-
   submitted = false;
-
-  errorMessage = '';
-
-  successMessage = '';
-
-  // ==========================================================
-  // 👁️ MOT DE PASSE
-  // ==========================================================
-
   showPassword = false;
 
-  // ==========================================================
-  // 👤 MODE INVITÉ
-  // ==========================================================
+  errorMessage = '';
+  successMessage = '';
 
   guestLoading = false;
 
   // ==========================================================
-  // 🔔 NOTIFICATION
+  // NOTIFICATIONS
   // ==========================================================
 
   showNotification = false;
-
   notificationMessage = '';
+  notificationType: NotificationType = 'success';
 
-  notificationType: NotificationType =
-    'success';
-
-  private notificationTimeout:
-    ReturnType<typeof setTimeout> | null = null;
+  private notificationTimeout: ReturnType<typeof setTimeout> | null = null;
+  private redirectTimeout: ReturnType<typeof setTimeout> | null = null;
 
   // ==========================================================
-  // 🌐 LANGUE
+  // LANGUE
   // ==========================================================
 
   get currentLanguage(): Language {
     return this.languageService.currentLanguage;
   }
 
-  // ==========================================================
-  // 🇫🇷 / 🇬🇧 CHANGER LANGUE
-  // ==========================================================
-
   setLanguage(language: Language): void {
     this.languageService.setLanguage(language);
   }
-
-  // ==========================================================
-  // 🔄 BASCULER LANGUE
-  // ==========================================================
 
   toggleLanguage(): void {
     this.languageService.toggleLanguage();
   }
 
-  // ==========================================================
-  // 🏳️ DRAPEAU LANGUE
-  // ==========================================================
-
   get currentLanguageFlag(): string {
-    return this.languageService.getLanguageFlag(
-      this.currentLanguage
-    );
+    return this.languageService.getLanguageFlag(this.currentLanguage);
   }
-
-  // ==========================================================
-  // 🏷️ NOM LANGUE
-  // ==========================================================
 
   get currentLanguageName(): string {
-    return this.languageService.getLanguageName(
-      this.currentLanguage
-    );
+    return this.languageService.getLanguageName(this.currentLanguage);
   }
 
   // ==========================================================
-  // 🌍 TRADUCTIONS
+  // TRADUCTIONS FR / EN
   // ==========================================================
 
   t(key: string): string {
-
-    const translations:
-      Record<Language, Record<string, string>> = {
-
-      // ======================================================
-      // 🇫🇷 FRANÇAIS
-      // ======================================================
-
+    const translations: Record<Language, Record<string, string>> = {
       fr: {
-
-        login:
-          'Connexion',
-
-        welcome:
-          'Bienvenue sur Natureora',
-
-        subtitle:
-          'Connectez-vous pour accéder à votre espace.',
-
-        email:
-          'Adresse e-mail',
-
-        emailPlaceholder:
-          'Votre adresse e-mail',
-
-        password:
-          'Mot de passe',
-
-        passwordPlaceholder:
-          'Votre mot de passe',
-
-        forgotPassword:
-          'Mot de passe oublié ?',
-
-        connect:
-          'Se connecter',
-
-        connecting:
-          'Connexion en cours...',
-
-        guest:
-          'Continuer comme invité',
-
-        guestLoading:
-          'Accès invité...',
-
-        noAccount:
-          'Vous n’avez pas encore de compte ?',
-
-        register:
-          'Créer un compte',
-
-        weak:
-          'Faible',
-
-        medium:
-          'Moyen',
-
-        good:
-          'Bon',
-
-        excellent:
-          'Excellent',
-
-        emailRequired:
-          'Veuillez renseigner votre adresse e-mail.',
-
-        emailInvalid:
-          'Veuillez renseigner une adresse e-mail valide.',
-
-        passwordRequired:
-          'Veuillez renseigner votre mot de passe.',
-
-        passwordMin:
-          'Le mot de passe doit contenir au moins 6 caractères.',
-
-        loginSuccess:
-          'Connexion réussie.',
-
-        serverUnavailable:
-          'Impossible de contacter le serveur. Vérifiez que le backend JardiScan est bien démarré.',
-
-        invalidInformation:
-          'Veuillez vérifier les informations renseignées.',
-
-        invalidCredentials:
-          'Adresse e-mail ou mot de passe incorrect.',
-
-        accountUnavailable:
-          'Votre compte ne peut pas être utilisé actuellement.',
-
-        accountNotFound:
-          'Aucun compte ne correspond à cette adresse e-mail.',
-
-        serverError:
-          'Une erreur serveur est survenue. Veuillez réessayer.',
-
-        loginError:
-          'Impossible de vous connecter. Veuillez réessayer.'
+        login: 'Connexion',
+        welcome: 'Bienvenue sur Arboria',
+        subtitle: 'Connectez-vous pour retrouver votre univers végétal.',
+        email: 'Adresse e-mail',
+        emailPlaceholder: 'vous@exemple.fr',
+        password: 'Mot de passe',
+        passwordPlaceholder: 'Votre mot de passe',
+        forgotPassword: 'Mot de passe oublié ?',
+        connect: 'Se connecter à Arboria',
+        connecting: 'Connexion en cours...',
+        guest: 'Continuer comme invité',
+        guestLoading: 'Accès invité...',
+        noAccount: 'Vous découvrez Arboria ?',
+        register: 'Créer un compte',
+        weak: 'Faible',
+        medium: 'Moyen',
+        good: 'Bon',
+        excellent: 'Excellent',
+        emailRequired: 'Veuillez renseigner votre adresse e-mail.',
+        emailInvalid: 'Veuillez renseigner une adresse e-mail valide.',
+        passwordRequired: 'Veuillez renseigner votre mot de passe.',
+        passwordMin: 'Le mot de passe doit contenir au moins 6 caractères.',
+        loginSuccess: 'Connexion réussie.',
+        serverUnavailable: 'Impossible de contacter le serveur. Vérifiez que le backend Arboria est démarré.',
+        invalidInformation: 'Veuillez vérifier les informations renseignées.',
+        invalidCredentials: 'Adresse e-mail ou mot de passe incorrect.',
+        accountUnavailable: 'Votre compte ne peut pas être utilisé actuellement.',
+        accountNotFound: 'Aucun compte ne correspond à cette adresse e-mail.',
+        serverError: 'Une erreur serveur est survenue. Veuillez réessayer.',
+        loginError: 'Impossible de vous connecter. Veuillez réessayer.'
       },
-
-      // ======================================================
-      // 🇬🇧 ENGLISH
-      // ======================================================
-
       en: {
-
-        login:
-          'Login',
-
-        welcome:
-          'Welcome to Natureora',
-
-        subtitle:
-          'Log in to access your personal space.',
-
-        email:
-          'Email address',
-
-        emailPlaceholder:
-          'Your email address',
-
-        password:
-          'Password',
-
-        passwordPlaceholder:
-          'Your password',
-
-        forgotPassword:
-          'Forgot your password?',
-
-        connect:
-          'Log in',
-
-        connecting:
-          'Logging in...',
-
-        guest:
-          'Continue as guest',
-
-        guestLoading:
-          'Guest access...',
-
-        noAccount:
-          'Don’t have an account yet?',
-
-        register:
-          'Create an account',
-
-        weak:
-          'Weak',
-
-        medium:
-          'Medium',
-
-        good:
-          'Good',
-
-        excellent:
-          'Excellent',
-
-        emailRequired:
-          'Please enter your email address.',
-
-        emailInvalid:
-          'Please enter a valid email address.',
-
-        passwordRequired:
-          'Please enter your password.',
-
-        passwordMin:
-          'Your password must contain at least 6 characters.',
-
-        loginSuccess:
-          'Login successful.',
-
-        serverUnavailable:
-          'Unable to contact the server. Please check that the JardiScan backend is running.',
-
-        invalidInformation:
-          'Please check the information provided.',
-
-        invalidCredentials:
-          'Incorrect email address or password.',
-
-        accountUnavailable:
-          'Your account cannot currently be used.',
-
-        accountNotFound:
-          'No account matches this email address.',
-
-        serverError:
-          'A server error occurred. Please try again.',
-
-        loginError:
-          'Unable to log in. Please try again.'
+        login: 'Login',
+        welcome: 'Welcome to Arboria',
+        subtitle: 'Log in to rediscover your botanical world.',
+        email: 'Email address',
+        emailPlaceholder: 'you@example.com',
+        password: 'Password',
+        passwordPlaceholder: 'Your password',
+        forgotPassword: 'Forgot your password?',
+        connect: 'Sign in to Arboria',
+        connecting: 'Signing in...',
+        guest: 'Continue as guest',
+        guestLoading: 'Opening guest access...',
+        noAccount: 'New to Arboria?',
+        register: 'Create an account',
+        weak: 'Weak',
+        medium: 'Medium',
+        good: 'Good',
+        excellent: 'Excellent',
+        emailRequired: 'Please enter your email address.',
+        emailInvalid: 'Please enter a valid email address.',
+        passwordRequired: 'Please enter your password.',
+        passwordMin: 'Your password must contain at least 6 characters.',
+        loginSuccess: 'Login successful.',
+        serverUnavailable: 'Unable to contact the server. Check that the Arboria backend is running.',
+        invalidInformation: 'Please check the information provided.',
+        invalidCredentials: 'Incorrect email address or password.',
+        accountUnavailable: 'Your account cannot currently be used.',
+        accountNotFound: 'No account matches this email address.',
+        serverError: 'A server error occurred. Please try again.',
+        loginError: 'Unable to log in. Please try again.'
       }
     };
 
-    return (
-      translations[this.currentLanguage]?.[key] ??
-      translations.fr[key] ??
-      key
-    );
+    return translations[this.currentLanguage]?.[key]
+      ?? translations.fr[key]
+      ?? key;
   }
 
   // ==========================================================
-  // 👑 FORMAT ROLE
+  // ANNÉE COURANTE
+  // ==========================================================
+
+  get anneeActuelle(): number {
+    return new Date().getFullYear();
+  }
+
+  // ==========================================================
+  // RÔLES
   // ==========================================================
 
   formatRole(role?: string): string {
-
     if (!role) {
       return 'Visiteur';
     }
 
     switch (role.toUpperCase()) {
-
       case 'ADMIN':
         return 'Admin';
-
       case 'VISITEUR':
         return 'Visiteur';
-
       case 'PROFESSIONNEL':
         return 'Professionnel';
-
       case 'MODERATEUR':
         return 'Modérateur';
-
       default:
         return role;
     }
   }
 
-  // ==========================================================
-  // 👑 VÉRIFIER ADMIN
-  // ==========================================================
-
   isAdmin(role?: string): boolean {
-
-    return (
-      (role ?? '').toUpperCase() ===
-      'ADMIN'
-    );
+    return (role ?? '').toUpperCase() === 'ADMIN';
   }
 
   // ==========================================================
-  // 👤 RÉCUPÉRER UTILISATEUR STOCKÉ
+  // UTILISATEUR STOCKÉ
   // ==========================================================
 
   getStoredUser(): LoginUser | null {
-
     try {
-
       const storedUser =
-        localStorage.getItem(
-          this.UTILISATEUR_STORAGE_KEY
-        );
+        localStorage.getItem(this.UTILISATEUR_STORAGE_KEY)
+        ?? localStorage.getItem(this.USER_STORAGE_KEY);
 
-      if (!storedUser) {
-        return null;
-      }
-
-      return JSON.parse(
-        storedUser
-      ) as LoginUser;
-
+      return storedUser
+        ? JSON.parse(storedUser) as LoginUser
+        : null;
     } catch {
-
       return null;
     }
   }
 
-  // ==========================================================
-  // 👑 RÉCUPÉRER ROLE
-  // ==========================================================
-
   getStoredUserRole(): string {
-
-    const utilisateur =
-      this.getStoredUser();
-
-    return (
-      utilisateur?.role ??
-      'VISITEUR'
-    );
+    return this.getStoredUser()?.role ?? 'VISITEUR';
   }
-
-  // ==========================================================
-  // 👑 VÉRIFIER ADMIN STOCKÉ
-  // ==========================================================
 
   isStoredUserAdmin(): boolean {
+    return this.isAdmin(this.getStoredUserRole());
+  }
 
-    return this.isAdmin(
-      this.getStoredUserRole()
-    );
+  getStoredJardiDex(): unknown[] {
+    return this.getStoredUser()?.jardiDex ?? [];
   }
 
   // ==========================================================
-  // 🔐 CONNEXION
+  // VALIDATION
+  // ==========================================================
+
+  private isValidEmail(value: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  isValidEmailForTemplate(): boolean {
+    return this.isValidEmail(this.email.trim());
+  }
+
+  isEmailInvalid(): boolean {
+    const value = this.email.trim();
+
+    return this.submitted &&
+      (!value || !this.isValidEmail(value));
+  }
+
+  isPasswordInvalid(): boolean {
+    return this.submitted &&
+      (!this.password || this.password.length < 6);
+  }
+
+  // ==========================================================
+  // CONNEXION
   // ==========================================================
 
   connecter(): void {
-
     this.submitted = true;
-
     this.errorMessage = '';
-
     this.successMessage = '';
 
-    // ========================================================
-    // PROTECTION DOUBLE CLIC
-    // ========================================================
-
-    if (
-      this.isLoading ||
-      this.guestLoading
-    ) {
+    if (this.isLoading || this.guestLoading) {
       return;
     }
 
-    // ========================================================
-    // NETTOYAGE
-    // ========================================================
-
-    const email =
-      this.email
-        .trim()
-        .toLowerCase();
-
-    const password =
-      this.password;
-
-    // ========================================================
-    // VALIDATION EMAIL
-    // ========================================================
+    const email = this.email.trim().toLowerCase();
+    const password = this.password;
 
     if (!email) {
-
-      this.errorMessage =
-        this.t('emailRequired');
-
-      this.showErrorNotification(
-        this.errorMessage
-      );
-
+      this.setError(this.t('emailRequired'));
       return;
     }
 
     if (!this.isValidEmail(email)) {
-
-      this.errorMessage =
-        this.t('emailInvalid');
-
-      this.showErrorNotification(
-        this.errorMessage
-      );
-
+      this.setError(this.t('emailInvalid'));
       return;
     }
 
-    // ========================================================
-    // VALIDATION MOT DE PASSE
-    // ========================================================
-
     if (!password) {
-
-      this.errorMessage =
-        this.t('passwordRequired');
-
-      this.showErrorNotification(
-        this.errorMessage
-      );
-
+      this.setError(this.t('passwordRequired'));
       return;
     }
 
     if (password.length < 6) {
-
-      this.errorMessage =
-        this.t('passwordMin');
-
-      this.showErrorNotification(
-        this.errorMessage
-      );
-
+      this.setError(this.t('passwordMin'));
       return;
     }
 
-    // ========================================================
-    // LOADING
-    // ========================================================
-
     this.isLoading = true;
 
-    // ========================================================
-    // REQUÊTE LOGIN
-    // ========================================================
+    this.http.post<LoginResponse>(
+      this.LOGIN_URL,
+      {
+        email,
+        motDePasse: password
+      }
+    ).subscribe({
+      next: (response) => {
+        this.isLoading = false;
 
-    this.http
-      .post<LoginResponse>(
-        this.LOGIN_URL,
-        {
-          email,
-          motDePasse: password
+        const utilisateur =
+          response?.user ??
+          response?.utilisateur ??
+          null;
+
+        if (!utilisateur) {
+          this.setError(this.t('loginError'));
+          return;
         }
-      )
-      .subscribe({
 
-        // ====================================================
-        // ✅ SUCCÈS
-        // ====================================================
-
-        next: (response) => {
-
-          this.isLoading = false;
-
-          // ==================================================
-          // 👤 RÉCUPÉRATION UTILISATEUR
-          // ==================================================
-
-          const utilisateur =
-            response?.user ??
-            response?.utilisateur ??
-            null;
-
-          // ==================================================
-          // ❌ UTILISATEUR ABSENT
-          // ==================================================
-
-          if (!utilisateur) {
-
-            this.errorMessage =
-              this.t('loginError');
-
-            this.showErrorNotification(
-              this.errorMessage
-            );
-
-            return;
-          }
-
-          // ==================================================
-          // 💾 SAUVEGARDE SESSION
-          // ==================================================
-
-          this.saveUserSession(
-            response,
-            utilisateur
-          );
-
-          // ==================================================
-          // ✅ MESSAGE
-          // ==================================================
-
-          this.successMessage =
-            response?.message ??
-            this.t('loginSuccess');
-
-          this.showSuccessNotification(
-            this.successMessage,
-            2500
-          );
-
-          // ==================================================
-          // 🚀 REDIRECTION
-          // ==================================================
-
-          setTimeout(() => {
-
-            void this.router.navigate([
-              '/accueil'
-            ]);
-
-          }, 1000);
-        },
-
-        // ====================================================
-        // ❌ ERREUR
-        // ====================================================
-
-        error: (
-          error: HttpErrorResponse
-        ) => {
-
-          this.isLoading = false;
-
-          this.errorMessage =
-            this.getErrorMessage(error);
-
-          this.showErrorNotification(
-            this.errorMessage
-          );
+        try {
+          this.saveUserSession(response, utilisateur);
+        } catch {
+          this.setError(this.t('loginError'));
+          return;
         }
-      });
+
+        this.successMessage =
+          response?.message ?? this.t('loginSuccess');
+
+        this.showSuccessNotification(this.successMessage, 1800);
+
+        this.clearRedirectTimeout();
+
+        this.redirectTimeout = setTimeout(() => {
+          this.redirectTimeout = null;
+          void this.router.navigate(['/accueil']);
+        }, 900);
+      },
+
+      error: (error: HttpErrorResponse) => {
+        this.isLoading = false;
+        this.setError(this.getErrorMessage(error));
+      }
+    });
+  }
+
+  // Alias conservé pour les templates utilisant seConnecter().
+  seConnecter(): void {
+    this.connecter();
+  }
+
+  private setError(message: string): void {
+    this.errorMessage = message;
+    this.successMessage = '';
+    this.showErrorNotification(message);
   }
 
   // ==========================================================
-  // 💾 SAUVEGARDE SESSION COMPLÈTE
+  // SAUVEGARDE SESSION
   // ==========================================================
 
   private saveUserSession(
     response: LoginResponse,
     utilisateur: LoginUser
   ): void {
-
-    // ========================================================
-    // 👤 COPIE COMPLÈTE
-    // ========================================================
-
     const utilisateurComplet: LoginUser = {
       ...utilisateur
     };
 
-    // ========================================================
-    // 🔑 TOKEN
-    // ========================================================
-
-    const token =
-      response?.token ??
-      null;
+    const token = response?.token ?? null;
 
     if (token) {
-
-      localStorage.setItem(
-        this.TOKEN_STORAGE_KEY,
-        token
-      );
-
+      localStorage.setItem(this.TOKEN_STORAGE_KEY, token);
     } else {
-
-      localStorage.removeItem(
-        this.TOKEN_STORAGE_KEY
-      );
+      localStorage.removeItem(this.TOKEN_STORAGE_KEY);
     }
-
-    // ========================================================
-    // 👤 USER
-    // ========================================================
 
     localStorage.setItem(
       this.USER_STORAGE_KEY,
-      JSON.stringify(
-        utilisateurComplet
-      )
+      JSON.stringify(utilisateurComplet)
     );
-
-    // ========================================================
-    // 👤 UTILISATEUR
-    // ========================================================
 
     localStorage.setItem(
       this.UTILISATEUR_STORAGE_KEY,
-      JSON.stringify(
-        utilisateurComplet
-      )
+      JSON.stringify(utilisateurComplet)
     );
 
-    // ========================================================
-    // 👤 MODE
-    // ========================================================
+    localStorage.setItem(this.MODE_STORAGE_KEY, 'user');
 
-    localStorage.setItem(
-      this.MODE_STORAGE_KEY,
-      'user'
-    );
-
-    // ========================================================
-    // 💾 SESSION
-    // ========================================================
-
-    const session: JardiScanSession = {
-
+    const session: ArboriaSession = {
       isLoggedIn: true,
-
       mode: 'user',
-
       token,
-
       user: utilisateurComplet,
-
-      loginAt:
-        new Date().toISOString(),
-
-      response:
-        response as Record<
-          string,
-          unknown
-        >
+      loginAt: new Date().toISOString(),
+      response: response as Record<string, unknown>
     };
 
     localStorage.setItem(
@@ -900,459 +487,203 @@ export class Login {
   }
 
   // ==========================================================
-  // 💾 RÉCUPÉRER SESSION
+  // RÉCUPÉRATION SESSION
   // ==========================================================
 
-  getStoredSession():
-    JardiScanSession | null {
-
+  getStoredSession(): ArboriaSession | null {
     try {
+      const value = localStorage.getItem(this.SESSION_STORAGE_KEY);
 
-      const session =
-        localStorage.getItem(
-          this.SESSION_STORAGE_KEY
-        );
-
-      if (!session) {
-        return null;
-      }
-
-      return JSON.parse(
-        session
-      ) as JardiScanSession;
-
+      return value
+        ? JSON.parse(value) as ArboriaSession
+        : null;
     } catch {
-
       return null;
     }
   }
 
   // ==========================================================
-  // 👤 RÉCUPÉRER LE JARDIDEX
-  // ==========================================================
-
-  getStoredJardiDex(): unknown[] {
-
-    const utilisateur =
-      this.getStoredUser();
-
-    return (
-      utilisateur?.jardiDex ??
-      []
-    );
-  }
-
-  // ==========================================================
-  // 👤 MODE INVITÉ
+  // MODE INVITÉ
   // ==========================================================
 
   continuerCommeInvite(): void {
-
-    if (
-      this.isLoading ||
-      this.guestLoading
-    ) {
+    if (this.isLoading || this.guestLoading) {
       return;
     }
 
     this.guestLoading = true;
-
     this.errorMessage = '';
-
     this.successMessage = '';
 
-    // ========================================================
-    // 🧹 NETTOYAGE SESSION UTILISATEUR
-    // ========================================================
+    try {
+      localStorage.removeItem(this.TOKEN_STORAGE_KEY);
+      localStorage.removeItem(this.USER_STORAGE_KEY);
+      localStorage.removeItem(this.UTILISATEUR_STORAGE_KEY);
 
-    localStorage.removeItem(
-      this.TOKEN_STORAGE_KEY
-    );
+      const guestSession: ArboriaSession = {
+        isLoggedIn: false,
+        mode: 'guest',
+        token: null,
+        user: null,
+        loginAt: new Date().toISOString()
+      };
 
-    localStorage.removeItem(
-      this.USER_STORAGE_KEY
-    );
+      localStorage.setItem(this.MODE_STORAGE_KEY, 'guest');
+      localStorage.setItem(
+        this.SESSION_STORAGE_KEY,
+        JSON.stringify(guestSession)
+      );
+    } catch {
+      this.guestLoading = false;
+      this.setError(this.t('loginError'));
+      return;
+    }
 
-    localStorage.removeItem(
-      this.UTILISATEUR_STORAGE_KEY
-    );
+    this.clearRedirectTimeout();
 
-    // ========================================================
-    // 👤 SESSION INVITÉ
-    // ========================================================
+    this.redirectTimeout = setTimeout(() => {
+      this.redirectTimeout = null;
 
-    const guestSession: JardiScanSession = {
-
-      isLoggedIn: false,
-
-      mode: 'guest',
-
-      token: null,
-
-      user: null,
-
-      loginAt:
-        new Date().toISOString()
-    };
-
-    // ========================================================
-    // 💾 MODE
-    // ========================================================
-
-    localStorage.setItem(
-      this.MODE_STORAGE_KEY,
-      'guest'
-    );
-
-    // ========================================================
-    // 💾 SESSION
-    // ========================================================
-
-    localStorage.setItem(
-      this.SESSION_STORAGE_KEY,
-      JSON.stringify(
-        guestSession
-      )
-    );
-
-    // ========================================================
-    // 🚀 REDIRECTION
-    // ========================================================
-
-    setTimeout(() => {
-
-      void this.router.navigate([
-        '/accueil'
-      ]);
-
-    }, 250);
+      void this.router.navigate(['/accueil']).finally(() => {
+        this.guestLoading = false;
+      });
+    }, 200);
   }
 
   // ==========================================================
-  // 📧 VALIDATION EMAIL
-  // ==========================================================
-
-  private isValidEmail(
-    email: string
-  ): boolean {
-
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-      .test(email);
-  }
-
-  // ==========================================================
-  // ❌ MESSAGE ERREUR BACKEND
-  // ==========================================================
-
-  private getErrorMessage(
-    error: HttpErrorResponse
-  ): string {
-
-    if (error.status === 0) {
-
-      return (
-        error.error?.message ??
-        this.t('serverUnavailable')
-      );
-    }
-
-    if (error.status === 400) {
-
-      return (
-        error.error?.message ??
-        this.t('invalidInformation')
-      );
-    }
-
-    if (error.status === 401) {
-
-      return (
-        error.error?.message ??
-        this.t('invalidCredentials')
-      );
-    }
-
-    if (error.status === 403) {
-
-      return (
-        error.error?.message ??
-        this.t('accountUnavailable')
-      );
-    }
-
-    if (error.status === 404) {
-
-      return (
-        error.error?.message ??
-        this.t('accountNotFound')
-      );
-    }
-
-    if (error.status === 500) {
-
-      return (
-        error.error?.message ??
-        this.t('serverError')
-      );
-    }
-
-    return (
-      error.error?.message ??
-      this.t('loginError')
-    );
-  }
-
-  // ==========================================================
-  // 👁️ AFFICHER / CACHER MOT DE PASSE
+  // MOT DE PASSE
   // ==========================================================
 
   togglePassword(): void {
-
-    this.showPassword =
-      !this.showPassword;
+    this.showPassword = !this.showPassword;
   }
-
-  // ==========================================================
-  // ❌ EMAIL INVALIDE
-  // ==========================================================
-
-  isEmailInvalid(): boolean {
-
-    return (
-      this.submitted &&
-      (
-        !this.email.trim() ||
-        !this.isValidEmail(
-          this.email.trim()
-        )
-      )
-    );
-  }
-
-  // ==========================================================
-  // ❌ MOT DE PASSE INVALIDE
-  // ==========================================================
-
-  isPasswordInvalid(): boolean {
-
-    return (
-      this.submitted &&
-      (
-        !this.password ||
-        this.password.length < 6
-      )
-    );
-  }
-
-  // ==========================================================
-  // 🔐 FORCE MOT DE PASSE
-  // ==========================================================
 
   getPasswordStrength(): number {
-
     if (!this.password) {
       return 0;
     }
 
     let strength = 0;
 
-    // ========================================================
-    // 6 CARACTÈRES
-    // ========================================================
+    if (this.password.length >= 6) strength++;
+    if (this.password.length >= 10) strength++;
+    if (/[A-Z]/.test(this.password)) strength++;
+    if (/[0-9]/.test(this.password)) strength++;
+    if (/[^A-Za-z0-9]/.test(this.password)) strength++;
 
-    if (
-      this.password.length >= 6
-    ) {
-      strength++;
-    }
-
-    // ========================================================
-    // 10 CARACTÈRES
-    // ========================================================
-
-    if (
-      this.password.length >= 10
-    ) {
-      strength++;
-    }
-
-    // ========================================================
-    // MAJUSCULE
-    // ========================================================
-
-    if (
-      /[A-Z]/.test(
-        this.password
-      )
-    ) {
-      strength++;
-    }
-
-    // ========================================================
-    // CHIFFRE
-    // ========================================================
-
-    if (
-      /[0-9]/.test(
-        this.password
-      )
-    ) {
-      strength++;
-    }
-
-    // ========================================================
-    // CARACTÈRE SPÉCIAL
-    // ========================================================
-
-    if (
-      /[^A-Za-z0-9]/.test(
-        this.password
-      )
-    ) {
-      strength++;
-    }
-
-    return Math.min(
-      strength,
-      5
-    );
+    return Math.min(strength, 5);
   }
 
-  // ==========================================================
-  // 🏷️ LABEL FORCE MOT DE PASSE
-  // ==========================================================
-
   getPasswordStrengthLabel(): string {
+    const strength = this.getPasswordStrength();
 
-    const strength =
-      this.getPasswordStrength();
-
-    if (strength === 0) {
-      return '';
-    }
-
-    if (strength <= 1) {
-      return this.t('weak');
-    }
-
-    if (strength <= 2) {
-      return this.t('medium');
-    }
-
-    if (strength <= 3) {
-      return this.t('good');
-    }
+    if (strength === 0) return '';
+    if (strength <= 1) return this.t('weak');
+    if (strength <= 2) return this.t('medium');
+    if (strength <= 3) return this.t('good');
 
     return this.t('excellent');
   }
 
   // ==========================================================
-  // ✅ TOAST SUCCÈS
+  // GESTION DES ERREURS API
+  // ==========================================================
+
+  private getErrorMessage(error: HttpErrorResponse): string {
+    const serverMessage =
+      typeof error.error?.message === 'string'
+        ? error.error.message
+        : null;
+
+    if (error.status === 0) {
+      return serverMessage ?? this.t('serverUnavailable');
+    }
+
+    if (error.status === 400) {
+      return serverMessage ?? this.t('invalidInformation');
+    }
+
+    if (error.status === 401) {
+      return serverMessage ?? this.t('invalidCredentials');
+    }
+
+    if (error.status === 403) {
+      return serverMessage ?? this.t('accountUnavailable');
+    }
+
+    if (error.status === 404) {
+      return serverMessage ?? this.t('accountNotFound');
+    }
+
+    if (error.status >= 500) {
+      return serverMessage ?? this.t('serverError');
+    }
+
+    return serverMessage ?? this.t('loginError');
+  }
+
+  // ==========================================================
+  // NOTIFICATIONS
   // ==========================================================
 
   private showSuccessNotification(
     message: string,
     duration = 4000
   ): void {
-
-    this.showNotificationMessage(
-      message,
-      'success',
-      duration
-    );
+    this.showNotificationMessage(message, 'success', duration);
   }
-
-  // ==========================================================
-  // ❌ TOAST ERREUR
-  // ==========================================================
 
   private showErrorNotification(
     message: string,
     duration = 5000
   ): void {
-
-    this.showNotificationMessage(
-      message,
-      'error',
-      duration
-    );
+    this.showNotificationMessage(message, 'error', duration);
   }
-
-  // ==========================================================
-  // 🔔 AFFICHER NOTIFICATION
-  // ==========================================================
 
   private showNotificationMessage(
     message: string,
     type: NotificationType,
     duration: number
   ): void {
-
-    // ========================================================
-    // 🧹 NETTOYAGE ANCIEN TIMER
-    // ========================================================
-
     if (this.notificationTimeout) {
-
-      clearTimeout(
-        this.notificationTimeout
-      );
-
-      this.notificationTimeout = null;
+      clearTimeout(this.notificationTimeout);
     }
 
-    // ========================================================
-    // 🔔 NOUVELLE NOTIFICATION
-    // ========================================================
+    this.notificationMessage = message;
+    this.notificationType = type;
+    this.showNotification = true;
 
-    this.notificationMessage =
-      message;
-
-    this.notificationType =
-      type;
-
-    this.showNotification =
-      true;
-
-    // ========================================================
-    // ⏱️ AUTO FERMETURE
-    // ========================================================
-
-    this.notificationTimeout =
-      setTimeout(() => {
-
-        this.closeNotification();
-
-      }, duration);
+    this.notificationTimeout = setTimeout(() => {
+      this.closeNotification();
+    }, duration);
   }
-
-  // ==========================================================
-  // ❌ FERMER NOTIFICATION
-  // ==========================================================
 
   closeNotification(): void {
-
     if (this.notificationTimeout) {
-
-      clearTimeout(
-        this.notificationTimeout
-      );
-
+      clearTimeout(this.notificationTimeout);
       this.notificationTimeout = null;
     }
 
-    this.showNotification =
-      false;
+    this.showNotification = false;
+  }
+
+  private clearRedirectTimeout(): void {
+    if (this.redirectTimeout) {
+      clearTimeout(this.redirectTimeout);
+      this.redirectTimeout = null;
+    }
   }
 
   // ==========================================================
-  // 📧 VALIDATION EMAIL TEMPLATE
+  // NETTOYAGE
   // ==========================================================
 
-  isValidEmailForTemplate(): boolean {
+  ngOnDestroy(): void {
+    if (this.notificationTimeout) {
+      clearTimeout(this.notificationTimeout);
+      this.notificationTimeout = null;
+    }
 
-    return this.isValidEmail(
-      this.email.trim()
-    );
+    this.clearRedirectTimeout();
   }
 }

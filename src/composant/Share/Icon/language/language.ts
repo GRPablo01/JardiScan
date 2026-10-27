@@ -68,6 +68,8 @@ export class Language2 implements OnDestroy {
   popupTop = 0;
   popupLeft = 0;
 
+  languageButtonHover = false;
+
   popupTransform = 'translateY(-50%)';
 
   // ============================================================

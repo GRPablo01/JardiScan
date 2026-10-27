@@ -1,0 +1,351 @@
+<!-- ============================================================
+     ARBORIA — RECHERCHE BOTANIQUE MULTI-CRITÈRES
+     Angular Standalone + Tailwind CSS
+     Responsive • Light/Dark • Filtres facultatifs
+============================================================ -->
+
+<section
+  id="recherche-botanique"
+  class="relative mt-6 w-full min-w-0 sm:mt-8"
+>
+  <!-- Barre de recherche multi-critères -->
+  <div
+    class="w-full min-w-0 overflow-hidden rounded-2xl border shadow-xl
+           backdrop-blur-xl transition-colors duration-300"
+    [style.backgroundColor]="'var(--BG3)'"
+    [style.borderColor]="'var(--BR1)'"
+    [style.boxShadow]="'var(--SHADOW)'"
+  >
+    <!-- En-tête -->
+    <div
+      class="flex items-center gap-3 border-b px-4 py-3 sm:px-5"
+      [style.borderColor]="'var(--BR1)'"
+    >
+      <div
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+        [style.backgroundColor]="'var(--PrimarySoft)'"
+        [style.color]="'var(--Primary)'"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          class="h-5 w-5"
+        >
+          <circle cx="10.8" cy="10.8" r="6.8"></circle>
+          <path d="m16 16 4.5 4.5"></path>
+        </svg>
+      </div>
+
+      <div class="min-w-0 flex-1">
+        <h2
+          class="text-sm font-semibold sm:text-base"
+          [style.color]="'var(--TX0)'"
+        >
+          Recherche botanique
+        </h2>
+
+        <p
+          class="mt-0.5 text-xs"
+          [style.color]="'var(--TX2)'"
+        >
+          Combine les critères de ton choix
+        </p>
+      </div>
+
+      <span
+        class="hidden rounded-full px-3 py-1 text-xs sm:inline-flex"
+        [style.backgroundColor]="'var(--PrimarySoft)'"
+        [style.color]="'var(--Primary)'"
+      >
+        Multi-critères
+      </span>
+    </div>
+
+    <!-- Grille des filtres indépendants -->
+    <div class="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-3">
+
+      <!-- 1. Nom de la plante -->
+      <div
+        class="min-w-0 border-b p-4 sm:border-r"
+        [style.borderColor]="'var(--BR1)'"
+      >
+        <label
+          for="filtre-nom"
+          class="mb-2 flex items-center gap-2 text-xs font-semibold"
+          [style.color]="'var(--TX2)'"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            class="h-4 w-4"
+            aria-hidden="true"
+          >
+            <path d="M12 20V10"></path>
+            <path d="M12 14C5 14 4 8 4 4c5 0 8 2 8 10Z"></path>
+            <path d="M12 17c0-5 3-8 8-9 0 5-2 9-8 9Z"></path>
+          </svg>
+          NOM DE LA PLANTE
+        </label>
+
+        <input
+          id="filtre-nom"
+          name="nom"
+          type="search"
+          [(ngModel)]="filtres.nom"
+          (ngModelChange)="appliquerFiltres()"
+          placeholder="Ex. : lavande, Rosa..."
+          autocomplete="off"
+          spellcheck="false"
+          class="w-full min-w-0 rounded-lg border bg-transparent px-3 py-2.5
+                 text-sm outline-none transition-colors focus:ring-1"
+          [style.color]="'var(--TX0)'"
+          [style.borderColor]="'var(--BR1)'"
+          [style.caretColor]="'var(--Primary)'"
+          [style.--tw-ring-color]="'var(--Primary)'"
+        />
+        <p class="mt-2 text-xs" [style.color]="'var(--TX2)'">
+          Nom commun ou scientifique
+        </p>
+      </div>
+
+      <!-- 2. Famille botanique -->
+      <div
+        class="min-w-0 border-b p-4 lg:border-r"
+        [style.borderColor]="'var(--BR1)'"
+      >
+        <label
+          for="filtre-famille"
+          class="mb-2 flex items-center gap-2 text-xs font-semibold"
+          [style.color]="'var(--TX2)'"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            class="h-4 w-4"
+            aria-hidden="true"
+          >
+            <path d="M12 21V11"></path>
+            <path d="M12 13C5 13 4 8 4 4c5 0 8 2 8 9Z"></path>
+            <path d="M12 16c0-5 3-8 8-9 0 5-2 9-8 9Z"></path>
+          </svg>
+          FAMILLE BOTANIQUE
+        </label>
+
+        <input
+          id="filtre-famille"
+          name="famille"
+          type="text"
+          [(ngModel)]="filtres.famille"
+          (ngModelChange)="appliquerFiltres()"
+          placeholder="Ex. : Rosacées..."
+          autocomplete="off"
+          class="w-full min-w-0 rounded-lg border bg-transparent px-3 py-2.5
+                 text-sm outline-none transition-colors focus:ring-1"
+          [style.color]="'var(--TX0)'"
+          [style.borderColor]="'var(--BR1)'"
+          [style.caretColor]="'var(--Primary)'"
+        />
+
+        <p class="mt-2 text-xs" [style.color]="'var(--TX2)'">
+          Famille de la plante
+        </p>
+      </div>
+
+      <!-- 3. Origine -->
+      <div
+        class="min-w-0 border-b p-4 sm:border-r lg:border-r-0"
+        [style.borderColor]="'var(--BR1)'"
+      >
+        <label
+          for="filtre-origine"
+          class="mb-2 block text-xs font-semibold"
+          [style.color]="'var(--TX2)'"
+        >
+          ORIGINE GÉOGRAPHIQUE
+        </label>
+
+        <input
+          id="filtre-origine"
+          name="origine"
+          type="text"
+          [(ngModel)]="filtres.origine"
+          (ngModelChange)="appliquerFiltres()"
+          placeholder="Ex. : Méditerranée..."
+          autocomplete="off"
+          class="w-full min-w-0 rounded-lg border bg-transparent px-3 py-2.5
+                 text-sm outline-none transition-colors focus:ring-1"
+          [style.color]="'var(--TX0)'"
+          [style.borderColor]="'var(--BR1)'"
+          [style.caretColor]="'var(--Primary)'"
+        />
+
+        <p class="mt-2 text-xs" [style.color]="'var(--TX2)'">
+          Région ou pays d'origine
+        </p>
+      </div>
+
+      <!-- 4. Exposition -->
+      <div
+        class="min-w-0 border-b p-4 sm:border-r lg:border-b-0"
+        [style.borderColor]="'var(--BR1)'"
+      >
+        <label
+          for="filtre-exposition"
+          class="mb-2 block text-xs font-semibold"
+          [style.color]="'var(--TX2)'"
+        >
+          EXPOSITION
+        </label>
+
+        <select
+          id="filtre-exposition"
+          name="exposition"
+          [(ngModel)]="filtres.exposition"
+          (ngModelChange)="appliquerFiltres()"
+          class="w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm
+                 outline-none transition-colors focus:ring-1"
+          [style.backgroundColor]="'var(--BG1)'"
+          [style.color]="'var(--TX0)'"
+          [style.borderColor]="'var(--BR1)'"
+        >
+          <option value="">Toutes les expositions</option>
+          <option value="soleil">Plein soleil</option>
+          <option value="mi-ombre">Mi-ombre</option>
+          <option value="ombre">Ombre</option>
+        </select>
+
+        <p class="mt-2 text-xs" [style.color]="'var(--TX2)'">
+          Lumière nécessaire
+        </p>
+      </div>
+
+      <!-- 5. Arrosage -->
+      <div
+        class="min-w-0 border-b p-4 sm:border-r lg:border-b-0"
+        [style.borderColor]="'var(--BR1)'"
+      >
+        <label
+          for="filtre-arrosage"
+          class="mb-2 block text-xs font-semibold"
+          [style.color]="'var(--TX2)'"
+        >
+          BESOINS EN EAU
+        </label>
+
+        <select
+          id="filtre-arrosage"
+          name="arrosage"
+          [(ngModel)]="filtres.arrosage"
+          (ngModelChange)="appliquerFiltres()"
+          class="w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm
+                 outline-none transition-colors focus:ring-1"
+          [style.backgroundColor]="'var(--BG1)'"
+          [style.color]="'var(--TX0)'"
+          [style.borderColor]="'var(--BR1)'"
+        >
+          <option value="">Tous les arrosages</option>
+          <option value="faible">Faible</option>
+          <option value="modere">Modéré</option>
+          <option value="frequent">Fréquent</option>
+        </select>
+
+        <p class="mt-2 text-xs" [style.color]="'var(--TX2)'">
+          Fréquence d'arrosage
+        </p>
+      </div>
+
+      <!-- 6. Période de floraison -->
+      <div
+        class="min-w-0 border-b p-4 lg:border-b-0"
+        [style.borderColor]="'var(--BR1)'"
+      >
+        <label
+          for="filtre-floraison"
+          class="mb-2 block text-xs font-semibold"
+          [style.color]="'var(--TX2)'"
+        >
+          FLORAISON
+        </label>
+
+        <select
+          id="filtre-floraison"
+          name="floraison"
+          [(ngModel)]="filtres.floraison"
+          (ngModelChange)="appliquerFiltres()"
+          class="w-full min-w-0 rounded-lg border px-3 py-2.5 text-sm
+                 outline-none transition-colors focus:ring-1"
+          [style.backgroundColor]="'var(--BG1)'"
+          [style.color]="'var(--TX0)'"
+          [style.borderColor]="'var(--BR1)'"
+        >
+          <option value="">Toute l'année</option>
+          <option value="printemps">Printemps</option>
+          <option value="ete">Été</option>
+          <option value="automne">Automne</option>
+          <option value="hiver">Hiver</option>
+        </select>
+
+        <p class="mt-2 text-xs" [style.color]="'var(--TX2)'">
+          Saison de floraison
+        </p>
+      </div>
+    </div>
+
+    <!-- État de la recherche -->
+    <div
+      class="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center
+             sm:justify-between sm:px-5"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <p class="text-xs" [style.color]="'var(--TX2)'">
+        <span
+          class="font-semibold"
+          [style.color]="'var(--Primary)'"
+        >
+          {{ nombreFiltresActifs }}
+        </span>
+        {{ nombreFiltresActifs > 1
+          ? 'critères renseignés'
+          : 'critère renseigné'
+        }}
+      </p>
+
+      <p class="text-xs" [style.color]="'var(--TX2)'">
+        Filtrage en temps réel
+      </p>
+    </div>
+  </div>
+
+  <!-- Résultats de la recherche -->
+  @if (rechercheActive) {
+    <div
+      class="mt-3 flex flex-wrap items-center justify-between gap-2 px-1"
+      aria-live="polite"
+    >
+      <p class="text-xs" [style.color]="'var(--TX2)'">
+        <span
+          class="font-semibold"
+          [style.color]="'var(--Primary)'"
+        >
+          {{ nombreResultats }}
+        </span>
+        {{ nombreResultats > 1
+          ? 'résultats trouvés'
+          : 'résultat trouvé'
+        }}
+      </p>
+
+      <p class="text-xs" [style.color]="'var(--TX2)'">
+        Les critères sont combinés
+      </p>
+    </div>
+  }
+</section>
